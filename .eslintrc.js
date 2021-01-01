@@ -30,11 +30,15 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+        moduleDirectory: ['node_modules/'],
       },
       typescript: {
         config: 'tsconfig.json',
         alwaysTryTypes: true,
       },
+    },
+    react: {
+      version: 'detect',
     },
   },
   rules: {

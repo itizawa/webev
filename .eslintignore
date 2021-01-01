@@ -1,0 +1,6 @@
+/.github/**
+/.vscode/**
+/node_modules/**
+/public/**
+next-env.d.ts
+next.config.js
