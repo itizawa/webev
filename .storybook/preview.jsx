@@ -1,8 +1,6 @@
 import { configure, addDecorator } from "@storybook/react";
 import { withKnobs } from "@storybook/addon-knobs";
 import React from "react";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import theme from '../src/theme';
 
 export const parameters = {
   backgrounds: {
@@ -31,10 +29,10 @@ export const parameters = {
 addDecorator(withKnobs);
 
 addDecorator((storyFn) => (
-  <ThemeProvider theme={theme}>
+  <>
     <CssBaseline />
     {storyFn()}
-  </ThemeProvider>
+  </>
 ));
 
 const req = require.context("../src", true, /\.stories\.tsx$/);

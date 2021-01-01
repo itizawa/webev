@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "@material-ui/core": "latest",
     "@storybook/addon-knobs": "^6.1.11",
+    "bootstrap": "^5.0.0",
     "next": "^10.0.4",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "styled-components": "^5.2.1"
   },
   "scripts": {
     "dev": "next",
