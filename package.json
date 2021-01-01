@@ -15,7 +15,8 @@
     "start": "next start",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix .",
-    "storybook": "start-storybook -p 6006 -c .storybook"
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",

@@ -17,3 +17,5 @@ yarn-error.log*
 
 # Next.js
 /.next
+
+/storybook-static
