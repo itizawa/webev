@@ -3,8 +3,9 @@ import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { AppProps } from 'next/app';
-import theme from '../src/theme';
+import theme from 'src/theme';
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = ({ Component, pageProps }: AppProps) => (
   <React.Fragment>
     <Head>
