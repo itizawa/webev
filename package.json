@@ -2,8 +2,16 @@
   "name": "webev",
   "version": "0.0.0",
   "main": "index.js",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "next": "^10.0.4",
+    "react": "latest",
+    "react-dom": "latest"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",
@@ -16,5 +24,10 @@
     "url": "https://github.com/itizawa/webev/issues"
   },
   "homepage": "https://github.com/itizawa/webev#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^14.14.17",
+    "@types/react": "^17.0.0",
+    "typescript": "^4.1.3"
+  }
 }
