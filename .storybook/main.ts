@@ -5,7 +5,7 @@ module.exports = {
     addons: ["@storybook/addon-essentials"],
     webpackFinal: async (config) => {
       config.resolve.alias = {
-        "src": path.resolve(__dirname, "../src")     
+        "~src": path.resolve(__dirname, "../src")     
       }
       return config
     }

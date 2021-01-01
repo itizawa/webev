@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import ClassNames from 'classnames';
-import { HomeIcon } from 'src/components/icons/HomeIcon';
+import { HomeIcon } from '~src/components/icons/HomeIcon';
 
 type Props = {
   isActive?: boolean;
