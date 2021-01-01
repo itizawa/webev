@@ -6,4 +6,4 @@ export default {
   component: Button,
 };
 
-export const _default: FC = () => <Button text="hoge" />;
+export const _default: FC = () => <Button text="test" />;
