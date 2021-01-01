@@ -1,29 +1,34 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import ClassNames from 'classnames';
+import { HomeIcon } from 'src/components/icons/HomeIcon';
 
 type Props = {
   isActive?: boolean;
   isDisabled?: boolean;
+  children: ReactNode;
 };
 
 const SidebarListItem: FC<Props> = (props: Props) => {
-  const { isActive, isDisabled } = props;
+  const { isActive, isDisabled, children } = props;
 
   const classNameForListItem = ClassNames({
     'list-group-item list-group-item-action': true,
     active: isActive,
     disabled: isDisabled,
   });
-  return <li className={classNameForListItem}>Dapibus ac facilisis in</li>;
+
+  return <li className={classNameForListItem}>{children}</li>;
 };
 
 export const SidebarList: FC = () => {
   return (
     <ul className="list-group list-group-flush">
-      <SidebarListItem isActive />
-      <SidebarListItem />
-      <SidebarListItem isDisabled />
-      <SidebarListItem />
+      <SidebarListItem isActive>
+        <HomeIcon />
+        Home
+      </SidebarListItem>
+      <SidebarListItem>test</SidebarListItem>
+      <SidebarListItem isDisabled>disabled</SidebarListItem>
     </ul>
   );
 };

@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { SidebarList } from './SidebarList';
+import { SidebarList } from '.';
 
 export default {
   title: 'organisms/SidebarList',
