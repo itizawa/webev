@@ -1,6 +1,10 @@
 import { configure, addDecorator } from "@storybook/react";
-import { withKnobs } from "@storybook/addon-knobs";
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+//storybook
+import { withInfo } from "@storybook/addon-info";
+import { withKnobs } from "@storybook/addon-knobs";
 
 export const parameters = {
   backgrounds: {
@@ -27,10 +31,10 @@ export const parameters = {
 };
 
 addDecorator(withKnobs);
+addDecorator(withInfo);
 
 addDecorator((storyFn) => (
   <>
-    <CssBaseline />
     {storyFn()}
   </>
 ));
