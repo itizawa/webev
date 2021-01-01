@@ -3,7 +3,7 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-export default function Index() {
+export const Index: React.FC = () => {
   return (
     <Container maxWidth="sm">
       <Box my={4}>
@@ -13,4 +13,4 @@ export default function Index() {
       </Box>
     </Container>
   );
-}
+};
