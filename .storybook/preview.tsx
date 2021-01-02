@@ -1,6 +1,6 @@
 import { configure, addDecorator } from "@storybook/react";
 import React from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '~src/styles/global.scss';
 
 //storybook
 import { withInfo } from "@storybook/addon-info";

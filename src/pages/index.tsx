@@ -1,7 +1,12 @@
 import React from 'react';
+import { SidebarList } from '~src/components/organisms/SidebarList';
 
 const Index: React.FC = () => {
-  return <div>hoge</div>;
+  return (
+    <div>
+      <SidebarList />
+    </div>
+  );
 };
 
 export default Index;

@@ -1,0 +1,14 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+@import '../../node_modules/bootstrap/scss/mixins';
+
+body {
+  font-weight: 300;
+  color: #3c4858;
+  background-color: #eee;
+}
+
+.c-pointer{
+  cursor: pointer;
+}

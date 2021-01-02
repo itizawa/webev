@@ -2,4 +2,9 @@
 .sidebar-list-group {
   width:260px;
   background-color: aqua;
+  
+  .sidebar-list-group-item {
+    cursor: pointer;
+  }
 }
+  
