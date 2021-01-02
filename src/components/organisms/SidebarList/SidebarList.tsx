@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import ClassNames from 'classnames';
-// import '~src/styles/components/organism/SidebarList.module.scss';
+import '~src/styles/components/organism/SidebarList.module.scss';
 import { HomeIcon } from '~src/components/icons/HomeIcon';
 
 type Props = {
