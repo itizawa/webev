@@ -1,12 +1,7 @@
 import React from 'react';
-import { SidebarList } from '~src/components/organisms/SidebarList';
 
 const Index: React.FC = () => {
-  return (
-    <div>
-      <SidebarList />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Index;
