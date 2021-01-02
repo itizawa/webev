@@ -12,7 +12,10 @@ export const _default: Story<ComponentProps<typeof SidebarList>> = () => {
   return (
     <>
       <h4>List Item With Icon</h4>
-      <SidebarList />
+      <SidebarList url="/home" onClickSidebarListItem={(url) => console.log(url)} />
+
+      <h4>List Item With Icon</h4>
+      <SidebarList url="/favorites" onClickSidebarListItem={(url) => console.log(url)} />
     </>
   );
 };
