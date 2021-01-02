@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
 import { SidebarList } from '.';
@@ -9,13 +9,12 @@ export default {
 };
 
 export const _default: Story<ComponentProps<typeof SidebarList>> = () => {
+  const [url, setUrl] = useState('/home');
+
   return (
     <>
       <h4>List Item With Icon</h4>
-      <SidebarList url="/home" onClickSidebarListItem={(url) => console.log(url)} />
-
-      <h4>List Item With Icon</h4>
-      <SidebarList url="/favorites" onClickSidebarListItem={(url) => console.log(url)} />
+      <SidebarList url={url} onClickSidebarListItem={(url) => setUrl(url)} />
     </>
   );
 };
