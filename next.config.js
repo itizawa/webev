@@ -8,6 +8,7 @@ module.exports = {
     config.resolve.alias = {
       ...config.resolve.alias,
       src: path.join(__dirname, 'src/'),
+      includePaths: path.join(__dirname, 'styles/'),
     };
     return config;
   },
