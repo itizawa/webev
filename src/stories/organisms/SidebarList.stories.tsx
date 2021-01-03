@@ -1,7 +1,7 @@
 import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { SidebarList } from '.';
+import { SidebarList } from '~src/components/organisms/SidebarList';
 
 export default {
   title: 'organisms/SidebarList',
