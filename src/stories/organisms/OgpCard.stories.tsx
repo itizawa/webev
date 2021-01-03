@@ -9,12 +9,14 @@ export default {
 };
 
 export const _default: Story<ComponentProps<typeof OgpCard>> = () => {
+  const url = 'https://qiita.com/';
+
   return (
     <>
       <h4>
-        <a href="https://qiita.com/itizawa">https://qiita.com/itizawa</a>
+        <a href={url}>{url}</a>
       </h4>
-      <OgpCard />
+      <OgpCard url={url} />
     </>
   );
 };
