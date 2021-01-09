@@ -11,7 +11,7 @@ export const OgpCard: FC<Props> = (props: Props) => {
   const { url, image, title, description } = props;
 
   return (
-    <div className="card">
+    <div className="card shadow border-0">
       <img src={image} alt={image} />
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
