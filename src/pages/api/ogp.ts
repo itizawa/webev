@@ -10,9 +10,9 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = req.query;
 
   try {
-    const res = await ogp(url);
+    const result = await ogp(url);
 
-    return res.status(200).send(res);
+    return res.status(200).send(result);
   } catch (err) {
     return res.status(500).send({ success: false });
   }
