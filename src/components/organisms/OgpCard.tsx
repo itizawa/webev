@@ -1,31 +1,21 @@
 import { FC, useEffect, useState } from 'react';
-import axios from 'axios';
 
 type Props = {
   url: string;
+  image: string;
+  description: string;
+  title: string;
 };
 
 export const OgpCard: FC<Props> = (props: Props) => {
-  const { url } = props;
-  const [image, setImage] = useState();
-  const [description, setDescription] = useState();
-
-  useEffect(() => {
-    const retrieveOgp = async (): Promise<void> => {
-      const res = await axios.get(`/api/ogp?url=${url}`);
-      const { image, desc } = res.data;
-      console.log(res.data);
-
-      setImage(image);
-      setDescription(desc);
-    };
-    retrieveOgp();
-  }, [url]);
+  const { url, image, title, description } = props;
 
   return (
     <div className="card">
       <img src={image} alt={image} />
       <div className="card-body">
+        <h5 className="card-title">{title}</h5>
+        <h6 className="card-subtitle mb-2 text-muted">{url}</h6>
         <p className="card-text">{description}</p>
       </div>
     </div>

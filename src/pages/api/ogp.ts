@@ -7,7 +7,7 @@ const handler = nextConnect();
 
 type ogpResponse = {
   image?: string;
-  desc?: string;
+  description?: string;
   title?: string;
 };
 
@@ -20,7 +20,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
     const response: ogpResponse = {
       image: $("meta[property='og:image']").attr('content'),
-      desc: $("meta[property='og:description']").attr('content'),
+      description: $("meta[property='og:description']").attr('content'),
       title: $("meta[property='og:title']").attr('content'),
     };
 
