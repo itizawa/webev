@@ -8,9 +8,12 @@ type Props = {
 export const OgpCard: FC<Props> = (props: Props) => {
   const { url } = props;
 
-  useEffect(async (): any => {
-    const res = await axios.get(`/api/ogp?url=${url}`);
-    console.log(res.data);
+  useEffect(() => {
+    const retrieveOgp = async (): Promise<void> => {
+      const res = await axios.get(`/api/ogp?url=${url}`);
+      console.log(res.data);
+    };
+    retrieveOgp();
   }, [url]);
 
   return <p>{url}</p>;
