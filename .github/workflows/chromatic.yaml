@@ -1,4 +1,8 @@
-# Other configuration required
+# Workflow name
+name: 'Chromatic'
+
+# Event for the workflow
+on: push
 
 jobs:
   chromatic-deployment:
