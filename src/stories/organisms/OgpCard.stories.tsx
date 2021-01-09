@@ -18,7 +18,7 @@ export const _default: Story<ComponentProps<typeof OgpCard>> = () => {
     <>
       <h4>OgpCard</h4>
       <div className="row">
-        <div className="col-6">
+        <div className="col-4">
           <OgpCard url={url} image={image} description={description} title={title} />
         </div>
       </div>
