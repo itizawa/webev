@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import '~src/styles/components/molecules/InputForm.module.scss';
 
 type Props = {
   inputValue: string;
@@ -25,7 +26,7 @@ export const InputForm: FC<Props> = (props: Props) => {
     <div className="input-group mb-3">
       <input
         type="text"
-        className="form-control"
+        className="form-control ps-3"
         placeholder="URL を保存"
         aria-label="Input Group"
         aria-describedby="input-group"
