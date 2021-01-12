@@ -23,7 +23,7 @@ export const InputForm: FC<Props> = (props: Props) => {
   };
 
   return (
-    <div className="input-group mb-3">
+    <div className="input-group">
       <input
         type="text"
         className="form-control ps-3"
