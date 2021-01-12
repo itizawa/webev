@@ -13,7 +13,7 @@ export const _default: Story<ComponentProps<typeof InputForm>> = () => {
 
   return (
     <>
-      <h4>Search Form</h4>
+      <h4>Input Form</h4>
       <div className="w-50">
         <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={() => setUrl('')} />
       </div>
