@@ -17,7 +17,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <div className="d-none d-lg-block">
         <Sidebar />
       </div>
-      <div className="col">
+      <div className="p-5">
         <Component {...pageProps} />
       </div>
     </div>

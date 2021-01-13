@@ -22,8 +22,22 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <OgpCard url={url} image={image} description={description} title={title} />
+    <div className="row">
+      <div className="col-3">
+        <OgpCard url={url} image={image} description={description} title={title} />
+      </div>
+      <div className="col-3">
+        <OgpCard url={url} image={image} description={description} title={title} />
+      </div>
+      <div className="col-3">
+        <OgpCard url={url} image={image} description={description} title={title} />
+      </div>
+      <div className="col-3">
+        <OgpCard url={url} image={image} description={description} title={title} />
+      </div>
+      <div className="col-3">
+        <OgpCard url={url} image={image} description={description} title={title} />
+      </div>
     </div>
   );
 };
