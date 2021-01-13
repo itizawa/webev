@@ -9,9 +9,9 @@ export const Navbar: FC<Props> = (props: Props) => {
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <div className="container-fluid">
+      <div className="container">
         <button
-          className="navbar-toggler d-md-none d-block"
+          className="navbar-toggler d-lg-none d-block"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
