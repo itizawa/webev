@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react';
 import ClassNames from 'classnames';
-import '~/styles/components/organisms/SidebarList.module.scss';
 import { HomeIcon } from '~/components/icons/HomeIcon';
 import { StarIcon } from '~/components/icons/StarIcon';
 

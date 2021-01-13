@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import '~/styles/components/molecules/InputForm.module.scss';
 
 type Props = {
   inputValue: string;
