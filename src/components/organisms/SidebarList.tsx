@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import ClassNames from 'classnames';
-import '~src/styles/components/organisms/SidebarList.module.scss';
-import { HomeIcon } from '~src/components/icons/HomeIcon';
-import { StarIcon } from '~src/components/icons/StarIcon';
+import '~/styles/components/organisms/SidebarList.module.scss';
+import { HomeIcon } from '~/components/icons/HomeIcon';
+import { StarIcon } from '~/components/icons/StarIcon';
 
 type SidebarListItemProps = {
   isActive?: boolean;

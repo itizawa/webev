@@ -1,9 +1,9 @@
 import React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
-import '~src/styles/global.scss';
-import { Navbar } from '~src/components/organisms/Navbar';
-import { Sidebar } from '~src/components/organisms/Sidebar';
+import '~/styles/global.scss';
+import { Navbar } from '~/components/organisms/Navbar';
+import { Sidebar } from '~/components/organisms/Sidebar';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = ({ Component, pageProps }: AppProps) => (

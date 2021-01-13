@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import { InputForm } from '~src/components/molecules/InputForm';
-import { PlusBoard } from '~src/components/icons/PlusBoard';
+import { InputForm } from '~/components/molecules/InputForm';
+import { PlusBoard } from '~/components/icons/PlusBoard';
 
 type Props = {};
 

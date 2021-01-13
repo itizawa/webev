@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { SidebarList } from '~src/components/organisms/SidebarList';
+import { SidebarList } from '~/components/organisms/SidebarList';
 
 type Props = {};
 

@@ -1,7 +1,7 @@
 import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { Navbar } from '~src/components/organisms/Navbar';
+import { Navbar } from '~/components/organisms/Navbar';
 
 export default {
   title: 'organisms/Navbar',
