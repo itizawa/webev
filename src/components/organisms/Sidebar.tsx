@@ -7,7 +7,7 @@ export const Sidebar: FC<Props> = (props: Props) => {
   const [url, setUrl] = useState('/home');
 
   return (
-    <div>
+    <div className="sidebar">
       <SidebarList url={url} onClickSidebarListItem={(url) => setUrl(url)} />
     </div>
   );
