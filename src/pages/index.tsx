@@ -13,7 +13,6 @@ const Index: React.FC = () => {
     const retrieveOgp = async (): Promise<void> => {
       const res = await axios.get(`/api/ogp?url=${url}`);
       const { image, description, title } = res.data;
-      console.log(res.data);
       setImage(image);
       setDescription(description);
       setTitle(title);
