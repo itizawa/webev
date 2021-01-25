@@ -1,7 +1,7 @@
 import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { OgpCard } from '~src/components/organisms/OgpCard';
+import { OgpCard } from '~/components/organisms/OgpCard';
 
 export default {
   title: 'organisms/OgpCard',

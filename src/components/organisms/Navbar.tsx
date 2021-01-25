@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import { InputForm } from '~src/components/molecules/InputForm';
-import { PlusBoard } from '~src/components/icons/PlusBoard';
+import { InputForm } from '~/components/molecules/InputForm';
+import { PlusBoard } from '~/components/icons/PlusBoard';
 
 type Props = {};
 
@@ -9,9 +9,9 @@ export const Navbar: FC<Props> = (props: Props) => {
 
   return (
     <nav className="navbar navbar-light bg-light">
-      <div className="container-fluid">
+      <div className="container">
         <button
-          className="navbar-toggler d-md-none d-block"
+          className="navbar-toggler d-lg-none d-block"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"

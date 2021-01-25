@@ -1,6 +1,6 @@
 import { configure, addDecorator } from "@storybook/react";
 import React from "react";
-import '~src/styles/global.scss';
+import '~/styles/global.scss';
 
 //storybook
 import { withInfo } from "@storybook/addon-info";

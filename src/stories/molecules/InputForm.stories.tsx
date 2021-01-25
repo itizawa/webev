@@ -1,7 +1,7 @@
 import { ComponentProps, useState } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
-import { InputForm } from '~src/components/molecules/InputForm';
+import { InputForm } from '~/components/molecules/InputForm';
 
 export default {
   title: 'molecules/InputForm',
