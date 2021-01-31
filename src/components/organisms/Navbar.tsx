@@ -1,11 +1,18 @@
 import { FC, useState } from 'react';
 import { InputForm } from '~/components/molecules/InputForm';
 import { PlusBoard } from '~/components/icons/PlusBoard';
+import { apiPost } from '~/utils/rest-client';
 
-type Props = {};
-
-export const Navbar: FC<Props> = (props: Props) => {
+export const Navbar: FC = () => {
   const [url, setUrl] = useState('');
+
+  const handleSaveButton = async () => {
+    try {
+      const res = await apiPost('/pages', { url });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <nav className="navbar navbar-light bg-light">
@@ -23,7 +30,7 @@ export const Navbar: FC<Props> = (props: Props) => {
         </button>
         <span className="navbar-brand mb-0 h1">Webev</span>
         <div className="w-50 d-none d-md-block">
-          <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={() => console.log('save')} />
+          <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={handleSaveButton} />
         </div>
         <div className="d-md-none d-block">
           <PlusBoard />
