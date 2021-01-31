@@ -16,7 +16,7 @@
     "react-dom": "latest",
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
-    "styled-components": "^5.2.1"
+    "sweetalert2": "^10.14.0"
   },
   "scripts": {
     "dev": "next",
