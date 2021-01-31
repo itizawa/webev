@@ -15,7 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     </Head>
     <Navbar />
-    <div className="d-flex">
+    <div className="d-flex h-100">
       <div className="d-none d-lg-block">
         <Sidebar />
       </div>
