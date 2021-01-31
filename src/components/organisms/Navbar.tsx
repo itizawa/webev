@@ -15,8 +15,9 @@ export const Navbar: FC = () => {
       const res = await apiPost('/pages', { url });
       const { title } = res.data;
       Swal.fire({
-        html: `${title} を保存しました!`,
+        html: `<b>${title}</b><br> を保存しました!`,
         position: 'top-end',
+        showConfirmButton: false,
         timer: 1200,
       });
       setUrl('');
@@ -26,7 +27,7 @@ export const Navbar: FC = () => {
   };
 
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar bg-dark">
       <div className="container">
         <button
           className="navbar-toggler d-lg-none d-block"
@@ -39,7 +40,7 @@ export const Navbar: FC = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <span className="navbar-brand mb-0 h1">Webev</span>
+        <span className="navbar-brand mb-0 h1 text-white">Webev</span>
         <div className="w-50 d-none d-md-block">
           <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={handleSaveButton} />
         </div>
