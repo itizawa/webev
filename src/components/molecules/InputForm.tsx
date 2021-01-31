@@ -32,7 +32,7 @@ export const InputForm: FC<Props> = (props: Props) => {
         value={inputValue}
         onChange={(e) => handleChangeValue(e.target.value)}
       />
-      <button className="btn btn-outline-secondary" type="button" id="input-group" onClick={handleClickSaveBtn}>
+      <button className="btn btn-secondary" type="button" id="input-group" onClick={handleClickSaveBtn}>
         保存する
       </button>
     </div>

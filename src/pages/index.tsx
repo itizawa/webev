@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const url = 'https://qiita.com/';
@@ -10,14 +9,14 @@ const Index: React.FC = () => {
   const [title, setTitle] = useState('title');
 
   useEffect(() => {
-    const retrieveOgp = async (): Promise<void> => {
-      const res = await axios.get(`/api/ogp?url=${url}`);
-      const { image, description, title } = res.data;
-      setImage(image);
-      setDescription(description);
-      setTitle(title);
-    };
-    retrieveOgp();
+    // const retrieveOgp = async (): Promise<void> => {
+    //   const res = await axios.get(`/api/ogp?url=${url}`);
+    //   const { image, description, title } = res.data;
+    //   setImage(image);
+    //   setDescription(description);
+    //   setTitle(title);
+    // };
+    // retrieveOgp();
   }, []);
 
   return (

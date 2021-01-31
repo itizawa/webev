@@ -4,11 +4,16 @@
 @import '../../node_modules/bootstrap/scss/mixins';
 
 @import './variables.scss';
+@import '~toastr/toastr.scss';
 
 body {
   font-weight: 300;
   color: #3c4858;
   background-color: #eee;
+}
+
+div#__next{
+  height: 100%;
 }
 
 .c-pointer{
