@@ -1,7 +1,11 @@
 import { FC, useState } from 'react';
+
 import { InputForm } from '~/components/molecules/InputForm';
 import { PlusBoard } from '~/components/icons/PlusBoard';
 import { apiPost } from '~/utils/rest-client';
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Swal = require('sweetalert2/dist/sweetalert2.js');
 
 export const Navbar: FC = () => {
   const [url, setUrl] = useState('');
@@ -9,6 +13,13 @@ export const Navbar: FC = () => {
   const handleSaveButton = async () => {
     try {
       const res = await apiPost('/pages', { url });
+      const { title } = res.data;
+      Swal.fire({
+        html: `${title} を保存しました!`,
+        position: 'top-end',
+        timer: 1200,
+      });
+      setUrl('');
     } catch (err) {
       console.log(err);
     }

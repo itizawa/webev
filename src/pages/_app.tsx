@@ -1,7 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
+
 import '~/styles/global.scss';
+import 'sweetalert2/src/sweetalert2.scss';
+
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 
