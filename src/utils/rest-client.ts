@@ -1,7 +1,7 @@
 import axiosBase from 'axios';
 
 const axios = axiosBase.create({
-  baseURL: 'http://localhost:8000', // バックエンドB のURL:port を指定する
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000',
   headers: {
     'Content-Type': 'application/json',
     'X-Requested-With': 'XMLHttpRequest',
