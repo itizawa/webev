@@ -1,6 +1,9 @@
 name: lint:front
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - release/**
 
 jobs:
   run-linters:
