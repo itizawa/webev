@@ -1,0 +1,42 @@
+name: lint:front
+
+on:
+  push:
+    branches-ignore:
+      - release/**
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        run: npm install
+
+      - name: Print dependencies
+        run: |
+          echo -n "node " && node -v
+          echo -n "npm " && npm -v
+          yarn list --depth=0
+      - name: yarn lint
+        run: |
+          yarn lint
+
+      - name: Slack Notification
+        uses: weseek/ghaction-slack-notification@master
+        with:
+          type: ${{ job.status }}
+          job_name: '*lint (${{ matrix.node-version }})*'
+          channel: '#webev-ci'
+          isCompactMode: true
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
