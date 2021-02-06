@@ -36,7 +36,7 @@ jobs:
         uses: weseek/ghaction-slack-notification@master
         with:
           type: ${{ job.status }}
-          job_name: '*lint (${{ matrix.node-version }})*'
+          job_name: '*lint webev front*'
           channel: '#webev-ci'
           isCompactMode: true
           url: ${{ secrets.SLACK_WEBHOOK_URL }}
