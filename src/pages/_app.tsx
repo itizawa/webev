@@ -16,10 +16,10 @@ const App = ({ Component, pageProps }: AppProps) => (
     </Head>
     <Navbar />
     <div className="d-flex h-100">
-      <div className="d-none d-lg-block">
+      <div className="d-none d-lg-block col-lg-2">
         <Sidebar />
       </div>
-      <div className="p-5">
+      <div className="p-5 col-12 col-lg-10">
         <Component {...pageProps} />
       </div>
     </div>

@@ -21,7 +21,7 @@ const Index: React.FC = () => {
   return (
     <div className="row">
       {pages.map((page) => (
-        <div className="col-3" key={page._id}>
+        <div className="col-3 mt-5" key={page._id}>
           <OgpCard url={page?.url} image={page?.image} description={page?.description} title={page?.title} />
         </div>
       ))}
