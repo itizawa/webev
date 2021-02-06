@@ -1,4 +1,4 @@
-name: Lint & Test
+name: lint:front
 
 on: push
 
@@ -28,3 +28,12 @@ jobs:
       - name: yarn lint
         run: |
           yarn lint
+
+      - name: Slack Notification
+        uses: weseek/ghaction-slack-notification@master
+        with:
+          type: ${{ job.status }}
+          job_name: '*lint (${{ matrix.node-version }})*'
+          channel: '#webev-ci'
+          isCompactMode: true
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
