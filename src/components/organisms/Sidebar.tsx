@@ -19,33 +19,18 @@ export const Sidebar: FC = () => {
       <ul className="sidebar-list-group list-group gap-3 py-3 text-white">
         {sidebarItemMappings.map((v) => {
           const classNameForListItem = ClassNames({
-            'sidebar-list-group-item list-group-item mx-3 border-0': true,
-            active: v.url === url,
+            [`${styles['sidebar-list-group-item']} list-group-item mx-3 border-0`]: true,
+            [styles.active]: v.url === url,
           });
 
           return (
             <li key={v.text} className={classNameForListItem} onClick={() => setUrl(v.url)}>
-              <SidebarListItem icon={v.icon} text={v.text} />
+              {v.icon != null && v.icon}
+              <span className="ms-3">{v.text}</span>
             </li>
           );
         })}
       </ul>
     </div>
-  );
-};
-
-type SidebarListItemProps = {
-  icon?: ReactNode;
-  text: string;
-};
-
-const SidebarListItem: FC<SidebarListItemProps> = (props: SidebarListItemProps) => {
-  const { icon, text } = props;
-
-  return (
-    <span>
-      {icon != null && icon}
-      <span className="ms-3">{text}</span>
-    </span>
   );
 };
