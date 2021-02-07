@@ -1,9 +1,26 @@
 import { FC } from 'react';
 
+import { apiPost } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { usePageListSWR } from '~/stores/page';
+
 import { InputForm } from '~/components/molecules/InputForm';
 import { PlusBoard } from '~/components/icons/PlusBoard';
 
 export const Navbar: FC = () => {
+  const { mutate: pageListMutate } = usePageListSWR();
+
+  const savePage = async (url: string): Promise<void> => {
+    try {
+      const res = await apiPost('/pages', { url });
+      const { title } = res.data;
+      toastSuccess(`${title} を保存しました!`);
+      pageListMutate();
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
   return (
     <nav className="navbar bg-dark">
       <div className="container">
@@ -20,7 +37,7 @@ export const Navbar: FC = () => {
         </button>
         <span className="navbar-brand mb-0 h1 text-white">Webev</span>
         <div className="w-50 d-none d-md-block">
-          <InputForm />
+          <InputForm onSavePage={savePage} />
         </div>
         <div className="d-md-none d-block">
           <PlusBoard />

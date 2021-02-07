@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { apiPost } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { usePageListSWR } from '~/stores/page';
+type Props = {
+  onSavePage?: (url: string) => void;
+};
 
 type FormValues = {
   url: string;
@@ -11,22 +11,15 @@ type FormValues = {
 
 const urlInputName = 'url';
 
-export const InputForm: FC = () => {
-  const { mutate: pageListMutate } = usePageListSWR();
+export const InputForm: FC<Props> = (props: Props) => {
   const { register, handleSubmit, setValue } = useForm<FormValues>();
 
   const onSubmit = async (formValues: FormValues): Promise<void> => {
     const { url } = formValues;
-
-    try {
-      const res = await apiPost('/pages', { url });
-      const { title } = res.data;
-      toastSuccess(`${title} を保存しました!`);
-      setValue(urlInputName, '');
-      pageListMutate();
-    } catch (err) {
-      toastError(err);
+    if (props?.onSavePage != null) {
+      await props.onSavePage(url);
     }
+    setValue(urlInputName, '');
   };
 
   return (

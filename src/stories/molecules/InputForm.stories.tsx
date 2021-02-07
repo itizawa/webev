@@ -9,13 +9,11 @@ export default {
 };
 
 export const _default: Story<ComponentProps<typeof InputForm>> = () => {
-  const [url, setUrl] = useState('');
-
   return (
     <>
       <h4>Input Form</h4>
       <div className="w-50">
-        <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={() => setUrl('')} />
+        <InputForm onSavePage={(inputValue) => console.log(inputValue)} />
       </div>
     </>
   );
