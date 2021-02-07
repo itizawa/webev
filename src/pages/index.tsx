@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 
 import { apiGet } from '~/utils/rest-client';
 
 import { IPage } from '~/interfaces/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
-const Index: React.FC = () => {
+const Index: FC = () => {
   const [pages, setPages] = useState([] as IPage[]);
 
   useEffect(() => {
