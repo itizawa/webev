@@ -1,9 +1,7 @@
 import { FC, useState } from 'react';
 import { SidebarList } from '~/components/organisms/SidebarList';
 
-type Props = {};
-
-export const Sidebar: FC<Props> = (props: Props) => {
+export const Sidebar: FC = () => {
   const [url, setUrl] = useState('/home' as string);
 
   return (

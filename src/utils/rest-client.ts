@@ -9,10 +9,10 @@ const axios = axiosBase.create({
   responseType: 'json',
 });
 
-export const apiGet = (url: string, query = {}): Promise<any> => {
+export const apiGet = (url: string, query = {}): Promise<unknown> => {
   return axios.get(`/api/v1${url}`, query);
 };
 
-export const apiPost = (url: string, body = {}): Promise<any> => {
+export const apiPost = (url: string, body = {}): Promise<unknown> => {
   return axios.post(`/api/v1${url}`, body);
 };
