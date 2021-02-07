@@ -15,6 +15,7 @@
         "ignore": ["after-comment", "inside-block"]
       } ],
       "selector-combinator-space-before": "always",
-      "selector-combinator-space-after": "always"
+      "selector-combinator-space-after": "always",
+      "no-missing-end-of-source-newline": true
     }
   }
