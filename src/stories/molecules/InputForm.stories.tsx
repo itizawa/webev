@@ -13,7 +13,7 @@ export const _default: Story<ComponentProps<typeof InputForm>> = () => {
     <>
       <h4>Input Form</h4>
       <div className="w-50">
-        <InputForm onSavePage={(inputValue) => console.log(inputValue)} />
+        <InputForm onSubmitForm={(inputValue) => console.log(inputValue)} />
       </div>
     </>
   );
