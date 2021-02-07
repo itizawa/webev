@@ -1,4 +1,4 @@
-import { FC, useState, ReactNode } from 'react';
+import { FC, useState } from 'react';
 import ClassNames from 'classnames';
 
 import { HomeIcon } from '~/components/icons/HomeIcon';
