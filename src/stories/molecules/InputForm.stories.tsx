@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react';
+import { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
 import { InputForm } from '~/components/molecules/InputForm';
@@ -9,13 +9,11 @@ export default {
 };
 
 export const _default: Story<ComponentProps<typeof InputForm>> = () => {
-  const [url, setUrl] = useState('');
-
   return (
     <>
       <h4>Input Form</h4>
       <div className="w-50">
-        <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={() => setUrl('')} />
+        <InputForm onSubmitForm={(inputValue) => console.log(inputValue)} />
       </div>
     </>
   );
