@@ -1,40 +1,48 @@
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 
-type Props = {
-  inputValue: string;
-  onChangeInputValue: (value: string) => void;
-  onClickSaveBtn: () => void;
+import { apiPost } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { usePageListSWR } from '~/stores/page';
+
+type FormValues = {
+  url: string;
 };
 
-export const InputForm: FC<Props> = (props: Props) => {
-  const { inputValue } = props;
+const urlInputName = 'url';
 
-  const handleChangeValue = (inputValue: string) => {
-    if (props.onChangeInputValue != null) {
-      props.onChangeInputValue(inputValue);
-    }
-  };
+export const InputForm: FC = () => {
+  const { mutate: pageListMutate } = usePageListSWR();
+  const { register, handleSubmit, setValue } = useForm<FormValues>();
 
-  const handleClickSaveBtn = () => {
-    if (props.onClickSaveBtn != null) {
-      props.onClickSaveBtn();
+  const onSubmit = async (formValues: FormValues): Promise<void> => {
+    const { url } = formValues;
+
+    try {
+      const res = await apiPost('/pages', { url });
+      const { title } = res.data;
+      toastSuccess(`${title} を保存しました!`);
+      setValue(urlInputName, '');
+      pageListMutate();
+    } catch (err) {
+      toastError(err);
     }
   };
 
   return (
-    <div className="input-group">
+    <form className="input-group" onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
+        name={urlInputName}
+        ref={register}
         className="form-control ps-3"
         placeholder="URL を保存"
         aria-label="Input Group"
         aria-describedby="input-group"
-        value={inputValue}
-        onChange={(e) => handleChangeValue(e.target.value)}
       />
-      <button className="btn btn-secondary" type="button" id="input-group" onClick={handleClickSaveBtn}>
+      <button className="btn btn-secondary" type="submit" id="input-group">
         保存する
       </button>
-    </div>
+    </form>
   );
 };
