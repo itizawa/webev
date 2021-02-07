@@ -15,22 +15,20 @@ export const Sidebar: FC = () => {
   const [url, setUrl] = useState('/home' as string);
 
   return (
-    <div className={`h-100 ${styles.sidebar}`}>
-      <ul className="sidebar-list-group list-group gap-3 py-3 text-white">
-        {sidebarItemMappings.map((v) => {
-          const classNameForListItem = ClassNames({
-            [`${styles['sidebar-list-group-item']} list-group-item mx-3 border-0`]: true,
-            [styles.active]: v.url === url,
-          });
+    <ul className="sidebar-list-group list-group gap-3 py-3 text-white">
+      {sidebarItemMappings.map((v) => {
+        const classNameForListItem = ClassNames({
+          [`${styles['sidebar-list-group-item']} list-group-item mx-3 border-0`]: true,
+          [styles.active]: v.url === url,
+        });
 
-          return (
-            <li key={v.text} className={classNameForListItem} onClick={() => setUrl(v.url)}>
-              {v.icon != null && v.icon}
-              <span className="ms-3">{v.text}</span>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+        return (
+          <li key={v.text} className={classNameForListItem} onClick={() => setUrl(v.url)}>
+            {v.icon != null && v.icon}
+            <span className="ms-3">{v.text}</span>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
