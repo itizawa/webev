@@ -15,6 +15,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^6.15.1",
+    "react-loading-skeleton": "^2.1.1",
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
     "swr": "^0.4.1",
