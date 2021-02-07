@@ -1,12 +1,11 @@
 import { FC, useState } from 'react';
 
 import { apiPost } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
 
 import { InputForm } from '~/components/molecules/InputForm';
 import { PlusBoard } from '~/components/icons/PlusBoard';
-
-import { toastSuccess } from '~/utils/toastr';
 
 export const Navbar: FC = () => {
   const [url, setUrl] = useState('');
@@ -20,7 +19,7 @@ export const Navbar: FC = () => {
       pageListMutate();
       setUrl('');
     } catch (err) {
-      console.log(err);
+      toastError(err);
     }
   };
 
