@@ -2,11 +2,10 @@ $enable-rounded: true;
 
 @import '../../../../node_modules/bootstrap/scss/mixins/border-radius';
 
-.input-group {
-  .form-control { 
-    @include border-start-radius(24px)
-  }
-  button {
-    @include border-end-radius(24px)
-  }
+.left-side { 
+  @include border-start-radius(24px)
+}
+
+.right-side {
+  @include border-end-radius(24px)
 }

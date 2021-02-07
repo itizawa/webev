@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
+import styles from '~/styles/components/molecules/InputForm.module.scss';
+
 type Props = {
   onSubmitForm?: (url: string) => void;
 };
@@ -28,12 +30,12 @@ export const InputForm: FC<Props> = (props: Props) => {
         type="text"
         name={urlInputName}
         ref={register}
-        className="form-control ps-3"
+        className={`form-control ps-3 ${styles['left-side']}`}
         placeholder="URL を保存"
         aria-label="Input Group"
         aria-describedby="input-group"
       />
-      <button className="btn btn-secondary" type="submit" id="input-group">
+      <button className={`btn btn-secondary ${styles['right-side']}`} type="submit" id="input-group">
         保存する
       </button>
     </form>
