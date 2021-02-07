@@ -1,40 +1,41 @@
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 
 type Props = {
-  inputValue: string;
-  onChangeInputValue: (value: string) => void;
-  onClickSaveBtn: () => void;
+  onSubmitForm?: (url: string) => void;
 };
 
+type FormValues = {
+  url: string;
+};
+
+const urlInputName = 'url';
+
 export const InputForm: FC<Props> = (props: Props) => {
-  const { inputValue } = props;
+  const { register, handleSubmit, setValue } = useForm<FormValues>();
 
-  const handleChangeValue = (inputValue: string) => {
-    if (props.onChangeInputValue != null) {
-      props.onChangeInputValue(inputValue);
+  const onSubmit = async (formValues: FormValues): Promise<void> => {
+    const { url } = formValues;
+    if (props?.onSubmitForm != null) {
+      await props.onSubmitForm(url);
     }
-  };
-
-  const handleClickSaveBtn = () => {
-    if (props.onClickSaveBtn != null) {
-      props.onClickSaveBtn();
-    }
+    setValue(urlInputName, '');
   };
 
   return (
-    <div className="input-group">
+    <form className="input-group" onSubmit={handleSubmit(onSubmit)}>
       <input
         type="text"
+        name={urlInputName}
+        ref={register}
         className="form-control ps-3"
         placeholder="URL を保存"
         aria-label="Input Group"
         aria-describedby="input-group"
-        value={inputValue}
-        onChange={(e) => handleChangeValue(e.target.value)}
       />
-      <button className="btn btn-secondary" type="button" id="input-group" onClick={handleClickSaveBtn}>
+      <button className="btn btn-secondary" type="submit" id="input-group">
         保存する
       </button>
-    </div>
+    </form>
   );
 };

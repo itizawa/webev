@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { apiPost } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -8,16 +8,14 @@ import { InputForm } from '~/components/molecules/InputForm';
 import { PlusBoard } from '~/components/icons/PlusBoard';
 
 export const Navbar: FC = () => {
-  const [url, setUrl] = useState('');
   const { mutate: pageListMutate } = usePageListSWR();
 
-  const handleSaveButton = async () => {
+  const savePage = async (url: string): Promise<void> => {
     try {
       const res = await apiPost('/pages', { url });
       const { title } = res.data;
       toastSuccess(`${title} を保存しました!`);
       pageListMutate();
-      setUrl('');
     } catch (err) {
       toastError(err);
     }
@@ -39,7 +37,7 @@ export const Navbar: FC = () => {
         </button>
         <span className="navbar-brand mb-0 h1 text-white">Webev</span>
         <div className="w-50 d-none d-md-block">
-          <InputForm inputValue={url} onChangeInputValue={setUrl} onClickSaveBtn={handleSaveButton} />
+          <InputForm onSubmitForm={savePage} />
         </div>
         <div className="d-md-none d-block">
           <PlusBoard />
