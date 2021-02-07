@@ -4,7 +4,7 @@ import { SidebarList } from '~/components/organisms/SidebarList';
 type Props = {};
 
 export const Sidebar: FC<Props> = (props: Props) => {
-  const [url, setUrl] = useState('/home');
+  const [url, setUrl] = useState('/home' as string);
 
   return (
     <div className="sidebar h-100">

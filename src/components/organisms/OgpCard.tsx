@@ -12,7 +12,9 @@ export const OgpCard: FC<Props> = (props: Props) => {
 
   return (
     <div className="card shadow border-0">
-      <img src={image} alt={image} />
+      <a href={url} target="blank" rel="noopener noreferrer">
+        <img src={image} alt={image} className="w-100" />
+      </a>
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <h6 className="card-subtitle mb-2 text-muted">

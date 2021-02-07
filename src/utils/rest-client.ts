@@ -9,6 +9,10 @@ const axios = axiosBase.create({
   responseType: 'json',
 });
 
+export const apiGet = (url: string, query = {}): Promise<any> => {
+  return axios.get(`/api/v1${url}`, query);
+};
+
 export const apiPost = (url: string, body = {}): Promise<any> => {
   return axios.post(`/api/v1${url}`, body);
 };
