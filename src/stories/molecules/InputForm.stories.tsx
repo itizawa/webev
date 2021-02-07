@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react';
+import { ComponentProps } from 'react';
 import { Story } from '@storybook/react/types-6-0';
 
 import { InputForm } from '~/components/molecules/InputForm';
