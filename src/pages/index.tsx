@@ -1,22 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { apiGet } from '~/utils/rest-client';
-
-import { IPage } from '~/interfaces/page';
+import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
-const Index: React.FC = () => {
-  const [pages, setPages] = useState([] as IPage[]);
+const Index: FC = () => {
+  const { data: pages } = usePageListSWR();
 
-  useEffect(() => {
-    const retrieveOgp = async (): Promise<void> => {
-      const res = await apiGet('/pages/list');
-      console.log(res.data);
-      const pages = res.data as IPage[];
-      setPages(pages);
-    };
-    retrieveOgp();
-  }, []);
+  if (pages == null) {
+    return <></>;
+  }
 
   return (
     <div className="p-3">
