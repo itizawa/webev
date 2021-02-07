@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Props = {
-  onSavePage?: (url: string) => void;
+  onSubmitForm?: (url: string) => void;
 };
 
 type FormValues = {
@@ -16,8 +16,8 @@ export const InputForm: FC<Props> = (props: Props) => {
 
   const onSubmit = async (formValues: FormValues): Promise<void> => {
     const { url } = formValues;
-    if (props?.onSavePage != null) {
-      await props.onSavePage(url);
+    if (props?.onSubmitForm != null) {
+      await props.onSubmitForm(url);
     }
     setValue(urlInputName, '');
   };

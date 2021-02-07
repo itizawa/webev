@@ -37,7 +37,7 @@ export const Navbar: FC = () => {
         </button>
         <span className="navbar-brand mb-0 h1 text-white">Webev</span>
         <div className="w-50 d-none d-md-block">
-          <InputForm onSavePage={savePage} />
+          <InputForm onSubmitForm={savePage} />
         </div>
         <div className="d-md-none d-block">
           <PlusBoard />
