@@ -16,6 +16,7 @@
     "react-dom": "latest",
     "sass": "^1.32.0",
     "sass-loader": "^10.1.0",
+    "swr": "^0.4.1",
     "toastr": "^2.1.4"
   },
   "scripts": {
