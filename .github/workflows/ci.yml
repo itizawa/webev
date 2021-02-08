@@ -23,9 +23,9 @@ jobs:
       - name: Install Node.js dependencies
         run: npm install
 
-      - name: pnpm lint
+      - name: npm run lint
         run: |
-          pnpm lint
+          npm run lint
 
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
