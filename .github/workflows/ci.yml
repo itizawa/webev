@@ -21,16 +21,16 @@ jobs:
 
       # ESLint and Prettier must be in `package.json`
       - name: Install Node.js dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Print dependencies
         run: |
           echo -n "node " && node -v
           echo -n "npm " && npm -v
-          yarn list --depth=0
-      - name: yarn lint
+          pnpm list --depth=0
+      - name: pnpm lint
         run: |
-          yarn lint
+          pnpm lint
 
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
