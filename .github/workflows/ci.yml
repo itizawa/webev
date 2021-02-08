@@ -27,10 +27,10 @@ jobs:
         run: |
           echo -n "node " && node -v
           echo -n "npm " && npm -v
-          pnpm list --depth=0
-      - name: pnpm lint
+          npm list --depth=0
+      - name: npm lint
         run: |
-          pnpm lint
+          npm lint
 
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
