@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { signIn, useSession } from 'next-auth/client';
 import { apiPost } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
@@ -9,6 +10,7 @@ import { PlusBoard } from '~/components/icons/PlusBoard';
 
 export const Navbar: FC = () => {
   const { mutate: pageListMutate } = usePageListSWR();
+  const [session, loading] = useSession();
 
   const savePage = async (url: string): Promise<void> => {
     try {
@@ -43,6 +45,20 @@ export const Navbar: FC = () => {
           <PlusBoard />
         </div>
       </div>
+      {!session && (
+        <button className="btn btn-primary" onClick={() => signIn('google')}>
+          ログイン
+        </button>
+      )}
+      {/* {session && (
+        <>
+          <button onClick={handleSignOut}>ログアウト</Button>
+          <Button color="secondary" variant="outlined" onClick={() => Router.push('/admin')}>
+            管理画面
+          </Button>
+          <img height="50px" className="ml-auto rounded-circle" src={session.user.image} />
+        </>
+      )} */}
     </nav>
   );
 };
