@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import Providers from 'next-auth/providers';
 
 const options = {
+  site: process.env.NEXTAUTH_URL || 'http://localhost:3000',
   providers: [
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
@@ -11,7 +12,7 @@ const options = {
   ],
 
   // A database is optional, but required to persist accounts in a database
-  database: process.env.MONGO_URI || 'mongodb://locakhost:27017/webev',
+  database: process.env.MONGO_URI || 'mongodb://localhost:27017/webev',
 
   sessionMaxAge: 30 * 24 * 60 * 60 * 1000, // Expire sessions after 30 days of being idle
   sessionUpdateAge: 24 * 60 * 60 * 1000, // Update session expiry only if session was updated more recently than the last 24 hours
