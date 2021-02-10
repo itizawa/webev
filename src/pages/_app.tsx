@@ -19,7 +19,6 @@ const App = ({ Component, pageProps }: AppProps) => (
         <Sidebar />
       </div>
       <div className="col-12 col-lg-10">
-        {process.env.NEXTAUTH_URL}
         <Component {...pageProps} />
       </div>
     </div>
