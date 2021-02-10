@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { signIn, useSession, signOut } from 'next-auth/client';
 import { apiPost } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
@@ -9,6 +10,7 @@ import { PlusBoard } from '~/components/icons/PlusBoard';
 
 export const Navbar: FC = () => {
   const { mutate: pageListMutate } = usePageListSWR();
+  const [session] = useSession();
 
   const savePage = async (url: string): Promise<void> => {
     try {
@@ -42,6 +44,16 @@ export const Navbar: FC = () => {
         <div className="d-md-none d-block">
           <PlusBoard />
         </div>
+        {!session && (
+          <button className="btn btn-primary" onClick={() => signIn('google')}>
+            ログイン
+          </button>
+        )}
+        {session && (
+          <button className="btn btn-primary" onClick={() => signOut()}>
+            ログアウト
+          </button>
+        )}
       </div>
     </nav>
   );
