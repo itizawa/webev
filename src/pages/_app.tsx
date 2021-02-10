@@ -10,7 +10,7 @@ import { Sidebar } from '~/components/organisms/Sidebar';
 const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <title>My page</title>
+      <title>Webev</title>
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     </Head>
     <Navbar />
@@ -19,6 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <Sidebar />
       </div>
       <div className="col-12 col-lg-10">
+        {process.env.NEXTAUTH_URL}
         <Component {...pageProps} />
       </div>
     </div>
