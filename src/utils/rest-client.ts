@@ -31,8 +31,9 @@ class RestClient {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  apiPost(url: string, body = {}): Promise<any> {
-    return this.axios.post(`/api/v1${url}`, body);
+  async apiPost(url: string, body = {}): Promise<any> {
+    const accessToken = await this.getAccessToken();
+    return this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
   }
 }
 
