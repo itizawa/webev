@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { signIn, useSession, signOut } from 'next-auth/client';
-import { apiPost } from '~/utils/rest-client';
+import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
 
@@ -14,7 +14,7 @@ export const Navbar: FC = () => {
 
   const savePage = async (url: string): Promise<void> => {
     try {
-      const res = await apiPost('/pages', { url });
+      const res = await restClient.apiPost('/pages', { url });
       const { title } = res.data;
       toastSuccess(`${title} を保存しました!`);
       pageListMutate();
