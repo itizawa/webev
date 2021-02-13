@@ -1,15 +1,17 @@
 import { FC } from 'react';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
+import { StarIcon } from '~/components/icons/StarIcon';
 
 type Props = {
   url: string;
   image: string;
   description: string;
   title: string;
+  isFavorite?: boolean;
 };
 
 export const OgpCard: FC<Props> = (props: Props) => {
-  const { url, image, title, description } = props;
+  const { url, image, title, description, isFavorite } = props;
 
   return (
     <div className={`card border-0 shadow ${styles.card}`}>
@@ -25,6 +27,9 @@ export const OgpCard: FC<Props> = (props: Props) => {
           </a>
         </h5>
         <p className="small mt-2">{description}</p>
+        <div className={styles.manager}>
+          <StarIcon width={24} height={24} isActive={isFavorite} />
+        </div>
       </div>
     </div>
   );
