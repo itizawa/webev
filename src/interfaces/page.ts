@@ -5,4 +5,5 @@ export interface IPage {
   description: string;
   title: string;
   body: string;
+  isFavorite: boolean;
 }
