@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: webev_front
+    command: sh -c "yarn && yarn dev"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/webev-front
+      - /webev-front/node_modules
+      - /webev-front/.next
+    networks:
+      - webev_link
+
+networks:
+  webev_link:
+    external: true
