@@ -13,7 +13,7 @@ export const OgpCard: FC<Props> = (props: Props) => {
 
   return (
     <div className={`card border-0 shadow ${styles.card}`}>
-      <div className={styles.fixedImage}>
+      <div className={styles.fixed}>
         <a href={url} target="blank" rel="noopener noreferrer">
           <img src={image} alt={image} className="card-img-top" />
         </a>
