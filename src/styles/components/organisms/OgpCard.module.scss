@@ -26,9 +26,10 @@
   }
 }
 
-.manager{
-  visibility:hidden;
-  opacity: 0;
-  transition-duration: .2s;
-  transition-property: opacity visibility;
+@media screen and (min-width:990px){	
+  .manager:not(.isActive){
+    visibility:hidden;
+    opacity: 0;
+    transition-duration: .2s;
+  }
 }
