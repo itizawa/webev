@@ -10,7 +10,7 @@ const Index: FC = () => {
   return (
     <div className="p-3">
       <h1>Home</h1>
-      <div className="row">
+      <div className="row mt-4">
         {pages == null ? (
           <>
             <div className="col-lg-4 col-md-6">
