@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { StarIcon } from '~/components/icons/StarIcon';
+import { TrashIcon } from '~/components/icons/TrashIcon';
 
 type Props = {
   url: string;
@@ -27,8 +28,9 @@ export const OgpCard: FC<Props> = (props: Props) => {
           </a>
         </h5>
         <p className="small mt-2">{description}</p>
-        <div className={styles.manager}>
+        <div className={`d-flex gap-3 ${styles.manager}`}>
           <StarIcon width={24} height={24} isActive={isFavorite} />
+          <TrashIcon width={24} height={24} />
         </div>
       </div>
     </div>
