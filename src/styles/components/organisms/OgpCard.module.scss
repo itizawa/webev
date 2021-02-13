@@ -1,5 +1,11 @@
 .card{
   background-color: #2f363d;
+  &:hover{
+    .manager{
+      visibility:visible;
+      opacity: 1;
+    }
+  }
 }
 
 .fixed {
@@ -18,4 +24,11 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
+}
+
+.manager{
+  visibility:hidden;
+  opacity: 0;
+  transition-duration: .2s;
+  transition-property: opacity visibility;
 }
