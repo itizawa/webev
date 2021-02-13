@@ -10,23 +10,23 @@ const Index: FC = () => {
   return (
     <div className="p-3">
       <h1>Home</h1>
-      <div className="row gap-3">
+      <div className="row">
         {pages == null ? (
           <>
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               <Skeleton height={300} />
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               <Skeleton height={300} />
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               <Skeleton height={300} />
             </div>
           </>
         ) : (
           <>
             {pages.map((page) => (
-              <div className="col-lg-3" key={page._id}>
+              <div className="col-lg-4 mb-3" key={page._id}>
                 <OgpCard url={page?.url} image={page?.image} description={page?.description} title={page?.title} />
               </div>
             ))}
