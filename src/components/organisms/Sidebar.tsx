@@ -8,7 +8,7 @@ import styles from '~/styles/components/organisms/Sidebar.module.scss';
 
 const sidebarItemMappings = [
   { text: 'Home', url: '/home', icon: <HomeIcon /> },
-  { text: 'Favorite (TBD)', url: '/favorites', icon: <StarIcon /> },
+  { text: 'Favorite', url: '/favorites', icon: <StarIcon isActive /> },
 ];
 
 export const Sidebar: FC = () => {
