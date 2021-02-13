@@ -1,11 +1,5 @@
 .card{
   background-color: #2f363d;
-  &:hover{
-    .manager{
-      visibility:visible;
-      opacity: 1;
-    }
-  }
 }
 
 .fixed {
@@ -23,13 +17,5 @@
     background-image: url('/spinner.gif');
     background-repeat: no-repeat;
     background-position: center center;
-  }
-}
-
-@media screen and (min-width:990px){	
-  .manager:not(.isActive){
-    visibility:hidden;
-    opacity: 0;
-    transition-duration: .2s;
   }
 }
