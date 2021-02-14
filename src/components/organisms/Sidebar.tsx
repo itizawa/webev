@@ -1,14 +1,13 @@
 import { FC, useState } from 'react';
 import ClassNames from 'classnames';
 
-import { HomeIcon } from '~/components/icons/HomeIcon';
-import { StarIcon } from '~/components/icons/StarIcon';
-
+import { Icon } from '../icons/Icon';
 import styles from '~/styles/components/organisms/Sidebar.module.scss';
+import { BootstrapIcon } from '~/interfaces/variables';
 
 const sidebarItemMappings = [
-  { text: 'Home', url: '/home', icon: <HomeIcon /> },
-  { text: 'Favorite', url: '/favorites', icon: <StarIcon isActive /> },
+  { text: 'Home', url: '/home', icon: BootstrapIcon.HOME },
+  { text: 'Favorite', url: '/favorites', icon: BootstrapIcon.STAR },
 ];
 
 export const Sidebar: FC = () => {
@@ -24,7 +23,7 @@ export const Sidebar: FC = () => {
 
         return (
           <li key={v.text} className={classNameForListItem} onClick={() => setUrl(v.url)}>
-            {v.icon != null && v.icon}
+            {v.icon != null && <Icon icon={v.icon} />}
             <span className="ms-3">{v.text}</span>
           </li>
         );
