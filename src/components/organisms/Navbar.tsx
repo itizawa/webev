@@ -6,7 +6,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
 
 import { InputForm } from '~/components/molecules/InputForm';
-import { PlusBoard } from '~/components/icons/PlusBoard';
 
 export const Navbar: FC = () => {
   const { mutate: pageListMutate } = usePageListSWR();
@@ -41,9 +40,7 @@ export const Navbar: FC = () => {
         <div className="w-50 d-none d-md-block">
           <InputForm onSubmitForm={savePage} />
         </div>
-        <div className="d-md-none d-block">
-          <PlusBoard />
-        </div>
+        <div className="d-md-none d-block">{/* <PlusBoard /> */}</div>
         {!session && (
           <button className="btn btn-primary" onClick={() => signIn('google')}>
             ログイン
