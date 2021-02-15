@@ -16,7 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => (
     </Head>
     <Navbar />
     <div className={`sticky-top ${style['nav-border']}`} />
-    <main className="d-flex h-100 mx-auto pt-lg-4">
+    <main className="d-flex mx-auto pt-lg-4">
       <div className="d-none d-lg-block col-lg-2">
         <Sidebar />
       </div>
