@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 
 import '~/styles/global.scss';
 
+import style from '~/styles/navbarBorder.module.scss';
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 
@@ -14,6 +15,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     </Head>
     <Navbar />
+    <div className={`sticky-top ${style.border}`} />
     <main className="d-flex h-100 mx-auto pt-lg-4">
       <div className="d-none d-lg-block col-lg-2">
         <Sidebar />
