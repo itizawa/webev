@@ -33,6 +33,11 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     return this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
   }
+
+  async apiPut(url: string, body = {}): Promise<AxiosResponse> {
+    const accessToken = await this.getAccessToken();
+    return this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+  }
 }
 
 export const restClient = new RestClient();
