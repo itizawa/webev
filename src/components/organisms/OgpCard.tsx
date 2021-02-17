@@ -1,9 +1,13 @@
 import { FC } from 'react';
+
 import { IconButton } from '../icons/IconButton';
+import { restClient } from '~/utils/rest-client';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 type Props = {
+  pageId: string;
   url: string;
   image: string;
   description: string;
@@ -12,7 +16,16 @@ type Props = {
 };
 
 export const OgpCard: FC<Props> = (props: Props) => {
-  const { url, image, title, description, isFavorite } = props;
+  const { pageId, url, image, title, description, isFavorite } = props;
+
+  const switchFavorite = async () => {
+    try {
+      const res = await restClient.apiPut(`/pages/${pageId}/favorite`, { isFavorite: !isFavorite });
+      console.log(res);
+    } catch (err) {
+      toastError(err);
+    }
+  };
 
   return (
     <div className={`card border-0 shadow ${styles.card}`}>
@@ -29,7 +42,14 @@ export const OgpCard: FC<Props> = (props: Props) => {
         </h5>
         <p className="small mt-2">{description}</p>
         <div className={`d-flex ${styles.manager}`}>
-          <IconButton width={24} height={24} icon={BootstrapIcon.STAR} isActive={isFavorite} activeColor={BootstrapColor.WARNING} />
+          <IconButton
+            width={24}
+            height={24}
+            icon={BootstrapIcon.STAR}
+            isActive={isFavorite}
+            activeColor={BootstrapColor.WARNING}
+            onClickButton={switchFavorite}
+          />
           <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} />
         </div>
       </div>
