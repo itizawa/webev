@@ -9,3 +9,10 @@ export const usePageListSWR = (): responseInterface<Page[], Error> => {
     revalidateOnReconnect: true,
   });
 };
+
+export const useFavoritePageListSWR = (): responseInterface<Page[], Error> => {
+  return useSWR('/pages/favorite-list', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+  });
+};
