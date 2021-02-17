@@ -2,16 +2,21 @@ import { FC, useEffect, useState } from 'react';
 
 import { IconButton } from '../icons/IconButton';
 import { restClient } from '~/utils/rest-client';
-import styles from '~/styles/components/organisms/OgpCard.module.scss';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { toastError, toastSuccess } from '~/utils/toastr';
+
+import styles from '~/styles/components/organisms/OgpCard.module.scss';
+
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page } from '~/interfaces/page';
+
+import { useFavoritePageListSWR } from '~/stores/page';
 
 type Props = {
   page: Page;
 };
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
+  const { mutate: useFavoritePageListMutate } = useFavoritePageListSWR();
   const { _id, url, image, title, description } = page;
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -24,6 +29,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
       toastSuccess('更新しました');
       setIsFavorite(page.isFavorite);
+      useFavoritePageListMutate();
     } catch (err) {
       toastError(err);
     }
