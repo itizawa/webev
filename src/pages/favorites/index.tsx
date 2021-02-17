@@ -9,7 +9,7 @@ const Index: FC = () => {
 
   return (
     <div className="p-3">
-      <h1>Home</h1>
+      <h1>Favorite</h1>
       <div className="row mt-4">
         {pages == null ? (
           <>
