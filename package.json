@@ -26,7 +26,7 @@
     "start": "next start",
     "lint:styles": "stylelint \"./**/*.{scss,css}\"",
     "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "lint": "npm-run-all -p lint:js lint:styles",
+    "lint": "npm-run-all -p lint:js lint:styles"
   },
   "repository": {
     "type": "git",
