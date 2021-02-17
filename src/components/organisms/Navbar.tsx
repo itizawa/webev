@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import Link from 'next/link';
 
 import { signIn, useSession, signOut } from 'next-auth/client';
 import { restClient } from '~/utils/rest-client';
@@ -36,7 +37,9 @@ export const Navbar: FC = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <span className="navbar-brand mb-0 h1 text-white">Webev</span>
+        <Link href="/">
+          <span className="navbar-brand mb-0 h1 text-white c-pointer">Webev</span>
+        </Link>
         <div className="w-50 d-none d-md-block">
           <InputForm onSubmitForm={savePage} />
         </div>
