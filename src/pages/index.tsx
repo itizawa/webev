@@ -26,7 +26,7 @@ const Index: FC = () => {
         ) : (
           pages.map((page) => (
             <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
-              <OgpCard url={page?.url} image={page?.image} description={page?.description} title={page?.title} isFavorite={page?.isFavorite} />
+              <OgpCard page={page} />
             </div>
           ))
         )}

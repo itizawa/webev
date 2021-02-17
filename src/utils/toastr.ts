@@ -1,4 +1,4 @@
-import * as toastr from 'toastr';
+import { error, success } from 'toastr';
 
 const toastrOption = {
   error: {
@@ -8,6 +8,7 @@ const toastrOption = {
     showDuration: 100,
     hideDuration: 100,
     timeOut: 0,
+    positionClass: 'toast-bottom-left',
   },
   success: {
     closeButton: true,
@@ -16,15 +17,16 @@ const toastrOption = {
     showDuration: 100,
     hideDuration: 100,
     timeOut: 3000,
+    positionClass: 'toast-bottom-left',
   },
 };
 
 // accepts both a single error and an array of errors
 export const toastError = (err: { message: string }, header = 'Error', option = toastrOption.error): void => {
-  toastr.error(err.message, header, option);
+  error(err.message, header, option);
 };
 
 // only accepts a single item
 export const toastSuccess = (body: string, header = 'Success', option = toastrOption.success): void => {
-  toastr.success(body, header, option);
+  success(body, header, option);
 };
