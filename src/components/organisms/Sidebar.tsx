@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import Link from 'next/link';
 import ClassNames from 'classnames';
 
 import { Icon } from '../icons/Icon';
@@ -22,10 +23,12 @@ export const Sidebar: FC = () => {
         });
 
         return (
-          <li key={v.text} className={classNameForListItem} onClick={() => setUrl(v.url)}>
-            {v.icon != null && <Icon icon={v.icon} />}
-            <span className="ms-3">{v.text}</span>
-          </li>
+          <Link key={v.text} href={v.url}>
+            <li className={classNameForListItem} onClick={() => setUrl(v.url)}>
+              {v.icon != null && <Icon icon={v.icon} />}
+              <span className="ms-3">{v.text}</span>
+            </li>
+          </Link>
         );
       })}
     </ul>
