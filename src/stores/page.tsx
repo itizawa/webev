@@ -1,9 +1,9 @@
 import useSWR, { responseInterface } from 'swr';
 import { restClient } from '~/utils/rest-client';
 
-import { IPage } from '~/interfaces/page';
+import { Page } from '~/interfaces/page';
 
-export const usePageListSWR = (): responseInterface<IPage[], Error> => {
+export const usePageListSWR = (): responseInterface<Page[], Error> => {
   return useSWR('/pages/list', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
