@@ -26,6 +26,10 @@ jobs:
       - name: npm run lint
         run: |
           npm run lint
+      
+      - name: yarn build
+        run: |
+          yarn build
 
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
