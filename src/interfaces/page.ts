@@ -1,4 +1,4 @@
-export interface IPage {
+export interface Page {
   _id: string;
   url: string;
   image: string;

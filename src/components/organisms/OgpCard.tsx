@@ -1,27 +1,29 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { IconButton } from '../icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { toastError, toastSuccess } from '~/utils/toastr';
+import { Page } from '~/interfaces/page';
 
 type Props = {
-  pageId: string;
-  url: string;
-  image: string;
-  description: string;
-  title: string;
-  isFavorite?: boolean;
+  page: Page;
 };
 
-export const OgpCard: FC<Props> = (props: Props) => {
-  const { pageId, url, image, title, description, isFavorite } = props;
+export const OgpCard: FC<Props> = ({ page }: Props) => {
+  const { _id, url, image, title, description } = page;
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    setIsFavorite(page.isFavorite);
+  }, [page]);
 
   const switchFavorite = async () => {
     try {
-      const res = await restClient.apiPut(`/pages/${pageId}/favorite`, { isFavorite: !isFavorite });
-      console.log(res);
+      const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
+      toastSuccess('更新しました');
+      setIsFavorite(page.isFavorite);
     } catch (err) {
       toastError(err);
     }
