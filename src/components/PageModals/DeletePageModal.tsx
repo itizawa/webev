@@ -1,12 +1,15 @@
 import { FC } from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
+import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { usePageForDelete } from '~/stores/modal';
 
 export const DeletePageModal: FC = () => {
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
 
-  console.log(pageForDelete);
+  const deletePage = () => {
+    // TODO delete page
+  };
 
   const closeDeleteModal = async () => {
     mutatePageForDelete(null);
@@ -14,17 +17,28 @@ export const DeletePageModal: FC = () => {
 
   return (
     <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal}>
-      <ModalHeader>Modal title</ModalHeader>
-      <ModalBody>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <ModalHeader className="bg-dark">ページを削除します</ModalHeader>
+      <ModalBody className="bg-dark text-break">
+        <div className={styles.fixed}>
+          <a href={pageForDelete?.url} target="blank" rel="noopener noreferrer">
+            <img src={pageForDelete?.image} alt={pageForDelete?.image} />
+          </a>
+        </div>
+        <h5 className="card-title my-3">
+          <a className="text-white text-decoration-none" href={pageForDelete?.url} target="blank" rel="noopener noreferrer">
+            {pageForDelete?.title}
+          </a>
+        </h5>
+        <p className="small mt-2">{pageForDelete?.description}</p>
+        <div className="d-flex justify-content-evenly">
+          <button className="btn btn-danger" onClick={deletePage}>
+            削除する
+          </button>
+          <button className="btn btn-secondary" onClick={closeDeleteModal}>
+            キャンセル
+          </button>
+        </div>
       </ModalBody>
-      <ModalFooter>
-        <button className="btn btn-secondary" onClick={closeDeleteModal}>
-          Cancel
-        </button>
-      </ModalFooter>
     </Modal>
   );
 };
