@@ -1,17 +1,19 @@
 import { FC } from 'react';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import { useIsOpenDeletePageModal } from '~/stores/modal';
+import { usePageForDelete } from '~/stores/modal';
 
 export const DeletePageModal: FC = () => {
-  const { data: isOpenDeleteModal, mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+  const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
+
+  console.log(pageForDelete);
 
   const closeDeleteModal = async () => {
-    mutateIsOpenDeletePageModal(false);
+    mutatePageForDelete(null);
   };
 
   return (
-    <Modal isOpen={isOpenDeleteModal} toggle={closeDeleteModal}>
+    <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal}>
       <ModalHeader>Modal title</ModalHeader>
       <ModalBody>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis

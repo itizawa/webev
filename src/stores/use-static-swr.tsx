@@ -5,7 +5,7 @@ export const useStaticSWR = <Data, Error>(
   key: keyInterface,
   updateData?: Data | fetcherFn<Data>,
   initialData?: Data | fetcherFn<Data>,
-): responseInterface<Data, Error> => {
+): responseInterface<Data | null, Error> => {
   if (updateData == null) {
     if (!cache.has(key) && initialData != null) {
       mutate(key, initialData, false);

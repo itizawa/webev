@@ -10,7 +10,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page } from '~/interfaces/page';
 
 import { useFavoritePageListSWR } from '~/stores/page';
-import { useIsOpenDeletePageModal } from '~/stores/modal';
+import { usePageForDelete } from '~/stores/modal';
 
 type Props = {
   page: Page;
@@ -20,7 +20,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
   const { mutate: useFavoritePageListMutate } = useFavoritePageListSWR();
   const { _id, url, image, title, description } = page;
   const [isFavorite, setIsFavorite] = useState(false);
-  const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+  const { mutate: mutatePageForDelete } = usePageForDelete();
 
   useEffect(() => {
     setIsFavorite(page.isFavorite);
@@ -38,7 +38,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
   };
 
   const openDeleteModal = async () => {
-    mutateIsOpenDeletePageModal(true);
+    mutatePageForDelete(page);
   };
 
   return (
