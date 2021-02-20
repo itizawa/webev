@@ -8,7 +8,7 @@ export const DeletePageModal: FC = () => {
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
 
   const deletePage = () => {
-    // TODO delete page
+    // TODO webev-56 delete page by api
   };
 
   const closeDeleteModal = async () => {
