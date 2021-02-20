@@ -6,6 +6,7 @@ import '~/styles/global.scss';
 import style from '~/styles/navbarBorder.module.scss';
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
+import { PageModals } from '~/components/PageModals/PageModals';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = ({ Component, pageProps }: AppProps) => (
@@ -23,6 +24,7 @@ const App = ({ Component, pageProps }: AppProps) => (
       <div className="col-12 col-lg-10">
         <Component {...pageProps} />
       </div>
+      <PageModals />
     </main>
   </>
 );
