@@ -10,7 +10,7 @@ export const Sidebar: FC = () => {
   const [url, setUrl] = useState('/home' as string);
 
   return (
-    <ul className="sidebar-list-group list-group gap-3 py-3 text-white">
+    <ul className="sidebar-list-group list-group gap-3 py-3 text-white sticky-top">
       {navbarItemMappings.map((v) => {
         const classNameForListItem = ClassNames({
           [`${styles['sidebar-list-group-item']} list-group-item mx-3 border-0`]: true,
