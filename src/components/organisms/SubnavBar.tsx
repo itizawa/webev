@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Icon } from '../icons/Icon';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 
-export const Footer: FC = () => {
+export const SubnavBar: FC = () => {
   return (
     <>
       {navbarItemMappings.map((v) => {

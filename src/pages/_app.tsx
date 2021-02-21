@@ -8,7 +8,7 @@ import '~/styles/global.scss';
 import style from '~/styles/navbarBorder.module.scss';
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
-import { Footer } from '~/components/organisms/Footer';
+import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { PageModals } from '~/components/PageModals/PageModals';
 import { usePageListSWR, useFavoritePageListSWR } from '~/stores/page';
 
@@ -45,7 +45,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Navbar />
       <div className="sticky-top">
         <nav className="navbar bg-dark d-flex justify-content-evenly d-md-none">
-          <Footer />
+          <SubnavBar />
         </nav>
         <div className={style['nav-border']} />
       </div>
