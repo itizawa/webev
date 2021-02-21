@@ -21,7 +21,7 @@ export const Sidebar: FC = () => {
           <Link key={v.text} href={v.url}>
             <li className={classNameForListItem} onClick={() => setUrl(v.url)}>
               {v.icon != null && <Icon icon={v.icon} />}
-              <span className="ms-3">{v.text}</span>
+              <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
             </li>
           </Link>
         );
