@@ -14,9 +14,8 @@ export const Navbar: FC = () => {
 
   const savePage = async (url: string): Promise<void> => {
     try {
-      const res = await restClient.apiPost('/pages', { url });
-      const { title } = res.data;
-      toastSuccess(`${title} を保存しました!`);
+      await restClient.apiPost('/pages', { url });
+      toastSuccess(`${url} を保存しました!`);
       pageListMutate();
     } catch (err) {
       toastError(err);
