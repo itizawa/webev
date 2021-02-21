@@ -9,10 +9,13 @@ import style from '~/styles/navbarBorder.module.scss';
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 import { PageModals } from '~/components/PageModals/PageModals';
+import { usePageListSWR, useFavoritePageListSWR } from '~/stores/page';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = ({ Component, pageProps }: AppProps) => {
   const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'));
+  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutate: useFavoritePageListMutate } = useFavoritePageListSWR();
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -23,7 +26,8 @@ const App = ({ Component, pageProps }: AppProps) => {
     });
     socket.on('update-page', () => {
       console.log('Get Updated Data');
-      // setNewChat(newData);
+      pageListMutate();
+      useFavoritePageListMutate();
     });
 
     return () => {
