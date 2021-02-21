@@ -38,6 +38,11 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     return this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
   }
+
+  async apiDelete(url: string, body = {}): Promise<AxiosResponse> {
+    const accessToken = await this.getAccessToken();
+    return this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
+  }
 }
 
 export const restClient = new RestClient();
