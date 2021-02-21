@@ -1,14 +1,22 @@
 import { FC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { usePageForDelete } from '~/stores/modal';
 
 export const DeletePageModal: FC = () => {
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
 
-  const deletePage = () => {
-    // TODO webev-56 delete page by api
+  const deletePage = async () => {
+    try {
+      const { data: page } = await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
+      mutatePageForDelete(null);
+      toastSuccess(`${page.url} を削除しました`);
+    } catch (err) {
+      toastError(err);
+    }
   };
 
   const closeDeleteModal = async () => {
