@@ -7,7 +7,7 @@ const toastrOption = {
     newestOnTop: false,
     showDuration: 100,
     hideDuration: 100,
-    timeOut: 0,
+    timeOut: 3000,
     positionClass: 'toast-bottom-left',
   },
   success: {
