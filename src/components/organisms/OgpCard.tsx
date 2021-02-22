@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 
-import { IconButton } from '../icons/IconButton';
+import { UncontrolledTooltip } from 'reactstrap';
+
+import { IconButton } from '~/components/icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -56,14 +58,19 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
         </h5>
         <p className="small mt-2">{description}</p>
         <div className={`d-flex ${styles.manager}`}>
-          <IconButton
-            width={24}
-            height={24}
-            icon={BootstrapIcon.STAR}
-            isActive={isFavorite}
-            activeColor={BootstrapColor.WARNING}
-            onClickButton={switchFavorite}
-          />
+          <div id={`favoritebutton-for-${page._id}`}>
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.STAR}
+              isActive={isFavorite}
+              activeColor={BootstrapColor.WARNING}
+              onClickButton={switchFavorite}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target={`favoritebutton-for-${page._id}`}>
+            お気に入り
+          </UncontrolledTooltip>
           <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} onClickButton={openDeleteModal} />
         </div>
       </div>
