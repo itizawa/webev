@@ -58,7 +58,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
         </h5>
         <p className="small mt-2">{description}</p>
         <div className={`d-flex ${styles.manager}`}>
-          <div id={`favoritebutton-for-${page._id}`}>
+          <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
@@ -68,10 +68,15 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
               onClickButton={switchFavorite}
             />
           </div>
-          <UncontrolledTooltip placement="top" target={`favoritebutton-for-${page._id}`}>
+          <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
             お気に入り
           </UncontrolledTooltip>
-          <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} onClickButton={openDeleteModal} />
+          <div id={`trash-for-${page._id}`}>
+            <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} onClickButton={openDeleteModal} />
+          </div>
+          <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
+            削除
+          </UncontrolledTooltip>
         </div>
       </div>
     </div>
