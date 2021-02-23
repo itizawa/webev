@@ -1,10 +1,11 @@
 import { FC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { usePageListSWR } from '~/stores/page';
+import { useOffsetPage, usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: FC = () => {
+  useOffsetPage(0);
   const { data: pages } = usePageListSWR();
 
   return (
