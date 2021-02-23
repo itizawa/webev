@@ -44,7 +44,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       </Head>
       <Navbar />
       <div className={`webev-nav-border ${style['nav-border']}`} />
-      <nav className="navbar bg-dark d-flex justify-content-evenly d-md-none">
+      <nav className="sticky-top bg-dark d-flex justify-content-evenly d-md-none">
         <SubnavBar />
       </nav>
       <main className="d-flex mx-auto pt-lg-4">
