@@ -1,11 +1,10 @@
 import { FC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useOffsetPage, useFavoritePageListSWR } from '~/stores/page';
+import { useFavoritePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: FC = () => {
-  useOffsetPage(0);
   const { data: pages } = useFavoritePageListSWR();
 
   return (
