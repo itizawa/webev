@@ -43,12 +43,10 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Navbar />
-      <div className="sticky-top">
-        <nav className="navbar bg-dark d-flex justify-content-evenly d-md-none">
-          <SubnavBar />
-        </nav>
-        <div className={style['nav-border']} />
-      </div>
+      <div className={`webev-nav-border ${style['nav-border']}`} />
+      <nav className="sticky-top bg-dark d-flex justify-content-evenly d-md-none">
+        <SubnavBar />
+      </nav>
       <main className="d-flex mx-auto pt-lg-4">
         <div className="d-none d-md-block col-lg-2">
           <Sidebar />
