@@ -1,15 +1,25 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: FC = () => {
+  const [cnt, setCnt] = useState(1);
+  const pages = [];
+  for (let i = 0; i < cnt; i++) {
+    pages.push(<Page activePage={i + 1} key={i} />);
+  }
+
   return (
     <div className="p-3">
       <h1>Home</h1>
-      <Page activePage={1} />
-      <Page activePage={2} />
+      {pages}
+      <div className="text-center">
+        <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
+          Load More
+        </button>
+      </div>
     </div>
   );
 };
