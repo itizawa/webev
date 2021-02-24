@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -11,15 +12,26 @@ const Index: FC = () => {
     pages.push(<Page activePage={i + 1} key={i} />);
   }
 
+  const loadMore = async (page: number) => {
+    setCnt(page + 1);
+  };
+
+  const skeletonForLoading = (
+    <div className="row mt-4">
+      {[...Array(9)].map((_, i) => (
+        <div key={i} className="col-lg-4 col-md-6 mb-3">
+          <Skeleton height={300} />
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className="p-3">
       <h1>Home</h1>
-      {pages}
-      <div className="text-center">
-        <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
-          Load More
-        </button>
-      </div>
+      <InfiniteScroll loadMore={loadMore} hasMore={true} loader={skeletonForLoading} element="div">
+        {pages}
+      </InfiniteScroll>
     </div>
   );
 };
