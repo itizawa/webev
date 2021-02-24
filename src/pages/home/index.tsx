@@ -35,16 +35,11 @@ const Page: FC<Props> = ({ activePage }: Props) => {
   if (paginationResult == null) {
     return (
       <div className="row mt-4">
-        <div className="col-lg-4 col-md-6">
-          <Skeleton height={300} />
-        </div>
-
-        <div className="col-lg-4 col-md-6">
-          <Skeleton height={300} />
-        </div>
-        <div className="col-lg-4 col-md-6">
-          <Skeleton height={300} />
-        </div>
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className="col-lg-4 col-md-6 mb-3">
+            <Skeleton height={300} />
+          </div>
+        ))}
       </div>
     );
   }
