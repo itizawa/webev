@@ -29,30 +29,35 @@ type Props = {
 };
 
 const Page: FC<Props> = ({ activePage }: Props) => {
-  const { data: pages } = usePageListSWR(activePage);
+  const { data: paginationResult } = usePageListSWR(activePage);
+
+  // 取得中の場合は スケルトンを表示する
+  if (paginationResult == null) {
+    return (
+      <div className="row mt-4">
+        <div className="col-lg-4 col-md-6">
+          <Skeleton height={300} />
+        </div>
+
+        <div className="col-lg-4 col-md-6">
+          <Skeleton height={300} />
+        </div>
+        <div className="col-lg-4 col-md-6">
+          <Skeleton height={300} />
+        </div>
+      </div>
+    );
+  }
+
+  const { docs: pages } = paginationResult;
 
   return (
     <div className="row mt-4">
-      {pages == null ? (
-        <>
-          <div className="col-lg-4 col-md-6">
-            <Skeleton height={300} />
-          </div>
-
-          <div className="col-lg-4 col-md-6">
-            <Skeleton height={300} />
-          </div>
-          <div className="col-lg-4 col-md-6">
-            <Skeleton height={300} />
-          </div>
-        </>
-      ) : (
-        pages.map((page) => (
-          <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
-            <OgpCard page={page} />
-          </div>
-        ))
-      )}
+      {pages.map((page) => (
+        <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
+          <OgpCard page={page} />
+        </div>
+      ))}
     </div>
   );
 };
