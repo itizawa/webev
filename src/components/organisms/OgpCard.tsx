@@ -11,7 +11,7 @@ import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page } from '~/interfaces/page';
 
-import { useFavoritePageListSWR } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete } from '~/stores/modal';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
-  const { mutate: useFavoritePageListMutate } = useFavoritePageListSWR();
+  const { mutate: useFavoritePageListMutate } = usePageListSWR();
   const { _id, url, image, title, description } = page;
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();

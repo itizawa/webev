@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useFavoritePageListSWR } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: FC = () => {
@@ -29,7 +29,7 @@ type Props = {
 };
 
 const Page: FC<Props> = ({ activePage }: Props) => {
-  const { data: pages } = useFavoritePageListSWR(activePage);
+  const { data: pages } = usePageListSWR(activePage);
 
   return (
     <div className="row mt-4">
