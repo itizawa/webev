@@ -2,28 +2,15 @@ import { FC, useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import useSWR, { useSWRInfinite, SWRInfiniteResponseInterface } from 'swr';
+import { useSWRInfinite, SWRInfiniteResponseInterface } from 'swr';
 import { PaginationResult } from '~/interfaces/paginationResult';
 
-import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { restClient } from '~/utils/rest-client';
 
 import { Page } from '~/interfaces/page';
 
 const Index: FC = () => {
-  const [activePage, setCnt] = useState(1);
-  const [hasPrevPage, setHasPrevPage] = useState(false);
-  // const [pages, setPages] = useState([] as Page[]);
-  // const { data: paginationResult, isValidating } = usePageListSWR(activePage);
-
-  const loadMore = async (activePage: number) => {
-    // if (!isValidating) {
-    //   setHasPrevPage(false);
-    //   setCnt(activePage + 1);
-    // }
-  };
-
   const { data: paginationResults, size, setSize }: SWRInfiniteResponseInterface<PaginationResult<Page>, Error> = useSWRInfinite(
     (index) => `/pages/list?status=stocked&page=${index + 1}&limit=9`,
     (endpoint) => restClient.apiGet(endpoint).then((result) => result.data),
