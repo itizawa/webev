@@ -15,7 +15,7 @@ const Index: FC = () => {
   return (
     <div className="p-3">
       <h1>Home</h1>
-      {pages}
+      <div className="row mt-4">{pages}</div>
       <div className="text-center">
         <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
           Load More
@@ -35,7 +35,7 @@ const Page: FC<Props> = ({ activePage }: Props) => {
   // 取得中の場合は スケルトンを表示する
   if (paginationResult == null) {
     return (
-      <div className="row mt-4">
+      <>
         <div className="col-lg-4 col-md-6">
           <Skeleton height={300} />
         </div>
@@ -46,20 +46,20 @@ const Page: FC<Props> = ({ activePage }: Props) => {
         <div className="col-lg-4 col-md-6">
           <Skeleton height={300} />
         </div>
-      </div>
+      </>
     );
   }
 
   const { docs: pages } = paginationResult;
 
   return (
-    <div className="row mt-4">
+    <>
       {pages.map((page) => (
         <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
           <OgpCard page={page} />
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
