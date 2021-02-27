@@ -1,6 +1,5 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import InfiniteScroll from 'react-infinite-scroller';
 
 import { useSWRInfinite, SWRInfiniteResponseInterface } from 'swr';
 import { PaginationResult } from '~/interfaces/paginationResult';
@@ -39,7 +38,6 @@ const Index: FC = () => {
   return (
     <div className="p-3">
       <h1>Home</h1>
-      {/* <InfiniteScroll loadMore={console} hasMore={hasPrevPage} loader={skeletonForLoading} element="div"> */}
       <div className="row mt-4">
         {pages.map((page) => (
           <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
@@ -48,7 +46,6 @@ const Index: FC = () => {
         ))}
         {hasNextPage && <button onClick={() => setSize(size + 1)}>load more</button>}
       </div>
-      {/* </InfiniteScroll> */}
     </div>
   );
 };
