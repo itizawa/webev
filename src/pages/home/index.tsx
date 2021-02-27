@@ -1,23 +1,13 @@
 import { FC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
-import { useSWRInfinite, SWRInfiniteResponseInterface } from 'swr';
-import { PaginationResult } from '~/interfaces/paginationResult';
-
 import { OgpCard } from '~/components/organisms/OgpCard';
-import { restClient } from '~/utils/rest-client';
 
 import { Page } from '~/interfaces/page';
+import { usePageListSWR } from '~/stores/page';
 
 const Index: FC = () => {
-  const { data: paginationResults, size, setSize, isValidating }: SWRInfiniteResponseInterface<PaginationResult<Page>, Error> = useSWRInfinite(
-    (index) => `/pages/list?status=stocked&page=${index + 1}&limit=9`,
-    (endpoint) => restClient.apiGet(endpoint).then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: true,
-    },
-  );
+  const { data: paginationResults, size, setSize, isValidating } = usePageListSWR();
 
   let pages = [] as Page[];
   let hasNextPage = false;
