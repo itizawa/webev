@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
-  const { mutate: useFavoritePageListMutate } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, image, title, description } = page;
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
@@ -33,7 +33,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
       toastSuccess('更新しました');
       setIsFavorite(page.isFavorite);
-      useFavoritePageListMutate();
+      mutatePageList();
     } catch (err) {
       toastError(err);
     }
