@@ -4,17 +4,18 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import styles from '~/styles/components/organisms/OgpCard.module.scss';
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
 
 export const DeletePageModal: FC = () => {
-  const { data: pageForDelete = null, mutate: mutatePageForDelete } = usePageForDelete();
+  const { data: pageForDelete } = usePageForDelete();
+  const { data: isOpenDeletePageModal = false, mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
   const { mutate: pageListMutate } = usePageListSWR();
 
   const deletePage = async () => {
     try {
       const { data: page } = await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
-      mutatePageForDelete(undefined);
+      mutateIsOpenDeletePageModal(false);
       toastSuccess(`${page.url} を削除しました`);
       pageListMutate();
     } catch (err) {
@@ -23,11 +24,11 @@ export const DeletePageModal: FC = () => {
   };
 
   const closeDeleteModal = async () => {
-    mutatePageForDelete(undefined);
+    mutateIsOpenDeletePageModal(false);
   };
 
   return (
-    <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal}>
+    <Modal isOpen={isOpenDeletePageModal} toggle={closeDeleteModal}>
       <ModalHeader className="bg-dark">ページを削除します</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className={styles.fixed}>
