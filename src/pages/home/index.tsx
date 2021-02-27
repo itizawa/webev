@@ -6,29 +6,33 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: FC = () => {
   const [cnt, setCnt] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const pages = [];
   for (let i = 0; i < cnt; i++) {
-    pages.push(<Page activePage={i + 1} key={i} />);
+    pages.push(<Page activePage={i + 1} key={i} setTotalPages={setTotalPages} />);
   }
 
   return (
     <div className="p-3">
       <h1>Home</h1>
       {pages}
-      <div className="text-center">
-        <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
-          Load More
-        </button>
-      </div>
+      {cnt !== totalPages && (
+        <div className="text-center">
+          <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
+            Load More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
 type Props = {
   activePage: number;
+  setTotalPages(totalPages: number): void;
 };
 
-const Page: FC<Props> = ({ activePage }: Props) => {
+const Page: FC<Props> = ({ activePage, setTotalPages }: Props) => {
   const { data: paginationResult } = usePageListSWR(activePage);
 
   // 取得中の場合は スケルトンを表示する
@@ -49,7 +53,8 @@ const Page: FC<Props> = ({ activePage }: Props) => {
     );
   }
 
-  const { docs: pages } = paginationResult;
+  const { docs: pages, totalPages } = paginationResult;
+  setTotalPages(totalPages);
 
   return (
     <div className="row mt-4">
