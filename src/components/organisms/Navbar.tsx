@@ -9,14 +9,14 @@ import { usePageListSWR } from '~/stores/page';
 import { InputForm } from '~/components/molecules/InputForm';
 
 export const Navbar: FC = () => {
-  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR();
   const [session] = useSession();
 
   const savePage = async (url: string): Promise<void> => {
     try {
       await restClient.apiPost('/pages', { url });
       toastSuccess(`${url} を保存しました!`);
-      pageListMutate();
+      mutatePageList();
     } catch (err) {
       toastError(err);
     }
