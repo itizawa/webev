@@ -8,13 +8,13 @@ import { usePageForDelete } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
 
 export const DeletePageModal: FC = () => {
-  const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
+  const { data: pageForDelete = null, mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: pageListMutate } = usePageListSWR();
 
   const deletePage = async () => {
     try {
       const { data: page } = await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
-      mutatePageForDelete(null);
+      mutatePageForDelete(undefined);
       toastSuccess(`${page.url} を削除しました`);
       pageListMutate();
     } catch (err) {
@@ -23,7 +23,7 @@ export const DeletePageModal: FC = () => {
   };
 
   const closeDeleteModal = async () => {
-    mutatePageForDelete(null);
+    mutatePageForDelete(undefined);
   };
 
   return (
