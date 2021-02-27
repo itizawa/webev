@@ -7,5 +7,5 @@ export const usePageForDelete = (initialData?: Page): responseInterface<Page, Er
 };
 
 export const useIsOpenDeletePageModal = (initialData?: boolean): responseInterface<boolean, Error> => {
-  return useStaticSWR('pageForDeletePageModal', initialData);
+  return useStaticSWR('isOpenDeletePageModal', initialData);
 };
