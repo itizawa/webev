@@ -44,7 +44,11 @@ const Index: FC = () => {
             ))}
           </div>
         )}
-        {hasNextPage && <button onClick={() => setSize(size + 1)}>load more</button>}
+        {hasNextPage && (
+          <button className="btn btn-primary" onClick={() => setSize(size + 1)}>
+            load more...
+          </button>
+        )}
       </div>
     </div>
   );
