@@ -10,7 +10,7 @@ import { restClient } from '~/utils/rest-client';
 import { Page } from '~/interfaces/page';
 
 const Index: FC = () => {
-  const { data: paginationResults, size, setSize }: SWRInfiniteResponseInterface<PaginationResult<Page>, Error> = useSWRInfinite(
+  const { data: paginationResults, size, setSize, isValidating }: SWRInfiniteResponseInterface<PaginationResult<Page>, Error> = useSWRInfinite(
     (index) => `/pages/list?status=stocked&page=${index + 1}&limit=9`,
     (endpoint) => restClient.apiGet(endpoint).then((result) => result.data),
     {
@@ -19,21 +19,12 @@ const Index: FC = () => {
     },
   );
 
-  if (paginationResults == null) {
-    return <p>hoge</p>;
+  let pages = [] as Page[];
+  let hasNextPage = false;
+  if (paginationResults != null) {
+    pages = paginationResults.map((paginationResult) => paginationResult.docs).flat();
+    hasNextPage = paginationResults[paginationResults.length - 1].hasNextPage;
   }
-  const pages = paginationResults.map((paginationResult) => paginationResult.docs).flat();
-  const hasNextPage = paginationResults[paginationResults.length - 1].hasNextPage;
-
-  const skeletonForLoading = (
-    <div className="row mt-4" key={0}>
-      {[...Array(9)].map((_, i) => (
-        <div key={i} className="col-lg-4 col-md-6 mb-3">
-          <Skeleton height={300} />
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <div className="p-3">
@@ -44,6 +35,15 @@ const Index: FC = () => {
             <OgpCard page={page} />
           </div>
         ))}
+        {isValidating && (
+          <div className="row mt-4" key={0}>
+            {[...Array(9)].map((_, i) => (
+              <div key={i} className="col-lg-4 col-md-6 mb-3">
+                <Skeleton height={300} />
+              </div>
+            ))}
+          </div>
+        )}
         {hasNextPage && <button onClick={() => setSize(size + 1)}>load more</button>}
       </div>
     </div>
