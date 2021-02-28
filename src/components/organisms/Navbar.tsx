@@ -1,16 +1,18 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import { signIn, useSession, signOut } from 'next-auth/client';
+import { signIn, signOut } from 'next-auth/client';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+
 import { usePageListSWR } from '~/stores/page';
+import { useCurrentUserSWR } from '~/stores/user';
 
 import { InputForm } from '~/components/molecules/InputForm';
 
 export const Navbar: FC = () => {
   const { mutate: mutatePageList } = usePageListSWR();
-  const [session] = useSession();
+  const { data: currentUser } = useCurrentUserSWR();
 
   const savePage = async (url: string): Promise<void> => {
     try {
@@ -43,12 +45,12 @@ export const Navbar: FC = () => {
           <InputForm onSubmitForm={savePage} />
         </div>
         <div className="d-md-none d-block">{/* <PlusBoard /> */}</div>
-        {!session && (
+        {currentUser == null && (
           <button className="btn btn-primary" onClick={() => signIn('google')}>
             ログイン
           </button>
         )}
-        {session && (
+        {currentUser != null && (
           <button className="btn btn-primary" onClick={() => signOut()}>
             ログアウト
           </button>

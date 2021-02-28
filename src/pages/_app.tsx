@@ -4,18 +4,22 @@ import io from 'socket.io-client';
 import { AppProps } from 'next/app';
 
 import '~/styles/global.scss';
-
 import style from '~/styles/navbarBorder.module.scss';
+
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { PageModals } from '~/components/PageModals/PageModals';
+
 import { usePageListSWR } from '~/stores/page';
+import { useCurrentUserSWR } from '~/stores/user';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = ({ Component, pageProps }: AppProps) => {
   const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'));
   const { mutate: pageListMutate } = usePageListSWR();
+
+  useCurrentUserSWR(pageProps.session);
 
   useEffect(() => {
     socket.on('connect', () => {
