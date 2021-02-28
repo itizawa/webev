@@ -11,17 +11,6 @@ export const Navbar: FC = () => {
   return (
     <div className="navbar bg-dark">
       <div className="container">
-        <button
-          className="navbar-toggler d-lg-none d-block"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
         <Link href="/">
           <span className="navbar-brand mb-0 h1 text-white c-pointer">Webev</span>
         </Link>
@@ -30,7 +19,6 @@ export const Navbar: FC = () => {
             <InputForm />
           </div>
         )}
-        <div className="d-md-none d-block">{/* <PlusBoard /> */}</div>
         {session == null && (
           <button className="btn btn-primary" onClick={() => signIn('google')}>
             ログイン
