@@ -1,3 +1,10 @@
 export interface User {
-  _id: string;
+  email: string;
+  name: string;
+  image: string;
+}
+
+export interface Session {
+  user: User;
+  accessToken: string;
 }
