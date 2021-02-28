@@ -11,7 +11,6 @@ const Index: FC = () => {
   const [activePage, setActivePage] = useState(1);
   const { data: paginationResult } = usePageListSWR(activePage);
 
-  console.log(paginationResult);
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
