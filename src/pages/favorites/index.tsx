@@ -1,9 +1,10 @@
 import { FC, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
-import { getSession } from 'next-auth/client';
 
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
+import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
+import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 
 const Index: FC = () => {
   const [cnt, setCnt] = useState(1);
@@ -14,15 +15,19 @@ const Index: FC = () => {
   }
 
   return (
-    <div className="p-3">
-      <h1>Home</h1>
-      <div className="row mt-4">{pages}</div>
-      <div className="text-center">
-        <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
-          Load More
-        </button>
-      </div>
-    </div>
+    <LoginRequiredWrapper>
+      <DashBoardLayout>
+        <div className="p-3">
+          <h1>Home</h1>
+          <div className="row mt-4">{pages}</div>
+          <div className="text-center">
+            <button className="btn btn-primary" onClick={() => setCnt(cnt + 1)}>
+              Load More
+            </button>
+          </div>
+        </div>
+      </DashBoardLayout>
+    </LoginRequiredWrapper>
   );
 };
 
@@ -62,19 +67,6 @@ const Page: FC<Props> = ({ activePage }: Props) => {
       ))}
     </>
   );
-};
-
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
-export const getServerSideProps = async (context: any) => {
-  const session = await getSession(context);
-
-  if (session == null) {
-    context.res.setHeader('location', '/');
-    context.res.statusCode = 302;
-    return context.res.end();
-  }
-
-  return { props: {} };
 };
 
 export default Index;

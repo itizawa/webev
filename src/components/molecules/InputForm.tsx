@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form';
 
 import styles from '~/styles/components/molecules/InputForm.module.scss';
 
-type Props = {
-  onSubmitForm?: (url: string) => void;
-};
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { usePageListSWR } from '~/stores/page';
 
 type FormValues = {
   url: string;
@@ -13,13 +13,19 @@ type FormValues = {
 
 const urlInputName = 'url';
 
-export const InputForm: FC<Props> = (props: Props) => {
+export const InputForm: FC = () => {
   const { register, handleSubmit, setValue } = useForm<FormValues>();
+  const { mutate: mutatePageList } = usePageListSWR();
 
   const onSubmit = async (formValues: FormValues): Promise<void> => {
     const { url } = formValues;
-    if (props?.onSubmitForm != null) {
-      await props.onSubmitForm(url);
+
+    try {
+      await restClient.apiPost('/pages', { url });
+      toastSuccess(`${url} を保存しました!`);
+      mutatePageList();
+    } catch (err) {
+      toastError(err);
     }
     setValue(urlInputName, '');
   };
