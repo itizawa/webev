@@ -4,12 +4,13 @@ import io from 'socket.io-client';
 import { AppProps } from 'next/app';
 
 import '~/styles/global.scss';
-
 import style from '~/styles/navbarBorder.module.scss';
+
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { PageModals } from '~/components/PageModals/PageModals';
+
 import { usePageListSWR } from '~/stores/page';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

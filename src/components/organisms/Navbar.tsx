@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { signIn, useSession, signOut } from 'next-auth/client';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+
 import { usePageListSWR } from '~/stores/page';
 
 import { InputForm } from '~/components/molecules/InputForm';
@@ -43,12 +44,12 @@ export const Navbar: FC = () => {
           <InputForm onSubmitForm={savePage} />
         </div>
         <div className="d-md-none d-block">{/* <PlusBoard /> */}</div>
-        {!session && (
+        {session == null && (
           <button className="btn btn-primary" onClick={() => signIn('google')}>
             ログイン
           </button>
         )}
-        {session && (
+        {session != null && (
           <button className="btn btn-primary" onClick={() => signOut()}>
             ログアウト
           </button>

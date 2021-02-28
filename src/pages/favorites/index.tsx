@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { getSession } from 'next-auth/client';
 
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -61,6 +62,19 @@ const Page: FC<Props> = ({ activePage }: Props) => {
       ))}
     </>
   );
+};
+
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
+export const getServerSideProps = async (context: any) => {
+  const session = await getSession(context);
+
+  if (session == null) {
+    context.res.setHeader('location', '/');
+    context.res.statusCode = 302;
+    return context.res.end();
+  }
+
+  return { props: {} };
 };
 
 export default Index;
