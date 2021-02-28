@@ -74,7 +74,7 @@ export const getServerSideProps = async (context: any) => {
     return context.res.end();
   }
 
-  return { props: { session } };
+  return { props: {} };
 };
 
 export default Index;
