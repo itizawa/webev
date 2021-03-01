@@ -1,29 +1,32 @@
 import { VFC, useState, useEffect } from 'react';
+import { throttle } from 'throttle-debounce';
 
 export const ScrollTopButton: VFC = () => {
   const [showScroll, setShowScroll] = useState(false);
 
-  const checkScrollTop = () => {
-    if (!showScroll && window.pageYOffset > 1000) {
+  const throttleCheckScrollTop = throttle(500, () => {
+    const currentYOffset = window.pageYOffset;
+    if (currentYOffset > 1000) {
       setShowScroll(true);
-    } else if (showScroll && window.pageYOffset <= 1000) {
+    }
+    if (currentYOffset <= 1000) {
       setShowScroll(false);
     }
-  };
+  });
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', checkScrollTop);
+    window.addEventListener('scroll', throttleCheckScrollTop);
     return () => {
-      window.removeEventListener('scroll', checkScrollTop);
+      window.removeEventListener('scroll', throttleCheckScrollTop);
     };
   }, []);
 
   return (
-    <button id="scroll-to-top" onClick={scrollTop} className="btn btn-light btn-lg">
+    <button id="scroll-to-top" onClick={scrollTop} className={`btn btn-light btn-lg ${showScroll ? 'd-block' : 'd-none'}`}>
       <i className="fas fa-chevron-up" />
     </button>
   );
