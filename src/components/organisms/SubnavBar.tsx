@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ClassNames from 'classnames';
 
-import { Icon } from '~/components/icons/Icon';
+import { Icon } from '~/components/Icons/Icon';
 import styles from '~/styles/components/organisms/SubnavBar.module.scss';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 

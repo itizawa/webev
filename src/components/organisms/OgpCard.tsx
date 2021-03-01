@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
 
-import { IconButton } from '~/components/icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
