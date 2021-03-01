@@ -7,4 +7,6 @@ export interface Page {
   title: string;
   body: string;
   isFavorite: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
