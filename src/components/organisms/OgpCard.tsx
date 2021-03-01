@@ -20,7 +20,7 @@ type Props = {
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, image, title, description } = page;
+  const { _id, url, siteName, image, title, description } = page;
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
@@ -59,7 +59,10 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
           </a>
         </h5>
         <p className="small mt-2">{description}</p>
-        <div className={`d-flex ${styles.manager}`}>
+        <div className="d-flex align-items-center">
+          <div className="me-auto">
+            <small>{siteName}</small>
+          </div>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
