@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip } from 'reactstrap';
+import { format } from 'date-fns';
 
 import { IconButton } from '~/components/icons/IconButton';
 import { restClient } from '~/utils/rest-client';
@@ -20,7 +21,7 @@ type Props = {
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description } = page;
+  const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
@@ -61,7 +62,10 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
         <p className="small mt-2">{description}</p>
         <div className="d-flex align-items-center">
           <div className="me-auto">
-            <small>{siteName}</small>
+            <small>
+              {siteName} <br />
+              {format(new Date(createdAt), 'YYYY/MM/DD HH:MM')}
+            </small>
           </div>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
