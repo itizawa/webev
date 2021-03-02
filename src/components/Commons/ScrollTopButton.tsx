@@ -1,7 +1,7 @@
 import { VFC, useState, useEffect } from 'react';
 import { throttle } from 'throttle-debounce';
 import { BootstrapIcon } from '~/interfaces/variables';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/Icons2/Icon';
 
 export const ScrollTopButton: VFC = () => {
   const [showScroll, setShowScroll] = useState(false);
