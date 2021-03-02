@@ -10,4 +10,5 @@ export enum BootstrapIcon {
   PLUS_BOARD = 'plus',
   STAR = 'star',
   TRASH = 'trash',
+  ARROW = 'arrow',
 }

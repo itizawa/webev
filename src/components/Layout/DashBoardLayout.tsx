@@ -3,12 +3,14 @@ import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 
 import { SocketConnector } from '../SocketConnector';
+
 import style from '~/styles/navbarBorder.module.scss';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { PageModals } from '~/components/PageModals/PageModals';
+import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -31,6 +33,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-10">{children}</div>
         {session && <PageModals />}
         {session && <SocketConnector />}
+        <ScrollTopButton />
       </main>
     </>
   );

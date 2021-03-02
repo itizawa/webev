@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
 
-import { IconButton } from '~/components/icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -64,7 +64,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
           <div className="me-auto">
             <small>
               {siteName} <br />
-              {format(new Date(createdAt), 'YYYY/MM/DD HH:MM')}
+              {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
           <div id={`favorite-for-${page._id}`}>
