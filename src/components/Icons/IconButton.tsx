@@ -5,6 +5,7 @@ import { BootstrapColor } from '~/interfaces/variables';
 
 type Props = {
   isActive?: boolean;
+  disabled?: boolean;
   text?: string;
   color: BootstrapColor;
   activeColor: BootstrapColor;
@@ -13,7 +14,7 @@ type Props = {
 } & ComponentProps<typeof Icon>;
 
 export const IconButton: FC<Props> = (props: Props) => {
-  const { width, height, isActive, icon, text, color, activeColor, buttonColor, onClickButton } = props;
+  const { width, height, isActive, disabled, icon, text, color, activeColor, buttonColor, onClickButton } = props;
   const textColor = isActive ? activeColor : color;
 
   const handleClickButton = () => {
@@ -25,6 +26,7 @@ export const IconButton: FC<Props> = (props: Props) => {
   const btnClassName = ClassNames({
     ['btn']: true,
     [`btn-${buttonColor}`]: buttonColor != null,
+    ['disabled']: disabled,
   });
 
   return (
