@@ -30,13 +30,14 @@ const Index: FC = () => {
                     <OgpCard page={page} />
                   </div>
                 ))}
-                <PaginationWrapper
-                  activePage={activePage}
-                  pagingLimit={paginationResult.limit}
-                  totalItemsCount={paginationResult.totalDocs}
-                  changePage={setActivePage}
-                  align="center"
-                />
+                <div className="text-center">
+                  <PaginationWrapper
+                    activePage={activePage}
+                    pagingLimit={paginationResult.limit}
+                    totalItemsCount={paginationResult.totalDocs}
+                    changePage={setActivePage}
+                  />
+                </div>
               </>
             )}
           </div>
