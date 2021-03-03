@@ -3,6 +3,7 @@ export enum BootstrapColor {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   WARNING = 'warning',
+  LIGHT = 'light',
 }
 
 export enum BootstrapIcon {
