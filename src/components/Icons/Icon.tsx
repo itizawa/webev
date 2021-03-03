@@ -43,12 +43,38 @@ const ArrowUpIcon: VFC = () => (
     />
   </>
 );
+
+const ChevronDoubleLeft: VFC = () => (
+  <>
+    <path fillRule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+    <path fillRule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+  </>
+);
+
+const ChevronLeft: VFC = () => (
+  <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+);
+
+const ChevronDoubleRight: VFC = () => (
+  <>
+    <path fillRule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z" />
+    <path fillRule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z" />
+  </>
+);
+const ChevronRight: VFC = () => (
+  <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+);
+
 const IconComponentMapping = {
   [BootstrapIcon.HOME]: <HomeIcon />,
   [BootstrapIcon.PLUS_BOARD]: <PlusBoardIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,
   [BootstrapIcon.ARROW]: <ArrowUpIcon />,
+  [BootstrapIcon.CHEVRON_DOUBLE_LEFT]: <ChevronDoubleLeft />,
+  [BootstrapIcon.CHEVRON_LEFT]: <ChevronLeft />,
+  [BootstrapIcon.CHEVRON_DOUBLE_RIGHT]: <ChevronDoubleRight />,
+  [BootstrapIcon.CHEVRON_RIGHT]: <ChevronRight />,
 };
 
 export const Icon: VFC<Props> = ({ width = 18, height = 18, icon = BootstrapIcon.HOME }: Props) => {
