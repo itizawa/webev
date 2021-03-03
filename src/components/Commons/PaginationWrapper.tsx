@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { IconButton } from '~/components/Icons/IconButton';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   activePage: number;
   totalItemsCount: number;
   pagingLimit: number;
   changePage(number: number): void;
-  align: string;
 };
 
 export const PaginationWrapper: FC<Props> = (props: Props) => {
@@ -36,37 +36,30 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
    * this function set << & <
    */
   const renderFirstPrev = (activePage: number) => {
-    const paginationItems = [];
-    if (activePage !== 1) {
-      paginationItems.push(
-        <PaginationItem key="painationItemFirst">
-          <PaginationLink
-            first
-            onClick={() => {
-              return props.changePage(1);
-            }}
-          />
-        </PaginationItem>,
-        <PaginationItem key="painationItemPrevious">
-          <PaginationLink
-            previous
-            onClick={() => {
-              return props.changePage(activePage - 1);
-            }}
-          />
-        </PaginationItem>,
-      );
-    } else {
-      paginationItems.push(
-        <PaginationItem key="painationItemFirst" disabled>
-          <PaginationLink first />
-        </PaginationItem>,
-        <PaginationItem key="painationItemPrevious" disabled>
-          <PaginationLink previous />
-        </PaginationItem>,
-      );
-    }
-    return paginationItems;
+    return (
+      <>
+        <IconButton
+          color={BootstrapColor.LIGHT}
+          buttonColor={BootstrapColor.SECONDARY}
+          activeColor={BootstrapColor.LIGHT}
+          icon={BootstrapIcon.CHEVRON_DOUBLE_LEFT}
+          disabled={activePage === 1}
+          onClickButton={() => {
+            props.changePage(1);
+          }}
+        />
+        <IconButton
+          color={BootstrapColor.LIGHT}
+          buttonColor={BootstrapColor.SECONDARY}
+          activeColor={BootstrapColor.LIGHT}
+          icon={BootstrapIcon.CHEVRON_LEFT}
+          disabled={activePage === 1}
+          onClickButton={() => {
+            props.changePage(activePage - 1);
+          }}
+        />
+      </>
+    );
   };
 
   /**
@@ -78,15 +71,14 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
     const paginationItems = [];
     for (let number = paginationStart; number <= maxViewPageNum; number++) {
       paginationItems.push(
-        <PaginationItem key={`paginationItem-${number}`} active={number === activePage}>
-          <PaginationLink
-            onClick={() => {
-              return props.changePage(number);
-            }}
-          >
-            {number}
-          </PaginationLink>
-        </PaginationItem>,
+        <button
+          className={`btn btn-secondary ${activePage === number ? 'active' : ''}`}
+          onClick={() => {
+            return props.changePage(number);
+          }}
+        >
+          {number}
+        </button>,
       );
     }
     return paginationItems;
@@ -98,58 +90,37 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
    * this function set > & >>
    */
   const renderNextLast = (activePage: number, totalPage: number) => {
-    const paginationItems = [];
-    if (totalPage !== activePage) {
-      paginationItems.push(
-        <PaginationItem key="painationItemNext">
-          <PaginationLink
-            next
-            onClick={() => {
-              return props.changePage(activePage + 1);
-            }}
-          />
-        </PaginationItem>,
-        <PaginationItem key="painationItemLast">
-          <PaginationLink
-            last
-            onClick={() => {
-              return props.changePage(totalPage);
-            }}
-          />
-        </PaginationItem>,
-      );
-    } else {
-      paginationItems.push(
-        <PaginationItem key="painationItemNext" disabled>
-          <PaginationLink next />
-        </PaginationItem>,
-        <PaginationItem key="painationItemLast" disabled>
-          <PaginationLink last />
-        </PaginationItem>,
-      );
-    }
-    return paginationItems;
-  };
-
-  const getListClassName = () => {
-    const listClassNames = [];
-
-    const { align } = props;
-    if (align === 'center') {
-      listClassNames.push('justify-content-center');
-    }
-    if (align === 'right') {
-      listClassNames.push('justify-content-end');
-    }
-
-    return listClassNames.join(' ');
+    return (
+      <>
+        <IconButton
+          color={BootstrapColor.LIGHT}
+          buttonColor={BootstrapColor.SECONDARY}
+          activeColor={BootstrapColor.LIGHT}
+          icon={BootstrapIcon.CHEVRON_DOUBLE_RIGHT}
+          disabled={totalPage === activePage}
+          onClickButton={() => {
+            props.changePage(activePage + 1);
+          }}
+        />
+        <IconButton
+          color={BootstrapColor.LIGHT}
+          buttonColor={BootstrapColor.SECONDARY}
+          activeColor={BootstrapColor.LIGHT}
+          icon={BootstrapIcon.CHEVRON_RIGHT}
+          disabled={totalPage === activePage}
+          onClickButton={() => {
+            props.changePage(totalPage);
+          }}
+        />
+      </>
+    );
   };
 
   return (
-    <Pagination listClassName={getListClassName()}>
+    <div className="btn-group" role="group">
       {renderFirstPrev(activePage)}
       {renderPaginations(activePage, paginationStart, maxViewPageNum)}
       {renderNextLast(activePage, totalPage)}
-    </Pagination>
+    </div>
   );
 };

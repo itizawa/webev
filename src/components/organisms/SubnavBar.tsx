@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ClassNames from 'classnames';
+import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
 import styles from '~/styles/components/organisms/SubnavBar.module.scss';
@@ -21,7 +22,7 @@ export const SubnavBar: FC = () => {
         return (
           <Link key={v.text} href={v.url}>
             <div className={classNameForListItem}>
-              {v.icon != null && <Icon icon={v.icon} />}
+              {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.SECONDARY} />}
               <span className="ms-1">{v.text}</span>
             </div>
           </Link>
