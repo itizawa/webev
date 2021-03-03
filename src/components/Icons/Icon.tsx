@@ -1,10 +1,11 @@
 import { VFC } from 'react';
-import { BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapIcon, BootstrapColor } from '~/interfaces/variables';
 
 type Props = {
   width?: number;
   height?: number;
   icon: BootstrapIcon;
+  color: BootstrapColor;
 };
 
 const HomeIcon: VFC = () => {
@@ -77,9 +78,9 @@ const IconComponentMapping = {
   [BootstrapIcon.CHEVRON_RIGHT]: <ChevronRight />,
 };
 
-export const Icon: VFC<Props> = ({ width = 18, height = 18, icon = BootstrapIcon.HOME }: Props) => {
+export const Icon: VFC<Props> = ({ width = 18, height = 18, icon = BootstrapIcon.HOME, color }: Props) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} className="align-text-bottom" fill="currentColor" viewBox="0 0 16 16">
+    <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} className={`align-text-bottom text-${color}`} fill="currentColor" viewBox="0 0 16 16">
       {IconComponentMapping[icon]}
     </svg>
   );
