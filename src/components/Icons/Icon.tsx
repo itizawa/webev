@@ -78,7 +78,7 @@ const IconComponentMapping = {
   [BootstrapIcon.CHEVRON_RIGHT]: <ChevronRight />,
 };
 
-export const Icon: VFC<Props> = ({ width = 18, height = 18, icon = BootstrapIcon.HOME, color }: Props) => {
+export const Icon: VFC<Props> = ({ width = 18, height = 18, icon, color }: Props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} className={`align-text-bottom text-${color}`} fill="currentColor" viewBox="0 0 16 16">
       {IconComponentMapping[icon]}
