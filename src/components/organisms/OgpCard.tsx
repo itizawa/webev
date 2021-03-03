@@ -73,6 +73,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
               height={24}
               icon={BootstrapIcon.STAR}
               isActive={isFavorite}
+              color={BootstrapColor.SECONDARY}
               activeColor={BootstrapColor.WARNING}
               onClickButton={switchFavorite}
             />
@@ -81,7 +82,14 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
             お気に入り
           </UncontrolledTooltip>
           <div id={`trash-for-${page._id}`}>
-            <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} onClickButton={openDeleteModal} />
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.TRASH}
+              onClickButton={openDeleteModal}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.WARNING}
+            />
           </div>
           <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
             削除
