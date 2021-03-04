@@ -10,7 +10,7 @@ export const useActivePage = (initialData?: number): responseInterface<number, E
 };
 
 export const usePageListSWR = (limit = 27, isFavorite = false): responseInterface<PaginationResult<Page>, Error> => {
-  const { data: activePage } = useActivePage();
+  const { data: activePage = 1 } = useActivePage();
   let key = `/pages/list?status=stocked&page=${activePage}&limit=${limit}`;
   if (isFavorite) {
     key += `&isFavorite=${isFavorite}`;
