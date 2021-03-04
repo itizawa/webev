@@ -8,7 +8,7 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: FC = () => {
-  const { data: paginationResult } = usePageListSWR(27, true);
+  const { data: paginationResult } = usePageListSWR();
 
   return (
     <LoginRequiredWrapper>

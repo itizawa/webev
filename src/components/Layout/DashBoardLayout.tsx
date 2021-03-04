@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { SocketConnector } from '~/components/SocketConnector';
 
 import style from '~/styles/navbarBorder.module.scss';
-import { useActivePage } from '~/stores/page';
+import { useActivePage, useIsRetrieveFavoritePageList } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -16,10 +16,12 @@ import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
-  const router = useRouter;
+  const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
+  const { mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   useEffect(() => {
+    mutateIsRetrieveFavoritePageList(router.pathname === '/favorites');
     mutateActivePage(1);
   }, [router]);
 
