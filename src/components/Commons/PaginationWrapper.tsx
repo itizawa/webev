@@ -72,6 +72,7 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
     for (let number = paginationStart; number <= maxViewPageNum; number++) {
       paginationItems.push(
         <button
+          key={number}
           className={`btn btn-secondary ${activePage === number ? 'active' : ''}`}
           onClick={() => {
             return mutateActivePage(number);
