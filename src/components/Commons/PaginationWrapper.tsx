@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { useActivePage } from '~/stores/page';
 
 type Props = {
-  activePage: number;
   totalItemsCount: number;
   pagingLimit: number;
-  changePage(number: number): void;
 };
 
 export const PaginationWrapper: FC<Props> = (props: Props) => {
-  const { activePage, totalItemsCount, pagingLimit } = props;
+  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
+  const { totalItemsCount, pagingLimit } = props;
 
   // calc totalPageNumber
   const totalPage = Math.floor(totalItemsCount / pagingLimit) + (totalItemsCount % pagingLimit === 0 ? 0 : 1);
@@ -45,7 +45,7 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_DOUBLE_LEFT}
           disabled={activePage === 1}
           onClickButton={() => {
-            props.changePage(1);
+            mutateActivePage(1);
           }}
         />
         <IconButton
@@ -55,7 +55,7 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_LEFT}
           disabled={activePage === 1}
           onClickButton={() => {
-            props.changePage(activePage - 1);
+            mutateActivePage(activePage - 1);
           }}
         />
       </>
@@ -72,9 +72,10 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
     for (let number = paginationStart; number <= maxViewPageNum; number++) {
       paginationItems.push(
         <button
+          key={number}
           className={`btn btn-secondary ${activePage === number ? 'active' : ''}`}
           onClick={() => {
-            return props.changePage(number);
+            return mutateActivePage(number);
           }}
         >
           {number}
@@ -99,7 +100,7 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_DOUBLE_RIGHT}
           disabled={totalPage === activePage}
           onClickButton={() => {
-            props.changePage(activePage + 1);
+            mutateActivePage(activePage + 1);
           }}
         />
         <IconButton
@@ -109,7 +110,7 @@ export const PaginationWrapper: FC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_RIGHT}
           disabled={totalPage === activePage}
           onClickButton={() => {
-            props.changePage(totalPage);
+            mutateActivePage(totalPage);
           }}
         />
       </>
