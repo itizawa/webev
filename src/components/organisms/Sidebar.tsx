@@ -23,7 +23,7 @@ export const Sidebar: FC = () => {
         return (
           <Link key={v.text} href={v.url}>
             <li className={classNameForListItem}>
-              {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.SECONDARY} />}
+              {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
               <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
             </li>
           </Link>
