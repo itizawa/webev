@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { usePageListSWR } from '~/stores/page';
@@ -8,8 +8,7 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: FC = () => {
-  const [activePage, setActivePage] = useState(1);
-  const { data: paginationResult } = usePageListSWR(activePage, 27, true);
+  const { data: paginationResult } = usePageListSWR(27, true);
 
   return (
     <LoginRequiredWrapper>
@@ -31,12 +30,7 @@ const Index: FC = () => {
                   </div>
                 ))}
                 <div className="text-center">
-                  <PaginationWrapper
-                    activePage={activePage}
-                    pagingLimit={paginationResult.limit}
-                    totalItemsCount={paginationResult.totalDocs}
-                    changePage={setActivePage}
-                  />
+                  <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
                 </div>
               </>
             )}
