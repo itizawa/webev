@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import { signIn, useSession, signOut } from 'next-auth/client';
+import { useSession, signOut } from 'next-auth/client';
 
 import { InputForm } from '~/components/molecules/InputForm';
 
@@ -20,14 +20,14 @@ export const Navbar: FC = () => {
           </div>
         )}
         {session == null && (
-          <button className="btn btn-primary" onClick={() => signIn('google')}>
-            ログイン
-          </button>
+          <Link href="/login">
+            <span className="mb-0 text-white c-pointer">Login</span>
+          </Link>
         )}
         {session != null && (
-          <button className="btn btn-primary d-none d-md-block" onClick={() => signOut()}>
-            ログアウト
-          </button>
+          <span className="mb-0 text-white c-pointer" onClick={() => signOut()}>
+            Logout
+          </span>
         )}
       </div>
     </div>
