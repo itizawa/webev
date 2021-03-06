@@ -1,25 +1,18 @@
-import { signIn, useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 
 export const LoginRequiredWrapper: FC = ({ children }) => {
   const [session, loading] = useSession();
+  const router = useRouter();
 
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && loading) return null;
 
-  // If no session exists, display access denied message
+  // If no session exists, redirect login page
   if (!session) {
-    return (
-      <DashBoardLayout>
-        <div className="p-3">
-          <h1>Login Required</h1>
-          <button className="btn btn-primary" onClick={() => signIn('google')}>
-            ログイン
-          </button>
-        </div>
-      </DashBoardLayout>
-    );
+    router.push('/login');
+    return null;
   }
 
   return <>{children}</>;
