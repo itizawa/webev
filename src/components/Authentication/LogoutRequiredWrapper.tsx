@@ -7,16 +7,16 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // If session exists, redirect login page
-    if (!loading && session == null) {
-      router.push('/login?isRedirect=true');
+    // If session exists, redirect home page
+    if (!loading && session != null) {
+      router.push('/home');
     }
   }, [loading, session]);
 
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && loading) return null;
 
-  if (session != null) {
+  if (session == null) {
     return <>{children}</>;
   }
 

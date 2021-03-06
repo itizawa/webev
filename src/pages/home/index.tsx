@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { usePageListSWR } from '~/stores/page';
@@ -7,7 +7,7 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
-const Index: FC = () => {
+const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
 
   return (
