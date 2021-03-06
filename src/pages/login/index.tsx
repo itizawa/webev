@@ -1,8 +1,8 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 
-const Index: FC = () => {
+const Index: VFC = () => {
   return (
     <DashBoardLayout>
       <div className="p-3">
