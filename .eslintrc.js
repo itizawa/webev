@@ -51,6 +51,8 @@ module.exports = {
     ],
     'react/prop-types': ['off'],
     'react/react-in-jsx-scope': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'import/order': ['error'],
     'prettier/prettier': [
