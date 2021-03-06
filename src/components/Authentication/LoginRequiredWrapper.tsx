@@ -9,7 +9,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   useEffect(() => {
     // If session exists, redirect login page
     if (!loading && session == null) {
-      router.push('/login');
+      router.push('/login?isRedirect=true');
     }
   }, [loading, session]);
 
