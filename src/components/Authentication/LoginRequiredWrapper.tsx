@@ -10,7 +10,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   if (typeof window !== 'undefined' && loading) return null;
 
   // If no session exists, redirect login page
-  if (!session) {
+  if (session == null) {
     router.push('/login');
     return null;
   }
