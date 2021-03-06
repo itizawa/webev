@@ -1,19 +1,24 @@
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 export const LoginRequiredWrapper: FC = ({ children }) => {
   const [session, loading] = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    // If session exists, redirect login page
+    if (!loading && session == null) {
+      router.push('/login');
+    }
+  }, [loading, session]);
+
   // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && loading) return null;
 
-  // If session exists, redirect login page
-  if (session == null) {
-    router.push('/login');
-    return null;
+  if (session != null) {
+    return <>{children}</>;
   }
 
-  return <>{children}</>;
+  return null;
 };
