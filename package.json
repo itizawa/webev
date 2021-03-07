@@ -1,6 +1,6 @@
 {
   "name": "webev",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
