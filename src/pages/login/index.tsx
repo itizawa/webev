@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/client';
 import { LoginRequiredWrapper } from '~/components/Authentication/LogoutRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
+import { Icon } from '~/components/Icons/Icon';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const router = useRouter();
@@ -120,8 +122,8 @@ const Index: VFC = () => {
             </div>
           </div>
           <button type="button" className="btn btn-google text-white w-100" onClick={() => signIn('google')}>
-            <i className="fab fa-google mr-2"></i>
-            Google でログインする
+            <Icon icon={BootstrapIcon.GOOGLE} color={BootstrapColor.LIGHT} />
+            <span className="ms-2">Google でログインする</span>
           </button>
         </div>
       </DashBoardLayout>
