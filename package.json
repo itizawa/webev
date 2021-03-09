@@ -4,8 +4,8 @@
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.0-beta1",
-    "bootstrap-icons": "^1.2.2",
+    "bootstrap": "^5.0.0-beta2",
+    "bootstrap-icons": "^1.4.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.17.0",
     "mongodb": "^3.6.4",
