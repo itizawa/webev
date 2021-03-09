@@ -17,7 +17,7 @@
     "react-loading-skeleton": "^2.1.1",
     "reactstrap": "^8.9.0",
     "sass": "^1.32.0",
-    "sass-loader": "^10.1.0",
+    "sass-loader": "^11.0.1",
     "socket.io-client": "^3.1.1",
     "swr": "^0.4.1",
     "throttle-debounce": "^3.0.1",
