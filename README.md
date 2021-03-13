@@ -33,9 +33,9 @@ If you can use the make command, run `make up-front` and `make up-back` in eithe
 
 ## Environmental variables
 
-The following environment variables are required for normal operation.
-Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
-Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
+- The following environment variables are required for normal operation.
+  - Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
+  - Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
 
 |Key | e.g. | Required | Which set? | What is this? | memo |
 |---|---|---|---|---|---|
