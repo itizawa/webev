@@ -17,7 +17,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
       <DropdownToggle className="nav-link p-0">
         <UserIcon image={user.image} size="medium" />
       </DropdownToggle>
-      <DropdownMenu right className="dropdown-menu-dark">
+      <DropdownMenu right className="dropdown-menu-dark personal-dropdown-menu">
         <DropdownItem header>
           <div className="text-center">
             <UserIcon image={user.image} size="large" isCircle />
