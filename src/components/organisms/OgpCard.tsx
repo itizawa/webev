@@ -15,6 +15,7 @@ import { Page } from '~/interfaces/page';
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 
+const MAX_WORD_COUNT = 96;
 type Props = {
   page: Page;
 };
@@ -59,7 +60,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
             {title}
           </a>
         </h5>
-        <p className="small mt-2">{description}</p>
+        <p className="small mt-2">{description.length > MAX_WORD_COUNT ? description.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
         <div className="d-flex align-items-center">
           <div className="me-auto">
             <small>
