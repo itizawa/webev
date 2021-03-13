@@ -1,4 +1,4 @@
-import { useSWRInfinite, responseInterface, SWRInfiniteResponseInterface } from 'swr';
+import { useSWRInfinite, SWRResponse, SWRInfiniteResponse } from 'swr';
 import { restClient } from '~/utils/rest-client';
 
 import { PaginationResult } from '~/interfaces/paginationResult';
@@ -6,15 +6,15 @@ import { PaginationResult } from '~/interfaces/paginationResult';
 import { Page } from '~/interfaces/page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
-export const useActivePage = (initialData?: number): responseInterface<number, Error> => {
+export const useActivePage = (initialData?: number): SWRResponse<number, Error> => {
   return useStaticSWR('activePage', initialData);
 };
 
-export const useIsRetrieveFavoritePageList = (initialData?: boolean): responseInterface<boolean, Error> => {
+export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isRetrieveFavoritePageList', initialData);
 };
 
-export const usePageListSWR = (limit = 27): SWRInfiniteResponseInterface<PaginationResult<Page>, Error> => {
+export const usePageListSWR = (limit = 27): SWRInfiniteResponse<PaginationResult<Page>, Error> => {
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
 
   return useSWRInfinite(
