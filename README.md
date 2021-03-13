@@ -11,7 +11,7 @@ Webev is OSS of bookmark manager that improves the organization of information.
 - 🛠 **Organized**: You Can be organized in a hierarchical structure.(TBD)
 - 🤝 **Share and Retrieve**: No longer use searches contaminated with SEO hacks.(TBD)
 
-## :rocket: Want to try it right away? Here is SaaS => <https://webev.cloud/> :rocket
+## :rocket: Want to try it right away? Here is SaaS => <https://webev.cloud/> :rocket:
 
 From here onward for those who start up by themselves.
 
