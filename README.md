@@ -40,8 +40,8 @@ If you can use the make command, run `make up-front` and `make up-back` in eithe
 |Key | e.g. | Required | Which set? | What is this? | memo |
 |---|---|---|---|---|---|
 |NEXT_PUBLIC_BACKEND_URL | <http://localhost:8000> | ✅ | webev-front | url of backend ||
-|GOOGLE_CLIENT_ID | XXXXXXXXXXXXX-XXXXXXXXXXXX.apps.googleusercontent.com | ✅ | webev-front | client id for authentication of google ||
-|GOOGLE_CLIENT_SECRET | XXXXXXXXXXXXX | ✅ | webev-front | client secret for authentication of google ||
+|GOOGLE_CLIENT_ID |  | ✅ | webev-front | client id for authentication of google ||
+|GOOGLE_CLIENT_SECRET |  | ✅ | webev-front | client secret for authentication of google ||
 |MONGO_URI | mongodb://mongo:27017/webev | ✅ | webev-front and webev-back | For storing credentials for using by next-auth  | |
 |PORT | 8000 |  | webev-back | port for server  | Anything other than 3000 is fine |
 
