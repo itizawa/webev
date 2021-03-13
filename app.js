@@ -4,8 +4,7 @@ const safeCompare = require('safe-compare');
 const app = protect(
   '/',
   (username, password) => {
-    return true
-    safeCompare(username, process.env.USERNAME || 'admin') && safeCompare(password, process.env.PASSWORD || 'admin')
+    safeCompare(username, process.env.BASIC_USERNAME || 'admin') && safeCompare(password, process.env.BASIC_PASSWORD || 'admin')
   },
   {
     directory: `${__dirname}/out`,
