@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/client';
 import { ProfileCard } from '~/components/ProfileCard/ProfileCard';
 import { InputForm } from '~/components/molecules/InputForm';
+import { User } from '~/interfaces/user';
 
 export const Navbar: FC = () => {
   const [session] = useSession();
@@ -24,7 +25,7 @@ export const Navbar: FC = () => {
             <span className="mb-0 text-white c-pointer">Login</span>
           </Link>
         )}
-        {session != null && <ProfileCard session={session} />}
+        {session != null && <ProfileCard user={session.user as User} />}
       </div>
     </div>
   );
