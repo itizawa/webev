@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import Link from 'next/link';
 
-import { useSession, signOut } from 'next-auth/client';
-
+import { useSession } from 'next-auth/client';
+import { ProfileCard } from '~/components/ProfileCard/ProfileCard';
 import { InputForm } from '~/components/molecules/InputForm';
 
 export const Navbar: FC = () => {
@@ -24,11 +24,7 @@ export const Navbar: FC = () => {
             <span className="mb-0 text-white c-pointer">Login</span>
           </Link>
         )}
-        {session != null && (
-          <span className="mb-0 text-white c-pointer" onClick={() => signOut()}>
-            Logout
-          </span>
-        )}
+        {session != null && <ProfileCard session={session} />}
       </div>
     </div>
   );
