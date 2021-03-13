@@ -9,7 +9,7 @@ type Props = {
   user: User;
 };
 
-export const ProfileCard: VFC<Props> = (props: Props) => {
+export const PersonalDropdown: VFC<Props> = (props: Props) => {
   const { user } = props;
 
   return (

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 
 import { useSession } from 'next-auth/client';
-import { ProfileCard } from '~/components/ProfileCard/ProfileCard';
+import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
 import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
 
@@ -25,7 +25,7 @@ export const Navbar: FC = () => {
             <span className="mb-0 text-white c-pointer">Login</span>
           </Link>
         )}
-        {session != null && <ProfileCard user={session.user as User} />}
+        {session != null && <PersonalDropdown user={session.user as User} />}
       </div>
     </div>
   );
