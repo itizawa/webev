@@ -18,6 +18,13 @@ export const ProfileCard: VFC<Props> = (props: Props) => {
         <UserIcon image={user.image} size="medium" />
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-dark">
+        <DropdownItem header>
+          <div className="text-center">
+            <UserIcon image={user.image} size="large" isCircle />
+            <h5 className="my-2">{user.name}</h5>
+          </div>
+        </DropdownItem>
+        <DropdownItem divider />
         <DropdownItem tag="li" onClick={() => signOut()}>
           Logout
         </DropdownItem>
