@@ -1,5 +1,7 @@
-import { signOut } from 'next-auth/client';
 import { VFC } from 'react';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { signOut } from 'next-auth/client';
+
 import { UserIcon } from '~/components/Icons/UserIcon';
 import { User } from '~/interfaces/user';
 
@@ -11,9 +13,15 @@ export const ProfileCard: VFC<Props> = (props: Props) => {
   const { user } = props;
 
   return (
-    <UserIcon image={user.image} />
-    // <span className="mb-0 text-white c-pointer" onClick={() => signOut()}>
-    //   Logout
-    // </span>
+    <UncontrolledDropdown>
+      <DropdownToggle className="nav-link p-0">
+        <UserIcon image={user.image} size="medium" />
+      </DropdownToggle>
+      <DropdownMenu right className="dropdown-menu-dark">
+        <DropdownItem tag="li" onClick={() => signOut()}>
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 };
