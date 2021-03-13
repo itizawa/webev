@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ClassNames from 'classnames';
 
-import { Icon } from '~/components/icons/Icon';
+import { BootstrapColor } from '~/interfaces/variables';
+
+import { Icon } from '~/components/Icons/Icon';
 import styles from '~/styles/components/organisms/Sidebar.module.scss';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 
@@ -21,7 +23,7 @@ export const Sidebar: FC = () => {
         return (
           <Link key={v.text} href={v.url}>
             <li className={classNameForListItem}>
-              {v.icon != null && <Icon icon={v.icon} />}
+              {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
               <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
             </li>
           </Link>

@@ -1,7 +1,11 @@
-import { FC, useState } from 'react';
+import { VFC, useState } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
+import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
+import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
+import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: FC = () => {
   const [cnt, setCnt] = useState(1);
@@ -28,17 +32,20 @@ type Props = {
   activePage: number;
 };
 
-const Page: FC<Props> = ({ activePage }: Props) => {
+const Page: VFC<Props> = ({ activePage }: Props) => {
   const { data: pages = [] } = usePageListSWR(activePage);
 
   return (
-    <>
-      {pages.map((page) => (
-        <div className="col-lg-4 col-md-6 mb-3" key={page?._id}>
-          {page != null && <OgpCard page={page} />}
-        </div>
-      ))}
-    </>
+    <LoginRequiredWrapper>
+      <DashBoardLayout>
+        {pages.map((page) => (
+          <></>
+          // <div className="col-lg-4 col-md-6 mb-3" key={page?._id}>
+          //   {page != null && <OgpCard page={page} />}
+          // </div>
+        ))}
+      </DashBoardLayout>
+    </LoginRequiredWrapper>
   );
 };
 

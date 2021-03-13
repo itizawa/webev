@@ -35,6 +35,36 @@ main{
   @include media-breakpoint-up(md){
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 980;
   }
+}
+
+.scroll-top-button{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  transition: opacity 0.4s; 
+  transition-duration: 200ms;
+  transition-property: all;
+  &.show{
+    opacity: 0.5;
+    &:hover{
+      opacity: 0.7;
+    }
+  }
+}
+
+$google-color: #db3236;
+
+.btn-google {
+  background-color: $google-color;
+}
+
+.login-term{
+  max-height: 450px;
+}
+
+.personal-dropdown-menu {
+  z-index: 1300;
 }

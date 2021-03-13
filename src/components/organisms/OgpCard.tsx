@@ -1,8 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip } from 'reactstrap';
+import { format } from 'date-fns';
 
-import { IconButton } from '~/components/icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -14,13 +15,14 @@ import { Page } from '~/interfaces/page';
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 
+const MAX_WORD_COUNT = 96;
 type Props = {
   page: Page;
 };
 
 export const OgpCard: FC<Props> = ({ page }: Props) => {
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, image, title, description } = page;
+  const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
@@ -58,14 +60,21 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
             {title}
           </a>
         </h5>
-        <p className="small mt-2">{description}</p>
-        <div className={`d-flex ${styles.manager}`}>
+        <p className="small mt-2">{description.length > MAX_WORD_COUNT ? description.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
+        <div className="d-flex align-items-center">
+          <div className="me-auto">
+            <small>
+              {siteName} <br />
+              {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+            </small>
+          </div>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
               icon={BootstrapIcon.STAR}
               isActive={isFavorite}
+              color={BootstrapColor.SECONDARY}
               activeColor={BootstrapColor.WARNING}
               onClickButton={switchFavorite}
             />
@@ -74,7 +83,14 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
             お気に入り
           </UncontrolledTooltip>
           <div id={`trash-for-${page._id}`}>
-            <IconButton width={24} height={24} icon={BootstrapIcon.TRASH} onClickButton={openDeleteModal} />
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.TRASH}
+              onClickButton={openDeleteModal}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.WARNING}
+            />
           </div>
           <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
             削除
