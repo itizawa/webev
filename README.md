@@ -32,7 +32,7 @@ From here onward for those who start up by themselves.
   - webev-back
 
 3. Prepare environment variables.  
-See the environment variable section below
+See the [environment variable section](https://github.com/itizawa/webev-front/master/#--environmental-variables) below
 
 4. Run `docker-compose up` on each folder.  
 If you can use the make command, run `make up-front` and `make up-back` in either folder
