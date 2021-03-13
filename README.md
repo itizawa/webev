@@ -41,3 +41,27 @@ See the environment variable section below
 4. Run `docker-compose up` on each folder.  
 If you can use the make command, run `make up-front` and `make up-back` in either folder
 
+<h2 align="center">
+  Environmental variables
+</h2>
+The following environment variables are required for normal operation.
+Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
+Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
+
+|Key | e.g. | Required | Which set? | What is this? | memo |
+|---|---|---|---|---|---|
+|NEXT_PUBLIC_BACKEND_URL | <http://localhost:8000> | ✅ | webev-front | url of backend ||
+|GOOGLE_CLIENT_ID | XXXXXXXXXXXXX-XXXXXXXXXXXX.apps.googleusercontent.com | ✅ | webev-front | client id for authentication of google ||
+|GOOGLE_CLIENT_SECRET | XXXXXXXXXXXXX | ✅ | webev-front | client secret for authentication of google ||
+|MONGO_URI | mongodb://mongo:27017/webev | ✅ | webev-front and webev-back | For storing credentials for using by next-auth  | |
+|PORT | 8000 |  | webev-back | port for server  | Anything other than 3000 is fine |
+
+<h2 align="center">
+  License
+</h2>
+
+<div align="center">
+  
+  [MIT](LICENSE)
+  
+</div>
