@@ -2,6 +2,25 @@
   "name": "webev",
   "version": "0.0.0",
   "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint:styles": "stylelint \"./**/*.{scss,css}\"",
+    "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
+    "lint": "npm-run-all -p lint:js lint:styles"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itizawa/webev.git"
+  },
+  "keywords": [],
+  "author": "itizawa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/itizawa/webev/issues"
+  },
+  "homepage": "https://github.com/itizawa/webev#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.0.0-beta2",
@@ -23,25 +42,6 @@
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4"
   },
-  "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "lint:styles": "stylelint \"./**/*.{scss,css}\"",
-    "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "lint": "npm-run-all -p lint:js lint:styles"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/itizawa/webev.git"
-  },
-  "keywords": [],
-  "author": "itizawa",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/itizawa/webev/issues"
-  },
-  "homepage": "https://github.com/itizawa/webev#readme",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@types/classnames": "^2.2.11",
