@@ -60,7 +60,7 @@ export const OgpCard: FC<Props> = ({ page }: Props) => {
             {title}
           </a>
         </h5>
-        <p className="small mt-2">{description.length > MAX_WORD_COUNT ? description.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
+        <p className="small mt-2">{description?.length > MAX_WORD_COUNT ? description?.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
         <div className="d-flex align-items-center">
           <div className="me-auto">
             <small>
