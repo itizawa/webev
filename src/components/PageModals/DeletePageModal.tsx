@@ -32,16 +32,9 @@ export const DeletePageModal: FC = () => {
       <ModalHeader className="bg-dark">ページを削除します</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className={styles.fixed}>
-          <a href={pageForDelete?.url} target="blank" rel="noopener noreferrer">
-            <img src={pageForDelete?.image} alt={pageForDelete?.image} />
-          </a>
+          <img src={pageForDelete?.image} alt={pageForDelete?.image} />
         </div>
-        <h5 className="card-title my-3">
-          <a className="text-white text-decoration-none" href={pageForDelete?.url} target="blank" rel="noopener noreferrer">
-            {pageForDelete?.title}
-          </a>
-        </h5>
-        <p className="small mt-2">{pageForDelete?.description}</p>
+        <h5 className="card-title my-3">{pageForDelete?.title}</h5>
         <div className="d-flex justify-content-evenly">
           <button className="btn btn-danger" onClick={deletePage}>
             削除する

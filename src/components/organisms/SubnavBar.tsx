@@ -12,7 +12,7 @@ export const SubnavBar: FC = () => {
   const router = useRouter();
 
   return (
-    <>
+    <div className={`sticky-top bg-dark d-flex justify-content-evenly d-md-none ${styles.subnavbar}`}>
       {navbarItemMappings.map((v) => {
         const classNameForListItem = ClassNames({
           ['text-center col py-2']: true,
@@ -28,6 +28,6 @@ export const SubnavBar: FC = () => {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 };

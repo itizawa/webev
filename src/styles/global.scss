@@ -35,7 +35,7 @@ main{
   @include media-breakpoint-up(md){
     position: sticky;
     top: 0;
-    z-index: 1020;
+    z-index: 980;
   }
 }
 
@@ -63,4 +63,8 @@ $google-color: #db3236;
 
 .login-term{
   max-height: 450px;
+}
+
+.personal-dropdown-menu {
+  z-index: 1300;
 }
