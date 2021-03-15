@@ -38,7 +38,7 @@
     "sass": "^1.32.0",
     "sass-loader": "^11.0.1",
     "socket.io-client": "^3.1.1",
-    "swr": "^0.4.1",
+    "swr": "^0.5.3",
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4"
   },
