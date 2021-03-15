@@ -14,7 +14,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
 
   return (
     <UncontrolledDropdown>
-      <DropdownToggle className="nav-link p-0" tag="a">
+      <DropdownToggle className="nav-link p-0 c-pointer" tag="a">
         <UserIcon image={user.image} size="medium" />
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-dark personal-dropdown-menu">
