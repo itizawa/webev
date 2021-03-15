@@ -1,11 +1,7 @@
-import useSWR, { keyInterface, responseInterface, mutate, cache } from 'swr';
-import { fetcherFn } from 'swr/dist/types';
+import useSWR, { Key, SWRResponse, mutate, cache } from 'swr';
+import { Fetcher } from 'swr/dist/types';
 
-export const useStaticSWR = <Data, Error>(
-  key: keyInterface,
-  updateData?: Data | fetcherFn<Data>,
-  initialData?: Data | fetcherFn<Data>,
-): responseInterface<Data, Error> => {
+export const useStaticSWR = <Data, Error>(key: Key, updateData?: Data | Fetcher<Data>, initialData?: Data | Fetcher<Data>): SWRResponse<Data, Error> => {
   if (updateData == null) {
     if (!cache.has(key) && initialData != null) {
       mutate(key, initialData, false);
