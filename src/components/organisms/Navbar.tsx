@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { useSession } from 'next-auth/client';
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
@@ -13,10 +14,10 @@ export const Navbar: FC = () => {
     <div className="navbar bg-dark">
       <div className="container">
         <Link href="/">
-          <span className="navbar-brand mb-0 h1 text-white c-pointer">Webev</span>
+          <span className="navbar-brand mb-0 text-white c-pointer">Webev</span>
         </Link>
         {session != null && (
-          <div className="w-50 my-md-0 my-2">
+          <div className="col col-md-6 my-md-0 my-2 me-2">
             <InputForm />
           </div>
         )}
