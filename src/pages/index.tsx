@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
-const Index: FC = () => {
+const Index: VFC = () => {
   return (
     <DefaultLayout>
       <h1 className="my-3">Welcome Webev!!</h1>
