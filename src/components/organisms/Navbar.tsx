@@ -1,6 +1,5 @@
 import { VFC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { useSession } from 'next-auth/client';
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
