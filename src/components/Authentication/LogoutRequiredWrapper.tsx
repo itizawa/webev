@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { VFC, useEffect } from 'react';
 
-export const LoginRequiredWrapper: FC = ({ children }) => {
+export const LoginRequiredWrapper: VFC = ({ children }) => {
   const [session, loading] = useSession();
   const router = useRouter();
 

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import styles from '~/styles/components/molecules/InputForm.module.scss';
@@ -13,7 +13,7 @@ type FormValues = {
 
 const urlInputName = 'url';
 
-export const InputForm: FC = () => {
+export const InputForm: VFC = () => {
   const { register, handleSubmit, setValue } = useForm<FormValues>();
   const { mutate: mutatePageList } = usePageListSWR();
 

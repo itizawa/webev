@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { FC, useEffect } from 'react';
+import { VFC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 
@@ -14,7 +14,7 @@ import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { PageModals } from '~/components/PageModals/PageModals';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
-export const DashBoardLayout: FC = ({ children }) => {
+export const DashBoardLayout: VFC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();

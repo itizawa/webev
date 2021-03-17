@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { VFC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
@@ -20,7 +20,7 @@ type Props = {
   page: Page;
 };
 
-export const OgpCard: FC<Props> = ({ page }: Props) => {
+export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isFavorite, setIsFavorite] = useState(false);

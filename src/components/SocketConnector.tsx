@@ -1,8 +1,8 @@
-import { FC, useState, useEffect } from 'react';
+import { VFC, useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { usePageListSWR } from '~/stores/page';
 
-export const SocketConnector: FC = () => {
+export const SocketConnector: VFC = () => {
   const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'));
   const { mutate: pageListMutate } = usePageListSWR();
 

@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import { DeletePageModal } from '~/components/PageModals/DeletePageModal';
 
-export const PageModals: FC = () => {
+export const PageModals: VFC = () => {
   return <DeletePageModal />;
 };
