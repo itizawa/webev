@@ -1,10 +1,10 @@
-import { FC, useState } from 'react';
+import { VFC, useState } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
 
-export const InputForm: FC = () => {
+export const InputForm: VFC = () => {
   const { mutate: mutatePageList } = usePageListSWR();
 
   const [url, setUrl] = useState('');

@@ -1,4 +1,4 @@
-import { FC, ComponentProps } from 'react';
+import { VFC, ComponentProps } from 'react';
 import ClassNames from 'classnames';
 import { Icon } from './Icon';
 import { BootstrapColor } from '~/interfaces/variables';
@@ -13,7 +13,7 @@ type Props = {
   onClickButton?: () => void;
 } & ComponentProps<typeof Icon>;
 
-export const IconButton: FC<Props> = (props: Props) => {
+export const IconButton: VFC<Props> = (props: Props) => {
   const { width, height, isActive, disabled, icon, text, color, activeColor, buttonColor, onClickButton } = props;
   const textColor = isActive ? activeColor : color;
 

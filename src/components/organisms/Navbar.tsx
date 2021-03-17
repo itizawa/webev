@@ -1,13 +1,12 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { useSession } from 'next-auth/client';
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
 import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
 
-export const Navbar: FC = () => {
+export const Navbar: VFC = () => {
   const [session] = useSession();
 
   return (

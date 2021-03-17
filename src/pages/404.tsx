@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
-const Page: FC = () => {
+const Page: VFC = () => {
   return (
     <DefaultLayout>
       <div className="p-3">
