@@ -21,9 +21,7 @@ export const DefaultLayout: FC = ({ children }) => {
       </Head>
       <Navbar />
       <div className={`webev-nav-border ${style['nav-border']}`} />
-      <main>
-        <div className="container">{children}</div>
-      </main>
+      <div className="container">{children}</div>
       {session && <PageModals />}
       {session && <SocketConnector />}
       <ScrollTopButton />
