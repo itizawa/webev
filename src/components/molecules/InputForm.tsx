@@ -30,6 +30,7 @@ export const InputForm: VFC = () => {
     if (usedClipboardTextsArray.includes(clipboardText)) {
       return;
     }
+    toastSuccess('Clipboard から取得しました');
     setUrl(clipboardText);
     usedClipboardTextsArray.unshift(clipboardText);
     let csvForSave = usedClipboardTextsArray.join(',');
