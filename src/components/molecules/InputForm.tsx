@@ -1,4 +1,4 @@
-import { VFC, useState, useEffect } from 'react';
+import { VFC, useState, useEffect, useCallback } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -15,15 +15,22 @@ export const InputForm: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url });
       toastSuccess(`${url} を保存しました!`);
+      setUrl('');
       mutatePageList();
     } catch (err) {
       toastError(err);
     }
   };
 
+  // read clipboard and set when not used in the past
   const readClipboardText = async () => {
-    const text = await navigator.clipboard.readText();
-    console.log(text);
+    const clipboardText = await navigator.clipboard.readText();
+    const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
+    if (usedClipboardTextsCSV.includes(clipboardText)) {
+      return;
+    }
+    setUrl(clipboardText);
+    localStorage.setItem('usedClipboardTexts', `${usedClipboardTextsCSV},${clipboardText}`);
   };
 
   useEffect(() => {
