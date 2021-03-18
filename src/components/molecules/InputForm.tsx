@@ -21,13 +21,20 @@ export const InputForm: VFC = () => {
     }
   };
 
+  const readClipboardText = async () => {
+    const text = await navigator.clipboard.readText();
+    console.log(text);
+  };
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.addEventListener('focus', async () => {
-        const text = await navigator.clipboard.readText();
-        console.log(text);
-      });
+      window.addEventListener('focus', readClipboardText);
     }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', readClipboardText);
+      }
+    };
   }, [window]);
 
   return (
