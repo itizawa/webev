@@ -1,4 +1,4 @@
-import { VFC, useState } from 'react';
+import { VFC, useState, useEffect } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -20,6 +20,15 @@ export const InputForm: VFC = () => {
       toastError(err);
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', async () => {
+        const text = await navigator.clipboard.readText();
+        console.log(text);
+      });
+    }
+  }, [window]);
 
   return (
     <form className="input-group" onSubmit={onSubmit}>
