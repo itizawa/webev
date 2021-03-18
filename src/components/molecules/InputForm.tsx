@@ -26,11 +26,17 @@ export const InputForm: VFC = () => {
   const readClipboardText = async () => {
     const clipboardText = await navigator.clipboard.readText();
     const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
-    if (usedClipboardTextsCSV.includes(clipboardText)) {
+    const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
+    if (usedClipboardTextsArray.includes(clipboardText)) {
       return;
     }
     setUrl(clipboardText);
-    localStorage.setItem('usedClipboardTexts', `${usedClipboardTextsCSV},${clipboardText}`);
+    usedClipboardTextsArray.unshift(clipboardText);
+    let csvForSave = usedClipboardTextsArray.join(',');
+    if (usedClipboardTextsArray.length >= 10) {
+      csvForSave = usedClipboardTextsArray.slice(0, 9).join(',');
+    }
+    localStorage.setItem('usedClipboardTexts', csvForSave);
   };
 
   useEffect(() => {
