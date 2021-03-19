@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 
@@ -13,8 +13,15 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
   const { user } = props;
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
+  useEffect(() => {
+    const isEnableReadFromClipboard = localStorage.getItem('isEnableReadFromClipboard') === 'true';
+    setIsEnableReadFromClipboard(isEnableReadFromClipboard);
+  }, []);
+
   const handleSwitch = () => {
-    setIsEnableReadFromClipboard(!isEnableReadFromClipboard);
+    const bool = !isEnableReadFromClipboard;
+    setIsEnableReadFromClipboard(bool);
+    localStorage.setItem('isEnableReadFromClipboard', bool.toString());
   };
 
   return (
