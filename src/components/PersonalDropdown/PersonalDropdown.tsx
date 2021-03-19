@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 
@@ -11,6 +11,11 @@ type Props = {
 
 export const PersonalDropdown: VFC<Props> = (props: Props) => {
   const { user } = props;
+  const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
+
+  const handleSwitch = () => {
+    setIsEnableReadFromClipboard(!isEnableReadFromClipboard);
+  };
 
   return (
     <UncontrolledDropdown>
@@ -24,6 +29,15 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
             <h5 className="my-2">{user.name}</h5>
           </div>
         </DropdownItem>
+        <DropdownItem divider />
+        <div className="px-3">
+          <div className="form-check form-switch">
+            <input className="form-check-input" type="checkbox" id="isEnableReadFromClipboard" checked={isEnableReadFromClipboard} onChange={handleSwitch} />
+            <label className="form-check-label" htmlFor="isEnableReadFromClipboard">
+              自動取得
+            </label>
+          </div>
+        </div>
         <DropdownItem divider />
         <DropdownItem tag="li" onClick={() => signOut()}>
           Logout
