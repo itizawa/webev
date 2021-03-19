@@ -1,4 +1,4 @@
-import { VFC, useState, useEffect, useCallback } from 'react';
+import { VFC, useState, useEffect } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -24,6 +24,9 @@ export const InputForm: VFC = () => {
 
   // read clipboard and set when not used in the past
   const readClipboardText = async () => {
+    if (localStorage.getItem('isEnableReadFromClipboard') !== 'true') {
+      return;
+    }
     const clipboardText = await navigator.clipboard.readText();
     const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
     const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
