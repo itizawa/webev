@@ -1,4 +1,4 @@
-import { VFC, useState } from 'react';
+import { VFC, useState, useEffect } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -15,11 +15,44 @@ export const InputForm: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url });
       toastSuccess(`${url} を保存しました!`);
+      setUrl('');
       mutatePageList();
     } catch (err) {
       toastError(err);
     }
   };
+
+  // read clipboard and set when not used in the past
+  const readClipboardText = async () => {
+    if (localStorage.getItem('isEnableReadFromClipboard') !== 'true') {
+      return;
+    }
+    const clipboardText = await navigator.clipboard.readText();
+    const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
+    const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
+    if (usedClipboardTextsArray.includes(clipboardText)) {
+      return;
+    }
+    toastSuccess('Clipboard から取得しました');
+    setUrl(clipboardText);
+    usedClipboardTextsArray.unshift(clipboardText);
+    let csvForSave = usedClipboardTextsArray.join(',');
+    if (usedClipboardTextsArray.length >= 10) {
+      csvForSave = usedClipboardTextsArray.slice(0, 9).join(',');
+    }
+    localStorage.setItem('usedClipboardTexts', csvForSave);
+  };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('focus', readClipboardText);
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('focus', readClipboardText);
+      }
+    };
+  }, [window]);
 
   return (
     <form className="input-group" onSubmit={onSubmit}>
