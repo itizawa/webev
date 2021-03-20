@@ -23,11 +23,6 @@ jobs:
         run: |
           echo v${{ steps.package-version.outputs.current-version}}
 
-      - name: Set up Ruby 2.6
-        uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
-
       - name: Create a release pull request
         uses: bakunyo/git-pr-release-action@master
         env:
