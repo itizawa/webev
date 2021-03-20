@@ -1,6 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
+import { toastSuccess } from '~/utils/toastr';
 
 import { UserIcon } from '~/components/Icons/UserIcon';
 import { User } from '~/interfaces/user';
@@ -22,6 +23,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
     localStorage.setItem('isEnableReadFromClipboard', bool.toString());
+    toastSuccess('更新しました');
   };
 
   return (
