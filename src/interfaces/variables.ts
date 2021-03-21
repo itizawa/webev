@@ -5,6 +5,7 @@ export enum BootstrapColor {
   WARNING = 'warning',
   DANGER = 'danger',
   LIGHT = 'light',
+  TWITTER = 'twitter',
 }
 
 export enum BootstrapIcon {
