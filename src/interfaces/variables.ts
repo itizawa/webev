@@ -18,5 +18,6 @@ export enum BootstrapIcon {
   CHEVRON_DOUBLE_RIGHT = 'chevron-double-right',
   CHEVRON_RIGHT = 'chevron-right',
   GOOGLE = 'google',
+  TWITTER = 'twitter',
   QUESTION = 'question',
 }
