@@ -24,7 +24,7 @@ export const IconButton: VFC<Props> = (props: Props) => {
   };
 
   const btnClassName = ClassNames({
-    ['btn']: true,
+    ['btn px-2']: true,
     [`btn-${buttonColor}`]: buttonColor != null,
     ['disabled']: disabled,
   });
