@@ -4641,10 +4641,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-auth@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.2.1.tgz#198999ea2ceef2edeba410216ebc34d728c585c5"
-  integrity sha512-Ahvoq2rt5hqc7FYSA73viMp9m3AsFAP3VfSEjDtszxmOYRLPxjf06+GcZZC0dfofruvnrYmUe9ldHmZTVpUUQA==
+next-auth@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.3.0.tgz#ab0a4d348eda20fcb1173dcb299e983a87ec223b"
+  integrity sha512-Ur5V1WVW4K0sUUEpCqU6cyjJBpWaCcrPS22J+PDIv+7pHjIJ5B0+9IzItLr0c+ZkA6qOctd48l7S3gZjwQz4oA==
   dependencies:
     crypto-js "^4.0.0"
     futoin-hkdf "^1.3.2"
