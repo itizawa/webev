@@ -17,6 +17,7 @@ export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRRespons
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
+  // TODO: 66 Allows to sort freely
   const sort = '-createdAt';
 
   return useSWR(
