@@ -39,7 +39,8 @@
     "socket.io-client": "^4.0.0",
     "swr": "^0.5.3",
     "throttle-debounce": "^3.0.1",
-    "toastr": "^2.1.4"
+    "toastr": "^2.1.4",
+    "url-join": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -50,6 +51,7 @@
     "@types/socket.io-client": "^1.4.35",
     "@types/throttle-debounce": "^2.1.0",
     "@types/toastr": "^2.1.38",
+    "@types/url-join": "^4.0.0",
     "@typescript-eslint/eslint-plugin": "^4.11.1",
     "@typescript-eslint/parser": "^4.11.1",
     "babel-loader": "^8.2.2",
