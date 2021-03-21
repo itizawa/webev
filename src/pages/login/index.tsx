@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { signIn } from 'next-auth/client';
 import { LoginRequiredWrapper } from '~/components/Authentication/LogoutRequiredWrapper';
-import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
+import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
@@ -13,7 +13,7 @@ const Index: VFC = () => {
 
   return (
     <LoginRequiredWrapper>
-      <DashBoardLayout>
+      <DefaultLayout>
         <div className="p-3">
           <h1>Login Page</h1>
           {router.query.isRedirect && <div className="alert alert-warning">ログインが必要です</div>}
@@ -133,7 +133,7 @@ const Index: VFC = () => {
             <span className="ms-2">Google でログインする</span>
           </button>
         </div>
-      </DashBoardLayout>
+      </DefaultLayout>
     </LoginRequiredWrapper>
   );
 };

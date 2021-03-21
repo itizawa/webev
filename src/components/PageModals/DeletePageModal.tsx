@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { restClient } from '~/utils/rest-client';
@@ -7,7 +7,7 @@ import styles from '~/styles/components/organisms/OgpCard.module.scss';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
 
-export const DeletePageModal: FC = () => {
+export const DeletePageModal: VFC = () => {
   const { data: pageForDelete } = usePageForDelete();
   const { data: isOpenDeletePageModal = false, mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
   const { mutate: pageListMutate } = usePageListSWR();

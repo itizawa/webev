@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ClassNames from 'classnames';
@@ -8,7 +8,7 @@ import { Icon } from '~/components/Icons/Icon';
 import styles from '~/styles/components/organisms/SubnavBar.module.scss';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 
-export const SubnavBar: FC = () => {
+export const SubnavBar: VFC = () => {
   const router = useRouter();
 
   return (

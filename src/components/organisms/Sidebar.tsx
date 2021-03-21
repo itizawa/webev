@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import ClassNames from 'classnames';
@@ -9,7 +9,7 @@ import { Icon } from '~/components/Icons/Icon';
 import styles from '~/styles/components/organisms/Sidebar.module.scss';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 
-export const Sidebar: FC = () => {
+export const Sidebar: VFC = () => {
   const router = useRouter();
 
   return (

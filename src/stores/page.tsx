@@ -1,27 +1,34 @@
-import useSWR, { responseInterface } from 'swr';
-import { restClient } from '~/utils/rest-client';
+import useSWR, { SWRResponse } from 'swr';
+import urljoin from 'url-join';
 
+import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
 import { Page } from '~/interfaces/page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
-export const useActivePage = (initialData?: number): responseInterface<number, Error> => {
+export const useActivePage = (initialData?: number): SWRResponse<number, Error> => {
   return useStaticSWR('activePage', initialData);
 };
 
-export const useIsRetrieveFavoritePageList = (initialData?: boolean): responseInterface<boolean, Error> => {
+export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isRetrieveFavoritePageList', initialData);
 };
 
-export const usePageListSWR = (limit = 27): responseInterface<PaginationResult<Page>, Error> => {
+export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
-  let key = `/pages/list?status=stocked&page=${activePage}&limit=${limit}`;
-  if (isRetrieveFavoritePageList) {
-    key += `&isFavorite=${isRetrieveFavoritePageList}`;
-  }
-  return useSWR(key, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
-  });
+  // TODO: 66 Allows to sort freely
+  const sort = '-createdAt';
+
+  return useSWR(
+    ['/pages/list?status=stocked', activePage, limit, sort, isRetrieveFavoritePageList],
+    (endpoint, page, limit, sort, isFavorite) =>
+      restClient
+        .apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`, `&sort=${sort}`, isFavorite ? `&isFavorite=${isFavorite}` : ``))
+        .then((result) => result.data),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
+  );
 };

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { VFC } from 'react';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useActivePage } from '~/stores/page';
@@ -8,7 +8,7 @@ type Props = {
   pagingLimit: number;
 };
 
-export const PaginationWrapper: FC<Props> = (props: Props) => {
+export const PaginationWrapper: VFC<Props> = (props: Props) => {
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
   const { totalItemsCount, pagingLimit } = props;
 
