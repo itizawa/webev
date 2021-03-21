@@ -17,11 +17,14 @@ export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRRespons
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
+  const sort = '-createdAt';
 
   return useSWR(
-    ['/pages/list?status=stocked', activePage, limit, isRetrieveFavoritePageList],
-    (endpoint, page, limit, isFavorite) =>
-      restClient.apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`, isFavorite ? `&isFavorite=${isFavorite}` : ``)).then((result) => result.data),
+    ['/pages/list?status=stocked', activePage, limit, sort, isRetrieveFavoritePageList],
+    (endpoint, page, limit, sort, isFavorite) =>
+      restClient
+        .apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`, `&sort=${sort}`, isFavorite ? `&isFavorite=${isFavorite}` : ``))
+        .then((result) => result.data),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: true,
