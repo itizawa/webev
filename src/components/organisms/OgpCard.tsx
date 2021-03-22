@@ -3,6 +3,7 @@ import { VFC, useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
 
+import urljoin from 'url-join';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -33,7 +34,8 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const sharePage = async () => {
     if (window != null) {
-      window.open('https://twitter.com/intent/tweet?text=Hello%20world', '_blanck');
+      const twitterUrl = urljoin('https://twitter.com/intent/tweet', `?url=${encodeURIComponent(url)}`, `&hashtags=${siteName}`);
+      window.open(twitterUrl, '_blanck');
     }
   };
 
