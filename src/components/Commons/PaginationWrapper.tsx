@@ -12,6 +12,11 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
   const { totalItemsCount, pagingLimit } = props;
 
+  const handlePaginationButton = (page: number) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mutateActivePage(page);
+  };
+
   // calc totalPageNumber
   const totalPage = Math.floor(totalItemsCount / pagingLimit) + (totalItemsCount % pagingLimit === 0 ? 0 : 1);
 
@@ -45,7 +50,7 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_DOUBLE_LEFT}
           disabled={activePage === 1}
           onClickButton={() => {
-            mutateActivePage(1);
+            handlePaginationButton(1);
           }}
         />
         <IconButton
@@ -55,7 +60,7 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_LEFT}
           disabled={activePage === 1}
           onClickButton={() => {
-            mutateActivePage(activePage - 1);
+            handlePaginationButton(activePage - 1);
           }}
         />
       </>
@@ -75,7 +80,7 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
           key={number}
           className={`btn btn-secondary ${activePage === number ? 'active' : ''}`}
           onClick={() => {
-            return mutateActivePage(number);
+            return handlePaginationButton(number);
           }}
         >
           {number}
@@ -100,7 +105,7 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_DOUBLE_RIGHT}
           disabled={totalPage === activePage}
           onClickButton={() => {
-            mutateActivePage(activePage + 1);
+            handlePaginationButton(activePage + 1);
           }}
         />
         <IconButton
@@ -110,7 +115,7 @@ export const PaginationWrapper: VFC<Props> = (props: Props) => {
           icon={BootstrapIcon.CHEVRON_RIGHT}
           disabled={totalPage === activePage}
           onClickButton={() => {
-            mutateActivePage(totalPage);
+            handlePaginationButton(totalPage);
           }}
         />
       </>

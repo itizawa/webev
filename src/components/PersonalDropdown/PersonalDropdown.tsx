@@ -1,5 +1,5 @@
 import { useEffect, useState, VFC } from 'react';
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledTooltip } from 'reactstrap';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 import { toastSuccess } from '~/utils/toastr';
 
