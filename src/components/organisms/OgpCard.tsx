@@ -32,7 +32,9 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   }, [page]);
 
   const sharePage = async () => {
-    console.log('click');
+    if (window != null) {
+      window.open('https://twitter.com/intent/tweet?text=Hello%20world', '_blanck');
+    }
   };
 
   const switchFavorite = async () => {
