@@ -63,7 +63,7 @@ export const InputForm: VFC = () => {
   return (
     <form className="input-group" onSubmit={onSubmit}>
       <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3" placeholder="URL を保存" />
-      <button className="btn btn-secondary" type="submit" id="input-group">
+      <button className="btn btn-secondary" type="submit" id="input-group" disabled={url.length === 0}>
         保存する
       </button>
     </form>
