@@ -34,7 +34,7 @@ export const DashBoardLayout: FC = ({ children }) => {
       <Navbar />
       <div className={`webev-nav-border ${style['nav-border']}`} />
       <SubnavBar />
-      <main className="d-flex mx-auto pt-lg-4">
+      <main className="d-flex mx-auto">
         <div className="d-none d-md-block col-lg-2">
           <Sidebar />
         </div>
