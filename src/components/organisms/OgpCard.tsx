@@ -4,6 +4,8 @@ import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
 
 import urljoin from 'url-join';
+import { useTranslation } from 'react-i18next';
+
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -22,6 +24,8 @@ type Props = {
 };
 
 export const OgpCard: VFC<Props> = ({ page }: Props) => {
+  const { t } = useTranslation();
+
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -42,7 +46,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchFavorite = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess('更新しました');
+      toastSuccess(t('toastr.update', { target: t('favorite') }));
       setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
