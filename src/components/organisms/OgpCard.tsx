@@ -5,12 +5,11 @@ import { format } from 'date-fns';
 
 import urljoin from 'url-join';
 import { useTranslation } from 'react-i18next';
+import style from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-
-import styles from '~/styles/components/organisms/OgpCard.module.scss';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page } from '~/interfaces/page';
@@ -60,12 +59,12 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   };
 
   return (
-    <div className={`card border-0 shadow ${styles.card}`}>
-      <div className={styles.fixed}>
+    <StyledCard className="card border-0 shadow">
+      <StyledImageWrapper>
         <a href={url} target="blank" rel="noopener noreferrer">
           <img src={image} alt={image} className="card-img-top" />
         </a>
-      </div>
+      </StyledImageWrapper>
       <div className="card-body p-2">
         <h5 className="card-title my-1">
           <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
@@ -122,6 +121,27 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           </UncontrolledTooltip>
         </div>
       </div>
-    </div>
+    </StyledCard>
   );
 };
+
+const StyledCard = style.div`
+  background-color: #2f363d;
+`;
+
+const StyledImageWrapper = style.div`
+  position: relative;
+  width: 100%;
+  padding-top: 55%;
+
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    background-image: url('/spinner.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+`;
