@@ -26,7 +26,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
     localStorage.setItem('isEnableReadFromClipboard', bool.toString());
-    toastSuccess(t('update_settings'));
+    toastSuccess(t('toastr.update', { target: t('settings') }));
   };
 
   return (
