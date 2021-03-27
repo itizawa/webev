@@ -19,8 +19,7 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          {t('hoge')}
-          <h1>Home</h1>
+          <h1>{t('home')}</h1>
           <div className="row">
             {paginationResult == null ? (
               [...Array(9)].map((_, i) => (
@@ -37,8 +36,8 @@ const Index: VFC = () => {
                 ))}
                 {paginationResult.docs.length === 0 ? (
                   <div className="text-center alert alert-info">
-                    <h2>ページが保存されていません</h2>
-                    <span>早速 url を保存しよう</span>
+                    <h2>{t('the_page_is_not_saved')}</h2>
+                    <span>{t('save_the_url_immediately')}</span>
                   </div>
                 ) : (
                   <div className="text-center">

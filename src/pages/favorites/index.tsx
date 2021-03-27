@@ -2,6 +2,8 @@ import { VFC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
+
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -9,13 +11,14 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: VFC = () => {
+  const { t } = useTranslation();
   const { data: paginationResult } = usePageListSWR();
 
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          <h1>Favorite</h1>
+          <h1>{t('favorite')}</h1>
           <div className="row">
             {paginationResult == null ? (
               [...Array(9)].map((_, i) => (
@@ -32,8 +35,8 @@ const Index: VFC = () => {
                 ))}
                 {paginationResult.docs.length === 0 ? (
                   <div className="text-center alert alert-info">
-                    <h2>ページが保存されていません</h2>
-                    <span>早速 url を保存しよう</span>
+                    <h2>{t('the_page_is_not_saved')}</h2>
+                    <span>{t('save_the_url_immediately')}</span>
                   </div>
                 ) : (
                   <div className="text-center">
