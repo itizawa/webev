@@ -9,6 +9,7 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
+import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 
 const Index: VFC = () => {
   const { t } = useTranslation();
@@ -20,6 +21,9 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           <h1>{t('home')}</h1>
+          <div className="my-2 d-flex flex-row-reverse">
+            <SortButtonGroup />
+          </div>
           <div className="row">
             {paginationResult == null ? (
               [...Array(9)].map((_, i) => (
