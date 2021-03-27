@@ -29,9 +29,16 @@ const Index: VFC = () => {
                     <OgpCard page={page} />
                   </div>
                 ))}
-                <div className="text-center">
-                  <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-                </div>
+                {paginationResult.docs.length === 0 ? (
+                  <div className="text-center alert alert-info">
+                    <h2>ページが保存されていません</h2>
+                    <span>早速 url を保存しよう</span>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+                  </div>
+                )}
               </>
             )}
           </div>
