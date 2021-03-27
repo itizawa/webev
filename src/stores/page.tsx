@@ -1,10 +1,11 @@
-import useSWR, { SWRResponse } from 'swr';
+import { SWRResponse } from 'swr';
 import urljoin from 'url-join';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
 import { Page } from '~/interfaces/page';
 import { useStaticSWR } from '~/stores/use-static-swr';
+import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
 export const useActivePage = (initialData?: number): SWRResponse<number, Error> => {
   return useStaticSWR('activePage', initialData);
@@ -20,7 +21,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
   // TODO: 66 Allows to sort freely
   const sort = '-createdAt';
 
-  return useSWR(
+  return useAuthenticationSWR(
     ['/pages/list?status=stocked', activePage, limit, sort, isRetrieveFavoritePageList],
     (endpoint, page, limit, sort, isFavorite) =>
       restClient
