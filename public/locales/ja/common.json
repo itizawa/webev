@@ -1,3 +1,32 @@
 {
-  "hoge": "ほげ"
+  "welcome_webev": "Welcome Webev!!",
+  "start_immediately":"さっそく 始める",
+  "term":"利用規約",
+
+  "logout":"ログアウト",
+  "delete":"削除",
+  "cancel":"キャンセル",
+  "settings":"設定",
+  "save":"保存",
+
+  "toastr": {
+    "update":"{{target}}を更新しました",
+    "delete":"{{target}}を削除しました",
+    "save":"{{target}}を保存しました"
+  },
+
+  "home":"Home",
+  "favorite":"Favorite",
+
+  "automatic_acquisition":"自動取得",
+  "function_details":"機能の詳細",
+
+  "delete_page":"ページを削除します",
+  "obtained_from_clipboard":"Clipboard から取得しました",
+
+  "the_page_is_not_saved":"ページが保存されていません",
+  "save_the_url_immediately":"早速 url を保存しよう",
+
+  "this_is_the_404_page":"This is the 404 page",
+  "go_to_top":"トップページに戻る"
 }
