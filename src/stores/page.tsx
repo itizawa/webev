@@ -1,4 +1,4 @@
-import useSWR, { SWRResponse } from 'swr';
+import { SWRResponse } from 'swr';
 import urljoin from 'url-join';
 
 import { restClient } from '~/utils/rest-client';
