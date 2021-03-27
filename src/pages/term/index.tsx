@@ -1,19 +1,17 @@
-import { VFC } from 'react';
-import Link from 'next/link';
-
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { VFC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
-const Page: VFC = () => {
+import { DefaultLayout } from '~/components/Layout/DefaultLayout';
+import { Term } from '~/components/Term/Term';
+
+const Index: VFC = () => {
   const { t } = useTranslation();
   return (
     <DefaultLayout>
       <div className="p-3">
-        <h1 className="m-3">{t('this_is_the_404_page')}</h1>
-        <h2>
-          <Link href="/">{t('go_to_top')}</Link>
-        </h2>
+        <h1>{t('term')}</h1>
+        <Term />
       </div>
     </DefaultLayout>
   );
@@ -26,4 +24,4 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
   },
 });
 
-export default Page;
+export default Index;

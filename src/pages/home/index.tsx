@@ -1,6 +1,9 @@
 import { VFC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -8,13 +11,15 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: VFC = () => {
+  const { t } = useTranslation();
+
   const { data: paginationResult } = usePageListSWR();
 
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          <h1>Home</h1>
+          <h1>{t('home')}</h1>
           <div className="row">
             {paginationResult == null ? (
               [...Array(9)].map((_, i) => (
@@ -29,9 +34,16 @@ const Index: VFC = () => {
                     <OgpCard page={page} />
                   </div>
                 ))}
-                <div className="text-center">
-                  <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-                </div>
+                {paginationResult.docs.length === 0 ? (
+                  <div className="text-center alert alert-info">
+                    <h2>{t('the_page_is_not_saved')}</h2>
+                    <span>{t('save_the_url_immediately')}</span>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+                  </div>
+                )}
               </>
             )}
           </div>
@@ -40,5 +52,12 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'footer'])),
+  },
+});
 
 export default Index;

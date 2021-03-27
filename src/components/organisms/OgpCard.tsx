@@ -3,6 +3,9 @@ import { VFC, useEffect, useState } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import { format } from 'date-fns';
 
+import urljoin from 'url-join';
+import { useTranslation } from 'react-i18next';
+
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -21,6 +24,8 @@ type Props = {
 };
 
 export const OgpCard: VFC<Props> = ({ page }: Props) => {
+  const { t } = useTranslation();
+
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isFavorite, setIsFavorite] = useState(false);
@@ -31,10 +36,17 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
     setIsFavorite(page.isFavorite);
   }, [page]);
 
+  const sharePage = async () => {
+    if (window != null) {
+      const twitterUrl = urljoin('https://twitter.com/intent/tweet', `?url=${encodeURIComponent(url)}`, `&hashtags=${siteName}`);
+      window.open(twitterUrl, '_blanck');
+    }
+  };
+
   const switchFavorite = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess('更新しました');
+      toastSuccess(t('toastr.update', { target: t('favorite') }));
       setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
@@ -68,6 +80,19 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
+          <div id={`twitetr-for-${page._id}`}>
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.TWITTER}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.SECONDARY}
+              onClickButton={sharePage}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target={`twitetr-for-${page._id}`}>
+            Share
+          </UncontrolledTooltip>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
@@ -80,7 +105,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             />
           </div>
           <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
-            お気に入り
+            Favorite
           </UncontrolledTooltip>
           <div id={`trash-for-${page._id}`}>
             <IconButton
@@ -93,7 +118,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             />
           </div>
           <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
-            削除
+            Delete
           </UncontrolledTooltip>
         </div>
       </div>
