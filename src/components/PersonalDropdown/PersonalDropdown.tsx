@@ -26,7 +26,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
     localStorage.setItem('isEnableReadFromClipboard', bool.toString());
-    toastSuccess('設定を更新しました');
+    toastSuccess(t('update_settings'));
   };
 
   return (
@@ -46,8 +46,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" id="isEnableReadFromClipboard" checked={isEnableReadFromClipboard} onChange={handleSwitch} />
             <label className="form-check-label" htmlFor="isEnableReadFromClipboard">
-              自動取得
-              {t('hoge')}
+              {t('automatic_acquisition')}
             </label>
           </div>
           <div className="text-center">
@@ -57,13 +56,13 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
               target="blank"
               rel="noopener noreferrer"
             >
-              機能の詳細
+              {t('function_details')}
             </a>
           </div>
         </div>
         <DropdownItem divider />
         <DropdownItem tag="button" onClick={() => signOut()}>
-          Logout
+          {t('logout')}
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
