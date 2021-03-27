@@ -58,7 +58,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
           </div>
         </div>
         <DropdownItem divider />
-        <DropdownItem tag="li" onClick={() => signOut()}>
+        <DropdownItem tag="button" onClick={() => signOut()}>
           Logout
         </DropdownItem>
       </DropdownMenu>
