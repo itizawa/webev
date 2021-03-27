@@ -31,14 +31,6 @@ main{
   }
 }
 
-.webev-nav-border{
-  @include media-breakpoint-up(md){
-    position: sticky;
-    top: 0;
-    z-index: 980;
-  }
-}
-
 .scroll-top-button{
   position: fixed;
   right: 20px;
