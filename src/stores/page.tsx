@@ -1,6 +1,7 @@
 import useSWR, { SWRResponse } from 'swr';
 import urljoin from 'url-join';
 
+import { useSession } from 'next-auth/client';
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
 import { Page } from '~/interfaces/page';
@@ -15,13 +16,17 @@ export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRRespons
 };
 
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
+  const [session] = useSession();
+
   const { data: activePage = 1 } = useActivePage();
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
   // TODO: 66 Allows to sort freely
   const sort = '-createdAt';
 
+  const key = session == null ? null : ['/pages/list?status=stocked', activePage, limit, sort, isRetrieveFavoritePageList];
+
   return useSWR(
-    ['/pages/list?status=stocked', activePage, limit, sort, isRetrieveFavoritePageList],
+    key,
     (endpoint, page, limit, sort, isFavorite) =>
       restClient
         .apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`, `&sort=${sort}`, isFavorite ? `&isFavorite=${isFavorite}` : ``))
