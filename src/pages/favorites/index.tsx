@@ -4,7 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 
-import { usePageListSWR } from '~/stores/page';
+import { useIsSortCreatedAt, usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
@@ -13,6 +13,7 @@ import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 const Index: VFC = () => {
   const { t } = useTranslation();
   const { data: paginationResult } = usePageListSWR();
+  const { mutate: mutateIsSortCreatedAt } = useIsSortCreatedAt();
 
   return (
     <LoginRequiredWrapper>
