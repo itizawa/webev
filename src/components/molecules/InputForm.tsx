@@ -28,6 +28,12 @@ export const InputForm: VFC = () => {
       return;
     }
     const clipboardText = await navigator.clipboard.readText();
+
+    // check url
+    if (!clipboardText.match(/^(http|https):\/\//i)) {
+      return;
+    }
+
     const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
     const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
     if (usedClipboardTextsArray.includes(clipboardText)) {
