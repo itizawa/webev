@@ -1,6 +1,6 @@
 {
   "name": "webev-front",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -38,6 +38,7 @@
     "sass": "^1.32.0",
     "sass-loader": "^11.0.1",
     "socket.io-client": "^4.0.0",
+    "styled-components": "^5.2.1",
     "swr": "^0.5.3",
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4",
@@ -50,6 +51,7 @@
     "@types/node": "^14.14.17",
     "@types/react": "^17.0.0",
     "@types/socket.io-client": "^1.4.35",
+    "@types/styled-components": "^5.1.9",
     "@types/throttle-debounce": "^2.1.0",
     "@types/toastr": "^2.1.38",
     "@types/url-join": "^4.0.0",
