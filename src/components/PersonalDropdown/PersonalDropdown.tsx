@@ -1,6 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
+import { useTranslation } from 'next-i18next';
 import { toastSuccess } from '~/utils/toastr';
 
 import { UserIcon } from '~/components/Icons/UserIcon';
@@ -11,7 +12,9 @@ type Props = {
 };
 
 export const PersonalDropdown: VFC<Props> = (props: Props) => {
+  const { t } = useTranslation();
   const { user } = props;
+
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
@@ -44,6 +47,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
             <input className="form-check-input" type="checkbox" id="isEnableReadFromClipboard" checked={isEnableReadFromClipboard} onChange={handleSwitch} />
             <label className="form-check-label" htmlFor="isEnableReadFromClipboard">
               自動取得
+              {t('hoge')}
             </label>
           </div>
           <div className="text-center">

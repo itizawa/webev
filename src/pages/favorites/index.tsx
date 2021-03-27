@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -47,5 +48,12 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});
 
 export default Index;

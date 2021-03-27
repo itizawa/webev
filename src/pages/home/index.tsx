@@ -1,6 +1,9 @@
 import { VFC } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { usePageListSWR } from '~/stores/page';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -8,12 +11,15 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 
 const Index: VFC = () => {
+  const { t } = useTranslation();
+
   const { data: paginationResult } = usePageListSWR();
 
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
+          {t('hoge')}
           <h1>Home</h1>
           <div className="row">
             {paginationResult == null ? (
@@ -47,5 +53,12 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common', 'footer'])),
+  },
+});
 
 export default Index;

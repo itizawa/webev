@@ -1,6 +1,8 @@
 import { VFC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
 const Index: VFC = () => {
@@ -16,5 +18,12 @@ const Index: VFC = () => {
     </DefaultLayout>
   );
 };
+
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getStaticProps = async ({ locale }: { locale: string }) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+});
 
 export default Index;
