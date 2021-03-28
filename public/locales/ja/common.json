@@ -19,8 +19,9 @@
     "success_archived":"アーカイブしました"
   },
 
-  "home":"Home",
-  "favorite":"Favorite",
+  "home":"ホーム",
+  "favorite":"お気に入り",
+  "archive":"アーカイブ",
 
   "automatic_acquisition":"自動取得",
   "function_details":"機能の詳細",
