@@ -79,7 +79,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
-          <div id={`twitetr-for-${page._id}`}>
+          <div id={`twitter-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
@@ -89,7 +89,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               onClickButton={sharePage}
             />
           </div>
-          <UncontrolledTooltip placement="top" target={`twitetr-for-${page._id}`}>
+          <UncontrolledTooltip placement="top" target={`twitter-for-${page._id}`}>
             Share
           </UncontrolledTooltip>
           <div id={`favorite-for-${page._id}`}>
