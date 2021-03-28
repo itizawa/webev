@@ -5,11 +5,13 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { usePageListSWR } from '~/stores/page';
+
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
+import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 
 const Index: VFC = () => {
   const { t } = useTranslation();
@@ -39,10 +41,7 @@ const Index: VFC = () => {
                   </div>
                 ))}
                 {paginationResult.docs.length === 0 ? (
-                  <div className="text-center alert alert-info">
-                    <h2>{t('the_page_is_not_saved')}</h2>
-                    <span>{t('save_the_url_immediately')}</span>
-                  </div>
+                  <NoPageAlert />
                 ) : (
                   <div className="text-center">
                     <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
