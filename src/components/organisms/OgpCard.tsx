@@ -90,7 +90,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
         <div className="d-flex align-items-center">
           <div className="me-auto">
             <small>
-              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
+              <span id={`sitename-for-${page._id}`}>
+                {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
+              </span>
+              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+                <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                  {siteName}
+                </UncontrolledTooltip>
+              )}
               <br />
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
