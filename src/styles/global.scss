@@ -11,11 +11,11 @@ $theme-colors: (
   'danger':     $danger,
   'light':      $light,
   'dark':       $dark,
-  'indigo': $indigo,
-  'purple': $purple,
-  'pink': $pink,
-  'orange': $orange,
-  'teal': $teal,
+  'indigo':     $indigo,
+  'purple':     $purple,
+  'pink':       $pink,
+  'orange':     $orange,
+  'teal':       $teal,
 );
 
 @import '../../node_modules/bootstrap/scss/_buttons';
