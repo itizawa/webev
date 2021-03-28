@@ -28,8 +28,8 @@
   "delete_page":"Delete Page",
   "obtained_from_clipboard":"Obtained from Clipboard",
 
-  "the_page_is_not_saved":"The page is not saved",
-  "save_the_url_immediately":"Let's save the url immediately",
+  "the_page_is_not_saved":"Your page have not been saved yet.",
+  "save_the_url_immediately":"Let’s try to add favorites right now!",
 
   "this_is_the_404_page":"This is the 404 page",
   "go_to_top":"Go to Top Page"
