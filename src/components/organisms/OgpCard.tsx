@@ -79,6 +79,12 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
+          <div id={`archive-for-${page._id}`}>
+            <IconButton width={24} height={24} icon={BootstrapIcon.ARCHIVE} color={BootstrapColor.SECONDARY} activeColor={BootstrapColor.SECONDARY} />
+          </div>
+          <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
+            Archive
+          </UncontrolledTooltip>
           <div id={`twitter-for-${page._id}`}>
             <IconButton
               width={24}
