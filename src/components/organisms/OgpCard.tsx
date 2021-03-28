@@ -108,7 +108,8 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               height={24}
               icon={BootstrapIcon.ARCHIVE}
               color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.DANGER}
+              isActive={isArchive}
               onClickButton={switchArchive}
             />
           </div>
