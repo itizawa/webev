@@ -12,10 +12,10 @@ const Index: VFC = () => {
   return (
     <DefaultLayout>
       <h1 className="my-3">{t('welcome_webev')}</h1>
-      <Image src="/images/eye-catch.png" height={1260} width={2240} />
+      <Image src="/images/eye-catch-dark.png" height={1260} width={2240} />
       <div className="text-center">
         <Link href="/home">
-          <button className="btn btn-info text-white mt-3">{t('start_immediately')}</button>
+          <button className="btn btn-purple text-white mt-3">{t('start_immediately')}</button>
         </Link>
       </div>
     </DefaultLayout>
