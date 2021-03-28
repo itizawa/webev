@@ -17,7 +17,9 @@ import { Page, PageStatus } from '~/interfaces/page';
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 
-const MAX_WORD_COUNT = 96;
+const MAX_WORD_COUNT_OF_BODY = 96;
+const MAX_WORD_COUNT_OF_SITENAME = 10;
+
 type Props = {
   page: Page;
 };
@@ -84,11 +86,19 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             {title}
           </a>
         </h5>
-        <p className="small mt-2">{description?.length > MAX_WORD_COUNT ? description?.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
+        <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
           <div className="me-auto">
             <small>
-              {siteName} <br />
+              <span id={`sitename-for-${page._id}`}>
+                {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
+              </span>
+              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+                <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                  {siteName}
+                </UncontrolledTooltip>
+              )}
+              <br />
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
