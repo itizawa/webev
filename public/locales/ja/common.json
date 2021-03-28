@@ -12,7 +12,8 @@
   "toastr": {
     "update":"{{target}}を更新しました",
     "delete":"{{target}}を削除しました",
-    "save":"{{target}}を保存しました"
+    "save":"{{target}}を保存しました",
+    "success_archived":"アーカイブしました"
   },
 
   "home":"Home",
