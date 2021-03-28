@@ -9,6 +9,9 @@
   "settings":"設定",
   "save":"保存",
 
+  "latest_order":"新しい順",
+  "oldest_order":"古い順",
+
   "toastr": {
     "update":"{{target}}を更新しました",
     "delete":"{{target}}を削除しました",

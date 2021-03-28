@@ -9,6 +9,9 @@
   "settings":"Settings",
   "save":"Save",
 
+  "latest_order":"Latest Order",
+  "oldest_order":"Oldest Order",
+
   "toastr": {
     "update":"Update {{target}}",
     "delete":"Delete {{target}}",
