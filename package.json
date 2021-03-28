@@ -8,7 +8,9 @@
     "start": "next start",
     "lint:styles": "stylelint \"./**/*.{scss,css}\"",
     "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "lint": "npm-run-all -p lint:js lint:styles"
+    "lint": "npm-run-all -p lint:js lint:styles",
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage"
   },
   "repository": {
     "type": "git",
@@ -82,5 +84,10 @@
     "stylelint-config-recess-order": "^2.3.0",
     "ts-jest": "^26.5.4",
     "typescript": "^4.1.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~/(.+)": "<rootDir>/src/$1"
+    }
   }
 }
