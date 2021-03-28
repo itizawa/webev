@@ -12,7 +12,8 @@
   "toastr": {
     "update":"Update {{target}}",
     "delete":"Delete {{target}}",
-    "save":"Save {{target}}"
+    "save":"Save {{target}}",
+    "success_archived":"Archived"
   },
 
   "home":"Home",

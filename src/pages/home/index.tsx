@@ -34,7 +34,7 @@ const Index: VFC = () => {
             ) : (
               <>
                 {paginationResult.docs.map((page) => (
-                  <div className="col-lg-4 col-md-6 mb-3" key={page._id}>
+                  <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
                     <OgpCard page={page} />
                   </div>
                 ))}
