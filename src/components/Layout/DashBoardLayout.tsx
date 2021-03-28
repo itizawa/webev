@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, useIsRetrieveFavoritePageList } from '~/stores/page';
+import { useActivePage, usePageStatus, useIsRetrieveFavoritePageList } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -15,15 +15,19 @@ import { PageModals } from '~/components/PageModals/PageModals';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
+import { PageStatus } from '~/interfaces/page';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
+
   const { mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
+  const { mutate: mutatePageStatus } = usePageStatus();
 
   useEffect(() => {
     mutateIsRetrieveFavoritePageList(router.pathname === '/favorites');
+    mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
     mutateActivePage(1);
   }, [router]);
 
