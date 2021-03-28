@@ -12,7 +12,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Page } from '~/interfaces/page';
+import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
@@ -27,11 +27,13 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
+  const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
 
   useEffect(() => {
+    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
     setIsFavorite(page.isFavorite);
   }, [page]);
 
@@ -39,6 +41,17 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
     if (window != null) {
       const twitterUrl = urljoin('https://twitter.com/intent/tweet', `?url=${encodeURIComponent(url)}`, `&hashtags=${siteName}`);
       window.open(twitterUrl, '_blanck');
+    }
+  };
+
+  const switchArchive = async () => {
+    try {
+      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
+      toastSuccess(t('toastr.success_archived'));
+      setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
+      mutatePageList();
+    } catch (err) {
+      toastError(err);
     }
   };
 
@@ -80,7 +93,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </small>
           </div>
           <div id={`archive-for-${page._id}`}>
-            <IconButton width={24} height={24} icon={BootstrapIcon.ARCHIVE} color={BootstrapColor.SECONDARY} activeColor={BootstrapColor.SECONDARY} />
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.ARCHIVE}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.SECONDARY}
+              onClickButton={switchArchive}
+            />
           </div>
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
             Archive
