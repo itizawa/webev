@@ -12,7 +12,7 @@ export const useActivePage = (initialData?: number): SWRResponse<number, Error> 
 };
 
 export const usePageStatus = (initialData?: PageStatus): SWRResponse<PageStatus, Error> => {
-  return useStaticSWR('pageStatustus', initialData);
+  return useStaticSWR('pageStatus', initialData);
 };
 
 export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRResponse<boolean, Error> => {
