@@ -29,6 +29,7 @@ export const Sidebar: VFC = () => {
 
 const StyledList = style.li<{ isActive: boolean }>`
 padding: 10px;
+color: #eee;
 background-color: inherit;
 border-radius: 3px;
 
