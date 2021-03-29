@@ -16,13 +16,16 @@ $theme-colors: (
   'pink':       $pink,
   'orange':     $orange,
   'teal':       $teal,
+  'google':     #db3236,
+  'twitter':     #1DA1F2,
 );
 
 @import '../../node_modules/bootstrap/scss/_buttons';
 @import '../../node_modules/bootstrap/scss/mixins';
   
-@import './variables.scss';
 @import '~toastr/toastr.scss';
+
+@import './override.scss';
 
 body {
   font-weight: 300;
