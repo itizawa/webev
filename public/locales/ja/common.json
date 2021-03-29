@@ -33,6 +33,8 @@
   "save_the_url_immediately":"上のバーから url を保存してください",
   "your_favorite_pages_don’t_exist":"お気に入りが存在しません",
   "favorite_immediately":"お気に入りボタンを押して追加してください",
+  "your_archive_pages_don’t_exist":"アーカイブが存在しません",
+  "archive_immediately":"アーカイブボタンを押して追加してください",
 
   "this_is_the_404_page":"This is the 404 page",
   "go_to_top":"トップページに戻る"

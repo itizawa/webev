@@ -33,6 +33,8 @@
   "save_the_url_immediately":"Please add them from the top bar.",
   "your_favorite_pages_don’t_exist":"Your favorite pages don’t exist.",
   "favorite_immediately":"Let’s try to add favorites!",
+  "your_archive_pages_don’t_exist":"Your archive pages don’t exist.",
+  "archive_immediately":"Let’s try to add archives!",
 
   "this_is_the_404_page":"This is the 404 page",
   "go_to_top":"Go to Top Page"
