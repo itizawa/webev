@@ -12,7 +12,7 @@ export const Sidebar: VFC = () => {
   const router = useRouter();
 
   return (
-    <ul className="sidebar-list-group list-group gap-3 py-3 text-white sticky-top">
+    <ul className="sidebar-list-group list-group gap-3 py-3 sticky-top">
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>

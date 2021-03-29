@@ -27,7 +27,7 @@ const Index: VFC = () => {
               利用規約に同意する
             </label>
           </div>
-          <button type="button" className="btn btn-google text-white w-100" onClick={() => signIn('google')} disabled={!isCheckedAgree}>
+          <button type="button" className="btn btn-google w-100" onClick={() => signIn('google')} disabled={!isCheckedAgree}>
             <Icon icon={BootstrapIcon.GOOGLE} color={BootstrapColor.LIGHT} />
             <span className="ms-2">Google でログインする</span>
           </button>

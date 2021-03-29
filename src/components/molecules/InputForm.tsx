@@ -65,7 +65,7 @@ export const InputForm: VFC = () => {
 
   return (
     <form className="input-group" onSubmit={onSubmit}>
-      <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3" placeholder="...URL" />
+      <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3 bg-white" placeholder="...URL" />
       <button className="btn btn-secondary" type="submit" id="input-group" disabled={url.length === 0}>
         {t('save')}
       </button>
