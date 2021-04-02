@@ -7,7 +7,6 @@ import { SocketConnector } from '~/components/SocketConnector';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { PageModals } from '~/components/PageModals/PageModals';
-import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 
@@ -25,7 +24,6 @@ export const DefaultLayout: FC = ({ children }) => {
       <div className="container">{children}</div>
       {session && <PageModals />}
       {session && <SocketConnector />}
-      <ScrollTopButton />
     </>
   );
 };
