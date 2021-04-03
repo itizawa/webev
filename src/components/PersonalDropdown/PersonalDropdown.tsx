@@ -2,6 +2,8 @@ import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 import { useTranslation } from 'next-i18next';
+import style from 'styled-components';
+
 import { toastSuccess } from '~/utils/toastr';
 
 import { UserIcon } from '~/components/Icons/UserIcon';
@@ -34,7 +36,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
       <DropdownToggle className="nav-link p-0 c-pointer" tag="a">
         <UserIcon image={user.image} size="medium" />
       </DropdownToggle>
-      <DropdownMenu right className="dropdown-menu-dark personal-dropdown-menu">
+      <StyledDropdownMenu right className="dropdown-menu-dark">
         <DropdownItem header>
           <div className="text-center">
             <UserIcon image={user.image} size="large" isCircle />
@@ -64,7 +66,11 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
         <DropdownItem tag="button" onClick={() => signOut()}>
           {t('logout')}
         </DropdownItem>
-      </DropdownMenu>
+      </StyledDropdownMenu>
     </UncontrolledDropdown>
   );
 };
+
+const StyledDropdownMenu = style(DropdownMenu)`
+  z-index: 1300;
+`;

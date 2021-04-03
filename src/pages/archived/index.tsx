@@ -11,7 +11,7 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { NoFavoritePageAlert } from '~/components/Alerts/NoFavoriteAlert';
+import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
 
 const Index: VFC = () => {
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          <h1>{t('favorite')}</h1>
+          <h1>{t('archive')}</h1>
           <div className="my-2 d-flex flex-row-reverse">
             <SortButtonGroup />
           </div>
@@ -40,7 +40,7 @@ const Index: VFC = () => {
                   </div>
                 ))}
                 {paginationResult.docs.length === 0 ? (
-                  <NoFavoritePageAlert />
+                  <NoArchivePageAlert />
                 ) : (
                   <div className="text-center">
                     <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />

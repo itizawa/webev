@@ -20,18 +20,14 @@ const Index: VFC = () => {
         <div className="p-3">
           <h1>Login Page</h1>
           {router.query.isRedirect && <div className="alert alert-warning">ログインが必要です</div>}
-          <div className="mb-3 overflow-auto border login-term p-3">
-            <div className="mx-auto">
-              <Term />
-            </div>
-          </div>
+          <Term />
           <div className="form-check form-check-inline mb-3">
             <input className="form-check-input" type="checkbox" id="termAgreement" checked={isCheckedAgree} onChange={() => setIsCheckedAgree(!isCheckedAgree)} />
             <label className="form-check-label" htmlFor="termAgreement">
               利用規約に同意する
             </label>
           </div>
-          <button type="button" className="btn btn-google text-white w-100" onClick={() => signIn('google')} disabled={!isCheckedAgree}>
+          <button type="button" className="btn btn-google w-100" onClick={() => signIn('google')} disabled={!isCheckedAgree}>
             <Icon icon={BootstrapIcon.GOOGLE} color={BootstrapColor.LIGHT} />
             <span className="ms-2">Google でログインする</span>
           </button>

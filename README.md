@@ -1,6 +1,6 @@
 # Webev
 
-![White and Black Memphis Style General Twitch Banner](https://user-images.githubusercontent.com/48426654/111029110-33fd2900-843e-11eb-90a2-f4098a00a5a4.png)
+![White and Black Memphis Style General Twitch Banner](https://user-images.githubusercontent.com/48426654/112742744-362dbe80-8fcc-11eb-914f-6b07b48862ac.png)
 
 [![build-dev](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml/badge.svg?branch=master)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
 

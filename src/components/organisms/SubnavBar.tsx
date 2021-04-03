@@ -1,33 +1,36 @@
 import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import ClassNames from 'classnames';
+import style from 'styled-components';
+
 import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
-import styles from '~/styles/components/organisms/SubnavBar.module.scss';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 
 export const SubnavBar: VFC = () => {
   const router = useRouter();
 
   return (
-    <div className={`sticky-top bg-dark d-flex justify-content-evenly d-md-none ${styles.subnavbar}`}>
+    <StyledSubnavBar className="sticky-top bg-dark d-flex justify-content-evenly d-md-none">
       {navbarItemMappings.map((v) => {
-        const classNameForListItem = ClassNames({
-          ['text-center col py-2']: true,
-          [styles.active]: v.url === router.pathname,
-        });
-
         return (
           <Link key={v.text} href={v.url}>
-            <div className={classNameForListItem}>
+            <StyledSubnavBarItem className="text-center col py-2" isActive={v.url === router.pathname}>
               {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.SECONDARY} />}
               <span className="ms-1">{v.text}</span>
-            </div>
+            </StyledSubnavBarItem>
           </Link>
         );
       })}
-    </div>
+    </StyledSubnavBar>
   );
 };
+
+const StyledSubnavBar = style.div`
+  top: -1px;
+`;
+
+const StyledSubnavBarItem = style.div<{ isActive: boolean }>`
+  ${({ isActive }) => isActive && `border-bottom: 4px solid slateblue;`}
+`;

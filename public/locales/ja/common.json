@@ -9,14 +9,19 @@
   "settings":"設定",
   "save":"保存",
 
+  "latest_order":"新しい順",
+  "oldest_order":"古い順",
+
   "toastr": {
     "update":"{{target}}を更新しました",
     "delete":"{{target}}を削除しました",
-    "save":"{{target}}を保存しました"
+    "save":"{{target}}を保存しました",
+    "success_archived":"アーカイブしました"
   },
 
   "home":"Home",
   "favorite":"Favorite",
+  "archive":"Archive",
 
   "automatic_acquisition":"自動取得",
   "function_details":"機能の詳細",
@@ -24,8 +29,12 @@
   "delete_page":"ページを削除します",
   "obtained_from_clipboard":"Clipboard から取得しました",
 
-  "the_page_is_not_saved":"ページが保存されていません",
-  "save_the_url_immediately":"早速 url を保存しよう",
+  "your_pages_don’t_exist":"ページが保存されていません",
+  "save_the_url_immediately":"上のバーから url を保存してください",
+  "your_favorite_pages_don’t_exist":"お気に入りが存在しません",
+  "favorite_immediately":"お気に入りボタンを押して追加してください",
+  "your_archive_pages_don’t_exist":"アーカイブが存在しません",
+  "archive_immediately":"アーカイブボタンを押して追加してください",
 
   "this_is_the_404_page":"This is the 404 page",
   "go_to_top":"トップページに戻る"

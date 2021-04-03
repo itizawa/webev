@@ -1,10 +1,31 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import '../../node_modules/bootstrap/scss/functions';
 @import '../../node_modules/bootstrap/scss/variables';
-@import '../../node_modules/bootstrap/scss/mixins';
 
-@import './variables.scss';
+$theme-colors: (
+  'primary':    $primary,
+  'secondary':  $secondary,
+  'success':    $success,
+  'info':       $info,
+  'warning':    $warning,
+  'danger':     $danger,
+  'light':      $light,
+  'dark':       $dark,
+  'indigo':     $indigo,
+  'purple':     $purple,
+  'pink':       $pink,
+  'orange':     $orange,
+  'teal':       $teal,
+  'google':     #db3236,
+  'twitter':     #1DA1F2,
+);
+
+@import '../../node_modules/bootstrap/scss/_buttons';
+@import '../../node_modules/bootstrap/scss/mixins';
+  
 @import '~toastr/toastr.scss';
+
+@import './override.scss';
 
 body {
   font-weight: 300;
@@ -29,37 +50,4 @@ main{
       width: 100%;
     } 
   }
-}
-
-.webev-nav-border{
-  @include media-breakpoint-up(md){
-    position: sticky;
-    top: 0;
-    z-index: 980;
-  }
-}
-
-.scroll-top-button{
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  opacity: 0;
-  transition: opacity 0.4s; 
-  transition-duration: 200ms;
-  transition-property: all;
-  &.show{
-    opacity: 0.5;
-    &:hover{
-      opacity: 0.7;
-    }
-  }
-}
-
-
-.login-term{
-  max-height: 450px;
-}
-
-.personal-dropdown-menu {
-  z-index: 1300;
 }
