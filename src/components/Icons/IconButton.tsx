@@ -1,5 +1,4 @@
 import { VFC, ComponentProps } from 'react';
-import ClassNames from 'classnames';
 import { Icon } from './Icon';
 import { BootstrapColor } from '~/interfaces/variables';
 
@@ -23,14 +22,16 @@ export const IconButton: VFC<Props> = (props: Props) => {
     }
   };
 
-  const btnClassName = ClassNames({
-    ['btn px-2']: true,
-    [`btn-${buttonColor}`]: buttonColor != null,
-    ['disabled']: disabled,
-  });
+  const btnClassName: string[] = ['btn', 'px-2'];
+  if (buttonColor != null) {
+    btnClassName.push(`btn-${buttonColor}`);
+  }
+  if (disabled) {
+    btnClassName.push('disabled');
+  }
 
   return (
-    <button className={btnClassName} onClick={handleClickButton}>
+    <button className={btnClassName.join(' ')} onClick={handleClickButton}>
       <Icon width={width} height={height} icon={icon} color={textColor} />
       {text && <span className={`ms-3 text-${textColor}`}>{text}</span>}
     </button>
