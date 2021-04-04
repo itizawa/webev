@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
+import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
 import { Navbar } from '~/components/organisms/Navbar';
@@ -21,12 +22,18 @@ export const DefaultLayout: FC = ({ children }) => {
       </Head>
       <Navbar />
       <StyledBorder />
-      <div className="container">{children}</div>
+      <StyledDiv className="container">{children}</StyledDiv>
       {session && <PageModals />}
       {session && <SocketConnector />}
+      <Footer />
     </>
   );
 };
+
+const StyledDiv = styled.div`
+  /* 一旦 min-height を指定 */
+  min-height: 480px;
+`;
 
 const StyledBorder = styled.div`
   height: 4px;
