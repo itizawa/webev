@@ -96,10 +96,10 @@ export const Term: VFC = () => {
       <p>
         本規約は、随時改定される場合があります。改定は溯って適用されることはありません。
         <br />
-        また、ユーザーと当社の関係を定めた本規約の最新版は常に
-        <Link href="/term">
-          <a className="text-primary">https://webev.cloud/term</a>
-        </Link>
+        また、ユーザーと当社の関係を定めた本規約の最新版は常に{' '}
+        <a href="https://webev.cloud/term" className="text-info">
+          https://webev.cloud/term
+        </a>{' '}
         でご覧になることができます。
         <br />
         ユーザーは、本規約への改定が有効となって以降に本サービスへのアクセスまたは本サービスの利用を継続することによって、
