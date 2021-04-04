@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
 import { useActivePage, usePageStatus, useIsRetrieveFavoritePageList } from '~/stores/page';
@@ -49,6 +50,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <SocketConnector />}
         <ScrollTopButton />
       </main>
+      <Footer />
     </>
   );
 };

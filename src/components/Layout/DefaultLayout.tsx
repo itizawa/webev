@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
+import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
 import { Navbar } from '~/components/organisms/Navbar';
@@ -24,6 +25,7 @@ export const DefaultLayout: FC = ({ children }) => {
       <div className="container">{children}</div>
       {session && <PageModals />}
       {session && <SocketConnector />}
+      <Footer />
     </>
   );
 };
