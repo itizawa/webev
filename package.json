@@ -39,7 +39,7 @@
     "sass-loader": "^11.0.1",
     "socket.io-client": "^4.0.1",
     "styled-components": "^5.2.1",
-    "swr": "^0.5.3",
+    "swr": "^0.5.4",
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4",
     "url-join": "^4.0.1"
