@@ -20,7 +20,7 @@ export const Sidebar: VFC = () => {
             <Link key={v.text} href={v.url}>
               <StyledList className="list-group-item mx-3 border-0 c-pointer" isActive={v.url === router.pathname}>
                 {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
-                <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
+                <span className="ms-3">{v.text}</span>
               </StyledList>
             </Link>
           );
