@@ -11,6 +11,7 @@ export enum BootstrapColor {
 export enum BootstrapIcon {
   HOME = 'home',
   PLUS_BOARD = 'plus',
+  PLUS_DOTTED = 'plus-dotted',
   ARCHIVE = 'archive',
   STAR = 'star',
   TRASH = 'trash',
