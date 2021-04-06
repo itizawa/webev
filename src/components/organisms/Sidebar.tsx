@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from 'styled-components';
 
-import { BootstrapColor } from '~/interfaces/variables';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
@@ -12,18 +12,27 @@ export const Sidebar: VFC = () => {
   const router = useRouter();
 
   return (
-    <ul className="sidebar-list-group list-group gap-3 py-3 sticky-top">
-      {navbarItemMappings.map((v) => {
-        return (
-          <Link key={v.text} href={v.url}>
-            <StyledList className="list-group-item mx-3 border-0 c-pointer" isActive={v.url === router.pathname}>
-              {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
-              <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
-            </StyledList>
-          </Link>
-        );
-      })}
-    </ul>
+    <div className="sticky-top">
+      <ul className="sidebar-list-group list-group gap-3 py-3">
+        {navbarItemMappings.map((v) => {
+          return (
+            <Link key={v.text} href={v.url}>
+              <StyledList className="list-group-item mx-3 border-0 c-pointer" isActive={v.url === router.pathname}>
+                {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
+                <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
+              </StyledList>
+            </Link>
+          );
+        })}
+      </ul>
+      <hr className="mt-0" />
+      <h5 className="text-center">
+        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+        <Link href="/directory">
+          <span className="ms-2 d-none d-lg-inline-block c-pointer">Directory</span>
+        </Link>
+      </h5>
+    </div>
   );
 };
 
