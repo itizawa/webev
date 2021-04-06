@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from 'styled-components';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { Diectory } from '../Sidebar/Diectory';
+import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
@@ -26,12 +27,7 @@ export const Sidebar: VFC = () => {
         })}
       </ul>
       <hr className="mt-0" />
-      <h5 className="text-center">
-        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-        <Link href="/directory">
-          <span className="ms-2 d-none d-lg-inline-block c-pointer">Directory</span>
-        </Link>
-      </h5>
+      <Diectory />
     </div>
   );
 };
