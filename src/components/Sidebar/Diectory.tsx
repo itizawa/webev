@@ -2,7 +2,6 @@ import { useState, VFC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { useTranslation } from 'react-i18next';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
