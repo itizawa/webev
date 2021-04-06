@@ -9,8 +9,6 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Icon } from '~/components/Icons/Icon';
 
 export const Diectory: VFC = () => {
-  const { t } = useTranslation();
-
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [directoryName, setDirectoryName] = useState('');
 
