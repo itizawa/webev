@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import Link from 'next/link';
 
-import { IconButton } from '../Icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
