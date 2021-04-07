@@ -32,7 +32,6 @@
     "next-i18next": "^8.1.2",
     "react": "latest",
     "react-dom": "^17.0.1",
-    "react-loading-skeleton": "^2.1.1",
     "reactstrap": "^8.9.0",
     "sass": "^1.32.0",
     "sass-loader": "^11.0.1",
