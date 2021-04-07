@@ -14,6 +14,10 @@ import { BootstrapBreakpoints } from '~/interfaces/variables';
 export const DefaultLayout: FC = ({ children }) => {
   const [session] = useSession();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   return (
     <>
       <Head>
