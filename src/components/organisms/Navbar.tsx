@@ -10,23 +10,21 @@ export const Navbar: VFC = () => {
   const [session] = useSession();
 
   return (
-    <div className="navbar bg-dark">
-      <div className="container">
-        <Link href="/">
-          <span className="navbar-brand mb-0 text-white c-pointer">Webev</span>
+    <div className="navbar bg-dark container">
+      <Link href="/">
+        <span className="navbar-brand mb-0 text-white c-pointer">Webev</span>
+      </Link>
+      {session != null && (
+        <div className="col col-md-6 my-md-0 my-2 me-2">
+          <InputForm />
+        </div>
+      )}
+      {session == null && (
+        <Link href="/login">
+          <span className="mb-0 text-white c-pointer">Login</span>
         </Link>
-        {session != null && (
-          <div className="col col-md-6 my-md-0 my-2 me-2">
-            <InputForm />
-          </div>
-        )}
-        {session == null && (
-          <Link href="/login">
-            <span className="mb-0 text-white c-pointer">Login</span>
-          </Link>
-        )}
-        {session != null && <PersonalDropdown user={session.user as User} />}
-      </div>
+      )}
+      {session != null && <PersonalDropdown user={session.user as User} />}
     </div>
   );
 };

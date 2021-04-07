@@ -26,6 +26,10 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
   const { mutate: mutatePageStatus } = usePageStatus();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   useEffect(() => {
     mutateIsRetrieveFavoritePageList(router.pathname === '/favorites');
     mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
