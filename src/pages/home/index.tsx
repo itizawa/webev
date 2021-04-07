@@ -22,8 +22,13 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          <h1>{t('home')}</h1>
-          <div className="my-2 d-flex flex-row-reverse">
+          <div className="d-flex align-items-center">
+            <h1>{t('home')}</h1>
+            <div className="ms-auto">
+              <span className="badge rounded-pill bg-secondary">{paginationResult?.totalDocs} Pages</span>
+            </div>
+          </div>
+          <div className="my-2 d-flex flex-row-reverse ms-auto">
             <SortButtonGroup />
           </div>
           <div className="row">
