@@ -31,8 +31,8 @@ export const DefaultLayout: FC = ({ children }) => {
 };
 
 const StyledDiv = styled.div`
-  /* 一旦 min-height を指定 */
-  min-height: 480px;
+  /* 画面全体からNavbarとFooterの高さを引く */
+  min-height: calc(100vh - 100px - 100px);
 `;
 
 const StyledBorder = styled.div`
