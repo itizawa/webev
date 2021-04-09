@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, usePageStatus, useIsRetrieveFavoritePageList } from '~/stores/page';
+import { useActivePage, usePageStatus } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
