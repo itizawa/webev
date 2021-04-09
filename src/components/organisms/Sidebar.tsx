@@ -12,11 +12,11 @@ export const Sidebar: VFC = () => {
   const router = useRouter();
 
   return (
-    <ul className="sidebar-list-group list-group gap-3 py-3 text-white sticky-top">
+    <ul className="sidebar-list-group list-group gap-3 py-3 sticky-top">
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>
-            <StyledList className="list-group-item mx-3 border-0 c-pointer" isActive={v.url === router.pathname}>
+            <StyledList className="list-group-item mx-3 border-0" isActive={v.url === router.pathname} role="button">
               {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
               <span className="ms-3 d-none d-lg-inline-block">{v.text}</span>
             </StyledList>
@@ -29,6 +29,7 @@ export const Sidebar: VFC = () => {
 
 const StyledList = style.li<{ isActive: boolean }>`
 padding: 10px;
+color: #eee;
 background-color: inherit;
 border-radius: 3px;
 

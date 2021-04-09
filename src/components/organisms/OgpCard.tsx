@@ -12,12 +12,14 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Page } from '~/interfaces/page';
+import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
 
-const MAX_WORD_COUNT = 96;
+const MAX_WORD_COUNT_OF_BODY = 96;
+const MAX_WORD_COUNT_OF_SITENAME = 10;
+
 type Props = {
   page: Page;
 };
@@ -27,11 +29,13 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
+  const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
 
   useEffect(() => {
+    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
     setIsFavorite(page.isFavorite);
   }, [page]);
 
@@ -39,6 +43,17 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
     if (window != null) {
       const twitterUrl = urljoin('https://twitter.com/intent/tweet', `?url=${encodeURIComponent(url)}`, `&hashtags=${siteName}`);
       window.open(twitterUrl, '_blanck');
+    }
+  };
+
+  const switchArchive = async () => {
+    try {
+      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
+      toastSuccess(t('toastr.success_archived'));
+      setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
+      mutatePageList();
+    } catch (err) {
+      toastError(err);
     }
   };
 
@@ -71,15 +86,37 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             {title}
           </a>
         </h5>
-        <p className="small mt-2">{description?.length > MAX_WORD_COUNT ? description?.substr(0, MAX_WORD_COUNT) + '...' : description}</p>
+        <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
           <div className="me-auto">
             <small>
-              {siteName} <br />
+              <span id={`sitename-for-${page._id}`}>
+                {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
+              </span>
+              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+                <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                  {siteName}
+                </UncontrolledTooltip>
+              )}
+              <br />
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
-          <div id={`twitetr-for-${page._id}`}>
+          <div id={`archive-for-${page._id}`}>
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.ARCHIVE}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.DANGER}
+              isActive={isArchive}
+              onClickButton={switchArchive}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
+            Archive
+          </UncontrolledTooltip>
+          <div id={`twitter-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
@@ -89,7 +126,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               onClickButton={sharePage}
             />
           </div>
-          <UncontrolledTooltip placement="top" target={`twitetr-for-${page._id}`}>
+          <UncontrolledTooltip placement="top" target={`twitter-for-${page._id}`}>
             Share
           </UncontrolledTooltip>
           <div id={`favorite-for-${page._id}`}>

@@ -1,16 +1,20 @@
 import { VFC } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { useIsSortCreatedAt } from '~/stores/page';
 
 export const SortButtonGroup: VFC = () => {
+  const { t } = useTranslation();
+
   const { data: isSortCreatedAt, mutate: mutateIsSortCreatedAt } = useIsSortCreatedAt();
 
   return (
     <div className="btn-group btn-group-sm" role="group">
       <button className={`btn btn-outline-indigo ${!isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(false)}>
-        新しい順番
+        {t('latest_order')}
       </button>
       <button className={`btn btn-outline-indigo ${isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(true)}>
-        古い順番
+        {t('oldest_order')}
       </button>
     </div>
   );

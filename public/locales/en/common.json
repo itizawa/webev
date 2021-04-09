@@ -1,6 +1,6 @@
 {
   "welcome_webev": "Welcome Webev!!",
-  "start_immediately":"Start Immediately",
+  "start_immediately":"Start!",
   "term":"Terms of Service",
 
   "logout":"Logout",
@@ -9,14 +9,20 @@
   "settings":"Settings",
   "save":"Save",
 
+  "only_favorite":"Only Favorite",
+  "latest_order":"Latest Order",
+  "oldest_order":"Oldest Order",
+
   "toastr": {
     "update":"Update {{target}}",
     "delete":"Delete {{target}}",
-    "save":"Save {{target}}"
+    "save":"Save {{target}}",
+    "success_archived":"Archived"
   },
 
   "home":"Home",
   "favorite":"Favorite",
+  "archive":"Archive",
 
   "automatic_acquisition":"Automatic acquisition",
   "function_details":"function details",
@@ -24,8 +30,12 @@
   "delete_page":"Delete Page",
   "obtained_from_clipboard":"Obtained from Clipboard",
 
-  "the_page_is_not_saved":"The page is not saved",
-  "save_the_url_immediately":"Let's save the url immediately",
+  "your_pages_don’t_exist":"Your pages don’t exist.",
+  "save_the_url_immediately":"Please add them from the top bar.",
+  "your_favorite_pages_don’t_exist":"Your favorite pages don’t exist.",
+  "favorite_immediately":"Let’s try to add favorites!",
+  "your_archive_pages_don’t_exist":"Your archive pages don’t exist.",
+  "archive_immediately":"Let’s try to add archives!",
 
   "this_is_the_404_page":"This is the 404 page",
   "go_to_top":"Go to Top Page"

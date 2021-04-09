@@ -40,11 +40,11 @@ export const DeletePageModal: VFC = () => {
         </StyledImageWrapper>
         <h5 className="card-title my-3">{pageForDelete?.title}</h5>
         <div className="d-flex justify-content-evenly">
-          <button className="btn btn-danger" onClick={deletePage}>
-            {t('delete')}
-          </button>
           <button className="btn btn-secondary" onClick={closeDeleteModal}>
             {t('cancel')}
+          </button>
+          <button className="btn btn-danger" onClick={deletePage}>
+            {t('delete')}
           </button>
         </div>
       </ModalBody>

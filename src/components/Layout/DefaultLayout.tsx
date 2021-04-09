@@ -3,16 +3,20 @@ import { FC } from 'react';
 import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
+import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { PageModals } from '~/components/PageModals/PageModals';
-import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 export const DefaultLayout: FC = ({ children }) => {
   const [session] = useSession();
+
+  if (typeof window === 'undefined') {
+    return null;
+  }
 
   return (
     <>
@@ -22,13 +26,18 @@ export const DefaultLayout: FC = ({ children }) => {
       </Head>
       <Navbar />
       <StyledBorder />
-      <div className="container">{children}</div>
+      <StyledDiv className="container">{children}</StyledDiv>
       {session && <PageModals />}
       {session && <SocketConnector />}
-      <ScrollTopButton />
+      <Footer />
     </>
   );
 };
+
+const StyledDiv = styled.div`
+  /* 画面全体からNavbarとFooterの高さを引く */
+  min-height: calc(100vh - 100px - 100px);
+`;
 
 const StyledBorder = styled.div`
   height: 4px;

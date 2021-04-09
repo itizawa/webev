@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 
-import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'react-i18next';
 
 import { useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 
@@ -12,7 +12,7 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
 import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
@@ -26,7 +26,7 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           <div className="d-flex align-items-center">
-            <h1>{t('home')}</h1>
+            <h1>{t('archive')}</h1>
             <div className="ms-auto">
               <span className="badge rounded-pill bg-secondary">{paginationResult?.totalDocs} Pages</span>
             </div>
@@ -53,7 +53,7 @@ const Index: VFC = () => {
                 </div>
               ))}
               {paginationResult.docs.length === 0 ? (
-                <NoPageAlert />
+                <NoArchivePageAlert />
               ) : (
                 <div className="text-center">
                   <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
@@ -70,7 +70,7 @@ const Index: VFC = () => {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common', 'footer'])),
+    ...(await serverSideTranslations(locale, ['common'])),
   },
 });
 

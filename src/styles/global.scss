@@ -11,31 +11,26 @@ $theme-colors: (
   'danger':     $danger,
   'light':      $light,
   'dark':       $dark,
-  'indigo': $indigo,
-  'purple': $purple,
-  'pink': $pink,
-  'orange': $orange,
-  'teal': $teal,
+  'indigo':     $indigo,
+  'purple':     $purple,
+  'pink':       $pink,
+  'orange':     $orange,
+  'teal':       $teal,
+  'google':     #db3236,
+  'twitter':     #1DA1F2,
 );
 
 @import '../../node_modules/bootstrap/scss/_buttons';
 @import '../../node_modules/bootstrap/scss/mixins';
   
-@import './variables.scss';
 @import '~toastr/toastr.scss';
+
+@import './override.scss';
 
 body {
   font-weight: 300;
   color: #ccc;
   background-color: #0e1e25;
-}
-
-main{
-  max-width: 1240px;
-}
-
-.c-pointer{
-  cursor: pointer;
 }
 
 #toast-container{
