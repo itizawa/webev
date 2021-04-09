@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
 
-export const apiErrorHandler = (err: AxiosError): string => {
-  return err.response?.data.message;
+export const apiErrorHandler = (err: AxiosError): Error => {
+  return new Error(err.response?.data.message);
 };

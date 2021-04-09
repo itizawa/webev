@@ -30,7 +30,7 @@ class RestClient {
     try {
       return await this.axios.get(`/api/v1${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
     } catch (err) {
-      throw new Error(apiErrorHandler(err));
+      throw apiErrorHandler(err);
     }
   }
 
@@ -39,7 +39,7 @@ class RestClient {
     try {
       return await this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
     } catch (err) {
-      throw new Error(apiErrorHandler(err));
+      throw apiErrorHandler(err);
     }
   }
 
@@ -48,7 +48,7 @@ class RestClient {
     try {
       return await this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
     } catch (err) {
-      throw new Error(apiErrorHandler(err));
+      throw apiErrorHandler(err);
     }
   }
 
@@ -57,7 +57,7 @@ class RestClient {
     try {
       return await this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
     } catch (err) {
-      throw new Error(apiErrorHandler(err));
+      throw apiErrorHandler(err);
     }
   }
 }
