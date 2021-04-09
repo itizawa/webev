@@ -14,7 +14,7 @@ import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
 
 export const Diectory: VFC = () => {
-  const { data: paginationResult } = useDirectoryListSWR();
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
@@ -31,6 +31,7 @@ export const Diectory: VFC = () => {
       await restClient.apiPost('/directories', { name });
       toastSuccess(t('toastr.save', { target: 'Directory' }));
       setName('');
+      mutateDirectoryList();
     } catch (err) {
       toastError(err);
     }
@@ -47,7 +48,7 @@ export const Diectory: VFC = () => {
         </Link>
       </h5>
       <StyledDiv className="text-center mx-3">
-        <ul className="sidebar-list-group list-group gap-3 py-3">
+        <ul className="sidebar-list-group list-group gap-1 py-3">
           {paginationResult?.docs.map((v) => {
             return (
               <Link key={v._id} href={`/directories/${v._id}`}>
