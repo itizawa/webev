@@ -12,7 +12,9 @@ export const Navbar: VFC = () => {
   return (
     <div className="navbar bg-dark container">
       <Link href="/">
-        <span className="navbar-brand mb-0 text-white c-pointer">Webev</span>
+        <span className="navbar-brand mb-0 text-white" role="button">
+          Webev
+        </span>
       </Link>
       {session != null && (
         <div className="col col-md-6 my-md-0 my-2 me-2">
@@ -21,7 +23,9 @@ export const Navbar: VFC = () => {
       )}
       {session == null && (
         <Link href="/login">
-          <span className="mb-0 text-white c-pointer">Login</span>
+          <span className="mb-0 text-white" role="button">
+            Login
+          </span>
         </Link>
       )}
       {session != null && <PersonalDropdown user={session.user as User} />}
