@@ -33,10 +33,6 @@ body {
   background-color: #0e1e25;
 }
 
-.c-pointer{
-  cursor: pointer;
-}
-
 #toast-container{
   @include media-breakpoint-down(md){
     left:0;
