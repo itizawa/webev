@@ -54,7 +54,7 @@ export const Diectory: VFC = () => {
           {paginationResult?.docs.map((v) => {
             return (
               <Link key={v._id} href={`/directories/${v._id}`}>
-                <StyledList className="list-group-item border-0">
+                <StyledList className="list-group-item border-0" role="button">
                   <span>{v.name}</span>
                 </StyledList>
               </Link>
