@@ -37,7 +37,7 @@ export const IconButton: VFC<Props> = (props: Props) => {
   return (
     <button className={btnClassName.join(' ')} onClick={handleClickButton}>
       <Icon width={width} height={height} icon={icon} color={textColor} />
-      {text && <span className={`ms-3 text-${textColor}`}>{text}</span>}
+      {text && <span className={`ms-2 text-${textColor}`}>{text}</span>}
     </button>
   );
 };
