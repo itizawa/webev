@@ -61,7 +61,7 @@ export const Diectory: VFC = () => {
         </ul>
         {isCreatingNewDirectory ? (
           <form className="input-group" onSubmit={onSubmit}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
           </form>
         ) : (
           <IconButton
