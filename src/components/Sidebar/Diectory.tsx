@@ -23,6 +23,10 @@ export const Diectory: VFC = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
+    if (name.trim() === '') {
+      return setIsCreatingNewDirectory(false);
+    }
+
     try {
       await restClient.apiPost('/directories', { name });
       toastSuccess(t('toastr.save', { target: 'Directory' }));
