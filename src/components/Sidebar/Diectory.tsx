@@ -44,7 +44,9 @@ export const Diectory: VFC = () => {
       <h5 className="text-center">
         <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
         <Link href="/directory">
-          <span className="ms-2 c-pointer">Directory</span>
+          <span className="ms-2" role="button">
+            Directory
+          </span>
         </Link>
       </h5>
       <StyledDiv className="text-center mx-3">
