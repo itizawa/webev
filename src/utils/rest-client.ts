@@ -1,5 +1,6 @@
 import axiosBase, { AxiosInstance, AxiosResponse } from 'axios';
 import { getSession } from 'next-auth/client';
+import { apiErrorHandler } from './apiErrorHandler';
 
 class RestClient {
   axios: AxiosInstance;
@@ -26,22 +27,38 @@ class RestClient {
 
   async apiGet(url: string, query = {}): Promise<AxiosResponse> {
     const accessToken = await this.getAccessToken();
-    return this.axios.get(`/api/v1${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
+    try {
+      return await this.axios.get(`/api/v1${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
+    } catch (err) {
+      throw apiErrorHandler(err);
+    }
   }
 
   async apiPost(url: string, body = {}): Promise<AxiosResponse> {
     const accessToken = await this.getAccessToken();
-    return this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    try {
+      return await this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    } catch (err) {
+      throw apiErrorHandler(err);
+    }
   }
 
   async apiPut(url: string, body = {}): Promise<AxiosResponse> {
     const accessToken = await this.getAccessToken();
-    return this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    try {
+      return await this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
+    } catch (err) {
+      throw apiErrorHandler(err);
+    }
   }
 
   async apiDelete(url: string, body = {}): Promise<AxiosResponse> {
     const accessToken = await this.getAccessToken();
-    return this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
+    try {
+      return await this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
+    } catch (err) {
+      throw apiErrorHandler(err);
+    }
   }
 }
 
