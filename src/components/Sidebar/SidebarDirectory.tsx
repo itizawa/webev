@@ -128,7 +128,7 @@ export const SidebarDirectory: VFC = () => {
   );
 };
 
-const StyledList = styled.li<{ isActive: boolean }>`
+const StyledList = styled.li<{ isActive?: boolean }>`
   padding: 10px;
   color: #eee;
   background-color: inherit;
