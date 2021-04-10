@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
@@ -13,51 +13,31 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
-
-const CHARACTERS = [
-  {
-    id: 'gambaruzoi',
-    name: 'がんばるぞい',
-    thumb: '/images/1.png',
-  },
-  {
-    id: 'gyp',
-    name: 'ぎょぱー！',
-    thumb: '/images/2.png',
-  },
-  {
-    id: 'iine',
-    name: 'いいね！',
-    thumb: '/images/3.png',
-  },
-  {
-    id: 'shincyoku_doudesuka',
-    name: '進捗どうですか',
-    thumb: '/images/4.png',
-  },
-  {
-    id: 'shobon',
-    name: 'ショボーン',
-    thumb: '/images/5.png',
-  },
-];
+import { Directory } from '~/interfaces/directory';
 
 export const Diectory: VFC = () => {
+  const { t } = useTranslation();
+
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+
+  const [directories, setDirectories] = useState<Directory[]>([]);
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-  const { t } = useTranslation();
-
-  const [characters, updateCharacters] = useState(CHARACTERS);
 
   const handleOnDragEnd = (result: any) => {
-    const items = Array.from(characters);
+    const items = Array.from(directories);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
 
-    updateCharacters(items);
+    setDirectories(items);
   };
+
+  useEffect(() => {
+    if (paginationResult != null) {
+      setDirectories(paginationResult.docs);
+    }
+  }, [paginationResult]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -89,45 +69,30 @@ export const Diectory: VFC = () => {
         </Link>
       </h5>
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        {/* Droppableをここに追加 */}
-        <Droppable droppableId="characters">
+        <Droppable droppableId="directories">
           {(provided) => (
-            <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-              {characters.map(({ id, name }, index) => {
+            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
+              {directories.map((directory, index) => {
                 return (
-                  <Draggable key={id} draggableId={id} index={index}>
+                  <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
-                      <li
-                        className="bg-info text-dark text-decoration-none"
-                        key={id}
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                      >
-                        <p>{name}</p>
-                      </li>
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        <Link href={`/directories/${directory._id}`}>
+                          <StyledList className="list-group-item border-0">
+                            <span>{directory.name}</span>
+                          </StyledList>
+                        </Link>
+                      </div>
                     )}
                   </Draggable>
                 );
               })}
-              {/* placeholderをここに追加 */}
               {provided.placeholder}
-            </ul>
+            </div>
           )}
         </Droppable>
       </DragDropContext>
       <StyledDiv className="text-center mx-3">
-        <ul className="sidebar-list-group list-group gap-1 py-3">
-          {paginationResult?.docs.map((v) => {
-            return (
-              <Link key={v._id} href={`/directories/${v._id}`}>
-                <StyledList className="list-group-item border-0" role="button">
-                  <span>{v.name}</span>
-                </StyledList>
-              </Link>
-            );
-          })}
-        </ul>
         {isCreatingNewDirectory ? (
           <form className="input-group" onSubmit={onSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
