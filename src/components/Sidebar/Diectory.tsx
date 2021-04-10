@@ -85,7 +85,7 @@ export const Diectory: VFC = () => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
-            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
+            <StyledDirectpryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
               {directories.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
@@ -102,7 +102,7 @@ export const Diectory: VFC = () => {
                 );
               })}
               {provided.placeholder}
-            </div>
+            </StyledDirectpryDiv>
           )}
         </Droppable>
       </DragDropContext>
@@ -136,6 +136,9 @@ const StyledList = styled.li`
   }
 `;
 
+const StyledDirectpryDiv = styled.div`
+  max-height: 60vh;
+`;
 const StyledDiv = styled.div`
   > .btn {
     width: 100%;
