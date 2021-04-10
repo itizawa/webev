@@ -1,5 +1,6 @@
 import { useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
@@ -17,6 +18,7 @@ import { Directory } from '~/interfaces/directory';
 
 export const SidebarDirectory: VFC = () => {
   const { t } = useTranslation();
+  const router = useRouter();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -74,14 +76,16 @@ export const SidebarDirectory: VFC = () => {
 
   return (
     <>
-      <h5 className="text-center">
-        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+      <ul className="sidebar-list-group list-group gap-3 py-3">
         <Link href="/directory">
-          <span className="ms-2" role="button">
-            Directory
-          </span>
+          <StyledList className="list-group-item mx-3 border-0" isActive={router.pathname === '/directory'} role="button">
+            <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+            <span className="ms-3" role="button">
+              Directory
+            </span>
+          </StyledList>
         </Link>
-      </h5>
+      </ul>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
@@ -124,16 +128,23 @@ export const SidebarDirectory: VFC = () => {
   );
 };
 
-const StyledList = styled.li`
+const StyledList = styled.li<{ isActive: boolean }>`
   padding: 10px;
   color: #eee;
   background-color: inherit;
   border-radius: 3px;
 
-  :hover {
+  ${({ isActive }) =>
+    isActive
+      ? `
+    margin-top: 0px;
+    background-color: #00acc1;
+    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
+  `
+      : `:hover {
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
-  }
+  }`}
 `;
 
 const StyledDirectpryDiv = styled.div`
