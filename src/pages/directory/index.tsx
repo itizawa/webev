@@ -1,5 +1,7 @@
 import { VFC } from 'react';
+import Link from 'next/link';
 
+import styled from 'styled-components';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
@@ -23,7 +25,13 @@ const Index: VFC = () => {
             <div className="row">
               {paginationResult.docs.map((directory) => (
                 <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
-                  {directory.name}
+                  <StyledImageWrapper>
+                    <Link href={`/directory/${directory._id}`}>
+                      <a>
+                        <img src="/images/no-page.png" alt={directory.name} />
+                      </a>
+                    </Link>
+                  </StyledImageWrapper>
                 </div>
               ))}
             </div>
@@ -42,3 +50,17 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
 });
 
 export default Index;
+
+const StyledImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  padding-top: 55%;
+
+  img {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+  }
+`;
