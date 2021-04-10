@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 
 import urljoin from 'url-join';
 import { useTranslation } from 'react-i18next';
-import style from 'styled-components';
+import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
@@ -162,11 +162,11 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   );
 };
 
-const StyledCard = style.div`
+const StyledCard = styled.div`
   background-color: #2f363d;
 `;
 
-const StyledImageWrapper = style.div`
+const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-top: 55%;
