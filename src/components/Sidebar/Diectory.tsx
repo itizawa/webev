@@ -32,12 +32,10 @@ export const Diectory: VFC = () => {
     }
     console.log(result);
 
-    // TODO-126 use api for save order
-    const items = Array.from(directories);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+    const reorderedItems = directories.splice(result.source.index, 1);
+    directories.splice(result.destination.index, 0, ...reorderedItems);
 
-    setDirectories(items);
+    setDirectories(directories);
   };
 
   useEffect(() => {
