@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -25,9 +25,13 @@ export const Diectory: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
-  // TODO type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnDragEnd = (result: any) => {
+  const handleOnDragEnd = (result: DragUpdate) => {
+    // may not have any destination (drag to nowhere)
+    if (result.destination == null) {
+      return;
+    }
+    console.log(result);
+
     // TODO-126 use api for save order
     const items = Array.from(directories);
     const [reorderedItem] = items.splice(result.source.index, 1);
