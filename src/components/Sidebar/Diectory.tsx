@@ -30,7 +30,17 @@ export const Diectory: VFC = () => {
     if (result.destination == null) {
       return;
     }
-    console.log(result);
+    // Do nothing if in the same place
+    if (result.source.index === result.destination.index) {
+      return;
+    }
+
+    try {
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
+      toastSuccess('Change!');
+    } catch (err) {
+      toastError(err);
+    }
 
     const reorderedItems = directories.splice(result.source.index, 1);
     directories.splice(result.destination.index, 0, ...reorderedItems);
