@@ -15,7 +15,7 @@ import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
 import { Directory } from '~/interfaces/directory';
 
-export const Diectory: VFC = () => {
+export const SidebarDirectory: VFC = () => {
   const { t } = useTranslation();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();

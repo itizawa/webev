@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import style from 'styled-components';
 
-import { Diectory } from '../Sidebar/Diectory';
+import { SidebarDirectory } from '../Sidebar/SidebarDirectory';
 import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
@@ -27,7 +27,7 @@ export const Sidebar: VFC = () => {
         })}
       </ul>
       <hr className="mt-0" />
-      <Diectory />
+      <SidebarDirectory />
     </div>
   );
 };
