@@ -25,7 +25,10 @@ export const Diectory: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
+  // TODO type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleOnDragEnd = (result: any) => {
+    // TODO-126 use api for save order
     const items = Array.from(directories);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
