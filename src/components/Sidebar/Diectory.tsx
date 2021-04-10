@@ -3,7 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -25,15 +25,26 @@ export const Diectory: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
-  // TODO type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleOnDragEnd = (result: any) => {
-    // TODO-126 use api for save order
-    const items = Array.from(directories);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
+  const handleOnDragEnd = (result: DragUpdate) => {
+    // may not have any destination (drag to nowhere)
+    if (result.destination == null) {
+      return;
+    }
+    // Do nothing if in the same place
+    if (result.source.index === result.destination.index) {
+      return;
+    }
 
-    setDirectories(items);
+    try {
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
+    } catch (err) {
+      toastError(err);
+    }
+
+    const reorderedItems = directories.splice(result.source.index, 1);
+    directories.splice(result.destination.index, 0, ...reorderedItems);
+
+    setDirectories(directories);
   };
 
   useEffect(() => {
@@ -74,7 +85,7 @@ export const Diectory: VFC = () => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
-            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
+            <StyledDirectpryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
               {directories.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
@@ -91,7 +102,7 @@ export const Diectory: VFC = () => {
                 );
               })}
               {provided.placeholder}
-            </div>
+            </StyledDirectpryDiv>
           )}
         </Droppable>
       </DragDropContext>
@@ -125,6 +136,9 @@ const StyledList = styled.li`
   }
 `;
 
+const StyledDirectpryDiv = styled.div`
+  max-height: 60vh;
+`;
 const StyledDiv = styled.div`
   > .btn {
     width: 100%;

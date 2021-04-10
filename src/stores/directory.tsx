@@ -6,7 +6,7 @@ import { PaginationResult } from '~/interfaces/paginationResult';
 import { Directory } from '~/interfaces/directory';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useDirectoryListSWR = (limit = 10): SWRResponse<PaginationResult<Directory>, Error> => {
+export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Directory>, Error> => {
   const page = 1;
   return useAuthenticationSWR(
     ['/directories/list'],
