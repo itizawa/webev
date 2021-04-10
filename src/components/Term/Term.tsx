@@ -1,5 +1,4 @@
 import { VFC } from 'react';
-import Link from 'next/link';
 
 export const Term: VFC = () => {
   return (
