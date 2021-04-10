@@ -37,7 +37,6 @@ export const Diectory: VFC = () => {
 
     try {
       restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
-      toastSuccess('Change!');
     } catch (err) {
       toastError(err);
     }
