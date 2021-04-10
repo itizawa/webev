@@ -4,9 +4,10 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, usePageStatus, useIsRetrieveFavoritePageList } from '~/stores/page';
+import { useActivePage, usePageStatus } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -22,11 +23,13 @@ export const DashBoardLayout: FC = ({ children }) => {
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
 
-  const { mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
   const { mutate: mutatePageStatus } = usePageStatus();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   useEffect(() => {
-    mutateIsRetrieveFavoritePageList(router.pathname === '/favorites');
     mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
     mutateActivePage(1);
   }, [router]);
@@ -40,7 +43,7 @@ export const DashBoardLayout: FC = ({ children }) => {
       <Navbar />
       <StyledBorder />
       <SubnavBar />
-      <main className="d-flex mx-auto">
+      <StyledDiv className="d-flex mx-auto">
         <div className="d-none d-md-block col-lg-2">
           <Sidebar />
         </div>
@@ -48,10 +51,17 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <PageModals />}
         {session && <SocketConnector />}
         <ScrollTopButton />
-      </main>
+      </StyledDiv>
+      <Footer />
     </>
   );
 };
+
+const StyledDiv = styled.div`
+  max-width: 1240px;
+  /* 画面全体からNavbarとFooterの高さを引く */
+  min-height: calc(100vh - 100px - 100px);
+`;
 
 const StyledBorder = styled.div`
   height: 4px;

@@ -1,6 +1,6 @@
 {
   "welcome_webev": "Welcome Webev!!",
-  "start_immediately":"Start Immediately",
+  "start_immediately":"Start!",
   "term":"Terms of Service",
 
   "logout":"Logout",
@@ -9,6 +9,7 @@
   "settings":"Settings",
   "save":"Save",
 
+  "only_favorite":"Only Favorite",
   "latest_order":"Latest Order",
   "oldest_order":"Oldest Order",
 
