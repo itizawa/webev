@@ -3,8 +3,9 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
-import { restClient } from '~/utils/rest-client';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
+import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/Icons/IconButton';
@@ -13,12 +14,50 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
 
+const CHARACTERS = [
+  {
+    id: 'gambaruzoi',
+    name: 'がんばるぞい',
+    thumb: '/images/1.png',
+  },
+  {
+    id: 'gyp',
+    name: 'ぎょぱー！',
+    thumb: '/images/2.png',
+  },
+  {
+    id: 'iine',
+    name: 'いいね！',
+    thumb: '/images/3.png',
+  },
+  {
+    id: 'shincyoku_doudesuka',
+    name: '進捗どうですか',
+    thumb: '/images/4.png',
+  },
+  {
+    id: 'shobon',
+    name: 'ショボーン',
+    thumb: '/images/5.png',
+  },
+];
+
 export const Diectory: VFC = () => {
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
   const { t } = useTranslation();
+
+  const [characters, updateCharacters] = useState(CHARACTERS);
+
+  const handleOnDragEnd = (result: any) => {
+    const items = Array.from(characters);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    updateCharacters(items);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -49,6 +88,34 @@ export const Diectory: VFC = () => {
           </span>
         </Link>
       </h5>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        {/* Droppableをここに追加 */}
+        <Droppable droppableId="characters">
+          {(provided) => (
+            <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+              {characters.map(({ id, name }, index) => {
+                return (
+                  <Draggable key={id} draggableId={id} index={index}>
+                    {(provided) => (
+                      <li
+                        className="bg-info text-dark text-decoration-none"
+                        key={id}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <p>{name}</p>
+                      </li>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {/* placeholderをここに追加 */}
+              {provided.placeholder}
+            </ul>
+          )}
+        </Droppable>
+      </DragDropContext>
       <StyledDiv className="text-center mx-3">
         <ul className="sidebar-list-group list-group gap-1 py-3">
           {paginationResult?.docs.map((v) => {
