@@ -29,6 +29,7 @@ const Index: VFC = () => {
                     <Link href={`/directory/${directory._id}`}>
                       <a>
                         <img src="/images/no-page.png" alt={directory.name} />
+                        <StyledDiv className="text-white px-3 pb-2">{directory.name}</StyledDiv>
                       </a>
                     </Link>
                   </StyledImageWrapper>
@@ -63,4 +64,13 @@ const StyledImageWrapper = styled.div`
     height: 100%;
     border-radius: 4px;
   }
+`;
+
+const StyledDiv = styled.div`
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding-top: 40px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+  border-radius: 4px;
 `;
