@@ -1,10 +1,11 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 import { useTranslation } from 'react-i18next';
-import { restClient } from '~/utils/rest-client';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
+import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/Icons/IconButton';
@@ -12,13 +13,34 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
+import { Directory } from '~/interfaces/directory';
 
 export const Diectory: VFC = () => {
+  const { t } = useTranslation();
+
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+
+  const [directories, setDirectories] = useState<Directory[]>([]);
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-  const { t } = useTranslation();
+
+  // TODO type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleOnDragEnd = (result: any) => {
+    // TODO-126 use api for save order
+    const items = Array.from(directories);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setDirectories(items);
+  };
+
+  useEffect(() => {
+    if (paginationResult != null) {
+      setDirectories(paginationResult.docs);
+    }
+  }, [paginationResult]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -49,18 +71,31 @@ export const Diectory: VFC = () => {
           </span>
         </Link>
       </h5>
+      <DragDropContext onDragEnd={handleOnDragEnd}>
+        <Droppable droppableId="directories">
+          {(provided) => (
+            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
+              {directories.map((directory, index) => {
+                return (
+                  <Draggable key={directory._id} draggableId={directory._id} index={index}>
+                    {(provided) => (
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                        <Link href={`/directories/${directory._id}`}>
+                          <StyledList className="list-group-item border-0">
+                            <span>{directory.name}</span>
+                          </StyledList>
+                        </Link>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
       <StyledDiv className="text-center mx-3">
-        <ul className="sidebar-list-group list-group gap-1 py-3">
-          {paginationResult?.docs.map((v) => {
-            return (
-              <Link key={v._id} href={`/directories/${v._id}`}>
-                <StyledList className="list-group-item border-0" role="button">
-                  <span>{v.name}</span>
-                </StyledList>
-              </Link>
-            );
-          })}
-        </ul>
         {isCreatingNewDirectory ? (
           <form className="input-group" onSubmit={onSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
