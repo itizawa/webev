@@ -1,6 +1,6 @@
 import { VFC, useEffect, useState } from 'react';
 
-import { UncontrolledTooltip, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 import { format } from 'date-fns';
 
@@ -32,7 +32,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [isOpenManageDropdown, setIsOpenManageDropdown] = useState(false);
+
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
 
@@ -158,7 +158,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
             Delete
           </UncontrolledTooltip>
-          <Dropdown isOpen={isOpenManageDropdown} toggle={() => setIsOpenManageDropdown(!isOpenManageDropdown)} direction="up">
+          <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
               <div id={`manage-for-${page._id}`}>
                 <IconButton
@@ -180,7 +180,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               <DropdownItem>Bar Action</DropdownItem>
               <DropdownItem>Quo Action</DropdownItem>
             </DropdownMenu>
-          </Dropdown>
+          </UncontrolledDropdown>
         </div>
       </div>
     </StyledCard>
