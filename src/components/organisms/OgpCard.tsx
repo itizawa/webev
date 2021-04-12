@@ -8,6 +8,7 @@ import urljoin from 'url-join';
 import { useTranslation } from 'react-i18next';
 import style from 'styled-components';
 
+import { Icon } from '../Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -118,19 +119,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
             Archive
           </UncontrolledTooltip>
-          <div id={`twitter-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.TWITTER}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
-              onClickButton={sharePage}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`twitter-for-${page._id}`}>
-            Share
-          </UncontrolledTooltip>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
@@ -145,19 +133,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
             Favorite
           </UncontrolledTooltip>
-          <div id={`trash-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.TRASH}
-              onClickButton={openDeleteModal}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
-            Delete
-          </UncontrolledTooltip>
           <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
               <div id={`manage-for-${page._id}`}>
@@ -170,15 +145,15 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 />
               </div>
             </DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem header>Header</DropdownItem>
-              <DropdownItem>Some Action</DropdownItem>
-              <DropdownItem text>Dropdown Item Text</DropdownItem>
-              <DropdownItem disabled>Action (disabled)</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Foo Action</DropdownItem>
-              <DropdownItem>Bar Action</DropdownItem>
-              <DropdownItem>Quo Action</DropdownItem>
+            <DropdownMenu className="dropdown-menu-dark">
+              <DropdownItem tag="button" onClick={openDeleteModal}>
+                <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Trash</span>
+              </DropdownItem>
+              <DropdownItem tag="button" onClick={sharePage}>
+                <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Share</span>
+              </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
