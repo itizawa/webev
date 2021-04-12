@@ -106,30 +106,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
-          <DragDropContext onDragEnd={() => console.log('hoge')}>
-            <Droppable droppableId="directories">
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  <Draggable key={page._id} draggableId={page._id} index={1}>
-                    {(provided) => (
-                      <div key={page._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <IconButton
-                          width={24}
-                          height={24}
-                          icon={BootstrapIcon.ADD_TO_DIRECTORY}
-                          color={BootstrapColor.SECONDARY}
-                          activeColor={BootstrapColor.INFO}
-                          isActive={isArchive}
-                          onClickButton={switchArchive}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
@@ -178,6 +154,10 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               <DropdownItem tag="button" onClick={sharePage}>
                 <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
                 <span className="ms-2">Share</span>
+              </DropdownItem>
+              <DropdownItem tag="button" onClick={sharePage}>
+                <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Add Directory</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>
