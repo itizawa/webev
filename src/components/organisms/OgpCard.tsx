@@ -105,6 +105,20 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
             </small>
           </div>
+          <div id={`directory-for-${page._id}`}>
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.ADD_TO_DIRECTORY}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.INFO}
+              isActive={isArchive}
+              onClickButton={switchArchive}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`}>
+            Add to Directory
+          </UncontrolledTooltip>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
