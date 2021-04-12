@@ -1,6 +1,7 @@
 import { VFC, useEffect, useState } from 'react';
 
-import { UncontrolledTooltip } from 'reactstrap';
+import { UncontrolledTooltip, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 import { format } from 'date-fns';
 
 import urljoin from 'url-join';
@@ -31,6 +32,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isOpenManageDropdown, setIsOpenManageDropdown] = useState(false);
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
 
@@ -156,6 +158,29 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
             Delete
           </UncontrolledTooltip>
+          <Dropdown isOpen={isOpenManageDropdown} toggle={() => setIsOpenManageDropdown(!isOpenManageDropdown)} direction="up">
+            <DropdownToggle tag="span">
+              <div id={`manage-for-${page._id}`}>
+                <IconButton
+                  width={24}
+                  height={24}
+                  icon={BootstrapIcon.THREE_DOTS_VERTICAL}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WARNING}
+                />
+              </div>
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem header>Header</DropdownItem>
+              <DropdownItem>Some Action</DropdownItem>
+              <DropdownItem text>Dropdown Item Text</DropdownItem>
+              <DropdownItem disabled>Action (disabled)</DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem>Foo Action</DropdownItem>
+              <DropdownItem>Bar Action</DropdownItem>
+              <DropdownItem>Quo Action</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
       </div>
     </StyledCard>
