@@ -18,6 +18,7 @@ export enum BootstrapIcon {
   TRASH = 'trash',
   THREE_DOTS_VERTICAL = 'three-dots-vertical',
   DIRECTORY = 'directory',
+  ADD_TO_DIRECTORY = 'add-to-directory',
   ARROW = 'arrow',
   CHEVRON_DOUBLE_LEFT = 'chevron-double-left',
   CHEVRON_LEFT = 'chevron-left',
