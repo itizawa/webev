@@ -1,7 +1,6 @@
 import { VFC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
 import { format } from 'date-fns';
 
