@@ -17,7 +17,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal } from '~/stores/modal';
+import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -34,8 +34,10 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+
+  const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   useEffect(() => {
@@ -78,6 +80,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   };
 
   const openAddDirectoryModal = async () => {
+    mutatePageForAddDirectory(page);
     mutateIsOpenAddDirectoryModal(true);
   };
 

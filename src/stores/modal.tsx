@@ -10,6 +10,10 @@ export const useIsOpenDeletePageModal = (initialData?: boolean): SWRResponse<boo
   return useStaticSWR('isOpenDeletePageModal', initialData);
 };
 
+export const usePageForAddDirectory = (initialData?: Page): SWRResponse<Page, Error> => {
+  return useStaticSWR('pageForAddDirectory', initialData);
+};
+
 export const useIsOpenAddDirectoryModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isOpenAddDirectoryModal', initialData);
 };
