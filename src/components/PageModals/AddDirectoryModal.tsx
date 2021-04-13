@@ -8,6 +8,9 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useDirectoryListSWR } from '~/stores/directory';
 
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { restClient } from '~/utils/rest-client';
+import { Directory } from '~/interfaces/directory';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useTranslation();
@@ -16,6 +19,19 @@ export const AddDirectoryModal: VFC = () => {
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   const { data: paginationResult } = useDirectoryListSWR();
+
+  const addPageTODirectory = async (directory: Directory) => {
+    try {
+      await restClient.apiPut(`/directories/${directory._id}/pages`, {
+        pages: [...directory.pages, pageForAddDirectory],
+      });
+      mutateIsOpenAddDirectoryModal(false);
+      toastSuccess(t('toastr.success_add_directory'));
+    } catch (error) {
+      console.log(error);
+      toastError(error);
+    }
+  };
 
   return (
     <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
@@ -39,7 +55,7 @@ export const AddDirectoryModal: VFC = () => {
           <div className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
               return (
-                <div key={directory._id}>
+                <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
                   <StyledList className="list-group-item border-0">
                     <span>{directory.name}</span>
                   </StyledList>
