@@ -30,6 +30,9 @@
   "delete_page":"ページを削除します",
   "obtained_from_clipboard":"Clipboard から取得しました",
 
+  "add_directory":"ページをディレクトリに保存します",
+
+
   "your_pages_don’t_exist":"ページが保存されていません",
   "save_the_url_immediately":"上のバーから url を保存してください",
   "your_favorite_pages_don’t_exist":"お気に入りが存在しません",
