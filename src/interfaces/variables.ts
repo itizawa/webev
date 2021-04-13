@@ -20,6 +20,8 @@ export enum BootstrapIcon {
   DIRECTORY = 'directory',
   ADD_TO_DIRECTORY = 'add-to-directory',
   ARROW = 'arrow',
+  ARROW_RIGHT = 'arrow-right',
+  ARROW_DOWN = 'arrow-down',
   CHEVRON_DOUBLE_LEFT = 'chevron-double-left',
   CHEVRON_LEFT = 'chevron-left',
   CHEVRON_DOUBLE_RIGHT = 'chevron-double-right',
