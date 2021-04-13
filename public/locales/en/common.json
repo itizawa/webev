@@ -17,7 +17,8 @@
     "update":"Update {{target}}",
     "delete":"Delete {{target}}",
     "save":"Save {{target}}",
-    "success_archived":"Archived"
+    "success_archived":"Archived",
+    "success_add_directory":"Add Directory"
   },
 
   "home":"Home",
@@ -29,6 +30,8 @@
 
   "delete_page":"Delete Page",
   "obtained_from_clipboard":"Obtained from Clipboard",
+
+  "add_directory":"Add Directory",
 
   "your_pages_don’t_exist":"Your pages don’t exist.",
   "save_the_url_immediately":"Please add them from the top bar.",
