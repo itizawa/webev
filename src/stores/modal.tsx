@@ -9,3 +9,7 @@ export const usePageForDelete = (initialData?: Page): SWRResponse<Page, Error> =
 export const useIsOpenDeletePageModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isOpenDeletePageModal', initialData);
 };
+
+export const useIsOpenAddDirectoryModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
+  return useStaticSWR('isOpenAddDirectoryModal', initialData);
+};
