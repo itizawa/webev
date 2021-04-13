@@ -18,7 +18,7 @@ export const AddDirectoryModal: VFC = () => {
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
-  const { data: paginationResult } = useDirectoryListSWR();
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const addPageTODirectory = async (directory: Directory) => {
     try {
@@ -27,6 +27,7 @@ export const AddDirectoryModal: VFC = () => {
       });
       mutateIsOpenAddDirectoryModal(false);
       toastSuccess(t('toastr.success_add_directory'));
+      mutateDirectoryList();
     } catch (error) {
       console.log(error);
       toastError(error);
@@ -54,6 +55,10 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <div className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
+              const isAlreadyAdded = directory.pages.some((page) => page._id === pageForAddDirectory?._id);
+              if (isAlreadyAdded) {
+                return null;
+              }
               return (
                 <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
                   <StyledList className="list-group-item border-0">
