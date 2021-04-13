@@ -153,7 +153,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 />
               </div>
             </DropdownToggle>
-            <DropdownMenu className="dropdown-menu-dark">
+            <DropdownMenu className="dropdown-menu-dark" positionFixed>
               <DropdownItem tag="button" onClick={openDeleteModal}>
                 <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                 <span className="ms-2">Trash</span>
