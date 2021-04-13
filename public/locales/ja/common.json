@@ -17,7 +17,8 @@
     "update":"{{target}}を更新しました",
     "delete":"{{target}}を削除しました",
     "save":"{{target}}を保存しました",
-    "success_archived":"アーカイブしました"
+    "success_archived":"アーカイブしました",
+    "success_add_directory":"ディレクトリに追加しました"
   },
 
   "home":"Home",

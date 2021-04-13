@@ -17,7 +17,8 @@
     "update":"Update {{target}}",
     "delete":"Delete {{target}}",
     "save":"Save {{target}}",
-    "success_archived":"Archived"
+    "success_archived":"Archived",
+    "success_add_directory":"Add Directory"
   },
 
   "home":"Home",
