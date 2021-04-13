@@ -17,7 +17,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
+import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal } from '~/stores/modal';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -36,6 +36,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+  const { mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -74,6 +75,10 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
     mutateIsOpenDeletePageModal(true);
+  };
+
+  const openAddDirectoryModal = async () => {
+    mutateIsOpenAddDirectoryModal(true);
   };
 
   return (
@@ -154,7 +159,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
                 <span className="ms-2">Share</span>
               </DropdownItem>
-              <DropdownItem tag="button" onClick={sharePage}>
+              <DropdownItem tag="button" onClick={openAddDirectoryModal}>
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                 <span className="ms-2">Add Directory</span>
               </DropdownItem>
