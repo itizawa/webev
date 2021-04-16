@@ -7,7 +7,10 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
+import { Icon } from '~/components/Icons/Icon';
+
 import { useDirectoryListSWR } from '~/stores/directory';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const { t } = useTranslation();
@@ -25,14 +28,14 @@ const Index: VFC = () => {
             <div className="row">
               {paginationResult.docs.map((directory) => (
                 <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
-                  <StyledImageWrapper>
-                    <Link href={`/directory/${directory._id}`}>
-                      <a>
-                        <img src="/images/no-page.png" alt={directory.name} />
-                        <StyledDiv className="text-white px-3 pb-2">{directory.name}</StyledDiv>
-                      </a>
-                    </Link>
-                  </StyledImageWrapper>
+                  <Link href={`/directory/${directory._id}`}>
+                    <StyledList className="list-group-item border-0">
+                      <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+                      <span className="ms-3" role="button">
+                        {directory.name}
+                      </span>
+                    </StyledList>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -43,6 +46,25 @@ const Index: VFC = () => {
   );
 };
 
+const StyledList = styled.li<{ isActive?: boolean }>`
+  padding: 10px;
+  color: #eee;
+  background-color: inherit;
+  border-radius: 3px;
+
+  ${({ isActive }) =>
+    isActive
+      ? `
+    margin-top: 0px;
+    background-color: #00acc1;
+    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
+  `
+      : `:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    transition: all 300ms linear;
+  }`}
+`;
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async ({ locale }: { locale: string }) => ({
   props: {
@@ -51,26 +73,3 @@ export const getStaticProps = async ({ locale }: { locale: string }) => ({
 });
 
 export default Index;
-
-const StyledImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-top: 55%;
-
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 4px;
-  }
-`;
-
-const StyledDiv = styled.div`
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  padding-top: 40px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
-  border-radius: 4px;
-`;
