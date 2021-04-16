@@ -44,17 +44,40 @@ const TrashIcon: VFC = () => (
   </>
 );
 
+const ThreeDotsVerticalIcon: VFC = () => (
+  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+);
+
 const DirectoryIcon: VFC = () => (
   <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
 );
 
-const ArrowUpIcon: VFC = () => (
+const AddToDirectoryIcon: VFC = () => (
   <>
-    <path
-      fillRule="evenodd"
-      d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
-    />
+    <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
+    <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z" />
   </>
+);
+
+const ArrowUpIcon: VFC = () => (
+  <path
+    fillRule="evenodd"
+    d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+  />
+);
+
+const ArrowRightIcon: VFC = () => (
+  <path
+    fillRule="evenodd"
+    d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+  />
+);
+
+const ArrowDownIcon: VFC = () => (
+  <path
+    fillRule="evenodd"
+    d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+  />
 );
 
 const ChevronDoubleLeft: VFC = () => (
@@ -104,8 +127,12 @@ const IconComponentMapping = {
   [BootstrapIcon.ARCHIVE]: <ArchiveIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,
+  [BootstrapIcon.THREE_DOTS_VERTICAL]: <ThreeDotsVerticalIcon />,
   [BootstrapIcon.DIRECTORY]: <DirectoryIcon />,
+  [BootstrapIcon.ADD_TO_DIRECTORY]: <AddToDirectoryIcon />,
   [BootstrapIcon.ARROW]: <ArrowUpIcon />,
+  [BootstrapIcon.ARROW_RIGHT]: <ArrowRightIcon />,
+  [BootstrapIcon.ARROW_DOWN]: <ArrowDownIcon />,
   [BootstrapIcon.CHEVRON_DOUBLE_LEFT]: <ChevronDoubleLeft />,
   [BootstrapIcon.CHEVRON_LEFT]: <ChevronLeft />,
   [BootstrapIcon.CHEVRON_DOUBLE_RIGHT]: <ChevronDoubleRight />,

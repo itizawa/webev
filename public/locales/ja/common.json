@@ -17,7 +17,8 @@
     "update":"{{target}}を更新しました",
     "delete":"{{target}}を削除しました",
     "save":"{{target}}を保存しました",
-    "success_archived":"アーカイブしました"
+    "success_archived":"アーカイブしました",
+    "success_add_directory":"ディレクトリに追加しました"
   },
 
   "delete_favorite_page":"お気に入りしたページを削除する",
@@ -33,6 +34,9 @@
 
   "delete_page":"ページを削除します",
   "obtained_from_clipboard":"Clipboard から取得しました",
+
+  "add_directory":"ページをディレクトリに保存します",
+
 
   "your_pages_don’t_exist":"ページが保存されていません",
   "save_the_url_immediately":"上のバーから url を保存してください",
