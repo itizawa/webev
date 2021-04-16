@@ -41,7 +41,7 @@ export const DeletePageModal: VFC = () => {
         </StyledImageWrapper>
         <h5 className="card-title my-3">{pageForDelete?.title}</h5>
         {pageForDelete?.isFavorite && (
-          <div className="form-check form-check-inline mb-3">
+          <div className="form-check form-check-inline mb-4">
             <input
               className="form-check-input"
               type="checkbox"
@@ -50,8 +50,11 @@ export const DeletePageModal: VFC = () => {
               onChange={() => setIsCheckedAgree(!isCheckedAgree)}
             />
             <label className="form-check-label" htmlFor="deleteAgreement">
-              利用規約に同意する
+              {t('delete_favorite_page')}
             </label>
+            <div id="deleteFavoritePageHelp" className="form-text">
+              {t('delete_favorite_page_desc')}
+            </div>
           </div>
         )}
         <div className="d-flex justify-content-evenly">
