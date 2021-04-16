@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { VFC, useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { useTranslation } from 'react-i18next';
@@ -16,6 +16,7 @@ export const DeletePageModal: VFC = () => {
   const { data: isOpenDeletePageModal = false, mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
   const { mutate: pageListMutate } = usePageListSWR();
 
+  const [isCheckedAgree, setIsCheckedAgree] = useState(false);
   const deletePage = async () => {
     try {
       const { data: page } = await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
@@ -39,11 +40,28 @@ export const DeletePageModal: VFC = () => {
           <img src={pageForDelete?.image} alt={pageForDelete?.image} />
         </StyledImageWrapper>
         <h5 className="card-title my-3">{pageForDelete?.title}</h5>
+        {pageForDelete?.isFavorite && (
+          <div className="form-check form-check-inline mb-4">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="deleteAgreement"
+              checked={isCheckedAgree}
+              onChange={() => setIsCheckedAgree(!isCheckedAgree)}
+            />
+            <label className="form-check-label" htmlFor="deleteAgreement">
+              {t('delete_favorite_page')}
+            </label>
+            <div id="deleteFavoritePageHelp" className="form-text">
+              {t('delete_favorite_page_desc')}
+            </div>
+          </div>
+        )}
         <div className="d-flex justify-content-evenly">
           <button className="btn btn-secondary" onClick={closeDeleteModal}>
             {t('cancel')}
           </button>
-          <button className="btn btn-danger" onClick={deletePage}>
+          <button className="btn btn-danger" onClick={deletePage} disabled={pageForDelete?.isFavorite && !isCheckedAgree}>
             {t('delete')}
           </button>
         </div>

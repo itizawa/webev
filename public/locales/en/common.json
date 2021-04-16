@@ -21,6 +21,9 @@
     "success_add_directory":"Add Directory"
   },
 
+  "delete_favorite_page":"Delete favorite page",
+  "delete_favorite_page_desc":"Once deleted, it cannot be revert.",
+
   "home":"Home",
   "favorite":"Favorite",
   "archive":"Archive",

@@ -21,6 +21,9 @@
     "success_add_directory":"ディレクトリに追加しました"
   },
 
+  "delete_favorite_page":"お気に入りしたページを削除する",
+  "delete_favorite_page_desc":"一度削除すると元に戻せません",
+
   "home":"Home",
   "favorite":"Favorite",
   "archive":"Archive",
