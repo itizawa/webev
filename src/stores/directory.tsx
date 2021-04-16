@@ -17,3 +17,10 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
     },
   );
 };
+
+export const useDirectoryById = (directoryId: string): SWRResponse<Directory, Error> => {
+  return useAuthenticationSWR(['/directories/', directoryId], (endpoint) => restClient.apiGet(urljoin(endpoint, directoryId)).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+  });
+};
