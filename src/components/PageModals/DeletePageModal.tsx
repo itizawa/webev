@@ -61,7 +61,7 @@ export const DeletePageModal: VFC = () => {
           <button className="btn btn-secondary" onClick={closeDeleteModal}>
             {t('cancel')}
           </button>
-          <button className="btn btn-danger" onClick={deletePage}>
+          <button className="btn btn-danger" onClick={deletePage} disabled={pageForDelete?.isFavorite && !isCheckedAgree}>
             {t('delete')}
           </button>
         </div>
