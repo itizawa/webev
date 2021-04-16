@@ -29,11 +29,16 @@ const Index: VFC = () => {
               {paginationResult.docs.map((directory) => (
                 <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
                   <Link href={`/directory/${directory._id}`}>
-                    <StyledList className="list-group-item border-0">
-                      <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                      <span className="ms-3" role="button">
-                        {directory.name}
-                      </span>
+                    <StyledList className="list-group-item border-0 d-flex">
+                      <div>
+                        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+                        <span className="ms-3" role="button">
+                          {directory.name}
+                        </span>
+                      </div>
+                      <div className="ms-auto">
+                        <span className="badge rounded-pill bg-secondary text-white">{directory.pages.length} Pages</span>
+                      </div>
                     </StyledList>
                   </Link>
                 </div>
