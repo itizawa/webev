@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, usePageStatus } from '~/stores/page';
+import { useActivePage, useDirectoryId, usePageStatus } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -22,6 +22,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
+  const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { mutate: mutatePageStatus } = usePageStatus();
 
@@ -31,6 +32,10 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   useEffect(() => {
     mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
+
+    if (router.pathname !== '/directory/[id]') {
+      mutateDirectoryId(null);
+    }
     mutateActivePage(1);
   }, [router]);
 
