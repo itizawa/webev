@@ -1,5 +1,6 @@
 import { VFC } from 'react';
 import { useRouter } from 'next/router';
+import { format } from 'date-fns';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
@@ -18,9 +19,15 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
-          <div className="d-flex align-items-center">
-            <h1>{directory?.name}</h1>
-          </div>
+          {directory != null && (
+            <div className="d-md-flex align-items-center mb-3">
+              <h1>{directory?.name}</h1>
+              <div className="ms-auto d-flex flex-column text-end">
+                <small>CreatedAt: {format(new Date(directory?.createdAt), 'yyyy/MM/dd HH:MM')}</small>
+                <small>UpdatedAt: {format(new Date(directory?.updatedAt), 'yyyy/MM/dd HH:MM')}</small>
+              </div>
+            </div>
+          )}
           {pages != null && (
             <div className="row">
               {pages.map((page) => (
