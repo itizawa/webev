@@ -29,11 +29,3 @@ export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directo
     },
   );
 };
-
-export const usePageListByDirectoryId = (directoryId?: string): SWRResponse<Page[], Error> => {
-  const endpoint = directoryId == null ? null : `/directories/${directoryId}/pages`;
-  return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(urljoin(endpoint)).then((result) => result.data), {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
-  });
-};
