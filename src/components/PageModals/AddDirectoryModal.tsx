@@ -1,19 +1,19 @@
 import { VFC } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import { Icon } from '../Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-import { useDirectoryListSWR } from '~/stores/directory';
-
-import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 import { restClient } from '~/utils/rest-client';
-import { Directory } from '~/interfaces/directory';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
+import { useDirectoryListSWR } from '~/stores/directory';
+import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { Directory } from '~/interfaces/directory';
+import { useLocale } from '~/hooks/useLocale';
+
 export const AddDirectoryModal: VFC = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
@@ -26,7 +26,7 @@ export const AddDirectoryModal: VFC = () => {
         directoryId: directory._id,
       });
       mutateIsOpenAddDirectoryModal(false);
-      toastSuccess(t('toastr.success_add_directory'));
+      toastSuccess(t.toastr_success_add_directory);
       mutateDirectoryList();
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ export const AddDirectoryModal: VFC = () => {
 
   return (
     <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
-      <ModalHeader className="bg-dark">{t('add_directory')}</ModalHeader>
+      <ModalHeader className="bg-dark">{t.add_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row">
           <div className="col-12 col-md-5">

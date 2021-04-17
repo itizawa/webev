@@ -1,7 +1,6 @@
 import { VFC } from 'react';
 import { AppProps } from 'next/app';
 import { Provider } from 'next-auth/client';
-import { appWithTranslation } from 'next-i18next';
 
 import '~/styles/global.scss';
 
@@ -13,4 +12,4 @@ const App: VFC<AppProps> = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default appWithTranslation(App);
+export default App;

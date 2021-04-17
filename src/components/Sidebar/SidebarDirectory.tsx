@@ -1,9 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useTranslation } from 'react-i18next';
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
 import { restClient } from '~/utils/rest-client';
@@ -12,13 +10,12 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-import { Icon } from '~/components/Icons/Icon';
 import { useDirectoryListSWR } from '~/stores/directory';
 import { Directory } from '~/interfaces/directory';
+import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
-  const { t } = useTranslation();
-  const router = useRouter();
+  const { t } = useLocale();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -64,7 +61,7 @@ export const SidebarDirectory: VFC = () => {
 
     try {
       await restClient.apiPost('/directories', { name });
-      toastSuccess(t('toastr.save', { target: 'Directory' }));
+      toastSuccess(t.toastr_save_directory);
       setName('');
       mutateDirectoryList();
     } catch (err) {
@@ -76,16 +73,6 @@ export const SidebarDirectory: VFC = () => {
 
   return (
     <>
-      <ul className="sidebar-list-group list-group gap-3 py-3">
-        <Link href="/directory">
-          <StyledList className="list-group-item mx-3 border-0" isActive={router.pathname === '/directory'} role="button">
-            <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-            <span className="ms-3" role="button">
-              Directory
-            </span>
-          </StyledList>
-        </Link>
-      </ul>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (

@@ -1,8 +1,6 @@
 import { VFC } from 'react';
 import { useRouter } from 'next/router';
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 
@@ -35,12 +33,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getServerSideProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'footer'])),
-  },
-});
 
 export default Index;
