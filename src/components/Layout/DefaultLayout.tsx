@@ -24,7 +24,9 @@ export const DefaultLayout: FC = ({ children }) => {
         <title>Webev</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <Navbar />
+      <div className="bg-dark">
+        <Navbar />
+      </div>
       <StyledBorder />
       <StyledDiv className="container">{children}</StyledDiv>
       {session && <PageModals />}

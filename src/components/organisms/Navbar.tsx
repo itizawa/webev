@@ -10,7 +10,7 @@ export const Navbar: VFC = () => {
   const [session] = useSession();
 
   return (
-    <div className="navbar bg-dark container">
+    <div className="navbar container">
       <Link href="/">
         <span className="navbar-brand mb-0 text-white" role="button">
           Webev

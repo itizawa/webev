@@ -1,7 +1,6 @@
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
-import { useTranslation } from 'next-i18next';
 import style from 'styled-components';
 
 import { toastSuccess } from '~/utils/toastr';
@@ -9,12 +8,14 @@ import { toastSuccess } from '~/utils/toastr';
 import { UserIcon } from '~/components/Icons/UserIcon';
 import { User } from '~/interfaces/user';
 
+import { useLocale } from '~/hooks/useLocale';
+
 type Props = {
   user: User;
 };
 
 export const PersonalDropdown: VFC<Props> = (props: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
   const { user } = props;
 
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
@@ -28,7 +29,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
     localStorage.setItem('isEnableReadFromClipboard', bool.toString());
-    toastSuccess(t('toastr.update', { target: t('settings') }));
+    toastSuccess(t.toastr_update_setting);
   };
 
   return (
@@ -48,7 +49,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" id="isEnableReadFromClipboard" checked={isEnableReadFromClipboard} onChange={handleSwitch} />
             <label className="form-check-label" htmlFor="isEnableReadFromClipboard">
-              {t('automatic_acquisition')}
+              {t.automatic_acquisition}
             </label>
           </div>
           <div className="text-center">
@@ -58,13 +59,13 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
               target="blank"
               rel="noopener noreferrer"
             >
-              {t('function_details')}
+              {t.function_details}
             </a>
           </div>
         </div>
         <DropdownItem divider />
         <DropdownItem tag="button" onClick={() => signOut()}>
-          {t('logout')}
+          {t.logout}
         </DropdownItem>
       </StyledDropdownMenu>
     </UncontrolledDropdown>

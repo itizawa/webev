@@ -40,7 +40,9 @@ export const DashBoardLayout: FC = ({ children }) => {
         <title>Webev</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <Navbar />
+      <div className="bg-dark">
+        <Navbar />
+      </div>
       <StyledBorder />
       <SubnavBar />
       <StyledDiv className="d-flex mx-auto">

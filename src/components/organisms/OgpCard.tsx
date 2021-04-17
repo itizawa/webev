@@ -1,12 +1,13 @@
 import { VFC, useEffect, useState } from 'react';
 
-import { UncontrolledTooltip } from 'reactstrap';
+import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 import { format } from 'date-fns';
 
 import urljoin from 'url-join';
-import { useTranslation } from 'react-i18next';
-import style from 'styled-components';
+import styled from 'styled-components';
 
+import { Icon } from '../Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -15,7 +16,8 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
+import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -25,14 +27,18 @@ type Props = {
 };
 
 export const OgpCard: VFC<Props> = ({ page }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isArchive, setIsArchive] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const { mutate: mutatePageForDelete } = usePageForDelete();
+
+  const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+
+  const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -49,7 +55,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchArchive = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t('toastr.success_archived'));
+      toastSuccess(t.toastr_success_archived);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {
@@ -60,7 +66,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchFavorite = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess(t('toastr.update', { target: t('favorite') }));
+      toastSuccess(t.toastr_update_favorite);
       setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
@@ -71,6 +77,11 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
     mutateIsOpenDeletePageModal(true);
+  };
+
+  const openAddDirectoryModal = async () => {
+    mutatePageForAddDirectory(page);
+    mutateIsOpenAddDirectoryModal(true);
   };
 
   return (
@@ -116,19 +127,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
             Archive
           </UncontrolledTooltip>
-          <div id={`twitter-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.TWITTER}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
-              onClickButton={sharePage}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`twitter-for-${page._id}`}>
-            Share
-          </UncontrolledTooltip>
           <div id={`favorite-for-${page._id}`}>
             <IconButton
               width={24}
@@ -143,30 +141,44 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
             Favorite
           </UncontrolledTooltip>
-          <div id={`trash-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.TRASH}
-              onClickButton={openDeleteModal}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`trash-for-${page._id}`}>
-            Delete
-          </UncontrolledTooltip>
+          <UncontrolledDropdown direction="up">
+            <DropdownToggle tag="span">
+              <div id={`manage-for-${page._id}`}>
+                <IconButton
+                  width={24}
+                  height={24}
+                  icon={BootstrapIcon.THREE_DOTS_VERTICAL}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WARNING}
+                />
+              </div>
+            </DropdownToggle>
+            <DropdownMenu className="dropdown-menu-dark" positionFixed>
+              <DropdownItem tag="button" onClick={openDeleteModal}>
+                <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Trash</span>
+              </DropdownItem>
+              <DropdownItem tag="button" onClick={sharePage}>
+                <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Share</span>
+              </DropdownItem>
+              <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                <span className="ms-2">Add Directory</span>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </div>
       </div>
     </StyledCard>
   );
 };
 
-const StyledCard = style.div`
+const StyledCard = styled.div`
   background-color: #2f363d;
 `;
 
-const StyledImageWrapper = style.div`
+const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-top: 55%;

@@ -2,7 +2,6 @@ import { useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import { signIn } from 'next-auth/client';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LogoutRequiredWrapper';
@@ -36,12 +35,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
 
 export default Index;
