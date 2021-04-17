@@ -17,6 +17,7 @@ export const en = {
   toastr_update: 'Update {{target}}',
   toastr_update_favorite: 'Update Favorite',
   toastr_delete: 'Delete {{target}}',
+  toastr_delete_url: 'Delete Url',
   toastr_save: 'Save {{target}}',
   toastr_save_url: 'Save Url',
   toastr_success_archived: 'Archived',
