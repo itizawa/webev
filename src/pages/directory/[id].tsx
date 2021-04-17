@@ -23,12 +23,15 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           <div className="d-flex align-items-center">{/* <h1>{directory?.name}</h1> */}</div>
-          {pages != null &&
-            pages.map((page) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                <OgpCard page={page} />
-              </div>
-            ))}
+          {pages != null && (
+            <div className="row">
+              {pages.map((page) => (
+                <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
+                  <OgpCard page={page} />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </DashBoardLayout>
     </LoginRequiredWrapper>
