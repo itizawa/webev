@@ -5,7 +5,6 @@ import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu
 import { format } from 'date-fns';
 
 import urljoin from 'url-join';
-import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 import { Icon } from '../Icons/Icon';
@@ -18,6 +17,7 @@ import { Page, PageStatus } from '~/interfaces/page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const OgpCard: VFC<Props> = ({ page }: Props) => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
@@ -55,7 +55,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchArchive = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t('toastr.success_archived'));
+      toastSuccess(t.toastr_success_archived);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {
@@ -66,7 +66,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchFavorite = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess(t('toastr.update', { target: t('favorite') }));
+      toastSuccess(t.toastr_update_favorite);
       setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
