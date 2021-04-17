@@ -8,6 +8,8 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { useDirectoryInfomation, usePageListByDirectoryId } from '~/stores/directory';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
+const FORMAT = 'yyyy/MM/dd HH:MM';
+
 const Index: VFC = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -23,8 +25,8 @@ const Index: VFC = () => {
             <div className="d-md-flex align-items-center mb-3">
               <h1>{directory?.name}</h1>
               <div className="ms-auto d-flex flex-column text-end">
-                <small>CreatedAt: {format(new Date(directory?.createdAt), 'yyyy/MM/dd HH:MM')}</small>
-                <small>UpdatedAt: {format(new Date(directory?.updatedAt), 'yyyy/MM/dd HH:MM')}</small>
+                <small>CreatedAt: {format(new Date(directory?.createdAt), FORMAT)}</small>
+                <small>UpdatedAt: {format(new Date(directory?.updatedAt), FORMAT)}</small>
               </div>
             </div>
           )}
