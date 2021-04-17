@@ -57,6 +57,9 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <div className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
+              if (pageForAddDirectory?.directoryId == directory._id) {
+                return null;
+              }
               return (
                 <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
                   <StyledList className="list-group-item border-0">
