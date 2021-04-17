@@ -28,7 +28,7 @@ const Index: VFC = () => {
           <div className="d-flex align-items-center">
             <h1>{t('home')}</h1>
             <div className="ms-auto">
-              <span className="badge rounded-pill bg-secondary">{paginationResult?.totalDocs} Pages</span>
+              <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
             </div>
           </div>
           <div className="my-2 d-flex">
