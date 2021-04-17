@@ -70,6 +70,9 @@ export const AddDirectoryModal: VFC = () => {
             })}
           </StyledDiv>
         </div>
+        <div className="mt-3 text-center" onClick={() => mutateIsOpenAddDirectoryModal(false)}>
+          <button className="btn btn-secondary w-100">Cancel</button>
+        </div>
       </ModalBody>
     </Modal>
   );
