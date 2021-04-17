@@ -19,7 +19,7 @@ export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRRespons
   return useStaticSWR('isRetrieveFavoritePageList', initialData);
 };
 
-export const useDirectoryId = (initialData?: string): SWRResponse<string, Error> => {
+export const useDirectoryId = (initialData?: string | null): SWRResponse<string | null, Error> => {
   return useStaticSWR('directoryId', initialData);
 };
 
@@ -48,7 +48,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
             `&limit=${limit}`,
             `&sort=${sort}`,
             isFavorite ? `&isFavorite=${isFavorite}` : ``,
-            directoryId ? `&directoryId=${directoryId}` : ``,
+            directoryId != null ? `&directoryId=${directoryId}` : ``,
           ),
         )
         .then((result) => result.data),
