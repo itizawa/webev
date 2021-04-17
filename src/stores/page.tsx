@@ -19,7 +19,7 @@ export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRRespons
   return useStaticSWR('isRetrieveFavoritePageList', initialData);
 };
 
-export const useDirectoryId = (initialData?: boolean): SWRResponse<boolean, Error> => {
+export const useDirectoryId = (initialData?: string): SWRResponse<string, Error> => {
   return useStaticSWR('directoryId', initialData);
 };
 
