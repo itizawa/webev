@@ -43,7 +43,7 @@ export const InputForm: VFC = () => {
     if (usedClipboardTextsArray.includes(clipboardText)) {
       return;
     }
-    toastSuccess(t('obtained_from_clipboard'));
+    toastSuccess(t.obtained_from_clipboard);
     setUrl(clipboardText);
     usedClipboardTextsArray.unshift(clipboardText);
     let csvForSave = usedClipboardTextsArray.join(',');

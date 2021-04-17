@@ -36,7 +36,7 @@ export const AddDirectoryModal: VFC = () => {
 
   return (
     <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
-      <ModalHeader className="bg-dark">{t('add_directory')}</ModalHeader>
+      <ModalHeader className="bg-dark">{t.add_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row">
           <div className="col-12 col-md-5">
