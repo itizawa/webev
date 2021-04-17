@@ -55,7 +55,7 @@ export const AddDirectoryModal: VFC = () => {
               <Icon height={48} width={48} icon={BootstrapIcon.ARROW_DOWN} color={BootstrapColor.WHITE} />
             </div>
           </div>
-          <div className="col-12 col-md-5">
+          <StyledDiv className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
               if (pageForAddDirectory?.directoryId == directory._id) {
                 return null;
@@ -68,7 +68,7 @@ export const AddDirectoryModal: VFC = () => {
                 </div>
               );
             })}
-          </div>
+          </StyledDiv>
         </div>
       </ModalBody>
     </Modal>
@@ -102,4 +102,9 @@ const StyledList = styled.li`
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
   }
+`;
+
+const StyledDiv = styled.div`
+  max-height: 500px;
+  overflow: scroll;
 `;
