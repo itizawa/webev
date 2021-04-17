@@ -22,9 +22,9 @@ const Index: ReactNode = (props: Props) => {
       <div className="row my-3">
         <div className="card bg-dark border border-warning text-white p-3 col-6 offset-3 text-center">
           <h2>
-            <CountUp end={props.count} />
+            <CountUp end={props.count} delay={1} /> Pages
           </h2>
-          <p>Total pages saved using webev!</p>
+          <p>{t('total_pages')}</p>
         </div>
       </div>
       <div className="text-center">
