@@ -11,6 +11,7 @@ import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 import { Directory } from '~/interfaces/directory';
 import { useLocale } from '~/hooks/useLocale';
+import { usePageListSWR } from '~/stores/page';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -18,7 +19,8 @@ export const AddDirectoryModal: VFC = () => {
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { data: paginationResult } = useDirectoryListSWR();
+  const { mutate: mutatePageList } = usePageListSWR();
 
   const addPageTODirectory = async (directory: Directory) => {
     try {
@@ -26,8 +28,8 @@ export const AddDirectoryModal: VFC = () => {
         directoryId: directory._id,
       });
       mutateIsOpenAddDirectoryModal(false);
+      mutatePageList();
       toastSuccess(t.toastr_success_add_directory);
-      mutateDirectoryList();
     } catch (error) {
       console.log(error);
       toastError(error);
