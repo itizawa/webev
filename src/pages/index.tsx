@@ -37,11 +37,11 @@ const Index: ReactNode = (props: Props) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getStaticProps = async () => {
+export async function getStaticProps() {
   let count = 0;
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/api/v1/pages/all`);
-    count = res.data.count || 0;
+    count = res.data;
   } catch (error) {
     console.log(error);
   }
@@ -49,9 +49,9 @@ export const getStaticProps = async () => {
   return {
     props: {
       count,
-      revalidate: 300,
     },
+    revalidate: 300,
   };
-};
+}
 
 export default Index;
