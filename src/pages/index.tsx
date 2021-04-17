@@ -19,7 +19,7 @@ const Index: ReactNode = (props: Props) => {
       <h1 className="my-3">{t('welcome_webev')}</h1>
       <Image src="/images/eye-catch-dark.png" height={1260} width={2240} />
       <div className="row my-3">
-        <div className="card bg-dark text-white p-3 col-6 offset-3 text-center">
+        <div className="card bg-dark border border-warning text-white p-3 col-6 offset-3 text-center">
           <h2>{props.count}</h2>
           <p>Total pages saved using webev!</p>
         </div>
