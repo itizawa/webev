@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import CountUp from 'react-countup';
 import { useTranslation } from 'react-i18next';
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 import { restClient } from '~/utils/rest-client';
@@ -20,7 +21,9 @@ const Index: ReactNode = (props: Props) => {
       <Image src="/images/eye-catch-dark.png" height={1260} width={2240} />
       <div className="row my-3">
         <div className="card bg-dark border border-warning text-white p-3 col-6 offset-3 text-center">
-          <h2>{props.count}</h2>
+          <h2>
+            <CountUp end={props.count} />
+          </h2>
           <p>Total pages saved using webev!</p>
         </div>
       </div>
