@@ -14,12 +14,9 @@ export const en = {
   latest_order: 'Latest Order',
   oldest_order: 'Oldest Order',
 
-  toastr_update: 'Update {{target}}',
   toastr_update_setting: 'Update Setting',
   toastr_update_favorite: 'Update Favorite',
-  toastr_delete: 'Delete {{target}}',
   toastr_delete_url: 'Delete Url',
-  toastr_save: 'Save {{target}}',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_success_archived: 'Archived',
