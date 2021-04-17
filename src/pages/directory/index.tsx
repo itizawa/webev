@@ -2,8 +2,6 @@ import { VFC } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
@@ -11,9 +9,10 @@ import { Icon } from '~/components/Icons/Icon';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { useLocale } from '~/hooks/useLocale';
 
 const Index: VFC = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { data: paginationResult } = useDirectoryListSWR();
 
@@ -22,7 +21,7 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           <div className="d-flex align-items-center">
-            <h1>{t('directory')}</h1>
+            <h1>{t.directory}</h1>
           </div>
           {paginationResult != null && (
             <div className="row">
@@ -66,12 +65,5 @@ const StyledList = styled.li<{ isActive?: boolean }>`
     transition: all 300ms linear;
   }`}
 `;
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common', 'footer'])),
-  },
-});
 
 export default Index;
