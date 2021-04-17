@@ -61,7 +61,7 @@ export const AddDirectoryModal: VFC = () => {
                 return null;
               }
               return (
-                <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
+                <div key={directory._id} onClick={() => addPageTODirectory(directory)} role="button">
                   <StyledList className="list-group-item border-0">
                     <span>{directory.name}</span>
                   </StyledList>
