@@ -10,8 +10,8 @@ import { Page } from '~/interfaces/page';
 export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Directory>, Error> => {
   const page = 1;
   return useAuthenticationSWR(
-    ['/directories/list'],
-    (endpoint) => restClient.apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`)).then((result) => result.data),
+    ['/directories/list', page, limit],
+    (endpoint, page, limit) => restClient.apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`)).then((result) => result.data),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: true,
