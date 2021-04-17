@@ -21,6 +21,7 @@ export const en = {
   toastr_delete_url: 'Delete Url',
   toastr_save: 'Save {{target}}',
   toastr_save_url: 'Save Url',
+  toastr_save_directory: 'Save Directory',
   toastr_success_archived: 'Archived',
   toastr_success_add_directory: 'Add Directory',
 
