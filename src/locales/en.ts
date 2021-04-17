@@ -15,6 +15,7 @@ export const en = {
   oldest_order: 'Oldest Order',
 
   toastr_update: 'Update {{target}}',
+  toastr_update_setting: 'Update Setting',
   toastr_update_favorite: 'Update Favorite',
   toastr_delete: 'Delete {{target}}',
   toastr_delete_url: 'Delete Url',

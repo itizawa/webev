@@ -15,6 +15,7 @@ export const ja = {
   oldest_order: '古い順',
 
   toastr_update: '{{target}}を更新しました',
+  toastr_update_setting: '設定を更新しました',
   toastr_update_favorite: 'お気に入りを更新しました',
   toastr_delete: '{{target}}を削除しました',
   toastr_delete_url: 'Url を削除しました',
