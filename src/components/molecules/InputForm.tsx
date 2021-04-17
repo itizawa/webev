@@ -1,12 +1,13 @@
 import { VFC, useState, useEffect } from 'react';
 
-import { useTranslation } from 'react-i18next';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+
 import { usePageListSWR } from '~/stores/page';
+import { useLocale } from '~/hooks/useLocale';
 
 export const InputForm: VFC = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
 
@@ -17,7 +18,7 @@ export const InputForm: VFC = () => {
 
     try {
       await restClient.apiPost('/pages', { url });
-      toastSuccess(t('toastr.save', { target: url }));
+      toastSuccess(t.toastr_save_url);
       setUrl('');
       mutatePageList();
     } catch (err) {
@@ -67,7 +68,7 @@ export const InputForm: VFC = () => {
     <form className="input-group" onSubmit={onSubmit}>
       <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3 bg-white" placeholder="...URL" />
       <button className="btn btn-secondary" type="submit" id="input-group" disabled={url.length === 0}>
-        {t('save')}
+        {t.save}
       </button>
     </form>
   );

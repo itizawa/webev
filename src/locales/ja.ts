@@ -17,6 +17,7 @@ export const ja = {
   toastr_update: '{{target}}を更新しました',
   toastr_delete: '{{target}}を削除しました',
   toastr_save: '{{target}}を保存しました',
+  toastr_save_url: 'Url を保存しました',
   toastr_success_archived: 'アーカイブしました',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 

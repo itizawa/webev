@@ -17,6 +17,7 @@ export const en = {
   toastr_update: 'Update {{target}}',
   toastr_delete: 'Delete {{target}}',
   toastr_save: 'Save {{target}}',
+  toastr_save_url: 'Save Url',
   toastr_success_archived: 'Archived',
   toastr_success_add_directory: 'Add Directory',
 
