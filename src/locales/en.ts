@@ -36,7 +36,7 @@ export const en = {
   delete_page: 'Delete Page',
   obtained_from_clipboard: 'Obtained from Clipboard',
 
-  add_directory: 'Add Directory',
+  move_directory: 'Move Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
   save_the_url_immediately: 'Please add them from the top bar.',
