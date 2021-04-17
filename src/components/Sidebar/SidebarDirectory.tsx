@@ -76,16 +76,6 @@ export const SidebarDirectory: VFC = () => {
 
   return (
     <>
-      <ul className="sidebar-list-group list-group gap-3 py-3">
-        <Link href="/directory">
-          <StyledList className="list-group-item mx-3 border-0" isActive={router.pathname === '/directory'} role="button">
-            <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-            <span className="ms-3" role="button">
-              Directory
-            </span>
-          </StyledList>
-        </Link>
-      </ul>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
