@@ -164,7 +164,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               </DropdownItem>
               <DropdownItem tag="button" onClick={openAddDirectoryModal}>
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Add Directory</span>
+                <span className="ms-2">Move Directory</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

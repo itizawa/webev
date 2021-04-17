@@ -1,42 +1,71 @@
 import { VFC } from 'react';
 import { useRouter } from 'next/router';
-import { format } from 'date-fns';
+
+import { useLocale } from '~/hooks/useLocale';
+
+import { useDirectoryInfomation } from '~/stores/directory';
+import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
-
-import { useDirectoryInfomation, usePageListByDirectoryId } from '~/stores/directory';
 import { OgpCard } from '~/components/organisms/OgpCard';
-
-const FORMAT = 'yyyy/MM/dd HH:MM';
+import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
+import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
+  const { t } = useLocale();
   const router = useRouter();
   const { id } = router.query;
+  const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
+  mutateDirectoryId(id as string);
   const { data: directory } = useDirectoryInfomation(id as string);
-  const { data: pages } = usePageListByDirectoryId(id as string);
+  const { data: paginationResult } = usePageListSWR();
 
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
           {directory != null && (
-            <div className="d-md-flex align-items-center mb-3">
+            <div className="d-flex align-items-center">
               <h1>{directory?.name}</h1>
-              <div className="ms-auto d-flex flex-column text-end">
-                <small>CreatedAt: {format(new Date(directory?.createdAt), FORMAT)}</small>
-                <small>UpdatedAt: {format(new Date(directory?.updatedAt), FORMAT)}</small>
+              <div className="ms-auto">
+                <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
               </div>
             </div>
           )}
-          {pages != null && (
+          <div className="my-2 d-flex">
+            <div className="ms-auto me-3">
+              <IconButton
+                icon={BootstrapIcon.STAR}
+                isActive={isRetrieveFavoritePageList}
+                color={BootstrapColor.SECONDARY}
+                activeColor={BootstrapColor.WARNING}
+                onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
+                buttonSize="sm"
+                text={t.only_favorite}
+              />
+            </div>
+            <SortButtonGroup />
+          </div>
+          {paginationResult != null && (
             <div className="row">
-              {pages.map((page) => (
+              {paginationResult.docs.map((page) => (
                 <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
                   <OgpCard page={page} />
                 </div>
               ))}
+              {paginationResult.docs.length === 0 ? (
+                <NoPageAlert />
+              ) : (
+                <div className="text-center">
+                  <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+                </div>
+              )}
             </div>
           )}
         </div>
