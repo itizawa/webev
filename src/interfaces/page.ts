@@ -10,6 +10,7 @@ export class Page {
   description: string;
   title: string;
   siteName: string;
+  directoryId: string;
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
@@ -22,6 +23,7 @@ export class Page {
     description: string,
     title: string,
     siteName: string,
+    directoryId: string,
     createdUser: string,
     createdAt: Date,
     updatedAt: Date,
@@ -34,6 +36,7 @@ export class Page {
     this.description = description;
     this.title = title;
     this.siteName = siteName;
+    this.directoryId = directoryId;
     this.createdUser = createdUser;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;

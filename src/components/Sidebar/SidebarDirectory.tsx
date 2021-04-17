@@ -95,7 +95,7 @@ export const SidebarDirectory: VFC = () => {
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Link href={`/directories/${directory._id}`}>
+                        <Link href={`/directory/${directory._id}`}>
                           <StyledList className="list-group-item border-0">
                             <span>{directory.name}</span>
                           </StyledList>

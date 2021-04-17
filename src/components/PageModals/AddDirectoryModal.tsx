@@ -22,8 +22,8 @@ export const AddDirectoryModal: VFC = () => {
 
   const addPageTODirectory = async (directory: Directory) => {
     try {
-      await restClient.apiPut(`/directories/${directory._id}/pages`, {
-        pages: [...directory.pages, pageForAddDirectory],
+      await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
+        directoryId: directory._id,
       });
       mutateIsOpenAddDirectoryModal(false);
       toastSuccess(t('toastr.success_add_directory'));
@@ -55,10 +55,6 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <div className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
-              const isAlreadyAdded = directory.pages.some((page) => page._id === pageForAddDirectory?._id);
-              if (isAlreadyAdded) {
-                return null;
-              }
               return (
                 <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
                   <StyledList className="list-group-item border-0">

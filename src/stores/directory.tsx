@@ -5,6 +5,7 @@ import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
 import { Directory } from '~/interfaces/directory';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
+import { Page } from '~/interfaces/page';
 
 export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Directory>, Error> => {
   const page = 1;
@@ -16,4 +17,12 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
       revalidateOnReconnect: true,
     },
   );
+};
+
+export const usePageListByDirectoryId = (directoryId?: string): SWRResponse<Page[], Error> => {
+  const endpoint = directoryId == null ? null : `/directories/${directoryId}/pages`;
+  return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(urljoin(endpoint)).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+  });
 };

@@ -36,9 +36,6 @@ const Index: VFC = () => {
                           {directory.name}
                         </span>
                       </div>
-                      <div className="ms-auto">
-                        <span className="badge rounded-pill bg-secondary text-white">{directory.pages.length} Pages</span>
-                      </div>
                     </StyledList>
                   </Link>
                 </div>
