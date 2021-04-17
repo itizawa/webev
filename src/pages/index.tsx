@@ -41,7 +41,7 @@ export const getStaticProps = async () => {
   let count = 0;
   try {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'}/api/v1/pages/all`);
-    count = res.data.count;
+    count = res.data.count || 0;
   } catch (error) {
     console.log(error);
   }
