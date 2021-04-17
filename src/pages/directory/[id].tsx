@@ -1,15 +1,12 @@
 import { VFC } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
-import { Icon } from '~/components/Icons/Icon';
 
 import { usePageListByDirectoryId } from '~/stores/directory';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
 const Index: VFC = () => {
@@ -22,6 +19,7 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <DashBoardLayout>
         <div className="p-3">
+          {/* TODO display directory info */}
           <div className="d-flex align-items-center">{/* <h1>{directory?.name}</h1> */}</div>
           {pages != null && (
             <div className="row">
