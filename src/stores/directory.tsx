@@ -19,6 +19,17 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
   );
 };
 
+export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
+  return useAuthenticationSWR(
+    ['/directories/', directoryId],
+    (endpoint, directoryId) => restClient.apiGet(urljoin(endpoint, directoryId)).then((result) => result.data),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
+  );
+};
+
 export const usePageListByDirectoryId = (directoryId?: string): SWRResponse<Page[], Error> => {
   const endpoint = directoryId == null ? null : `/directories/${directoryId}/pages`;
   return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(urljoin(endpoint)).then((result) => result.data), {
