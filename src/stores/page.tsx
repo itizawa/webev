@@ -43,7 +43,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
         .apiGet(
           urljoin(
             endpoint,
-            status.map((v) => `?status[]=${v}`).join(''),
+            status.map((v: PageStatus) => `?status[]=${v}`).join(''),
             `&page=${page}`,
             `&limit=${limit}`,
             `&sort=${sort}`,
