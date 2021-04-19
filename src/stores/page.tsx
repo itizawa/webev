@@ -11,7 +11,7 @@ export const useActivePage = (initialData?: number): SWRResponse<number, Error> 
   return useStaticSWR('activePage', initialData);
 };
 
-export const usePageStatus = (initialData?: PageStatus): SWRResponse<PageStatus, Error> => {
+export const usePageStatus = (initialData?: PageStatus[]): SWRResponse<PageStatus[], Error> => {
   return useStaticSWR('pageStatus', initialData);
 };
 
@@ -29,7 +29,7 @@ export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, 
 
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
-  const { data: status = PageStatus.PAGE_STATUS_STOCK } = usePageStatus();
+  const { data: status = [PageStatus.PAGE_STATUS_STOCK] } = usePageStatus();
   const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
   const { data: directoryId } = useDirectoryId();
   const { data: isSortCreatedAt = false } = useIsSortCreatedAt();
@@ -43,8 +43,8 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
         .apiGet(
           urljoin(
             endpoint,
-            `?status=${status}`,
-            `?page=${page}`,
+            status.map((v) => `?status[]=${v}`).join(''),
+            `&page=${page}`,
             `&limit=${limit}`,
             `&sort=${sort}`,
             isFavorite ? `&isFavorite=${isFavorite}` : ``,
