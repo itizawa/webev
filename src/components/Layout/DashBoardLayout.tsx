@@ -17,19 +17,18 @@ import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { PageStatus } from '~/interfaces/page';
+import { PathName } from '~/interfaces/route';
 
-type Pathname = '/home' | '/archived' | '/directory/[id]';
-
-const statusByPagePathname = {
-  '/home': [PageStatus.PAGE_STATUS_STOCK],
-  '/archived': [PageStatus.PAGE_STATUS_ARCHIVE],
-  '/directory/[id]': [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
+const statusByPagePathname: { [key: string]: PageStatus[] } = {
+  [PathName.HOME]: [PageStatus.PAGE_STATUS_STOCK],
+  [PathName.ARCHIVED]: [PageStatus.PAGE_STATUS_ARCHIVE],
+  [PathName.DIRECTORY_ID]: [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
 };
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
-  const pathname = router.pathname as Pathname;
+  const pathname = router.pathname as PathName;
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
