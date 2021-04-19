@@ -18,9 +18,18 @@ import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { PageStatus } from '~/interfaces/page';
 
+type Pathname = '/home' | '/archived' | '/directory/[id]';
+
+const statusByPagePathname = {
+  '/home': [PageStatus.PAGE_STATUS_STOCK],
+  '/archived': [PageStatus.PAGE_STATUS_ARCHIVE],
+  '/directory/[id]': [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
+};
+
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
+  const pathname = router.pathname as Pathname;
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
@@ -31,7 +40,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
+    mutatePageStatus(statusByPagePathname[pathname]);
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
