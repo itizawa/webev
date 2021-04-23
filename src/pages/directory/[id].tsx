@@ -7,6 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
+import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
@@ -23,7 +24,11 @@ const Index: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const { id } = router.query;
+
   const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   mutateDirectoryId(id as string);
@@ -31,7 +36,8 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
 
   const openDeleteModal = () => {
-    console.log('hoge');
+    mutateDirectoryForDelete(directory);
+    mutateIsOpenDeleteDirectoryModal(true);
   };
 
   return (
