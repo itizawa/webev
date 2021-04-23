@@ -36,6 +36,8 @@ export const ja = {
   delete_page: 'ページを削除します',
   obtained_from_clipboard: 'Clipboard から取得しました',
 
+  delete_directory: 'Directory を削除します',
+
   move_directory: 'ディレクトリに移動します',
 
   'your_pages_don’t_exist': 'ページが保存されていません',

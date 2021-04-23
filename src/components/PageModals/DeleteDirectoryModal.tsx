@@ -33,9 +33,9 @@ export const DeleteDirectoryModal: VFC = () => {
 
   return (
     <Modal isOpen={isOpenDeleteDirectoryModal} toggle={closeDeleteModal}>
-      <ModalHeader className="bg-dark">{t.delete_page}</ModalHeader>
+      <ModalHeader className="bg-dark">{t.delete_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
-        <h5 className="card-title my-3">{directoryForDelete?.name}</h5>
+        <h5 className="mt-3 mb-5 text-center">{directoryForDelete?.name}</h5>
         <div className="d-flex justify-content-evenly">
           <button className="btn btn-secondary" onClick={closeDeleteModal}>
             {t.cancel}
