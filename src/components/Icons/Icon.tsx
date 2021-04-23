@@ -44,6 +44,10 @@ const TrashIcon: VFC = () => (
   </>
 );
 
+const ThreeDotsHorisonalIcon: VFC = () => (
+  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+);
+
 const ThreeDotsVerticalIcon: VFC = () => (
   <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
 );
@@ -127,6 +131,7 @@ const IconComponentMapping = {
   [BootstrapIcon.ARCHIVE]: <ArchiveIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,
+  [BootstrapIcon.THREE_DOTS_HORIZONAL]: <ThreeDotsHorisonalIcon />,
   [BootstrapIcon.THREE_DOTS_VERTICAL]: <ThreeDotsVerticalIcon />,
   [BootstrapIcon.DIRECTORY]: <DirectoryIcon />,
   [BootstrapIcon.ADD_TO_DIRECTORY]: <AddToDirectoryIcon />,

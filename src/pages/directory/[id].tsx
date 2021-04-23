@@ -2,10 +2,12 @@ import { VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
+import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
@@ -13,19 +15,30 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { IconButton } from '~/components/Icons/IconButton';
+import { Icon } from '~/components/Icons/Icon';
+
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const { id } = router.query;
+
   const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   mutateDirectoryId(id as string);
   const { data: directory } = useDirectoryInfomation(id as string);
   const { data: paginationResult } = usePageListSWR();
+
+  const openDeleteModal = () => {
+    mutateDirectoryForDelete(directory);
+    mutateIsOpenDeleteDirectoryModal(true);
+  };
 
   return (
     <LoginRequiredWrapper>
@@ -33,15 +46,33 @@ const Index: VFC = () => {
         <div className="p-3">
           {directory != null && (
             <div className="d-flex align-items-center">
-              <h1>
-                <Link href="/directory">
-                  <a className="text-decoration-none text-white">Directory</a>
-                </Link>
-                <span className="mx-2">{'/'}</span>
-                {directory?.name}
-              </h1>
+              <div>
+                <small>
+                  <Link href="/directory">
+                    <a className="text-decoration-none text-white">Directory</a>
+                  </Link>
+                  <span className="ms-1">{'/'}</span>
+                </small>
+                <h1>{directory?.name}</h1>
+              </div>
               <div className="ms-auto">
-                <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+                <UncontrolledDropdown direction="down">
+                  <DropdownToggle tag="div">
+                    <IconButton
+                      width={18}
+                      height={18}
+                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                      color={BootstrapColor.SECONDARY}
+                      activeColor={BootstrapColor.WARNING}
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Trash</span>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </div>
             </div>
           )}
