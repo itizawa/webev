@@ -1,12 +1,10 @@
-import { VFC, useState } from 'react';
+import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-import style from 'styled-components';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
-import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
