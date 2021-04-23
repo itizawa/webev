@@ -43,7 +43,13 @@ const Index: VFC = () => {
                 <h1>{directory?.name}</h1>
               </div>
               <div className="ms-auto">
-                <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+                <IconButton
+                  width={18}
+                  height={18}
+                  icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WARNING}
+                />
               </div>
             </div>
           )}
