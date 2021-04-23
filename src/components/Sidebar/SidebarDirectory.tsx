@@ -1,5 +1,6 @@
 import { useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
@@ -16,6 +17,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -83,7 +85,7 @@ export const SidebarDirectory: VFC = () => {
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <Link href={`/directory/${directory._id}`}>
-                          <StyledList className="list-group-item border-0">
+                          <StyledList className="list-group-item border-0" isActive={directory._id === router.query.id}>
                             <span>{directory.name}</span>
                           </StyledList>
                         </Link>

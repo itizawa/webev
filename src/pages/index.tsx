@@ -20,11 +20,13 @@ const Index: ReactNode = (props: Props) => {
       <h1 className="my-3">{t.welcome_webev}</h1>
       <Image src="/images/eye-catch-dark.png" height={1260} width={2240} />
       <div className="row my-3">
-        <div className="card bg-dark border border-warning text-white p-3 col-6 offset-3 text-center">
-          <h2>
-            <CountUp end={props.count} delay={1} /> Pages
-          </h2>
-          <p>{t.total_pages}</p>
+        <div className="col-12 col-md-6 offset-md-3">
+          <div className="card bg-dark border border-warning text-white p-3 text-center">
+            <h2>
+              <CountUp end={props.count} delay={1} /> Pages
+            </h2>
+            <p>{t.total_pages}</p>
+          </div>
         </div>
       </div>
       <div className="text-center">

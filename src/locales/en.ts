@@ -19,6 +19,7 @@ export const en = {
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
+  toastr_delete_directory: 'Delete Directory',
   toastr_success_archived: 'Archived',
   toastr_success_add_directory: 'Add Directory',
 
@@ -36,7 +37,9 @@ export const en = {
   delete_page: 'Delete Page',
   obtained_from_clipboard: 'Obtained from Clipboard',
 
-  add_directory: 'Add Directory',
+  delete_directory: 'Delete Directory',
+
+  move_directory: 'Move Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
   save_the_url_immediately: 'Please add them from the top bar.',

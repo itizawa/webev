@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, usePageStatus } from '~/stores/page';
+import { useActivePage, useDirectoryId, usePageStatus } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -17,11 +17,20 @@ import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { PageStatus } from '~/interfaces/page';
+import { PathName } from '~/interfaces/route';
+
+const statusByPagePathname: { [key: string]: PageStatus[] } = {
+  [PathName.HOME]: [PageStatus.PAGE_STATUS_STOCK],
+  [PathName.ARCHIVED]: [PageStatus.PAGE_STATUS_ARCHIVE],
+  [PathName.DIRECTORY_ID]: [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
+};
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
+  const pathname = router.pathname as PathName;
   const { mutate: mutateActivePage } = useActivePage();
+  const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { mutate: mutatePageStatus } = usePageStatus();
 
@@ -30,7 +39,11 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutatePageStatus(router.pathname === '/archived' ? PageStatus.PAGE_STATUS_ARCHIVE : PageStatus.PAGE_STATUS_STOCK);
+    mutatePageStatus(statusByPagePathname[pathname]);
+
+    if (router.pathname !== '/directory/[id]') {
+      mutateDirectoryId(null);
+    }
     mutateActivePage(1);
   }, [router]);
 

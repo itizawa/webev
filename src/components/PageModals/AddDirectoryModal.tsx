@@ -11,6 +11,7 @@ import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 import { Directory } from '~/interfaces/directory';
 import { useLocale } from '~/hooks/useLocale';
+import { usePageListSWR } from '~/stores/page';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -18,7 +19,8 @@ export const AddDirectoryModal: VFC = () => {
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { data: paginationResult } = useDirectoryListSWR();
+  const { mutate: mutatePageList } = usePageListSWR();
 
   const addPageTODirectory = async (directory: Directory) => {
     try {
@@ -26,8 +28,8 @@ export const AddDirectoryModal: VFC = () => {
         directoryId: directory._id,
       });
       mutateIsOpenAddDirectoryModal(false);
+      mutatePageList();
       toastSuccess(t.toastr_success_add_directory);
-      mutateDirectoryList();
     } catch (error) {
       console.log(error);
       toastError(error);
@@ -36,7 +38,7 @@ export const AddDirectoryModal: VFC = () => {
 
   return (
     <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
-      <ModalHeader className="bg-dark">{t.add_directory}</ModalHeader>
+      <ModalHeader className="bg-dark">{t.move_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row">
           <div className="col-12 col-md-5">
@@ -53,17 +55,23 @@ export const AddDirectoryModal: VFC = () => {
               <Icon height={48} width={48} icon={BootstrapIcon.ARROW_DOWN} color={BootstrapColor.WHITE} />
             </div>
           </div>
-          <div className="col-12 col-md-5">
+          <StyledDiv className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
+              if (pageForAddDirectory?.directoryId == directory._id) {
+                return null;
+              }
               return (
-                <div key={directory._id} onClick={() => addPageTODirectory(directory)}>
+                <div key={directory._id} onClick={() => addPageTODirectory(directory)} role="button">
                   <StyledList className="list-group-item border-0">
                     <span>{directory.name}</span>
                   </StyledList>
                 </div>
               );
             })}
-          </div>
+          </StyledDiv>
+        </div>
+        <div className="mt-3 text-center" onClick={() => mutateIsOpenAddDirectoryModal(false)}>
+          <button className="btn btn-secondary w-100">Cancel</button>
         </div>
       </ModalBody>
     </Modal>
@@ -97,4 +105,9 @@ const StyledList = styled.li`
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
   }
+`;
+
+const StyledDiv = styled.div`
+  max-height: 500px;
+  overflow: scroll;
 `;
