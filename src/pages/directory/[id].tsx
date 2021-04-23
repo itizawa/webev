@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import { useRouter } from 'next/router';
 
+import Link from 'next/link';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation } from '~/stores/directory';
@@ -32,7 +33,13 @@ const Index: VFC = () => {
         <div className="p-3">
           {directory != null && (
             <div className="d-flex align-items-center">
-              <h1>{directory?.name}</h1>
+              <h1>
+                <Link href="/directory">
+                  <a className="text-decoration-none text-white">Directory</a>
+                </Link>
+                <span className="mx-2">{'/'}</span>
+                {directory?.name}
+              </h1>
               <div className="ms-auto">
                 <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
               </div>
