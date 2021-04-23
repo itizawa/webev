@@ -2,6 +2,7 @@ import { VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation } from '~/stores/directory';
@@ -13,8 +14,10 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { IconButton } from '~/components/Icons/IconButton';
+import { Icon } from '~/components/Icons/Icon';
+
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -26,6 +29,10 @@ const Index: VFC = () => {
   mutateDirectoryId(id as string);
   const { data: directory } = useDirectoryInfomation(id as string);
   const { data: paginationResult } = usePageListSWR();
+
+  const openDeleteModal = () => {
+    console.log('hoge');
+  };
 
   return (
     <LoginRequiredWrapper>
@@ -43,13 +50,23 @@ const Index: VFC = () => {
                 <h1>{directory?.name}</h1>
               </div>
               <div className="ms-auto">
-                <IconButton
-                  width={18}
-                  height={18}
-                  icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WARNING}
-                />
+                <UncontrolledDropdown direction="down">
+                  <DropdownToggle tag="div">
+                    <IconButton
+                      width={18}
+                      height={18}
+                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                      color={BootstrapColor.SECONDARY}
+                      activeColor={BootstrapColor.WARNING}
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu className="dropdown-menu-dark" positionFixed>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Trash</span>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </div>
             </div>
           )}
