@@ -66,7 +66,7 @@ const Index: VFC = () => {
                       activeColor={BootstrapColor.WARNING}
                     />
                   </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-dark" positionFixed>
+                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
                     <DropdownItem tag="button" onClick={openDeleteModal}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
