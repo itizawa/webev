@@ -18,10 +18,9 @@ export const DeleteDirectoryModal: VFC = () => {
 
   const deletePage = async () => {
     try {
-      // await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
-      // mutateIsOpenDeletePageModal(false);
-      // toastSuccess(t.toastr_delete_url);
-      // pageListMutate();
+      await restClient.apiDelete(`/directories/${directoryForDelete?._id}`);
+      mutateIsOpenDeleteDirectoryModal(false);
+      toastSuccess(t.toastr_delete_directory);
     } catch (err) {
       toastError(err);
     }
