@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
+import { useRouter } from 'next/router';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -10,6 +11,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const DeleteDirectoryModal: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const { data: directoryForDelete } = useDirectoryForDelete();
   const { data: isOpenDeleteDirectoryModal = false, mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
@@ -19,6 +21,7 @@ export const DeleteDirectoryModal: VFC = () => {
       await restClient.apiDelete(`/directories/${directoryForDelete?._id}`);
       mutateIsOpenDeleteDirectoryModal(false);
       toastSuccess(t.toastr_delete_directory);
+      router.push('/directory');
     } catch (err) {
       toastError(err);
     }
