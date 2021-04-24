@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { SidebarDirectory } from '../Sidebar/SidebarDirectory';
+import { SidebarDirectory } from '~/components/Sidebar/SidebarDirectory';
 import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
