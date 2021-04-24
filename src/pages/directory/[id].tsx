@@ -71,6 +71,10 @@ const Index: VFC = () => {
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
                     </DropdownItem>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Rename</span>
+                    </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
