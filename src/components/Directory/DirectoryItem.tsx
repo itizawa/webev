@@ -12,7 +12,7 @@ export const DirectoryItem: VFC = (props: Props) => {
 
   return (
     <>
-      <StyledDiv className="text-white text-left w-100 rounded" role="button" onClick={() => setIsOpen((prevState) => !prevState)}>
+      <StyledDiv className="text-white text-left w-100 rounded text-truncate" role="button" onClick={() => setIsOpen((prevState) => !prevState)}>
         {isOpen ? (
           <IconButton
             width={18}
@@ -34,7 +34,9 @@ export const DirectoryItem: VFC = (props: Props) => {
         )}
         hoge
       </StyledDiv>
-      <Collapse isOpen={isOpen}>{isOpen && <DirectoryItem />}</Collapse>
+      <Collapse isOpen={isOpen}>
+        <div className="ps-3">{isOpen && <DirectoryItem />}</div>
+      </Collapse>
     </>
   );
 };
