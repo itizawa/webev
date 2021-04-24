@@ -1,6 +1,4 @@
 import { useEffect, useState, VFC } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
@@ -18,7 +16,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -76,9 +73,6 @@ export const SidebarDirectory: VFC = () => {
 
   return (
     <>
-      <div className="px-3">
-        <DirectoryItem />
-      </div>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
@@ -88,11 +82,7 @@ export const SidebarDirectory: VFC = () => {
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Link href={`/directory/${directory._id}`}>
-                          <StyledList className="list-group-item border-0" isActive={directory._id === router.query.id}>
-                            <span>{directory.name}</span>
-                          </StyledList>
-                        </Link>
+                        <DirectoryItem directory={directory} />
                       </div>
                     )}
                   </Draggable>
@@ -103,7 +93,7 @@ export const SidebarDirectory: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <StyledDiv className="text-center mx-3">
+      <StyledDiv className="text-center mx-3 mt-2">
         {isCreatingNewDirectory ? (
           <form className="input-group" onSubmit={onSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />

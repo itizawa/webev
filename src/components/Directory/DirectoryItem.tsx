@@ -1,13 +1,18 @@
+import Link from 'next/link';
 import { useState, VFC } from 'react';
 import { Collapse } from 'reactstrap';
 
 import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
+import { Directory } from '~/interfaces/directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-type Props = {};
-export const DirectoryItem: VFC = (props: Props) => {
+type Props = {
+  directory?: Directory;
+};
+
+export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -32,7 +37,9 @@ export const DirectoryItem: VFC = (props: Props) => {
             isRemovePadding
           />
         )}
-        hoge
+        <Link href={`/directory/${directory?._id}`}>
+          <a className="text-decoration-none text-white">{directory?.name}</a>
+        </Link>
       </StyledDiv>
       <Collapse isOpen={isOpen}>
         <div className="ps-3">{isOpen && <DirectoryItem />}</div>
