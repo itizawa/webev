@@ -150,7 +150,9 @@ const Index: VFC = () => {
                 </div>
               ))}
               {paginationResult.docs.length === 0 ? (
-                <NoPageAlert />
+                <div className="col-12">
+                  <NoPageAlert />
+                </div>
               ) : (
                 <div className="text-center">
                   <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
