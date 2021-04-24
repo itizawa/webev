@@ -16,6 +16,7 @@ export const en = {
 
   toastr_update_setting: 'Update Setting',
   toastr_update_favorite: 'Update Favorite',
+  toastr_update_directory_name: 'Update Directory Name',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',

@@ -19,6 +19,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -57,7 +58,12 @@ const Index: VFC = () => {
     if (newDirecroryName === directory?.name) {
       return setIsEditing(false);
     }
-    console.log(newDirecroryName);
+
+    try {
+      toastSuccess(t.toastr_update_directory_name);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   return (
