@@ -100,20 +100,16 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
         </h5>
         <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
-          <div className="me-auto">
-            <small>
-              <span id={`sitename-for-${page._id}`}>
-                {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
-              </span>
-              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
-                <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
-                  {siteName}
-                </UncontrolledTooltip>
-              )}
-              <br />
-              {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
-            </small>
-          </div>
+          <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
+            {siteName}
+            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                {siteName}
+              </UncontrolledTooltip>
+            )}
+            <br />
+            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+          </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
