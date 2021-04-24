@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation } from '~/stores/directory';
@@ -76,7 +77,7 @@ const Index: VFC = () => {
         <div className="p-3">
           {directory != null && (
             <div className="d-flex align-items-center">
-              <div>
+              <StyledDiv className="col me-5">
                 <small>
                   <Link href="/directory">
                     <a className="text-decoration-none text-white">Directory</a>
@@ -99,7 +100,7 @@ const Index: VFC = () => {
                 ) : (
                   <h1>{directory?.name}</h1>
                 )}
-              </div>
+              </StyledDiv>
               <div className="ms-auto">
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
@@ -160,5 +161,9 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+const StyledDiv = styled.div`
+  max-width: 400px;
+`;
 
 export default Index;
