@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
-import { Icon } from '../Icons/Icon';
+import { Icon } from '~/components/Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
