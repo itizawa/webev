@@ -6,7 +6,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useDirectoryInfomation } from '~/stores/directory';
+import { useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
@@ -40,6 +40,7 @@ const Index: VFC = () => {
 
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
 
   useEffect(() => {
@@ -65,6 +66,7 @@ const Index: VFC = () => {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
       toastSuccess(t.toastr_update_directory_name);
       mutateDirectory();
+      mutateDirectoryList();
       setIsEditing(false);
     } catch (error) {
       toastError(error);
