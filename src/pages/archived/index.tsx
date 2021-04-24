@@ -1,11 +1,10 @@
 import { VFC } from 'react';
 
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'react-i18next';
-
 import { useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+
+import { useLocale } from '~/hooks/useLocale';
 
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -16,7 +15,7 @@ import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
 import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
-  const { t } = useTranslation();
+  const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
@@ -26,9 +25,9 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           <div className="d-flex align-items-center">
-            <h1>{t('archive')}</h1>
+            <h1>{t.archive}</h1>
             <div className="ms-auto">
-              <span className="badge rounded-pill bg-secondary">{paginationResult?.totalDocs} Pages</span>
+              <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
             </div>
           </div>
           <div className="my-2 d-flex">
@@ -40,7 +39,7 @@ const Index: VFC = () => {
                 activeColor={BootstrapColor.WARNING}
                 onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
                 buttonSize="sm"
-                text={t('only_favorite')}
+                text={t.only_favorite}
               />
             </div>
             <SortButtonGroup />
@@ -66,12 +65,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const getStaticProps = async ({ locale }: { locale: string }) => ({
-  props: {
-    ...(await serverSideTranslations(locale, ['common'])),
-  },
-});
 
 export default Index;
