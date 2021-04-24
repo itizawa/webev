@@ -50,6 +50,16 @@ const Index: VFC = () => {
     mutateIsOpenDeleteDirectoryModal(true);
   };
 
+  const handleSubmitRenameForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // If there is no change, do nothing
+    if (newDirecroryName === directory?.name) {
+      return setIsEditing(false);
+    }
+    console.log(newDirecroryName);
+  };
+
   return (
     <LoginRequiredWrapper>
       <DashBoardLayout>
@@ -64,7 +74,7 @@ const Index: VFC = () => {
                   <span className="ms-1">{'/'}</span>
                 </small>
                 {isEditing ? (
-                  <form className="input-group my-2">
+                  <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
                     <input type="text" value={newDirecroryName} className="form-control ps-3 bg-white" onChange={(e) => setNewDirecroryName(e.target.value)} />
                     <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
                       {t.save}
