@@ -38,7 +38,7 @@ const Index: VFC = () => {
   const [newDirecroryName, setNewDirecroryName] = useState('');
 
   mutateDirectoryId(id as string);
-  const { data: directory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
   const { data: paginationResult } = usePageListSWR();
 
   useEffect(() => {
@@ -63,6 +63,7 @@ const Index: VFC = () => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
       toastSuccess(t.toastr_update_directory_name);
+      mutateDirectory();
       setIsEditing(false);
     } catch (error) {
       toastError(error);
