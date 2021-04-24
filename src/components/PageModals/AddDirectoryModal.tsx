@@ -12,6 +12,7 @@ import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/mod
 import { Directory } from '~/interfaces/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
+import { imagePath } from '~/const/imagePath';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -43,9 +44,9 @@ export const AddDirectoryModal: VFC = () => {
         <div className="row">
           <div className="col-12 col-md-5">
             <StyledImageWrapper>
-              <img src={pageForAddDirectory?.image} alt={pageForAddDirectory?.image} />
+              <img src={pageForAddDirectory?.image || imagePath.NO_IMAGE} alt={pageForAddDirectory?.image || imagePath.NO_IMAGE} />
             </StyledImageWrapper>
-            <h5 className="card-title my-1">{pageForAddDirectory?.title}</h5>
+            <h5 className="card-title my-1">{pageForAddDirectory?.title || pageForAddDirectory?.url}</h5>
           </div>
           <div className="col-12 col-md-2 text-center">
             <div className="d-none d-md-block mt-5">
