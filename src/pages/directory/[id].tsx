@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
@@ -22,6 +22,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -31,9 +32,18 @@ const Index: VFC = () => {
 
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [newDirecroryName, setNewDirecroryName] = useState('');
+
   mutateDirectoryId(id as string);
   const { data: directory } = useDirectoryInfomation(id as string);
   const { data: paginationResult } = usePageListSWR();
+
+  useEffect(() => {
+    if (directory != null) {
+      setNewDirecroryName(directory?.name);
+    }
+  }, [directory]);
 
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
@@ -53,7 +63,16 @@ const Index: VFC = () => {
                   </Link>
                   <span className="ms-1">{'/'}</span>
                 </small>
-                <h1>{directory?.name}</h1>
+                {isEditing ? (
+                  <form className="input-group my-2">
+                    <input type="text" value={newDirecroryName} className="form-control ps-3 bg-white" onChange={(e) => setNewDirecroryName(e.target.value)} />
+                    <button className="btn btn-secondary" type="submit" id="input-group">
+                      {t.save}
+                    </button>
+                  </form>
+                ) : (
+                  <h1>{directory?.name}</h1>
+                )}
               </div>
               <div className="ms-auto">
                 <UncontrolledDropdown direction="down">
@@ -71,7 +90,7 @@ const Index: VFC = () => {
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
                     </DropdownItem>
