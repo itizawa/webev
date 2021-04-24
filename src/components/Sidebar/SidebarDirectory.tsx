@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
-import { Collapse } from 'reactstrap';
+import { DirectoryItem } from '../Directory/DirectoryItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -19,7 +19,7 @@ import { useLocale } from '~/hooks/useLocale';
 export const SidebarDirectory: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const [directories, setDirectories] = useState<Directory[]>([]);
@@ -77,15 +77,7 @@ export const SidebarDirectory: VFC = () => {
   return (
     <>
       <div className="px-3">
-        <div className="text-white text-left w-100 border border-success rounded" role="button" onClick={() => setIsOpen((prevState) => !prevState)}>
-          {isOpen ? (
-            <IconButton width={18} height={18} icon={BootstrapIcon.CARET_DOWN} color={BootstrapColor.SECONDARY} activeColor={BootstrapColor.SECONDARY} />
-          ) : (
-            <IconButton width={18} height={18} icon={BootstrapIcon.CARET_RIGHT} color={BootstrapColor.SECONDARY} activeColor={BootstrapColor.SECONDARY} />
-          )}
-          hoge
-        </div>
-        <Collapse isOpen={isOpen}>aaa</Collapse>
+        <DirectoryItem />
       </div>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
