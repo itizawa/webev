@@ -20,6 +20,7 @@ import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -51,7 +52,7 @@ const Index: VFC = () => {
     mutateIsOpenDeleteDirectoryModal(true);
   };
 
-  const handleSubmitRenameForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // If there is no change, do nothing
@@ -60,7 +61,9 @@ const Index: VFC = () => {
     }
 
     try {
+      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
       toastSuccess(t.toastr_update_directory_name);
+      setIsEditing(false);
     } catch (error) {
       toastError(error);
     }
