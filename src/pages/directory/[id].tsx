@@ -1,11 +1,12 @@
-import { VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useDirectoryInfomation } from '~/stores/directory';
+import { useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
@@ -19,9 +20,12 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -31,13 +35,42 @@ const Index: VFC = () => {
 
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [newDirecroryName, setNewDirecroryName] = useState('');
+
   mutateDirectoryId(id as string);
-  const { data: directory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
+
+  useEffect(() => {
+    if (directory != null) {
+      setNewDirecroryName(directory?.name);
+    }
+  }, [directory]);
 
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
     mutateIsOpenDeleteDirectoryModal(true);
+  };
+
+  const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // If there is no change, do nothing
+    if (newDirecroryName === directory?.name) {
+      return setIsEditing(false);
+    }
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
+      toastSuccess(t.toastr_update_directory_name);
+      mutateDirectory();
+      mutateDirectoryList();
+      setIsEditing(false);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   return (
@@ -46,15 +79,30 @@ const Index: VFC = () => {
         <div className="p-3">
           {directory != null && (
             <div className="d-flex align-items-center">
-              <div>
+              <StyledDiv className="col me-5">
                 <small>
                   <Link href="/directory">
                     <a className="text-decoration-none text-white">Directory</a>
                   </Link>
                   <span className="ms-1">{'/'}</span>
                 </small>
-                <h1>{directory?.name}</h1>
-              </div>
+                {isEditing ? (
+                  <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
+                    <input
+                      type="text"
+                      value={newDirecroryName}
+                      className="form-control ps-3 bg-white"
+                      onChange={(e) => setNewDirecroryName(e.target.value)}
+                      autoFocus
+                    />
+                    <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
+                      {t.save}
+                    </button>
+                  </form>
+                ) : (
+                  <h1>{directory?.name}</h1>
+                )}
+              </StyledDiv>
               <div className="ms-auto">
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
@@ -70,6 +118,10 @@ const Index: VFC = () => {
                     <DropdownItem tag="button" onClick={openDeleteModal}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
+                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Rename</span>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -111,5 +163,9 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+const StyledDiv = styled.div`
+  max-width: 400px;
+`;
 
 export default Index;

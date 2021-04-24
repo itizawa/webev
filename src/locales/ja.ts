@@ -16,6 +16,7 @@ export const ja = {
 
   toastr_update_setting: '設定を更新しました',
   toastr_update_favorite: 'お気に入りを更新しました',
+  toastr_update_directory_name: '名前を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'Directory を保存しました',

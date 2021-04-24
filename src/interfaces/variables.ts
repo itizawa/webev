@@ -15,6 +15,7 @@ export enum BootstrapIcon {
   PLUS_DOTTED = 'plus-dotted',
   ARCHIVE = 'archive',
   STAR = 'star',
+  PENCIL = 'pencil',
   TRASH = 'trash',
   THREE_DOTS_HORIZONAL = 'three-dots-horizonal',
   THREE_DOTS_VERTICAL = 'three-dots-vertical',
