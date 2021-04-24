@@ -94,7 +94,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
       <div className="card-body p-2">
         <h5 className="card-title my-1">
           <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
-            {title}
+            {title || url}
           </a>
         </h5>
         <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
