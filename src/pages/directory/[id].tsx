@@ -66,7 +66,7 @@ const Index: VFC = () => {
                 {isEditing ? (
                   <form className="input-group my-2">
                     <input type="text" value={newDirecroryName} className="form-control ps-3 bg-white" onChange={(e) => setNewDirecroryName(e.target.value)} />
-                    <button className="btn btn-secondary" type="submit" id="input-group">
+                    <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
                       {t.save}
                     </button>
                   </form>
