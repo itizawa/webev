@@ -30,7 +30,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   return (
     <>
       <StyledDiv
-        className="text-white text-left w-100 rounded text-truncate d-flex"
+        className="text-white text-left w-100 rounded d-flex"
         role="button"
         onClick={() => router.push(`/directory/${directory?._id}`)}
         isActive={isActive}
@@ -58,14 +58,14 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
             isRemovePadding
           />
         )}
-        <span>{directory?.name}</span>
+        <span className="text-truncate">{directory?.name}</span>
         <div className="ms-auto pencil-button">
           <IconButton
             width={18}
             height={18}
             isActive={isActive}
-            icon={BootstrapIcon.PENCIL}
-            color={BootstrapColor.SECONDARY}
+            icon={BootstrapIcon.ADD_TO_DIRECTORY}
+            color={BootstrapColor.WHITE}
             activeColor={BootstrapColor.WHITE}
             onClickButton={handleClickPencilIcon}
             isRemovePadding
