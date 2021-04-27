@@ -41,6 +41,7 @@ export const en = {
   delete_directory: 'Delete Directory',
 
   move_directory: 'Move Directory',
+  create_directory: 'Create New Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
   save_the_url_immediately: 'Please add them from the top bar.',

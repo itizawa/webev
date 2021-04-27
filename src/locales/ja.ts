@@ -41,6 +41,7 @@ export const ja = {
   delete_directory: 'Directory を削除します',
 
   move_directory: 'ディレクトリに移動します',
+  create_directory: 'Directory の新規作成',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
   save_the_url_immediately: '上のバーから url を保存してください',
