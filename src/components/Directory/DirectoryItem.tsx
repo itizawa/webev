@@ -1,11 +1,11 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, VFC } from 'react';
-import { Collapse } from 'reactstrap';
+import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
+import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/interfaces/directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
@@ -15,6 +15,8 @@ type Props = {
 
 export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   const router = useRouter();
+  const { t } = useLocale();
+
   const [isOpen, setIsOpen] = useState(false);
   const isActive = router.query.id != null && directory?._id === router.query.id;
 
@@ -54,7 +56,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
           />
         )}
         <span className="text-truncate">{directory?.name}</span>
-        <div className="ms-auto pencil-button">
+        <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
           <IconButton
             width={18}
             height={18}
@@ -66,6 +68,9 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
             isRemovePadding
           />
         </div>
+        <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
+          {t.create_directory}
+        </UncontrolledTooltip>
       </StyledDiv>
       <Collapse isOpen={isOpen}>
         <div className="ps-3">{isOpen && <DirectoryItem />}</div>
@@ -75,12 +80,12 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
 };
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
-  .pencil-button {
+  .create-directory-button {
     display: none;
   }
 
   &:hover {
-    .pencil-button {
+    .create-directory-button {
       display: block;
     }
   }
