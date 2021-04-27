@@ -29,12 +29,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
 
   return (
     <>
-      <StyledDiv
-        className="text-white text-left w-100 rounded d-flex"
-        role="button"
-        onClick={() => router.push(`/directory/${directory?._id}`)}
-        isActive={isActive}
-      >
+      <StyledDiv className="text-white text-left rounded d-flex" role="button" onClick={() => router.push(`/directory/${directory?._id}`)} isActive={isActive}>
         {isOpen ? (
           <IconButton
             width={18}

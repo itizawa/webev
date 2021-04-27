@@ -14,7 +14,7 @@ export const Sidebar: VFC = () => {
 
   return (
     <div className="sticky-top">
-      <ul className="sidebar-list-group list-group gap-3 py-3">
+      <ul className="list-group gap-3 py-3">
         {navbarItemMappings.map((v) => {
           return (
             <Link key={v.text} href={v.url}>
