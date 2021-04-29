@@ -18,4 +18,4 @@ const options = {
   sessionUpdateAge: 24 * 60 * 60 * 1000, // Update session expiry only if session was updated more recently than the last 24 hours
 };
 
-export default (req: NextApiRequest, res: NextApiResponse): Promise<void> => NextAuth(req, res, options);
+export default (req: NextApiRequest, res: NextApiResponse): void | Promise<void> => NextAuth(req, res, options);
