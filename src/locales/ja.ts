@@ -44,7 +44,6 @@ export const ja = {
   create_directory: 'Directory の新規作成',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
-  save_the_url_immediately: '上のバーから url を保存してください',
   'your_favorite_pages_don’t_exist': 'お気に入りが存在しません',
   favorite_immediately: 'お気に入りボタンを押して追加してください',
   'your_archive_pages_don’t_exist': 'アーカイブが存在しません',
