@@ -1,10 +1,9 @@
 import { useEffect, useState, VFC } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
+import { DirectoryItem } from '../Directory/DirectoryItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -17,7 +16,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -83,12 +81,8 @@ export const SidebarDirectory: VFC = () => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
-                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Link href={`/directory/${directory._id}`}>
-                          <StyledList className="list-group-item border-0" isActive={directory._id === router.query.id}>
-                            <span>{directory.name}</span>
-                          </StyledList>
-                        </Link>
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
+                        <DirectoryItem directory={directory} />
                       </div>
                     )}
                   </Draggable>
@@ -99,9 +93,9 @@ export const SidebarDirectory: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <StyledDiv className="text-center mx-3">
+      <StyledDiv className="text-center mx-3 mt-2">
         {isCreatingNewDirectory ? (
-          <form className="input-group" onSubmit={onSubmit}>
+          <form className="input-group ps-3" onSubmit={onSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
           </form>
         ) : (
@@ -116,25 +110,6 @@ export const SidebarDirectory: VFC = () => {
     </>
   );
 };
-
-const StyledList = styled.li<{ isActive?: boolean }>`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  ${({ isActive }) =>
-    isActive
-      ? `
-    margin-top: 0px;
-    background-color: #00acc1;
-    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
-  `
-      : `:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
-  }`}
-`;
 
 const StyledDirectpryDiv = styled.div`
   max-height: 60vh;

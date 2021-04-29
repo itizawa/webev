@@ -78,14 +78,14 @@ const Index: VFC = () => {
       <DashBoardLayout>
         <div className="p-3">
           {directory != null && (
-            <div className="d-flex align-items-center">
-              <StyledDiv className="col me-5">
-                <small>
-                  <Link href="/directory">
-                    <a className="text-decoration-none text-white">Directory</a>
-                  </Link>
-                  <span className="ms-1">{'/'}</span>
-                </small>
+            <>
+              <small>
+                <Link href="/directory">
+                  <a className="text-decoration-none text-white">Directory</a>
+                </Link>
+                <span className="ms-1">{'/'}</span>
+              </small>
+              <div className="d-flex gap-3 align-items-center">
                 {isEditing ? (
                   <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
                     <input
@@ -100,33 +100,33 @@ const Index: VFC = () => {
                     </button>
                   </form>
                 ) : (
-                  <h1>{directory?.name}</h1>
+                  <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
                 )}
-              </StyledDiv>
-              <div className="ms-auto">
-                <UncontrolledDropdown direction="down">
-                  <DropdownToggle tag="div">
-                    <IconButton
-                      width={18}
-                      height={18}
-                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
-                      color={BootstrapColor.SECONDARY}
-                      activeColor={BootstrapColor.WARNING}
-                    />
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    <DropdownItem tag="button" onClick={openDeleteModal}>
-                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                      <span className="ms-2">Trash</span>
-                    </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
-                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
-                      <span className="ms-2">Rename</span>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
+                <div className="ms-auto">
+                  <UncontrolledDropdown direction="down">
+                    <DropdownToggle tag="div">
+                      <IconButton
+                        width={18}
+                        height={18}
+                        icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                        color={BootstrapColor.SECONDARY}
+                        activeColor={BootstrapColor.WARNING}
+                      />
+                    </DropdownToggle>
+                    <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                      <DropdownItem tag="button" onClick={openDeleteModal}>
+                        <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                        <span className="ms-2">Trash</span>
+                      </DropdownItem>
+                      <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
+                        <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                        <span className="ms-2">Rename</span>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </UncontrolledDropdown>
+                </div>
               </div>
-            </div>
+            </>
           )}
           <div className="my-2 d-flex">
             <div className="ms-auto me-3">
@@ -150,7 +150,9 @@ const Index: VFC = () => {
                 </div>
               ))}
               {paginationResult.docs.length === 0 ? (
-                <NoPageAlert />
+                <div className="col-12">
+                  <NoPageAlert />
+                </div>
               ) : (
                 <div className="text-center">
                   <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
@@ -163,9 +165,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-const StyledDiv = styled.div`
-  max-width: 400px;
-`;
 
 export default Index;

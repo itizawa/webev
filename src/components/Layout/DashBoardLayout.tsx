@@ -59,10 +59,10 @@ export const DashBoardLayout: FC = ({ children }) => {
       <StyledBorder />
       <SubnavBar />
       <StyledDiv className="d-flex mx-auto">
-        <div className="d-none d-md-block col-lg-2">
+        <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-10">{children}</div>
+        <div className="col-12 col-md-9">{children}</div>
         {session && <PageModals />}
         {session && <SocketConnector />}
         <ScrollTopButton />

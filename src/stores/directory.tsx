@@ -4,6 +4,7 @@ import urljoin from 'url-join';
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
 import { Directory } from '~/interfaces/directory';
+import { DirectoryTree } from '~/interfaces/directoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
 export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Directory>, Error> => {
@@ -18,13 +19,21 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
   );
 };
 
+export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<DirectoryTree[], Error> => {
+  const endpoint = parentDirectoryId != null ? `/directories/${parentDirectoryId}/children` : null;
+  return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+};
+
 export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
   return useAuthenticationSWR(
     ['/directories/', directoryId],
     (endpoint, directoryId) => restClient.apiGet(urljoin(endpoint, directoryId)).then((result) => result.data),
     {
       revalidateOnFocus: false,
-      revalidateOnReconnect: true,
+      revalidateOnReconnect: false,
     },
   );
 };

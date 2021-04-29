@@ -7,8 +7,7 @@ export const NoPageAlert: VFC = () => {
 
   return (
     <div className="text-center alert alert-info">
-      <h2>{t['your_pages_don’t_exist']}</h2>
-      <span>{t.save_the_url_immediately}</span>
+      <h2 className="mb-0">{t['your_pages_don’t_exist']}</h2>
     </div>
   );
 };
