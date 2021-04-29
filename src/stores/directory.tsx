@@ -18,13 +18,24 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
   );
 };
 
+export const useDirectoryChildren = (parentDirectoryId: string): SWRResponse<Directory[], Error> => {
+  return useAuthenticationSWR(
+    ['/directories/', parentDirectoryId],
+    (endpoint, parentDirectoryId) => restClient.apiGet(urljoin(endpoint, `/${parentDirectoryId}`, `/children`)).then((result) => result.data),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
+  );
+};
+
 export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
   return useAuthenticationSWR(
     ['/directories/', directoryId],
     (endpoint, directoryId) => restClient.apiGet(urljoin(endpoint, directoryId)).then((result) => result.data),
     {
       revalidateOnFocus: false,
-      revalidateOnReconnect: true,
+      revalidateOnReconnect: false,
     },
   );
 };
