@@ -1,4 +1,5 @@
 import axiosBase, { AxiosInstance, AxiosResponse } from 'axios';
+import { Session } from 'next-auth';
 import { getSession } from 'next-auth/client';
 import { apiErrorHandler } from './apiErrorHandler';
 
@@ -19,8 +20,10 @@ class RestClient {
 
   async getAccessToken() {
     if (this.accessToken == null) {
-      const session = await getSession();
-      this.accessToken = session?.accessToken;
+      const session: Session | null = await getSession({});
+      if (session != null) {
+        this.accessToken = session.accessToken as string;
+      }
     }
     return this.accessToken;
   }
