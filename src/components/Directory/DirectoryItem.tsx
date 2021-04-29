@@ -11,7 +11,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/interfaces/directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useDirectoryListSWR } from '~/stores/directory';
+import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
@@ -21,8 +21,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   const router = useRouter();
   const { t } = useLocale();
 
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
-
+  const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildren(directory?._id);
   const [isOpen, setIsOpen] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
@@ -54,7 +53,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
       await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateDirectoryList();
+      mutateChildrenDirectortTrees();
     } catch (err) {
       toastError(err);
     }
@@ -110,7 +109,10 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {isOpen && <DirectoryItem />}
+          {childrenDirectortTrees?.map((childrenDirectortTree) => {
+            return <DirectoryItem key={childrenDirectortTree._id} directory={childrenDirectortTree.descendant as Directory} />;
+          })}
+          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
