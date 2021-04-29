@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';

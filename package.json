@@ -28,7 +28,7 @@
     "date-fns": "^2.21.1",
     "mongodb": "^3.6.4",
     "next": "^10.2.0",
-    "next-auth": "^3.13.3",
+    "next-auth": "^3.17.0",
     "react": "latest",
     "react-beautiful-dnd": "^13.1.0",
     "react-countup": "^4.3.3",
