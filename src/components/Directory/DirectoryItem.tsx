@@ -54,6 +54,7 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
       toastSuccess(t.toastr_save_directory);
       setName('');
       mutateChildrenDirectortTrees();
+      setIsCreatingNewDirectory(false);
     } catch (err) {
       toastError(err);
     }
