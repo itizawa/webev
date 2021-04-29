@@ -18,15 +18,31 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   const { t } = useLocale();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
+  const [name, setName] = useState('');
+
   const isActive = router.query.id != null && directory?._id === router.query.id;
 
   const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    if (!isOpen) {
+      setIsCreatingNewDirectory(false);
+    }
     setIsOpen((prevState) => !prevState);
   };
 
   const handleClickPencilIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
+    setIsOpen(true);
+    setIsCreatingNewDirectory(true);
+  };
+
+  const handleSubmitCreateDirectory = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    if (name.trim() === '') {
+      return setIsCreatingNewDirectory(false);
+    }
   };
 
   return (
@@ -73,7 +89,14 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
         </UncontrolledTooltip>
       </StyledDiv>
       <Collapse isOpen={isOpen}>
-        <div className="ps-3">{isOpen && <DirectoryItem />}</div>
+        <div className="ps-3 pt-1">
+          {isCreatingNewDirectory && (
+            <form className="input-group my-2 ps-3" onSubmit={handleSubmitCreateDirectory}>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+            </form>
+          )}
+          {isOpen && <DirectoryItem />}
+        </div>
       </Collapse>
     </>
   );

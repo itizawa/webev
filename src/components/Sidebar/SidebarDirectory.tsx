@@ -95,7 +95,7 @@ export const SidebarDirectory: VFC = () => {
       </DragDropContext>
       <StyledDiv className="text-center mx-3 mt-2">
         {isCreatingNewDirectory ? (
-          <form className="input-group" onSubmit={onSubmit}>
+          <form className="input-group ps-3" onSubmit={onSubmit}>
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
           </form>
         ) : (
