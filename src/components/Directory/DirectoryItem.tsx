@@ -4,10 +4,14 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+
 import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/interfaces/directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { useDirectoryListSWR } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
@@ -16,6 +20,8 @@ type Props = {
 export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
   const router = useRouter();
   const { t } = useLocale();
+
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -42,6 +48,15 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
 
     if (name.trim() === '') {
       return setIsCreatingNewDirectory(false);
+    }
+
+    try {
+      await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
+      toastSuccess(t.toastr_save_directory);
+      setName('');
+      mutateDirectoryList();
+    } catch (err) {
+      toastError(err);
     }
   };
 
