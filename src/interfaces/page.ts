@@ -16,21 +16,8 @@ export class Page {
   updatedAt: Date;
   status: PageStatus;
   isFavorite: boolean;
-  constructor(
-    id: string,
-    url: string,
-    image: string,
-    description: string,
-    title: string,
-    siteName: string,
-    directoryId: string,
-    createdUser: string,
-    createdAt: Date,
-    updatedAt: Date,
-    status: PageStatus,
-    isFavorite: boolean,
-  ) {
-    this._id = id;
+  constructor({ _id, url, image, description, title, siteName, directoryId, createdUser, createdAt, updatedAt, status, isFavorite }: Page) {
+    this._id = _id;
     this.url = url;
     this.image = image;
     this.description = description;

@@ -34,6 +34,10 @@ const StarIcon: VFC = () => (
   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 );
 
+const PencilIcon: VFC = () => (
+  <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+);
+
 const TrashIcon: VFC = () => (
   <>
     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
@@ -84,6 +88,10 @@ const ArrowDownIcon: VFC = () => (
   />
 );
 
+const CaretRight: VFC = () => <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />;
+
+const CaretDown: VFC = () => <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />;
+
 const ChevronDoubleLeft: VFC = () => (
   <>
     <path fillRule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
@@ -130,6 +138,7 @@ const IconComponentMapping = {
   [BootstrapIcon.PLUS_DOTTED]: <PlusDottedIcon />,
   [BootstrapIcon.ARCHIVE]: <ArchiveIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
+  [BootstrapIcon.PENCIL]: <PencilIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,
   [BootstrapIcon.THREE_DOTS_HORIZONAL]: <ThreeDotsHorisonalIcon />,
   [BootstrapIcon.THREE_DOTS_VERTICAL]: <ThreeDotsVerticalIcon />,
@@ -138,6 +147,8 @@ const IconComponentMapping = {
   [BootstrapIcon.ARROW]: <ArrowUpIcon />,
   [BootstrapIcon.ARROW_RIGHT]: <ArrowRightIcon />,
   [BootstrapIcon.ARROW_DOWN]: <ArrowDownIcon />,
+  [BootstrapIcon.CARET_RIGHT]: <CaretRight />,
+  [BootstrapIcon.CARET_DOWN]: <CaretDown />,
   [BootstrapIcon.CHEVRON_DOUBLE_LEFT]: <ChevronDoubleLeft />,
   [BootstrapIcon.CHEVRON_LEFT]: <ChevronLeft />,
   [BootstrapIcon.CHEVRON_DOUBLE_RIGHT]: <ChevronDoubleRight />,
