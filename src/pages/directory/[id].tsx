@@ -1,11 +1,11 @@
-import { useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAncestorDirectories, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
@@ -21,6 +21,7 @@ import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
+import { Directory } from '~/domains/Directory';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -39,6 +40,7 @@ const Index: VFC = () => {
 
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
 
@@ -82,7 +84,21 @@ const Index: VFC = () => {
                 <Link href="/directory">
                   <a className="text-decoration-none text-white">Directory</a>
                 </Link>
-                <span className="ms-1">{'/'}</span>
+                <span className="mx-1">{'/'}</span>
+                {ancestorDirectories?.map((ancestorDirectorie) => {
+                  const ancestorDirectory = ancestorDirectorie.ancestor as Directory;
+                  if (ancestorDirectory._id === directory._id) {
+                    return null;
+                  }
+                  return (
+                    <Fragment key={ancestorDirectorie._id}>
+                      <Link href={`/directory/${ancestorDirectory._id}`}>
+                        <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
+                      </Link>
+                      <span className="mx-1">{'/'}</span>
+                    </Fragment>
+                  );
+                })}
               </small>
               <div className="d-flex gap-3 align-items-center">
                 {isEditing ? (
