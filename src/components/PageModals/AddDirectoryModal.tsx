@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
@@ -17,6 +18,8 @@ import { imagePath } from '~/const/imagePath';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
+  const directoryId = router.query.id;
 
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
@@ -59,7 +62,7 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <StyledDiv className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
-              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} />;
+              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} activeDirectoryId={directoryId as string} />;
             })}
           </StyledDiv>
         </div>
