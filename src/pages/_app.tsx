@@ -13,7 +13,7 @@ const App: VFC<AppProps> = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   const pathname = router.pathname as PathNames;
 
-  if (PathConfigs[pathname].layout === LayoutNames.DASHBOARD) {
+  if (PathConfigs[pathname]?.layout === LayoutNames.DASHBOARD) {
     return (
       <Provider options={{ clientMaxAge: 0, keepAlive: 0 }} session={pageProps.session}>
         <DashBoardLayout>

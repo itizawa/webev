@@ -1,6 +1,9 @@
 import { PageStatus } from '~/domains/Page';
 
 export const PathNames = {
+  ROOT: '/',
+  LOGIN: '/login',
+  TERM: '/term',
   HOME: '/home',
   ARCHIVED: '/archived',
   DIRECTORY: '/directory',
@@ -15,6 +18,18 @@ export const LayoutNames = {
 export type LayoutName = typeof LayoutNames[keyof typeof LayoutNames];
 
 export const PathConfigs = {
+  [PathNames.ROOT]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
+  },
+  [PathNames.LOGIN]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
+  },
+  [PathNames.TERM]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
+  },
   [PathNames.HOME]: {
     layout: LayoutNames.DASHBOARD,
     statusForFind: [PageStatus.PAGE_STATUS_STOCK],
