@@ -16,7 +16,7 @@ import { PageModals } from '~/components/PageModals/PageModals';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
-import { PageStatus } from '~/interfaces/page';
+import { PageStatus } from '~/domains/Page';
 import { PathName } from '~/interfaces/route';
 
 const statusByPagePathname: { [key: string]: PageStatus[] } = {

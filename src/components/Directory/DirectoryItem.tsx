@@ -9,7 +9,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
-import { Directory } from '~/interfaces/directory';
+import { Directory } from '~/domains/Directory';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useDirectoryChildren } from '~/stores/directory';
 

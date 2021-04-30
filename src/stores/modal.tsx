@@ -1,6 +1,6 @@
 import { SWRResponse } from 'swr';
-import { Directory } from '~/interfaces/directory';
-import { Page } from '~/interfaces/page';
+import { Directory } from '~/domains/Directory';
+import { Page } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
 export const usePageForDelete = (initialData?: Page): SWRResponse<Page, Error> => {

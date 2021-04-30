@@ -13,7 +13,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Page, PageStatus } from '~/interfaces/page';
+import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
