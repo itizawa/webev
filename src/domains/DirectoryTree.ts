@@ -1,4 +1,4 @@
-import { Directory } from './directory';
+import { Directory } from './Directory';
 
 export class DirectoryTree {
   _id: string;
