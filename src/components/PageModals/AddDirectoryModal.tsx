@@ -2,6 +2,7 @@ import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 import { Icon } from '../Icons/Icon';
+import { DirectoryItem } from '../Directory/DirectoryItem';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { restClient } from '~/utils/rest-client';
@@ -9,7 +10,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
-import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
 import { imagePath } from '~/const/imagePath';
@@ -23,10 +23,10 @@ export const AddDirectoryModal: VFC = () => {
   const { data: paginationResult } = useDirectoryListSWR();
   const { mutate: mutatePageList } = usePageListSWR();
 
-  const addPageTODirectory = async (directory: Directory) => {
+  const addPageTODirectory = async (directoryId: string) => {
     try {
       await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
-        directoryId: directory._id,
+        directoryId,
       });
       mutateIsOpenAddDirectoryModal(false);
       mutatePageList();
@@ -58,16 +58,7 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <StyledDiv className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
-              if (pageForAddDirectory?.directoryId == directory._id) {
-                return null;
-              }
-              return (
-                <div key={directory._id} onClick={() => addPageTODirectory(directory)} role="button">
-                  <StyledList className="list-group-item border-0">
-                    <span>{directory.name}</span>
-                  </StyledList>
-                </div>
-              );
+              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} />;
             })}
           </StyledDiv>
         </div>
