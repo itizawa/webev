@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState, VFC } from 'react';
+import { useCallback, useState, VFC } from 'react';
 import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
@@ -15,9 +15,10 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
+  onClickDirectory?: (directoryId: string) => void;
 };
 
-export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
+export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory }: Props) => {
   const router = useRouter();
   const { t } = useLocale();
 
@@ -60,9 +61,15 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
     }
   };
 
+  const handleClickDirectory = useCallback(() => {
+    if (onClickDirectory != null) {
+      onClickDirectory(directory?._id as string);
+    }
+  }, [directory?._id]);
+
   return (
     <>
-      <StyledDiv className="text-white text-left rounded d-flex" role="button" onClick={() => router.push(`/directory/${directory?._id}`)} isActive={isActive}>
+      <StyledDiv className="text-white text-left rounded d-flex" role="button" onClick={handleClickDirectory} isActive={isActive}>
         {isOpen ? (
           <IconButton
             width={18}
@@ -111,7 +118,9 @@ export const DirectoryItem: VFC<Props> = ({ directory }: Props) => {
             </form>
           )}
           {childrenDirectortTrees?.map((childrenDirectortTree) => {
-            return <DirectoryItem key={childrenDirectortTree._id} directory={childrenDirectortTree.descendant as Directory} />;
+            return (
+              <DirectoryItem key={childrenDirectortTree._id} directory={childrenDirectortTree.descendant as Directory} onClickDirectory={onClickDirectory} />
+            );
           })}
           {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
