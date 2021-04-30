@@ -10,7 +10,6 @@ import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~
 import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
@@ -76,107 +75,105 @@ const Index: VFC = () => {
 
   return (
     <LoginRequiredWrapper>
-      <DashBoardLayout>
-        <div className="p-3">
-          {directory != null && (
-            <>
-              <small>
-                <Link href="/directory">
-                  <a className="text-decoration-none text-white">Directory</a>
-                </Link>
-                <span className="mx-1">{'/'}</span>
-                {ancestorDirectories?.map((ancestorDirectorie) => {
-                  const ancestorDirectory = ancestorDirectorie.ancestor as Directory;
-                  if (ancestorDirectory._id === directory._id) {
-                    return null;
-                  }
-                  return (
-                    <Fragment key={ancestorDirectorie._id}>
-                      <Link href={`/directory/${ancestorDirectory._id}`}>
-                        <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
-                      </Link>
-                      <span className="mx-1">{'/'}</span>
-                    </Fragment>
-                  );
-                })}
-              </small>
-              <div className="d-flex gap-3 align-items-center">
-                {isEditing ? (
-                  <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
-                    <input
-                      type="text"
-                      value={newDirecroryName}
-                      className="form-control ps-3 bg-white"
-                      onChange={(e) => setNewDirecroryName(e.target.value)}
-                      autoFocus
-                    />
-                    <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
-                      {t.save}
-                    </button>
-                  </form>
-                ) : (
-                  <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
-                )}
-                <div className="ms-auto">
-                  <UncontrolledDropdown direction="down">
-                    <DropdownToggle tag="div">
-                      <IconButton
-                        width={18}
-                        height={18}
-                        icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
-                        color={BootstrapColor.SECONDARY}
-                        activeColor={BootstrapColor.WARNING}
-                      />
-                    </DropdownToggle>
-                    <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                      <DropdownItem tag="button" onClick={openDeleteModal}>
-                        <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                        <span className="ms-2">Trash</span>
-                      </DropdownItem>
-                      <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
-                        <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
-                        <span className="ms-2">Rename</span>
-                      </DropdownItem>
-                    </DropdownMenu>
-                  </UncontrolledDropdown>
-                </div>
-              </div>
-            </>
-          )}
-          <div className="my-2 d-flex">
-            <div className="ms-auto me-3">
-              <IconButton
-                icon={BootstrapIcon.STAR}
-                isActive={isRetrieveFavoritePageList}
-                color={BootstrapColor.SECONDARY}
-                activeColor={BootstrapColor.WARNING}
-                onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
-                buttonSize="sm"
-                text={t.only_favorite}
-              />
-            </div>
-            <SortButtonGroup />
-          </div>
-          {paginationResult != null && (
-            <div className="row">
-              {paginationResult.docs.map((page) => (
-                <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                  <OgpCard page={page} />
-                </div>
-              ))}
-              {paginationResult.docs.length === 0 ? (
-                <div className="col-12">
-                  <NoPageAlert />
-                </div>
+      <div className="p-3">
+        {directory != null && (
+          <>
+            <small>
+              <Link href="/directory">
+                <a className="text-decoration-none text-white">Directory</a>
+              </Link>
+              <span className="mx-1">{'/'}</span>
+              {ancestorDirectories?.map((ancestorDirectorie) => {
+                const ancestorDirectory = ancestorDirectorie.ancestor as Directory;
+                if (ancestorDirectory._id === directory._id) {
+                  return null;
+                }
+                return (
+                  <Fragment key={ancestorDirectorie._id}>
+                    <Link href={`/directory/${ancestorDirectory._id}`}>
+                      <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
+                    </Link>
+                    <span className="mx-1">{'/'}</span>
+                  </Fragment>
+                );
+              })}
+            </small>
+            <div className="d-flex gap-3 align-items-center">
+              {isEditing ? (
+                <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
+                  <input
+                    type="text"
+                    value={newDirecroryName}
+                    className="form-control ps-3 bg-white"
+                    onChange={(e) => setNewDirecroryName(e.target.value)}
+                    autoFocus
+                  />
+                  <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
+                    {t.save}
+                  </button>
+                </form>
               ) : (
-                <div className="text-center">
-                  <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-                </div>
+                <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
               )}
+              <div className="ms-auto">
+                <UncontrolledDropdown direction="down">
+                  <DropdownToggle tag="div">
+                    <IconButton
+                      width={18}
+                      height={18}
+                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                      color={BootstrapColor.SECONDARY}
+                      activeColor={BootstrapColor.WARNING}
+                    />
+                  </DropdownToggle>
+                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Trash</span>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
+                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Rename</span>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </div>
             </div>
-          )}
+          </>
+        )}
+        <div className="my-2 d-flex">
+          <div className="ms-auto me-3">
+            <IconButton
+              icon={BootstrapIcon.STAR}
+              isActive={isRetrieveFavoritePageList}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.WARNING}
+              onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
+              buttonSize="sm"
+              text={t.only_favorite}
+            />
+          </div>
+          <SortButtonGroup />
         </div>
-      </DashBoardLayout>
+        {paginationResult != null && (
+          <div className="row">
+            {paginationResult.docs.map((page) => (
+              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
+                <OgpCard page={page} />
+              </div>
+            ))}
+            {paginationResult.docs.length === 0 ? (
+              <div className="col-12">
+                <NoPageAlert />
+              </div>
+            ) : (
+              <div className="text-center">
+                <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </LoginRequiredWrapper>
   );
 };
