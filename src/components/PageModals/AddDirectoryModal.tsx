@@ -1,8 +1,9 @@
 import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
-import { Icon } from '../Icons/Icon';
-import { DirectoryItem } from '../Directory/DirectoryItem';
+
+import { DirectoryItem } from '~/components/Directory/DirectoryItem';
+import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { restClient } from '~/utils/rest-client';
@@ -84,18 +85,6 @@ const StyledImageWrapper = styled.div`
     background-image: url('/spinner.gif');
     background-repeat: no-repeat;
     background-position: center center;
-  }
-`;
-
-const StyledList = styled.li`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  :hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
   }
 `;
 
