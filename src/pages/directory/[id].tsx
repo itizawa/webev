@@ -84,6 +84,7 @@ const Index: VFC = () => {
                 <Link href="/directory">
                   <a className="text-decoration-none text-white">Directory</a>
                 </Link>
+                <span className="mx-1">{'/'}</span>
                 {ancestorDirectories?.map((ancestorDirectorie) => {
                   const ancestorDirectory = ancestorDirectorie.ancestor as Directory;
                   if (ancestorDirectory._id === directory._id) {
@@ -91,10 +92,10 @@ const Index: VFC = () => {
                   }
                   return (
                     <Fragment key={ancestorDirectorie._id}>
-                      <span className="mx-1">{'/'}</span>
                       <Link href={`/directory/${ancestorDirectory._id}`}>
                         <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
                       </Link>
+                      <span className="mx-1">{'/'}</span>
                     </Fragment>
                   );
                 })}
