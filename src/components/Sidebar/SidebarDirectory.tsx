@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 
@@ -16,6 +17,8 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
+  const directoryId = router.query.id;
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
@@ -71,6 +74,10 @@ export const SidebarDirectory: VFC = () => {
     setIsCreatingNewDirectory(false);
   };
 
+  const handleClickDirectory = (directoryId: string) => {
+    router.push(`/directory/${directoryId}`);
+  };
+
   return (
     <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -82,7 +89,7 @@ export const SidebarDirectory: VFC = () => {
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectoryItem directory={directory} />
+                        <DirectoryItem directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />
                       </div>
                     )}
                   </Draggable>

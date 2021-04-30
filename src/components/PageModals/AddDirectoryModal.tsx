@@ -1,7 +1,10 @@
+import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
-import { Icon } from '../Icons/Icon';
+
+import { DirectoryItem } from '~/components/Directory/DirectoryItem';
+import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { restClient } from '~/utils/rest-client';
@@ -9,13 +12,14 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
-import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
 import { imagePath } from '~/const/imagePath';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
+  const directoryId = router.query.id;
 
   const { data: pageForAddDirectory } = usePageForAddDirectory();
   const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
@@ -23,10 +27,10 @@ export const AddDirectoryModal: VFC = () => {
   const { data: paginationResult } = useDirectoryListSWR();
   const { mutate: mutatePageList } = usePageListSWR();
 
-  const addPageTODirectory = async (directory: Directory) => {
+  const addPageTODirectory = async (directoryId: string) => {
     try {
       await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
-        directoryId: directory._id,
+        directoryId,
       });
       mutateIsOpenAddDirectoryModal(false);
       mutatePageList();
@@ -58,16 +62,7 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <StyledDiv className="col-12 col-md-5">
             {paginationResult?.docs.map((directory) => {
-              if (pageForAddDirectory?.directoryId == directory._id) {
-                return null;
-              }
-              return (
-                <div key={directory._id} onClick={() => addPageTODirectory(directory)} role="button">
-                  <StyledList className="list-group-item border-0">
-                    <span>{directory.name}</span>
-                  </StyledList>
-                </div>
-              );
+              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} activeDirectoryId={directoryId as string} />;
             })}
           </StyledDiv>
         </div>
@@ -93,18 +88,6 @@ const StyledImageWrapper = styled.div`
     background-image: url('/spinner.gif');
     background-repeat: no-repeat;
     background-position: center center;
-  }
-`;
-
-const StyledList = styled.li`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  :hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
   }
 `;
 
