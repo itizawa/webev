@@ -1,5 +1,5 @@
 import { SWRResponse } from 'swr';
-import { Directory } from '~/interfaces/directory';
+import { Directory } from '~/domains/Directory';
 import { Page } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 

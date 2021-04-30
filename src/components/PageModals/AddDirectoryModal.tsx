@@ -9,7 +9,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
-import { Directory } from '~/interfaces/directory';
+import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
 import { imagePath } from '~/const/imagePath';

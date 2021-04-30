@@ -11,7 +11,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { useDirectoryListSWR } from '~/stores/directory';
-import { Directory } from '~/interfaces/directory';
+import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectory: VFC = () => {
