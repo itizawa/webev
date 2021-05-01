@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useAncestorDirectories, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-// import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
+import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -29,8 +29,8 @@ const Index: VFC = () => {
   const { id } = router.query;
 
   const { mutate: mutateDirectoryId } = useDirectoryId();
-  // const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
-  // const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
 
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
@@ -49,10 +49,10 @@ const Index: VFC = () => {
     }
   }, [directory]);
 
-  // const openDeleteModal = () => {
-  //   mutateDirectoryForDelete(directory);
-  //   mutateIsOpenDeleteDirectoryModal(true);
-  // };
+  const openDeleteModal = () => {
+    mutateDirectoryForDelete(directory);
+    mutateIsOpenDeleteDirectoryModal(true);
+  };
 
   const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -127,11 +127,10 @@ const Index: VFC = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    {/* TODO display after implement backend api */}
-                    {/* <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
-                    </DropdownItem> */}
+                    </DropdownItem>
                     <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
