@@ -1,25 +1,26 @@
-import { VFC, ComponentProps } from 'react';
+import { VFC, ComponentProps, MouseEvent } from 'react';
 import { Icon } from './Icon';
 import { BootstrapColor } from '~/interfaces/variables';
 
 type Props = {
   isActive?: boolean;
   disabled?: boolean;
+  isRemovePadding?: boolean;
   text?: string;
   color: BootstrapColor;
   activeColor: BootstrapColor;
   buttonSize?: 'sm' | 'lg';
   buttonColor?: BootstrapColor;
-  onClickButton?: () => void;
+  onClickButton?: (e: MouseEvent<HTMLButtonElement>) => void;
 } & ComponentProps<typeof Icon>;
 
 export const IconButton: VFC<Props> = (props: Props) => {
-  const { width, height, isActive, disabled, icon, text, color, activeColor, buttonColor, buttonSize, onClickButton } = props;
+  const { width, height, isActive, disabled, isRemovePadding = false, icon, text, color, activeColor, buttonColor, buttonSize, onClickButton } = props;
   const textColor = isActive ? activeColor : color;
 
-  const handleClickButton = () => {
+  const handleClickButton = (e: MouseEvent<HTMLButtonElement>) => {
     if (onClickButton != null) {
-      onClickButton();
+      onClickButton(e);
     }
   };
 
@@ -32,6 +33,9 @@ export const IconButton: VFC<Props> = (props: Props) => {
   }
   if (disabled) {
     btnClassName.push('disabled');
+  }
+  if (isRemovePadding) {
+    btnClassName.push('py-0');
   }
 
   return (

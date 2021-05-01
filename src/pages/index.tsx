@@ -5,8 +5,8 @@ import Image from 'next/image';
 import CountUp from 'react-countup';
 import axios from 'axios';
 
-import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 import { useLocale } from '~/hooks/useLocale';
+import { imagePath } from '~/const/imagePath';
 
 type Props = {
   count: number;
@@ -16,9 +16,9 @@ const Index: ReactNode = (props: Props) => {
   const { t } = useLocale();
 
   return (
-    <DefaultLayout>
+    <>
       <h1 className="my-3">{t.welcome_webev}</h1>
-      <Image src="/images/eye-catch-dark.png" height={1260} width={2240} />
+      <Image src={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
         <div className="col-12 col-md-6 offset-md-3">
           <div className="card bg-dark border border-warning text-white p-3 text-center">
@@ -34,7 +34,7 @@ const Index: ReactNode = (props: Props) => {
           <button className="btn btn-purple mt-3">{t.start_immediately}</button>
         </Link>
       </div>
-    </DefaultLayout>
+    </>
   );
 };
 

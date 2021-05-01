@@ -16,19 +16,12 @@ import { PageModals } from '~/components/PageModals/PageModals';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
-import { PageStatus } from '~/interfaces/page';
-import { PathName } from '~/interfaces/route';
-
-const statusByPagePathname: { [key: string]: PageStatus[] } = {
-  [PathName.HOME]: [PageStatus.PAGE_STATUS_STOCK],
-  [PathName.ARCHIVED]: [PageStatus.PAGE_STATUS_ARCHIVE],
-  [PathName.DIRECTORY_ID]: [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
-};
+import { PathConfigs, PathNames } from '~/interfaces/route';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
-  const pathname = router.pathname as PathName;
+  const pathname = router.pathname as PathNames;
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
@@ -39,7 +32,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutatePageStatus(statusByPagePathname[pathname]);
+    mutatePageStatus(PathConfigs[pathname].statusForFind);
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
@@ -59,10 +52,10 @@ export const DashBoardLayout: FC = ({ children }) => {
       <StyledBorder />
       <SubnavBar />
       <StyledDiv className="d-flex mx-auto">
-        <div className="d-none d-md-block col-lg-2">
+        <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-10">{children}</div>
+        <div className="col-12 col-md-9">{children}</div>
         {session && <PageModals />}
         {session && <SocketConnector />}
         <ScrollTopButton />

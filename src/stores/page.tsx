@@ -3,7 +3,7 @@ import urljoin from 'url-join';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
-import { Page, PageStatus } from '~/interfaces/page';
+import { Page, PageStatus } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 

@@ -7,17 +7,18 @@ import { format } from 'date-fns';
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
-import { Icon } from '../Icons/Icon';
+import { Icon } from '~/components/Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Page, PageStatus } from '~/interfaces/page';
+import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
+import { imagePath } from '~/const/imagePath';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -88,31 +89,27 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
     <StyledCard className="card border-0 shadow">
       <StyledImageWrapper>
         <a href={url} target="blank" rel="noopener noreferrer">
-          <img src={image} alt={image} className="card-img-top" />
+          <img src={image || imagePath.NO_IMAGE} alt={image || imagePath.NO_IMAGE} className="card-img-top" />
         </a>
       </StyledImageWrapper>
       <div className="card-body p-2">
         <h5 className="card-title my-1">
           <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
-            {title}
+            {title || url}
           </a>
         </h5>
         <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
-          <div className="me-auto">
-            <small>
-              <span id={`sitename-for-${page._id}`}>
-                {siteName?.length > MAX_WORD_COUNT_OF_SITENAME ? description?.substr(0, MAX_WORD_COUNT_OF_SITENAME) + '...' : siteName}
-              </span>
-              {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
-                <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
-                  {siteName}
-                </UncontrolledTooltip>
-              )}
-              <br />
-              {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
-            </small>
-          </div>
+          <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
+            {siteName}
+            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                {siteName}
+              </UncontrolledTooltip>
+            )}
+            <br />
+            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+          </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
