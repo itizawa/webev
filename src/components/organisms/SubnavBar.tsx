@@ -12,15 +12,19 @@ import { Icon } from '~/components/Icons/Icon';
 import { navbarItemMappings } from '~/const/navbarItemMappings';
 import { useLocale } from '~/hooks/useLocale';
 import { useDirectoryListSWR } from '~/stores/directory';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 export const SubnavBar: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: paginationResult } = useDirectoryListSWR();
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const [isDisplayDirectoryHierarchie, setIsDisplayDirectoryHierarchie] = useState(false);
+  const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
+  const [name, setName] = useState('');
 
   const closeDirectoryHierarchieModal = () => {
     setIsDisplayDirectoryHierarchie(false);
@@ -29,6 +33,25 @@ export const SubnavBar: VFC = () => {
   const handleClickDirectory = (directoryId: string) => {
     setIsDisplayDirectoryHierarchie(false);
     router.push(`/directory/${directoryId}`);
+  };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    if (name.trim() === '') {
+      return setIsCreatingNewDirectory(false);
+    }
+
+    try {
+      await restClient.apiPost('/directories', { name });
+      toastSuccess(t.toastr_save_directory);
+      setName('');
+      mutateDirectoryList();
+    } catch (err) {
+      toastError(err);
+    }
+
+    setIsCreatingNewDirectory(false);
   };
 
   return (
@@ -60,6 +83,20 @@ export const SubnavBar: VFC = () => {
           {paginationResult?.docs.map((directory) => {
             return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />;
           })}
+          <StyledDiv className="text-center mx-3 mt-2">
+            {isCreatingNewDirectory ? (
+              <form className="input-group ps-3" onSubmit={onSubmit}>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+              </form>
+            ) : (
+              <IconButton
+                icon={BootstrapIcon.PLUS_DOTTED}
+                color={BootstrapColor.LIGHT}
+                activeColor={BootstrapColor.LIGHT}
+                onClickButton={() => setIsCreatingNewDirectory(true)}
+              />
+            )}
+          </StyledDiv>
           <button className="mt-3 btn btn-secondary w-100" onClick={closeDirectoryHierarchieModal}>
             {t.cancel}
           </button>
@@ -75,4 +112,16 @@ const StyledSubnavBar = styled.div`
 
 const StyledSubnavBarItem = styled.div<{ isActive: boolean }>`
   ${({ isActive }) => isActive && `border-bottom: 4px solid slateblue;`}
+`;
+
+const StyledDiv = styled.div`
+  > .btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    :hover {
+      background-color: rgba(200, 200, 200, 0.2);
+      transition: all 300ms linear;
+    }
+  }
 `;
