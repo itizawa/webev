@@ -9,7 +9,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
@@ -135,7 +135,9 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
   .create-directory-button {
-    display: none;
+    @media (min-width: ${BootstrapBreakpoints.md}px) {
+      display: none;
+    }
   }
 
   &:hover {
