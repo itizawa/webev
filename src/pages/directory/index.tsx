@@ -4,7 +4,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { Icon } from '~/components/Icons/Icon';
 
 import { useDirectoryListSWR } from '~/stores/directory';
@@ -18,31 +17,29 @@ const Index: VFC = () => {
 
   return (
     <LoginRequiredWrapper>
-      <DashBoardLayout>
-        <div className="p-3">
-          <div className="d-flex align-items-center">
-            <h1>{t.directory}</h1>
-          </div>
-          {paginationResult != null && (
-            <div className="row">
-              {paginationResult.docs.map((directory) => (
-                <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
-                  <Link href={`/directory/${directory._id}`}>
-                    <StyledList className="list-group-item border-0 d-flex">
-                      <div>
-                        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                        <span className="ms-3" role="button">
-                          {directory.name}
-                        </span>
-                      </div>
-                    </StyledList>
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
+      <div className="p-3">
+        <div className="d-flex align-items-center">
+          <h1>{t.directory}</h1>
         </div>
-      </DashBoardLayout>
+        {paginationResult != null && (
+          <div className="row">
+            {paginationResult.docs.map((directory) => (
+              <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
+                <Link href={`/directory/${directory._id}`}>
+                  <StyledList className="list-group-item border-0 d-flex">
+                    <div>
+                      <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+                      <span className="ms-3" role="button">
+                        {directory.name}
+                      </span>
+                    </div>
+                  </StyledList>
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </LoginRequiredWrapper>
   );
 };

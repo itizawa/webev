@@ -24,6 +24,8 @@ export enum BootstrapIcon {
   ARROW = 'arrow',
   ARROW_RIGHT = 'arrow-right',
   ARROW_DOWN = 'arrow-down',
+  CARET_RIGHT = 'caret-right',
+  CARET_DOWN = 'caret-down',
   CHEVRON_DOUBLE_LEFT = 'chevron-double-left',
   CHEVRON_LEFT = 'chevron-left',
   CHEVRON_DOUBLE_RIGHT = 'chevron-double-right',

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { SidebarDirectory } from '../Sidebar/SidebarDirectory';
+import { SidebarDirectory } from '~/components/Sidebar/SidebarDirectory';
 import { BootstrapColor } from '~/interfaces/variables';
 
 import { Icon } from '~/components/Icons/Icon';
@@ -14,7 +14,7 @@ export const Sidebar: VFC = () => {
 
   return (
     <div className="sticky-top">
-      <ul className="sidebar-list-group list-group gap-3 py-3">
+      <ul className="list-group gap-3 py-3">
         {navbarItemMappings.map((v) => {
           return (
             <Link key={v.text} href={v.url}>

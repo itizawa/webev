@@ -41,9 +41,9 @@ export const en = {
   delete_directory: 'Delete Directory',
 
   move_directory: 'Move Directory',
+  create_directory: 'Create New Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
-  save_the_url_immediately: 'Please add them from the top bar.',
   'your_favorite_pages_don’t_exist': 'Your favorite pages don’t exist.',
   favorite_immediately: 'Let’s try to add favorites!',
   'your_archive_pages_don’t_exist': 'Your archive pages don’t exist.',
