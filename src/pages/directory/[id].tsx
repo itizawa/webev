@@ -38,6 +38,7 @@ const Index: VFC = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [newDirecroryName, setNewDirecroryName] = useState('');
+  const [parentDirectory, setParentDirectory] = useState<Directory>();
 
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
@@ -45,12 +46,24 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
+  const { mutate: mutateParentChildren } = useDirectoryChildren(parentDirectory?._id);
 
   useEffect(() => {
     if (directory != null) {
       setNewDirecroryName(directory?.name);
     }
   }, [directory]);
+
+  // find parent directory
+  useEffect(() => {
+    if (ancestorDirectories == null) {
+      return;
+    }
+    const directoryTree = ancestorDirectories.find((ancestorDirectory) => ancestorDirectory.depth === 1);
+    if (directoryTree != null) {
+      setParentDirectory(directoryTree.ancestor as Directory);
+    }
+  }, [ancestorDirectories]);
 
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
@@ -70,6 +83,7 @@ const Index: VFC = () => {
       toastSuccess(t.toastr_update_directory_name);
       mutateDirectory();
       mutateDirectoryList();
+      mutateParentChildren();
       setIsEditing(false);
     } catch (error) {
       toastError(error);
