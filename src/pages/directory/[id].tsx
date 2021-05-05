@@ -145,25 +145,28 @@ const Index: VFC = () => {
             </div>
           </>
         )}
-        {childrenDirectoryTrees != null && (
-          <div className="row my-3">
-            {childrenDirectoryTrees.map((v) => {
-              const directory = v.descendant as Directory;
-              return (
-                <div className="col-xl-4 col-6 mb-3" key={directory._id}>
-                  <Link href={`/directory/${directory._id}`}>
-                    <StyledList className="list-group-item border-0 d-flex">
-                      <div>
-                        <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                        <span className="ms-3" role="button">
-                          {directory.name}
-                        </span>
-                      </div>
-                    </StyledList>
-                  </Link>
-                </div>
-              );
-            })}
+        {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
+          <div className="my-3 bg-dark shadow  p-3">
+            <h5>Child Directories</h5>
+            <div className="row">
+              {childrenDirectoryTrees.map((v) => {
+                const directory = v.descendant as Directory;
+                return (
+                  <div className="col-xl-4 col-md-6" key={directory._id}>
+                    <Link href={`/directory/${directory._id}`}>
+                      <StyledList className="list-group-item border-0 d-flex">
+                        <div>
+                          <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+                          <span className="ms-3" role="button">
+                            {directory.name}
+                          </span>
+                        </div>
+                      </StyledList>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
         <div className="my-2 d-flex">
