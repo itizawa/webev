@@ -9,7 +9,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
+import { useDirectoryForDelete, useIsOpenCreateDirectoryModal, useParentDirectoryForCreateDirectory, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -33,6 +33,8 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+  const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
+  const { mutate: mutateIsOpenCreateDirectoryModal } = useIsOpenCreateDirectoryModal();
 
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
@@ -68,6 +70,11 @@ const Index: VFC = () => {
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
     mutateIsOpenDeleteDirectoryModal(true);
+  };
+
+  const openAddDirectoryModal = () => {
+    mutateParentDirectoryForCreateDirectory(directory);
+    mutateIsOpenCreateDirectoryModal(true);
   };
 
   const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -151,6 +158,10 @@ const Index: VFC = () => {
                     <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                      <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Create Directory</span>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
