@@ -77,7 +77,7 @@ const Index: VFC = () => {
               <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
                 <Link href={`/directory/${directory._id}`}>
                   <StyledList className="list-group-item border-0 d-flex">
-                    <div>
+                    <div className="w-100 text-truncate">
                       <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
                       <span className="ms-3" role="button">
                         {directory.name}
