@@ -9,6 +9,8 @@ export const en = {
   cancel: 'Cancel',
   settings: 'Settings',
   save: 'Save',
+  create: 'Create',
+  create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
   only_favorite: 'Only Favorite',
   latest_order: 'Latest Order',

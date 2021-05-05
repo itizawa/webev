@@ -9,6 +9,8 @@ export const ja = {
   cancel: 'キャンセル',
   settings: '設定',
   save: '保存',
+  create: '作成',
+  create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
   only_favorite: 'お気に入り',
   latest_order: '新しい順',
