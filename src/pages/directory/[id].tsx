@@ -75,7 +75,6 @@ const Index: VFC = () => {
       toastError(error);
     }
   };
-  console.log(childrenDirectoryTrees);
 
   return (
     <LoginRequiredWrapper>
