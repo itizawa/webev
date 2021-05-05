@@ -1,11 +1,13 @@
 import { Fragment, useEffect, useState, VFC } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import Link from 'next/link';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import styled from 'styled-components';
+
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAncestorDirectories, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 // import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
@@ -42,6 +44,7 @@ const Index: VFC = () => {
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
+  const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
   useEffect(() => {
     if (directory != null) {
@@ -72,6 +75,7 @@ const Index: VFC = () => {
       toastError(error);
     }
   };
+  console.log(childrenDirectoryTrees);
 
   return (
     <LoginRequiredWrapper>
@@ -141,6 +145,30 @@ const Index: VFC = () => {
             </div>
           </>
         )}
+        {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
+          <div className="my-3 bg-dark shadow  p-3">
+            <h5>Child Directories</h5>
+            <div className="row">
+              {childrenDirectoryTrees.map((v) => {
+                const directory = v.descendant as Directory;
+                return (
+                  <div className="col-xl-4 col-md-6" key={directory._id}>
+                    <Link href={`/directory/${directory._id}`}>
+                      <StyledList className="list-group-item border-0 d-flex">
+                        <div>
+                          <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+                          <span className="ms-3" role="button">
+                            {directory.name}
+                          </span>
+                        </div>
+                      </StyledList>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
         <div className="my-2 d-flex">
           <div className="ms-auto me-3">
             <IconButton
@@ -177,5 +205,24 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
+
+const StyledList = styled.li<{ isActive?: boolean }>`
+  padding: 10px;
+  color: #eee;
+  background-color: inherit;
+  border-radius: 3px;
+
+  ${({ isActive }) =>
+    isActive
+      ? `
+    margin-top: 0px;
+    background-color: #00acc1;
+    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
+  `
+      : `:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    transition: all 300ms linear;
+  }`}
+`;
 
 export default Index;
