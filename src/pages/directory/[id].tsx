@@ -9,7 +9,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-// import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
+import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -31,13 +31,14 @@ const Index: VFC = () => {
   const { id } = router.query;
 
   const { mutate: mutateDirectoryId } = useDirectoryId();
-  // const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
-  // const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
 
   const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   const [isEditing, setIsEditing] = useState(false);
   const [newDirecroryName, setNewDirecroryName] = useState('');
+  const [parentDirectory, setParentDirectory] = useState<Directory>();
 
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
@@ -45,6 +46,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
+  const { mutate: mutateParentChildren } = useDirectoryChildren(parentDirectory?._id);
 
   useEffect(() => {
     if (directory != null) {
@@ -52,10 +54,21 @@ const Index: VFC = () => {
     }
   }, [directory]);
 
-  // const openDeleteModal = () => {
-  //   mutateDirectoryForDelete(directory);
-  //   mutateIsOpenDeleteDirectoryModal(true);
-  // };
+  // find parent directory
+  useEffect(() => {
+    if (ancestorDirectories == null) {
+      return;
+    }
+    const directoryTree = ancestorDirectories.find((ancestorDirectory) => ancestorDirectory.depth === 1);
+    if (directoryTree != null) {
+      setParentDirectory(directoryTree.ancestor as Directory);
+    }
+  }, [ancestorDirectories]);
+
+  const openDeleteModal = () => {
+    mutateDirectoryForDelete(directory);
+    mutateIsOpenDeleteDirectoryModal(true);
+  };
 
   const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,12 +83,12 @@ const Index: VFC = () => {
       toastSuccess(t.toastr_update_directory_name);
       mutateDirectory();
       mutateDirectoryList();
+      mutateParentChildren();
       setIsEditing(false);
     } catch (error) {
       toastError(error);
     }
   };
-  console.log(childrenDirectoryTrees);
 
   return (
     <LoginRequiredWrapper>
@@ -131,10 +144,10 @@ const Index: VFC = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    {/* <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={openDeleteModal}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
-                    </DropdownItem> */}
+                    </DropdownItem>
                     <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
@@ -155,7 +168,7 @@ const Index: VFC = () => {
                   <div className="col-xl-4 col-md-6" key={directory._id}>
                     <Link href={`/directory/${directory._id}`}>
                       <StyledList className="list-group-item border-0 d-flex">
-                        <div>
+                        <div className="w-100 text-truncate">
                           <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
                           <span className="ms-3" role="button">
                             {directory.name}
