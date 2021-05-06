@@ -23,7 +23,7 @@
   "homepage": "https://github.com/itizawa/webev#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "bootstrap": "^5.0.0-beta3",
+    "bootstrap": "^5.0.0",
     "bootstrap-icons": "^1.4.0",
     "date-fns": "^2.21.1",
     "mongodb": "^3.6.4",
