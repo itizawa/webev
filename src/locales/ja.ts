@@ -9,6 +9,8 @@ export const ja = {
   cancel: 'キャンセル',
   settings: '設定',
   save: '保存',
+  create: '作成',
+  create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
   only_favorite: 'お気に入り',
   latest_order: '新しい順',
@@ -42,6 +44,7 @@ export const ja = {
 
   move_directory: 'ディレクトリに移動します',
   create_directory: 'Directory の新規作成',
+  manage_directory: 'Directory を編集する',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
   'your_favorite_pages_don’t_exist': 'お気に入りが存在しません',
