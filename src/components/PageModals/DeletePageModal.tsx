@@ -1,7 +1,7 @@
 import { VFC, useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
-import style from 'styled-components';
+import { FixedImage } from '~/components/Atoms/FixedImage';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -37,9 +37,7 @@ export const DeletePageModal: VFC = () => {
     <Modal isOpen={isOpenDeletePageModal} toggle={closeDeleteModal}>
       <ModalHeader className="bg-dark">{t.delete_page}</ModalHeader>
       <ModalBody className="bg-dark text-break">
-        <StyledImageWrapper>
-          <img src={pageForDelete?.image} alt={pageForDelete?.image} />
-        </StyledImageWrapper>
+        <FixedImage imageUrl={pageForDelete?.image} />
         <h5 className="card-title my-3">{pageForDelete?.title}</h5>
         {pageForDelete?.isFavorite && (
           <div className="form-check form-check-inline mb-4">
@@ -70,20 +68,3 @@ export const DeletePageModal: VFC = () => {
     </Modal>
   );
 };
-
-const StyledImageWrapper = style.div`
-  position: relative;
-  width: 100%;
-  padding-top: 55%;
-
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-
-    background-image: url('/spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-`;
