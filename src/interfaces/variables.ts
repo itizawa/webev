@@ -34,6 +34,7 @@ export enum BootstrapIcon {
   TWITTER = 'twitter',
   GITHUB = 'github',
   QUESTION = 'question',
+  GEAR = 'gear',
 }
 
 export const BootstrapBreakpoints = {

@@ -61,9 +61,9 @@ const Index: VFC = () => {
         <div className="d-flex align-items-center justify-content-between">
           <h1>{t.directory}</h1>
           <IconButton
-            width={24}
-            height={24}
-            icon={BootstrapIcon.DIRECTORY}
+            width={18}
+            height={18}
+            icon={BootstrapIcon.GEAR}
             color={BootstrapColor.SECONDARY}
             activeColor={BootstrapColor.SECONDARY}
             isActive={isDisplayDirectoryHierarchie}
