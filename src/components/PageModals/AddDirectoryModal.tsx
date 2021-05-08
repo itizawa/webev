@@ -3,7 +3,8 @@ import { VFC, useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 
-import { IconButton } from '../Icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
+import { FixedImage } from '~/components/Atoms/FixedImage';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
@@ -15,7 +16,6 @@ import { useDirectoryListSWR } from '~/stores/directory';
 import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
-import { imagePath } from '~/const/imagePath';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -70,9 +70,7 @@ export const AddDirectoryModal: VFC = () => {
       <ModalBody className="bg-dark text-break">
         <div className="row">
           <div className="col-12 col-md-5">
-            <StyledImageWrapper>
-              <img src={pageForAddDirectory?.image || imagePath.NO_IMAGE} alt={pageForAddDirectory?.image || imagePath.NO_IMAGE} />
-            </StyledImageWrapper>
+            <FixedImage imageUrl={pageForAddDirectory?.image} />
             <h5 className="card-title my-1">{pageForAddDirectory?.title || pageForAddDirectory?.url}</h5>
           </div>
           <div className="col-12 col-md-2 text-center">
@@ -110,23 +108,6 @@ export const AddDirectoryModal: VFC = () => {
     </Modal>
   );
 };
-
-const StyledImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-top: 55%;
-
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-
-    background-image: url('/spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-`;
 
 const StyledDiv = styled.div`
   max-height: 500px;
