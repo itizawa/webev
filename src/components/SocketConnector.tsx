@@ -1,10 +1,12 @@
 import { VFC, useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { usePageListSWR } from '~/stores/page';
+import { useSocketId } from '~/stores/contexts';
 
 export const SocketConnector: VFC = () => {
   const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'));
   const { mutate: pageListMutate } = usePageListSWR();
+  const { mutate: mutateSocketId } = useSocketId();
 
   useEffect(() => {
     socket.on('connect', () => {
@@ -16,6 +18,9 @@ export const SocketConnector: VFC = () => {
     socket.on('update-page', () => {
       console.log('Get Updated Data');
       pageListMutate();
+    });
+    socket.on('issue-token', ({ socketId }: { socketId: string }) => {
+      mutateSocketId(socketId);
     });
 
     return () => {
