@@ -5,11 +5,13 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
+import { useSocketId } from '~/stores/contexts';
 
 export const InputForm: VFC = () => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
+  const { data: socketId } = useSocketId();
 
   const [url, setUrl] = useState('');
 
@@ -17,7 +19,7 @@ export const InputForm: VFC = () => {
     e.preventDefault();
 
     try {
-      await restClient.apiPost('/pages', { url });
+      await restClient.apiPost('/pages', { url, socketId });
       toastSuccess(t.toastr_save_url);
       setUrl('');
       mutatePageList();
