@@ -21,7 +21,7 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
 
 export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<DirectoryTree[], Error> => {
   const endpoint = parentDirectoryId != null ? `/directories/${parentDirectoryId}/children` : null;
-  return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
@@ -29,7 +29,7 @@ export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<Di
 
 export const useAncestorDirectories = (directoryId?: string): SWRResponse<DirectoryTree[], Error> => {
   const endpoint = directoryId != null ? `/directories/${directoryId}/ancestor` : null;
-  return useAuthenticationSWR([endpoint], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
