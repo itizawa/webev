@@ -9,13 +9,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-import {
-  useDirectoryForDelete,
-  useIsOpenCreateDirectoryModal,
-  useParentDirectoryForCreateDirectory,
-  useIsOpenDeleteDirectoryModal,
-  useDirectoryForRename,
-} from '~/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -37,9 +31,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
-  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
-  const { mutate: mutateIsOpenCreateDirectoryModal } = useIsOpenCreateDirectoryModal();
 
   const { data: isRetrieveFavoritePageList = false, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
@@ -51,7 +43,6 @@ const Index: VFC = () => {
 
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
-    mutateIsOpenDeleteDirectoryModal(true);
   };
 
   const openRenameModal = () => {
@@ -60,7 +51,6 @@ const Index: VFC = () => {
 
   const openAddDirectoryModal = () => {
     mutateParentDirectoryForCreateDirectory(directory);
-    mutateIsOpenCreateDirectoryModal(true);
   };
 
   return (

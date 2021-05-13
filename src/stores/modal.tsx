@@ -19,22 +19,14 @@ export const useIsOpenAddDirectoryModal = (initialData?: boolean): SWRResponse<b
   return useStaticSWR('isOpenAddDirectoryModal', initialData);
 };
 
-export const useDirectoryForDelete = (initialData?: Directory): SWRResponse<Directory, Error> => {
-  return useStaticSWR('directoryForDelete', initialData);
-};
-
-export const useIsOpenDeleteDirectoryModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isOpenDeleteDirectoryModal', initialData);
+export const useDirectoryForDelete = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
+  return useStaticSWR<Directory | null, Error>('directoryForDelete', initialData);
 };
 
 export const useDirectoryForRename = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
   return useStaticSWR<Directory | null, Error>('directoryForRename', initialData);
 };
 
-export const useParentDirectoryForCreateDirectory = (initialData?: Directory): SWRResponse<Directory, Error> => {
-  return useStaticSWR('parentDirectoryForCreateDirectory', initialData);
-};
-
-export const useIsOpenCreateDirectoryModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isOpenCreateDirectoryModal', initialData);
+export const useParentDirectoryForCreateDirectory = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
+  return useStaticSWR<Directory | null, Error>('parentDirectoryForCreateDirectory', initialData);
 };
