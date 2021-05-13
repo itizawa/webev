@@ -17,7 +17,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { usePageForDelete, useIsOpenDeletePageModal, usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -39,7 +39,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -82,7 +81,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const openAddDirectoryModal = async () => {
     mutatePageForAddDirectory(page);
-    mutateIsOpenAddDirectoryModal(true);
   };
 
   return (

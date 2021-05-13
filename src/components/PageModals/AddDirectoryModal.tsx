@@ -13,7 +13,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryListSWR } from '~/stores/directory';
-import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
 
@@ -22,8 +22,7 @@ export const AddDirectoryModal: VFC = () => {
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: pageForAddDirectory } = usePageForAddDirectory();
-  const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
+  const { data: pageForAddDirectory, mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageList } = usePageListSWR();
@@ -36,9 +35,9 @@ export const AddDirectoryModal: VFC = () => {
       await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
         directoryId,
       });
-      mutateIsOpenAddDirectoryModal(false);
-      mutatePageList();
       toastSuccess(t.toastr_success_add_directory);
+      mutatePageList();
+      mutatePageForAddDirectory(null);
     } catch (error) {
       console.log(error);
       toastError(error);
@@ -65,7 +64,7 @@ export const AddDirectoryModal: VFC = () => {
   };
 
   return (
-    <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
+    <Modal isOpen={pageForAddDirectory != null} toggle={() => mutatePageForAddDirectory(null)} size="lg">
       <ModalHeader className="bg-dark">{t.move_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row">
@@ -101,7 +100,7 @@ export const AddDirectoryModal: VFC = () => {
             </StyledCreateFormDiv>
           </StyledDiv>
         </div>
-        <div className="mt-3 text-center" onClick={() => mutateIsOpenAddDirectoryModal(false)}>
+        <div className="mt-3 text-center" onClick={() => mutatePageForAddDirectory(null)}>
           <button className="btn btn-secondary w-100">Cancel</button>
         </div>
       </ModalBody>
