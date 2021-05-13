@@ -3,12 +3,8 @@ import { Directory } from '~/domains/Directory';
 import { Page } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
-export const usePageForDelete = (initialData?: Page): SWRResponse<Page, Error> => {
-  return useStaticSWR('pageForDeletePageModal', initialData);
-};
-
-export const useIsOpenDeletePageModal = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isOpenDeletePageModal', initialData);
+export const usePageForDelete = (initialData?: Page): SWRResponse<Page | null, Error> => {
+  return useStaticSWR<Page | null, Error>('pageForDeletePageModal', initialData);
 };
 
 export const usePageForAddDirectory = (initialData?: Page): SWRResponse<Page | null, Error> => {
