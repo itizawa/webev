@@ -27,6 +27,10 @@ export const useIsOpenDeleteDirectoryModal = (initialData?: boolean): SWRRespons
   return useStaticSWR('isOpenDeleteDirectoryModal', initialData);
 };
 
+export const useDirectoryForRename = (initialData?: Directory): SWRResponse<Directory, Error> => {
+  return useStaticSWR('directoryForRename', initialData);
+};
+
 export const useParentDirectoryForCreateDirectory = (initialData?: Directory): SWRResponse<Directory, Error> => {
   return useStaticSWR('parentDirectoryForCreateDirectory', initialData);
 };
