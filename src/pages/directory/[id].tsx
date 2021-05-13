@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -7,9 +7,9 @@ import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-import { useDirectoryForDelete, useIsOpenCreateDirectoryModal, useParentDirectoryForCreateDirectory, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -20,8 +20,6 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { restClient } from '~/utils/rest-client';
 import { Directory } from '~/domains/Directory';
 
 const Index: VFC = () => {
@@ -32,69 +30,27 @@ const Index: VFC = () => {
 
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
-  const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+  const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
-  const { mutate: mutateIsOpenCreateDirectoryModal } = useIsOpenCreateDirectoryModal();
 
-  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [newDirecroryName, setNewDirecroryName] = useState('');
-  const [parentDirectory, setParentDirectory] = useState<Directory>();
+  const { data: isRetrieveFavoritePageList = false, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
-  const { mutate: mutateParentChildren } = useDirectoryChildren(parentDirectory?._id);
-
-  useEffect(() => {
-    if (directory != null) {
-      setNewDirecroryName(directory?.name);
-    }
-  }, [directory]);
-
-  // find parent directory
-  useEffect(() => {
-    if (ancestorDirectories == null) {
-      return;
-    }
-    const directoryTree = ancestorDirectories.find((ancestorDirectory) => ancestorDirectory.depth === 1);
-    if (directoryTree != null) {
-      setParentDirectory(directoryTree.ancestor as Directory);
-    }
-  }, [ancestorDirectories]);
 
   const openDeleteModal = () => {
     mutateDirectoryForDelete(directory);
-    mutateIsOpenDeleteDirectoryModal(true);
+  };
+
+  const openRenameModal = () => {
+    mutateDirectoryForRename(directory);
   };
 
   const openAddDirectoryModal = () => {
     mutateParentDirectoryForCreateDirectory(directory);
-    mutateIsOpenCreateDirectoryModal(true);
-  };
-
-  const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // If there is no change, do nothing
-    if (newDirecroryName === directory?.name) {
-      return setIsEditing(false);
-    }
-
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
-      toastSuccess(t.toastr_update_directory_name);
-      mutateDirectory();
-      mutateDirectoryList();
-      mutateParentChildren();
-      setIsEditing(false);
-    } catch (error) {
-      toastError(error);
-    }
   };
 
   return (
@@ -123,22 +79,7 @@ const Index: VFC = () => {
               })}
             </small>
             <div className="d-flex gap-3 align-items-center">
-              {isEditing ? (
-                <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
-                  <input
-                    type="text"
-                    value={newDirecroryName}
-                    className="form-control ps-3 bg-white"
-                    onChange={(e) => setNewDirecroryName(e.target.value)}
-                    autoFocus
-                  />
-                  <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
-                    {t.save}
-                  </button>
-                </form>
-              ) : (
-                <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
-              )}
+              <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
               <div className="ms-auto">
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
@@ -155,7 +96,7 @@ const Index: VFC = () => {
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
+                    <DropdownItem tag="button" onClick={openRenameModal}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
                     </DropdownItem>

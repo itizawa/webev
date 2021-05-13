@@ -5,7 +5,7 @@ import { FixedImage } from '~/components/Atoms/FixedImage';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { usePageForDelete, useIsOpenDeletePageModal } from '~/stores/modal';
+import { usePageForDelete } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -13,15 +13,14 @@ import { useLocale } from '~/hooks/useLocale';
 export const DeletePageModal: VFC = () => {
   const { t } = useLocale();
 
-  const { data: pageForDelete } = usePageForDelete();
-  const { data: isOpenDeletePageModal = false, mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
+  const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: pageListMutate } = usePageListSWR();
 
   const [isCheckedAgree, setIsCheckedAgree] = useState(false);
   const deletePage = async () => {
     try {
       await restClient.apiDelete(`/pages/${pageForDelete?._id}`);
-      mutateIsOpenDeletePageModal(false);
+      mutatePageForDelete(null);
       toastSuccess(t.toastr_delete_url);
       pageListMutate();
     } catch (err) {
@@ -30,11 +29,11 @@ export const DeletePageModal: VFC = () => {
   };
 
   const closeDeleteModal = async () => {
-    mutateIsOpenDeletePageModal(false);
+    mutatePageForDelete(null);
   };
 
   return (
-    <Modal isOpen={isOpenDeletePageModal} toggle={closeDeleteModal}>
+    <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal}>
       <ModalHeader className="bg-dark">{t.delete_page}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <FixedImage imageUrl={pageForDelete?.image} />

@@ -45,6 +45,7 @@ export const en = {
   move_directory: 'Move Directory',
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
+  rename_directory: 'Rename Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
   'your_favorite_pages_don’t_exist': 'Your favorite pages don’t exist.',
