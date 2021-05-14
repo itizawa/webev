@@ -28,7 +28,7 @@ const Index: VFC = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState<string>();
+  const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState<string>('');
 
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
@@ -60,7 +60,7 @@ const Index: VFC = () => {
 
   const handleClickManageButton = (e: MouseEvent<HTMLButtonElement>, directoryId: string) => {
     e.stopPropagation();
-    setDirectoryIdForDropdown(directoryId);
+    setDirectoryIdForDropdown((prevDirectoryId) => (prevDirectoryId === directoryId ? '' : directoryId));
   };
 
   return (
