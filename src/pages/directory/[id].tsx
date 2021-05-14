@@ -1,8 +1,8 @@
-import { Fragment, VFC } from 'react';
+import { Fragment, VFC, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -28,6 +28,8 @@ const Index: VFC = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState<string>();
+
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
@@ -51,6 +53,12 @@ const Index: VFC = () => {
 
   const openAddDirectoryModal = () => {
     mutateParentDirectoryForCreateDirectory(directory);
+  };
+
+  const handleClickManageButton = (e: React.MouseEvent<HTMLButtonElement>, directoryId: string) => {
+    e.stopPropagation();
+
+    setDirectoryIdForDropdown(directoryId);
   };
 
   return (
@@ -126,6 +134,33 @@ const Index: VFC = () => {
                             {directory.name}
                           </span>
                         </div>
+                        <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
+                          <DropdownToggle tag="div">
+                            <IconButton
+                              width={18}
+                              height={18}
+                              icon={BootstrapIcon.THREE_DOTS_VERTICAL}
+                              color={BootstrapColor.WHITE}
+                              activeColor={BootstrapColor.WHITE}
+                              onClickButton={(e) => handleClickManageButton(e, directory._id)}
+                              isRemovePadding
+                            />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                            <DropdownItem tag="button" onClick={openDeleteModal}>
+                              <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                              <span className="ms-2">Trash</span>
+                            </DropdownItem>
+                            <DropdownItem tag="button" onClick={openRenameModal}>
+                              <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                              <span className="ms-2">Rename</span>
+                            </DropdownItem>
+                            <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                              <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                              <span className="ms-2">Create Directory</span>
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </Dropdown>
                       </StyledList>
                     </Link>
                   </div>
