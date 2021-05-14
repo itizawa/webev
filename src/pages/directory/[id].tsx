@@ -1,4 +1,4 @@
-import { Fragment, VFC, useState } from 'react';
+import { Fragment, VFC, useState, MouseEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -43,21 +43,23 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
-  const openDeleteModal = () => {
+  const openDeleteModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
+    e.stopPropagation();
     mutateDirectoryForDelete(directory);
   };
 
-  const openRenameModal = () => {
+  const openRenameModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
+    e.stopPropagation();
     mutateDirectoryForRename(directory);
   };
 
-  const openAddDirectoryModal = () => {
+  const openAddDirectoryModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
+    e.stopPropagation();
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  const handleClickManageButton = (e: React.MouseEvent<HTMLButtonElement>, directoryId: string) => {
+  const handleClickManageButton = (e: MouseEvent<HTMLButtonElement>, directoryId: string) => {
     e.stopPropagation();
-
     setDirectoryIdForDropdown(directoryId);
   };
 
@@ -100,15 +102,15 @@ const Index: VFC = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={openRenameModal}>
+                    <DropdownItem tag="button" onClick={(e) => openRenameModal(e, directory)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                    <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
                       <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Create Directory</span>
                     </DropdownItem>
@@ -147,15 +149,15 @@ const Index: VFC = () => {
                             />
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                            <DropdownItem tag="button" onClick={openDeleteModal}>
+                            <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
                               <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                               <span className="ms-2">Trash</span>
                             </DropdownItem>
-                            <DropdownItem tag="button" onClick={openRenameModal}>
+                            <DropdownItem tag="button" onClick={(e) => openRenameModal(e, directory)}>
                               <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                               <span className="ms-2">Rename</span>
                             </DropdownItem>
-                            <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                            <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
                               <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                               <span className="ms-2">Create Directory</span>
                             </DropdownItem>
