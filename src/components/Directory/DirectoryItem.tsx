@@ -135,6 +135,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
   .create-directory-button {
+    height: 24px;
     @media (min-width: ${BootstrapBreakpoints.md}px) {
       display: none;
     }

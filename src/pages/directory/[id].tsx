@@ -19,7 +19,7 @@ import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 
 const Index: VFC = () => {
@@ -137,7 +137,7 @@ const Index: VFC = () => {
                           </span>
                         </div>
                         <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
-                          <DropdownToggle tag="div">
+                          <DropdownToggle tag="span" className="manage-directory-button">
                             <IconButton
                               width={18}
                               height={18}
@@ -213,6 +213,19 @@ const StyledList = styled.li<{ isActive?: boolean }>`
   color: #eee;
   background-color: inherit;
   border-radius: 3px;
+
+  .manage-directory-button {
+    height: 24px;
+    @media (min-width: ${BootstrapBreakpoints.md}px) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .manage-directory-button {
+      display: block;
+    }
+  }
 
   ${({ isActive }) =>
     isActive
