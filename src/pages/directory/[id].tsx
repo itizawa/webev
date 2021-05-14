@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -21,6 +20,7 @@ import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
+import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -41,15 +41,15 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
-  const openDeleteModal = () => {
+  const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
   };
 
-  const openRenameModal = () => {
+  const openRenameModal = (directory: Directory) => {
     mutateDirectoryForRename(directory);
   };
 
-  const openAddDirectoryModal = () => {
+  const openAddDirectoryModal = (directory: Directory) => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
@@ -92,15 +92,15 @@ const Index: VFC = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={openRenameModal}>
+                    <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
                     </DropdownItem>
-                    <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                    <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
                       <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Create Directory</span>
                     </DropdownItem>
@@ -111,23 +111,14 @@ const Index: VFC = () => {
           </>
         )}
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
-          <div className="my-3 bg-dark shadow  p-3">
+          <div className="my-3 bg-dark shadow p-3">
             <h5>Child Directories</h5>
             <div className="row">
               {childrenDirectoryTrees.map((v) => {
                 const directory = v.descendant as Directory;
                 return (
-                  <div className="col-xl-4 col-md-6" key={directory._id}>
-                    <Link href={`/directory/${directory._id}`}>
-                      <StyledList className="list-group-item border-0 d-flex">
-                        <div className="w-100 text-truncate">
-                          <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                          <span className="ms-3" role="button">
-                            {directory.name}
-                          </span>
-                        </div>
-                      </StyledList>
-                    </Link>
+                  <div className="col-xl-4 col-md-6 col-12" key={directory._id}>
+                    <DirectoryListItem directory={directory} />
                   </div>
                 );
               })}
@@ -170,24 +161,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-const StyledList = styled.li<{ isActive?: boolean }>`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  ${({ isActive }) =>
-    isActive
-      ? `
-    margin-top: 0px;
-    background-color: #00acc1;
-    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
-  `
-      : `:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
-  }`}
-`;
 
 export default Index;

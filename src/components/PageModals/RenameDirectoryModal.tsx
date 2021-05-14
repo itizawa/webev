@@ -1,4 +1,5 @@
 import { useEffect, useState, VFC } from 'react';
+import { useRouter } from 'next/router';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { restClient } from '~/utils/rest-client';
@@ -7,13 +8,16 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { useDirectoryForRename } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 
 export const RenameDirectoryModal: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
+
   const [name, setName] = useState<string>('');
   const { data: directoryForRename, mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateDirectory } = useDirectoryInfomation(directoryForRename?._id as string);
+  const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   useEffect(() => {
@@ -30,6 +34,7 @@ export const RenameDirectoryModal: VFC = () => {
       toastSuccess(t.toastr_update_directory_name);
       mutateDirectory();
       mutateDirectoryList();
+      mutateDirectoryChildren();
       mutateDirectoryForRename(null);
     } catch (err) {
       toastError(err);

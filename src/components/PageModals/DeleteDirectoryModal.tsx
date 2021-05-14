@@ -8,19 +8,27 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { useDirectoryForDelete } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
+import { useDirectoryChildren, useDirectoryListSWR } from '~/stores/directory';
 
 export const DeleteDirectoryModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
   const { data: directoryForDelete, mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
 
   const deletePage = async () => {
     try {
       await restClient.apiDelete(`/directories/${directoryForDelete?._id}`);
-      mutateDirectoryForDelete(null);
       toastSuccess(t.toastr_delete_directory);
-      router.push('/directory');
+      // delete current pgae directory
+      if (router.query.id === directoryForDelete?._id) {
+        router.push('/directory');
+      }
+      mutateDirectoryList();
+      mutateDirectoryChildren();
+      mutateDirectoryForDelete(null);
     } catch (err) {
       toastError(err);
     }
