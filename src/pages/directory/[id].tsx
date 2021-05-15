@@ -9,6 +9,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
+import { useIsCopiedUrl } from '~/stores/contexts';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -34,6 +35,7 @@ const Index: VFC = () => {
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
   const { data: isRetrieveFavoritePageList = false, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
+  const { data: isCopiedUrl } = useIsCopiedUrl();
 
   mutateDirectoryId(id as string);
   const { data: directory } = useDirectoryInfomation(id as string);
@@ -87,6 +89,7 @@ const Index: VFC = () => {
                   icon={BootstrapIcon.SAVE}
                   color={BootstrapColor.SECONDARY}
                   activeColor={BootstrapColor.WARNING}
+                  isActive={isCopiedUrl}
                   text={t.save_page}
                 />
               </div>

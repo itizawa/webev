@@ -5,13 +5,14 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
-import { useSocketId } from '~/stores/contexts';
+import { useIsCopiedUrl, useSocketId } from '~/stores/contexts';
 
 export const InputForm: VFC = () => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { data: socketId } = useSocketId();
+  const { mutate: mutateIsCopiedUrl } = useIsCopiedUrl();
 
   const [url, setUrl] = useState('');
 
@@ -37,8 +38,9 @@ export const InputForm: VFC = () => {
 
     // check url
     if (!clipboardText.match(/^(http|https):\/\//i)) {
-      return;
+      return mutateIsCopiedUrl(false);
     }
+    mutateIsCopiedUrl(true);
 
     const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
     const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
