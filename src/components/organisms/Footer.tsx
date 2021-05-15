@@ -23,11 +23,11 @@ export const Footer: FC = () => {
             </Link>
           </p>
           <span className="me-2">🇺🇸</span>
-          <Link href={router.pathname} locale="en">
+          <Link href={router.asPath} locale="en">
             <a className="text-muted">English</a>
           </Link>
           <span className="ms-3 me-2">🇯🇵</span>
-          <Link href={router.pathname} locale="ja">
+          <Link href={router.asPath} locale="ja">
             <a className="text-muted">Japanese</a>
           </Link>
         </div>

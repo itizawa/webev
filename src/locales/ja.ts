@@ -45,6 +45,7 @@ export const ja = {
   move_directory: 'ディレクトリに移動します',
   create_directory: 'Directory の新規作成',
   manage_directory: 'Directory を編集する',
+  rename_directory: 'Directory をリネームする',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
   'your_favorite_pages_don’t_exist': 'お気に入りが存在しません',

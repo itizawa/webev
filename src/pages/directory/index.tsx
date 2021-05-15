@@ -1,13 +1,11 @@
 import { VFC, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import styled from 'styled-components';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { Icon } from '~/components/Icons/Icon';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
@@ -15,6 +13,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -61,9 +60,9 @@ const Index: VFC = () => {
         <div className="d-flex align-items-center justify-content-between">
           <h1>{t.directory}</h1>
           <IconButton
-            width={24}
-            height={24}
-            icon={BootstrapIcon.DIRECTORY}
+            width={18}
+            height={18}
+            icon={BootstrapIcon.GEAR}
             color={BootstrapColor.SECONDARY}
             activeColor={BootstrapColor.SECONDARY}
             isActive={isDisplayDirectoryHierarchie}
@@ -74,17 +73,8 @@ const Index: VFC = () => {
         {paginationResult != null && (
           <div className="row">
             {paginationResult.docs.map((directory) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={directory._id}>
-                <Link href={`/directory/${directory._id}`}>
-                  <StyledList className="list-group-item border-0 d-flex">
-                    <div className="w-100 text-truncate">
-                      <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                      <span className="ms-3" role="button">
-                        {directory.name}
-                      </span>
-                    </div>
-                  </StyledList>
-                </Link>
+              <div className="col-xl-4 col-md-6" key={directory._id}>
+                <DirectoryListItem directory={directory} />
               </div>
             ))}
           </div>
@@ -118,25 +108,6 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-const StyledList = styled.li<{ isActive?: boolean }>`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  ${({ isActive }) =>
-    isActive
-      ? `
-    margin-top: 0px;
-    background-color: #00acc1;
-    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
-  `
-      : `:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
-  }`}
-`;
 
 const StyledDiv = styled.div`
   > .btn {

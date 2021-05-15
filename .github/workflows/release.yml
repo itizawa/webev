@@ -30,3 +30,12 @@ jobs:
           channel: '#webev-release'
           url: ${{ secrets.SLACK_WEBHOOK_URL }}
           created_tag: '${{ github.event.pull_request.title }}'
+
+      - name: Twitter Notification
+        uses: mugi111/tweet-trigger-release@v1.2
+        with:
+          consumer_key: ${{ secrets.CONSUMER_KEY }}
+          consumer_secret: ${{ secrets.CONSUMER_SECRET }}
+          access_token_key: ${{ secrets.ACCESS_TOKEN_KEY }}
+          access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }}
+          tweet_body: "Webev ${{ github.event.pull_request.title }}をリリースしました！ \n https://github.com/itizawa/webev-front/releases/tag/${{ github.event.pull_request.title }} \n \n お試しはこちらから → https://webev.cloud/ja \n #Webev"
