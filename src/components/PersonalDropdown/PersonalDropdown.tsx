@@ -64,7 +64,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
           </div>
         </div>
         <DropdownItem divider />
-        <DropdownItem tag="button" onClick={() => signOut()}>
+        <DropdownItem tag="button" onClick={() => signOut({ callbackUrl: '/' })}>
           {t.logout}
         </DropdownItem>
       </StyledDropdownMenu>
