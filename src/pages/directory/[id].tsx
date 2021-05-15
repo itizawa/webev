@@ -81,6 +81,16 @@ const Index: VFC = () => {
             <div className="d-flex gap-3 align-items-center">
               <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
               <div className="ms-auto">
+                <IconButton
+                  width={18}
+                  height={18}
+                  icon={BootstrapIcon.SAVE}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WARNING}
+                  text={t.save_page}
+                />
+              </div>
+              <div>
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
                     <IconButton
