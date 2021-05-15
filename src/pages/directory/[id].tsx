@@ -83,45 +83,43 @@ const Index: VFC = () => {
             </small>
             <div className="d-flex gap-3 align-items-center">
               <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
-              <div className="ms-auto">
-                <IconButton
-                  width={18}
-                  height={18}
-                  icon={BootstrapIcon.SAVE}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WARNING}
-                  isActive={urlFromClipBoard != null}
-                  text={t.save_page}
-                  onClickButton={() => mutateDirectoryForSavePage(directory)}
-                />
-              </div>
-              <div>
-                <UncontrolledDropdown direction="down">
-                  <DropdownToggle tag="div">
-                    <IconButton
-                      width={18}
-                      height={18}
-                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
-                      color={BootstrapColor.SECONDARY}
-                      activeColor={BootstrapColor.WARNING}
-                    />
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
-                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                      <span className="ms-2">Trash</span>
-                    </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
-                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
-                      <span className="ms-2">Rename</span>
-                    </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
-                      <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
-                      <span className="ms-2">Create Directory</span>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </div>
+            </div>
+            <div className="d-flex mt-2 gap-3 align-items-center justify-content-end">
+              <IconButton
+                width={18}
+                height={18}
+                icon={BootstrapIcon.SAVE}
+                color={BootstrapColor.SECONDARY}
+                activeColor={BootstrapColor.WARNING}
+                isActive={urlFromClipBoard != null}
+                text={t.save_page}
+                onClickButton={() => mutateDirectoryForSavePage(directory)}
+              />
+              <UncontrolledDropdown direction="down">
+                <DropdownToggle tag="div">
+                  <IconButton
+                    width={18}
+                    height={18}
+                    icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
+                    color={BootstrapColor.SECONDARY}
+                    activeColor={BootstrapColor.WARNING}
+                  />
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                  <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
+                    <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                    <span className="ms-2">Trash</span>
+                  </DropdownItem>
+                  <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
+                    <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                    <span className="ms-2">Rename</span>
+                  </DropdownItem>
+                  <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
+                    <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                    <span className="ms-2">Create Directory</span>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </div>
           </>
         )}
