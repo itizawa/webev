@@ -41,6 +41,7 @@ export const InputForm: VFC = () => {
 
   // read clipboard and set when not used in the past
   const readClipboardText = async () => {
+    // TODO use vars from DB instead of localstorage
     if (localStorage.getItem('isEnableReadFromClipboard') !== 'true') {
       return;
     }
