@@ -10,6 +10,7 @@ export const en = {
   settings: 'Settings',
   save: 'Save',
   save_page: 'Save Page',
+  save_to_directory: (directoryName: string): string => `Save Page to ${directoryName}`,
   create: 'Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 

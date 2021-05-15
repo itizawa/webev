@@ -10,6 +10,7 @@ export const ja = {
   settings: '設定',
   save: '保存',
   save_page: 'ページを保存する',
+  save_to_directory: (directoryName: string): string => `${directoryName} に保存します`,
   create: '作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
