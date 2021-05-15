@@ -5,15 +5,25 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
-import { useSocketId } from '~/stores/contexts';
+import { useUrlFromClipBoard, useSocketId } from '~/stores/contexts';
 
 export const InputForm: VFC = () => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { data: socketId } = useSocketId();
+  const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   const [url, setUrl] = useState('');
+  const [usedClipboardTexts, setUsedClipboardTexts] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (urlFromClipBoard != null) {
+      setUrl(urlFromClipBoard);
+    } else {
+      setUrl('');
+    }
+  }, [urlFromClipBoard]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -21,6 +31,7 @@ export const InputForm: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url, socketId });
       toastSuccess(t.toastr_save_url);
+      mutateUrlFromClipBoard(null);
       setUrl('');
       mutatePageList();
     } catch (err) {
@@ -30,6 +41,7 @@ export const InputForm: VFC = () => {
 
   // read clipboard and set when not used in the past
   const readClipboardText = async () => {
+    // TODO use vars from DB instead of localstorage
     if (localStorage.getItem('isEnableReadFromClipboard') !== 'true') {
       return;
     }
@@ -37,22 +49,15 @@ export const InputForm: VFC = () => {
 
     // check url
     if (!clipboardText.match(/^(http|https):\/\//i)) {
-      return;
+      return mutateUrlFromClipBoard(null);
     }
 
-    const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
-    const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
-    if (usedClipboardTextsArray.includes(clipboardText)) {
+    if (usedClipboardTexts.includes(clipboardText)) {
       return;
     }
+    mutateUrlFromClipBoard(clipboardText);
     toastSuccess(t.obtained_from_clipboard);
-    setUrl(clipboardText);
-    usedClipboardTextsArray.unshift(clipboardText);
-    let csvForSave = usedClipboardTextsArray.join(',');
-    if (usedClipboardTextsArray.length >= 10) {
-      csvForSave = usedClipboardTextsArray.slice(0, 9).join(',');
-    }
-    localStorage.setItem('usedClipboardTexts', csvForSave);
+    setUsedClipboardTexts((prevState) => [...prevState, clipboardText]);
   };
 
   useEffect(() => {
