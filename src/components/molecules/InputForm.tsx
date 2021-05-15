@@ -15,6 +15,7 @@ export const InputForm: VFC = () => {
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   const [url, setUrl] = useState('');
+  const [usedClipboardTexts, setUsedClipboardTexts] = useState<string[]>([]);
 
   useEffect(() => {
     if (urlFromClipBoard != null) {
@@ -49,20 +50,13 @@ export const InputForm: VFC = () => {
     if (!clipboardText.match(/^(http|https):\/\//i)) {
       return mutateUrlFromClipBoard(null);
     }
-    mutateUrlFromClipBoard(clipboardText);
 
-    const usedClipboardTextsCSV = localStorage.getItem('usedClipboardTexts') || '';
-    const usedClipboardTextsArray = usedClipboardTextsCSV.split(',');
-    if (usedClipboardTextsArray.includes(clipboardText)) {
+    if (usedClipboardTexts.includes(clipboardText)) {
       return;
     }
+    mutateUrlFromClipBoard(clipboardText);
     toastSuccess(t.obtained_from_clipboard);
-    usedClipboardTextsArray.unshift(clipboardText);
-    let csvForSave = usedClipboardTextsArray.join(',');
-    if (usedClipboardTextsArray.length >= 10) {
-      csvForSave = usedClipboardTextsArray.slice(0, 9).join(',');
-    }
-    localStorage.setItem('usedClipboardTexts', csvForSave);
+    setUsedClipboardTexts((prevState) => [...prevState, clipboardText]);
   };
 
   useEffect(() => {
