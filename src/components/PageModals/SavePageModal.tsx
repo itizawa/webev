@@ -24,6 +24,8 @@ export const SavePageModal: VFC = () => {
   useEffect(() => {
     if (urlFromClipBoard != null) {
       setUrl(urlFromClipBoard);
+    } else {
+      setUrl('');
     }
   }, [urlFromClipBoard]);
 

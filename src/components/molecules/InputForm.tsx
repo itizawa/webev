@@ -12,9 +12,17 @@ export const InputForm: VFC = () => {
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { data: socketId } = useSocketId();
-  const { mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
+  const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    if (urlFromClipBoard != null) {
+      setUrl(urlFromClipBoard);
+    } else {
+      setUrl('');
+    }
+  }, [urlFromClipBoard]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -22,6 +30,7 @@ export const InputForm: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url, socketId });
       toastSuccess(t.toastr_save_url);
+      mutateUrlFromClipBoard(null);
       setUrl('');
       mutatePageList();
     } catch (err) {
@@ -48,7 +57,6 @@ export const InputForm: VFC = () => {
       return;
     }
     toastSuccess(t.obtained_from_clipboard);
-    setUrl(clipboardText);
     usedClipboardTextsArray.unshift(clipboardText);
     let csvForSave = usedClipboardTextsArray.join(',');
     if (usedClipboardTextsArray.length >= 10) {
