@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
+import { FixedImage } from '~/components/Atoms/FixedImage';
 import { Icon } from '~/components/Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
@@ -16,9 +17,8 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete, useIsOpenDeletePageModal, useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { usePageForDelete, usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
-import { imagePath } from '~/const/imagePath';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITENAME = 10;
@@ -36,10 +36,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
-  const { mutate: mutateIsOpenDeletePageModal } = useIsOpenDeletePageModal();
-
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -77,21 +74,17 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
-    mutateIsOpenDeletePageModal(true);
   };
 
   const openAddDirectoryModal = async () => {
     mutatePageForAddDirectory(page);
-    mutateIsOpenAddDirectoryModal(true);
   };
 
   return (
     <StyledCard className="card border-0 shadow">
-      <StyledImageWrapper>
-        <a href={url} target="blank" rel="noopener noreferrer">
-          <img src={image || imagePath.NO_IMAGE} alt={image || imagePath.NO_IMAGE} className="card-img-top" />
-        </a>
-      </StyledImageWrapper>
+      <a href={url} target="blank" rel="noopener noreferrer">
+        <FixedImage imageUrl={image} />
+      </a>
       <div className="card-body p-2">
         <h5 className="card-title my-1">
           <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
@@ -173,21 +166,4 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
 const StyledCard = styled.div`
   background-color: #2f363d;
-`;
-
-const StyledImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-top: 55%;
-
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-
-    background-image: url('/spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
 `;

@@ -1,15 +1,14 @@
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-// import { useDirectoryForDelete, useIsOpenDeleteDirectoryModal } from '~/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -20,9 +19,8 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { restClient } from '~/utils/rest-client';
 import { Directory } from '~/domains/Directory';
+import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -31,51 +29,29 @@ const Index: VFC = () => {
   const { id } = router.query;
 
   const { mutate: mutateDirectoryId } = useDirectoryId();
-  // const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
-  // const { mutate: mutateIsOpenDeleteDirectoryModal } = useIsOpenDeleteDirectoryModal();
+  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
+  const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
-  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [newDirecroryName, setNewDirecroryName] = useState('');
+  const { data: isRetrieveFavoritePageList = false, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
-  useEffect(() => {
-    if (directory != null) {
-      setNewDirecroryName(directory?.name);
-    }
-  }, [directory]);
-
-  // const openDeleteModal = () => {
-  //   mutateDirectoryForDelete(directory);
-  //   mutateIsOpenDeleteDirectoryModal(true);
-  // };
-
-  const handleSubmitRenameForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // If there is no change, do nothing
-    if (newDirecroryName === directory?.name) {
-      return setIsEditing(false);
-    }
-
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name: newDirecroryName });
-      toastSuccess(t.toastr_update_directory_name);
-      mutateDirectory();
-      mutateDirectoryList();
-      setIsEditing(false);
-    } catch (error) {
-      toastError(error);
-    }
+  const openDeleteModal = (directory: Directory) => {
+    mutateDirectoryForDelete(directory);
   };
-  console.log(childrenDirectoryTrees);
+
+  const openRenameModal = (directory: Directory) => {
+    mutateDirectoryForRename(directory);
+  };
+
+  const openAddDirectoryModal = (directory: Directory) => {
+    mutateParentDirectoryForCreateDirectory(directory);
+  };
 
   return (
     <LoginRequiredWrapper>
@@ -103,22 +79,7 @@ const Index: VFC = () => {
               })}
             </small>
             <div className="d-flex gap-3 align-items-center">
-              {isEditing ? (
-                <form className="input-group my-2" onSubmit={handleSubmitRenameForm}>
-                  <input
-                    type="text"
-                    value={newDirecroryName}
-                    className="form-control ps-3 bg-white"
-                    onChange={(e) => setNewDirecroryName(e.target.value)}
-                    autoFocus
-                  />
-                  <button className="btn btn-secondary" type="submit" id="input-group" disabled={newDirecroryName.trim() === ''}>
-                    {t.save}
-                  </button>
-                </form>
-              ) : (
-                <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
-              )}
+              <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
               <div className="ms-auto">
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
@@ -131,13 +92,17 @@ const Index: VFC = () => {
                     />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    {/* <DropdownItem tag="button" onClick={openDeleteModal}>
+                    <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
                       <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Trash</span>
-                    </DropdownItem> */}
-                    <DropdownItem tag="button" onClick={() => setIsEditing(true)}>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
                       <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
                       <span className="ms-2">Rename</span>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
+                      <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                      <span className="ms-2">Create Directory</span>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
@@ -146,23 +111,14 @@ const Index: VFC = () => {
           </>
         )}
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
-          <div className="my-3 bg-dark shadow  p-3">
+          <div className="my-3 bg-dark shadow p-3">
             <h5>Child Directories</h5>
             <div className="row">
               {childrenDirectoryTrees.map((v) => {
                 const directory = v.descendant as Directory;
                 return (
-                  <div className="col-xl-4 col-md-6" key={directory._id}>
-                    <Link href={`/directory/${directory._id}`}>
-                      <StyledList className="list-group-item border-0 d-flex">
-                        <div>
-                          <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
-                          <span className="ms-3" role="button">
-                            {directory.name}
-                          </span>
-                        </div>
-                      </StyledList>
-                    </Link>
+                  <div className="col-xl-4 col-md-6 col-12" key={directory._id}>
+                    <DirectoryListItem directory={directory} />
                   </div>
                 );
               })}
@@ -205,24 +161,5 @@ const Index: VFC = () => {
     </LoginRequiredWrapper>
   );
 };
-
-const StyledList = styled.li<{ isActive?: boolean }>`
-  padding: 10px;
-  color: #eee;
-  background-color: inherit;
-  border-radius: 3px;
-
-  ${({ isActive }) =>
-    isActive
-      ? `
-    margin-top: 0px;
-    background-color: #00acc1;
-    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
-  `
-      : `:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-    transition: all 300ms linear;
-  }`}
-`;
 
 export default Index;

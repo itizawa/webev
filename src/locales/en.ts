@@ -9,6 +9,8 @@ export const en = {
   cancel: 'Cancel',
   settings: 'Settings',
   save: 'Save',
+  create: 'Create',
+  create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
   only_favorite: 'Only Favorite',
   latest_order: 'Latest Order',
@@ -43,6 +45,7 @@ export const en = {
   move_directory: 'Move Directory',
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
+  rename_directory: 'Rename Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
   'your_favorite_pages_don’t_exist': 'Your favorite pages don’t exist.',

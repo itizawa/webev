@@ -3,7 +3,8 @@ import { VFC, useState } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import styled from 'styled-components';
 
-import { IconButton } from '../Icons/IconButton';
+import { IconButton } from '~/components/Icons/IconButton';
+import { FixedImage } from '~/components/Atoms/FixedImage';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
@@ -12,18 +13,16 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryListSWR } from '~/stores/directory';
-import { useIsOpenAddDirectoryModal, usePageForAddDirectory } from '~/stores/modal';
+import { usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
-import { imagePath } from '~/const/imagePath';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: pageForAddDirectory } = usePageForAddDirectory();
-  const { data: isOpenAddDirectoryModal = false, mutate: mutateIsOpenAddDirectoryModal } = useIsOpenAddDirectoryModal();
+  const { data: pageForAddDirectory, mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageList } = usePageListSWR();
@@ -36,9 +35,9 @@ export const AddDirectoryModal: VFC = () => {
       await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
         directoryId,
       });
-      mutateIsOpenAddDirectoryModal(false);
-      mutatePageList();
       toastSuccess(t.toastr_success_add_directory);
+      mutatePageList();
+      mutatePageForAddDirectory(null);
     } catch (error) {
       console.log(error);
       toastError(error);
@@ -65,14 +64,12 @@ export const AddDirectoryModal: VFC = () => {
   };
 
   return (
-    <Modal isOpen={isOpenAddDirectoryModal} toggle={() => mutateIsOpenAddDirectoryModal(false)} size="lg">
+    <Modal isOpen={pageForAddDirectory != null} toggle={() => mutatePageForAddDirectory(null)} size="lg">
       <ModalHeader className="bg-dark">{t.move_directory}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row">
           <div className="col-12 col-md-5">
-            <StyledImageWrapper>
-              <img src={pageForAddDirectory?.image || imagePath.NO_IMAGE} alt={pageForAddDirectory?.image || imagePath.NO_IMAGE} />
-            </StyledImageWrapper>
+            <FixedImage imageUrl={pageForAddDirectory?.image} />
             <h5 className="card-title my-1">{pageForAddDirectory?.title || pageForAddDirectory?.url}</h5>
           </div>
           <div className="col-12 col-md-2 text-center">
@@ -103,30 +100,13 @@ export const AddDirectoryModal: VFC = () => {
             </StyledCreateFormDiv>
           </StyledDiv>
         </div>
-        <div className="mt-3 text-center" onClick={() => mutateIsOpenAddDirectoryModal(false)}>
+        <div className="mt-3 text-center" onClick={() => mutatePageForAddDirectory(null)}>
           <button className="btn btn-secondary w-100">Cancel</button>
         </div>
       </ModalBody>
     </Modal>
   );
 };
-
-const StyledImageWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-top: 55%;
-
-  img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-
-    background-image: url('/spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-`;
 
 const StyledDiv = styled.div`
   max-height: 500px;

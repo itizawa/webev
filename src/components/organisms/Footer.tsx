@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 export const Footer: FC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   return (
     <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
@@ -21,11 +23,11 @@ export const Footer: FC = () => {
             </Link>
           </p>
           <span className="me-2">🇺🇸</span>
-          <Link href="/" locale="en">
+          <Link href={router.asPath} locale="en">
             <a className="text-muted">English</a>
           </Link>
           <span className="ms-3 me-2">🇯🇵</span>
-          <Link href="/" locale="ja">
+          <Link href={router.asPath} locale="ja">
             <a className="text-muted">Japanese</a>
           </Link>
         </div>
