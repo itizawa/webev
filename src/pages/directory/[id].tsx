@@ -61,7 +61,7 @@ const Index: VFC = () => {
       <div className="p-3">
         {directory != null && (
           <>
-            <small>
+            <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
               <Link href="/directory">
                 <a className="text-decoration-none text-white">Directory</a>
               </Link>
@@ -80,9 +80,9 @@ const Index: VFC = () => {
                   </Fragment>
                 );
               })}
-            </small>
+            </div>
             <div className="d-flex gap-3 align-items-center">
-              <span className="text-nowrap overflow-scroll fs-1">{directory?.name}</span>
+              <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0">{directory?.name}</span>
             </div>
             <div className="d-flex mt-2 gap-3 align-items-center justify-content-end">
               <IconButton
