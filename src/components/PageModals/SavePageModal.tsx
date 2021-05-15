@@ -1,4 +1,4 @@
-import { VFC, useState } from 'react';
+import { VFC, useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { restClient } from '~/utils/rest-client';
@@ -6,7 +6,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
-import { useSocketId } from '~/stores/contexts';
+import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -19,6 +19,13 @@ export const SavePageModal: VFC = () => {
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
+  const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
+
+  useEffect(() => {
+    if (urlFromClipBoard != null) {
+      setUrl(urlFromClipBoard);
+    }
+  }, [urlFromClipBoard]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -27,13 +34,15 @@ export const SavePageModal: VFC = () => {
       await restClient.apiPost('/pages', { url, socketId, directoryId: directoryForSavePage?._id });
       toastSuccess(t.toastr_delete_url);
       pageListMutate();
-      mutateDirectoryForSavePage(null);
+      closeModal();
     } catch (err) {
       toastError(err);
     }
   };
 
   const closeModal = async () => {
+    mutateUrlFromClipBoard(null);
+    setUrl('');
     mutateDirectoryForSavePage(null);
   };
 
