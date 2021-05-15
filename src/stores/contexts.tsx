@@ -5,6 +5,6 @@ export const useSocketId = (initialData?: string): SWRResponse<string, Error> =>
   return useStaticSWR('socketId', initialData);
 };
 
-export const useIsCopiedUrl = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isCopiedUrl', initialData);
+export const useUrlFromClipBoard = (initialData?: string): SWRResponse<string | null, Error> => {
+  return useStaticSWR<string | null, Error>('urlFromClipBoard', initialData);
 };
