@@ -62,7 +62,7 @@ const Index: VFC = () => {
           <>
             <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
               <Link href="/directory">
-                <a className="text-decoration-none text-white">Directory</a>
+                <a className="text-decoration-none text-white">{t.directory}</a>
               </Link>
               <span className="mx-1">{'/'}</span>
               {ancestorDirectories?.map((ancestorDirectorie) => {
