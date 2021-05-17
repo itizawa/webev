@@ -25,7 +25,7 @@ export const SubnavBar: VFC = () => {
           <Link key={v.text} href={v.url}>
             <StyledSubnavBarItem className="text-center col py-2" isActive={v.url === router.pathname}>
               {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.SECONDARY} />}
-              <span className="ms-1">{v.text}</span>
+              <small className="ms-1">{v.text}</small>
             </StyledSubnavBarItem>
           </Link>
         );
