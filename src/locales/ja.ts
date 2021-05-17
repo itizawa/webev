@@ -23,7 +23,7 @@ export const ja = {
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'Directory を保存しました',
   toastr_delete_directory: 'Directory を削除しました',
-  toastr_success_archived: 'アーカイブしました',
+  toastr_success_read: '読みました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'Home',

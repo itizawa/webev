@@ -51,7 +51,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchArchive = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t.toastr_success_archived);
+      toastSuccess(t.toastr_success_read);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {

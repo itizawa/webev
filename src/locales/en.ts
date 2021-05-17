@@ -23,7 +23,7 @@ export const en = {
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
-  toastr_success_archived: 'Archived',
+  toastr_success_read: 'Read!',
   toastr_success_add_directory: 'Add Directory',
 
   home: 'Home',
