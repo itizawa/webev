@@ -29,6 +29,7 @@ export const en = {
   home: 'Home',
   read: 'Read',
   directory: 'Directory',
+  share: 'Share',
 
   automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
