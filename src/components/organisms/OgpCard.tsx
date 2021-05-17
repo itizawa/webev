@@ -115,15 +115,15 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             <DropdownMenu className="dropdown-menu-dark" positionFixed>
               <DropdownItem tag="button" onClick={openDeleteModal}>
                 <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Trash</span>
+                <span className="ms-2">{t.delete}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={sharePage}>
                 <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Share</span>
+                <span className="ms-2">{t.share}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={openAddDirectoryModal}>
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Move Directory</span>
+                <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

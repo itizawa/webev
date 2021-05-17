@@ -29,6 +29,7 @@ export const ja = {
   home: 'ホーム',
   read: '読んだ記事',
   directory: 'ディレクトリ',
+  share: '共有',
 
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
@@ -38,10 +39,10 @@ export const ja = {
 
   delete_directory: 'ディレクトリを削除します',
 
-  move_directory: 'ディレクトリに移動します',
+  move_directory: 'ディレクトリに移動',
   create_directory: 'ディレクトリの新規作成',
-  manage_directory: 'ディレクトリを編集する',
-  rename_directory: 'ディレクトリをリネームする',
+  manage_directory: 'ディレクトリの編集',
+  rename_directory: 'ディレクトリのリネーム',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
 
