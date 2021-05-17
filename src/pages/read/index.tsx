@@ -18,7 +18,7 @@ const Index: VFC = () => {
     <LoginRequiredWrapper>
       <div className="p-3">
         <div className="d-flex align-items-center">
-          <h1>{t.archive}</h1>
+          <h1>{t.read}</h1>
           <div className="ms-auto">
             <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
           </div>

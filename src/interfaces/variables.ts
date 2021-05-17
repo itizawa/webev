@@ -13,7 +13,7 @@ export enum BootstrapIcon {
   HOME = 'home',
   PLUS_BOARD = 'plus',
   PLUS_DOTTED = 'plus-dotted',
-  ARCHIVE = 'archive',
+  CHECK = 'check',
   STAR = 'star',
   PENCIL = 'pencil',
   TRASH = 'trash',

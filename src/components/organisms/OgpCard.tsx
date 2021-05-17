@@ -94,7 +94,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             <IconButton
               width={24}
               height={24}
-              icon={BootstrapIcon.ARCHIVE}
+              icon={BootstrapIcon.CHECK}
               color={BootstrapColor.SECONDARY}
               activeColor={BootstrapColor.DANGER}
               isActive={isArchive}
