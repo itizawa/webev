@@ -26,9 +26,9 @@ export const ja = {
   toastr_success_read: '読みました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
-  home: 'Home',
+  home: 'ホーム',
   read: '読んだ記事',
-  directory: 'Directory',
+  directory: 'フォルダ',
 
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
