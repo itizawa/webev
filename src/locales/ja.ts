@@ -27,7 +27,7 @@ export const ja = {
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'Home',
-  archive: 'Archive',
+  read: '読んだ記事',
   directory: 'Directory',
 
   automatic_acquisition: '自動取得',
@@ -44,8 +44,6 @@ export const ja = {
   rename_directory: 'Directory をリネームする',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
-  'your_archive_pages_don’t_exist': 'アーカイブが存在しません',
-  archive_immediately: 'アーカイブボタンを押して追加してください',
 
   this_is_the_404_page: 'This is the 404 page',
   go_to_top: 'トップページに戻る',
