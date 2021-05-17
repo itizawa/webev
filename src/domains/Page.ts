@@ -1,6 +1,6 @@
 export enum PageStatus {
   PAGE_STATUS_STOCK = 'stocked',
-  PAGE_STATUS_ARCHIVE = 'archived',
+  PAGE_STATUS_ARCHIVE = 'archived', // It is read on the display
   PAGE_STATUS_DELETED = 'deleted',
 }
 export class Page {
