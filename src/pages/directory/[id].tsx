@@ -107,15 +107,15 @@ const Index: VFC = () => {
                 <DropdownMenu className="dropdown-menu-dark" positionFixed right>
                   <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
                     <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                    <span className="ms-2">Trash</span>
+                    <span className="ms-2">{t.delete}</span>
                   </DropdownItem>
                   <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
                     <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
-                    <span className="ms-2">Rename</span>
+                    <span className="ms-2">{t.rename_directory}</span>
                   </DropdownItem>
                   <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
                     <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
-                    <span className="ms-2">Create Directory</span>
+                    <span className="ms-2">{t.create_directory}</span>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
