@@ -1,5 +1,5 @@
 export const ja = {
-  welcome_webev: 'Welcome Webev!!',
+  welcome_webev: 'Webev へようこそ!!',
   total_pages: 'Webev に保存されたページの総数',
   start_immediately: 'さっそく 始める',
   term: '利用規約',
@@ -21,30 +21,30 @@ export const ja = {
   toastr_update_directory_name: '名前を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
-  toastr_save_directory: 'Directory を保存しました',
-  toastr_delete_directory: 'Directory を削除しました',
+  toastr_save_directory: 'ディレクトリを保存しました',
+  toastr_delete_directory: 'ディレクトリを削除しました',
   toastr_success_read: '読みました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'ホーム',
   read: '読んだ記事',
-  directory: 'フォルダ',
+  directory: 'ディレクトリ',
 
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
 
   delete_page: 'ページを削除します',
-  obtained_from_clipboard: 'Clipboard から取得しました',
+  obtained_from_clipboard: 'クリップボードから取得しました',
 
-  delete_directory: 'Directory を削除します',
+  delete_directory: 'ディレクトリを削除します',
 
   move_directory: 'ディレクトリに移動します',
-  create_directory: 'Directory の新規作成',
-  manage_directory: 'Directory を編集する',
-  rename_directory: 'Directory をリネームする',
+  create_directory: 'ディレクトリの新規作成',
+  manage_directory: 'ディレクトリを編集する',
+  rename_directory: 'ディレクトリをリネームする',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
 
-  this_is_the_404_page: 'This is the 404 page',
+  this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',
 };
