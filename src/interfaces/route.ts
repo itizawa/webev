@@ -5,7 +5,7 @@ export const PathNames = {
   LOGIN: '/login',
   TERM: '/term',
   HOME: '/home',
-  ARCHIVED: '/archived',
+  READ: '/read',
   DIRECTORY: '/directory',
   DIRECTORY_ID: '/directory/[id]',
 } as const;
@@ -34,7 +34,7 @@ export const PathConfigs = {
     layout: LayoutNames.DASHBOARD,
     statusForFind: [PageStatus.PAGE_STATUS_STOCK],
   },
-  [PathNames.ARCHIVED]: {
+  [PathNames.READ]: {
     layout: LayoutNames.DASHBOARD,
     statusForFind: [PageStatus.PAGE_STATUS_ARCHIVE],
   },

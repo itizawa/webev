@@ -2,6 +2,6 @@ import { BootstrapIcon } from '~/interfaces/variables';
 
 export const navbarItemMappings = [
   { text: 'Home', url: '/home', icon: BootstrapIcon.HOME },
-  { text: 'Archive', url: '/archived', icon: BootstrapIcon.ARCHIVE },
+  { text: 'Read', url: '/read', icon: BootstrapIcon.ARCHIVE },
   { text: 'Directory', url: '/directory', icon: BootstrapIcon.DIRECTORY },
 ];
