@@ -15,10 +15,6 @@ export const usePageStatus = (initialData?: PageStatus[]): SWRResponse<PageStatu
   return useStaticSWR('pageStatus', initialData);
 };
 
-export const useIsRetrieveFavoritePageList = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isRetrieveFavoritePageList', initialData);
-};
-
 export const useDirectoryId = (initialData?: string | null): SWRResponse<string | null, Error> => {
   return useStaticSWR('directoryId', initialData);
 };
@@ -30,15 +26,14 @@ export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, 
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: status = [PageStatus.PAGE_STATUS_STOCK] } = usePageStatus();
-  const { data: isRetrieveFavoritePageList = false } = useIsRetrieveFavoritePageList();
   const { data: directoryId } = useDirectoryId();
   const { data: isSortCreatedAt = false } = useIsSortCreatedAt();
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
 
   return useAuthenticationSWR(
-    ['/pages/list', status, activePage, limit, sort, isRetrieveFavoritePageList, directoryId],
-    (endpoint, status, page, limit, sort, isFavorite, directoryId) =>
+    ['/pages/list', status, activePage, limit, sort, directoryId],
+    (endpoint, status, page, limit, sort, directoryId) =>
       restClient
         .apiGet(
           urljoin(
@@ -47,7 +42,6 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
             `&page=${page}`,
             `&limit=${limit}`,
             `&sort=${sort}`,
-            isFavorite ? `&isFavorite=${isFavorite}` : ``,
             directoryId != null ? `&directoryId=${directoryId}` : ``,
           ),
         )

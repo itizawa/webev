@@ -33,14 +33,12 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { mutate: mutatePageList } = usePageListSWR();
   const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isArchive, setIsArchive] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutatePageForDelete } = usePageForDelete();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-    setIsFavorite(page.isFavorite);
   }, [page]);
 
   const sharePage = async () => {
@@ -55,17 +53,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
       toastSuccess(t.toastr_success_archived);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-      mutatePageList();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
-  const switchFavorite = async () => {
-    try {
-      const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess(t.toastr_update_favorite);
-      setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
       toastError(err);
@@ -116,20 +103,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           </div>
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
             Archive
-          </UncontrolledTooltip>
-          <div id={`favorite-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.STAR}
-              isActive={isFavorite}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={switchFavorite}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
-            Favorite
           </UncontrolledTooltip>
           <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
