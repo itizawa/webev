@@ -2,8 +2,6 @@ import { VFC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import { format } from 'date-fns';
-
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
@@ -31,7 +29,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt } = page;
+  const { _id, url, siteName, image, title, description } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -87,8 +85,6 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
-            <br />
-            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
