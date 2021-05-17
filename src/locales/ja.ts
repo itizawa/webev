@@ -18,7 +18,6 @@ export const ja = {
   oldest_order: '古い順',
 
   toastr_update_setting: '設定を更新しました',
-  toastr_update_favorite: 'お気に入りを更新しました',
   toastr_update_directory_name: '名前を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
@@ -27,11 +26,7 @@ export const ja = {
   toastr_success_archived: 'アーカイブしました',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
-  delete_favorite_page: 'お気に入りしたページを削除する',
-  delete_favorite_page_desc: '一度削除すると元に戻せません',
-
   home: 'Home',
-  favorite: 'Favorite',
   archive: 'Archive',
   directory: 'Directory',
 
@@ -49,8 +44,6 @@ export const ja = {
   rename_directory: 'Directory をリネームする',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
-  'your_favorite_pages_don’t_exist': 'お気に入りが存在しません',
-  favorite_immediately: 'お気に入りボタンを押して追加してください',
   'your_archive_pages_don’t_exist': 'アーカイブが存在しません',
   archive_immediately: 'アーカイブボタンを押して追加してください',
 

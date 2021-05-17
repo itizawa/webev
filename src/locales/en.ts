@@ -18,7 +18,6 @@ export const en = {
   oldest_order: 'Oldest Order',
 
   toastr_update_setting: 'Update Setting',
-  toastr_update_favorite: 'Update Favorite',
   toastr_update_directory_name: 'Update Directory Name',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
@@ -27,11 +26,7 @@ export const en = {
   toastr_success_archived: 'Archived',
   toastr_success_add_directory: 'Add Directory',
 
-  delete_favorite_page: 'Delete favorite page',
-  delete_favorite_page_desc: 'Once deleted, it cannot be revert.',
-
   home: 'Home',
-  favorite: 'Favorite',
   archive: 'Archive',
   directory: 'Directory',
 
@@ -49,8 +44,6 @@ export const en = {
   rename_directory: 'Rename Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
-  'your_favorite_pages_don’t_exist': 'Your favorite pages don’t exist.',
-  favorite_immediately: 'Let’s try to add favorites!',
   'your_archive_pages_don’t_exist': 'Your archive pages don’t exist.',
   archive_immediately: 'Let’s try to add archives!',
 
