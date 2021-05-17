@@ -8,7 +8,6 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -36,11 +35,7 @@ const Index: VFC = () => {
                 <OgpCard page={page} />
               </div>
             ))}
-            {paginationResult.docs.length === 0 ? (
-              <div className="col-12">
-                <NoArchivePageAlert />
-              </div>
-            ) : (
+            {paginationResult.docs.length !== 0 && (
               <div className="text-center">
                 <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
               </div>
