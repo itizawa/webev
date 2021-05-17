@@ -42,7 +42,7 @@ export const ja = {
   move_directory: 'ディレクトリに移動',
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
-  rename_directory: 'ディレクトリのリネーム',
+  rename_directory: 'ディレクトリの名前変更',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
 
