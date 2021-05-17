@@ -7,7 +7,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
-import { useDirectoryId, useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
+import { useDirectoryId, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -34,7 +34,6 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
-  const { data: isRetrieveFavoritePageList = false, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
   const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
@@ -139,18 +138,9 @@ const Index: VFC = () => {
           </div>
         )}
         <div className="my-2 d-flex">
-          <div className="ms-auto me-3">
-            <IconButton
-              icon={BootstrapIcon.STAR}
-              isActive={isRetrieveFavoritePageList}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
-              buttonSize="sm"
-              text={t.only_favorite}
-            />
+          <div className="ms-auto">
+            <SortButtonGroup />
           </div>
-          <SortButtonGroup />
         </div>
         {paginationResult != null && (
           <div className="row">

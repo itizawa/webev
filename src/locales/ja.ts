@@ -14,7 +14,6 @@ export const ja = {
   create: '作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
-  only_favorite: 'お気に入り',
   latest_order: '新しい順',
   oldest_order: '古い順',
 

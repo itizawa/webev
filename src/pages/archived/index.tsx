@@ -1,8 +1,6 @@
 import { VFC } from 'react';
 
-import { useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -11,13 +9,11 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
-import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
-  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   return (
     <LoginRequiredWrapper>
@@ -29,18 +25,9 @@ const Index: VFC = () => {
           </div>
         </div>
         <div className="my-2 d-flex">
-          <div className="ms-auto me-3">
-            <IconButton
-              icon={BootstrapIcon.STAR}
-              isActive={isRetrieveFavoritePageList}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
-              buttonSize="sm"
-              text={t.only_favorite}
-            />
+          <div className="ms-auto">
+            <SortButtonGroup />
           </div>
-          <SortButtonGroup />
         </div>
         {paginationResult != null && (
           <div className="row">
@@ -50,7 +37,9 @@ const Index: VFC = () => {
               </div>
             ))}
             {paginationResult.docs.length === 0 ? (
-              <NoArchivePageAlert />
+              <div className="col-12">
+                <NoArchivePageAlert />
+              </div>
             ) : (
               <div className="text-center">
                 <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
