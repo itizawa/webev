@@ -23,11 +23,11 @@ export const en = {
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
-  toastr_success_archived: 'Archived',
+  toastr_success_read: 'Read!',
   toastr_success_add_directory: 'Add Directory',
 
   home: 'Home',
-  archive: 'Archive',
+  read: 'Read',
   directory: 'Directory',
 
   automatic_acquisition: 'Automatic acquisition',
@@ -44,8 +44,6 @@ export const en = {
   rename_directory: 'Rename Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
-  'your_archive_pages_don’t_exist': 'Your archive pages don’t exist.',
-  archive_immediately: 'Let’s try to add archives!',
 
   this_is_the_404_page: 'This is the 404 page',
   go_to_top: 'Go to Top Page',

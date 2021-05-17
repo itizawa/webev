@@ -23,12 +23,12 @@ export const ja = {
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'Directory を保存しました',
   toastr_delete_directory: 'Directory を削除しました',
-  toastr_success_archived: 'アーカイブしました',
+  toastr_success_read: '読みました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
-  home: 'Home',
-  archive: 'Archive',
-  directory: 'Directory',
+  home: 'ホーム',
+  read: '読んだ記事',
+  directory: 'フォルダ',
 
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
@@ -44,8 +44,6 @@ export const ja = {
   rename_directory: 'Directory をリネームする',
 
   'your_pages_don’t_exist': 'ページが保存されていません',
-  'your_archive_pages_don’t_exist': 'アーカイブが存在しません',
-  archive_immediately: 'アーカイブボタンを押して追加してください',
 
   this_is_the_404_page: 'This is the 404 page',
   go_to_top: 'トップページに戻る',

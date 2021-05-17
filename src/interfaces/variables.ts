@@ -1,5 +1,6 @@
 export enum BootstrapColor {
   INFO = 'info',
+  SUCCESS = 'success',
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   WHITE = 'white',
@@ -13,7 +14,7 @@ export enum BootstrapIcon {
   HOME = 'home',
   PLUS_BOARD = 'plus',
   PLUS_DOTTED = 'plus-dotted',
-  ARCHIVE = 'archive',
+  CHECK = 'check',
   STAR = 'star',
   PENCIL = 'pencil',
   TRASH = 'trash',

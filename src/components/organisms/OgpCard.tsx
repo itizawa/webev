@@ -2,8 +2,6 @@ import { VFC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import { format } from 'date-fns';
-
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
@@ -31,7 +29,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt } = page;
+  const { _id, url, siteName, image, title, description } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -51,7 +49,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchArchive = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t.toastr_success_archived);
+      toastSuccess(t.toastr_success_read);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {
@@ -87,16 +85,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
-            <br />
-            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
-              icon={BootstrapIcon.ARCHIVE}
+              icon={BootstrapIcon.CHECK}
               color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.DANGER}
+              activeColor={BootstrapColor.SUCCESS}
               isActive={isArchive}
               onClickButton={switchArchive}
             />
