@@ -98,7 +98,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             />
           </div>
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
-            Archive
+            {t.read}
           </UncontrolledTooltip>
           <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
