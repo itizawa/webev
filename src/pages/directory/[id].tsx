@@ -48,6 +48,7 @@ const Index: VFC = () => {
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
   const [description, setDescription] = useState<string>();
+  const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
 
   useEffect(() => {
@@ -55,6 +56,12 @@ const Index: VFC = () => {
       setDescription(directory.description);
     }
   }, [directory]);
+
+  useEffect(() => {
+    if (description != null) {
+      setDescriptionRows(description.split('\n').length);
+    }
+  }, [description]);
 
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
@@ -153,7 +160,7 @@ const Index: VFC = () => {
           <StyledTextarea
             className="form-control"
             value={description}
-            rows={3}
+            rows={descriptionRows}
             onChange={(e) => handleChangeDescription(e.target.value)}
             placeholder={t.no_description}
           />
