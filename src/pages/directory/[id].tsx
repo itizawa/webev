@@ -24,6 +24,8 @@ import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -71,10 +73,16 @@ const Index: VFC = () => {
     setIsDisplaySubmitButton(true);
   };
 
-  const submitDescription = async (): Promise<void> => {
-    setIsDisplaySubmitButton(false);
+  const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
 
-    console.log('hoge');
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/description`, { description: newDescription });
+      toastSuccess(t.toastr_update_directory_description);
+    } catch (err) {
+      toastError(err);
+    }
+    setIsDisplaySubmitButton(false);
   };
 
   return (
