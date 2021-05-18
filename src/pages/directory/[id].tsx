@@ -55,6 +55,8 @@ const Index: VFC = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
+  console.log(directory);
+
   return (
     <LoginRequiredWrapper>
       <div className="p-3">
@@ -81,9 +83,7 @@ const Index: VFC = () => {
               })}
             </div>
             <div className="d-flex gap-3 align-items-center">
-              <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0">{directory?.name}</span>
-            </div>
-            <div className="d-flex mt-2 gap-3 align-items-center justify-content-end">
+              <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
               <IconButton
                 width={18}
                 height={18}
@@ -91,7 +91,6 @@ const Index: VFC = () => {
                 color={BootstrapColor.SECONDARY}
                 activeColor={BootstrapColor.WARNING}
                 isActive={urlFromClipBoard != null}
-                text={t.save_page}
                 onClickButton={() => mutateDirectoryForSavePage(directory)}
               />
               <UncontrolledDropdown direction="down">
