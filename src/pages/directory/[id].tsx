@@ -1,6 +1,8 @@
-import { Fragment, VFC } from 'react';
+import { Fragment, useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import styled from 'styled-components';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
@@ -43,6 +45,15 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
+  const [newDescription, setNewDescription] = useState<string>();
+  const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
+
+  useEffect(() => {
+    if (directory != null) {
+      setNewDescription(directory.description);
+    }
+  }, [directory]);
+
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
   };
@@ -55,7 +66,16 @@ const Index: VFC = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  console.log(directory);
+  const handleChangeDescription = (inputValue: string) => {
+    setNewDescription(inputValue);
+    setIsDisplaySubmitButton(true);
+  };
+
+  const submitDescription = async (): Promise<void> => {
+    setIsDisplaySubmitButton(false);
+
+    console.log('hoge');
+  };
 
   return (
     <LoginRequiredWrapper>
@@ -121,6 +141,14 @@ const Index: VFC = () => {
             </div>
           </>
         )}
+        <form onSubmit={submitDescription}>
+          <StyledInput className="form-control" value={newDescription} onChange={(e) => handleChangeDescription(e.target.value)} placeholder={t.no_description} />
+          {isDisplaySubmitButton && (
+            <button type="submit" className="btn btn-sm btn-purple mt-2 position-absolute">
+              {t.save}
+            </button>
+          )}
+        </form>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
             <h5>Child Directories</h5>
@@ -165,3 +193,25 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledInput = styled.textarea`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;
