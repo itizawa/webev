@@ -47,12 +47,12 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
-  const [newDescription, setNewDescription] = useState<string>();
+  const [description, setDescription] = useState<string>();
   const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
 
   useEffect(() => {
     if (directory != null) {
-      setNewDescription(directory.description);
+      setDescription(directory.description);
     }
   }, [directory]);
 
@@ -69,7 +69,7 @@ const Index: VFC = () => {
   };
 
   const handleChangeDescription = (inputValue: string) => {
-    setNewDescription(inputValue);
+    setDescription(inputValue);
     setIsDisplaySubmitButton(true);
   };
 
@@ -77,7 +77,7 @@ const Index: VFC = () => {
     e.preventDefault();
 
     try {
-      await restClient.apiPut(`/directories/${directory?._id}/description`, { description: newDescription });
+      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
@@ -150,7 +150,13 @@ const Index: VFC = () => {
           </>
         )}
         <form onSubmit={submitDescription}>
-          <StyledInput className="form-control" value={newDescription} onChange={(e) => handleChangeDescription(e.target.value)} placeholder={t.no_description} />
+          <StyledTextarea
+            className="form-control"
+            value={description}
+            rows={3}
+            onChange={(e) => handleChangeDescription(e.target.value)}
+            placeholder={t.no_description}
+          />
           {isDisplaySubmitButton && (
             <button type="submit" className="btn btn-sm btn-purple mt-2 position-absolute">
               {t.save}
@@ -202,7 +208,7 @@ const Index: VFC = () => {
 
 export default Index;
 
-const StyledInput = styled.textarea`
+const StyledTextarea = styled.textarea`
   color: #ccc;
   background: transparent;
   border: none;
