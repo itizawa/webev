@@ -31,6 +31,8 @@ export const ja = {
   directory: 'ディレクトリ',
   share: '共有',
 
+  no_description: '説明なし',
+
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
 

@@ -31,6 +31,8 @@ export const en = {
   directory: 'Directory',
   share: 'Share',
 
+  no_description: 'no description',
+
   automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
 
