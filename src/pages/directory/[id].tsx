@@ -1,6 +1,8 @@
-import { Fragment, VFC } from 'react';
+import { Fragment, useEffect, useState, VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+
+import styled from 'styled-components';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
@@ -22,6 +24,8 @@ import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -43,6 +47,22 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
 
+  const [description, setDescription] = useState<string>();
+  const [descriptionRows, setDescriptionRows] = useState<number>();
+  const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
+
+  useEffect(() => {
+    if (directory != null) {
+      setDescription(directory.description);
+    }
+  }, [directory]);
+
+  useEffect(() => {
+    if (description != null) {
+      setDescriptionRows(description.split('\n').length);
+    }
+  }, [description]);
+
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
   };
@@ -53,6 +73,23 @@ const Index: VFC = () => {
 
   const openAddDirectoryModal = (directory: Directory) => {
     mutateParentDirectoryForCreateDirectory(directory);
+  };
+
+  const handleChangeDescription = (inputValue: string) => {
+    setDescription(inputValue);
+    setIsDisplaySubmitButton(true);
+  };
+
+  const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
+      toastSuccess(t.toastr_update_directory_description);
+    } catch (err) {
+      toastError(err);
+    }
+    setIsDisplaySubmitButton(false);
   };
 
   return (
@@ -81,9 +118,7 @@ const Index: VFC = () => {
               })}
             </div>
             <div className="d-flex gap-3 align-items-center">
-              <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0">{directory?.name}</span>
-            </div>
-            <div className="d-flex mt-2 gap-3 align-items-center justify-content-end">
+              <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
               <IconButton
                 width={18}
                 height={18}
@@ -91,7 +126,6 @@ const Index: VFC = () => {
                 color={BootstrapColor.SECONDARY}
                 activeColor={BootstrapColor.WARNING}
                 isActive={urlFromClipBoard != null}
-                text={t.save_page}
                 onClickButton={() => mutateDirectoryForSavePage(directory)}
               />
               <UncontrolledDropdown direction="down">
@@ -122,6 +156,20 @@ const Index: VFC = () => {
             </div>
           </>
         )}
+        <form onSubmit={submitDescription}>
+          <StyledTextarea
+            className="form-control"
+            value={description}
+            rows={descriptionRows}
+            onChange={(e) => handleChangeDescription(e.target.value)}
+            placeholder={t.no_description}
+          />
+          {isDisplaySubmitButton && (
+            <button type="submit" className="btn btn-sm btn-purple mt-2 position-absolute">
+              {t.save}
+            </button>
+          )}
+        </form>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
             <h5>Child Directories</h5>
@@ -166,3 +214,25 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledTextarea = styled.textarea`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;

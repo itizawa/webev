@@ -19,6 +19,7 @@ export const ja = {
 
   toastr_update_setting: '設定を更新しました',
   toastr_update_directory_name: '名前を更新しました',
+  toastr_update_directory_description: '説明を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
@@ -30,6 +31,8 @@ export const ja = {
   read: '読んだ記事',
   directory: 'ディレクトリ',
   share: '共有',
+
+  no_description: '説明なし',
 
   automatic_acquisition: '自動取得',
   function_details: '機能の詳細',

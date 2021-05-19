@@ -19,6 +19,7 @@ export const en = {
 
   toastr_update_setting: 'Update Setting',
   toastr_update_directory_name: 'Update Directory Name',
+  toastr_update_directory_description: 'Update Directory Description',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
@@ -30,6 +31,8 @@ export const en = {
   read: 'Read',
   directory: 'Directory',
   share: 'Share',
+
+  no_description: 'no description',
 
   automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
