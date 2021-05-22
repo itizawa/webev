@@ -1,8 +1,6 @@
 import { VFC } from 'react';
 
-import { useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -10,37 +8,25 @@ import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { NoArchivePageAlert } from '~/components/Alerts/NoArchiveAlert';
-import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
-  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   return (
     <LoginRequiredWrapper>
       <div className="p-3">
         <div className="d-flex align-items-center">
-          <h1>{t.archive}</h1>
+          <h1 className="mb-0">{t.read}</h1>
           <div className="ms-auto">
             <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
           </div>
         </div>
         <div className="my-2 d-flex">
-          <div className="ms-auto me-3">
-            <IconButton
-              icon={BootstrapIcon.STAR}
-              isActive={isRetrieveFavoritePageList}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
-              buttonSize="sm"
-              text={t.only_favorite}
-            />
+          <div className="ms-auto">
+            <SortButtonGroup />
           </div>
-          <SortButtonGroup />
         </div>
         {paginationResult != null && (
           <div className="row">
@@ -49,9 +35,7 @@ const Index: VFC = () => {
                 <OgpCard page={page} />
               </div>
             ))}
-            {paginationResult.docs.length === 0 ? (
-              <NoArchivePageAlert />
-            ) : (
+            {paginationResult.docs.length !== 0 && (
               <div className="text-center">
                 <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
               </div>

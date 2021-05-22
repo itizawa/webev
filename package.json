@@ -1,6 +1,6 @@
 {
   "name": "webev-front",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -27,8 +27,8 @@
     "bootstrap-icons": "^1.4.0",
     "date-fns": "^2.21.1",
     "mongodb": "^3.6.4",
-    "next": "^10.2.0",
-    "next-auth": "^3.20.1",
+    "next": "^10.2.2",
+    "next-auth": "^3.23.0",
     "react": "latest",
     "react-beautiful-dnd": "^13.1.0",
     "react-countup": "^4.3.3",

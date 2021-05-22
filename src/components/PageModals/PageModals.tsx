@@ -5,6 +5,7 @@ import { CreateDirectoryModal } from '~/components/PageModals/CreateDirectoryMod
 import { DeletePageModal } from '~/components/PageModals/DeletePageModal';
 import { DeleteDirectoryModal } from '~/components/PageModals/DeleteDirectoryModal';
 import { RenameDirectoryModal } from '~/components/PageModals/RenameDirectoryModal';
+import { SavePageModal } from '~/components/PageModals/SavePageModal';
 
 export const PageModals: VFC = () => {
   return (
@@ -14,6 +15,7 @@ export const PageModals: VFC = () => {
       <CreateDirectoryModal />
       <DeleteDirectoryModal />
       <RenameDirectoryModal />
+      <SavePageModal />
     </>
   );
 };

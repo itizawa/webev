@@ -2,8 +2,6 @@ import { VFC, useEffect, useState } from 'react';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import { format } from 'date-fns';
-
 import urljoin from 'url-join';
 import styled from 'styled-components';
 
@@ -31,16 +29,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt } = page;
+  const { _id, url, siteName, image, title, description } = page;
   const [isArchive, setIsArchive] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutatePageForDelete } = usePageForDelete();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-    setIsFavorite(page.isFavorite);
   }, [page]);
 
   const sharePage = async () => {
@@ -53,19 +49,8 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const switchArchive = async () => {
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t.toastr_success_archived);
+      toastSuccess(t.toastr_success_read);
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-      mutatePageList();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
-  const switchFavorite = async () => {
-    try {
-      const { data: page } = await restClient.apiPut(`/pages/${_id}/favorite`, { isFavorite: !isFavorite });
-      toastSuccess(t.toastr_update_favorite);
-      setIsFavorite(page.isFavorite);
       mutatePageList();
     } catch (err) {
       toastError(err);
@@ -100,36 +85,20 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
-            <br />
-            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
               width={24}
               height={24}
-              icon={BootstrapIcon.ARCHIVE}
+              icon={BootstrapIcon.CHECK}
               color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.DANGER}
+              activeColor={BootstrapColor.SUCCESS}
               isActive={isArchive}
               onClickButton={switchArchive}
             />
           </div>
           <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
-            Archive
-          </UncontrolledTooltip>
-          <div id={`favorite-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.STAR}
-              isActive={isFavorite}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={switchFavorite}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`favorite-for-${page._id}`}>
-            Favorite
+            {t.read}
           </UncontrolledTooltip>
           <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
@@ -146,15 +115,15 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             <DropdownMenu className="dropdown-menu-dark" positionFixed>
               <DropdownItem tag="button" onClick={openDeleteModal}>
                 <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Trash</span>
+                <span className="ms-2">{t.delete}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={sharePage}>
                 <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Share</span>
+                <span className="ms-2">{t.share}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={openAddDirectoryModal}>
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
-                <span className="ms-2">Move Directory</span>
+                <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

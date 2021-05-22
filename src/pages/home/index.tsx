@@ -1,9 +1,6 @@
 import { VFC } from 'react';
 
-import { useIsRetrieveFavoritePageList, usePageListSWR } from '~/stores/page';
-
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-
+import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { OgpCard } from '~/components/organisms/OgpCard';
@@ -11,13 +8,11 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
-import { IconButton } from '~/components/Icons/IconButton';
 
 const Index: VFC = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
-  const { data: isRetrieveFavoritePageList, mutate: mutateIsRetrieveFavoritePageList } = useIsRetrieveFavoritePageList();
 
   return (
     <LoginRequiredWrapper>
@@ -29,18 +24,9 @@ const Index: VFC = () => {
           </div>
         </div>
         <div className="my-2 d-flex">
-          <div className="ms-auto me-3">
-            <IconButton
-              icon={BootstrapIcon.STAR}
-              isActive={isRetrieveFavoritePageList}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              onClickButton={() => mutateIsRetrieveFavoritePageList(!isRetrieveFavoritePageList)}
-              buttonSize="sm"
-              text={t.only_favorite}
-            />
+          <div className="ms-auto">
+            <SortButtonGroup />
           </div>
-          <SortButtonGroup />
         </div>
         {paginationResult != null && (
           <div className="row">
