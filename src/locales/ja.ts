@@ -17,6 +17,8 @@ export const ja = {
   latest_order: '新しい順',
   oldest_order: '古い順',
 
+  created_at: '作成日',
+
   toastr_update_setting: '設定を更新しました',
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',

@@ -17,6 +17,8 @@ export const en = {
   latest_order: 'Latest Order',
   oldest_order: 'Oldest Order',
 
+  created_at: 'CreatedAt',
+
   toastr_update_setting: 'Update Setting',
   toastr_update_directory_name: 'Update Directory Name',
   toastr_update_directory_description: 'Update Directory Description',
