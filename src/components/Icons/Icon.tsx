@@ -30,6 +30,13 @@ const CheckIcon: VFC = () => (
   <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 1 .011 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.75.75 0 0 1 1.08-.022z" />
 );
 
+const OutlineCheckIcon: VFC = () => (
+  <>
+    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+    <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+  </>
+);
+
 const StarIcon: VFC = () => (
   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 );
@@ -148,6 +155,7 @@ const IconComponentMapping = {
   [BootstrapIcon.PLUS_BOARD]: <PlusBoardIcon />,
   [BootstrapIcon.PLUS_DOTTED]: <PlusDottedIcon />,
   [BootstrapIcon.CHECK]: <CheckIcon />,
+  [BootstrapIcon.OUTLINE_CHECK]: <OutlineCheckIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
   [BootstrapIcon.PENCIL]: <PencilIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,
