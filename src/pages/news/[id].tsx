@@ -1,6 +1,8 @@
 import { VFC } from 'react';
 import axios from 'axios';
 
+import { format } from 'date-fns';
+
 type Props = {
   news: {
     id: string;
@@ -12,14 +14,13 @@ type Props = {
 
 const Index: VFC<Props> = (props: Props) => {
   const { news } = props;
-  console.log(news);
 
   return (
     <div className="p-3">
       <div className="d-flex align-items-center mb-3">
         <h1 className="mb-0">{news.title}</h1>
       </div>
-      <p>{news.publishedAt}</p>
+      <p>記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>
       <div
         dangerouslySetInnerHTML={{
           __html: `${news.body}`,
