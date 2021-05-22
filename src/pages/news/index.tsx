@@ -50,7 +50,7 @@ const StyledAnchor = styled.a`
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async () => {
   const key: { headers: { [key: string]: string } } = {
-    headers: { 'X-API-KEY': process.env.API_KEY as string },
+    headers: { 'X-API-KEY': process.env.CMS_API_KEY as string },
   };
   try {
     const response = await axios.get('https://webev.microcms.io/api/v1/news', key);
