@@ -13,15 +13,22 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
+    <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
       <div className="container d-flex">
         <div>
-          <h5 className="text-muted mb-0">Webev</h5>
-          <p>
-            <Link href="/term">
-              <a className="text-muted">{t.term}</a>
-            </Link>
-          </p>
+          <h5 className="text-muted mb-0 text-white">Webev</h5>
+          <ul className="ps-0">
+            <li className="list-unstyled my-1" role="button">
+              <Link href="/term">
+                <StyledAnchor className="fw-bold text-muted">{t.term}</StyledAnchor>
+              </Link>
+            </li>
+            <li className="list-unstyled my-1" role="button">
+              <Link href="/news">
+                <StyledAnchor className="fw-bold text-muted">{t.news}</StyledAnchor>
+              </Link>
+            </li>
+          </ul>
           <span className="me-2">🇺🇸</span>
           <Link href={router.asPath} locale="en">
             <a className="text-muted">English</a>
@@ -64,4 +71,12 @@ export const Footer: FC = () => {
 
 const StyledFooter = styled.footer`
   padding-bottom: 80px;
+`;
+
+const StyledAnchor = styled.a`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;

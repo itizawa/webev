@@ -30,6 +30,7 @@ export const ja = {
   home: 'ホーム',
   read: '読んだ記事',
   directory: 'ディレクトリ',
+  news: 'ニュース',
   share: '共有',
 
   no_description: '説明なし',

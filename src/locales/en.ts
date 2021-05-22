@@ -30,6 +30,7 @@ export const en = {
   home: 'Home',
   read: 'Read',
   directory: 'Directory',
+  news: 'News',
   share: 'Share',
 
   no_description: 'no description',
