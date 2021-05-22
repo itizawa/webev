@@ -33,6 +33,8 @@ export const en = {
   news: 'News',
   share: 'Share',
 
+  child_directory: 'Child Directories',
+
   no_description: 'no description',
 
   automatic_acquisition: 'Automatic acquisition',
