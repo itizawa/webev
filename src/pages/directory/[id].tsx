@@ -221,6 +221,7 @@ export default Index;
 
 const StyledTextarea = styled.textarea`
   color: #ccc;
+  resize: none;
   background: transparent;
   border: none;
 
