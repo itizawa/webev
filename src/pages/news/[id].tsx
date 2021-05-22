@@ -2,14 +2,10 @@ import { VFC } from 'react';
 import axios from 'axios';
 
 import { format } from 'date-fns';
+import { News } from '~/interfaces/newx';
 
 type Props = {
-  news: {
-    id: string;
-    title: string;
-    publishedAt: Date;
-    body: string;
-  };
+  news: News;
 };
 
 const Index: VFC<Props> = (props: Props) => {
