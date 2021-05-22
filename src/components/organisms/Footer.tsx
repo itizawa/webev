@@ -17,11 +17,18 @@ export const Footer: FC = () => {
       <div className="container d-flex">
         <div>
           <h5 className="text-muted mb-0">Webev</h5>
-          <p>
-            <Link href="/term">
-              <a className="text-muted">{t.term}</a>
-            </Link>
-          </p>
+          <ul className="ps-0">
+            <li className="list-unstyled my-1">
+              <Link href="/term">
+                <a className="fw-bold text-muted text-decoration-none">{t.term}</a>
+              </Link>
+            </li>
+            <li className="list-unstyled my-1">
+              <Link href="/news">
+                <a className="fw-bold text-muted text-decoration-none">{t.news}</a>
+              </Link>
+            </li>
+          </ul>
           <span className="me-2">🇺🇸</span>
           <Link href={router.asPath} locale="en">
             <a className="text-muted">English</a>
