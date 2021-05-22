@@ -15,6 +15,10 @@ type Props = {
 const Index: VFC<Props> = (props: Props) => {
   const { news } = props;
 
+  if (news == null) {
+    return <div className="p-3"></div>;
+  }
+
   return (
     <div className="p-3">
       <div className="d-flex align-items-center mb-3">
@@ -41,10 +45,10 @@ export const getStaticPaths = async () => {
     const { data } = response;
 
     const paths = data.contents.map((content) => `/news/${content.id}`);
-    return { paths, fallback: false };
+    return { paths, fallback: true };
   } catch (error) {
     console.log(error);
-    return { paths: [], fallback: false };
+    return { paths: [], fallback: true };
   }
 };
 
