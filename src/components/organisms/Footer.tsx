@@ -16,16 +16,16 @@ export const Footer: FC = () => {
     <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
       <div className="container d-flex">
         <div>
-          <h5 className="text-muted mb-0">Webev</h5>
+          <h5 className="text-muted mb-0 text-white">Webev</h5>
           <ul className="ps-0">
-            <li className="list-unstyled my-1">
+            <li className="list-unstyled my-1" role="button">
               <Link href="/term">
-                <a className="fw-bold text-muted text-decoration-none">{t.term}</a>
+                <StyledAnchor className="fw-bold text-muted">{t.term}</StyledAnchor>
               </Link>
             </li>
-            <li className="list-unstyled my-1">
+            <li className="list-unstyled my-1" role="button">
               <Link href="/news">
-                <a className="fw-bold text-muted text-decoration-none">{t.news}</a>
+                <StyledAnchor className="fw-bold text-muted">{t.news}</StyledAnchor>
               </Link>
             </li>
           </ul>
@@ -71,4 +71,12 @@ export const Footer: FC = () => {
 
 const StyledFooter = styled.footer`
   padding-bottom: 80px;
+`;
+
+const StyledAnchor = styled.a`
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
