@@ -13,7 +13,7 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
+    <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
       <div className="container d-flex">
         <div>
           <h5 className="text-muted mb-0 text-white">Webev</h5>
