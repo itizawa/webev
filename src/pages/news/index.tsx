@@ -7,14 +7,11 @@ import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/newx';
 
 type Props = {
-  data: {
-    contents: News[];
-  };
+  contents: News[];
 };
 
-const Index: VFC<Props> = ({ data }: Props) => {
+const Index: VFC<Props> = ({ contents }: Props) => {
   const { t } = useLocale();
-  const { contents } = data;
 
   return (
     <div className="p-3">
@@ -52,18 +49,18 @@ export const getStaticProps = async () => {
   };
   try {
     const response = await axios.get('https://webev.microcms.io/api/v1/news', key);
-    const { data } = response;
+    const { contents } = response.data;
 
     return {
       props: {
-        data,
+        contents,
       },
     };
   } catch (error) {
     console.log(error);
     return {
       props: {
-        data: { contents: [] },
+        contents: [],
       },
     };
   }
