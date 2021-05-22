@@ -7,7 +7,7 @@ import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
 
 export const Navbar: VFC = () => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
 
   return (
     <div className="navbar container">
@@ -21,7 +21,7 @@ export const Navbar: VFC = () => {
           <InputForm />
         </div>
       )}
-      {session == null && (
+      {session == null && !loading && (
         <Link href="/login">
           <span className="mb-0 text-white" role="button">
             Login
