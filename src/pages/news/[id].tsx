@@ -5,6 +5,8 @@ type Props = {
   news: {
     id: string;
     title: string;
+    publishedAt: Date;
+    body: string;
   };
 };
 
@@ -17,6 +19,12 @@ const Index: VFC<Props> = (props: Props) => {
       <div className="d-flex align-items-center mb-3">
         <h1 className="mb-0">{news.title}</h1>
       </div>
+      <p>{news.publishedAt}</p>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: `${news.body}`,
+        }}
+      />
     </div>
   );
 };
