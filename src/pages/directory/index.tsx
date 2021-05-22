@@ -57,8 +57,8 @@ const Index: VFC = () => {
   return (
     <LoginRequiredWrapper>
       <div className="p-3">
-        <div className="d-flex align-items-center justify-content-between">
-          <h1>{t.directory}</h1>
+        <div className="d-flex align-items-center justify-content-between mb-3">
+          <h1 className="mb-0">{t.directory}</h1>
           <IconButton
             width={18}
             height={18}
