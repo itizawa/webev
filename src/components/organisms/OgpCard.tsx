@@ -87,7 +87,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
               </UncontrolledTooltip>
             )}
             <br />
-            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+            {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton

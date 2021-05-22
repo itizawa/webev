@@ -18,6 +18,7 @@ export const en = {
   oldest_order: 'Oldest Order',
 
   created_at: 'CreatedAt',
+  stoked_at: 'StockedAt',
 
   toastr_update_setting: 'Update Setting',
   toastr_update_directory_name: 'Update Directory Name',
