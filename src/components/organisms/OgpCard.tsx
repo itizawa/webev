@@ -4,6 +4,7 @@ import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu
 
 import urljoin from 'url-join';
 import styled from 'styled-components';
+import { format } from 'date-fns';
 
 import { FixedImage } from '~/components/Atoms/FixedImage';
 import { Icon } from '~/components/Icons/Icon';
@@ -29,7 +30,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description } = page;
+  const { _id, url, siteName, image, title, description, createdAt } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -85,6 +86,8 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
+            <br />
+            {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <div id={`archive-for-${page._id}`}>
             <IconButton
