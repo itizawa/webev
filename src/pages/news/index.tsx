@@ -4,19 +4,17 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
+import { News } from '~/interfaces/newx';
 
 type Props = {
   data: {
-    contents: Array<{
-      id: string;
-      title: string;
-    }>;
+    contents: News[];
   };
 };
 
-const Index: VFC<Props> = (props: Props) => {
+const Index: VFC<Props> = ({ data }: Props) => {
   const { t } = useLocale();
-  const { contents } = props.data;
+  const { contents } = data;
 
   return (
     <div className="p-3">
