@@ -156,19 +156,23 @@ const Index: VFC = () => {
             </div>
           </>
         )}
-        <form onSubmit={submitDescription}>
-          <StyledTextarea
-            className="form-control"
-            value={description}
-            rows={descriptionRows}
-            onChange={(e) => handleChangeDescription(e.target.value)}
-            placeholder={t.no_description}
-          />
-          {isDisplaySubmitButton && (
-            <button type="submit" className="btn btn-sm btn-purple mt-2 position-absolute">
-              {t.save}
-            </button>
-          )}
+        <form onSubmit={submitDescription} className="d-flex">
+          <div className="w-100">
+            <StyledTextarea
+              className="form-control"
+              value={description}
+              rows={descriptionRows}
+              onChange={(e) => handleChangeDescription(e.target.value)}
+              placeholder={t.no_description}
+            />
+          </div>
+          <div className="ms-2">
+            {isDisplaySubmitButton && (
+              <button type="submit" className="btn btn-sm btn-purple">
+                {t.save}
+              </button>
+            )}
+          </div>
         </form>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
