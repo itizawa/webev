@@ -23,6 +23,7 @@ const Index: VFC<Props> = (props: Props) => {
       <div className="d-flex align-items-center mb-3">
         <h1 className="mb-0">{t.news}</h1>
       </div>
+      {contents.length === 0 && <span>No News</span>}
       <ul>
         {contents.map((v) => {
           return (
