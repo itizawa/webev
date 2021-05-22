@@ -8,6 +8,8 @@ export const PathNames = {
   READ: '/read',
   DIRECTORY: '/directory',
   DIRECTORY_ID: '/directory/[id]',
+  NEWS: '/news',
+  NEWS_ID: '/news/[id]',
 } as const;
 export type PathNames = typeof PathNames[keyof typeof PathNames];
 
@@ -45,5 +47,13 @@ export const PathConfigs = {
   [PathNames.DIRECTORY_ID]: {
     layout: LayoutNames.DASHBOARD,
     statusForFind: [PageStatus.PAGE_STATUS_STOCK, PageStatus.PAGE_STATUS_ARCHIVE],
+  },
+  [PathNames.NEWS]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
+  },
+  [PathNames.NEWS_ID]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
   },
 };
