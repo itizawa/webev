@@ -176,7 +176,7 @@ const Index: VFC = () => {
         </form>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
-            <h5>Child Directories</h5>
+            <h5>{t.child_directory}</h5>
             <div className="row">
               {childrenDirectoryTrees.map((v) => {
                 const directory = v.descendant as Directory;

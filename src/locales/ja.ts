@@ -33,6 +33,8 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
 
+  child_directory: '子ディレクトリ',
+
   no_description: '説明なし',
 
   automatic_acquisition: '自動取得',
