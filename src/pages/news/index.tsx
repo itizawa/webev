@@ -23,6 +23,7 @@ const Index: VFC<Props> = (props: Props) => {
       <div className="d-flex align-items-center mb-3">
         <h1 className="mb-0">{t.news}</h1>
       </div>
+      {contents.length === 0 && <span>No News</span>}
       <ul>
         {contents.map((v) => {
           return (
@@ -49,7 +50,7 @@ const StyledAnchor = styled.a`
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async () => {
   const key: { headers: { [key: string]: string } } = {
-    headers: { 'X-API-KEY': process.env.API_KEY as string },
+    headers: { 'X-API-KEY': process.env.CMS_API_KEY as string },
   };
   try {
     const response = await axios.get('https://webev.microcms.io/api/v1/news', key);
