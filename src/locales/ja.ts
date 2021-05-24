@@ -36,6 +36,9 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
 
+  read_button: '読了',
+  return_button: '戻す',
+
   child_directory: '子ディレクトリ',
 
   no_description: '説明なし',

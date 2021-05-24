@@ -30,7 +30,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt } = page;
+  const { _id, url, siteName, image, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -72,47 +72,16 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
         <FixedImage imageUrl={image} />
       </a>
       <div className="card-body p-2">
-        <h5 className="card-title my-1">
-          <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
-            {title || url}
-          </a>
-        </h5>
-        <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
-          <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
-            {siteName}
-            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
-              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
-                {siteName}
-              </UncontrolledTooltip>
-            )}
-            <br />
-            {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
-          </small>
-          <div id={`archive-for-${page._id}`}>
-            <IconButton
-              width={24}
-              height={24}
-              icon={BootstrapIcon.CHECK}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.WARNING}
-              isActive={isArchive}
-              onClickButton={switchArchive}
-            />
-          </div>
-          <UncontrolledTooltip placement="top" target={`archive-for-${page._id}`}>
-            {t.read}
-          </UncontrolledTooltip>
+          <p className="fw-bold mb-0 me-auto">
+            <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
+              {title || url}
+            </a>
+          </p>
           <UncontrolledDropdown direction="up">
             <DropdownToggle tag="span">
               <div id={`manage-for-${page._id}`}>
-                <IconButton
-                  width={24}
-                  height={24}
-                  icon={BootstrapIcon.THREE_DOTS_VERTICAL}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WARNING}
-                />
+                <IconButton width={18} height={18} icon={BootstrapIcon.THREE_DOTS_VERTICAL} color={BootstrapColor.WHITE} activeColor={BootstrapColor.WHITE} />
               </div>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-dark" positionFixed>
@@ -131,6 +100,33 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
+        <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
+        <div className="d-flex align-items-center">
+          <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
+            {siteName}
+            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+                {siteName}
+              </UncontrolledTooltip>
+            )}
+            <br />
+            {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+          </small>
+          <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
+            {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+              <>
+                <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+                <span className="ms-2">{t.return_button}</span>
+              </>
+            )}
+            {status === PageStatus.PAGE_STATUS_STOCK && (
+              <>
+                <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
+                <span className="ms-2">{t.read_button}</span>
+              </>
+            )}
+          </StyledButton>
+        </div>
       </div>
     </StyledCard>
   );
@@ -138,4 +134,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
 const StyledCard = styled.div`
   background-color: #2f363d;
+`;
+
+const StyledButton = styled.button`
+  color: #fff;
+  background-color: #008078;
+
+  :hover {
+    color: #fff;
+    opacity: 0.8;
+  }
 `;
