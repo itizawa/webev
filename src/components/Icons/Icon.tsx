@@ -37,6 +37,10 @@ const OutlineCheckIcon: VFC = () => (
   </>
 );
 
+const ReplyIcon: VFC = () => (
+  <path d="M5.921 11.9 1.353 8.62a.719.719 0 0 1 0-1.238L5.921 4.1A.716.716 0 0 1 7 4.719V6c1.5 0 6 0 7 8-2.5-4.5-7-4-7-4v1.281c0 .56-.606.898-1.079.62z" />
+);
+
 const StarIcon: VFC = () => (
   <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
 );
@@ -156,6 +160,7 @@ const IconComponentMapping = {
   [BootstrapIcon.PLUS_DOTTED]: <PlusDottedIcon />,
   [BootstrapIcon.CHECK]: <CheckIcon />,
   [BootstrapIcon.OUTLINE_CHECK]: <OutlineCheckIcon />,
+  [BootstrapIcon.REPLY]: <ReplyIcon />,
   [BootstrapIcon.STAR]: <StarIcon />,
   [BootstrapIcon.PENCIL]: <PencilIcon />,
   [BootstrapIcon.TRASH]: <TrashIcon />,

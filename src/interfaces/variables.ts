@@ -16,6 +16,7 @@ export enum BootstrapIcon {
   PLUS_DOTTED = 'plus-dotted',
   CHECK = 'check',
   OUTLINE_CHECK = 'outline-check',
+  REPLY = 'reply',
   STAR = 'star',
   PENCIL = 'pencil',
   TRASH = 'trash',
