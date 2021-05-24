@@ -36,6 +36,9 @@ export const en = {
   news: 'News',
   share: 'Share',
 
+  read_button: 'Read',
+  return_button: 'Put Back',
+
   child_directory: 'Child Directories',
 
   no_description: 'no description',

@@ -31,10 +31,13 @@ export const ja = {
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'ホーム',
-  read: '読了',
+  read: '読んだ記事',
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
+
+  read_button: '読了',
+  return_button: '戻す',
 
   child_directory: '子ディレクトリ',
 
