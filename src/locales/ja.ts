@@ -31,7 +31,7 @@ export const ja = {
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'ホーム',
-  read: '読んだ記事',
+  read: '読了',
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
