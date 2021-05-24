@@ -100,7 +100,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        <p className="small mt-2">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
+        <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center">
           <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
             {siteName}
