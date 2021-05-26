@@ -1,11 +1,8 @@
 name: Check Package
 
 on: 
-  push:
-    branches-ignore:
-      - release/**
-  # schedule:
-  #   - cron: '0 8 * * 5' # every friday AM 8:00
+  schedule:
+    - cron: '0 8 * * 6'
 jobs:
   npm:
     runs-on: ubuntu-latest
