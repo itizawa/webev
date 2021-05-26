@@ -109,7 +109,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
-            <br />
+            {siteName && <br />}
             {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
           </small>
           <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
