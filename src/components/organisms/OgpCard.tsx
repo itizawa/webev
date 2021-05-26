@@ -67,11 +67,11 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   };
 
   return (
-    <StyledCard className="card border-0 shadow">
+    <StyledCard className="card border-0 shadow h-100">
       <a href={url} target="blank" rel="noopener noreferrer">
         <FixedImage imageUrl={image} />
       </a>
-      <div className="card-body p-2">
+      <div className="card-body p-2 d-flex flex-column">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
             <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
@@ -101,7 +101,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
           </UncontrolledDropdown>
         </div>
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center mt-auto">
           <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
             {siteName}
             {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
