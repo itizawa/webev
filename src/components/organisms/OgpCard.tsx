@@ -116,13 +116,13 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             {status === PageStatus.PAGE_STATUS_ARCHIVE && (
               <>
                 <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
-                <span className="ms-2">{t.return_button}</span>
+                <span className="ms-2 text-nowrap">{t.return_button}</span>
               </>
             )}
             {status === PageStatus.PAGE_STATUS_STOCK && (
               <>
                 <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
-                <span className="ms-2">{t.read_button}</span>
+                <span className="ms-2 text-nowrap">{t.read_button}</span>
               </>
             )}
           </StyledButton>
