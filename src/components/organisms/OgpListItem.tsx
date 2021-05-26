@@ -80,7 +80,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
               {title || url}
             </a>
           </p>
-          <UncontrolledDropdown direction="up">
+          <UncontrolledDropdown direction="left">
             <DropdownToggle tag="span">
               <div id={`manage-for-${page._id}`}>
                 <IconButton width={18} height={18} icon={BootstrapIcon.THREE_DOTS_VERTICAL} color={BootstrapColor.WHITE} activeColor={BootstrapColor.WHITE} />
