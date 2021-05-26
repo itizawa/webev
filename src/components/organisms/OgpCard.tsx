@@ -73,7 +73,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
       </a>
       <div className="card-body p-2">
         <div className="d-flex align-items-center">
-          <p className="fw-bold mb-0 me-auto">
+          <p className="fw-bold text-break mb-0 me-auto">
             <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
               {title || url}
             </a>
