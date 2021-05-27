@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { VFC } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/newx';
@@ -24,7 +23,7 @@ const Index: VFC<Props> = ({ contents }: Props) => {
           return (
             <li key={v.id} role="button">
               <Link href={`/news/${v.id}`}>
-                <StyledAnchor className="text-white fw-bold">{v.title}</StyledAnchor>
+                <a className="text-white fw-bold webev-anchor">{v.title}</a>
               </Link>
             </li>
           );
@@ -33,14 +32,6 @@ const Index: VFC<Props> = ({ contents }: Props) => {
     </div>
   );
 };
-
-const StyledAnchor = styled.a`
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async () => {

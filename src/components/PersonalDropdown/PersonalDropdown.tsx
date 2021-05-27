@@ -53,12 +53,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
             </label>
           </div>
           <div className="text-center">
-            <a
-              className="text-info text-decoration-none small"
-              href="https://itizawa-tech.growi.cloud/6055a19f2c62a800488491b4"
-              target="blank"
-              rel="noopener noreferrer"
-            >
+            <a className="text-info small webev-anchor" href="https://itizawa-tech.growi.cloud/6055a19f2c62a800488491b4" target="blank" rel="noopener noreferrer">
               {t.function_details}
             </a>
           </div>

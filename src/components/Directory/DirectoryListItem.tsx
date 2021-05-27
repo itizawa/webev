@@ -44,7 +44,7 @@ export const DirectoryListItem: VFC<Props> = ({ directory }: Props) => {
 
   return (
     <Link href={`/directory/${directory._id}`}>
-      <StyledList className="d-flex">
+      <StyledList className="d-flex" role="button">
         <div className="w-100 text-truncate">
           <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
           <span className="ms-3" role="button">

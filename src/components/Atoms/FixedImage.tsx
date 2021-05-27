@@ -19,6 +19,10 @@ const StyledImageWrapper = styled.div`
   width: 100%;
   padding-top: 55%;
 
+  :hover {
+    opacity: 0.8;
+  }
+
   img {
     position: absolute;
     top: 0;
