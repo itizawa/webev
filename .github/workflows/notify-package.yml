@@ -2,7 +2,7 @@ name: Check Package
 
 on: 
   schedule:
-    - cron: '0 8 * * 6'
+    - cron: '0 20 * * 6'
 jobs:
   npm:
     runs-on: ubuntu-latest
