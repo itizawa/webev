@@ -39,7 +39,7 @@ export const en = {
   return_news_list: 'Return News List',
 
   read_button: 'Read',
-  return_button: 'Put Back',
+  return_button: 'Put Back Home',
 
   child_directory: 'Child Directories',
 
