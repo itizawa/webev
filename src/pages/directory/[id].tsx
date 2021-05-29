@@ -153,15 +153,13 @@ const Index: VFC = () => {
             </div>
           </>
         )}
-        <div className="w-100">
-          <StyledTextarea
-            className="form-control"
-            value={description}
-            rows={descriptionRows}
-            onChange={(e) => handleChangeDescription(e.target.value)}
-            placeholder={t.no_description}
-          />
-        </div>
+        <StyledTextarea
+          className="form-control w-100"
+          value={description}
+          rows={descriptionRows}
+          onChange={(e) => handleChangeDescription(e.target.value)}
+          placeholder={t.no_description}
+        />
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
             <h5>{t.child_directory}</h5>
