@@ -77,6 +77,10 @@ const Index: VFC = () => {
   };
 
   const handleBlurTextArea = async (): Promise<void> => {
+    // do nothing, no change
+    if (description === directory?.description) {
+      return;
+    }
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       toastSuccess(t.toastr_update_directory_description);
