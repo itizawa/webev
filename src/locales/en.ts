@@ -36,6 +36,8 @@ export const en = {
   news: 'News',
   share: 'Share',
 
+  return_news_list: 'Return News List',
+
   read_button: 'Read',
   return_button: 'Put Back',
 
