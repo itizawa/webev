@@ -26,7 +26,7 @@ type Props = {
   page: Page;
 };
 
-export const OgpCard: VFC<Props> = ({ page }: Props) => {
+export const OgpListItem: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
@@ -67,14 +67,16 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   };
 
   return (
-    <StyledCard className="card border-0 shadow h-100">
-      <a href={url} target="blank" rel="noopener noreferrer">
-        <FixedImage imageUrl={image} />
-      </a>
-      <div className="card-body p-2 d-flex flex-column">
+    <StyledRow className="row py-2">
+      <div className="d-none d-md-block col-2 py-2">
+        <a href={url} target="blank" rel="noopener noreferrer">
+          <FixedImage imageUrl={image} />
+        </a>
+      </div>
+      <div className="col-12 col-md-10">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white webev-anchor" href={url} target="blank" rel="noopener noreferrer">
+            <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
               {title || url}
             </a>
           </p>
@@ -100,40 +102,41 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
-        <div className="d-flex align-items-center mt-auto">
-          <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
-            {siteName}
-            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
-              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
-                {siteName}
-              </UncontrolledTooltip>
-            )}
-            {siteName && <br />}
-            {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
-          </small>
-          <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
-            {status === PageStatus.PAGE_STATUS_ARCHIVE && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.return_button}</span>
-              </>
-            )}
-            {status === PageStatus.PAGE_STATUS_STOCK && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.read_button}</span>
-              </>
-            )}
-          </StyledButton>
-        </div>
+        <span className="small p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</span>
       </div>
-    </StyledCard>
+      <div className="d-flex align-items-center my-1">
+        <small className="text-truncate px-1" id={`sitename-for-${page._id}`}>
+          {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+        </small>
+        <small className="text-truncate ms-3">
+          {siteName}
+          {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
+            <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+              {siteName}
+            </UncontrolledTooltip>
+          )}
+        </small>
+        <StyledButton className="btn btn-sm d-flex ms-auto" onClick={switchArchive}>
+          {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+            <>
+              <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+              <span className="ms-2 text-nowrap">{t.return_button}</span>
+            </>
+          )}
+          {status === PageStatus.PAGE_STATUS_STOCK && (
+            <>
+              <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
+              <span className="ms-2 text-nowrap">{t.read_button}</span>
+            </>
+          )}
+        </StyledButton>
+      </div>
+    </StyledRow>
   );
 };
 
-const StyledCard = styled.div`
-  background-color: #2f363d;
+const StyledRow = styled.div`
+  border-top: 1px solid #404040;
 `;
 
 const StyledButton = styled.button`

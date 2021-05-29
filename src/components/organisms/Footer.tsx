@@ -13,22 +13,29 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
+    <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
       <div className="container d-flex">
         <div>
-          <h5 className="text-muted mb-0">Webev</h5>
-          <p>
-            <Link href="/term">
-              <a className="text-muted">{t.term}</a>
-            </Link>
-          </p>
+          <h5 className="text-muted mb-0 text-white">Webev</h5>
+          <ul className="ps-0">
+            <li className="list-unstyled my-1" role="button">
+              <Link href="/term">
+                <a className="fw-bold text-muted webev-anchor">{t.term}</a>
+              </Link>
+            </li>
+            <li className="list-unstyled my-1" role="button">
+              <Link href="/news">
+                <a className="fw-bold text-muted webev-anchor">{t.news}</a>
+              </Link>
+            </li>
+          </ul>
           <span className="me-2">🇺🇸</span>
           <Link href={router.asPath} locale="en">
-            <a className="text-muted">English</a>
+            <a className="text-muted webev-anchor">English</a>
           </Link>
           <span className="ms-3 me-2">🇯🇵</span>
           <Link href={router.asPath} locale="ja">
-            <a className="text-muted">Japanese</a>
+            <a className="text-muted webev-anchor">Japanese</a>
           </Link>
         </div>
         <div id="github-link-button" className="ms-auto">

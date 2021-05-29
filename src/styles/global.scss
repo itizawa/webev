@@ -27,6 +27,8 @@ $theme-colors: (
 
 @import './override.scss';
 
+@import './customUtility.scss';
+
 body {
   font-weight: 300;
   color: #ccc;

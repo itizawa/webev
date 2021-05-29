@@ -17,6 +17,9 @@ export const ja = {
   latest_order: '新しい順',
   oldest_order: '古い順',
 
+  created_at: '作成日',
+  stoked_at: '保存日',
+
   toastr_update_setting: '設定を更新しました',
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
@@ -30,7 +33,13 @@ export const ja = {
   home: 'ホーム',
   read: '読んだ記事',
   directory: 'ディレクトリ',
+  news: 'ニュース',
   share: '共有',
+
+  read_button: '読了',
+  return_button: '戻す',
+
+  child_directory: '子ディレクトリ',
 
   no_description: '説明なし',
 
