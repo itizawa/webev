@@ -1,7 +1,3 @@
-# PR
-
-## 対象のIssue
+# 対象のIssue
 
 fix #
-
-## その他 (optional)
