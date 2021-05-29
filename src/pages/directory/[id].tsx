@@ -24,8 +24,8 @@ import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
-import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
+// import { restClient } from '~/utils/rest-client';
+// import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -78,16 +78,16 @@ const Index: VFC = () => {
     setDescription(inputValue);
   };
 
-  const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+  // const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  //   e.preventDefault();
 
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
-      toastSuccess(t.toastr_update_directory_description);
-    } catch (err) {
-      toastError(err);
-    }
-  };
+  //   try {
+  //     await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
+  //     toastSuccess(t.toastr_update_directory_description);
+  //   } catch (err) {
+  //     toastError(err);
+  //   }
+  // };
 
   return (
     <LoginRequiredWrapper>
@@ -153,17 +153,15 @@ const Index: VFC = () => {
             </div>
           </>
         )}
-        <form onSubmit={submitDescription} className="d-flex">
-          <div className="w-100">
-            <StyledTextarea
-              className="form-control"
-              value={description}
-              rows={descriptionRows}
-              onChange={(e) => handleChangeDescription(e.target.value)}
-              placeholder={t.no_description}
-            />
-          </div>
-        </form>
+        <div className="w-100">
+          <StyledTextarea
+            className="form-control"
+            value={description}
+            rows={descriptionRows}
+            onChange={(e) => handleChangeDescription(e.target.value)}
+            placeholder={t.no_description}
+          />
+        </div>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
             <h5>{t.child_directory}</h5>
