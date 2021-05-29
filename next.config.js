@@ -9,6 +9,9 @@ module.exports = withPWA({
     defaultLocale: 'en',
     locales: ['en', 'ja'],
   },
+  future: {
+    webpack5: true,
+  },
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
