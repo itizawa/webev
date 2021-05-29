@@ -1,18 +1,23 @@
 import { VFC } from 'react';
 
 import { usePageListSWR } from '~/stores/page';
+import { useOgpCardLayout } from '~/stores/contexts';
 import { useLocale } from '~/hooks/useLocale';
+
+import { OgpLayoutType } from '~/interfaces/contexts';
 
 import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { OgpListItem } from '~/components/organisms/OgpListItem';
 
 const Index: VFC = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
+  const { data: ogpCardLayout } = useOgpCardLayout();
 
   return (
     <LoginRequiredWrapper>
@@ -30,11 +35,20 @@ const Index: VFC = () => {
         </div>
         {paginationResult != null && (
           <div className="row">
-            {paginationResult.docs.map((page) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                <OgpCard page={page} />
-              </div>
-            ))}
+            {paginationResult.docs.map((page) => {
+              if (ogpCardLayout === OgpLayoutType.LIST) {
+                return (
+                  <div className="col-12" key={page._id}>
+                    <OgpListItem page={page} />
+                  </div>
+                );
+              }
+              return (
+                <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
+                  <OgpCard page={page} />
+                </div>
+              );
+            })}
             {paginationResult.docs.length === 0 ? (
               <div className="col-12">
                 <NoPageAlert />
