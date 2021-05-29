@@ -5,10 +5,13 @@ import style from 'styled-components';
 
 import { toastSuccess } from '~/utils/toastr';
 
+import { Icon } from '~/components/Icons/Icon';
 import { UserIcon } from '~/components/Icons/UserIcon';
-import { User } from '~/interfaces/user';
 
 import { useLocale } from '~/hooks/useLocale';
+
+import { User } from '~/interfaces/user';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   user: User;
@@ -57,6 +60,14 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
               {t.function_details}
             </a>
           </div>
+        </div>
+        <div className="px-3 my-3 d-flex justify-content-between">
+          <button className="btn btn-outline-indigo active">
+            <Icon height={20} width={20} icon={BootstrapIcon.LIST} color={BootstrapColor.WHITE} />
+          </button>
+          <button className="btn btn-outline-indigo active">
+            <Icon height={20} width={20} icon={BootstrapIcon.GRID} color={BootstrapColor.WHITE} />
+          </button>
         </div>
         <DropdownItem divider />
         <DropdownItem tag="button" onClick={() => signOut({ callbackUrl: '/' })}>
