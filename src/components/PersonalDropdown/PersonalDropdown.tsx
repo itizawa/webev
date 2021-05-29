@@ -24,13 +24,14 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
   const { t } = useLocale();
   const { user } = props;
 
-  const { data: ogpCardLayout, mutate: mutateOgpCardLayout } = useOgpCardLayout();
-
+  const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
     const isEnableReadFromClipboard = localStorage.getItem('isEnableReadFromClipboard') === 'true';
     setIsEnableReadFromClipboard(isEnableReadFromClipboard);
+    const ogpCardLayout = localStorage.getItem('ogpCardLayout') as OgpLayoutType;
+    mutateOgpCardLayout(ogpCardLayout);
   }, []);
 
   const handleSwitch = () => {
@@ -41,6 +42,7 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
   };
 
   const handleClickOgpCardLayout = (type: OgpLayoutType) => {
+    localStorage.setItem('ogpCardLayout', type);
     mutateOgpCardLayout(type);
   };
 
