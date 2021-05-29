@@ -29,6 +29,7 @@
     "mongodb": "^3.6.4",
     "next": "^10.2.3",
     "next-auth": "^3.23.0",
+    "next-pwa": "^5.2.21",
     "react": "latest",
     "react-beautiful-dnd": "^13.1.0",
     "react-countup": "^4.3.3",
