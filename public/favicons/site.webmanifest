@@ -19,6 +19,8 @@
 	"background_color": "#000000",
 	"display": "standalone",
 	"share_target": {
+		"method": "GET",
+		"enctype": "application/x-www-form-urlencoded",
 		"action": "/home",
 		"params": {
 		  "title": "name",
