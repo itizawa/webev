@@ -73,12 +73,12 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
 
   return (
     <StyledRow className="row py-2">
-      <div className="d-none d-md-block col-2 py-2">
+      <div className="col-3 col-md-2 p-1 p-md-2">
         <a href={url} target="blank" rel="noopener noreferrer">
           <FixedImage imageUrl={image} />
         </a>
       </div>
-      <div className="col-12 col-md-10">
+      <div className="col-9 col-md-10">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
             <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
