@@ -48,9 +48,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
   };
 
   const switchArchive = async () => {
+    const bool = !isArchive;
     try {
-      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t.toastr_success_read);
+      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: bool });
+      if (bool) {
+        toastSuccess(t.toastr_success_read);
+      } else {
+        toastSuccess(t.toastr_success_put_back);
+      }
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {
