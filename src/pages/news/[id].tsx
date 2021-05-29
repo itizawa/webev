@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { format } from 'date-fns';
 import { News } from '~/interfaces/newx';
+import { useLocale } from '~/hooks/useLocale';
 
 type Props = {
   news: News;
@@ -10,6 +11,7 @@ type Props = {
 
 const Index: VFC<Props> = (props: Props) => {
   const { news } = props;
+  const { t } = useLocale();
 
   if (news == null) {
     return <div className="p-3"></div>;
@@ -17,7 +19,7 @@ const Index: VFC<Props> = (props: Props) => {
 
   return (
     <div className="p-3">
-      <button className="btn btn-indigo text-white">{`< 戻る`}</button>
+      <button className="btn btn-indigo text-white">{`< ${t.return_news_list}`}</button>
       <div className="d-flex align-items-center my-3">
         <h1 className="mb-0">{news.title}</h1>
       </div>
