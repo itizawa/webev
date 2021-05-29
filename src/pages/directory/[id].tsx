@@ -49,7 +49,6 @@ const Index: VFC = () => {
 
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
-  const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
 
   useEffect(() => {
     if (directory != null) {
@@ -77,19 +76,15 @@ const Index: VFC = () => {
 
   const handleChangeDescription = (inputValue: string) => {
     setDescription(inputValue);
-    setIsDisplaySubmitButton(true);
   };
 
-  const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-
+  const handleBlurTextArea = async (): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
     }
-    setIsDisplaySubmitButton(false);
   };
 
   return (
@@ -156,24 +151,14 @@ const Index: VFC = () => {
             </div>
           </>
         )}
-        <form onSubmit={submitDescription} className="d-flex">
-          <div className="w-100">
-            <StyledTextarea
-              className="form-control"
-              value={description}
-              rows={descriptionRows}
-              onChange={(e) => handleChangeDescription(e.target.value)}
-              placeholder={t.no_description}
-            />
-          </div>
-          <div className="ms-2">
-            {isDisplaySubmitButton && (
-              <button type="submit" className="btn btn-sm btn-purple">
-                {t.save}
-              </button>
-            )}
-          </div>
-        </form>
+        <StyledTextarea
+          className="form-control w-100"
+          value={description}
+          rows={descriptionRows}
+          onChange={(e) => handleChangeDescription(e.target.value)}
+          onBlur={handleBlurTextArea}
+          placeholder={t.no_description}
+        />
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
           <div className="my-3 bg-dark shadow p-3">
             <h5>{t.child_directory}</h5>
