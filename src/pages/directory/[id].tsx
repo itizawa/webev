@@ -14,12 +14,10 @@ import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirecto
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { OgpCard } from '~/components/organisms/OgpCard';
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
+import { PageList } from '~/components/Page/PageList';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
@@ -179,24 +177,7 @@ const Index: VFC = () => {
             <SortButtonGroup />
           </div>
         </div>
-        {paginationResult != null && (
-          <div className="row">
-            {paginationResult.docs.map((page) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                <OgpCard page={page} />
-              </div>
-            ))}
-            {paginationResult.docs.length === 0 ? (
-              <div className="col-12">
-                <NoPageAlert />
-              </div>
-            ) : (
-              <div className="text-center">
-                <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-              </div>
-            )}
-          </div>
-        )}
+        {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
       </div>
     </LoginRequiredWrapper>
   );

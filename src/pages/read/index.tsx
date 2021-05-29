@@ -4,9 +4,8 @@ import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { OgpCard } from '~/components/organisms/OgpCard';
+import { PageList } from '~/components/Page/PageList';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 
 const Index: VFC = () => {
@@ -28,20 +27,7 @@ const Index: VFC = () => {
             <SortButtonGroup />
           </div>
         </div>
-        {paginationResult != null && (
-          <div className="row">
-            {paginationResult.docs.map((page) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                <OgpCard page={page} />
-              </div>
-            ))}
-            {paginationResult.docs.length !== 0 && (
-              <div className="text-center">
-                <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-              </div>
-            )}
-          </div>
-        )}
+        {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
       </div>
     </LoginRequiredWrapper>
   );
