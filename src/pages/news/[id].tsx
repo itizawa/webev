@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { format } from 'date-fns';
 
-import { News } from '~/interfaces/newx';
+import { News } from '~/interfaces/news';
 import { useLocale } from '~/hooks/useLocale';
 
 type Props = {

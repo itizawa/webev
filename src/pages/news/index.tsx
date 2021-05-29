@@ -3,7 +3,7 @@ import { VFC } from 'react';
 import axios from 'axios';
 
 import { useLocale } from '~/hooks/useLocale';
-import { News } from '~/interfaces/newx';
+import { News } from '~/interfaces/news';
 
 type Props = {
   contents: News[];
