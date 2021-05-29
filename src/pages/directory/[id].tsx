@@ -49,7 +49,6 @@ const Index: VFC = () => {
 
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
-  const [isDisplaySubmitButton, setIsDisplaySubmitButton] = useState(false);
 
   useEffect(() => {
     if (directory != null) {
@@ -77,7 +76,6 @@ const Index: VFC = () => {
 
   const handleChangeDescription = (inputValue: string) => {
     setDescription(inputValue);
-    setIsDisplaySubmitButton(true);
   };
 
   const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -89,7 +87,6 @@ const Index: VFC = () => {
     } catch (err) {
       toastError(err);
     }
-    setIsDisplaySubmitButton(false);
   };
 
   return (
@@ -165,13 +162,6 @@ const Index: VFC = () => {
               onChange={(e) => handleChangeDescription(e.target.value)}
               placeholder={t.no_description}
             />
-          </div>
-          <div className="ms-2">
-            {isDisplaySubmitButton && (
-              <button type="submit" className="btn btn-sm btn-purple">
-                {t.save}
-              </button>
-            )}
           </div>
         </form>
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
