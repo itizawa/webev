@@ -1,5 +1,9 @@
+const withPWA = require('next-pwa')
 
-module.exports = {
+module.exports = withPWA({
+  pwa: {
+    dest: "public", // outout dir
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'ja'],
@@ -10,4 +14,4 @@ module.exports = {
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     MONGO_URI: process.env.MONGO_URI,
   },
-};
+});
