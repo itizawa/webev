@@ -1,2 +1,6 @@
 // Layout of Ogp
-export type OgpLayoutType = 'list' | 'card';
+export const OgpLayoutType = {
+  LIST: 'list',
+  CARD: 'card',
+} as const;
+export type OgpLayoutType = typeof OgpLayoutType[keyof typeof OgpLayoutType];
