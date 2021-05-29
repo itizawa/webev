@@ -15,6 +15,10 @@ export default class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff" />
+          <meta property="og:site_name" content="Webev" />
+          <meta property="og:title" content="Webev" />
+          <meta property="og:url" content="https://www.webev.cloud" />
+          <meta property="og:description" content="Webev は、誰でも使えるブックマークマネージャーです！URL を入力して保存するだけで Web ページを管理できます。" />
         </Head>
         <body>
           <Main />
