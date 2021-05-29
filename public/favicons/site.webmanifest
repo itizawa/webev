@@ -1,6 +1,8 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "webev",
+    "short_name": "WE",
+    "description": "webev is bookmark manager",
+    "start_url": "/",
     "icons": [
         {
             "src": "/favicons/android-chrome-192x192.png",
