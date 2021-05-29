@@ -24,8 +24,8 @@ import { Icon } from '~/components/Icons/Icon';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
-// import { restClient } from '~/utils/rest-client';
-// import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -78,16 +78,14 @@ const Index: VFC = () => {
     setDescription(inputValue);
   };
 
-  // const submitDescription = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-  //   e.preventDefault();
-
-  //   try {
-  //     await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
-  //     toastSuccess(t.toastr_update_directory_description);
-  //   } catch (err) {
-  //     toastError(err);
-  //   }
-  // };
+  const handleBlurTextArea = async (): Promise<void> => {
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
+      toastSuccess(t.toastr_update_directory_description);
+    } catch (err) {
+      toastError(err);
+    }
+  };
 
   return (
     <LoginRequiredWrapper>
@@ -158,6 +156,7 @@ const Index: VFC = () => {
           value={description}
           rows={descriptionRows}
           onChange={(e) => handleChangeDescription(e.target.value)}
+          onBlur={handleBlurTextArea}
           placeholder={t.no_description}
         />
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
