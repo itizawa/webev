@@ -10,7 +10,4 @@ module.exports = {
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     MONGO_URI: process.env.MONGO_URI,
   },
-  future: {
-    webpack5: true
-  }
 };
