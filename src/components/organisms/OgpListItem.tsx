@@ -107,7 +107,9 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        <span className="small p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</span>
+        <span className="small p-1 d-none d-sm-block">
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+        </span>
       </div>
       <div className="d-flex align-items-center my-1">
         <small className="text-truncate px-1" id={`sitename-for-${page._id}`}>
