@@ -5,10 +5,16 @@ import style from 'styled-components';
 
 import { toastSuccess } from '~/utils/toastr';
 
+import { Icon } from '~/components/Icons/Icon';
 import { UserIcon } from '~/components/Icons/UserIcon';
-import { User } from '~/interfaces/user';
 
 import { useLocale } from '~/hooks/useLocale';
+
+import { useOgpCardLayout } from '~/stores/contexts';
+import { OgpLayoutType } from '~/interfaces/contexts';
+
+import { User } from '~/interfaces/user';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   user: User;
@@ -18,11 +24,14 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
   const { t } = useLocale();
   const { user } = props;
 
+  const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
     const isEnableReadFromClipboard = localStorage.getItem('isEnableReadFromClipboard') === 'true';
     setIsEnableReadFromClipboard(isEnableReadFromClipboard);
+    const ogpCardLayout = localStorage.getItem('ogpCardLayout') as OgpLayoutType;
+    mutateOgpCardLayout(ogpCardLayout);
   }, []);
 
   const handleSwitch = () => {
@@ -30,6 +39,11 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
     setIsEnableReadFromClipboard(bool);
     localStorage.setItem('isEnableReadFromClipboard', bool.toString());
     toastSuccess(t.toastr_update_setting);
+  };
+
+  const handleClickOgpCardLayout = (type: OgpLayoutType) => {
+    localStorage.setItem('ogpCardLayout', type);
+    mutateOgpCardLayout(type);
   };
 
   return (
@@ -57,6 +71,20 @@ export const PersonalDropdown: VFC<Props> = (props: Props) => {
               {t.function_details}
             </a>
           </div>
+        </div>
+        <div className="px-3 my-3 d-flex justify-content-between">
+          <button
+            className={`btn btn-outline-indigo ${ogpCardLayout === OgpLayoutType.LIST ? 'active' : ''}`}
+            onClick={() => handleClickOgpCardLayout(OgpLayoutType.LIST)}
+          >
+            <Icon height={20} width={20} icon={BootstrapIcon.LIST} color={BootstrapColor.WHITE} />
+          </button>
+          <button
+            className={`btn btn-outline-indigo ${ogpCardLayout === OgpLayoutType.CARD ? 'active' : ''}`}
+            onClick={() => handleClickOgpCardLayout(OgpLayoutType.CARD)}
+          >
+            <Icon height={20} width={20} icon={BootstrapIcon.GRID} color={BootstrapColor.WHITE} />
+          </button>
         </div>
         <DropdownItem divider />
         <DropdownItem tag="button" onClick={() => signOut({ callbackUrl: '/' })}>
