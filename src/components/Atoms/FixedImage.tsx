@@ -9,7 +9,7 @@ type Props = {
 export const FixedImage: VFC<Props> = ({ imageUrl }: Props) => {
   return (
     <StyledImageWrapper>
-      <img src={imageUrl || imagePath.NO_IMAGE} alt={imageUrl || imagePath.NO_IMAGE} loading="lazy" />
+      <img src={imageUrl || imagePath.NO_IMAGE} alt={imageUrl || imagePath.NO_IMAGE} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
     </StyledImageWrapper>
   );
 };
