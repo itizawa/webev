@@ -22,7 +22,8 @@ $theme-colors: (
 
 @import '../../node_modules/bootstrap/scss/_buttons';
 @import '../../node_modules/bootstrap/scss/mixins';
-  
+@import '../../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+
 @import '~toastr/toastr.scss';
 
 @import './override.scss';
