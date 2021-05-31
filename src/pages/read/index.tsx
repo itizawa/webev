@@ -1,4 +1,5 @@
 import { VFC } from 'react';
+import Loader from 'react-loader-spinner';
 
 import { usePageListSWR } from '~/stores/page';
 
@@ -27,6 +28,11 @@ const Index: VFC = () => {
             <SortButtonGroup />
           </div>
         </div>
+        {paginationResult == null && (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        )}
         {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
       </div>
     </LoginRequiredWrapper>

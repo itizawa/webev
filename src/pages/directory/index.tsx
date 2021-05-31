@@ -2,6 +2,7 @@ import { VFC, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import Loader from 'react-loader-spinner';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
@@ -70,6 +71,11 @@ const Index: VFC = () => {
             text={t.manage_directory}
           />
         </div>
+        {paginationResult == null && (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        )}
         {paginationResult != null && (
           <div className="row">
             {paginationResult.docs.map((directory) => (
