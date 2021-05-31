@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
@@ -181,6 +182,11 @@ const Index: VFC = () => {
             <SortButtonGroup />
           </div>
         </div>
+        {paginationResult == null && (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        )}
         {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
       </div>
     </LoginRequiredWrapper>
