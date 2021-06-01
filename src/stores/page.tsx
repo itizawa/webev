@@ -19,6 +19,10 @@ export const useDirectoryId = (initialData?: string | null): SWRResponse<string 
   return useStaticSWR('directoryId', initialData);
 };
 
+export const useSearchKeyWord = (initialData?: string | null): SWRResponse<string | null, Error> => {
+  return useStaticSWR('searchKeyWord', initialData);
+};
+
 export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isSortCreatedAt', initialData);
 };
@@ -27,6 +31,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
   const { data: activePage = 1 } = useActivePage();
   const { data: status = [PageStatus.PAGE_STATUS_STOCK] } = usePageStatus();
   const { data: directoryId } = useDirectoryId();
+  const { data: searchKeyWord } = useSearchKeyWord();
   const { data: isSortCreatedAt = false } = useIsSortCreatedAt();
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
@@ -42,6 +47,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
             `&page=${page}`,
             `&limit=${limit}`,
             `&sort=${sort}`,
+            searchKeyWord != null ? `&q=${searchKeyWord}` : ``,
             directoryId != null ? `&directoryId=${directoryId}` : ``,
           ),
         )
