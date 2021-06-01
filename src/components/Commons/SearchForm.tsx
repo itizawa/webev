@@ -24,7 +24,7 @@ export const SearchForm: VFC = () => {
 
   return (
     <form className="input-group input-group-sm" onSubmit={onSubmitSearchForm}>
-      <button className="btn btn-secondary text-white" type="submit" id="input-group-search" disabled={inputValue.length === 0}>
+      <button className="btn btn-secondary text-white" type="submit" id="input-group-search">
         <Icon height={16} width={16} icon={BootstrapIcon.SEARCH} color={BootstrapColor.WHITE} />
         <span className="ms-2">{t.search}</span>
       </button>
