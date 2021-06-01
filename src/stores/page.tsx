@@ -37,8 +37,8 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
 
   return useAuthenticationSWR(
-    ['/pages/list', status, activePage, limit, sort, directoryId],
-    (endpoint, status, page, limit, sort, directoryId) =>
+    ['/pages/list', status, activePage, limit, sort, searchKeyWord, directoryId],
+    (endpoint, status, page, limit, sort, searchKeyWord, directoryId) =>
       restClient
         .apiGet(
           urljoin(
