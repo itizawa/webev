@@ -16,6 +16,7 @@ import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
+import { SearchForm } from '~/components/Commons/SearchForm';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/Page/PageList';
@@ -177,8 +178,11 @@ const Index: VFC = () => {
             </div>
           </div>
         )}
-        <div className="my-2 d-flex">
-          <div className="ms-auto">
+        <div className="my-2 d-flex justify-content-between">
+          <div>
+            <SearchForm />
+          </div>
+          <div>
             <SortButtonGroup />
           </div>
         </div>
