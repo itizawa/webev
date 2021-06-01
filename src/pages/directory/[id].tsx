@@ -178,7 +178,7 @@ const Index: VFC = () => {
             </div>
           </div>
         )}
-        <div className="my-2 d-flex justify-content-between">
+        <div className="my-3 d-flex justify-content-between">
           <div>
             <SearchForm />
           </div>
