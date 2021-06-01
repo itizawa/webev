@@ -8,6 +8,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { PageList } from '~/components/Page/PageList';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
+import { SearchForm } from '~/components/Commons/SearchForm';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -23,8 +24,11 @@ const Index: VFC = () => {
             <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
           </div>
         </div>
-        <div className="my-2 d-flex">
-          <div className="ms-auto">
+        <div className="my-3 d-flex justify-content-between">
+          <div>
+            <SearchForm />
+          </div>
+          <div>
             <SortButtonGroup />
           </div>
         </div>

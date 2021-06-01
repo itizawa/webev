@@ -8,6 +8,7 @@ export const ja = {
   delete: '削除',
   cancel: 'キャンセル',
   settings: '設定',
+  search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に保存します`,
@@ -59,7 +60,7 @@ export const ja = {
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
 
-  'your_pages_don’t_exist': 'ページが保存されていません',
+  'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',

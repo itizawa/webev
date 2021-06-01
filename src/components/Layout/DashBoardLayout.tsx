@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, useDirectoryId, usePageStatus } from '~/stores/page';
+import { useActivePage, useDirectoryId, usePageStatus, useSearchKeyWord } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -26,6 +26,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { mutate: mutatePageStatus } = usePageStatus();
+  const { mutate: mutateSearchKeyord } = useSearchKeyWord();
 
   if (typeof window === 'undefined') {
     return null;
@@ -33,6 +34,7 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   useEffect(() => {
     mutatePageStatus(PathConfigs[pathname].statusForFind);
+    mutateSearchKeyord('');
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);

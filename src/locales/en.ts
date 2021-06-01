@@ -8,6 +8,7 @@ export const en = {
   delete: 'Delete',
   cancel: 'Cancel',
   settings: 'Settings',
+  search: 'Search',
   save: 'Save',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save Page to ${directoryName}`,
