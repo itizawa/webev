@@ -8,6 +8,7 @@ export const ja = {
   delete: '削除',
   cancel: 'キャンセル',
   settings: '設定',
+  search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に保存します`,
