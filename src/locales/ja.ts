@@ -60,7 +60,7 @@ export const ja = {
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
 
-  'your_pages_don’t_exist': 'ページが保存されていません',
+  'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',
