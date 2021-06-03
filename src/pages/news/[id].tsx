@@ -30,7 +30,7 @@ const Index: VFC<Props> = (props: Props) => {
   return (
     <>
       <Head>
-        <title>{news.title}</title>
+        <title>Webev - {news.title}</title>
         <meta property="og:title" content={news.title} />
         <meta property="og:description" content={`${news.body.substr(0, 90)}...`} />
         <meta name="twitter:title" content={news.title} />
