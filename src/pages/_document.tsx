@@ -5,6 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
+          <title>Webev</title>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
