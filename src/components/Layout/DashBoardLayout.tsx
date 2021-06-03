@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -44,10 +43,6 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   return (
     <div>
-      <Head>
-        <title>Webev | Dashboard</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
       <div className="bg-dark">
         <Navbar />
       </div>
