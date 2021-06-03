@@ -11,7 +11,6 @@ const Index: VFC = () => {
     <>
       <Head>
         <title>Webev | {t.term}</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <div className="p-3">
         <h1>{t.term}</h1>
