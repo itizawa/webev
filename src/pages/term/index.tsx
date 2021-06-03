@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { VFC } from 'react';
 
 import { Term } from '~/components/Term/Term';
@@ -7,10 +8,16 @@ const Index: VFC = () => {
   const { t } = useLocale();
 
   return (
-    <div className="p-3">
-      <h1>{t.term}</h1>
-      <Term />
-    </div>
+    <>
+      <Head>
+        <title>Webev | {t.term}</title>
+        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+      </Head>
+      <div className="p-3">
+        <h1>{t.term}</h1>
+        <Term />
+      </div>
+    </>
   );
 };
 
