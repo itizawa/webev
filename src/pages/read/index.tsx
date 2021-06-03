@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
@@ -16,30 +17,37 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
 
   return (
-    <LoginRequiredWrapper>
-      <div className="p-3">
-        <div className="d-flex align-items-center">
-          <h1 className="mb-0">{t.read}</h1>
-          <div className="ms-auto">
-            <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+    <>
+      <Head>
+        <title>Webev | {t.read}</title>
+      </Head>
+      <LoginRequiredWrapper>
+        <div className="p-3">
+          <div className="d-flex align-items-center">
+            <h1 className="mb-0">{t.read}</h1>
+            <div className="ms-auto">
+              <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+            </div>
           </div>
+          <div className="my-3 d-flex justify-content-between gap-3">
+            <div>
+              <SearchForm />
+            </div>
+            <div>
+              <SortButtonGroup />
+            </div>
+          </div>
+          {paginationResult == null && (
+            <div className="text-center pt-5">
+              <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+            </div>
+          )}
+          {paginationResult != null && (
+            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+          )}
         </div>
-        <div className="my-3 d-flex justify-content-between gap-3">
-          <div>
-            <SearchForm />
-          </div>
-          <div>
-            <SortButtonGroup />
-          </div>
-        </div>
-        {paginationResult == null && (
-          <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-          </div>
-        )}
-        {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
-      </div>
-    </LoginRequiredWrapper>
+      </LoginRequiredWrapper>
+    </>
   );
 };
 
