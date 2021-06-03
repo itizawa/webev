@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';

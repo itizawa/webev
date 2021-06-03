@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { FC } from 'react';
 import styled from 'styled-components';
 
