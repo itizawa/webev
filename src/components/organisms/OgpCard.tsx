@@ -1,4 +1,5 @@
 import { VFC, useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -111,12 +112,17 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        {directoryOfPage?.name != null && (
-          <div>
-            <span className="badge bg-secondary text-white">
-              <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
-              <span className="ms-1">{directoryOfPage?.name}</span>
-            </span>
+        {directoryOfPage != null && (
+          <div className="mt-2">
+            <Link href={`/directory/${directoryOfPage._id}`}>
+              <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
+                <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
+                <span className="ms-1">{directoryOfPage.name}</span>
+              </span>
+            </Link>
+            <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
+              {directoryOfPage.description}
+            </UncontrolledTooltip>
           </div>
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
