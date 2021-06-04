@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { useDirectoryForRename } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAllDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 
 export const RenameDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -19,6 +19,7 @@ export const RenameDirectoryModal: VFC = () => {
   const { mutate: mutateDirectory } = useDirectoryInfomation(directoryForRename?._id as string);
   const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { mutate: mutateAllDirectories } = useAllDirectories();
 
   useEffect(() => {
     if (directoryForRename != null) {
@@ -35,6 +36,7 @@ export const RenameDirectoryModal: VFC = () => {
       mutateDirectory();
       mutateDirectoryList();
       mutateDirectoryChildren();
+      mutateAllDirectories();
       mutateDirectoryForRename(null);
     } catch (err) {
       toastError(err);
