@@ -10,7 +10,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
+import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -47,6 +47,7 @@ const Index: VFC = () => {
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
+  const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
@@ -86,6 +87,7 @@ const Index: VFC = () => {
     }
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
+      mutateAllDirectories();
       toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
