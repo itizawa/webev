@@ -1,38 +1,26 @@
-import Head from 'next/head';
 import { FC } from 'react';
-import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
 import { Footer } from '../organisms/Footer';
-import { SocketConnector } from '~/components/SocketConnector';
 
 import { Navbar } from '~/components/organisms/Navbar';
-import { PageModals } from '~/components/PageModals/PageModals';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 export const DefaultLayout: FC = ({ children }) => {
-  const [session] = useSession();
-
   if (typeof window === 'undefined') {
     return null;
   }
 
   return (
-    <>
-      <Head>
-        <title>Webev</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
+    <div>
       <div className="bg-dark">
         <Navbar />
       </div>
       <StyledBorder />
       <StyledDiv className="container">{children}</StyledDiv>
-      {session && <PageModals />}
-      {session && <SocketConnector />}
       <Footer />
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { FC, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
@@ -7,7 +6,7 @@ import styled from 'styled-components';
 import { Footer } from '../organisms/Footer';
 import { SocketConnector } from '~/components/SocketConnector';
 
-import { useActivePage, useDirectoryId, usePageStatus } from '~/stores/page';
+import { useActivePage, useDirectoryId, usePageStatus, useSearchKeyWord } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -26,6 +25,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { mutate: mutatePageStatus } = usePageStatus();
+  const { mutate: mutateSearchKeyord } = useSearchKeyWord();
 
   if (typeof window === 'undefined') {
     return null;
@@ -33,6 +33,7 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   useEffect(() => {
     mutatePageStatus(PathConfigs[pathname].statusForFind);
+    mutateSearchKeyord('');
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
@@ -41,11 +42,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }, [router]);
 
   return (
-    <>
-      <Head>
-        <title>Webev</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-      </Head>
+    <div>
       <div className="bg-dark">
         <Navbar />
       </div>
@@ -61,7 +58,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <ScrollTopButton />
       </StyledDiv>
       <Footer />
-    </>
+    </div>
   );
 };
 

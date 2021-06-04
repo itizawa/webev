@@ -1,13 +1,14 @@
+import Head from 'next/head';
 import { VFC } from 'react';
+import Loader from 'react-loader-spinner';
 
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { OgpCard } from '~/components/organisms/OgpCard';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { SearchForm } from '~/components/Commons/SearchForm';
+import { PageList } from '~/components/Page/PageList';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -15,39 +16,37 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
 
   return (
-    <LoginRequiredWrapper>
-      <div className="p-3">
-        <div className="d-flex align-items-center">
-          <h1 className="mb-0">{t.home}</h1>
-          <div className="ms-auto">
-            <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+    <>
+      <Head>
+        <title>Webev | {t.home}</title>
+      </Head>
+      <LoginRequiredWrapper>
+        <div className="p-3">
+          <div className="d-flex align-items-center">
+            <h1 className="mb-0">{t.home}</h1>
+            <div className="ms-auto">
+              <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+            </div>
           </div>
+          <div className="my-3 d-flex justify-content-between gap-3">
+            <div>
+              <SearchForm />
+            </div>
+            <div>
+              <SortButtonGroup />
+            </div>
+          </div>
+          {paginationResult == null && (
+            <div className="text-center pt-5">
+              <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+            </div>
+          )}
+          {paginationResult != null && (
+            <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+          )}
         </div>
-        <div className="my-2 d-flex">
-          <div className="ms-auto">
-            <SortButtonGroup />
-          </div>
-        </div>
-        {paginationResult != null && (
-          <div className="row">
-            {paginationResult.docs.map((page) => (
-              <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-                <OgpCard page={page} />
-              </div>
-            ))}
-            {paginationResult.docs.length === 0 ? (
-              <div className="col-12">
-                <NoPageAlert />
-              </div>
-            ) : (
-              <div className="text-center">
-                <PaginationWrapper pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </LoginRequiredWrapper>
+      </LoginRequiredWrapper>
+    </>
   );
 };
 

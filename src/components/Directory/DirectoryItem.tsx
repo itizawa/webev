@@ -10,7 +10,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useDirectoryChildren } from '~/stores/directory';
+import { useAllDirectories, useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
@@ -22,6 +22,8 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   const { t } = useLocale();
 
   const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildren(directory?._id);
+  const { mutate: mutateAllDirectories } = useAllDirectories();
+
   const [isOpen, setIsOpen] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
@@ -54,6 +56,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
       toastSuccess(t.toastr_save_directory);
       setName('');
       mutateChildrenDirectortTrees();
+      mutateAllDirectories();
       setIsCreatingNewDirectory(false);
     } catch (err) {
       toastError(err);

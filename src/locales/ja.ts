@@ -8,6 +8,7 @@ export const ja = {
   delete: '削除',
   cancel: 'キャンセル',
   settings: '設定',
+  search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に保存します`,
@@ -28,6 +29,7 @@ export const ja = {
   toastr_save_directory: 'ディレクトリを保存しました',
   toastr_delete_directory: 'ディレクトリを削除しました',
   toastr_success_read: '読みました！',
+  toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
 
   home: 'ホーム',
@@ -36,8 +38,10 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
 
+  return_news_list: 'ニュースリストに戻る',
+
   read_button: '読了',
-  return_button: '戻す',
+  return_button: 'ホームに戻す',
 
   child_directory: '子ディレクトリ',
 
@@ -56,7 +60,7 @@ export const ja = {
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
 
-  'your_pages_don’t_exist': 'ページが保存されていません',
+  'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',

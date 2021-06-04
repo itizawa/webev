@@ -1,4 +1,5 @@
-import { VFC, useEffect, useState } from 'react';
+import { VFC, useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -17,6 +18,7 @@ import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, usePageForAddDirectory } from '~/stores/modal';
+import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -35,6 +37,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { data: allDirectories } = useAllDirectories();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -48,9 +51,14 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
   };
 
   const switchArchive = async () => {
+    const bool = !isArchive;
     try {
       const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
-      toastSuccess(t.toastr_success_read);
+      if (bool) {
+        toastSuccess(t.toastr_success_read);
+      } else {
+        toastSuccess(t.toastr_success_put_back);
+      }
       setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
       mutatePageList();
     } catch (err) {
@@ -66,17 +74,21 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
     mutatePageForAddDirectory(page);
   };
 
+  const directoryOfPage = useMemo(() => {
+    return allDirectories?.find((v) => v._id === page.directoryId);
+  }, [allDirectories, page.directoryId]);
+
   return (
     <StyledRow className="row py-2">
-      <div className="d-none d-md-block col-2 py-2">
+      <div className="col-3 col-md-2 p-1 p-md-2">
         <a href={url} target="blank" rel="noopener noreferrer">
           <FixedImage imageUrl={image} />
         </a>
       </div>
-      <div className="col-12 col-md-10">
+      <div className="col-9 col-md-10">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
+            <a className="text-white webev-anchor" href={url} target="blank" rel="noopener noreferrer">
               {title || url}
             </a>
           </p>
@@ -102,7 +114,24 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        <span className="small p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</span>
+        {directoryOfPage != null && (
+          <div className="">
+            <Link href={`/directory/${directoryOfPage._id}`}>
+              <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
+                <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
+                <span className="ms-1">{directoryOfPage.name}</span>
+              </span>
+            </Link>
+            {directoryOfPage.description.trim() !== '' && (
+              <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
+                {directoryOfPage.description}
+              </UncontrolledTooltip>
+            )}
+          </div>
+        )}
+        <span className="small p-1 d-none d-sm-block">
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+        </span>
       </div>
       <div className="d-flex align-items-center my-1">
         <small className="text-truncate px-1" id={`sitename-for-${page._id}`}>

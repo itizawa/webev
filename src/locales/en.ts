@@ -8,6 +8,7 @@ export const en = {
   delete: 'Delete',
   cancel: 'Cancel',
   settings: 'Settings',
+  search: 'Search',
   save: 'Save',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save Page to ${directoryName}`,
@@ -28,6 +29,7 @@ export const en = {
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
   toastr_success_read: 'Read!',
+  toastr_success_put_back: 'Put Back Home!',
   toastr_success_add_directory: 'Add Directory',
 
   home: 'Home',
@@ -36,8 +38,10 @@ export const en = {
   news: 'News',
   share: 'Share',
 
+  return_news_list: 'Return News List',
+
   read_button: 'Read',
-  return_button: 'Put Back',
+  return_button: 'Put Back Home',
 
   child_directory: 'Child Directories',
 

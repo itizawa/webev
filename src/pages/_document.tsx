@@ -5,6 +5,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="ja">
         <Head>
+          <title>Webev</title>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
@@ -15,6 +16,17 @@ export default class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff" />
+          <meta property="og:site_name" content="Webev" />
+          <meta property="og:title" content="Webev" />
+          <meta property="og:url" content="https://www.webev.cloud" />
+          <meta property="og:description" content="Webev は、誰でも使えるブックマークマネージャーです！URL を入力して保存するだけで Web ページを管理できます。" />
+          {/* Twitter */}
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="Webev" />
+          <meta
+            name="twitter:description"
+            content="Webev は、誰でも使えるブックマークマネージャーです！URL を入力して保存するだけで Web ページを管理できます。"
+          />
         </Head>
         <body>
           <Main />

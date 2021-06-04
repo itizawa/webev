@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Head from 'next/head';
 import { VFC } from 'react';
 import axios from 'axios';
 
 import { useLocale } from '~/hooks/useLocale';
-import { News } from '~/interfaces/newx';
+import { News } from '~/interfaces/news';
 
 type Props = {
   contents: News[];
@@ -13,23 +14,28 @@ const Index: VFC<Props> = ({ contents }: Props) => {
   const { t } = useLocale();
 
   return (
-    <div className="p-3">
-      <div className="d-flex align-items-center mb-3">
-        <h1 className="mb-0">{t.news}</h1>
+    <>
+      <Head>
+        <title>Webev | {t.news}</title>
+      </Head>
+      <div className="p-3">
+        <div className="d-flex align-items-center mb-3">
+          <h1 className="mb-0">{t.news}</h1>
+        </div>
+        {contents.length === 0 && <span>No News</span>}
+        <ul>
+          {contents.map((v) => {
+            return (
+              <li key={v.id} role="button">
+                <Link href={`/news/${v.id}`}>
+                  <a className="text-white fw-bold webev-anchor">{v.title}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-      {contents.length === 0 && <span>No News</span>}
-      <ul>
-        {contents.map((v) => {
-          return (
-            <li key={v.id} role="button">
-              <Link href={`/news/${v.id}`}>
-                <a className="text-white fw-bold webev-anchor">{v.title}</a>
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    </>
   );
 };
 
