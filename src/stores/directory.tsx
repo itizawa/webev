@@ -46,7 +46,7 @@ export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directo
   );
 };
 
-export const useAllDirectories = (): SWRResponse<PaginationResult<Directory>, Error> => {
+export const useAllDirectories = (): SWRResponse<Directory[], Error> => {
   return useAuthenticationSWR(['/directories/all'], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
