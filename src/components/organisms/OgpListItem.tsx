@@ -1,4 +1,5 @@
-import { VFC, useEffect, useState } from 'react';
+import { VFC, useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -17,6 +18,7 @@ import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, usePageForAddDirectory } from '~/stores/modal';
+import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -35,6 +37,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { data: allDirectories } = useAllDirectories();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -70,6 +73,10 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
   const openAddDirectoryModal = async () => {
     mutatePageForAddDirectory(page);
   };
+
+  const directoryOfPage = useMemo(() => {
+    return allDirectories?.find((v) => v._id === page.directoryId);
+  }, [allDirectories, page.directoryId]);
 
   return (
     <StyledRow className="row py-2">
@@ -107,6 +114,21 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
+        {directoryOfPage != null && (
+          <div className="">
+            <Link href={`/directory/${directoryOfPage._id}`}>
+              <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
+                <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
+                <span className="ms-1">{directoryOfPage.name}</span>
+              </span>
+            </Link>
+            {directoryOfPage.description.trim() !== '' && (
+              <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
+                {directoryOfPage.description}
+              </UncontrolledTooltip>
+            )}
+          </div>
+        )}
         <span className="small p-1 d-none d-sm-block">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </span>
