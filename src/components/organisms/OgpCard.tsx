@@ -76,7 +76,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page.directoryId);
-  }, [allDirectories]);
+  }, [allDirectories, page.directoryId]);
 
   return (
     <StyledCard className="card border-0 shadow h-100">
