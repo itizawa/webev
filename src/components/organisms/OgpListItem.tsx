@@ -88,7 +88,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
       <div className="col-9 col-md-10">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white text-decoration-none" href={url} target="blank" rel="noopener noreferrer">
+            <a className="text-white webev-anchor" href={url} target="blank" rel="noopener noreferrer">
               {title || url}
             </a>
           </p>
