@@ -1,4 +1,4 @@
-import { VFC, useEffect, useState } from 'react';
+import { VFC, useEffect, useState, useMemo } from 'react';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
@@ -17,6 +17,7 @@ import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, usePageForAddDirectory } from '~/stores/modal';
+import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -35,6 +36,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
   const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { data: allDirectories } = useAllDirectories();
 
   useEffect(() => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
@@ -71,6 +73,10 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
     mutatePageForAddDirectory(page);
   };
 
+  const directoryOfPage = useMemo(() => {
+    return allDirectories?.find((v) => v._id === page.directoryId);
+  }, [allDirectories]);
+
   return (
     <StyledCard className="card border-0 shadow h-100">
       <a href={url} target="blank" rel="noopener noreferrer">
@@ -105,6 +111,14 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
+        {directoryOfPage?.name != null && (
+          <div>
+            <span className="badge bg-secondary text-white">
+              <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
+              <span className="ms-1">{directoryOfPage?.name}</span>
+            </span>
+          </div>
+        )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center mt-auto">
           <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
