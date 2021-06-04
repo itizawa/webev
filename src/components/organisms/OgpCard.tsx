@@ -120,9 +120,11 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
                 <span className="ms-1">{directoryOfPage.name}</span>
               </span>
             </Link>
-            <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
-              {directoryOfPage.description}
-            </UncontrolledTooltip>
+            {directoryOfPage.description.trim() !== '' && (
+              <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
+                {directoryOfPage.description}
+              </UncontrolledTooltip>
+            )}
           </div>
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
