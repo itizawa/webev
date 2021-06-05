@@ -5,7 +5,7 @@ import { Fragment, useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -123,15 +123,20 @@ const Index: VFC = () => {
               </div>
               <div className="d-flex gap-3 align-items-center">
                 <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
-                <IconButton
-                  width={18}
-                  height={18}
-                  icon={BootstrapIcon.SAVE}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WARNING}
-                  isActive={urlFromClipBoard != null}
-                  onClickButton={() => mutateDirectoryForSavePage(directory)}
-                />
+                <div id="save-page-to-directory">
+                  <IconButton
+                    width={18}
+                    height={18}
+                    icon={BootstrapIcon.SAVE}
+                    color={BootstrapColor.SECONDARY}
+                    activeColor={BootstrapColor.WARNING}
+                    isActive={urlFromClipBoard != null}
+                    onClickButton={() => mutateDirectoryForSavePage(directory)}
+                  />
+                </div>
+                <UncontrolledTooltip placement="top" target="save-page-to-directory">
+                  {t.save_to_directory(directory.name)}
+                </UncontrolledTooltip>
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
                     <IconButton
