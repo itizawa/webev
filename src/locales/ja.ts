@@ -32,6 +32,7 @@ export const ja = {
   toastr_success_read: '読みました！',
   toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
+  toastr_success_send_inquiry: '送信しました',
 
   home: 'ホーム',
   read: '読んだ記事',
