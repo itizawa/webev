@@ -27,13 +27,11 @@ const Index: VFC = () => {
               <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
             </div>
           </div>
-          <div className="my-3 d-flex justify-content-between gap-3">
+          <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
             <div>
               <SearchForm />
             </div>
-            <div>
-              <SortButtonGroup />
-            </div>
+            <SortButtonGroup />
           </div>
           {paginationResult == null && (
             <div className="text-center pt-5">

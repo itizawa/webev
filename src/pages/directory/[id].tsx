@@ -188,13 +188,11 @@ const Index: VFC = () => {
               </div>
             </div>
           )}
-          <div className="my-3 d-flex justify-content-between gap-3">
+          <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
             <div>
               <SearchForm />
             </div>
-            <div>
-              <SortButtonGroup />
-            </div>
+            <SortButtonGroup />
           </div>
           {paginationResult == null && (
             <div className="text-center pt-5">
