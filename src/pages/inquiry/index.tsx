@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState, VFC } from 'react';
+import { useMemo, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
@@ -14,8 +14,8 @@ const Index: VFC = () => {
   const router = useRouter();
 
   const [inquiryType, setInquiryType] = useState<InquiryType>();
-  const [inquiryEmail, setInquiryEmail] = useState<string>();
-  const [inquiryText, setInquiryText] = useState<string>();
+  const [inquiryEmail, setInquiryEmail] = useState<string>('');
+  const [inquiryText, setInquiryText] = useState<string>('');
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -28,6 +28,10 @@ const Index: VFC = () => {
       toastError(err);
     }
   };
+
+  const invalidForm = useMemo(() => {
+    return inquiryType == null || inquiryEmail.trim() === '' || inquiryText.trim() === '';
+  }, [inquiryType, inquiryEmail, inquiryText]);
 
   return (
     <>
@@ -69,7 +73,7 @@ const Index: VFC = () => {
                 <textarea rows={5} value={inquiryText} className="form-control" id="inputText" onChange={(e) => setInquiryText(e.target.value)} />
               </div>
             </div>
-            <button type="submit" className="btn btn-purple w-100">
+            <button type="submit" className="btn btn-purple w-100" disabled={invalidForm}>
               {t.inquiry_submit}
             </button>
           </form>
