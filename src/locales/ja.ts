@@ -69,6 +69,7 @@ export const ja = {
   inquiry_email_desc: '返信が必要な場合は入力してください',
   inquiry_type: '種類',
   inquiry_email: 'メールアドレス',
+  inquiry_text: '本文',
   open_select: '選択してください',
   bug_report: 'バグの報告',
   violation_report: '不適切な投稿の報告',
