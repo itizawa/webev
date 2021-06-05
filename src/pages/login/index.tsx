@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { useState, VFC } from 'react';
 
 import { signIn } from 'next-auth/client';
@@ -8,6 +7,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { LoginRequiredWrapper } from '~/components/Authentication/LogoutRequiredWrapper';
 import { Icon } from '~/components/Icons/Icon';
 import { Term } from '~/components/Term/Term';
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 const Index: VFC = () => {
   const router = useRouter();
@@ -15,9 +15,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Webev | Login</title>
-      </Head>
+      <WebevOgpHead title="Webev | Login" />
       <LoginRequiredWrapper>
         <div className="p-3">
           <h1>Login Page</h1>
