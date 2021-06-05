@@ -65,4 +65,6 @@ export const ja = {
 
   this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',
+
+  inquiry_email_desc: '返信が必要な場合は入力してください',
 };

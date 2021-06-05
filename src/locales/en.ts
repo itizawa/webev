@@ -65,4 +65,6 @@ export const en = {
 
   this_is_the_404_page: 'This is the 404 page',
   go_to_top: 'Go to Top Page',
+
+  inquiry_email_desc: 'Please enter if you need a reply',
 };
