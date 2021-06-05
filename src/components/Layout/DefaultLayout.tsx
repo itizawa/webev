@@ -8,10 +8,6 @@ import { Navbar } from '~/components/organisms/Navbar';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 export const DefaultLayout: FC = ({ children }) => {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
   return (
     <div>
       <div className="bg-dark">
