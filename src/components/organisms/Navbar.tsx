@@ -2,6 +2,8 @@ import { VFC } from 'react';
 import Link from 'next/link';
 
 import { useSession } from 'next-auth/client';
+import styled from 'styled-components';
+
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
 import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
@@ -10,7 +12,7 @@ export const Navbar: VFC = () => {
   const [session, loading] = useSession();
 
   return (
-    <div className="navbar container">
+    <StyledDiv className="navbar container">
       <Link href="/">
         <span className="navbar-brand mb-0 text-white fw-bold" role="button">
           Webev
@@ -29,6 +31,10 @@ export const Navbar: VFC = () => {
         </Link>
       )}
       {session != null && <PersonalDropdown user={session.user as User} />}
-    </div>
+    </StyledDiv>
   );
 };
+
+const StyledDiv = styled.div`
+  min-height: 56px;
+`;
