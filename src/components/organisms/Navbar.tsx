@@ -12,7 +12,7 @@ export const Navbar: VFC = () => {
   return (
     <div className="navbar container">
       <Link href="/">
-        <span className="navbar-brand mb-0 text-white" role="button">
+        <span className="navbar-brand mb-0 text-white fw-bold" role="button">
           Webev
         </span>
       </Link>
