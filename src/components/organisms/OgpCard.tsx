@@ -133,7 +133,9 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
             {favicon != null && (
               <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
             )}
-            {siteName}
+            <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
+              {siteName}
+            </a>
             {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
               <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
                 {siteName}
