@@ -134,7 +134,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
         </span>
       </div>
       <div className="d-flex align-items-center my-1">
-        <small className="text-truncate px-1" id={`sitename-for-${page._id}`}>
+        <small className="text-truncate" id={`sitename-for-${page._id}`}>
           {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
         </small>
         <small className="text-truncate ms-3">
