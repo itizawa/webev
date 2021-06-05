@@ -17,7 +17,7 @@ export const WebevOgpHead: VFC<Props> = (props: Props) => {
 
   return (
     <Head>
-      <title>Webev - {title}</title>
+      <title>{title == null ? 'Webev' : `Webev - ${title}`}</title>
       <meta property="og:site_name" content={siteName || 'Webev'} />
       <meta property="og:title" content={title || 'Webev'} />
       <meta property="og:url" content={url || 'https://www.webev.cloud'} />
