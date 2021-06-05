@@ -1,6 +1,7 @@
-import Head from 'next/head';
 import { VFC } from 'react';
 import Loader from 'react-loader-spinner';
+
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
@@ -17,9 +18,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Webev | {t.home}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${t.home}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
           <div className="d-flex align-items-center">
