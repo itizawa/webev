@@ -67,4 +67,9 @@ export const ja = {
   go_to_top: 'トップページに戻る',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',
+  bug_report: 'バグの報告',
+  violation_report: '不適切な投稿の報告',
+  feature_request: '機能のリクエスト',
+  development: '開発に関すること(お手伝い募集中です)',
+  others: 'その他',
 };
