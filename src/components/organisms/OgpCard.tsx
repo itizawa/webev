@@ -131,7 +131,7 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
         <div className="d-flex align-items-center mt-auto">
           <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
             {favicon != null && (
-              <img className="me-1" width={16} height={16} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+              <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
             )}
             {siteName}
             {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
