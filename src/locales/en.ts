@@ -68,6 +68,7 @@ export const en = {
 
   inquiry_email_desc: 'Please enter if you need a reply',
   inquiry_type: 'Inquiry Type',
+  inquiry_email: 'Mail Address',
   open_select: 'Open this select menu',
   bug_report: 'Bug Request',
   violation_report: 'Violation Request',
