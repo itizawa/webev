@@ -67,6 +67,7 @@ export const en = {
   go_to_top: 'Go to Top Page',
 
   inquiry_email_desc: 'Please enter if you need a reply',
+  open_select: 'Open this select menu',
   bug_report: 'Bug Request',
   violation_report: 'Violation Request',
   feature_request: 'Feature Request',
