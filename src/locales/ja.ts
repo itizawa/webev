@@ -67,7 +67,8 @@ export const ja = {
   go_to_top: 'トップページに戻る',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',
-  inquiry_type: '問い合わせの種類',
+  inquiry_type: '種類',
+  inquiry_email: 'メールアドレス',
   open_select: '選択してください',
   bug_report: 'バグの報告',
   violation_report: '不適切な投稿の報告',
