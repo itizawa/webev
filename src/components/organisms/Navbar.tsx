@@ -11,6 +11,10 @@ import { User } from '~/interfaces/user';
 export const Navbar: VFC = () => {
   const [session, loading] = useSession();
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   return (
     <StyledDiv className="navbar container">
       <Link href="/">
