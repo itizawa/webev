@@ -5,6 +5,8 @@ import Image from 'next/image';
 import CountUp from 'react-countup';
 import axios from 'axios';
 
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+
 import { useLocale } from '~/hooks/useLocale';
 import { imagePath } from '~/const/imagePath';
 
@@ -17,6 +19,7 @@ const Index: ReactNode = (props: Props) => {
 
   return (
     <>
+      <WebevOgpHead />
       <h1 className="my-3">{t.welcome_webev}</h1>
       <Image src={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
