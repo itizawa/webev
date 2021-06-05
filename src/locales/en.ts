@@ -3,6 +3,7 @@ export const en = {
   total_pages: 'Total pages saved using Webev!',
   start_immediately: 'Start!',
   term: 'Terms of Service',
+  inquiry: 'Inquiry',
 
   logout: 'Logout',
   delete: 'Delete',

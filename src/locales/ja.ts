@@ -3,6 +3,7 @@ export const ja = {
   total_pages: 'Webev に保存されたページの総数',
   start_immediately: 'さっそく 始める',
   term: '利用規約',
+  inquiry: 'お問い合わせ',
 
   logout: 'ログアウト',
   delete: '削除',
