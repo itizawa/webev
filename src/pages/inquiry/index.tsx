@@ -1,18 +1,33 @@
 import Head from 'next/head';
 import { useState, VFC } from 'react';
+import { useRouter } from 'next/router';
 
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const [inquiryType, setInquiryType] = useState<InquiryType>();
   const [inquiryEmail, setInquiryEmail] = useState<string>();
   const [inquiryText, setInquiryText] = useState<string>();
-  console.log(inquiryType);
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
+
+    try {
+      await restClient.apiPost('/inquiries', { type: inquiryType, email: inquiryEmail, text: inquiryText });
+      toastSuccess(t.toastr_success_send_inquiry);
+      router.push('/');
+    } catch (err) {
+      toastError(err);
+    }
+  };
 
   return (
     <>
@@ -22,7 +37,7 @@ const Index: VFC = () => {
       <div className="p-3">
         <h1 className="text-center">{t.inquiry}</h1>
         <StyledDiv className="mx-auto">
-          <form className="mt-3 mt-lg-5">
+          <form className="mt-3 mt-lg-5" onSubmit={onSubmit}>
             <div className="mb-3 mb-lg-4">
               <label className="col-form-label">{t.inquiry_type}</label>
               <div>
@@ -54,6 +69,9 @@ const Index: VFC = () => {
                 <textarea rows={5} value={inquiryText} className="form-control" id="inputText" onChange={(e) => setInquiryText(e.target.value)} />
               </div>
             </div>
+            <button type="submit" className="btn btn-purple w-100">
+              {t.inquiry_submit}
+            </button>
           </form>
         </StyledDiv>
       </div>
