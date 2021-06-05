@@ -11,6 +11,8 @@ const Index: VFC = () => {
 
   const [inquiryType, setInquiryType] = useState<InquiryType>();
   const [inquiryEmail, setInquiryEmail] = useState<string>();
+  const [inquiryText, setInquiryText] = useState<string>();
+  console.log(inquiryType);
 
   return (
     <>
@@ -24,11 +26,11 @@ const Index: VFC = () => {
             <div className="mb-3 mb-lg-4">
               <label className="col-form-label">{t.inquiry_type}</label>
               <div>
-                <select className="form-select" onChange={(e) => setInquiryType(e.target.value as InquiryType)}>
-                  <option selected={inquiryType == null}>{t.open_select}</option>
+                <select className="form-select" defaultValue="default" onChange={(e) => setInquiryType(e.target.value as InquiryType)}>
+                  <option value="default">{t.open_select}</option>
                   {Object.values(InquiryType).map((v) => {
                     return (
-                      <option key={v} selected={inquiryType == v} value={v}>
+                      <option key={v} value={v}>
                         {t[v]}
                       </option>
                     );
@@ -42,6 +44,14 @@ const Index: VFC = () => {
               </label>
               <div>
                 <input type="email" value={inquiryEmail} className="form-control" id="inputEmail" onChange={(e) => setInquiryEmail(e.target.value)} />
+              </div>
+            </div>
+            <div className="mb-3 mb-lg-4">
+              <label htmlFor="inputText" placeholder="hoge@example.com" className="col-form-label">
+                {t.inquiry_text}
+              </label>
+              <div>
+                <textarea rows={5} value={inquiryText} className="form-control" id="inputText" onChange={(e) => setInquiryText(e.target.value)} />
               </div>
             </div>
           </form>
