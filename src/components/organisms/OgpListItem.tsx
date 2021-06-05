@@ -32,7 +32,7 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt, status } = page;
+  const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -138,6 +138,9 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
           {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
         </small>
         <small className="text-truncate ms-3">
+          {favicon != null && (
+            <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+          )}
           {siteName}
           {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
             <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
