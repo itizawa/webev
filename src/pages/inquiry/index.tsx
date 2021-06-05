@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import { useMemo, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
-
 import styled from 'styled-components';
+
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
@@ -35,9 +35,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Webev | {t.inquiry}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${t.inquiry}`} />
       <div className="p-3">
         <h1 className="text-center">{t.inquiry}</h1>
         <StyledDiv className="mx-auto">
