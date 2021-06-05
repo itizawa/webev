@@ -76,4 +76,5 @@ export const ja = {
   feature_request: '機能のリクエスト',
   development: '開発に関すること(お手伝い募集中です)',
   others: 'その他',
+  inquiry_submit: '送信',
 };

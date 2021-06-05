@@ -76,4 +76,5 @@ export const en = {
   feature_request: 'Feature Request',
   development: 'Development (We are looking for help)',
   others: 'Others',
+  inquiry_submit: 'Send',
 };
