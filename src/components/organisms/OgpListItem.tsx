@@ -134,11 +134,11 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
         </span>
       </div>
       <div className="col-12 d-flex align-items-center my-1">
-        <small className="text-truncate" id={`sitename-for-${page._id}`}>
+        <small className="me-3 text-truncate" id={`sitename-for-${page._id}`}>
           {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
         </small>
         {favicon != null && (
-          <img className="ms-3 me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+          <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
         )}
         <small className="text-truncate">
           <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
