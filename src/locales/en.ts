@@ -42,7 +42,7 @@ export const en = {
 
   return_news_list: 'Return News List',
 
-  read_button: 'Read',
+  read_button: 'Mark as Read',
   return_button: 'Put Back Home',
 
   child_directory: 'Child Directories',
