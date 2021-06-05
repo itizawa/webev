@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import { Fragment, useEffect, useState, VFC } from 'react';
 
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
@@ -96,9 +96,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Webev | {directory?.name}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
           {directory != null && (

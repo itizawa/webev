@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Head from 'next/head';
 import { VFC } from 'react';
 import axios from 'axios';
 
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/news';
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 type Props = {
   contents: News[];
@@ -15,9 +15,7 @@ const Index: VFC<Props> = ({ contents }: Props) => {
 
   return (
     <>
-      <Head>
-        <title>Webev | {t.news}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${t.news}`} />
       <div className="p-3">
         <div className="d-flex align-items-center mb-3">
           <h1 className="mb-0">{t.news}</h1>

@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
@@ -10,6 +9,7 @@ import { PageList } from '~/components/Page/PageList';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -18,9 +18,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <Head>
-        <title>Webev | {t.read}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${t.read}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
           <div className="d-flex align-items-center">
