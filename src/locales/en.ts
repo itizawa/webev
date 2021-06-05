@@ -3,6 +3,7 @@ export const en = {
   total_pages: 'Total pages saved using Webev!',
   start_immediately: 'Start!',
   term: 'Terms of Service',
+  inquiry: 'Inquiry',
 
   logout: 'Logout',
   delete: 'Delete',
@@ -31,6 +32,7 @@ export const en = {
   toastr_success_read: 'Read!',
   toastr_success_put_back: 'Put Back Home!',
   toastr_success_add_directory: 'Add Directory',
+  toastr_success_send_inquiry: 'Send Inquiry',
 
   home: 'Home',
   read: 'Read',
@@ -64,4 +66,16 @@ export const en = {
 
   this_is_the_404_page: 'This is the 404 page',
   go_to_top: 'Go to Top Page',
+
+  inquiry_email_desc: 'Please enter if you need a reply',
+  inquiry_type: 'Inquiry Type',
+  inquiry_email: 'Mail Address',
+  inquiry_text: 'Inquiry Text',
+  open_select: 'Open this select menu',
+  bug_report: 'Bug Request',
+  violation_report: 'Violation Request',
+  feature_request: 'Feature Request',
+  development: 'Development (We are looking for help)',
+  others: 'Others',
+  inquiry_submit: 'Send',
 };
