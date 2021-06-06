@@ -99,7 +99,7 @@ const Index: VFC = () => {
   };
 
   const handleEmoji = (emoji: any) => {
-    setEmoji(emoji);
+    setEmoji(emoji.id);
     setEmojiSettingMode(false);
   }
 
@@ -141,7 +141,7 @@ const Index: VFC = () => {
               <div className="d-flex gap-3 align-items-center">
                 <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">
                   {/* TODO: display selected emoji */}
-                  <Emoji emoji="thinking_face" size={40} onClick={(emoji) => clickEmojiHandler(emoji) }/>
+                  <Emoji emoji={emoji} size={40} onClick={(emoji) => clickEmojiHandler(emoji) }/>
                   {emojiSettingMode &&
                     (
                       <Picker onSelect={emoji => handleEmoji(emoji)} />
