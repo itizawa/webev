@@ -103,7 +103,7 @@ const Index: VFC = () => {
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
                 <Link href="/directory">
-                  <a className="text-decoration-none text-white">{t.directory}</a>
+                  <a className="webev-anchor text-white">{t.directory}</a>
                 </Link>
                 <span className="mx-1">{'/'}</span>
                 {ancestorDirectories?.map((ancestorDirectorie) => {
@@ -114,7 +114,7 @@ const Index: VFC = () => {
                   return (
                     <Fragment key={ancestorDirectorie._id}>
                       <Link href={`/directory/${ancestorDirectory._id}`}>
-                        <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
+                        <a className="webev-anchor text-white">{ancestorDirectory.name}</a>
                       </Link>
                       <span className="mx-1">{'/'}</span>
                     </Fragment>
