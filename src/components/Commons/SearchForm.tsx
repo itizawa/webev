@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { Icon } from '../Icons/Icon';
 import { useLocale } from '~/hooks/useLocale';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useSearchKeyWord } from '~/stores/page';
 
 export const SearchForm: VFC = () => {
@@ -44,6 +44,8 @@ export const SearchForm: VFC = () => {
 };
 
 const StyledForm = styled.form<{ isExpand: boolean }>`
-  ${({ isExpand }) => isExpand && `width: 400px;`}
-  transition: all 1000ms;
+  @media (min-width: ${BootstrapBreakpoints.md}px) {
+    ${({ isExpand }) => isExpand && `width: 400px;`}
+    transition: all 1000ms;
+  }
 `;
