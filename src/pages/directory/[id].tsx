@@ -10,7 +10,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Uncon
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
+import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -43,17 +43,20 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
-  const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
+  const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
 
+  const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
 
   useEffect(() => {
     if (directory != null) {
+      setName(directory.name);
       setDescription(directory.description);
     }
   }, [directory]);
@@ -78,6 +81,28 @@ const Index: VFC = () => {
 
   const handleChangeDescription = (inputValue: string) => {
     setDescription(inputValue);
+  };
+
+  const handleBlurTextInput = async (): Promise<void> => {
+    // name is required
+    if (name?.trim() === '') {
+      return setName(directory?.name);
+    }
+    // do nothing, no change
+    if (name === directory?.name) {
+      return;
+    }
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
+      mutateAllDirectories();
+      mutateDirectory();
+      mutateDirectoryList();
+      mutateDirectoryChildren();
+      mutateAllDirectories();
+      toastSuccess(t.toastr_update_directory_name);
+    } catch (err) {
+      toastError(err);
+    }
   };
 
   const handleBlurTextArea = async (): Promise<void> => {
@@ -121,8 +146,13 @@ const Index: VFC = () => {
                   );
                 })}
               </div>
-              <div className="d-flex gap-3 align-items-center">
-                <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
+              <div className="d-flex gap-3 align-items-center mt-2">
+                <StyledInput
+                  className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={handleBlurTextInput}
+                  value={name || ''}
+                />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -166,7 +196,7 @@ const Index: VFC = () => {
             </>
           )}
           <StyledTextarea
-            className="form-control w-100"
+            className="form-control w-100 mt-2"
             value={description}
             rows={descriptionRows}
             onChange={(e) => handleChangeDescription(e.target.value)}
@@ -209,6 +239,28 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledInput = styled.input`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;
 
 const StyledTextarea = styled.textarea`
   color: #ccc;
