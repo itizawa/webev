@@ -49,11 +49,13 @@ const Index: VFC = () => {
   const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
+  const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
 
   useEffect(() => {
     if (directory != null) {
+      setTitle(directory.name);
       setDescription(directory.description);
     }
   }, [directory]);
@@ -121,8 +123,12 @@ const Index: VFC = () => {
                   );
                 })}
               </div>
-              <div className="d-flex gap-3 align-items-center">
-                <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
+              <div className="d-flex gap-3 align-items-center mt-2">
+                <StyledInput
+                  className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title || ''}
+                />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -166,7 +172,7 @@ const Index: VFC = () => {
             </>
           )}
           <StyledTextarea
-            className="form-control w-100"
+            className="form-control w-100 mt-2"
             value={description}
             rows={descriptionRows}
             onChange={(e) => handleChangeDescription(e.target.value)}
@@ -209,6 +215,28 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledInput = styled.input`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;
 
 const StyledTextarea = styled.textarea`
   color: #ccc;
