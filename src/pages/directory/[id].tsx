@@ -84,8 +84,12 @@ const Index: VFC = () => {
   };
 
   const handleBlurTextInput = async (): Promise<void> => {
+    // name is required
+    if (name?.trim() === '') {
+      return setName(directory?.name);
+    }
     // do nothing, no change
-    if (name === directory?.name || name?.trim() === '') {
+    if (name === directory?.name) {
       return;
     }
     try {
