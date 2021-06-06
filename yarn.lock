@@ -1556,6 +1556,13 @@
   resolved "https://registry.yarnpkg.com/@types/component-emitter/-/component-emitter-1.2.10.tgz#ef5b1589b9f16544642e473db5ea5639107ef3ea"
   integrity sha512-bsjleuRKWmGqajMerkzox19aGbscQX5rmmvvXl3wlIp5gMG1HgkiwPxsN5p070fBDKTNSPgojVbuY1+HWMbFhg==
 
+"@types/emoji-mart@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/emoji-mart/-/emoji-mart-3.0.4.tgz#418868330c13b510a7b4b86b1ee9904291daeec1"
+  integrity sha512-Uqegqi54lXzz1qlDnLYEbFlUXY46auTVwbeOO8mj+9maGu2WBx/lGnmLKg7WS4CC5lB8Q6ch8K5VPBR9bDjWgg==
+  dependencies:
+    "@types/react" "*"
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
