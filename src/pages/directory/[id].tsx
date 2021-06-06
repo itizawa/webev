@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
+import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
+import { Emoji } from 'emoji-mart';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -122,7 +125,14 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center">
-                <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">{directory?.name}</span>
+                <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">
+                  {/* TODO: display selected emoji */}
+                  <Emoji emoji="thinking_face" size={40} />
+
+                  <span className="ms-2 align-text-bottom">
+                    {directory?.name}
+                  </span>
+                </span>
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
