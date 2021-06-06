@@ -147,10 +147,6 @@ const Index: VFC = () => {
                       <Picker onSelect={emoji => handleEmoji(emoji)} />
                     )
                   }
-                
-
-
-
                   <span className="ms-2 align-text-bottom">
                     {directory?.name}
                   </span>
