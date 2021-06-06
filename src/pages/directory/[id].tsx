@@ -54,6 +54,7 @@ const Index: VFC = () => {
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
+  const [emoji, setEmoji] = useState<any>();
 
   useEffect(() => {
     if (directory != null) {
@@ -97,11 +98,16 @@ const Index: VFC = () => {
     }
   };
 
+  const handleEmoji = (emoji: any) => {
+    setEmoji(emoji);
+    setEmojiSettingMode(false);
+  }
+
   const clickEmojiHandler = (emoji: any) => {
     console.log(emoji);
     setEmojiSettingMode(true);
     return (
-      <Picker onSelect={emoji => alert(JSON.stringify(emoji))} />
+      <Picker onSelect={emoji => handleEmoji(emoji)} />
     );
   }
 
@@ -138,7 +144,7 @@ const Index: VFC = () => {
                   <Emoji emoji="thinking_face" size={40} onClick={(emoji) => clickEmojiHandler(emoji) }/>
                   {emojiSettingMode &&
                     (
-                      <Picker onSelect={emoji => alert(JSON.stringify(emoji))} />
+                      <Picker onSelect={emoji => handleEmoji(emoji)} />
                     )
                   }
                 
