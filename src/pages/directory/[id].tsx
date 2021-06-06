@@ -6,9 +6,8 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-import { Picker } from 'emoji-mart';
+import { Emoji, Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
-import { Emoji } from 'emoji-mart';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -54,6 +53,7 @@ const Index: VFC = () => {
 
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
+  const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
 
   useEffect(() => {
     if (directory != null) {
@@ -97,6 +97,14 @@ const Index: VFC = () => {
     }
   };
 
+  const clickEmojiHandler = (emoji: any) => {
+    console.log(emoji);
+    setEmojiSettingMode(true);
+    return (
+      <Picker onSelect={emoji => alert(JSON.stringify(emoji))} />
+    );
+  }
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
@@ -127,7 +135,15 @@ const Index: VFC = () => {
               <div className="d-flex gap-3 align-items-center">
                 <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">
                   {/* TODO: display selected emoji */}
-                  <Emoji emoji="thinking_face" size={40} />
+                  <Emoji emoji="thinking_face" size={40} onClick={(emoji) => clickEmojiHandler(emoji) }/>
+                  {emojiSettingMode &&
+                    (
+                      <Picker onSelect={emoji => alert(JSON.stringify(emoji))} />
+                    )
+                  }
+                
+
+
 
                   <span className="ms-2 align-text-bottom">
                     {directory?.name}
