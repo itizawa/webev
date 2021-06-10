@@ -9,9 +9,7 @@ import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-type Props = {};
-
-export const ShareLinkReceiver: VFC<Props> = () => {
+export const ShareLinkReceiver: VFC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
