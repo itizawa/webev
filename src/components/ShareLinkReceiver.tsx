@@ -23,8 +23,8 @@ export const ShareLinkReceiver: VFC = () => {
     if (typeof router.query.title === 'string') {
       setTitle(router.query.title);
     }
-    if (typeof router.query.url === 'string') {
-      setUrl(router.query.url);
+    if (typeof router.query.description === 'string') {
+      setUrl(router.query.description);
     }
   }, [router]);
 
