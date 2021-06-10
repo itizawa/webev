@@ -48,9 +48,6 @@ export const ShareLinkReceiver: VFC = () => {
 
   return (
     <>
-      {url}
-      {title}
-      {router.asPath}
       <Modal isOpen={title != null && url != null} toggle={handleClickCloseButton}>
         <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
         <ModalBody className="bg-dark text-break text-center">

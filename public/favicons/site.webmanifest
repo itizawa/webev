@@ -24,7 +24,7 @@
 		"action": "/home",
 		"params": {
 		  "title": "title",
-		  "text": "description",
+		  "text": "url",
 		  "url": "link"
 		}
 	}
