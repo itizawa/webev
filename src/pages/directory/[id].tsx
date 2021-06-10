@@ -7,12 +7,12 @@ import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 import { Emoji, Picker } from 'emoji-mart';
-import 'emoji-mart/css/emoji-mart.css';
+import 'emoji-mart/css/emoji-mart.css';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
+import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -45,12 +45,14 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
-  const { data: childrenDirectoryTrees } = useDirectoryChildren(directory?._id);
+  const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
+  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
 
+  const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
@@ -58,6 +60,7 @@ const Index: VFC = () => {
 
   useEffect(() => {
     if (directory != null) {
+      setName(directory.name);
       setDescription(directory.description);
     }
   }, [directory]);
@@ -84,6 +87,28 @@ const Index: VFC = () => {
     setDescription(inputValue);
   };
 
+  const handleBlurTextInput = async (): Promise<void> => {
+    // name is required
+    if (name?.trim() === '') {
+      return setName(directory?.name);
+    }
+    // do nothing, no change
+    if (name === directory?.name) {
+      return;
+    }
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
+      mutateAllDirectories();
+      mutateDirectory();
+      mutateDirectoryList();
+      mutateDirectoryChildren();
+      mutateAllDirectories();
+      toastSuccess(t.toastr_update_directory_name);
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
   const handleBlurTextArea = async (): Promise<void> => {
     // do nothing, no change
     if (description === directory?.description) {
@@ -101,15 +126,13 @@ const Index: VFC = () => {
   const handleEmoji = (emoji: any) => {
     setEmoji(emoji.id);
     setEmojiSettingMode(false);
-  }
+  };
 
   const clickEmojiHandler = (emoji: any) => {
     console.log(emoji);
     setEmojiSettingMode(true);
-    return (
-      <Picker onSelect={emoji => handleEmoji(emoji)} />
-    );
-  }
+    return <Picker onSelect={(emoji) => handleEmoji(emoji)} />;
+  };
 
   return (
     <>
@@ -120,7 +143,7 @@ const Index: VFC = () => {
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
                 <Link href="/directory">
-                  <a className="text-decoration-none text-white">{t.directory}</a>
+                  <a className="webev-anchor text-white">{t.directory}</a>
                 </Link>
                 <span className="mx-1">{'/'}</span>
                 {ancestorDirectories?.map((ancestorDirectorie) => {
@@ -131,26 +154,26 @@ const Index: VFC = () => {
                   return (
                     <Fragment key={ancestorDirectorie._id}>
                       <Link href={`/directory/${ancestorDirectory._id}`}>
-                        <a className="text-decoration-none text-white">{ancestorDirectory.name}</a>
+                        <a className="webev-anchor text-white">{ancestorDirectory.name}</a>
                       </Link>
                       <span className="mx-1">{'/'}</span>
                     </Fragment>
                   );
                 })}
               </div>
-              <div className="d-flex gap-3 align-items-center">
+              <div className="d-flex gap-3 align-items-center mt-2">
                 <span className="text-nowrap overflow-scroll fs-1 pb-2 pb-md-0 me-auto">
                   {/* TODO: display selected emoji */}
-                  <Emoji emoji={emoji} size={40} onClick={(emoji) => clickEmojiHandler(emoji) }/>
-                  {emojiSettingMode &&
-                    (
-                      <Picker onSelect={emoji => handleEmoji(emoji)} />
-                    )
-                  }
-                  <span className="ms-2 align-text-bottom">
-                    {directory?.name}
-                  </span>
+                  <Emoji emoji={emoji} size={40} onClick={(emoji) => clickEmojiHandler(emoji)} />
+                  {emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}
+                  <span className="ms-2 align-text-bottom">{directory?.name}</span>
                 </span>
+                <StyledInput
+                  className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={handleBlurTextInput}
+                  value={name || ''}
+                />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -194,7 +217,7 @@ const Index: VFC = () => {
             </>
           )}
           <StyledTextarea
-            className="form-control w-100"
+            className="form-control w-100 mt-2"
             value={description}
             rows={descriptionRows}
             onChange={(e) => handleChangeDescription(e.target.value)}
@@ -237,6 +260,28 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledInput = styled.input`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;
 
 const StyledTextarea = styled.textarea`
   color: #ccc;

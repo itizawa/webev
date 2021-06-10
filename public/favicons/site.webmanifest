@@ -23,8 +23,8 @@
 		"enctype": "application/x-www-form-urlencoded",
 		"action": "/home",
 		"params": {
-		  "title": "name",
-		  "text": "description",
+		  "title": "title",
+		  "text": "url",
 		  "url": "link"
 		}
 	}
