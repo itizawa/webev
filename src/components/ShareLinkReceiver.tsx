@@ -22,8 +22,12 @@ export const ShareLinkReceiver: VFC<Props> = () => {
   const [url, setUrl] = useState<string | null>();
 
   useEffect(() => {
-    setTitle(router.query.title as string);
-    setUrl(router.query.url as string);
+    if (typeof router.query.title === 'string') {
+      setTitle(router.query.title);
+    }
+    if (typeof router.query.url === 'string') {
+      setUrl(router.query.url);
+    }
   }, [router]);
 
   const handleClickCloseButton = () => {
