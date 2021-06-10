@@ -26,6 +26,7 @@ export const ShareLinkReceiver: VFC = () => {
     if (typeof router.query.url === 'string') {
       setUrl(router.query.url);
     }
+    alert(((router.query.url as string) + router.query.title) as string);
   }, [router]);
 
   const handleClickCloseButton = () => {
