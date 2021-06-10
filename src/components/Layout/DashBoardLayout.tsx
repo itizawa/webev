@@ -3,15 +3,16 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { Footer } from '../organisms/Footer';
-import { SocketConnector } from '~/components/SocketConnector';
-
 import { useActivePage, useDirectoryId, usePageStatus, useSearchKeyWord } from '~/stores/page';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
 import { SubnavBar } from '~/components/organisms/SubnavBar';
+import { Footer } from '~/components/organisms/Footer';
+
 import { PageModals } from '~/components/PageModals/PageModals';
+import { ShareLinkReceiver } from '~/components/ShareLinkReceiver';
+import { SocketConnector } from '~/components/SocketConnector';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
@@ -55,6 +56,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-9">{children}</div>
         {session && <PageModals />}
         {session && <SocketConnector />}
+        {session && <ShareLinkReceiver />}
         <ScrollTopButton />
       </StyledDiv>
       <Footer />
