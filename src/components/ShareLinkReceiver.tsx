@@ -26,6 +26,7 @@ export const ShareLinkReceiver: VFC = () => {
     if (typeof router.query.url === 'string') {
       setUrl(router.query.url);
     }
+    console.log(router);
   }, [router]);
 
   const handleClickCloseButton = () => {
@@ -49,7 +50,7 @@ export const ShareLinkReceiver: VFC = () => {
     <>
       {url}
       {title}
-      {router.route}
+      {router.asPath}
       <Modal isOpen={title != null && url != null} toggle={handleClickCloseButton}>
         <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
         <ModalBody className="bg-dark text-break text-center">
