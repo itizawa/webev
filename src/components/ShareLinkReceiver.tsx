@@ -26,7 +26,6 @@ export const ShareLinkReceiver: VFC = () => {
     if (typeof router.query.url === 'string') {
       setUrl(router.query.url);
     }
-    alert(((router.query.url as string) + router.query.title) as string);
   }, [router]);
 
   const handleClickCloseButton = () => {
@@ -47,20 +46,25 @@ export const ShareLinkReceiver: VFC = () => {
   };
 
   return (
-    <Modal isOpen={title != null && url != null} toggle={handleClickCloseButton}>
-      <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
-      <ModalBody className="bg-dark text-break text-center">
-        <p>{title}</p>
-        <p>{url}</p>
-        <div className="d-flex justify-content-evenly mt-5">
-          <button className="btn btn-secondary" onClick={handleClickCloseButton}>
-            {t.cancel}
-          </button>
-          <button className="btn btn-indigo" onClick={handleClickSubmitButton}>
-            {t.save}
-          </button>
-        </div>
-      </ModalBody>
-    </Modal>
+    <>
+      {url}
+      {title}
+      {router.route}
+      <Modal isOpen={title != null && url != null} toggle={handleClickCloseButton}>
+        <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
+        <ModalBody className="bg-dark text-break text-center">
+          <p>{title}</p>
+          <p>{url}</p>
+          <div className="d-flex justify-content-evenly mt-5">
+            <button className="btn btn-secondary" onClick={handleClickCloseButton}>
+              {t.cancel}
+            </button>
+            <button className="btn btn-indigo" onClick={handleClickSubmitButton}>
+              {t.save}
+            </button>
+          </div>
+        </ModalBody>
+      </Modal>
+    </>
   );
 };
