@@ -51,8 +51,8 @@ export const ShareLinkReceiver: VFC<Props> = () => {
     <Modal isOpen={title != null && url != null} toggle={handleClickCloseButton}>
       <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
       <ModalBody className="bg-dark text-break text-center">
-        <h5 className="text-center my-3">{title}</h5>
-        <h5 className="">{url}</h5>
+        <p>{title}</p>
+        <p>{url}</p>
         <div className="d-flex justify-content-evenly mt-5">
           <button className="btn btn-secondary" onClick={handleClickCloseButton}>
             {t.cancel}
