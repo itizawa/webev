@@ -1,7 +1,6 @@
 import { VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
-import { useRouter } from 'next/router';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { usePageListSWR } from '~/stores/page';
@@ -14,7 +13,6 @@ import { PageList } from '~/components/Page/PageList';
 
 const Index: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
 
   const { data: paginationResult } = usePageListSWR();
 
@@ -22,7 +20,6 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.home}`} />
       <LoginRequiredWrapper>
-        {router.asPath}
         <div className="p-3">
           <div className="d-flex align-items-center">
             <h1 className="mb-0">{t.home}</h1>
