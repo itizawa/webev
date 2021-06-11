@@ -29,7 +29,7 @@
     "emoji-mart": "^3.0.1",
     "mongodb": "^3.6.4",
     "next": "^10.2.3",
-    "next-auth": "^3.25.0",
+    "next-auth": "^3.26.1",
     "next-pwa": "^5.2.21",
     "react": "latest",
     "react-beautiful-dnd": "^13.1.0",
