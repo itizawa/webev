@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -14,7 +14,7 @@ type Props = {
   count: number;
 };
 
-const Index: ReactNode = (props: Props) => {
+const Index: VFC<Props> = (props) => {
   const { t } = useLocale();
 
   return (

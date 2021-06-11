@@ -12,7 +12,7 @@ type Props = {
   contents: News[];
 };
 
-const Index: VFC<Props> = ({ contents }: Props) => {
+const Index: VFC<Props> = ({ contents }) => {
   const { t } = useLocale();
 
   return (
