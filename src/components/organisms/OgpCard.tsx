@@ -28,7 +28,7 @@ type Props = {
   page: Page;
 };
 
-export const OgpCard: VFC<Props> = ({ page }: Props) => {
+export const OgpCard: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();

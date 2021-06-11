@@ -14,7 +14,7 @@ type Props = {
   news: News;
 };
 
-const Index: VFC<Props> = (props: Props) => {
+const Index: VFC<Props> = (props) => {
   const { news } = props;
   const { t } = useLocale();
   const router = useRouter();

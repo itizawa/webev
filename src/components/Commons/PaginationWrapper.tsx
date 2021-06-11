@@ -8,7 +8,7 @@ type Props = {
   pagingLimit: number;
 };
 
-export const PaginationWrapper: VFC<Props> = (props: Props) => {
+export const PaginationWrapper: VFC<Props> = (props) => {
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
   const { totalItemsCount, pagingLimit } = props;
 

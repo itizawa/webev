@@ -14,7 +14,7 @@ type Props = {
   onClickButton?: (e: MouseEvent<HTMLButtonElement>) => void;
 } & ComponentProps<typeof Icon>;
 
-export const IconButton: VFC<Props> = (props: Props) => {
+export const IconButton: VFC<Props> = (props) => {
   const { width, height, isActive, disabled, isRemovePadding = false, icon, text, color, activeColor, buttonColor, buttonSize, onClickButton } = props;
   const textColor = isActive ? activeColor : color;
 

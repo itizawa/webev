@@ -15,7 +15,7 @@ import { Icon } from '~/components/Icons/Icon';
 type Props = {
   directory: Directory;
 };
-export const DirectoryListItem: VFC<Props> = ({ directory }: Props) => {
+export const DirectoryListItem: VFC<Props> = ({ directory }) => {
   const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState('');
 
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
