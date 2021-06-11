@@ -9,7 +9,7 @@ import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
 
 export const Navbar: VFC = () => {
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE;
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 
   const [session, loading] = useSession();
 
