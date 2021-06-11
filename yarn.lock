@@ -5246,7 +5246,7 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-auth@*, next-auth@^3.25.0:
+next-auth@*, next-auth@^3.26.1:
   version "3.26.1"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.26.1.tgz#d7e932151a69e98bd232e60cbe8436d247809f80"
   integrity sha512-oGJjB4gkoV/4ddX+SOgc+c45BvrCGI21lHjhk4IczJew3wKAglv7Cto7M6AkbktG6kP9Rst7JN89gaWKyQ/UCg==
