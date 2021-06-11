@@ -28,11 +28,11 @@ type Props = {
   page: Page;
 };
 
-export const OgpListItem: VFC<Props> = ({ page }: Props) => {
+export const OgpListItem: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt, status } = page;
+  const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -133,12 +133,17 @@ export const OgpListItem: VFC<Props> = ({ page }: Props) => {
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </span>
       </div>
-      <div className="d-flex align-items-center my-1">
-        <small className="text-truncate px-1" id={`sitename-for-${page._id}`}>
-          {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+      <div className="col-12 d-flex align-items-center my-1">
+        <small className="me-3 text-truncate" id={`sitename-for-${page._id}`}>
+          {format(new Date(createdAt), 'yyyy/MM/dd')}
         </small>
-        <small className="text-truncate ms-3">
-          {siteName}
+        {favicon != null && (
+          <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+        )}
+        <small className="text-truncate">
+          <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
+            {siteName}
+          </a>
           {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
             <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
               {siteName}

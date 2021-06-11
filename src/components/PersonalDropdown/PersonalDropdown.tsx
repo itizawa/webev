@@ -20,7 +20,7 @@ type Props = {
   user: User;
 };
 
-export const PersonalDropdown: VFC<Props> = (props: Props) => {
+export const PersonalDropdown: VFC<Props> = (props) => {
   const { t } = useLocale();
   const { user } = props;
 

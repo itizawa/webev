@@ -3,6 +3,7 @@ export const ja = {
   total_pages: 'Webev に保存されたページの総数',
   start_immediately: 'さっそく 始める',
   term: '利用規約',
+  inquiry: 'お問い合わせ',
 
   logout: 'ログアウト',
   delete: '削除',
@@ -11,7 +12,7 @@ export const ja = {
   search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
-  save_to_directory: (directoryName: string): string => `${directoryName} に保存します`,
+  save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
@@ -31,6 +32,7 @@ export const ja = {
   toastr_success_read: '読みました！',
   toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
+  toastr_success_send_inquiry: '送信しました',
 
   home: 'ホーム',
   read: '読んだ記事',
@@ -64,4 +66,16 @@ export const ja = {
 
   this_is_the_404_page: '404 page です',
   go_to_top: 'トップページに戻る',
+
+  inquiry_email_desc: '返信が必要な場合は入力してください',
+  inquiry_type: '種類',
+  inquiry_email: 'メールアドレス',
+  inquiry_text: '本文',
+  open_select: '選択してください',
+  bug_report: 'バグの報告',
+  violation_report: '不適切な投稿の報告',
+  feature_request: '機能のリクエスト',
+  development: '開発に関すること(お手伝い募集中です)',
+  others: 'その他',
+  inquiry_submit: '送信',
 };

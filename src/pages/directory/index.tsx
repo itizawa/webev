@@ -1,10 +1,11 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { VFC, useState } from 'react';
 
 import styled from 'styled-components';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import Loader from 'react-loader-spinner';
+
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
@@ -59,9 +60,7 @@ const Index: VFC = () => {
   };
   return (
     <>
-      <Head>
-        <title>Webev | {t.directory}</title>
-      </Head>
+      <WebevOgpHead title={`Webev | ${t.directory}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
           <div className="d-flex align-items-center justify-content-between mb-3">

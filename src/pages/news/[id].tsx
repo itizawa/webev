@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import axios from 'axios';
@@ -9,12 +8,13 @@ import { format } from 'date-fns';
 
 import { News } from '~/interfaces/news';
 import { useLocale } from '~/hooks/useLocale';
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 type Props = {
   news: News;
 };
 
-const Index: VFC<Props> = (props: Props) => {
+const Index: VFC<Props> = (props) => {
   const { news } = props;
   const { t } = useLocale();
   const router = useRouter();
@@ -29,13 +29,7 @@ const Index: VFC<Props> = (props: Props) => {
 
   return (
     <>
-      <Head>
-        <title>Webev - {news.title}</title>
-        <meta property="og:title" content={news.title} />
-        <meta property="og:description" content={`${news.body.substr(0, 90)}...`} />
-        <meta name="twitter:title" content={news.title} />
-        <meta name="twitter:description" content={`${news.body.substr(0, 90)}...`} />
-      </Head>
+      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumnail?.url} />
       <div className="p-2">
         <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
         <h1 className="text-center my-3">{news.title}</h1>

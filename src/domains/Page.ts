@@ -7,6 +7,7 @@ export class Page {
   _id: string;
   url: string;
   image: string;
+  favicon: string;
   description: string;
   title: string;
   siteName: string;
@@ -16,10 +17,11 @@ export class Page {
   updatedAt: Date;
   status: PageStatus;
   isFavorite: boolean;
-  constructor({ _id, url, image, description, title, siteName, directoryId, createdUser, createdAt, updatedAt, status, isFavorite }: Page) {
+  constructor({ _id, url, image, favicon, description, title, siteName, directoryId, createdUser, createdAt, updatedAt, status, isFavorite }: Page) {
     this._id = _id;
     this.url = url;
     this.image = image;
+    this.favicon = favicon;
     this.description = description;
     this.title = title;
     this.siteName = siteName;

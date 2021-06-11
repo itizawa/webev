@@ -28,11 +28,11 @@ type Props = {
   page: Page;
 };
 
-export const OgpCard: VFC<Props> = ({ page }: Props) => {
+export const OgpCard: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
-  const { _id, url, siteName, image, title, description, createdAt, status } = page;
+  const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
@@ -129,15 +129,20 @@ export const OgpCard: VFC<Props> = ({ page }: Props) => {
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center mt-auto">
-          <small className="text-truncate me-auto px-1" id={`sitename-for-${page._id}`}>
-            {siteName}
+          <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
+            {favicon != null && (
+              <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+            )}
+            <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
+              {siteName}
+            </a>
             {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
               <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
                 {siteName}
               </UncontrolledTooltip>
             )}
             {siteName && <br />}
-            {t.stoked_at}: {format(new Date(createdAt), 'yyyy/MM/dd HH:MM')}
+            {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
           <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
             {status === PageStatus.PAGE_STATUS_ARCHIVE && (

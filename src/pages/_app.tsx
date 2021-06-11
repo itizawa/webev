@@ -9,7 +9,7 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PathNames, PathConfigs, LayoutNames } from '~/interfaces/route';
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
-const App: VFC<AppProps> = ({ Component, pageProps }: AppProps) => {
+const App: VFC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
   const pathname = router.pathname as PathNames;
 

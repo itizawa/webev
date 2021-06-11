@@ -28,6 +28,11 @@ export const Footer: FC = () => {
                 <a className="fw-bold text-muted webev-anchor">{t.news}</a>
               </Link>
             </li>
+            <li className="list-unstyled my-1" role="button">
+              <Link href="/inquiry">
+                <a className="fw-bold text-muted webev-anchor">{t.inquiry}</a>
+              </Link>
+            </li>
           </ul>
           <span className="me-2">🇺🇸</span>
           <Link href={router.asPath} locale="en">

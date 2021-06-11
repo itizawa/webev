@@ -15,7 +15,12 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   }, [loading, session]);
 
   // When rendering client side don't display anything until loading is complete
-  if (typeof window !== 'undefined' && loading) return null;
+  if (typeof window !== 'undefined' && loading)
+    return (
+      <div className="text-center pt-5">
+        <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+      </div>
+    );
 
   if (session != null) {
     return <>{children}</>;

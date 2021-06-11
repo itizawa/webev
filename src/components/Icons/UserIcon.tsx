@@ -6,7 +6,7 @@ type Props = {
   isCircle?: boolean;
 };
 
-export const UserIcon: VFC<Props> = (props: Props) => {
+export const UserIcon: VFC<Props> = (props) => {
   const { size, isCircle = false } = props;
   let height;
   switch (size) {
