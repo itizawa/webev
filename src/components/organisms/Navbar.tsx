@@ -9,6 +9,8 @@ import { InputForm } from '~/components/molecules/InputForm';
 import { User } from '~/interfaces/user';
 
 export const Navbar: VFC = () => {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+
   const [session, loading] = useSession();
 
   if (typeof window === 'undefined') {
@@ -22,7 +24,7 @@ export const Navbar: VFC = () => {
           Webev
         </span>
       </Link>
-      {session != null && (
+      {session != null && !isMaintenanceMode && (
         <div className="col col-md-6 my-md-0 my-2 me-2">
           <InputForm />
         </div>

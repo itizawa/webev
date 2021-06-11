@@ -78,4 +78,6 @@ export const en = {
   development: 'Development (We are looking for help)',
   others: 'Others',
   inquiry_submit: 'Send',
+
+  maintenance: 'The management screen is under maintenance',
 };

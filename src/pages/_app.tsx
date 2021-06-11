@@ -5,15 +5,21 @@ import { Provider } from 'next-auth/client';
 
 import '~/styles/global.scss';
 
+import { MaintenanceLayout } from '~/components/Layout/MaintenanceLayout';
 import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PathNames, PathConfigs, LayoutNames } from '~/interfaces/route';
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
 const App: VFC<AppProps> = ({ Component, pageProps }) => {
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+
   const router = useRouter();
   const pathname = router.pathname as PathNames;
 
   if (PathConfigs[pathname]?.layout === LayoutNames.DASHBOARD) {
+    if (isMaintenanceMode) {
+      return <MaintenanceLayout />;
+    }
     return (
       <Provider options={{ clientMaxAge: 0, keepAlive: 0 }} session={pageProps.session}>
         <DashBoardLayout>

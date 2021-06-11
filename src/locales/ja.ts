@@ -78,4 +78,6 @@ export const ja = {
   development: '開発に関すること(お手伝い募集中です)',
   others: 'その他',
   inquiry_submit: '送信',
+
+  maintenance: '管理画面はメンテナンス中です',
 };
