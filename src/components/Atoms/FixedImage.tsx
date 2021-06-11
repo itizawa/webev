@@ -6,7 +6,7 @@ import { imagePath } from '~/const/imagePath';
 type Props = {
   imageUrl?: string;
 };
-export const FixedImage: VFC<Props> = ({ imageUrl }: Props) => {
+export const FixedImage: VFC<Props> = ({ imageUrl }) => {
   return (
     <StyledImageWrapper>
       <img src={imageUrl || imagePath.NO_IMAGE} alt={imageUrl || imagePath.NO_IMAGE} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />

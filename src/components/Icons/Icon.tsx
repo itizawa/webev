@@ -203,7 +203,7 @@ const IconComponentMapping = {
   [BootstrapIcon.GEAR]: <Gear />,
 };
 
-export const Icon: VFC<Props> = ({ width = 18, height = 18, icon, color }: Props) => {
+export const Icon: VFC<Props> = ({ width = 18, height = 18, icon, color }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} className={`align-text-bottom text-${color}`} fill="currentColor" viewBox="0 0 16 16">
       {IconComponentMapping[icon]}

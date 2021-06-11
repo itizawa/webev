@@ -15,7 +15,7 @@ type Props = {
   totalItemsCount: number;
 };
 
-export const PageList: VFC<Props> = (props: Props) => {
+export const PageList: VFC<Props> = (props) => {
   const { pages, pagingLimit, totalItemsCount } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
 

@@ -12,7 +12,7 @@ type Props = {
 
 const DESCRIPTION = 'Webev は、誰でも使えるブックマークマネージャーです！URL を入力して保存するだけで Web ページを管理できます。';
 
-export const WebevOgpHead: VFC<Props> = (props: Props) => {
+export const WebevOgpHead: VFC<Props> = (props) => {
   const { siteName, title, url, image, description } = props;
 
   return (
