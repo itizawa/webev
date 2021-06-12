@@ -80,4 +80,8 @@ export const en = {
   inquiry_submit: 'Send',
 
   maintenance: 'The management screen is under maintenance',
+
+  tutorial_desc1: 'Webev is bookmark manager.',
+  tutorial_desc2: 'Immediately, I saved how to use Webev！',
+  tutorial_desc3: 'After reading, Press <span class="fw-bold">Mark as Read</span> to take a record',
 };
