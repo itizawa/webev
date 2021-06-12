@@ -80,4 +80,8 @@ export const ja = {
   inquiry_submit: '送信',
 
   maintenance: '管理画面はメンテナンス中です',
+
+  tutorial_desc1: 'Webev はブックマークを画像で管理する web アプリです。',
+  tutorial_desc2: '早速、Webev の使い方を保存します！',
+  tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 };
