@@ -24,7 +24,7 @@ export const WebevOgpHead: VFC<Props> = (props) => {
         <meta property="og:url" content={url || 'https://www.webev.cloud'} />
         <meta property="og:image" content={image || imagePath.EYE_CATCH_DARK} />
         <meta property="og:description" content={description || DESCRIPTION} />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title || 'Webev'} />
         <meta property="twitter:image" content={image || imagePath.EYE_CATCH_DARK} />
         <meta name="twitter:description" content={description || DESCRIPTION} />
