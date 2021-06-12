@@ -13,7 +13,7 @@ export const TutorialDitecter: VFC = () => {
     <Modal isOpen={!currentUser?.isExecutedTutorial}>
       <ModalHeader className="bg-dark">{t.welcome_webev}</ModalHeader>
       <ModalBody className="bg-dark text-break text-center">
-        <h3>{t.welcome_webev}</h3>
+        <h3>🎉 {t.welcome_webev} 🎉</h3>
         <p>
           {t.tutorial_desc1}
           <br />
