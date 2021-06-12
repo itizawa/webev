@@ -152,7 +152,7 @@ export const OgpCard: VFC<Props> = ({ page }) => {
                 {siteName}
               </UncontrolledTooltip>
             )}
-            {siteName && <br />}
+            {siteName != null && <br />}
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
           <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
