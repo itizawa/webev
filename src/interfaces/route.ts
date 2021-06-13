@@ -38,7 +38,7 @@ export const PathConfigs = {
     statusForFind: [PageStatus.PAGE_STATUS_STOCK],
   },
   [PathNames.USER]: {
-    layout: LayoutNames.DEFAULT,
+    layout: LayoutNames.DASHBOARD,
     statusForFind: [PageStatus.PAGE_STATUS_STOCK],
   },
   [PathNames.READ]: {
