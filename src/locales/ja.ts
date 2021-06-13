@@ -39,6 +39,7 @@ export const ja = {
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
+  user: 'ユーザー',
 
   return_news_list: 'ニュースリストに戻る',
 

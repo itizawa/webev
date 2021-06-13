@@ -5,9 +5,11 @@ import { useCurrentUser } from '~/stores/user';
 import { UserIcon } from '~/components/Icons/UserIcon';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
+import { useLocale } from '~/hooks/useLocale';
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 const Index: VFC = () => {
-  //   const { t } = useLocale();
+  const { t } = useLocale();
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const [name, setName] = useState<string>();
 
@@ -45,6 +47,7 @@ const Index: VFC = () => {
 
   return (
     <>
+      <WebevOgpHead title={`Webev | ${t.user}`} />
       <div className="container">
         <div className="row mt-3">
           <div className="col-3">
