@@ -2,14 +2,12 @@ import { VFC } from 'react';
 
 type Props = {
   image: string;
-  size?: number;
+  size?: number | 32;
   isCircle?: boolean;
 };
-
-const defaultSize = 32;
 
 export const UserIcon: VFC<Props> = (props) => {
   const { size, isCircle = false } = props;
 
-  return <img height={size || defaultSize} width="auto" src={props.image} className={`${isCircle ? 'rounded-circle' : ''}`} />;
+  return <img height={size} width="auto" src={props.image} className={`${isCircle ? 'rounded-circle' : ''}`} />;
 };
