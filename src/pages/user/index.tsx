@@ -18,9 +18,17 @@ const Index: VFC = () => {
 
   return (
     <>
-      <UserIcon image={currentUser.image} size={140} isCircle />
-      <div>user name: {currentUser.name}</div>
-      <div>user email: {currentUser.email}</div>
+      <div className="container">
+        <div className="row mt-3">
+          <div className="col-3">
+            <UserIcon image={currentUser.image} size={140} isCircle />
+          </div>
+          <div className="col-9">
+            <h1>{currentUser.name}</h1>
+            <p>Hello 😄</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
