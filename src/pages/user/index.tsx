@@ -1,12 +1,21 @@
-import { VFC } from 'react';
+import { VFC, useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
 import { useCurrentUser } from '~/stores/user';
 import { UserIcon } from '~/components/Icons/UserIcon';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
 
 const Index: VFC = () => {
   //   const { t } = useLocale();
   const { data: currentUser } = useCurrentUser();
-  console.log(currentUser);
+  const [name, setName] = useState<string>();
+
+  useEffect(() => {
+    if (currentUser != null) {
+      setName(currentUser.name);
+    }
+  }, [currentUser]);
 
   if (currentUser == null) {
     return (
@@ -16,6 +25,24 @@ const Index: VFC = () => {
     );
   }
 
+  const handleSubmitTextInput = async (): Promise<void> => {
+    // name is required
+    if (currentUser.name?.trim() === '') {
+      return setName(currentUser.name);
+    }
+    // do nothing, no change
+    if (currentUser.name === name) {
+      return;
+    }
+    try {
+      await restClient.apiPut(`/users/me`, { name });
+      // mutateCurrentUser();
+      toastSuccess('success');
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -24,7 +51,12 @@ const Index: VFC = () => {
             <UserIcon image={currentUser.image} size={140} isCircle />
           </div>
           <div className="col-9">
-            <h1>{currentUser.name}</h1>
+            <StyledInput
+              className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
+              onChange={(e) => setName(e.target.value)}
+              onBlur={handleSubmitTextInput}
+              value={name || ''}
+            />
             <p>Hello 😄</p>
           </div>
         </div>
@@ -34,3 +66,25 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledInput = styled.input`
+  color: #ccc;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: #ccc;
+    background: #232323;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &:focus {
+    color: #ccc;
+    background: transparent;
+    ::placeholder {
+      color: #ccc;
+    }
+  }
+`;
