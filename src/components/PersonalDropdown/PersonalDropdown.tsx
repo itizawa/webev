@@ -10,21 +10,18 @@ import { UserIcon } from '~/components/Icons/UserIcon';
 
 import { useLocale } from '~/hooks/useLocale';
 
+import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/interfaces/contexts';
 
-import { User } from '~/interfaces/user';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-type Props = {
-  user: User;
-};
-
-export const PersonalDropdown: VFC<Props> = (props) => {
+export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
-  const { user } = props;
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
+  const { data: currentUer } = useCurrentUser();
+
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
@@ -46,16 +43,20 @@ export const PersonalDropdown: VFC<Props> = (props) => {
     mutateOgpCardLayout(type);
   };
 
+  if (currentUer == null) {
+    return null;
+  }
+
   return (
     <UncontrolledDropdown>
       <DropdownToggle className="nav-link p-0" tag="a" role="button">
-        <UserIcon image={user.image} size="medium" />
+        <UserIcon image={currentUer.image} size="medium" />
       </DropdownToggle>
       <StyledDropdownMenu right className="dropdown-menu-dark">
         <DropdownItem header>
           <div className="text-center">
-            <UserIcon image={user.image} size="large" isCircle />
-            <h5 className="my-2">{user.name}</h5>
+            <UserIcon image={currentUer.image} size="large" isCircle />
+            <h5 className="my-2">{currentUer.name}</h5>
           </div>
         </DropdownItem>
         <DropdownItem divider />
