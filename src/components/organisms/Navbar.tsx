@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
 import { InputForm } from '~/components/molecules/InputForm';
-import { User } from '~/interfaces/user';
 
 export const Navbar: VFC = () => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
@@ -36,7 +35,7 @@ export const Navbar: VFC = () => {
           </span>
         </Link>
       )}
-      {session != null && <PersonalDropdown user={session.user as User} />}
+      {session != null && <PersonalDropdown />}
     </StyledDiv>
   );
 };
