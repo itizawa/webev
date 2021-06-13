@@ -60,7 +60,8 @@ const Index: VFC = () => {
               onBlur={handleBlurTextInput}
               value={name || ''}
             />
-            <p>Hello 😄</p>
+            {/* TODO impl description*/}
+            {/* <p>Hello 😄</p> */}
           </div>
         </div>
       </div>

@@ -39,7 +39,7 @@ export const en = {
   directory: 'Directory',
   news: 'News',
   share: 'Share',
-  user: 'User',
+  user: 'User Page',
 
   return_news_list: 'Return News List',
 
