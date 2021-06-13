@@ -8,7 +8,7 @@ import { restClient } from '~/utils/rest-client';
 
 const Index: VFC = () => {
   //   const { t } = useLocale();
-  const { data: currentUser } = useCurrentUser();
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const [name, setName] = useState<string>();
 
   useEffect(() => {
@@ -25,18 +25,18 @@ const Index: VFC = () => {
     );
   }
 
-  const handleSubmitTextInput = async (): Promise<void> => {
+  const handleBlurTextInput = async (): Promise<void> => {
     // name is required
-    if (currentUser.name?.trim() === '') {
+    if (name?.trim() === '') {
       return setName(currentUser.name);
     }
     // do nothing, no change
-    if (currentUser.name === name) {
+    if (name === currentUser.name) {
       return;
     }
     try {
-      await restClient.apiPut(`/users/me`, { name });
-      // mutateCurrentUser();
+      await restClient.apiPut('/users/me', { name });
+      mutateCurrentUser();
       toastSuccess('success');
     } catch (err) {
       toastError(err);
@@ -54,7 +54,7 @@ const Index: VFC = () => {
             <StyledInput
               className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
               onChange={(e) => setName(e.target.value)}
-              onBlur={handleSubmitTextInput}
+              onBlur={handleBlurTextInput}
               value={name || ''}
             />
             <p>Hello 😄</p>
