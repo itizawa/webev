@@ -138,7 +138,18 @@ export const OgpListItem: VFC<Props> = ({ page }) => {
           {format(new Date(createdAt), 'yyyy/MM/dd')}
         </small>
         {favicon != null && (
-          <img className="me-1" width={14} height={14} src={favicon} alt={favicon} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+          <img
+            className="me-1"
+            width={14}
+            height={14}
+            src={favicon}
+            alt={favicon}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onError={(e: any) => (e.target.style.display = 'none')}
+            loading="lazy"
+            referrerPolicy="no-referrer"
+            decoding="sync"
+          />
         )}
         <small className="text-truncate">
           <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">

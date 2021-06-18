@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 import { useActivePage, useDirectoryId, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/organisms/Navbar';
 import { Sidebar } from '~/components/organisms/Sidebar';
@@ -13,6 +14,7 @@ import { Footer } from '~/components/organisms/Footer';
 import { PageModals } from '~/components/PageModals/PageModals';
 import { ShareLinkReceiver } from '~/components/ShareLinkReceiver';
 import { SocketConnector } from '~/components/SocketConnector';
+import { TutorialDitecter } from '~/components/TutorialDitecter';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
@@ -27,6 +29,8 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   const { mutate: mutatePageStatus } = usePageStatus();
   const { mutate: mutateSearchKeyord } = useSearchKeyWord();
+
+  const { data: currentUser } = useCurrentUser();
 
   if (typeof window === 'undefined') {
     return null;
@@ -57,6 +61,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <PageModals />}
         {session && <SocketConnector />}
         {session && <ShareLinkReceiver />}
+        {currentUser && <TutorialDitecter />}
         <ScrollTopButton />
       </StyledDiv>
       <Footer />
