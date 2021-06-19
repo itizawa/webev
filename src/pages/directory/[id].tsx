@@ -29,8 +29,6 @@ import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-type EmojiType = string | EmojiData;
-
 const openFileFolderEmoji = {
   id: 'open_file_folder',
   name: 'Open File Folder',
@@ -68,8 +66,7 @@ const Index: VFC = () => {
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
-
-  const [emoji, setEmoji] = useState<EmojiType>(openFileFolderEmoji);
+  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
 
   useEffect(() => {
     if (directory != null) {
@@ -136,15 +133,15 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: EmojiType) => {
-    console.log(emoji);
+  const handleEmoji = (emoji: EmojiData) => {
+    console.log(JSON.stringify(emoji));
     console.log(typeof emoji);
 
     setEmoji(emoji);
     setEmojiSettingMode(false);
   };
 
-  const clickEmojiHandler = (emoji: EmojiType) => {
+  const clickEmojiHandler = (emoji: EmojiData) => {
     console.log(emoji);
     setEmojiSettingMode(true);
   };
