@@ -7,7 +7,7 @@ type Props = {
 };
 
 export const UserIcon: VFC<Props> = (props) => {
-  const { size, isCircle = false } = props;
+  const { size = 32, isCircle = false } = props;
 
   return <img height={size} width="auto" src={props.image} className={`${isCircle ? 'rounded-circle' : ''}`} />;
 };
