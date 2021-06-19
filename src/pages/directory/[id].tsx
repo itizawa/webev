@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-import { Emoji, Picker, BaseEmoji, CustomEmoji } from 'emoji-mart';
+import { Emoji, Picker, EmojiData } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -29,7 +29,7 @@ import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-type EmojiType = string | BaseEmoji | CustomEmoji;
+type EmojiType = string | EmojiData;
 
 const Index: VFC = () => {
   const { t } = useLocale();
