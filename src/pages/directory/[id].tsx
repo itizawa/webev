@@ -138,8 +138,7 @@ const Index: VFC = () => {
     setEmojiSettingMode(false);
   };
 
-  const clickEmojiHandler = (emoji: EmojiData) => {
-    console.log(emoji);
+  const clickEmojiHandler = () => {
     setEmojiSettingMode(true);
   };
 
@@ -171,7 +170,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <Emoji emoji={emoji} size={40} onClick={(emoji) => clickEmojiHandler(emoji)} />
+                <Emoji emoji={emoji} size={40} onClick={clickEmojiHandler} />
                 {emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
