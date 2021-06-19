@@ -2,7 +2,7 @@ import { VFC } from 'react';
 
 type Props = {
   image: string;
-  size?: number | 32;
+  size?: number;
   isCircle?: boolean;
 };
 
