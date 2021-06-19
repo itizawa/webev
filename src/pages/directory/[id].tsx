@@ -122,12 +122,12 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: any) => {
+  const handleEmoji = (emoji: string) => {
     setEmoji(emoji.id);
     setEmojiSettingMode(false);
   };
 
-  const clickEmojiHandler = (emoji: any) => {
+  const clickEmojiHandler = (emoji: string) => {
     console.log(emoji);
     setEmojiSettingMode(true);
   };
