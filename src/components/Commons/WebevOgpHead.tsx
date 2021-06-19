@@ -8,17 +8,21 @@ type Props = {
   url?: string;
   image?: string;
   description?: string;
+  keywords?: string[];
 };
 
 const DESCRIPTION = 'Webev は、誰でも使えるブックマークマネージャーです！URL を入力して保存するだけで Web ページを管理できます。';
+const KEYWORDS = 'bookmark,ブックマーク';
 
 export const WebevOgpHead: VFC<Props> = (props) => {
-  const { siteName, title, url, image, description } = props;
+  const { siteName, title, url, image, description, keywords = [] } = props;
 
   return (
     <>
       <Head>
         <title>{title || 'Webev'}</title>
+        <meta name="description" content={description || DESCRIPTION} />
+        <meta name="keywords" content={keywords.length > 0 ? keywords?.join(',') : KEYWORDS} />
         <meta property="og:site_name" content={siteName || 'Webev'} />
         <meta property="og:title" content={title || 'Webev'} />
         <meta property="og:url" content={url || 'https://www.webev.cloud'} />
