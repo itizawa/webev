@@ -31,6 +31,17 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 type EmojiType = string | EmojiData;
 
+const openFileFolderEmoji = {
+  id: 'open_file_folder',
+  name: 'Open File Folder',
+  short_names: ['open_file_folder'],
+  colons: ':open_file_folder:',
+  emoticons: [],
+  unified: '1f4c2',
+  skin: null,
+  native: '📂',
+};
+
 const Index: VFC = () => {
   const { t } = useLocale();
 
@@ -57,7 +68,8 @@ const Index: VFC = () => {
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
-  const [emoji, setEmoji] = useState<EmojiType>('open_file_folder');
+
+  const [emoji, setEmoji] = useState<EmojiType>(openFileFolderEmoji);
 
   useEffect(() => {
     if (directory != null) {
