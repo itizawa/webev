@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-import { Emoji, Picker } from 'emoji-mart';
+import { Emoji, Picker, BaseEmoji, CustomEmoji } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -55,7 +55,7 @@ const Index: VFC = () => {
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
-  const [emoji, setEmoji] = useState<string>('open_file_folder');
+  const [emoji, setEmoji] = useState<string | BaseEmoji | CustomEmoji>('open_file_folder');
 
   useEffect(() => {
     if (directory != null) {
@@ -122,12 +122,12 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: string) => {
+  const handleEmoji = (emoji: any) => {
     setEmoji(emoji.id);
     setEmojiSettingMode(false);
   };
 
-  const clickEmojiHandler = (emoji: string) => {
+  const clickEmojiHandler = (emoji: string | BaseEmoji | CustomEmoji) => {
     console.log(emoji);
     setEmojiSettingMode(true);
   };
