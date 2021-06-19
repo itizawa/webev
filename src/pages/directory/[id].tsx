@@ -134,9 +134,6 @@ const Index: VFC = () => {
   };
 
   const handleEmoji = (emoji: EmojiData) => {
-    console.log(JSON.stringify(emoji));
-    console.log(typeof emoji);
-
     setEmoji(emoji);
     setEmojiSettingMode(false);
   };
