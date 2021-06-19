@@ -130,7 +130,6 @@ const Index: VFC = () => {
   const clickEmojiHandler = (emoji: any) => {
     console.log(emoji);
     setEmojiSettingMode(true);
-    return <Picker onSelect={(emoji) => handleEmoji(emoji)} />;
   };
 
   return (
