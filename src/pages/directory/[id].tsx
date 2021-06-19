@@ -29,6 +29,8 @@ import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
+type EmojiType = string | BaseEmoji | CustomEmoji;
+
 const Index: VFC = () => {
   const { t } = useLocale();
 
@@ -55,7 +57,7 @@ const Index: VFC = () => {
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
-  const [emoji, setEmoji] = useState<string | BaseEmoji | CustomEmoji>('open_file_folder');
+  const [emoji, setEmoji] = useState<EmojiType>('open_file_folder');
 
   useEffect(() => {
     if (directory != null) {
@@ -122,12 +124,15 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: any) => {
-    setEmoji(emoji.id);
+  const handleEmoji = (emoji: EmojiType) => {
+    console.log(emoji);
+    console.log(typeof emoji);
+
+    setEmoji(emoji);
     setEmojiSettingMode(false);
   };
 
-  const clickEmojiHandler = (emoji: string | BaseEmoji | CustomEmoji) => {
+  const clickEmojiHandler = (emoji: EmojiType) => {
     console.log(emoji);
     setEmojiSettingMode(true);
   };
@@ -161,7 +166,7 @@ const Index: VFC = () => {
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
                 <Emoji emoji={emoji} size={40} onClick={(emoji) => clickEmojiHandler(emoji)} />
-                {emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji.id)} />}
+                {emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
