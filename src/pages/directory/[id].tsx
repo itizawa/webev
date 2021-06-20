@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-
+import { Emoji, Picker, EmojiData } from 'emoji-mart';
+import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -53,6 +54,8 @@ const Index: VFC = () => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
+  const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
+  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
 
   useEffect(() => {
     if (directory != null) {
@@ -119,6 +122,15 @@ const Index: VFC = () => {
     }
   };
 
+  const handleEmoji = (emoji: EmojiData) => {
+    setEmoji(emoji);
+    setEmojiSettingMode(false);
+  };
+
+  const clickEmojiHandler = () => {
+    setEmojiSettingMode(true);
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
@@ -147,6 +159,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
+                <Emoji emoji={emoji} size={40} onClick={clickEmojiHandler} />
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
@@ -193,6 +206,7 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
+              <StyledEmojiPicker className="position-absolute">{emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}</StyledEmojiPicker>
             </>
           )}
           <StyledTextarea
@@ -260,6 +274,10 @@ const StyledInput = styled.input`
       color: #ccc;
     }
   }
+`;
+
+const StyledEmojiPicker = styled.div`
+  z-index: 980;
 `;
 
 const StyledTextarea = styled.textarea`
