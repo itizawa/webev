@@ -11,7 +11,7 @@ import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR } from '~/stores/page';
+import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -27,6 +27,7 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+import { PageStatus } from '~/domains/Page';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -49,10 +50,15 @@ const Index: VFC = () => {
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { mutate: mutatePageStatus } = usePageStatus();
 
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
+
+  useEffect(() => {
+    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
+  }, []);
 
   useEffect(() => {
     if (directory != null) {
