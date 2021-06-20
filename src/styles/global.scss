@@ -1,34 +1,35 @@
-@import '../../node_modules/bootstrap/scss/bootstrap';
-@import '../../node_modules/bootstrap/scss/functions';
-@import '../../node_modules/bootstrap/scss/variables';
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "emoji-mart/css/emoji-mart.css";
 
 $theme-colors: (
-  'primary':    $primary,
-  'secondary':  $secondary,
-  'success':    $success,
-  'info':       $info,
-  'warning':    $warning,
-  'danger':     $danger,
-  'light':      $light,
-  'dark':       $dark,
-  'indigo':     $indigo,
-  'purple':     $purple,
-  'pink':       $pink,
-  'orange':     $orange,
-  'teal':       $teal,
-  'google':     #db3236,
-  'twitter':     #1DA1F2,
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "orange": $orange,
+  "teal": $teal,
+  "google": #db3236,
+  "twitter": #1da1f2,
 );
 
-@import '../../node_modules/bootstrap/scss/_buttons';
-@import '../../node_modules/bootstrap/scss/mixins';
-@import '../../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+@import "../../node_modules/bootstrap/scss/_buttons";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-@import '~toastr/toastr.scss';
+@import "~toastr/toastr.scss";
 
-@import './override.scss';
+@import "./override.scss";
 
-@import './customUtility.scss';
+@import "./customUtility.scss";
 
 body {
   font-weight: 300;
@@ -36,13 +37,13 @@ body {
   background-color: #0e1e25;
 }
 
-#toast-container{
-  @include media-breakpoint-down(md){
-    left:0;
+#toast-container {
+  @include media-breakpoint-down(md) {
+    left: 0;
     width: 100%;
     padding: 0 5%;
-    .toast{
+    .toast {
       width: 100%;
-    } 
+    }
   }
 }
