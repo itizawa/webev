@@ -53,7 +53,6 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageStatus } = usePageStatus();
 
-  const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
 
@@ -63,7 +62,6 @@ const Index: VFC = () => {
 
   useEffect(() => {
     if (directory != null) {
-      setName(directory.name);
       setDescription(directory.description);
     }
   }, [directory]);
@@ -90,15 +88,7 @@ const Index: VFC = () => {
     setDescription(inputValue);
   };
 
-  const handleBlurTextInput = async (): Promise<void> => {
-    // name is required
-    if (name?.trim() === '') {
-      return setName(directory?.name);
-    }
-    // do nothing, no change
-    if (name === directory?.name) {
-      return;
-    }
+  const updateDirectroyName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
       mutateAllDirectories();
@@ -154,7 +144,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <EditableInput value={directory.name} />
+                <EditableInput value={directory.name} onSubmit={updateDirectroyName} />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}

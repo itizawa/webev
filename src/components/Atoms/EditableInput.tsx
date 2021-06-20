@@ -4,10 +4,11 @@ import styled from 'styled-components';
 
 type Props = {
   value: string;
+  onSubmit: (inputValue: string) => void;
 };
 
 export const EditableInput: VFC<Props> = (props) => {
-  const { value } = props;
+  const { value, onSubmit } = props;
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -15,9 +16,19 @@ export const EditableInput: VFC<Props> = (props) => {
   }, [value]);
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
-    if (e.key == 'Enter') {
-      console.log(inputValue);
+    if (e.key != 'Enter') {
+      return;
     }
+    // name is required
+    if (inputValue?.trim() === '') {
+      return;
+    }
+    // do nothing, no change
+    if (inputValue === value) {
+      return;
+    }
+
+    onSubmit(inputValue);
   };
 
   return (
