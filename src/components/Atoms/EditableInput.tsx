@@ -27,7 +27,7 @@ export const EditableInput: VFC<Props> = (props) => {
     if (inputValue === value) {
       return;
     }
-
+    e.currentTarget.blur();
     onSubmit(inputValue);
   };
 
