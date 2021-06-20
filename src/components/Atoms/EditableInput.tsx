@@ -14,11 +14,17 @@ export const EditableInput: VFC<Props> = (props) => {
     setInputValue(value);
   }, [value]);
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key == 'Enter') {
+      console.log(inputValue);
+    }
+  };
+
   return (
     <StyledInput
       className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
       onChange={(e) => setInputValue(e.target.value)}
-      // onBlur={handleBlurTextInput}
+      onKeyPress={handleKeyPress}
       value={inputValue || ''}
     />
   );

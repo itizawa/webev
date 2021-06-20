@@ -21,6 +21,7 @@ import { SearchForm } from '~/components/Commons/SearchForm';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/Page/PageList';
+import { EditableInput } from '~/components/Atoms/EditableInput';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
@@ -153,12 +154,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <StyledInput
-                  className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
-                  onChange={(e) => setName(e.target.value)}
-                  onBlur={handleBlurTextInput}
-                  value={name || ''}
-                />
+                <EditableInput value={directory.name} />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -245,28 +241,6 @@ const Index: VFC = () => {
 };
 
 export default Index;
-
-const StyledInput = styled.input`
-  color: #ccc;
-  background: transparent;
-  border: none;
-
-  &:hover {
-    color: #ccc;
-    background: #232323;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
-
-  &:focus {
-    color: #ccc;
-    background: transparent;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
-`;
 
 const StyledTextarea = styled.textarea`
   color: #ccc;
