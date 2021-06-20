@@ -7,7 +7,7 @@ import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 import { Emoji, Picker, EmojiData } from 'emoji-mart';
-import 'emoji-mart/css/emoji-mart.css';
+import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -28,17 +28,6 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-
-const openFileFolderEmoji = {
-  id: 'open_file_folder',
-  name: 'Open File Folder',
-  short_names: ['open_file_folder'],
-  colons: ':open_file_folder:',
-  emoticons: [],
-  unified: '1f4c2',
-  skin: null,
-  native: '📂',
-};
 
 const Index: VFC = () => {
   const { t } = useLocale();
