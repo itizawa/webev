@@ -1,5 +1,3 @@
-import { PageStatus } from '~/domains/Page';
-
 export const PathNames = {
   ROOT: '/',
   NOT_FOUND: '/404',
