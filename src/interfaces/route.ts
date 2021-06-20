@@ -2,6 +2,7 @@ import { PageStatus } from '~/domains/Page';
 
 export const PathNames = {
   ROOT: '/',
+  NOT_FOUND: '/404',
   LOGIN: '/login',
   TERM: '/term',
   HOME: '/home',
@@ -22,6 +23,10 @@ export type LayoutName = typeof LayoutNames[keyof typeof LayoutNames];
 
 export const PathConfigs = {
   [PathNames.ROOT]: {
+    layout: LayoutNames.DEFAULT,
+    statusForFind: [PageStatus.PAGE_STATUS_STOCK],
+  },
+  [PathNames.NOT_FOUND]: {
     layout: LayoutNames.DEFAULT,
     statusForFind: [PageStatus.PAGE_STATUS_STOCK],
   },
