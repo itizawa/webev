@@ -128,7 +128,7 @@ const Index: VFC = () => {
 
     try {
       await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
-      mutateAllDirectories();
+      mutateDirectory();
       toastSuccess(t.toastr_update_emoji);
       setEmoji(emoji);
       setEmojiSettingMode(false);
