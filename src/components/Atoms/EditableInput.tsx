@@ -33,7 +33,7 @@ export const EditableInput: VFC<Props> = (props) => {
 
   return (
     <StyledInput
-      className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 w-100"
+      className="form-control text-white text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 w-100"
       onChange={(e) => setInputValue(e.target.value)}
       onKeyPress={handleKeyPress}
       value={inputValue || ''}
@@ -42,12 +42,10 @@ export const EditableInput: VFC<Props> = (props) => {
 };
 
 const StyledInput = styled.input`
-  color: #ccc;
   background: transparent;
   border: none;
 
   &:hover {
-    color: #ccc;
     background: #232323;
     ::placeholder {
       color: #ccc;
@@ -55,7 +53,6 @@ const StyledInput = styled.input`
   }
 
   &:focus {
-    color: #ccc;
     background: transparent;
     ::placeholder {
       color: #ccc;
