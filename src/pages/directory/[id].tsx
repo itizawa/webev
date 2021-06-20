@@ -7,6 +7,7 @@ import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 import { Emoji, Picker, EmojiData } from 'emoji-mart';
+import { restClient } from '~/utils/rest-client';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -26,7 +27,7 @@ import { PageList } from '~/components/Page/PageList';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
-import { restClient } from '~/utils/rest-client';
+
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
@@ -122,9 +123,18 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: EmojiData) => {
-    setEmoji(emoji);
-    setEmojiSettingMode(false);
+  const handleEmoji = async (emoji: EmojiData) => {
+    const emojiId = emoji.id;
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
+      mutateAllDirectories();
+      toastSuccess(t.toastr_update_emoji);
+      setEmoji(emoji);
+      setEmojiSettingMode(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const clickEmojiHandler = () => {
