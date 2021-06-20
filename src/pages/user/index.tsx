@@ -37,7 +37,7 @@ const Index: VFC = () => {
       <WebevOgpHead title={`Webev | ${t.user}`} />
       <div className="container">
         <div className="row mt-3">
-          <div className="col-3">
+          <div className="col-3 text-center">
             <UserIcon image={currentUser.image} size={140} isCircle />
           </div>
           <div className="col-9">
