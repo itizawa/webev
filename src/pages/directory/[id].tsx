@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-import { Emoji, Picker, EmojiData } from 'emoji-mart';
+import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { restClient } from '~/utils/rest-client';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
@@ -62,6 +62,11 @@ const Index: VFC = () => {
     if (directory != null) {
       setName(directory.name);
       setDescription(directory.description);
+
+      const result = emojiIndex.search(directory.emojiId);
+      if (result != null) {
+        setEmoji(result[0]);
+      }
     }
   }, [directory]);
 
