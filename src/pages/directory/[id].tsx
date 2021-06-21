@@ -25,8 +25,8 @@ import { PageList } from '~/components/Page/PageList';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
-import { restClient } from '~/utils/rest-client';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
