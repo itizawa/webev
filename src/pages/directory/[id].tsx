@@ -7,7 +7,6 @@ import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
-import { restClient } from '~/utils/rest-client';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -26,6 +25,7 @@ import { PageList } from '~/components/Page/PageList';
 
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
+import { restClient } from '~/utils/rest-client';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
