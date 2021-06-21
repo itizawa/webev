@@ -138,7 +138,7 @@ const Index: VFC = () => {
       setEmoji(emoji);
       setEmojiSettingMode(false);
     } catch (error) {
-      console.log(error);
+      toastError(error);
     }
   };
 
