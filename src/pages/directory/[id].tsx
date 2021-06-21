@@ -220,7 +220,9 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
-              <StyledEmojiPicker className="position-absolute">{emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}</StyledEmojiPicker>
+              <StyledEmojiPicker className="position-absolute">
+                {emojiSettingMode && <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} />}
+              </StyledEmojiPicker>
             </>
           )}
           <StyledTextarea
