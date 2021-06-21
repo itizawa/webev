@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
-import { Emoji, Picker, EmojiData } from 'emoji-mart';
+import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
@@ -61,6 +61,11 @@ const Index: VFC = () => {
     if (directory != null) {
       setName(directory.name);
       setDescription(directory.description);
+
+      const result = emojiIndex.search(directory.emojiId);
+      if (result != null) {
+        setEmoji(result[0]);
+      }
     }
   }, [directory]);
 
@@ -122,9 +127,18 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = (emoji: EmojiData) => {
-    setEmoji(emoji);
-    setEmojiSettingMode(false);
+  const handleEmoji = async (emoji: EmojiData) => {
+    const emojiId = emoji.id;
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
+      mutateDirectory();
+      toastSuccess(t.toastr_update_emoji);
+      setEmoji(emoji);
+      setEmojiSettingMode(false);
+    } catch (error) {
+      toastError(error);
+    }
   };
 
   const clickEmojiHandler = () => {
