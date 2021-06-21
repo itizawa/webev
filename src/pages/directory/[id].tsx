@@ -27,7 +27,6 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Directory } from '~/domains/Directory';
 import { restClient } from '~/utils/rest-client';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
-
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
