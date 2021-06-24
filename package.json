@@ -44,7 +44,8 @@
     "swr": "^0.5.6",
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4",
-    "url-join": "^4.0.1"
+    "url-join": "^4.0.1",
+    "use-file-upload": "^1.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
