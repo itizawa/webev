@@ -35,14 +35,12 @@ export const useAncestorDirectories = (directoryId?: string): SWRResponse<Direct
 };
 
 export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
-  return useAuthenticationSWR(
-    ['/directories', directoryId],
-    (endpoint, directoryId) => restClient.apiGet(`${endpoint}/${directoryId}`).then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  const endpoint = directoryId != null ? `/directories/${directoryId}` : null;
+
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 };
 
 export const useAllDirectories = (): SWRResponse<Directory[], Error> => {
