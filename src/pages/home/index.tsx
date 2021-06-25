@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
@@ -14,6 +15,7 @@ import { PageList } from '~/components/Page/PageList';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const { data: paginationResult } = usePageListSWR();
   const { mutate: mutatePageStatus } = usePageStatus();
@@ -29,6 +31,8 @@ const Index: VFC = () => {
         <div className="p-3">
           <div className="d-flex align-items-center">
             <h1 className="mb-0">{t.home}</h1>
+            {router.asPath}
+            {router.pathname}
             <div className="ms-auto">
               <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
             </div>
