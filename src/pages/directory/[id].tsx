@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, VFC } from 'react';
 
-import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
@@ -53,24 +52,9 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageStatus } = usePageStatus();
 
-  const [description, setDescription] = useState<string>();
-  const [descriptionRows, setDescriptionRows] = useState<number>();
-
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
   }, []);
-
-  useEffect(() => {
-    if (directory != null) {
-      setDescription(directory.description);
-    }
-  }, [directory]);
-
-  useEffect(() => {
-    if (description != null) {
-      setDescriptionRows(description.split('\n').length);
-    }
-  }, [description]);
 
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
@@ -82,10 +66,6 @@ const Index: VFC = () => {
 
   const openAddDirectoryModal = (directory: Directory) => {
     mutateParentDirectoryForCreateDirectory(directory);
-  };
-
-  const handleChangeDescription = (inputValue: string) => {
-    setDescription(inputValue);
   };
 
   const updateDirectroyName = async (name: string): Promise<void> => {
@@ -102,11 +82,7 @@ const Index: VFC = () => {
     }
   };
 
-  const handleBlurTextArea = async (): Promise<void> => {
-    // do nothing, no change
-    if (description === directory?.description) {
-      return;
-    }
+  const updateDirectroyDescription = async (description: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       mutateAllDirectories();
@@ -143,8 +119,8 @@ const Index: VFC = () => {
                   );
                 })}
               </div>
-              <div className="d-flex gap-3 align-items-center mt-2">
-                <EditableInput value={directory.name} onSubmit={updateDirectroyName} />
+              <div className="d-flex gap-3 align-items-center my-2">
+                <EditableInput value={directory.name} onSubmit={updateDirectroyName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -185,16 +161,10 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
+              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} />
             </>
           )}
-          <StyledTextarea
-            className="form-control w-100 mt-2"
-            value={description}
-            rows={descriptionRows}
-            onChange={(e) => handleChangeDescription(e.target.value)}
-            onBlur={handleBlurTextArea}
-            placeholder={t.no_description}
-          />
+          {/* placeholder={t.no_description} */}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
             <div className="my-3 bg-dark shadow p-3">
               <h5>{t.child_directory}</h5>
@@ -231,26 +201,3 @@ const Index: VFC = () => {
 };
 
 export default Index;
-
-const StyledTextarea = styled.textarea`
-  color: #ccc;
-  resize: none;
-  background: transparent;
-  border: none;
-
-  &:hover {
-    color: #ccc;
-    background: #232323;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
-
-  &:focus {
-    color: #ccc;
-    background: transparent;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
-`;
