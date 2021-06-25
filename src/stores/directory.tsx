@@ -1,5 +1,4 @@
 import { SWRResponse } from 'swr';
-import urljoin from 'url-join';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
@@ -11,7 +10,7 @@ export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Di
   const page = 1;
   return useAuthenticationSWR(
     ['/directories/list', page, limit],
-    (endpoint, page, limit) => restClient.apiGet(urljoin(endpoint, `?page=${page}`, `&limit=${limit}`)).then((result) => result.data),
+    (endpoint, page, limit) => restClient.apiGet(`${endpoint}?page=${page}&limit=${limit}`).then((result) => result.data),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: true,
@@ -36,14 +35,12 @@ export const useAncestorDirectories = (directoryId?: string): SWRResponse<Direct
 };
 
 export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
-  return useAuthenticationSWR(
-    ['/directories/', directoryId],
-    (endpoint, directoryId) => restClient.apiGet(urljoin(endpoint, directoryId)).then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  const endpoint = directoryId != null ? `/directories/${directoryId}` : null;
+
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 };
 
 export const useAllDirectories = (): SWRResponse<Directory[], Error> => {
