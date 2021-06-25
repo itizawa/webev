@@ -1,9 +1,10 @@
-import { VFC } from 'react';
+import { useEffect, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
-import { usePageListSWR } from '~/stores/page';
+import { PageStatus } from '~/domains/Page';
+import { usePageListSWR, usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
@@ -15,6 +16,11 @@ const Index: VFC = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
+  const { mutate: mutatePageStatus } = usePageStatus();
+
+  useEffect(() => {
+    mutatePageStatus([PageStatus.PAGE_STATUS_STOCK]);
+  }, []);
 
   return (
     <>

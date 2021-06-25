@@ -1,7 +1,7 @@
-import { VFC } from 'react';
+import { useEffect, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
-import { usePageListSWR } from '~/stores/page';
+import { usePageListSWR, usePageStatus } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -11,10 +11,17 @@ import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
+import { PageStatus } from '~/domains/Page';
+
 const Index: VFC = () => {
   const { t } = useLocale();
 
+  const { mutate: mutatePageStatus } = usePageStatus();
   const { data: paginationResult } = usePageListSWR();
+
+  useEffect(() => {
+    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE]);
+  }, []);
 
   return (
     <>
