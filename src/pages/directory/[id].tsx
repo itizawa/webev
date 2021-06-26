@@ -9,7 +9,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, Uncon
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -49,7 +49,8 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+
   const { mutate: mutatePageStatus } = usePageStatus();
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const Index: VFC = () => {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
       mutateAllDirectories();
       mutateDirectory();
-      mutateDirectoryList();
+      mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
       toastSuccess(t.toastr_update_directory_name);
