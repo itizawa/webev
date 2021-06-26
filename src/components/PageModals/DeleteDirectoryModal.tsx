@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { useDirectoryForDelete } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useDirectoryChildren, useDirectoryListSWR } from '~/stores/directory';
+import { useAllParentDirectories, useDirectoryChildren } from '~/stores/directory';
 
 export const DeleteDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -16,7 +16,7 @@ export const DeleteDirectoryModal: VFC = () => {
 
   const { data: directoryForDelete, mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
   const deletePage = async () => {
     try {
@@ -26,7 +26,7 @@ export const DeleteDirectoryModal: VFC = () => {
       if (router.query.id === directoryForDelete?._id) {
         router.push('/directory');
       }
-      mutateDirectoryList();
+      mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateDirectoryForDelete(null);
     } catch (err) {

@@ -12,7 +12,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { useDirectoryListSWR } from '~/stores/directory';
+import { useAllParentDirectories } from '~/stores/directory';
 import { usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
@@ -24,7 +24,7 @@ export const AddDirectoryModal: VFC = () => {
 
   const { data: pageForAddDirectory, mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
   const { mutate: mutatePageList } = usePageListSWR();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -55,7 +55,7 @@ export const AddDirectoryModal: VFC = () => {
       await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateDirectoryList();
+      mutateAllParentDirectories();
     } catch (err) {
       toastError(err);
     }
@@ -81,7 +81,7 @@ export const AddDirectoryModal: VFC = () => {
             </div>
           </div>
           <StyledDiv className="col-12 col-md-5">
-            {paginationResult?.docs.map((directory) => {
+            {allParentDirectories.map((directory) => {
               return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} activeDirectoryId={directoryId as string} />;
             })}
             <StyledCreateFormDiv className="text-center mx-3 mt-2">
