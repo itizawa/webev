@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itizawa/webev.git"
+    "url": "git+https://github.com/webev-dev/webev.git"
   },
   "keywords": [],
   "author": "itizawa",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/itizawa/webev/issues"
+    "url": "https://github.com/webev-dev/webev/issues"
   },
-  "homepage": "https://github.com/itizawa/webev#readme",
+  "homepage": "https://github.com/webev-dev/webev#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
