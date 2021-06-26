@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
@@ -56,6 +56,7 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const pickerRef = useRef(null);
 
   useEffect(() => {
     if (directory != null) {
@@ -141,6 +142,14 @@ const Index: VFC = () => {
     }
   };
 
+  const handleClick = () => {
+    if (pickerRef.current != null) {
+      setEmojiSettingMode(false);
+    } else {
+      setEmojiSettingMode(true);
+    }
+  };
+
   const clickEmojiHandler = () => {
     setEmojiSettingMode(true);
   };
@@ -149,7 +158,7 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
-        <div className="p-3">
+        <div className="p-3" onClick={handleClick}>
           {directory != null && (
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
@@ -221,7 +230,7 @@ const Index: VFC = () => {
                 </UncontrolledDropdown>
               </div>
               <StyledEmojiPicker className="position-absolute">
-                {emojiSettingMode && <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} />}
+                {emojiSettingMode && <Picker theme="dark" ref={pickerRef} onSelect={(emoji) => handleEmoji(emoji)} />}
               </StyledEmojiPicker>
             </>
           )}
