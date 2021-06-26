@@ -142,7 +142,7 @@ const Index: VFC = () => {
     }
   };
 
-  const toggleEmojiPicker = () => {
+  const toggleEmojiPickerHandler = () => {
     if (pickerRef.current != null) {
       setIsEmojiSettingMode(false);
     } else {
@@ -154,7 +154,7 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
-        <div className="p-3" onClick={toggleEmojiPicker}>
+        <div className="p-3" onClick={toggleEmojiPickerHandler}>
           {directory != null && (
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
