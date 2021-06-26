@@ -142,7 +142,7 @@ const Index: VFC = () => {
     }
   };
 
-  const handleClick = () => {
+  const toggleEmojiPicker = () => {
     if (pickerRef.current != null) {
       setEmojiSettingMode(false);
     } else {
@@ -150,15 +150,11 @@ const Index: VFC = () => {
     }
   };
 
-  const clickEmojiHandler = () => {
-    setEmojiSettingMode(true);
-  };
-
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
-        <div className="p-3" onClick={handleClick}>
+        <div className="p-3" onClick={toggleEmojiPicker}>
           {directory != null && (
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
@@ -182,7 +178,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <Emoji emoji={emoji} size={40} onClick={clickEmojiHandler} />
+                <Emoji emoji={emoji} size={40} />
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
