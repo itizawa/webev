@@ -54,7 +54,7 @@ const Index: VFC = () => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
-  const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
+  const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
   const pickerRef = useRef(null);
 
@@ -136,7 +136,7 @@ const Index: VFC = () => {
       mutateDirectory();
       toastSuccess(t.toastr_update_emoji);
       setEmoji(emoji);
-      setEmojiSettingMode(false);
+      setIsEmojiSettingMode(false);
     } catch (error) {
       toastError(error);
     }
@@ -144,9 +144,9 @@ const Index: VFC = () => {
 
   const toggleEmojiPicker = () => {
     if (pickerRef.current != null) {
-      setEmojiSettingMode(false);
+      setIsEmojiSettingMode(false);
     } else {
-      setEmojiSettingMode(true);
+      setIsEmojiSettingMode(true);
     }
   };
 
@@ -226,7 +226,7 @@ const Index: VFC = () => {
                 </UncontrolledDropdown>
               </div>
               <StyledEmojiPicker className="position-absolute">
-                {emojiSettingMode && <Picker theme="dark" ref={pickerRef} onSelect={(emoji) => handleEmoji(emoji)} />}
+                {isEmojiSettingMode && <Picker theme="dark" ref={pickerRef} onSelect={(emoji) => handleEmoji(emoji)} />}
               </StyledEmojiPicker>
             </>
           )}
