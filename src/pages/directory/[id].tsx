@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, useRef, VFC } from 'react';
+import { Fragment, useEffect, useState, VFC } from 'react';
 
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
@@ -56,7 +56,6 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
-  const pickerRef = useRef(null);
 
   useEffect(() => {
     if (directory != null) {
@@ -142,19 +141,11 @@ const Index: VFC = () => {
     }
   };
 
-  const toggleEmojiPickerHandler = () => {
-    if (pickerRef.current != null) {
-      setIsEmojiSettingMode(false);
-    } else {
-      setIsEmojiSettingMode(true);
-    }
-  };
-
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
-        <div className="p-3" onClick={toggleEmojiPickerHandler}>
+        <div className="p-3">
           {directory != null && (
             <>
               <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
@@ -178,7 +169,7 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <Emoji emoji={emoji} size={40} />
+                <Emoji emoji={emoji} size={40} onClick={() => setIsEmojiSettingMode(true)} />
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
@@ -225,9 +216,11 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
-              <StyledEmojiPicker className="position-absolute">
-                {isEmojiSettingMode && <Picker theme="dark" ref={pickerRef} onSelect={(emoji) => handleEmoji(emoji)} />}
-              </StyledEmojiPicker>
+              {isEmojiSettingMode && (
+                <StyledEmojiPicker className="bg-info position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
+                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} />
+                </StyledEmojiPicker>
+              )}
             </>
           )}
           <StyledTextarea
@@ -298,7 +291,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledEmojiPicker = styled.div`
-  z-index: 980;
+  z-index: 1300;
 `;
 
 const StyledTextarea = styled.textarea`
