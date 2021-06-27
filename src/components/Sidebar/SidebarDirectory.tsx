@@ -4,7 +4,10 @@ import styled from 'styled-components';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
+import { Emoji } from 'emoji-mart';
 import { DirectoryItem } from '../Directory/DirectoryItem';
+
+import { openFileFolderEmoji } from '~/const/emoji';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -90,6 +93,7 @@ export const SidebarDirectory: VFC = () => {
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
                         <DirectoryItem directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />
+                        <Emoji emoji={openFileFolderEmoji} size={40} />
                       </div>
                     )}
                   </Draggable>
