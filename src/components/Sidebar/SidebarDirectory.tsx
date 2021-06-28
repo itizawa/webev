@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
 import { DirectoryItem } from '../Directory/DirectoryItem';
-
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
