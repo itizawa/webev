@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
@@ -56,6 +56,7 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (directory != null) {
@@ -140,6 +141,13 @@ const Index: VFC = () => {
       toastError(error);
     }
   };
+  const handleEmoji2 = () => {
+    setIsEmojiSettingMode(true);
+    if (emojiRef.current != null) {
+      console.log('emojiRef', emojiRef.current.offsetTop);
+      console.log('emojiRef', emojiRef.current.offsetLeft);
+    }
+  };
 
   return (
     <>
@@ -169,7 +177,9 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <Emoji emoji={emoji} size={40} onClick={() => setIsEmojiSettingMode(true)} />
+                <div ref={emojiRef}>
+                  <Emoji emoji={emoji} size={40} onClick={() => handleEmoji2()} />
+                </div>
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
@@ -218,7 +228,7 @@ const Index: VFC = () => {
               </div>
               {isEmojiSettingMode && (
                 <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} style={{ position: 'absolute', left: '320px', top: '170px' }} />
+                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} />
                 </StyledEmojiPicker>
               )}
             </>
