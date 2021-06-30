@@ -56,6 +56,8 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const [top, setTop] = useState<number>(0);
+  const [left, setLeft] = useState<number>(0);
   const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -141,11 +143,12 @@ const Index: VFC = () => {
       toastError(error);
     }
   };
+
   const handleEmoji2 = () => {
     setIsEmojiSettingMode(true);
     if (emojiRef.current != null) {
-      console.log('emojiRef', emojiRef.current.offsetTop);
-      console.log('emojiRef', emojiRef.current.offsetLeft);
+      setTop(emojiRef.current.offsetTop);
+      setLeft(emojiRef.current.offsetLeft);
     }
   };
 
@@ -228,7 +231,7 @@ const Index: VFC = () => {
               </div>
               {isEmojiSettingMode && (
                 <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} />
+                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} style={{ position: 'absolute', left: left, top: top }} />
                 </StyledEmojiPicker>
               )}
             </>
