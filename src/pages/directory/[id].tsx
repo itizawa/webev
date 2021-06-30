@@ -58,8 +58,8 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
-  const [top, setTop] = useState<number>(0);
-  const [left, setLeft] = useState<number>(0);
+  const [piclerTop, setPiclerTop] = useState<number>(0);
+  const [piclerLeft, setPiclerLeft] = useState<number>(0);
   const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -149,8 +149,8 @@ const Index: VFC = () => {
   const handleEmoji2 = () => {
     setIsEmojiSettingMode(true);
     if (emojiRef.current != null) {
-      setTop(emojiRef.current.offsetTop + emojiSize + 10);
-      setLeft(emojiRef.current.offsetLeft);
+      setPiclerTop(emojiRef.current.offsetTop + emojiSize + 10);
+      setPiclerLeft(emojiRef.current.offsetLeft);
     }
   };
 
@@ -233,7 +233,7 @@ const Index: VFC = () => {
               </div>
               {isEmojiSettingMode && (
                 <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} style={{ position: 'absolute', left: left, top: top }} />
+                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} style={{ position: 'absolute', left: piclerLeft, top: piclerTop }} />
                 </StyledEmojiPicker>
               )}
             </>
