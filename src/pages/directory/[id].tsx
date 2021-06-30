@@ -132,7 +132,7 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = async (emoji: EmojiData) => {
+  const handleSelectEmoji = async (emoji: EmojiData) => {
     const emojiId = emoji.id;
 
     try {
@@ -146,7 +146,7 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji2 = () => {
+  const handleClickedEmoji = () => {
     setIsEmojiSettingMode(true);
     if (emojiRef.current != null) {
       setPiclerTop(emojiRef.current.offsetTop + emojiSize + 10);
@@ -183,7 +183,7 @@ const Index: VFC = () => {
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
                 <div ref={emojiRef}>
-                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleEmoji2()} />
+                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickedEmoji()} />
                 </div>
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
@@ -233,7 +233,7 @@ const Index: VFC = () => {
               </div>
               {isEmojiSettingMode && (
                 <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleEmoji(emoji)} style={{ position: 'absolute', left: piclerLeft, top: piclerTop }} />
+                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} style={{ position: 'absolute', left: piclerLeft, top: piclerTop }} />
                 </StyledEmojiPicker>
               )}
             </>
