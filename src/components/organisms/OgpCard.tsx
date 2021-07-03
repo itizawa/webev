@@ -3,7 +3,6 @@ import Link from 'next/link';
 
 import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import urljoin from 'url-join';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
@@ -45,8 +44,8 @@ export const OgpCard: VFC<Props> = ({ page }) => {
 
   const sharePage = async () => {
     if (window != null) {
-      const twitterUrl = urljoin('https://twitter.com/intent/tweet', `?url=${encodeURIComponent(url)}`, `&hashtags=${siteName}`);
-      window.open(twitterUrl, '_blanck');
+      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&hashtags=${siteName}`);
+      window.open(twitterUrl.toString(), '_blanck');
     }
   };
 

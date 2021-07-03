@@ -50,7 +50,7 @@ export const Footer: FC = () => {
             icon={BootstrapIcon.GITHUB}
             color={BootstrapColor.SECONDARY}
             activeColor={BootstrapColor.SECONDARY}
-            onClickButton={() => window.open('https://github.com/itizawa/webev-front', '_blank')}
+            onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
           />
         </div>
         <UncontrolledTooltip placement="top" target="github-link-button">

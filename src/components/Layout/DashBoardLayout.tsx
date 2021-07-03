@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { useActivePage, useDirectoryId, useSearchKeyWord } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/organisms/Navbar';
@@ -18,16 +18,13 @@ import { TutorialDitecter } from '~/components/TutorialDitecter';
 import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
-import { PathConfigs, PathNames } from '~/interfaces/route';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
-  const pathname = router.pathname as PathNames;
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
-  const { mutate: mutatePageStatus } = usePageStatus();
   const { mutate: mutateSearchKeyord } = useSearchKeyWord();
 
   const { data: currentUser } = useCurrentUser();
@@ -37,7 +34,6 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutatePageStatus(PathConfigs[pathname].statusForFind);
     mutateSearchKeyord('');
 
     if (router.pathname !== '/directory/[id]') {

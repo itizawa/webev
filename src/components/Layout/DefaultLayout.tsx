@@ -14,16 +14,11 @@ export const DefaultLayout: FC = ({ children }) => {
         <Navbar />
       </div>
       <StyledBorder />
-      <StyledDiv className="container">{children}</StyledDiv>
+      <div className="webev-container container">{children}</div>
       <Footer />
     </div>
   );
 };
-
-const StyledDiv = styled.div`
-  /* 画面全体からNavbarとFooterの高さを引く */
-  min-height: calc(100vh - 100px - 100px);
-`;
 
 const StyledBorder = styled.div`
   height: 4px;
