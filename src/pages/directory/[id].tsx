@@ -232,9 +232,12 @@ const Index: VFC = () => {
                 </UncontrolledDropdown>
               </div>
               {isEmojiSettingMode && (
-                <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} style={{ position: 'absolute', left: pickerLeft, top: pickerTop }} />
-                </StyledEmojiPicker>
+                <>
+                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                  <StyledEmojiWrapper top={pickerTop} left={pickerLeft}>
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                  </StyledEmojiWrapper>
+                </>
               )}
             </>
           )}
@@ -305,7 +308,10 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledEmojiPicker = styled.div`
+const StyledEmojiWrapper = styled.div<{ top: number; left: number }>`
+  position: absolute;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
   z-index: 1300;
 `;
 
