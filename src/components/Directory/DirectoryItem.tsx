@@ -99,7 +99,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
         {directory && (
           <div className="text-truncate">
             <StyledEmojiWrapper>
-              <Emoji emoji={directory.emojiId} size={18} />
+              <Emoji emoji={directory.emojiId} size={20} />
             </StyledEmojiWrapper>
             <span className="ms-2">{directory.name}</span>
           </div>

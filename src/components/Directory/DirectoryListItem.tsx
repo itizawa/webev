@@ -47,7 +47,9 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
     <Link href={`/directory/${directory._id}`}>
       <StyledList className="d-flex" role="button">
         <div className="w-100 text-truncate">
-          <Emoji emoji={directory.emojiId} size={20} />
+          <StyledEmojiWrapper>
+            <Emoji emoji={directory.emojiId} size={20} />
+          </StyledEmojiWrapper>
           <span className="ms-3" role="button">
             {directory.name}
           </span>
@@ -83,6 +85,12 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
     </Link>
   );
 };
+
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    vertical-align: text-bottom;
+  }
+`;
 
 const StyledList = styled.li<{ isActive?: boolean }>`
   padding: 10px;
