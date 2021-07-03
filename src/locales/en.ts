@@ -40,6 +40,7 @@ export const en = {
   news: 'News',
   share: 'Share',
   user: 'User Page',
+  article: 'Article',
 
   return_news_list: 'Return News List',
 

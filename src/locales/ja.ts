@@ -40,6 +40,7 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
   user: 'ユーザーページ',
+  article: '記事',
 
   return_news_list: 'ニュースリストに戻る',
 
