@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
@@ -29,6 +29,8 @@ import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
+const emojiSize = 40;
+
 const Index: VFC = () => {
   const { t } = useLocale();
 
@@ -54,8 +56,11 @@ const Index: VFC = () => {
   const [name, setName] = useState<string>();
   const [description, setDescription] = useState<string>();
   const [descriptionRows, setDescriptionRows] = useState<number>();
-  const [emojiSettingMode, setEmojiSettingMode] = useState<boolean>();
+  const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const [pickerTop, setPickerTop] = useState<number>(0);
+  const [pickerLeft, setPickerLeft] = useState<number>(0);
+  const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (directory != null) {
@@ -127,7 +132,7 @@ const Index: VFC = () => {
     }
   };
 
-  const handleEmoji = async (emoji: EmojiData) => {
+  const handleSelectEmoji = async (emoji: EmojiData) => {
     const emojiId = emoji.id;
 
     try {
@@ -135,14 +140,18 @@ const Index: VFC = () => {
       mutateDirectory();
       toastSuccess(t.toastr_update_emoji);
       setEmoji(emoji);
-      setEmojiSettingMode(false);
+      setIsEmojiSettingMode(false);
     } catch (error) {
       toastError(error);
     }
   };
 
-  const clickEmojiHandler = () => {
-    setEmojiSettingMode(true);
+  const handleClickEmoji = () => {
+    setIsEmojiSettingMode(true);
+    if (emojiRef.current != null) {
+      setPickerTop(emojiRef.current.offsetTop + emojiSize + 10);
+      setPickerLeft(emojiRef.current.offsetLeft);
+    }
   };
 
   return (
@@ -173,7 +182,9 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center mt-2">
-                <Emoji emoji={emoji} size={40} onClick={clickEmojiHandler} />
+                <div ref={emojiRef}>
+                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+                </div>
                 <StyledInput
                   className="form-control text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 me-auto w-100"
                   onChange={(e) => setName(e.target.value)}
@@ -220,7 +231,14 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
-              <StyledEmojiPicker className="position-absolute">{emojiSettingMode && <Picker onSelect={(emoji) => handleEmoji(emoji)} />}</StyledEmojiPicker>
+              {isEmojiSettingMode && (
+                <>
+                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                  </StyledEmojiPickerWrapper>
+                </>
+              )}
             </>
           )}
           <StyledTextarea
@@ -290,8 +308,11 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledEmojiPicker = styled.div`
-  z-index: 980;
+const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
+  position: absolute;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  z-index: 1300;
 `;
 
 const StyledTextarea = styled.textarea`
