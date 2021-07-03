@@ -233,7 +233,7 @@ const Index: VFC = () => {
               </div>
               {isEmojiSettingMode && (
                 <StyledEmojiPicker className=" position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)}>
-                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} style={{ position: 'absolute', left: piclerLeft, top: piclerTop }} />
+                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} style={{ position: 'absolute', left: pickerLeft, top: pickerTop }} />
                 </StyledEmojiPicker>
               )}
             </>
