@@ -3,6 +3,7 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
+import { Emoji } from 'emoji-mart';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -95,7 +96,14 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
             isRemovePadding
           />
         )}
-        <span className="text-truncate">{directory?.name}</span>
+        {directory && (
+          <div className="text-truncate">
+            <StyledEmojiWrapper>
+              <Emoji emoji={directory.emojiId} size={18} />
+            </StyledEmojiWrapper>
+            <span className="ms-2">{directory.name}</span>
+          </div>
+        )}
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
           <IconButton
             width={18}
@@ -135,6 +143,12 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
     </>
   );
 };
+
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    vertical-align: text-bottom;
+  }
+`;
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
   .create-directory-button {
