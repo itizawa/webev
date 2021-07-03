@@ -146,9 +146,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
 
 const StyledEmojiWrapper = styled.span`
   .emoji-mart-emoji {
-    /* どちらかいい感じの方で */
-    /* vertical-align: middle;*/
-    /* vertical-align: text-bottom; */
+    vertical-align: text-bottom;
   }
 `;
 
