@@ -89,5 +89,7 @@ export const ja = {
 
   create_article: '新規記事を作成する',
   title: 'タイトル',
+  article_title_placeholder: '今日読んだ記事',
   description: '説明',
+  article_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
 };

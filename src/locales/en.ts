@@ -89,5 +89,7 @@ export const en = {
 
   create_article: 'Create New Article',
   title: 'Title',
+  article_title_placeholder: 'Read Articles',
   description: 'Description',
+  article_description_placeholder: 'ex) I tried to summarize the articles I read today!',
 };

@@ -19,13 +19,13 @@ const Index: VFC = () => {
               <label htmlFor="article-title" className="form-label">
                 {t.title}
               </label>
-              <input type="text" className="form-control bg-white" id="article-title" />
+              <input type="text" className="form-control bg-white" id="article-title" placeholder={t.article_title_placeholder} />
             </div>
             <div className="mb-3">
               <label htmlFor="article-body" className="form-label">
                 {t.description}
               </label>
-              <textarea className="form-control bg-white" id="article-body" rows={3} />
+              <textarea className="form-control bg-white" id="article-body" placeholder={t.article_description_placeholder} rows={3} />
             </div>
             <h2>Page</h2>
           </div>
