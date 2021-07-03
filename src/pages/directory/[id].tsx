@@ -58,8 +58,8 @@ const Index: VFC = () => {
   const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
-  const [piclerTop, setPiclerTop] = useState<number>(0);
-  const [piclerLeft, setPiclerLeft] = useState<number>(0);
+  const [pickerTop, setPickerTop] = useState<number>(0);
+  const [pickerLeft, setPickerLeft] = useState<number>(0);
   const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -149,8 +149,8 @@ const Index: VFC = () => {
   const handleClickEmoji = () => {
     setIsEmojiSettingMode(true);
     if (emojiRef.current != null) {
-      setPiclerTop(emojiRef.current.offsetTop + emojiSize + 10);
-      setPiclerLeft(emojiRef.current.offsetLeft);
+      setPickerTop(emojiRef.current.offsetTop + emojiSize + 10);
+      setPickerLeft(emojiRef.current.offsetLeft);
     }
   };
 
