@@ -1,9 +1,12 @@
 import { VFC } from 'react';
 
-import { useLocale } from '~/hooks/useLocale';
+import styled from 'styled-components';
 
+import { useLocale } from '~/hooks/useLocale';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { IconButton } from '~/components/Icons/IconButton';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -28,6 +31,14 @@ const Index: VFC = () => {
               <textarea className="form-control bg-white" id="article-body" placeholder={t.article_description_placeholder} rows={3} />
             </div>
             <h2>Page</h2>
+            <StyledDiv className="text-center mt-3">
+              <IconButton
+                icon={BootstrapIcon.PLUS_DOTTED}
+                color={BootstrapColor.LIGHT}
+                activeColor={BootstrapColor.LIGHT}
+                // onClickButton={() => setIsCreatingNewDirectory(true)}
+              />
+            </StyledDiv>
           </div>
         </div>
       </LoginRequiredWrapper>
@@ -36,3 +47,15 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledDiv = styled.div`
+  > .btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    :hover {
+      background-color: rgba(200, 200, 200, 0.2);
+      transition: all 300ms linear;
+    }
+  }
+`;
