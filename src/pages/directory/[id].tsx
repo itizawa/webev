@@ -234,9 +234,9 @@ const Index: VFC = () => {
               {isEmojiSettingMode && (
                 <>
                   <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
-                  <StyledEmojiWrapper top={pickerTop} left={pickerLeft}>
+                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
                     <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
-                  </StyledEmojiWrapper>
+                  </StyledEmojiPickerWrapper>
                 </>
               )}
             </>
@@ -308,7 +308,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledEmojiWrapper = styled.div<{ top: number; left: number }>`
+const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
   position: absolute;
   top: ${(props) => props.top}px;
   left: ${(props) => props.left}px;
