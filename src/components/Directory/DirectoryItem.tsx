@@ -101,7 +101,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
             <StyledEmojiWrapper>
               <Emoji emoji={directory.emojiId} size={18} />
             </StyledEmojiWrapper>
-            <span className="ms-2">{directory?.name}</span>
+            <span className="ms-2">{directory.name}</span>
           </div>
         )}
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
