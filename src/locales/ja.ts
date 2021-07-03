@@ -89,4 +89,5 @@ export const ja = {
 
   create_article: '新規記事を作成する',
   title: 'タイトル',
+  description: '説明',
 };

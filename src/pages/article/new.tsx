@@ -23,10 +23,11 @@ const Index: VFC = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="article-body" className="form-label">
-                {t.inquiry_text}
+                {t.description}
               </label>
-              <textarea className="form-control bg-white" id="article-body" rows={5} />
+              <textarea className="form-control bg-white" id="article-body" rows={3} />
             </div>
+            <h2>Page</h2>
           </div>
         </div>
       </LoginRequiredWrapper>

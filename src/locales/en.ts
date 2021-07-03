@@ -89,4 +89,5 @@ export const en = {
 
   create_article: 'Create New Article',
   title: 'Title',
+  description: 'Description',
 };
