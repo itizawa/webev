@@ -10,6 +10,7 @@ export const PathNames = {
   DIRECTORY_ID: '/directory/[id]',
   NEWS: '/news',
   NEWS_ID: '/news/[id]',
+  ARTICLE_NEW: '/article/new',
 } as const;
 export type PathNames = typeof PathNames[keyof typeof PathNames];
 
@@ -51,6 +52,9 @@ export const PathConfigs = {
     layout: LayoutNames.DEFAULT,
   },
   [PathNames.NEWS_ID]: {
+    layout: LayoutNames.DEFAULT,
+  },
+  [PathNames.ARTICLE_NEW]: {
     layout: LayoutNames.DEFAULT,
   },
 };
