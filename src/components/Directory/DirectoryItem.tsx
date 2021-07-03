@@ -98,10 +98,10 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
         )}
         {directory && (
           <div className="text-truncate">
-            <span className="me-2 align-middle">
-              <Emoji emoji={directory.emojiId} size={20} />
-            </span>
-            <span className="align-middle">{directory?.name}</span>
+            <StyledEmojiWrapper>
+              <Emoji emoji={directory.emojiId} size={18} />
+            </StyledEmojiWrapper>
+            <span className="ms-2">{directory?.name}</span>
           </div>
         )}
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
@@ -143,6 +143,14 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
     </>
   );
 };
+
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    /* どちらかいい感じの方で */
+    /* vertical-align: middle;*/
+    /* vertical-align: text-bottom; */
+  }
+`;
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
   .create-directory-button {
