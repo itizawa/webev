@@ -17,7 +17,7 @@ const Index: VFC = () => {
   const router = useRouter();
 
   const { data: currentUser, mutate: mutateCurrentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
-  const { data: user, isValidating: isValidatingUser } = useUserById({ id: router.query.id as string });
+  const { data: user, mutate: mutateUserById, isValidating: isValidatingUser } = useUserById({ id: router.query.id as string });
 
   if (isValidatingCurrentUser || isValidatingUser) {
     return (
@@ -42,8 +42,9 @@ const Index: VFC = () => {
 
   const handleBlurTextInput = async (name: string): Promise<void> => {
     try {
-      await restClient.apiPut('/users/me', { name });
+      await restClient.apiPut('/users/me', { properity: { name } });
       mutateCurrentUser();
+      mutateUserById();
       toastSuccess('success');
     } catch (err) {
       toastError(err);
