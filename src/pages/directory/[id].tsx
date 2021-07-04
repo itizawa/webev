@@ -3,20 +3,20 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import Loader from 'react-loader-spinner';
-
 import styled from 'styled-components';
-
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
+
 import { openFileFolderEmoji } from '~/const/emoji';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
@@ -24,13 +24,13 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/Page/PageList';
 import { EditableInput } from '~/components/Atoms/EditableInput';
-
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+
+import { Directory } from '~/domains/Directory';
+import { PageStatus } from '~/domains/Page';
+
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { PageStatus } from '~/domains/Page';
 
 const emojiSize = 40;
 
@@ -218,7 +218,6 @@ const Index: VFC = () => {
               <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} />
             </>
           )}
-          {/* placeholder={t.no_description} */}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
             <div className="my-3 bg-dark shadow p-3">
               <h5>{t.child_directory}</h5>
