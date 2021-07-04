@@ -215,7 +215,7 @@ const Index: VFC = () => {
                   </StyledEmojiPickerWrapper>
                 </>
               )}
-              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} />
+              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} isAllowEmpty />
             </>
           )}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
