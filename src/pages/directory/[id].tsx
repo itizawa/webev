@@ -56,9 +56,6 @@ const Index: VFC = () => {
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
-  const [name, setName] = useState<string>();
-  const [description, setDescription] = useState<string>();
-  const [descriptionRows, setDescriptionRows] = useState<number>();
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
   const [pickerTop, setPickerTop] = useState<number>(0);
@@ -67,9 +64,6 @@ const Index: VFC = () => {
 
   useEffect(() => {
     if (directory != null) {
-      setName(directory.name);
-      setDescription(directory.description);
-
       const result = emojiIndex.search(directory.emojiId);
       if (result != null) {
         setEmoji(result[0]);
@@ -77,11 +71,6 @@ const Index: VFC = () => {
     }
   }, [directory]);
 
-  useEffect(() => {
-    if (description != null) {
-      setDescriptionRows(description.split('\n').length);
-    }
-  }, [description]);
   const { mutate: mutatePageStatus } = usePageStatus();
 
   useEffect(() => {
