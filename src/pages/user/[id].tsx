@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
@@ -27,7 +28,16 @@ const Index: VFC = () => {
   }
 
   if (user == null) {
-    return null;
+    return (
+      <div className="p-3">
+        <h1 className="m-3">{t.this_is_the_404_page}</h1>
+        <h2>
+          <Link href="/">
+            <a className="text-white webev-anchor">{t.go_to_top}</a>
+          </Link>
+        </h2>
+      </div>
+    );
   }
 
   const handleBlurTextInput = async (name: string): Promise<void> => {
