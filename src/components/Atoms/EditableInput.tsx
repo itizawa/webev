@@ -6,10 +6,11 @@ type Props = {
   value: string;
   onSubmit: (inputValue: string) => void;
   isHeader?: boolean;
+  isAllowEmpty?: boolean;
 };
 
 export const EditableInput: VFC<Props> = (props) => {
-  const { value, onSubmit, isHeader } = props;
+  const { value, onSubmit, isHeader, isAllowEmpty = false } = props;
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -20,8 +21,7 @@ export const EditableInput: VFC<Props> = (props) => {
     if (e.key != 'Enter') {
       return;
     }
-    // name is required
-    if (inputValue?.trim() === '') {
+    if (!isAllowEmpty && inputValue?.trim() === '') {
       return;
     }
     // do nothing, no change
