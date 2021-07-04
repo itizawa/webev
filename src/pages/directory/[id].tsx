@@ -92,7 +92,6 @@ const Index: VFC = () => {
   const updateDirectroyName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateAllDirectories();
       mutateDirectory();
       mutateAllParentDirectories();
       mutateDirectoryChildren();
@@ -122,6 +121,7 @@ const Index: VFC = () => {
       toastSuccess(t.toastr_update_emoji);
       setEmoji(emoji);
       setIsEmojiSettingMode(false);
+      mutateAllParentDirectories();
     } catch (error) {
       toastError(error);
     }
