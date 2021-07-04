@@ -1,11 +1,14 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import Loader from 'react-loader-spinner';
 
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
+import styled from 'styled-components';
 
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
+import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
+import { openFileFolderEmoji } from '~/const/emoji';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -29,6 +32,8 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { PageStatus } from '~/domains/Page';
 
+const emojiSize = 40;
+
 const Index: VFC = () => {
   const { t } = useLocale();
 
@@ -50,6 +55,21 @@ const Index: VFC = () => {
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+
+  const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
+  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const [pickerTop, setPickerTop] = useState<number>(0);
+  const [pickerLeft, setPickerLeft] = useState<number>(0);
+  const emojiRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (directory != null) {
+      const result = emojiIndex.search(directory.emojiId);
+      if (result != null) {
+        setEmoji(result[0]);
+      }
+    }
+  }, [directory]);
 
   const { mutate: mutatePageStatus } = usePageStatus();
 
@@ -93,6 +113,28 @@ const Index: VFC = () => {
     }
   };
 
+  const handleSelectEmoji = async (emoji: EmojiData) => {
+    const emojiId = emoji.id;
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
+      mutateDirectory();
+      toastSuccess(t.toastr_update_emoji);
+      setEmoji(emoji);
+      setIsEmojiSettingMode(false);
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
+  const handleClickEmoji = () => {
+    setIsEmojiSettingMode(true);
+    if (emojiRef.current != null) {
+      setPickerTop(emojiRef.current.offsetTop + emojiSize + 10);
+      setPickerLeft(emojiRef.current.offsetLeft);
+    }
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
@@ -121,6 +163,9 @@ const Index: VFC = () => {
                 })}
               </div>
               <div className="d-flex gap-3 align-items-center my-2">
+                <div ref={emojiRef}>
+                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+                </div>
                 <EditableInput value={directory.name} onSubmit={updateDirectroyName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
@@ -162,6 +207,14 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
+              {isEmojiSettingMode && (
+                <>
+                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                  </StyledEmojiPickerWrapper>
+                </>
+              )}
               <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} />
             </>
           )}
@@ -202,3 +255,10 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
+  position: absolute;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  z-index: 1300;
+`;
