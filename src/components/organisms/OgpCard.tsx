@@ -25,9 +25,10 @@ const MAX_WORD_COUNT_OF_SITENAME = 10;
 
 type Props = {
   page: Page;
+  isHideArchiveButton?: boolean;
 };
 
-export const OgpCard: VFC<Props> = ({ page }) => {
+export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
@@ -154,20 +155,22 @@ export const OgpCard: VFC<Props> = ({ page }) => {
             {siteName != null && <br />}
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
-          <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
-            {status === PageStatus.PAGE_STATUS_ARCHIVE && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.return_button}</span>
-              </>
-            )}
-            {status === PageStatus.PAGE_STATUS_STOCK && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.read_button}</span>
-              </>
-            )}
-          </StyledButton>
+          {!isHideArchiveButton && (
+            <StyledButton className="btn btn-sm d-flex" onClick={switchArchive}>
+              {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+                <>
+                  <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2 text-nowrap">{t.return_button}</span>
+                </>
+              )}
+              {status === PageStatus.PAGE_STATUS_STOCK && (
+                <>
+                  <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
+                  <span className="ms-2 text-nowrap">{t.read_button}</span>
+                </>
+              )}
+            </StyledButton>
+          )}
         </div>
       </div>
     </StyledCard>

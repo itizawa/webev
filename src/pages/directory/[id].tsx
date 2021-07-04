@@ -245,7 +245,7 @@ const Index: VFC = () => {
             </div>
           )}
           {paginationResult != null && (
-            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
           )}
         </div>
       </LoginRequiredWrapper>
