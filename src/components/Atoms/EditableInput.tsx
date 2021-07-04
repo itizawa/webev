@@ -7,10 +7,11 @@ type Props = {
   onSubmit: (inputValue: string) => void;
   isHeader?: boolean;
   isAllowEmpty?: boolean;
+  placeholder?: string;
 };
 
 export const EditableInput: VFC<Props> = (props) => {
-  const { value, onSubmit, isHeader, isAllowEmpty = false } = props;
+  const { value, onSubmit, isHeader, isAllowEmpty = false, placeholder } = props;
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export const EditableInput: VFC<Props> = (props) => {
       onChange={(e) => setInputValue(e.target.value)}
       onKeyPress={handleKeyPress}
       value={inputValue || ''}
+      placeholder={placeholder || ''}
     />
   );
 };
