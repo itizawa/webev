@@ -6,7 +6,7 @@ export default class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           {/* Google Analytics */}
-          {GA_ID === '' && (
+          {GA_ID !== '' && (
             <>
               <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
               <script
