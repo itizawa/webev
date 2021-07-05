@@ -1,14 +1,13 @@
+// eslint-disable-next-line no-undef
 export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '';
 
-export const pageview = (path: string): void => {
+export const pageview = (path) => {
   window.gtag('config', GA_ID, {
     page_path: path,
   });
 };
 
-import { Event } from '~/interfaces/googleAnalytics';
-
-export const event = ({ action, category, label }: Event): void => {
+export const event = ({ action, category, label }) => {
   if (GA_ID === '') {
     return;
   }
