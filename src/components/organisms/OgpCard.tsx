@@ -18,6 +18,7 @@ import { Page, PageStatus } from '~/domains/Page';
 import { usePageListSWR } from '~/stores/page';
 import { usePageForDelete, usePageForAddDirectory } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
+
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
