@@ -111,6 +111,12 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                 <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
+              {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+                <DropdownItem tag="button" onClick={switchArchive}>
+                  <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2 text-nowrap">{t.return_button}</span>
+                </DropdownItem>
+              )}
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
@@ -161,20 +167,10 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             </UncontrolledTooltip>
           )}
         </small>
-        {!isHideArchiveButton && (
+        {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
           <StyledButton className="btn btn-sm d-flex ms-auto" onClick={switchArchive}>
-            {status === PageStatus.PAGE_STATUS_ARCHIVE && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.return_button}</span>
-              </>
-            )}
-            {status === PageStatus.PAGE_STATUS_STOCK && (
-              <>
-                <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
-                <span className="ms-2 text-nowrap">{t.read_button}</span>
-              </>
-            )}
+            <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+            <span className="ms-2 text-nowrap">{t.read_button}</span>
           </StyledButton>
         )}
       </div>
