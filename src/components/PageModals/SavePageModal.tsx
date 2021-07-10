@@ -1,8 +1,11 @@
 import { VFC, useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Emoji } from 'emoji-mart';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+
+import { EditableInput } from '~/components/Atoms/EditableInput';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
@@ -48,6 +51,10 @@ export const SavePageModal: VFC = () => {
     mutateDirectoryForSavePage(null);
   };
 
+  const updateDirectroyName = async () => {
+    console.log('hoge');
+  };
+
   return (
     <Modal size="lg" isOpen={directoryForSavePage != null} toggle={closeModal}>
       <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
@@ -64,6 +71,11 @@ export const SavePageModal: VFC = () => {
               </button>
             </form>
           </div>
+        </div>
+        <hr className="mt-4" />
+        <div className="d-flex gap-1 align-items-center">
+          <Emoji emoji="mag" size={18} />
+          <EditableInput onSubmit={updateDirectroyName} value="" placeholder="Search..." />
         </div>
       </ModalBody>
     </Modal>
