@@ -41,7 +41,7 @@ export const en = {
   news: 'News',
   share: 'Share',
   user: 'User Page',
-  article: 'Article',
+  scrap: 'Scrap',
 
   return_news_list: 'Return News List',
 
@@ -88,9 +88,9 @@ export const en = {
   tutorial_desc2: 'Immediately, I saved how to use Webev！',
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
-  create_article: 'Create New Article',
+  create_scrap: 'Create New Scrap',
   title: 'Title',
-  article_title_placeholder: 'Read Articles',
+  scrap_title_placeholder: 'Read Scraps',
   description: 'Description',
-  article_description_placeholder: 'ex) I tried to summarize the articles I read today!',
+  scrap_description_placeholder: 'ex) I tried to summarize the scraps I read today!',
 };

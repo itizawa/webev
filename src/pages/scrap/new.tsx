@@ -13,22 +13,22 @@ const Index: VFC = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | New ${t.create_article}`} />
+      <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
       <LoginRequiredWrapper>
         <div className="row pt-4">
           <div className="col-12 offset-md-2 col-md-8">
-            <h1>{t.create_article}</h1>
+            <h1>{t.create_scrap}</h1>
             <div className="mb-3">
-              <label htmlFor="article-title" className="form-label">
+              <label htmlFor="scrap-title" className="form-label">
                 {t.title}
               </label>
-              <input type="text" className="form-control bg-white" id="article-title" placeholder={t.article_title_placeholder} />
+              <input type="text" className="form-control bg-white" id="scrap-title" placeholder={t.scrap_title_placeholder} />
             </div>
             <div className="mb-3">
-              <label htmlFor="article-body" className="form-label">
+              <label htmlFor="scrap-body" className="form-label">
                 {t.description}
               </label>
-              <textarea className="form-control bg-white" id="article-body" placeholder={t.article_description_placeholder} rows={3} />
+              <textarea className="form-control bg-white" id="scrap-body" placeholder={t.scrap_description_placeholder} rows={3} />
             </div>
             <h2>Page</h2>
             <StyledDiv className="text-center mt-3">

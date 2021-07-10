@@ -41,7 +41,7 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
   user: 'ユーザーページ',
-  article: '記事',
+  scrap: '記事',
 
   return_news_list: 'ニュースリストに戻る',
 
@@ -88,9 +88,9 @@ export const ja = {
   tutorial_desc2: '早速、Webev の使い方を保存します！',
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
-  create_article: '新規記事を作成する',
+  create_scrap: '新規記事を作成する',
   title: 'タイトル',
-  article_title_placeholder: '今日読んだ記事',
+  scrap_title_placeholder: '今日読んだ記事',
   description: '説明',
-  article_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
+  scrap_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
 };
