@@ -163,8 +163,11 @@ const StyledEmojiWrapper = styled.span`
 `;
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
+  align-items: center;
+  /* ズレをなくすための調整 */
+  height: 24px;
+
   .create-directory-button {
-    height: 24px;
     @media (min-width: ${BootstrapBreakpoints.md}px) {
       display: none;
     }
