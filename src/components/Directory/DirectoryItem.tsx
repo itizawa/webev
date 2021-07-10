@@ -26,6 +26,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
@@ -72,36 +73,47 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
 
   return (
     <>
-      <StyledDiv className="text-white text-left rounded d-flex" role="button" onClick={handleClickDirectory} isActive={isActive}>
-        {isOpen ? (
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon={BootstrapIcon.CARET_DOWN}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.WHITE}
-            onClickButton={handleToggleCollapse}
-            isRemovePadding
-          />
-        ) : (
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon={BootstrapIcon.CARET_RIGHT}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.WHITE}
-            onClickButton={handleToggleCollapse}
-            isRemovePadding
-          />
+      <StyledDiv
+        className="text-white text-left rounded d-flex"
+        role="button"
+        onClick={handleClickDirectory}
+        isActive={isActive}
+        onMouseEnter={() => setIsHoverDirectoryItem(true)}
+        onMouseLeave={() => setIsHoverDirectoryItem(false)}
+      >
+        {isHoverDirectoryItem && (
+          <>
+            {isOpen ? (
+              <IconButton
+                width={18}
+                height={18}
+                isActive={isActive}
+                icon={BootstrapIcon.CARET_DOWN}
+                color={BootstrapColor.SECONDARY}
+                activeColor={BootstrapColor.WHITE}
+                onClickButton={handleToggleCollapse}
+                isRemovePadding
+              />
+            ) : (
+              <IconButton
+                width={18}
+                height={18}
+                isActive={isActive}
+                icon={BootstrapIcon.CARET_RIGHT}
+                color={BootstrapColor.SECONDARY}
+                activeColor={BootstrapColor.WHITE}
+                onClickButton={handleToggleCollapse}
+                isRemovePadding
+              />
+            )}
+          </>
         )}
-        {directory && (
+        {!isHoverDirectoryItem && (
           <div className="text-truncate">
             <StyledEmojiWrapper>
-              <Emoji emoji={directory.emojiId} size={20} />
+              <Emoji emoji={directory?.emojiId || ''} size={20} />
             </StyledEmojiWrapper>
-            <span className="ms-2">{directory.name}</span>
+            <span className="ms-2">{directory?.name}</span>
           </div>
         )}
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
