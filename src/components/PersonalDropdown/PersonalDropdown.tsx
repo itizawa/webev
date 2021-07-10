@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
@@ -55,8 +56,12 @@ export const PersonalDropdown: VFC = () => {
       <StyledDropdownMenu right className="dropdown-menu-dark">
         <DropdownItem header>
           <div className="text-center">
-            <UserIcon image={currentUer.image} size={48} isCircle />
-            <h5 className="my-2">{currentUer.name}</h5>
+            <Link href={`/user/${currentUer._id}`}>
+              <a className="text-white webev-anchor">
+                <UserIcon image={currentUer.image} size={48} isCircle />
+                <h5 className="my-2">{currentUer.name}</h5>
+              </a>
+            </Link>
           </div>
         </DropdownItem>
         <DropdownItem divider />

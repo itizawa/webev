@@ -10,11 +10,16 @@ import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
 import { PathNames, PathConfigs, LayoutNames } from '~/interfaces/route';
 import { DefaultLayout } from '~/components/Layout/DefaultLayout';
 
+import { usePageView } from '~/hooks/usePageView';
+
 const App: VFC<AppProps> = ({ Component, pageProps }) => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 
   const router = useRouter();
   const pathname = router.pathname as PathNames;
+
+  // GA
+  usePageView();
 
   if (PathConfigs[pathname]?.layout === LayoutNames.DASHBOARD) {
     if (isMaintenanceMode) {

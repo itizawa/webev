@@ -3,6 +3,7 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
+import { Emoji } from 'emoji-mart';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -25,6 +26,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
@@ -71,31 +73,49 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
 
   return (
     <>
-      <StyledDiv className="text-white text-left rounded d-flex" role="button" onClick={handleClickDirectory} isActive={isActive}>
-        {isOpen ? (
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon={BootstrapIcon.CARET_DOWN}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.WHITE}
-            onClickButton={handleToggleCollapse}
-            isRemovePadding
-          />
-        ) : (
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon={BootstrapIcon.CARET_RIGHT}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.WHITE}
-            onClickButton={handleToggleCollapse}
-            isRemovePadding
-          />
-        )}
-        <span className="text-truncate">{directory?.name}</span>
+      <StyledDiv
+        className="text-white text-left rounded d-flex"
+        role="button"
+        onClick={handleClickDirectory}
+        isActive={isActive}
+        onMouseEnter={() => setIsHoverDirectoryItem(true)}
+        onMouseLeave={() => setIsHoverDirectoryItem(false)}
+      >
+        <div className="text-truncate">
+          {isHoverDirectoryItem && (
+            <>
+              {isOpen ? (
+                <IconButton
+                  width={18}
+                  height={18}
+                  isActive={isActive}
+                  icon={BootstrapIcon.CARET_DOWN}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WHITE}
+                  onClickButton={handleToggleCollapse}
+                  isRemovePadding
+                />
+              ) : (
+                <IconButton
+                  width={18}
+                  height={18}
+                  isActive={isActive}
+                  icon={BootstrapIcon.CARET_RIGHT}
+                  color={BootstrapColor.SECONDARY}
+                  activeColor={BootstrapColor.WHITE}
+                  onClickButton={handleToggleCollapse}
+                  isRemovePadding
+                />
+              )}
+            </>
+          )}
+          {!isHoverDirectoryItem && (
+            <StyledEmojiWrapper className="px-2">
+              <Emoji emoji={directory?.emojiId || ''} size={18} />
+            </StyledEmojiWrapper>
+          )}
+          <span className="ms-2">{directory?.name}</span>
+        </div>
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
           <IconButton
             width={18}
@@ -136,9 +156,18 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   );
 };
 
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    vertical-align: middle;
+  }
+`;
+
 const StyledDiv = styled.div<{ isActive?: boolean }>`
+  align-items: center;
+  /* ズレをなくすための調整 */
+  height: 24px;
+
   .create-directory-button {
-    height: 24px;
     @media (min-width: ${BootstrapBreakpoints.md}px) {
       display: none;
     }

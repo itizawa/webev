@@ -13,10 +13,11 @@ type Props = {
   pages: Page[];
   pagingLimit: number;
   totalItemsCount: number;
+  isHideArchiveButton?: boolean;
 };
 
 export const PageList: VFC<Props> = (props) => {
-  const { pages, pagingLimit, totalItemsCount } = props;
+  const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
 
   return (
@@ -25,13 +26,13 @@ export const PageList: VFC<Props> = (props) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
             <div className="col-12" key={page._id}>
-              <OgpListItem page={page} />
+              <OgpListItem page={page} isHideArchiveButton={isHideArchiveButton} />
             </div>
           );
         }
         return (
           <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <OgpCard page={page} />
+            <OgpCard page={page} isHideArchiveButton={isHideArchiveButton} />
           </div>
         );
       })}

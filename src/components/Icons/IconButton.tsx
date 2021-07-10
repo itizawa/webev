@@ -24,7 +24,7 @@ export const IconButton: VFC<Props> = (props) => {
     }
   };
 
-  const btnClassName: string[] = ['btn', 'px-2'];
+  const btnClassName: string[] = ['btn', 'px-2', 'border-0'];
   if (buttonSize != null) {
     btnClassName.push(`btn-${buttonSize}`);
   }

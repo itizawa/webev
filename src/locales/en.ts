@@ -25,6 +25,7 @@ export const en = {
   toastr_update_setting: 'Update Setting',
   toastr_update_directory_name: 'Update Directory Name',
   toastr_update_directory_description: 'Update Directory Description',
+  toastr_update_emoji: 'Update Directory Emoji',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
@@ -43,7 +44,7 @@ export const en = {
 
   return_news_list: 'Return News List',
 
-  read_button: 'Mark as Read',
+  read_button: 'Read',
   return_button: 'Put Back Home',
 
   child_directory: 'Child Directories',
@@ -84,5 +85,5 @@ export const en = {
 
   tutorial_desc1: 'Webev is bookmark manager.',
   tutorial_desc2: 'Immediately, I saved how to use Webev！',
-  tutorial_desc3: 'After reading, Press <span class="fw-bold">Mark as Read</span> to take a record.',
+  tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 };
