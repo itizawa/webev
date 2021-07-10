@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
-import { usePageListSWR } from '~/stores/page';
+import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -22,7 +22,9 @@ export const SavePageModal: VFC = () => {
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
+  const { data: paginationResult } = usePageNotBelongDirectory();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
+  console.log(paginationResult);
 
   useEffect(() => {
     if (urlFromClipBoard != null) {
