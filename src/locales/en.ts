@@ -45,7 +45,7 @@ export const en = {
 
   return_news_list: 'Return News List',
 
-  read_button: 'Mark as Read',
+  read_button: 'Read',
   return_button: 'Put Back Home',
 
   child_directory: 'Child Directories',
@@ -86,7 +86,7 @@ export const en = {
 
   tutorial_desc1: 'Webev is bookmark manager.',
   tutorial_desc2: 'Immediately, I saved how to use Webev！',
-  tutorial_desc3: 'After reading, Press <span class="fw-bold">Mark as Read</span> to take a record.',
+  tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
   create_article: 'Create New Article',
   title: 'Title',
