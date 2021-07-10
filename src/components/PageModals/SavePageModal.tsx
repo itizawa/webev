@@ -60,8 +60,8 @@ export const SavePageModal: VFC = () => {
       <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row align-items-center">
-          <div className="col-12 col-md-3">
-            <p className="text-center mb-0">{t.save_to_directory(directoryForSavePage?.name as string)}</p>
+          <div className="col-12 col-md-3 text-md-end">
+            <span>{t.input_url}</span>
           </div>
           <div className="col-12 col-md-9">
             <form className="input-group my-2" onSubmit={handleSubmit}>
