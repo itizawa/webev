@@ -49,16 +49,22 @@ export const SavePageModal: VFC = () => {
   };
 
   return (
-    <Modal isOpen={directoryForSavePage != null} toggle={closeModal}>
+    <Modal size="lg" isOpen={directoryForSavePage != null} toggle={closeModal}>
       <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
       <ModalBody className="bg-dark text-break">
-        <p className="text-center">{t.save_to_directory(directoryForSavePage?.name as string)}</p>
-        <form className="input-group my-2" onSubmit={handleSubmit}>
-          <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
-          <button className="btn btn-success" type="submit" disabled={url.trim() === ''}>
-            {t.save}
-          </button>
-        </form>
+        <div className="row align-items-center">
+          <div className="col-12 col-md-3">
+            <p className="text-center mb-0">{t.save_to_directory(directoryForSavePage?.name as string)}</p>
+          </div>
+          <div className="col-12 col-md-9">
+            <form className="input-group my-2" onSubmit={handleSubmit}>
+              <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
+              <button className="btn btn-success" type="submit" disabled={url.trim() === ''}>
+                {t.save}
+              </button>
+            </form>
+          </div>
+        </div>
       </ModalBody>
     </Modal>
   );
