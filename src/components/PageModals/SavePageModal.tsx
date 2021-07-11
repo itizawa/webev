@@ -1,6 +1,7 @@
 import { VFC, useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Emoji } from 'emoji-mart';
+import Loader from 'react-loader-spinner';
 
 import styled from 'styled-components';
 
@@ -31,7 +32,7 @@ export const SavePageModal: VFC = () => {
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
-  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory(searchKeyWord);
+  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage, searchKeyWord });
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
@@ -111,7 +112,11 @@ export const SavePageModal: VFC = () => {
           <Emoji emoji="mag" size={18} />
           <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
         </div>
-        {paginationResult != null && (
+        {paginationResult == null ? (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        ) : (
           <>
             {paginationResult.docs.map((page) => {
               return (
