@@ -44,10 +44,13 @@ const Index: VFC = () => {
             </div>
             <h2>Page</h2>
             {isAddPage && (
-              <div className="p-3">
+              <div className="p-3 border border-secondary">
                 <div className="d-flex gap-1 align-items-center mb-3">
                   <Emoji emoji="mag" size={18} />
                   <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+                  <button className="btn btn-secondary btn-sm text-nowrap" onClick={() => setIsAddPage(false)}>
+                    {t.cancel}
+                  </button>
                 </div>
                 {paginationResult == null ? (
                   <div className="text-center pt-5">
