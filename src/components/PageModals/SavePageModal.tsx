@@ -28,7 +28,7 @@ export const SavePageModal: VFC = () => {
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
-  const { data: paginationResult } = usePageNotBelongDirectory(searchKeyWord);
+  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory(searchKeyWord);
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
@@ -60,6 +60,19 @@ export const SavePageModal: VFC = () => {
 
   const updateDirectroyName = async (searchWord: string) => {
     setSearchKeyWord(searchWord);
+  };
+
+  const addPageToDirectory = async (pageId: string) => {
+    try {
+      await restClient.apiPut(`/pages/${pageId}/directories`, {
+        directoryId: directoryForSavePage?._id,
+      });
+      toastSuccess(t.toastr_success_add_directory);
+      mutatePageNotBelongDirectory();
+    } catch (error) {
+      console.log(error);
+      toastError(error);
+    }
   };
 
   return (
@@ -97,7 +110,7 @@ export const SavePageModal: VFC = () => {
         {paginationResult?.docs.map((page) => {
           return (
             <div key={page._id} className="mb-3">
-              <OgpPreviewCard page={page} />
+              <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
             </div>
           );
         })}

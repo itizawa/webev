@@ -10,14 +10,14 @@ const MAX_WORD_COUNT_OF_BODY = 40;
 
 type Props = {
   page: Page;
+  onClickCard: () => void;
 };
 
-export const OgpPreviewCard: VFC<Props> = ({ page }) => {
+export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard }) => {
   const { url, image, favicon, title, description } = page;
 
   return (
-    // <a href={url} target="blank" rel="noopener noreferrer" className="col">
-    <StyledDiv className="d-flex overflow-hidden">
+    <StyledDiv role="button" className="d-flex overflow-hidden" onClick={onClickCard}>
       <StyledImg
         height="100px"
         width="100px"
@@ -57,6 +57,10 @@ export const OgpPreviewCard: VFC<Props> = ({ page }) => {
 const StyledDiv = styled.div`
   background: #333;
   border-radius: 8px;
+
+  :hover {
+    opacity: 0.8;
+  }
 `;
 
 const StyledImg = styled.img`
