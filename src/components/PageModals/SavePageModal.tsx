@@ -2,17 +2,21 @@ import { VFC, useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Emoji } from 'emoji-mart';
 
+import styled from 'styled-components';
+
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { EditableInput } from '~/components/Atoms/EditableInput';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
+import { IconButton } from '~/components/Icons/IconButton';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 export const SavePageModal: VFC = () => {
   const { t } = useLocale();
@@ -59,7 +63,16 @@ export const SavePageModal: VFC = () => {
 
   return (
     <Modal size="lg" isOpen={directoryForSavePage != null} toggle={closeModal}>
-      <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
+      <StyledModalHeader className="bg-dark">
+        {t.save_page}
+        <IconButton
+          color={BootstrapColor.LIGHT}
+          buttonColor={BootstrapColor.SECONDARY}
+          activeColor={BootstrapColor.LIGHT}
+          icon={BootstrapIcon.CLOSE}
+          onClickButton={closeModal}
+        />
+      </StyledModalHeader>
       <ModalBody className="bg-dark text-break">
         <div className="row align-items-center">
           <div className="col-12 col-md-3 text-md-end">
@@ -90,3 +103,9 @@ export const SavePageModal: VFC = () => {
     </Modal>
   );
 };
+
+const StyledModalHeader = styled(ModalHeader)`
+  .modal-title {
+    display: contents;
+  }
+`;
