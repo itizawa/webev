@@ -1,5 +1,6 @@
-import { VFC } from 'react';
+import { useState, VFC } from 'react';
 
+import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -7,9 +8,18 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { useAllPages } from '~/stores/page';
+import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
+import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const [isAddPage, setIsAddPage] = useState(false);
+  const [activePage, setActivePage] = useState(1);
+
+  const { data: paginationResult } = useAllPages({ activePage });
+  console.log(paginationResult);
 
   return (
     <>
@@ -31,14 +41,51 @@ const Index: VFC = () => {
               <textarea className="form-control bg-white" id="scrap-body" placeholder={t.scrap_description_placeholder} rows={3} />
             </div>
             <h2>Page</h2>
-            <StyledDiv className="text-center mt-3">
-              <IconButton
-                icon={BootstrapIcon.PLUS_DOTTED}
-                color={BootstrapColor.LIGHT}
-                activeColor={BootstrapColor.LIGHT}
-                // onClickButton={() => setIsCreatingNewDirectory(true)}
-              />
-            </StyledDiv>
+            {isAddPage && (
+              <div className="p-3">
+                {paginationResult == null ? (
+                  <div className="text-center pt-5">
+                    <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+                  </div>
+                ) : (
+                  <>
+                    <StyledDiv className=" overflow-scroll">
+                      {paginationResult.docs.map((page) => {
+                        return (
+                          <div key={page._id} className="mb-3">
+                            <OgpPreviewCard page={page} onClickCard={() => console.log(page._id)} />
+                          </div>
+                        );
+                      })}
+                    </StyledDiv>
+                    {paginationResult.docs.length === 0 ? (
+                      <div className="col-12">
+                        <NoPageAlert />
+                      </div>
+                    ) : (
+                      <div className="text-center mt-3">
+                        <PaginationWrapper
+                          pagingLimit={paginationResult.limit}
+                          totalItemsCount={paginationResult.totalDocs}
+                          activePage={activePage}
+                          mutateActivePage={(number) => setActivePage(number)}
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
+            {!isAddPage && (
+              <StyledIconButtonWrapper className="text-center mt-3">
+                <IconButton
+                  icon={BootstrapIcon.PLUS_DOTTED}
+                  color={BootstrapColor.LIGHT}
+                  activeColor={BootstrapColor.LIGHT}
+                  onClickButton={() => setIsAddPage(true)}
+                />
+              </StyledIconButtonWrapper>
+            )}
           </div>
         </div>
       </LoginRequiredWrapper>
@@ -48,7 +95,7 @@ const Index: VFC = () => {
 
 export default Index;
 
-const StyledDiv = styled.div`
+const StyledIconButtonWrapper = styled.div`
   > .btn {
     width: 100%;
     padding: 10px;
@@ -58,4 +105,8 @@ const StyledDiv = styled.div`
       transition: all 300ms linear;
     }
   }
+`;
+
+const StyledDiv = styled.div`
+  max-height: 300px;
 `;
