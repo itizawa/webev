@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { imagePath } from '~/const/imagePath';
 
 import { Page } from '~/domains/Page';
+import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 const MAX_WORD_COUNT_OF_BODY = 40;
 
@@ -72,7 +73,9 @@ const StyledDiv = styled.div`
   border-radius: 8px;
 
   button {
-    display: none;
+    @media (min-width: ${BootstrapBreakpoints.md}px) {
+      display: none;
+    }
   }
 
   :hover {
