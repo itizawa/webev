@@ -1,12 +1,15 @@
 import { VFC, useState, useEffect } from 'react';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Emoji } from 'emoji-mart';
+import Loader from 'react-loader-spinner';
 
 import styled from 'styled-components';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
+import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 import { IconButton } from '~/components/Icons/IconButton';
@@ -23,12 +26,13 @@ export const SavePageModal: VFC = () => {
 
   const [url, setUrl] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState('');
+  const [activePage, setActivePage] = useState(1);
 
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
-  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory(searchKeyWord);
+  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage, searchKeyWord });
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
@@ -108,13 +112,35 @@ export const SavePageModal: VFC = () => {
           <Emoji emoji="mag" size={18} />
           <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
         </div>
-        {paginationResult?.docs.map((page) => {
-          return (
-            <div key={page._id} className="mb-3">
-              <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
-            </div>
-          );
-        })}
+        {paginationResult == null ? (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        ) : (
+          <>
+            {paginationResult.docs.map((page) => {
+              return (
+                <div key={page._id} className="mb-3">
+                  <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
+                </div>
+              );
+            })}
+            {paginationResult.docs.length === 0 ? (
+              <div className="col-12">
+                <NoPageAlert />
+              </div>
+            ) : (
+              <div className="text-center">
+                <PaginationWrapper
+                  pagingLimit={paginationResult.limit}
+                  totalItemsCount={paginationResult.totalDocs}
+                  activePage={activePage}
+                  mutateActivePage={(number) => setActivePage(number)}
+                />
+              </div>
+            )}
+          </>
+        )}
       </ModalBody>
     </Modal>
   );
