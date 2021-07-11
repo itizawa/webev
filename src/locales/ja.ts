@@ -92,7 +92,8 @@ export const ja = {
 
   input_url: 'Url を入力する',
 
-  create_scrap: '新規スクラップを作成する',
+  create_scrap: 'スクラップを作成する',
+  scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
   title: 'タイトル',
   scrap_title_placeholder: '今日読んだ記事',
   description: '説明',

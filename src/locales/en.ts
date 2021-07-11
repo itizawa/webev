@@ -91,7 +91,8 @@ export const en = {
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
   input_url: 'Input Url',
-  create_scrap: 'Create New Scrap',
+  create_scrap: 'Create Scrap',
+  scrap_description: 'Create scraps and make your own summary!',
   title: 'Title',
   scrap_title_placeholder: 'Read Scraps',
   description: 'Description',
