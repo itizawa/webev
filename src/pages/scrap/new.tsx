@@ -61,7 +61,7 @@ const Index: VFC = () => {
             {selectedPages.map((page) => {
               return (
                 <div key={page._id} className="mb-3">
-                  <OgpPreviewCard page={page} onClickCard={() => console.log(page)} />
+                  <OgpPreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
                 </div>
               );
             })}
