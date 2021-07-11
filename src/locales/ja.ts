@@ -26,6 +26,7 @@ export const ja = {
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
   toastr_update_emoji: '絵文字を更新しました',
+  toastr_create_scrap: 'スクラップを作成しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',

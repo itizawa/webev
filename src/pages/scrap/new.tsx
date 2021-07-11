@@ -1,22 +1,36 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState, VFC } from 'react';
 
 import { imagePath } from '~/const/imagePath';
+import { restClient } from '~/utils/rest-client';
 
 import { useLocale } from '~/hooks/useLocale';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const [scrapTitle, setScrapTitle] = useState('');
   const [isCreating, setIsCreating] = useState(false);
 
-  const handleSubmitCreateScrap = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmitCreateScrap = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setIsCreating(true);
+
+    try {
+      const res = await restClient.apiPost('/scraps', { scrap: { title: scrapTitle, body: '' } });
+      const { _id: scrapId } = res.data;
+      router.push(`/scrap/${scrapId}/edit`);
+
+      toastSuccess(t.toastr_create_scrap);
+    } catch (err) {
+      toastError(err);
+    }
   };
 
   return (
