@@ -12,7 +12,7 @@ export const en = {
   search: 'Search',
   save: 'Save',
   save_page: 'Save Page',
-  save_page_to_directory: 'Save Page to Directory',
+  save_page_to_directory: 'Add Page to Directory',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
