@@ -1,5 +1,6 @@
 import { useState, VFC } from 'react';
 
+import { Emoji } from 'emoji-mart';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
@@ -12,14 +13,15 @@ import { useAllPages } from '~/stores/page';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
+import { EditableInput } from '~/components/Atoms/EditableInput';
 
 const Index: VFC = () => {
   const { t } = useLocale();
   const [isAddPage, setIsAddPage] = useState(false);
   const [activePage, setActivePage] = useState(1);
+  const [searchKeyWord, setSearchKeyWord] = useState('');
 
-  const { data: paginationResult } = useAllPages({ activePage });
-  console.log(paginationResult);
+  const { data: paginationResult } = useAllPages({ activePage, searchKeyWord });
 
   return (
     <>
@@ -43,6 +45,10 @@ const Index: VFC = () => {
             <h2>Page</h2>
             {isAddPage && (
               <div className="p-3">
+                <div className="d-flex gap-1 align-items-center mb-3">
+                  <Emoji emoji="mag" size={18} />
+                  <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+                </div>
                 {paginationResult == null ? (
                   <div className="text-center pt-5">
                     <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
