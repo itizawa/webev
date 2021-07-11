@@ -7,7 +7,7 @@ import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   isOpen: boolean;
-  toggle: () => void;
+  toggle?: () => void;
   title: string;
 };
 
@@ -18,13 +18,15 @@ export const WebevModal: FC<Props> = (props) => {
     <Modal size="lg" isOpen={isOpen} toggle={toggle}>
       <StyledModalHeader className="bg-dark">
         {title}
-        <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CLOSE}
-          onClickButton={toggle}
-        />
+        {toggle != null && (
+          <IconButton
+            color={BootstrapColor.LIGHT}
+            buttonColor={BootstrapColor.SECONDARY}
+            activeColor={BootstrapColor.LIGHT}
+            icon={BootstrapIcon.CLOSE}
+            onClickButton={toggle}
+          />
+        )}
       </StyledModalHeader>
       <ModalBody className="bg-dark text-break">{children}</ModalBody>
     </Modal>
