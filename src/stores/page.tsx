@@ -72,9 +72,7 @@ export const usePageNotBelongDirectory = ({
   );
 };
 
-export const useAllPages = ({ activePage }: { activePage: number }): SWRResponse<PaginationResult<Page>, Error> => {
-  const { data: searchKeyWord } = useSearchKeyWord();
-
+export const useAllPages = ({ activePage, searchKeyWord }: { activePage: number; searchKeyWord: string }): SWRResponse<PaginationResult<Page>, Error> => {
   return useAuthenticationSWR(
     ['/pages/list', activePage, searchKeyWord],
     (endpoint, page, searchKeyWord) =>
