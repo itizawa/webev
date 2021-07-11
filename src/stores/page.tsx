@@ -71,3 +71,19 @@ export const usePageNotBelongDirectory = ({
     },
   );
 };
+
+export const useAllPages = ({ activePage }: { activePage: number }): SWRResponse<PaginationResult<Page>, Error> => {
+  const { data: searchKeyWord } = useSearchKeyWord();
+
+  return useAuthenticationSWR(
+    ['/pages/list', activePage, searchKeyWord],
+    (endpoint, page, searchKeyWord) =>
+      restClient
+        .apiGet(`${endpoint}?status[]=stocked&status[]=archived&limit=30&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`)
+        .then((result) => result.data),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
+  );
+};
