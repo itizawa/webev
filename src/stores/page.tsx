@@ -52,9 +52,8 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
   );
 };
 
-export const usePageNotBelongDirectory = (): SWRResponse<PaginationResult<Page>, Error> => {
+export const usePageNotBelongDirectory = (searchKeyWord: string): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
-  const { data: searchKeyWord } = useSearchKeyWord();
 
   return useAuthenticationSWR(
     ['/pages/list', activePage, searchKeyWord],

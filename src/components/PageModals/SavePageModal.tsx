@@ -22,12 +22,13 @@ export const SavePageModal: VFC = () => {
   const { t } = useLocale();
 
   const [url, setUrl] = useState('');
+  const [searchKeyWord, setSearchKeyWord] = useState('');
 
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
-  const { data: paginationResult } = usePageNotBelongDirectory();
+  const { data: paginationResult } = usePageNotBelongDirectory(searchKeyWord);
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
@@ -57,8 +58,8 @@ export const SavePageModal: VFC = () => {
     mutateDirectoryForSavePage(null);
   };
 
-  const updateDirectroyName = async () => {
-    console.log('hoge');
+  const updateDirectroyName = async (searchWord: string) => {
+    setSearchKeyWord(searchWord);
   };
 
   return (
@@ -90,7 +91,7 @@ export const SavePageModal: VFC = () => {
         <hr className="mt-4" />
         <div className="d-flex gap-1 align-items-center mb-3">
           <Emoji emoji="mag" size={18} />
-          <EditableInput onSubmit={updateDirectroyName} value="" placeholder="Search..." />
+          <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
         </div>
         {paginationResult?.docs.map((page) => {
           return (
