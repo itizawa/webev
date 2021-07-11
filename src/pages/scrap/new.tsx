@@ -13,7 +13,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
+      <WebevOgpHead title={`Webev | ${t.create_scrap}`} />
       <LoginRequiredWrapper>
         <div className="row pt-4">
           <div className="col-12 offset-md-2 col-md-8">
