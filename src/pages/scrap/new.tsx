@@ -38,6 +38,13 @@ const Index: VFC = () => {
     setIsAddPage(false);
   };
 
+  const removePageFromSelectedPages = (page: Page) => {
+    setSelectedPages((prevState) => {
+      return prevState.filter((v) => v !== page);
+    });
+    setIsAddPage(false);
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
@@ -61,7 +68,7 @@ const Index: VFC = () => {
             {selectedPages.map((page) => {
               return (
                 <div key={page._id} className="mb-3">
-                  <OgpPreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
+                  <OgpPreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} onClickClearButton={() => removePageFromSelectedPages(page)} />
                 </div>
               );
             })}
@@ -82,6 +89,9 @@ const Index: VFC = () => {
                   <>
                     <StyledDiv className=" overflow-scroll">
                       {paginationResult.docs.map((page) => {
+                        if (selectedPages.includes(page)) {
+                          return null;
+                        }
                         return (
                           <div key={page._id} className="mb-3">
                             <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
