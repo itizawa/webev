@@ -45,7 +45,7 @@ const Index: VFC = () => {
                 />
               </div>
               <div className="text-center">
-                <button className="btn btn-purple btn-lg mt-3" disabled={isCreating}>
+                <button className="btn btn-purple btn-lg mt-3" disabled={scrapTitle.trim() === '' || isCreating}>
                   {t.create_scrap}
                 </button>
               </div>
