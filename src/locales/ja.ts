@@ -12,7 +12,6 @@ export const ja = {
   search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
-  save_page_to_directory: 'Directory にページを追加する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
@@ -64,6 +63,8 @@ export const ja = {
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
+  save_page_to_directory: 'ディレクトリにページを追加する',
+  add_page_already_saved: 'すでに保存しているページを追加する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
 

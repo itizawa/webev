@@ -12,7 +12,6 @@ export const en = {
   search: 'Search',
   save: 'Save',
   save_page: 'Save Page',
-  save_page_to_directory: 'Add Page to Directory',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
@@ -64,6 +63,8 @@ export const en = {
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
   rename_directory: 'Rename Directory',
+  save_page_to_directory: 'Add Page to Directory',
+  add_page_already_saved: 'Add Page Saved Already',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 

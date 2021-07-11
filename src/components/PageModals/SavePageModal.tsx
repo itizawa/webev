@@ -89,6 +89,7 @@ export const SavePageModal: VFC = () => {
           </div>
         </div>
         <hr className="mt-4" />
+        <p>{t.add_page_already_saved}</p>
         <div className="d-flex gap-1 align-items-center mb-3">
           <Emoji emoji="mag" size={18} />
           <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
