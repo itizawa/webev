@@ -69,6 +69,7 @@ export const SavePageModal: VFC = () => {
       });
       toastSuccess(t.toastr_success_add_directory);
       mutatePageNotBelongDirectory();
+      pageListMutate();
     } catch (error) {
       console.log(error);
       toastError(error);
