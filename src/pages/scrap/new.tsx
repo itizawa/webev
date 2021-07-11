@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
+
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { IconButton } from '~/components/Icons/IconButton';
@@ -15,13 +16,27 @@ import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 
+import { Page } from '~/domains/Page';
+
 const Index: VFC = () => {
   const { t } = useLocale();
   const [isAddPage, setIsAddPage] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [searchKeyWord, setSearchKeyWord] = useState('');
 
+  const [selectedPages, setSelectedPages] = useState<Page[]>([]);
+
   const { data: paginationResult } = useAllPages({ activePage, searchKeyWord });
+
+  const addPageToSelectedPages = (page: Page) => {
+    if (selectedPages.includes(page)) {
+      return setIsAddPage(false);
+    }
+    setSelectedPages((prevState) => {
+      return [...prevState, page];
+    });
+    setIsAddPage(false);
+  };
 
   return (
     <>
@@ -43,6 +58,13 @@ const Index: VFC = () => {
               <textarea className="form-control bg-white" id="scrap-body" placeholder={t.scrap_description_placeholder} rows={3} />
             </div>
             <h2>Page</h2>
+            {selectedPages.map((page) => {
+              return (
+                <div key={page._id} className="mb-3">
+                  <OgpPreviewCard page={page} onClickCard={() => console.log(page)} />
+                </div>
+              );
+            })}
             {isAddPage && (
               <div className="p-3 border border-secondary">
                 <div className="d-flex gap-1 align-items-center mb-3">
@@ -62,7 +84,7 @@ const Index: VFC = () => {
                       {paginationResult.docs.map((page) => {
                         return (
                           <div key={page._id} className="mb-3">
-                            <OgpPreviewCard page={page} onClickCard={() => console.log(page._id)} />
+                            <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
                           </div>
                         );
                       })}
