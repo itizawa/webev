@@ -6,6 +6,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { EditableInput } from '~/components/Atoms/EditableInput';
+import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
@@ -24,7 +25,6 @@ export const SavePageModal: VFC = () => {
   const { mutate: pageListMutate } = usePageListSWR();
   const { data: paginationResult } = usePageNotBelongDirectory();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
-  console.log(paginationResult);
 
   useEffect(() => {
     if (urlFromClipBoard != null) {
@@ -75,10 +75,17 @@ export const SavePageModal: VFC = () => {
           </div>
         </div>
         <hr className="mt-4" />
-        <div className="d-flex gap-1 align-items-center">
+        <div className="d-flex gap-1 align-items-center mb-3">
           <Emoji emoji="mag" size={18} />
           <EditableInput onSubmit={updateDirectroyName} value="" placeholder="Search..." />
         </div>
+        {paginationResult?.docs.map((page) => {
+          return (
+            <div key={page._id} className="mb-3">
+              <OgpPreviewCard page={page} />
+            </div>
+          );
+        })}
       </ModalBody>
     </Modal>
   );
