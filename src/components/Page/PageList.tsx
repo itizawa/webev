@@ -9,6 +9,8 @@ import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { OgpListItem } from '~/components/organisms/OgpListItem';
 import { OgpCard } from '~/components/organisms/OgpCard';
 
+import { useActivePage } from '~/stores/page';
+
 type Props = {
   pages: Page[];
   pagingLimit: number;
@@ -19,6 +21,7 @@ type Props = {
 export const PageList: VFC<Props> = (props) => {
   const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
+  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
 
   return (
     <div className="row">
@@ -42,7 +45,7 @@ export const PageList: VFC<Props> = (props) => {
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} />
+          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={mutateActivePage} />
         </div>
       )}
     </div>

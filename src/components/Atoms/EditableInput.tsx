@@ -35,7 +35,7 @@ export const EditableInput: VFC<Props> = (props) => {
 
   return (
     <StyledInput
-      className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} pt-0 pb-2 pb-md-0 w-100`}
+      className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} py-0 pb-md-0 w-100`}
       onChange={(e) => setInputValue(e.target.value)}
       onKeyPress={handleKeyPress}
       value={inputValue || ''}

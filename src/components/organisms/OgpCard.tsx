@@ -110,7 +110,7 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                 <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
-              {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+              {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_ARCHIVE && (
                 <DropdownItem tag="button" onClick={switchArchive}>
                   <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
                   <span className="ms-2 text-nowrap">{t.return_button}</span>

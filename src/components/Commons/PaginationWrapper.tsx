@@ -1,16 +1,16 @@
 import { VFC } from 'react';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useActivePage } from '~/stores/page';
 
 type Props = {
   totalItemsCount: number;
   pagingLimit: number;
+  activePage: number;
+  mutateActivePage: (page: number) => void;
 };
 
 export const PaginationWrapper: VFC<Props> = (props) => {
-  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
-  const { totalItemsCount, pagingLimit } = props;
+  const { totalItemsCount, pagingLimit, activePage, mutateActivePage } = props;
 
   const handlePaginationButton = (page: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

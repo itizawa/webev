@@ -64,6 +64,8 @@ export const en = {
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
   rename_directory: 'Rename Directory',
+  save_page_to_directory: 'Add Page to Directory',
+  add_page_already_saved: 'Add Page Saved Already',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 
@@ -88,6 +90,7 @@ export const en = {
   tutorial_desc2: 'Immediately, I saved how to use Webev！',
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
+  input_url: 'Input Url',
   create_scrap: 'Create New Scrap',
   title: 'Title',
   scrap_title_placeholder: 'Read Scraps',
