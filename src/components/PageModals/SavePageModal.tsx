@@ -1,9 +1,6 @@
 import { VFC, useState, useEffect } from 'react';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Emoji } from 'emoji-mart';
 import Loader from 'react-loader-spinner';
-
-import styled from 'styled-components';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -12,14 +9,13 @@ import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
-import { IconButton } from '~/components/Icons/IconButton';
+import { WebevModal } from '~/components/Atoms/WebevModal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 export const SavePageModal: VFC = () => {
   const { t } = useLocale();
@@ -81,73 +77,55 @@ export const SavePageModal: VFC = () => {
   };
 
   return (
-    <Modal size="lg" isOpen={directoryForSavePage != null} toggle={closeModal}>
-      <StyledModalHeader className="bg-dark">
-        {t.save_page_to_directory}
-        <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CLOSE}
-          onClickButton={closeModal}
-        />
-      </StyledModalHeader>
-      <ModalBody className="bg-dark text-break">
-        <div className="row align-items-center">
-          <div className="col-12 col-md-3 text-md-end">
-            <span>{t.input_url}</span>
-          </div>
-          <div className="col-12 col-md-9">
-            <form className="input-group my-2" onSubmit={handleSubmit}>
-              <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
-              <button className="btn btn-success" type="submit" disabled={url.trim() === ''}>
-                {t.save}
-              </button>
-            </form>
-          </div>
+    <WebevModal isOpen={directoryForSavePage != null} toggle={closeModal} title={t.save_page_to_directory}>
+      <div className="row align-items-center">
+        <div className="col-12 col-md-3 text-md-end">
+          <span>{t.input_url}</span>
         </div>
-        <hr className="mt-4" />
-        <p>{t.add_page_already_saved}</p>
-        <div className="d-flex gap-1 align-items-center mb-3">
-          <Emoji emoji="mag" size={18} />
-          <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+        <div className="col-12 col-md-9">
+          <form className="input-group my-2" onSubmit={handleSubmit}>
+            <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
+            <button className="btn btn-success" type="submit" disabled={url.trim() === ''}>
+              {t.save}
+            </button>
+          </form>
         </div>
-        {paginationResult == null ? (
-          <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-          </div>
-        ) : (
-          <>
-            {paginationResult.docs.map((page) => {
-              return (
-                <div key={page._id} className="mb-3">
-                  <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
-                </div>
-              );
-            })}
-            {paginationResult.docs.length === 0 ? (
-              <div className="col-12">
-                <NoPageAlert />
+      </div>
+      <hr className="mt-4" />
+      <p>{t.add_page_already_saved}</p>
+      <div className="d-flex gap-1 align-items-center mb-3">
+        <Emoji emoji="mag" size={18} />
+        <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+      </div>
+      {paginationResult == null ? (
+        <div className="text-center pt-5">
+          <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+        </div>
+      ) : (
+        <>
+          {paginationResult.docs.map((page) => {
+            return (
+              <div key={page._id} className="mb-3">
+                <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
               </div>
-            ) : (
-              <div className="text-center">
-                <PaginationWrapper
-                  pagingLimit={paginationResult.limit}
-                  totalItemsCount={paginationResult.totalDocs}
-                  activePage={activePage}
-                  mutateActivePage={(number) => setActivePage(number)}
-                />
-              </div>
-            )}
-          </>
-        )}
-      </ModalBody>
-    </Modal>
+            );
+          })}
+          {paginationResult.docs.length === 0 ? (
+            <div className="col-12">
+              <NoPageAlert />
+            </div>
+          ) : (
+            <div className="text-center">
+              <PaginationWrapper
+                pagingLimit={paginationResult.limit}
+                totalItemsCount={paginationResult.totalDocs}
+                activePage={activePage}
+                mutateActivePage={(number) => setActivePage(number)}
+              />
+            </div>
+          )}
+        </>
+      )}
+    </WebevModal>
   );
 };
-
-const StyledModalHeader = styled(ModalHeader)`
-  .modal-title {
-    display: contents;
-  }
-`;

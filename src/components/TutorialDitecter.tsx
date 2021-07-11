@@ -1,7 +1,6 @@
 import { VFC } from 'react';
 
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-
+import { WebevModal } from './Atoms/WebevModal';
 import { restClient } from '~/utils/rest-client';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -33,9 +32,8 @@ export const TutorialDitecter: VFC = () => {
   };
 
   return (
-    <Modal isOpen={!currentUser?.isExecutedTutorial}>
-      <ModalHeader className="bg-dark">{t.welcome_webev}</ModalHeader>
-      <ModalBody className="bg-dark text-break text-center">
+    <WebevModal isOpen={!currentUser?.isExecutedTutorial} title={t.welcome_webev}>
+      <div className="text-center">
         <h3>🎉 {t.welcome_webev} 🎉</h3>
         <p>
           {t.tutorial_desc1}
@@ -48,7 +46,7 @@ export const TutorialDitecter: VFC = () => {
             OK
           </button>
         </div>
-      </ModalBody>
-    </Modal>
+      </div>
+    </WebevModal>
   );
 };

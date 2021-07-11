@@ -1,7 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
+import { WebevModal } from '../Atoms/WebevModal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -48,16 +48,13 @@ export const RenameDirectoryModal: VFC = () => {
   };
 
   return (
-    <Modal isOpen={directoryForRename != null} toggle={closeDeleteModal}>
-      <ModalHeader className="bg-dark">{t.rename_directory}</ModalHeader>
-      <ModalBody className="bg-dark text-break">
-        <form className="input-group my-2" onSubmit={handleSubmit}>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-          <button className="btn btn-success" type="submit" disabled={name.trim() === '' || name === directoryForRename?.name}>
-            {t.save}
-          </button>
-        </form>
-      </ModalBody>
-    </Modal>
+    <WebevModal isOpen={directoryForRename != null} toggle={closeDeleteModal} title={t.rename_directory}>
+      <form className="input-group my-2" onSubmit={handleSubmit}>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+        <button className="btn btn-success" type="submit" disabled={name.trim() === '' || name === directoryForRename?.name}>
+          {t.save}
+        </button>
+      </form>
+    </WebevModal>
   );
 };
