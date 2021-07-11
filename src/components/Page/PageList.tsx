@@ -21,7 +21,7 @@ type Props = {
 export const PageList: VFC<Props> = (props) => {
   const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
-  const { data: activePage } = useActivePage();
+  const { data: activePage = 1 } = useActivePage();
 
   return (
     <div className="row">
