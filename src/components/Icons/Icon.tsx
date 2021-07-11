@@ -18,6 +18,12 @@ const SerachIcon: VFC = () => (
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
 );
 
+const CloseIcon: VFC = () => (
+  <>
+    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+  </>
+);
+
 const PlusBoardIcon: VFC = () => (
   <>
     <path fillRule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
@@ -172,6 +178,7 @@ const Gear: VFC = () => (
 const IconComponentMapping = {
   [BootstrapIcon.HOME]: <HomeIcon />,
   [BootstrapIcon.SEARCH]: <SerachIcon />,
+  [BootstrapIcon.CLOSE]: <CloseIcon />,
   [BootstrapIcon.PLUS_BOARD]: <PlusBoardIcon />,
   [BootstrapIcon.PLUS_DOTTED]: <PlusDottedIcon />,
   [BootstrapIcon.CHECK]: <CheckIcon />,

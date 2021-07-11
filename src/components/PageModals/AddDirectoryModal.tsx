@@ -30,7 +30,7 @@ export const AddDirectoryModal: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
-  const addPageTODirectory = async (directoryId: string) => {
+  const addPageToDirectory = async (directoryId: string) => {
     try {
       await restClient.apiPut(`/pages/${pageForAddDirectory?._id}/directories`, {
         directoryId,
@@ -82,7 +82,7 @@ export const AddDirectoryModal: VFC = () => {
           </div>
           <StyledDiv className="col-12 col-md-5">
             {allParentDirectories.map((directory) => {
-              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageTODirectory} activeDirectoryId={directoryId as string} />;
+              return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={addPageToDirectory} activeDirectoryId={directoryId as string} />;
             })}
             <StyledCreateFormDiv className="text-center mx-3 mt-2">
               {isCreatingNewDirectory ? (

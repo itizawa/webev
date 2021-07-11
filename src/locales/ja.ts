@@ -63,6 +63,8 @@ export const ja = {
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
+  save_page_to_directory: 'ディレクトリにページを追加する',
+  add_page_already_saved: 'すでに保存しているページを追加する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
 
@@ -86,4 +88,6 @@ export const ja = {
   tutorial_desc1: 'Webev はブックマークを画像で管理する web アプリです。',
   tutorial_desc2: '早速、Webev の使い方を保存します！',
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
+
+  input_url: 'Url を入力する',
 };
