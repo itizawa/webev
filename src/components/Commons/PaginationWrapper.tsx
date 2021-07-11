@@ -6,11 +6,12 @@ import { useActivePage } from '~/stores/page';
 type Props = {
   totalItemsCount: number;
   pagingLimit: number;
+  activePage: number;
 };
 
 export const PaginationWrapper: VFC<Props> = (props) => {
-  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
-  const { totalItemsCount, pagingLimit } = props;
+  const { mutate: mutateActivePage } = useActivePage();
+  const { totalItemsCount, pagingLimit, activePage } = props;
 
   const handlePaginationButton = (page: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
