@@ -1,6 +1,6 @@
 import { VFC, useState } from 'react';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
+import { WebevModal } from '../Atoms/WebevModal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -40,17 +40,14 @@ export const CreateDirectoryModal: VFC = () => {
   };
 
   return (
-    <Modal isOpen={parentDirectoryForCreateDirectory != null} toggle={closeDeleteModal}>
-      <ModalHeader className="bg-dark">{t.create_directory}</ModalHeader>
-      <ModalBody className="bg-dark text-break">
-        {parentDirectoryForCreateDirectory != null && <p className="text-center">{t.create_child_directory(parentDirectoryForCreateDirectory.name)}</p>}
-        <form className="input-group my-2" onSubmit={handleSubmitCreateDirectory}>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-          <button className="btn btn-success" type="submit">
-            {t.create}
-          </button>
-        </form>
-      </ModalBody>
-    </Modal>
+    <WebevModal isOpen={parentDirectoryForCreateDirectory != null} toggle={closeDeleteModal} title={t.create_directory}>
+      {parentDirectoryForCreateDirectory != null && <p className="text-center">{t.create_child_directory(parentDirectoryForCreateDirectory.name)}</p>}
+      <form className="input-group my-2" onSubmit={handleSubmitCreateDirectory}>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+        <button className="btn btn-success" type="submit">
+          {t.create}
+        </button>
+      </form>
+    </WebevModal>
   );
 };
