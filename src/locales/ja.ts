@@ -12,6 +12,7 @@ export const ja = {
   search: '検索',
   save: '保存',
   save_page: 'ページを保存する',
+  save_page_to_directory: 'Directory にページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,

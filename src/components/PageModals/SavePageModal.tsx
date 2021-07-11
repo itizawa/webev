@@ -65,7 +65,7 @@ export const SavePageModal: VFC = () => {
   return (
     <Modal size="lg" isOpen={directoryForSavePage != null} toggle={closeModal}>
       <StyledModalHeader className="bg-dark">
-        {t.save_page}
+        {t.save_page_to_directory}
         <IconButton
           color={BootstrapColor.LIGHT}
           buttonColor={BootstrapColor.SECONDARY}
