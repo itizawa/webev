@@ -5,19 +5,28 @@ import styled from 'styled-components';
 import { imagePath } from '~/const/imagePath';
 
 import { Page } from '~/domains/Page';
+import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 const MAX_WORD_COUNT_OF_BODY = 40;
 
 type Props = {
   page: Page;
   onClickCard: () => void;
+  onClickClearButton?: () => void;
 };
 
-export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard }) => {
+export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearButton }) => {
   const { url, image, favicon, title, description } = page;
 
+  const handleClickClearButton = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (onClickClearButton != null) {
+      onClickClearButton();
+    }
+  };
+
   return (
-    <StyledDiv role="button" className="d-flex overflow-hidden" onClick={onClickCard}>
+    <StyledDiv role="button" className="d-flex" onClick={onClickCard}>
       <StyledImg
         height="100px"
         width="100px"
@@ -27,7 +36,12 @@ export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard }) => {
         referrerPolicy="no-referrer"
         decoding="sync"
       />
-      <StyledDivRgiht className="px-3 py-2 d-flex flex-column">
+      <StyledDivRgiht className="px-3 py-2 d-flex flex-column position-relative">
+        {!!onClickClearButton && (
+          <StyledButton type="button" className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill" onClick={handleClickClearButton}>
+            ×
+          </StyledButton>
+        )}
         <StyledTitle className="small fw-bold text-break mb-0">{title || url}</StyledTitle>
         <StyledDescription className="small text-truncate mb-0">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
@@ -58,12 +72,22 @@ const StyledDiv = styled.div`
   background: #333;
   border-radius: 8px;
 
+  button {
+    @media (min-width: ${BootstrapBreakpoints.md}px) {
+      display: none;
+    }
+  }
+
   :hover {
     opacity: 0.8;
+    button {
+      display: block;
+    }
   }
 `;
 
 const StyledImg = styled.img`
+  border-radius: 8px 0px 0px 8px;
   object-fit: cover;
 `;
 
@@ -84,4 +108,8 @@ const StyledDescription = styled.p`
 
 const StyledUrl = styled.p`
   font-size: 0.75rem;
+`;
+
+const StyledButton = styled.button`
+  transform: translate(30%, -30%);
 `;

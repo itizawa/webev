@@ -26,6 +26,7 @@ export const ja = {
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
   toastr_update_emoji: '絵文字を更新しました',
+  toastr_create_scrap: 'スクラップを作成しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
@@ -41,6 +42,7 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
   user: 'ユーザーページ',
+  scrap: '記事',
 
   return_news_list: 'ニュースリストに戻る',
 
@@ -90,4 +92,11 @@ export const ja = {
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
   input_url: 'Url を入力する',
+
+  create_scrap: 'スクラップを作成する',
+  scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
+  title: 'タイトル',
+  scrap_title_placeholder: '今日読んだ記事',
+  description: '説明',
+  scrap_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
 };

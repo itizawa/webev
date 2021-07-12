@@ -26,6 +26,7 @@ export const en = {
   toastr_update_directory_name: 'Update Directory Name',
   toastr_update_directory_description: 'Update Directory Description',
   toastr_update_emoji: 'Update Directory Emoji',
+  toastr_create_scrap: 'Create Scrap',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
@@ -41,6 +42,7 @@ export const en = {
   news: 'News',
   share: 'Share',
   user: 'User Page',
+  scrap: 'Scrap',
 
   return_news_list: 'Return News List',
 
@@ -90,4 +92,10 @@ export const en = {
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
   input_url: 'Input Url',
+  create_scrap: 'Create Scrap',
+  scrap_description: 'Create scraps and make your own summary!',
+  title: 'Title',
+  scrap_title_placeholder: 'Read Scraps',
+  description: 'Description',
+  scrap_description_placeholder: 'ex) I tried to summarize the scraps I read today!',
 };
