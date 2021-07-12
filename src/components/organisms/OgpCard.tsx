@@ -80,7 +80,7 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   }, [allDirectories, page.directoryId]);
 
   return (
-    <StyledCard className="card border-0 shadow h-100">
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       <a href={url} target="blank" rel="noopener noreferrer">
         <FixedImage imageUrl={image} />
       </a>
