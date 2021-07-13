@@ -3,6 +3,7 @@ import { useState, VFC } from 'react';
 import { Emoji } from 'emoji-mart';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -17,9 +18,16 @@ import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 
 import { Page } from '~/domains/Page';
+import { useScrapById } from '~/stores/scrap';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
+  const { id: scrapId } = router.query;
+
+  const { data: scrap } = useScrapById({ scrapId: scrapId as string });
+  console.log(scrap);
+
   const [isAddPage, setIsAddPage] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [searchKeyWord, setSearchKeyWord] = useState('');
