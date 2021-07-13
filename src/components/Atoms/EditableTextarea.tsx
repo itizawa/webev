@@ -31,7 +31,7 @@ export const EditableTextares: VFC<Props> = (props) => {
 
   return (
     <StyledInput
-      className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} py-0 pb-md-0 w-100`}
+      className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} pb-md-0 w-100`}
       onChange={(e) => setInputValue(e.target.value)}
       onBlur={handleKeyPress}
       value={inputValue || ''}
