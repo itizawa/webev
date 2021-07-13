@@ -20,6 +20,7 @@ import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 
 import { Page } from '~/domains/Page';
 import { useScrapById } from '~/stores/scrap';
+import { EditableTextares } from '~/components/Atoms/EditableTextarea';
 
 const emojiSize = 40;
 
@@ -29,7 +30,6 @@ const Index: VFC = () => {
   const { id: scrapId } = router.query;
 
   const { data: scrap } = useScrapById({ scrapId: scrapId as string });
-  console.log(scrap);
 
   const [isAddPage, setIsAddPage] = useState(false);
   const [activePage, setActivePage] = useState(1);
@@ -116,12 +116,7 @@ const Index: VFC = () => {
               )}
               <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
             </div>
-            <div className="mb-3">
-              <label htmlFor="scrap-body" className="form-label">
-                {t.description}
-              </label>
-              <textarea className="form-control bg-white" id="scrap-body" placeholder={t.scrap_description_placeholder} rows={3} />
-            </div>
+            <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
             <h2>Page</h2>
             {selectedPages.map((page) => {
               return (
