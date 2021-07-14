@@ -35,11 +35,13 @@ export const Navbar: VFC = () => {
           </div>
         )}
         {session == null && !loading && (
-          <Link href="/login">
-            <span className="mb-0 text-white" role="button">
-              Login
-            </span>
-          </Link>
+          <div className="d-flex align-items-center justify-content-end">
+            <Link href="/login">
+              <span className="mb-0 text-white" role="button">
+                Login
+              </span>
+            </Link>
+          </div>
         )}
       </div>
     </StyledDiv>
