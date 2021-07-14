@@ -15,8 +15,8 @@ export const Sidebar: VFC = () => {
 
   const navbarItemMappings = [
     { text: t.home, url: '/home', icon: BootstrapIcon.HOME },
-    { text: t.read, url: '/read', icon: BootstrapIcon.CHECK },
     { text: t.directory, url: '/directory', icon: BootstrapIcon.DIRECTORY },
+    { text: t.scrap, url: '/scrap', icon: BootstrapIcon.SCRAP },
   ];
 
   return (
@@ -49,8 +49,8 @@ const StyledList = styled.li<{ isActive: boolean }>`
     isActive
       ? `
     margin-top: 0px;
-    background-color: #00acc1;
-    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
+    background-color: #6f42c1;
+    box-shadow: 0 12px 20px -10px rgba(111, 66, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(111, 66, 193, 0.2);
   `
       : `:hover {
     background-color: rgba(200, 200, 200, 0.2);

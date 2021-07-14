@@ -100,86 +100,92 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
       <LoginRequiredWrapper>
-        <div className="row pt-4">
-          <div className="col-12 offset-md-2 col-md-8">
-            <div className="d-flex gap-3 align-items-center my-2">
-              <div ref={emojiRef}>
-                <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
-              </div>
-              {isEmojiSettingMode && (
-                <>
-                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
-                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
-                  </StyledEmojiPickerWrapper>
-                </>
-              )}
-              <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
-            </div>
-            <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
-            <h2>Page</h2>
-            {selectedPages.map((page) => {
-              return (
-                <div key={page._id} className="mb-3">
-                  <OgpPreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} onClickClearButton={() => removePageFromSelectedPages(page)} />
+        <div className="p-3">
+          <div className="row">
+            <div className="col-12">
+              <div className="d-flex gap-3 align-items-center my-2">
+                <div ref={emojiRef}>
+                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
-              );
-            })}
-            {isAddPage && (
-              <div className="p-3 border border-secondary">
-                <div className="d-flex gap-1 align-items-center mb-3">
-                  <Emoji emoji="mag" size={18} />
-                  <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
-                  <button className="btn btn-secondary btn-sm text-nowrap" onClick={() => setIsAddPage(false)}>
-                    {t.cancel}
-                  </button>
-                </div>
-                {paginationResult == null ? (
-                  <div className="text-center pt-5">
-                    <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-                  </div>
-                ) : (
+                {isEmojiSettingMode && (
                   <>
-                    <StyledDiv className=" overflow-scroll">
-                      {paginationResult.docs.map((page) => {
-                        if (selectedPages.includes(page)) {
-                          return null;
-                        }
-                        return (
-                          <div key={page._id} className="mb-3">
-                            <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
-                          </div>
-                        );
-                      })}
-                    </StyledDiv>
-                    {paginationResult.docs.length === 0 ? (
-                      <div className="col-12">
-                        <NoPageAlert />
-                      </div>
-                    ) : (
-                      <div className="text-center mt-3">
-                        <PaginationWrapper
-                          pagingLimit={paginationResult.limit}
-                          totalItemsCount={paginationResult.totalDocs}
-                          activePage={activePage}
-                          mutateActivePage={(number) => setActivePage(number)}
-                        />
-                      </div>
-                    )}
+                    <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                    <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                      <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                    </StyledEmojiPickerWrapper>
                   </>
                 )}
+                <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
               </div>
-            )}
-            {!isAddPage && (
-              <StyledIconButtonWrapper className="text-center mt-3">
-                <IconButton
-                  icon={BootstrapIcon.PLUS_DOTTED}
-                  color={BootstrapColor.LIGHT}
-                  activeColor={BootstrapColor.LIGHT}
-                  onClickButton={() => setIsAddPage(true)}
-                />
-              </StyledIconButtonWrapper>
-            )}
+              <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
+              <h2>Page</h2>
+              {selectedPages.map((page) => {
+                return (
+                  <div key={page._id} className="mb-3">
+                    <OgpPreviewCard
+                      page={page}
+                      onClickCard={() => window.open(page.url, '_blank')}
+                      onClickClearButton={() => removePageFromSelectedPages(page)}
+                    />
+                  </div>
+                );
+              })}
+              {isAddPage && (
+                <div className="p-3 border border-secondary">
+                  <div className="d-flex gap-1 align-items-center mb-3">
+                    <Emoji emoji="mag" size={18} />
+                    <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+                    <button className="btn btn-secondary btn-sm text-nowrap" onClick={() => setIsAddPage(false)}>
+                      {t.cancel}
+                    </button>
+                  </div>
+                  {paginationResult == null ? (
+                    <div className="text-center pt-5">
+                      <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+                    </div>
+                  ) : (
+                    <>
+                      <StyledDiv className=" overflow-scroll">
+                        {paginationResult.docs.map((page) => {
+                          if (selectedPages.includes(page)) {
+                            return null;
+                          }
+                          return (
+                            <div key={page._id} className="mb-3">
+                              <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
+                            </div>
+                          );
+                        })}
+                      </StyledDiv>
+                      {paginationResult.docs.length === 0 ? (
+                        <div className="col-12">
+                          <NoPageAlert />
+                        </div>
+                      ) : (
+                        <div className="text-center mt-3">
+                          <PaginationWrapper
+                            pagingLimit={paginationResult.limit}
+                            totalItemsCount={paginationResult.totalDocs}
+                            activePage={activePage}
+                            mutateActivePage={(number) => setActivePage(number)}
+                          />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              )}
+              {!isAddPage && (
+                <StyledIconButtonWrapper className="text-center mt-3">
+                  <IconButton
+                    icon={BootstrapIcon.PLUS_DOTTED}
+                    color={BootstrapColor.LIGHT}
+                    activeColor={BootstrapColor.LIGHT}
+                    onClickButton={() => setIsAddPage(true)}
+                  />
+                </StyledIconButtonWrapper>
+              )}
+            </div>
           </div>
         </div>
       </LoginRequiredWrapper>

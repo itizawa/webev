@@ -17,29 +17,38 @@ export const Navbar: VFC = () => {
   }
 
   return (
-    <StyledDiv className="navbar container">
-      <Link href="/">
-        <span className="navbar-brand mb-0 text-white fw-bold" role="button">
-          Webev
-        </span>
-      </Link>
-      {session != null && !isMaintenanceMode && (
-        <div className="col col-md-6 my-md-0 my-2 me-2">
-          <InputForm />
-        </div>
-      )}
-      {session == null && !loading && (
-        <Link href="/login">
-          <span className="mb-0 text-white" role="button">
-            Login
+    <StyledDiv className="navbar mx-auto row">
+      <div className="col-3">
+        <Link href="/">
+          <span className="navbar-brand mb-0 text-white fw-bold" role="button">
+            Webev
           </span>
         </Link>
-      )}
-      {session != null && <PersonalDropdown />}
+      </div>
+      <div className="col-9">
+        {session != null && !isMaintenanceMode && (
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="col col-md-9 my-md-0 my-0 me-2">
+              <InputForm />
+            </div>
+            <PersonalDropdown />
+          </div>
+        )}
+        {session == null && !loading && (
+          <div className="d-flex align-items-center justify-content-end">
+            <Link href="/login">
+              <span className="mb-0 text-white" role="button">
+                Login
+              </span>
+            </Link>
+          </div>
+        )}
+      </div>
     </StyledDiv>
   );
 };
 
 const StyledDiv = styled.div`
+  max-width: 1240px;
   min-height: 56px;
 `;
