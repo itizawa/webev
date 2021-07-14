@@ -42,7 +42,7 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
   user: 'ユーザーページ',
-  scrap: '記事',
+  scrap: 'スクラップ',
 
   return_news_list: 'ニュースリストに戻る',
 
