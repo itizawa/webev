@@ -3,6 +3,7 @@ import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 import style from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 import { toastSuccess } from '~/utils/toastr';
 
@@ -45,7 +46,7 @@ export const PersonalDropdown: VFC = () => {
   };
 
   if (currentUer == null) {
-    return null;
+    return <Loader type="Oval" color="#00BFFF" height={32} width={32} />;
   }
 
   return (
