@@ -14,8 +14,8 @@ export const Footer: FC = () => {
 
   return (
     <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
-      <div className="container d-flex">
-        <div>
+      <StyledDiv className="row mx-auto">
+        <div className="col-9">
           <h5 className="text-muted mb-0 text-white">Webev</h5>
           <ul className="ps-0">
             <li className="list-unstyled my-1" role="button">
@@ -43,37 +43,43 @@ export const Footer: FC = () => {
             <a className="text-muted webev-anchor">Japanese</a>
           </Link>
         </div>
-        <div id="github-link-button" className="ms-auto">
-          <IconButton
-            width={24}
-            height={24}
-            icon={BootstrapIcon.GITHUB}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.SECONDARY}
-            onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
-          />
+        <div className="col-3 d-flex">
+          <div id="github-link-button" className="ms-auto">
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.GITHUB}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.SECONDARY}
+              onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target="github-link-button">
+            Webev is OSS
+          </UncontrolledTooltip>
+          <div id="twitter-link-button">
+            <IconButton
+              width={24}
+              height={24}
+              icon={BootstrapIcon.TWITTER}
+              color={BootstrapColor.SECONDARY}
+              activeColor={BootstrapColor.SECONDARY}
+              onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
+            />
+          </div>
+          <UncontrolledTooltip placement="top" target="twitter-link-button">
+            Please feel free to contact me!
+          </UncontrolledTooltip>
         </div>
-        <UncontrolledTooltip placement="top" target="github-link-button">
-          Webev is OSS
-        </UncontrolledTooltip>
-        <div id="twitter-link-button">
-          <IconButton
-            width={24}
-            height={24}
-            icon={BootstrapIcon.TWITTER}
-            color={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.SECONDARY}
-            onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
-          />
-        </div>
-        <UncontrolledTooltip placement="top" target="twitter-link-button">
-          Please feel free to contact me!
-        </UncontrolledTooltip>
-      </div>
+      </StyledDiv>
     </StyledFooter>
   );
 };
 
 const StyledFooter = styled.footer`
   padding-bottom: 80px;
+`;
+
+const StyledDiv = styled.div`
+  max-width: 1240px;
 `;
