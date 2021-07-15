@@ -4,6 +4,7 @@ import { VFC, useState, MouseEvent } from 'react';
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 import styled from 'styled-components';
 
+import { Emoji } from 'emoji-mart';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
@@ -46,7 +47,9 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
     <Link href={`/directory/${directory._id}`}>
       <StyledList className="d-flex" role="button">
         <div className="w-100 text-truncate">
-          <Icon icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.LIGHT} />
+          <StyledEmojiWrapper>
+            <Emoji emoji={directory.emojiId} size={20} />
+          </StyledEmojiWrapper>
           <span className="ms-3" role="button">
             {directory.name}
           </span>
@@ -82,6 +85,12 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
     </Link>
   );
 };
+
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    vertical-align: text-bottom;
+  }
+`;
 
 const StyledList = styled.li<{ isActive?: boolean }>`
   padding: 10px;

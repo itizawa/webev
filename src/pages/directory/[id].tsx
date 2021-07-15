@@ -1,20 +1,22 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
-import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
-
+import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
+import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
+import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation, useDirectoryListSWR } from '~/stores/directory';
+import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
+import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
@@ -22,13 +24,15 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/Page/PageList';
 import { EditableInput } from '~/components/Atoms/EditableInput';
-
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { Directory } from '~/domains/Directory';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+
+import { Directory } from '~/domains/Directory';
+import { PageStatus } from '~/domains/Page';
+
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { PageStatus } from '~/domains/Page';
+
+const emojiSize = 40;
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -50,27 +54,28 @@ const Index: VFC = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
-  const { mutate: mutateDirectoryList } = useDirectoryListSWR();
-  const { mutate: mutatePageStatus } = usePageStatus();
+  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
-  const [description, setDescription] = useState<string>();
-  const [descriptionRows, setDescriptionRows] = useState<number>();
+  const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
+  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const [pickerTop, setPickerTop] = useState<number>(0);
+  const [pickerLeft, setPickerLeft] = useState<number>(0);
+  const emojiRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (directory != null) {
+      const result = emojiIndex.search(directory.emojiId);
+      if (result != null) {
+        setEmoji(result[0]);
+      }
+    }
+  }, [directory]);
+
+  const { mutate: mutatePageStatus } = usePageStatus();
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
   }, []);
-
-  useEffect(() => {
-    if (directory != null) {
-      setDescription(directory.description);
-    }
-  }, [directory]);
-
-  useEffect(() => {
-    if (description != null) {
-      setDescriptionRows(description.split('\n').length);
-    }
-  }, [description]);
 
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);
@@ -84,16 +89,11 @@ const Index: VFC = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  const handleChangeDescription = (inputValue: string) => {
-    setDescription(inputValue);
-  };
-
   const updateDirectroyName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateAllDirectories();
       mutateDirectory();
-      mutateDirectoryList();
+      mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
       toastSuccess(t.toastr_update_directory_name);
@@ -102,17 +102,36 @@ const Index: VFC = () => {
     }
   };
 
-  const handleBlurTextArea = async (): Promise<void> => {
-    // do nothing, no change
-    if (description === directory?.description) {
-      return;
-    }
+  const updateDirectroyDescription = async (description: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       mutateAllDirectories();
       toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
+    }
+  };
+
+  const handleSelectEmoji = async (emoji: EmojiData) => {
+    const emojiId = emoji.id;
+
+    try {
+      await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
+      mutateDirectory();
+      toastSuccess(t.toastr_update_emoji);
+      setEmoji(emoji);
+      setIsEmojiSettingMode(false);
+      mutateAllParentDirectories();
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
+  const handleClickEmoji = () => {
+    setIsEmojiSettingMode(true);
+    if (emojiRef.current != null) {
+      setPickerTop(emojiRef.current.offsetTop + emojiSize + 10);
+      setPickerLeft(emojiRef.current.offsetLeft);
     }
   };
 
@@ -143,8 +162,11 @@ const Index: VFC = () => {
                   );
                 })}
               </div>
-              <div className="d-flex gap-3 align-items-center mt-2">
-                <EditableInput value={directory.name} onSubmit={updateDirectroyName} />
+              <div className="d-flex gap-3 align-items-center my-2">
+                <div ref={emojiRef}>
+                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+                </div>
+                <EditableInput value={directory.name} onSubmit={updateDirectroyName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -185,16 +207,17 @@ const Index: VFC = () => {
                   </DropdownMenu>
                 </UncontrolledDropdown>
               </div>
+              {isEmojiSettingMode && (
+                <>
+                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                  </StyledEmojiPickerWrapper>
+                </>
+              )}
+              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
             </>
           )}
-          <StyledTextarea
-            className="form-control w-100 mt-2"
-            value={description}
-            rows={descriptionRows}
-            onChange={(e) => handleChangeDescription(e.target.value)}
-            onBlur={handleBlurTextArea}
-            placeholder={t.no_description}
-          />
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
             <div className="my-3 bg-dark shadow p-3">
               <h5>{t.child_directory}</h5>
@@ -222,7 +245,7 @@ const Index: VFC = () => {
             </div>
           )}
           {paginationResult != null && (
-            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
           )}
         </div>
       </LoginRequiredWrapper>
@@ -232,25 +255,9 @@ const Index: VFC = () => {
 
 export default Index;
 
-const StyledTextarea = styled.textarea`
-  color: #ccc;
-  resize: none;
-  background: transparent;
-  border: none;
-
-  &:hover {
-    color: #ccc;
-    background: #232323;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
-
-  &:focus {
-    color: #ccc;
-    background: transparent;
-    ::placeholder {
-      color: #ccc;
-    }
-  }
+const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
+  position: absolute;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  z-index: 1300;
 `;

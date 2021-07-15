@@ -11,7 +11,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { IconButton } from '~/components/Icons/IconButton';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
-import { useDirectoryListSWR } from '~/stores/directory';
+import { useAllParentDirectories } from '~/stores/directory';
 import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -20,10 +20,9 @@ export const SidebarDirectory: VFC = () => {
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const { data: allParentDirectories, mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
   const [directories, setDirectories] = useState<Directory[]>([]);
-
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
@@ -50,10 +49,10 @@ export const SidebarDirectory: VFC = () => {
   };
 
   useEffect(() => {
-    if (paginationResult != null) {
-      setDirectories(paginationResult.docs);
+    if (allParentDirectories != null) {
+      setDirectories(allParentDirectories);
     }
-  }, [paginationResult]);
+  }, [allParentDirectories]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -66,7 +65,7 @@ export const SidebarDirectory: VFC = () => {
       await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateDirectoryList();
+      mutateAllParentDirectories();
     } catch (err) {
       toastError(err);
     }

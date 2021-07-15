@@ -1,23 +1,24 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import '../../node_modules/bootstrap/scss/functions';
 @import '../../node_modules/bootstrap/scss/variables';
+@import 'emoji-mart/css/emoji-mart.css';
 
 $theme-colors: (
-  'primary':    $primary,
-  'secondary':  $secondary,
-  'success':    $success,
-  'info':       $info,
-  'warning':    $warning,
-  'danger':     $danger,
-  'light':      $light,
-  'dark':       $dark,
-  'indigo':     $indigo,
-  'purple':     $purple,
-  'pink':       $pink,
-  'orange':     $orange,
-  'teal':       $teal,
-  'google':     #db3236,
-  'twitter':     #1DA1F2,
+  'primary': $primary,
+  'secondary': $secondary,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'danger': $danger,
+  'light': $light,
+  'dark': $dark,
+  'indigo': $indigo,
+  'purple': $purple,
+  'pink': $pink,
+  'orange': $orange,
+  'teal': $teal,
+  'google': #db3236,
+  'twitter': #1da1f2,
 );
 
 @import '../../node_modules/bootstrap/scss/_buttons';
@@ -36,18 +37,18 @@ body {
   background-color: #0e1e25;
 }
 
-.webev-container{
+.webev-container {
   /* 画面全体からNavbarとFooterの高さを引く */
   min-height: calc(100vh - 100px - 100px);
 }
 
-#toast-container{
-  @include media-breakpoint-down(md){
-    left:0;
+#toast-container {
+  @include media-breakpoint-down(md) {
+    left: 0;
     width: 100%;
     padding: 0 5%;
-    .toast{
+    .toast {
       width: 100%;
-    } 
+    }
   }
 }

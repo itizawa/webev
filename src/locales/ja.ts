@@ -25,6 +25,7 @@ export const ja = {
   toastr_update_setting: '設定を更新しました',
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
+  toastr_update_emoji: '絵文字を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
@@ -62,6 +63,9 @@ export const ja = {
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
+  save_page_to_directory: 'ディレクトリにページを追加する',
+  add_page_already_saved: 'すでに保存しているページを追加する',
+  remove_page_from_directory: 'ディレクトリからページを除外する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
 
@@ -85,4 +89,6 @@ export const ja = {
   tutorial_desc1: 'Webev はブックマークを画像で管理する web アプリです。',
   tutorial_desc2: '早速、Webev の使い方を保存します！',
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
+
+  input_url: 'Url を入力する',
 };

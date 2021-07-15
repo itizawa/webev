@@ -1,5 +1,4 @@
 import { SWRResponse } from 'swr';
-import urljoin from 'url-join';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/interfaces/paginationResult';
@@ -41,16 +40,30 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
     (endpoint, status, page, limit, sort, searchKeyWord, directoryId) =>
       restClient
         .apiGet(
-          urljoin(
-            endpoint,
-            status.map((v: PageStatus) => `?status[]=${v}`).join(''),
-            `&page=${page}`,
-            `&limit=${limit}`,
-            `&sort=${sort}`,
-            searchKeyWord != null ? `&q=${searchKeyWord}` : ``,
-            directoryId != null ? `&directoryId=${directoryId}` : ``,
-          ),
+          `${endpoint}?${status.map((v: PageStatus) => `status[]=${v}&`).join('')}&page=${page}&limit=${limit}&sort=${sort}${
+            searchKeyWord != null ? `&q=${searchKeyWord}` : ``
+          }${directoryId != null ? `&directoryId=${directoryId}` : ``}`,
         )
+        .then((result) => result.data),
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: true,
+    },
+  );
+};
+
+export const usePageNotBelongDirectory = ({
+  activePage,
+  searchKeyWord,
+}: {
+  activePage: number;
+  searchKeyWord: string;
+}): SWRResponse<PaginationResult<Page>, Error> => {
+  return useAuthenticationSWR(
+    ['/pages/list', activePage, searchKeyWord],
+    (endpoint, page, searchKeyWord) =>
+      restClient
+        .apiGet(`${endpoint}?status[]=stocked&status[]=archived&directoryId=null&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`)
         .then((result) => result.data),
     {
       revalidateOnFocus: false,

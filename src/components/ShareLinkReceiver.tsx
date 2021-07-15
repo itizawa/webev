@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-
+import { WebevModal } from './Atoms/WebevModal';
 import { useLocale } from '~/hooks/useLocale';
 import { useSocketId } from '~/stores/contexts';
 import { usePageListSWR } from '~/stores/page';
@@ -23,8 +22,8 @@ export const ShareLinkReceiver: VFC = () => {
     if (typeof router.query.title === 'string') {
       setTitle(router.query.title);
     }
-    if (typeof router.query.description === 'string') {
-      setUrl(router.query.description);
+    if (typeof router.query.url === 'string') {
+      setUrl(router.query.url);
     }
   }, [router]);
 
@@ -46,20 +45,17 @@ export const ShareLinkReceiver: VFC = () => {
   };
 
   return (
-    <Modal isOpen={url != null} toggle={handleClickCloseButton}>
-      <ModalHeader className="bg-dark">{t.save_page}</ModalHeader>
-      <ModalBody className="bg-dark text-break text-center">
-        <p>{title || 'No title'}</p>
-        <p>{url}</p>
-        <div className="d-flex justify-content-evenly mt-5">
-          <button className="btn btn-secondary" onClick={handleClickCloseButton}>
-            {t.cancel}
-          </button>
-          <button className="btn btn-indigo" onClick={handleClickSubmitButton}>
-            {t.save}
-          </button>
-        </div>
-      </ModalBody>
-    </Modal>
+    <WebevModal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
+      <p>{title || 'No title'}</p>
+      <p>{url}</p>
+      <div className="d-flex justify-content-evenly mt-5">
+        <button className="btn btn-secondary" onClick={handleClickCloseButton}>
+          {t.cancel}
+        </button>
+        <button className="btn btn-indigo" onClick={handleClickSubmitButton}>
+          {t.save}
+        </button>
+      </div>
+    </WebevModal>
   );
 };

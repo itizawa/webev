@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { VFC, useState, useEffect } from 'react';
 
 import styled from 'styled-components';
-import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
@@ -20,6 +19,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { PageStatus } from '~/domains/Page';
+import { WebevModal } from '~/components/Atoms/WebevModal';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -98,33 +98,25 @@ const Index: VFC = () => {
             </div>
           )}
         </div>
-        <Modal isOpen={isDisplayDirectoryHierarchie} toggle={closeDirectoryHierarchieModal}>
-          <ModalHeader className="bg-dark">{t.directory}</ModalHeader>
-          <ModalBody className="bg-dark text-break">
-            {paginationResult?.docs.map((directory) => {
-              return (
-                <DirectoryItem key={directory._id} directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />
-              );
-            })}
-            <StyledDiv className="text-center mx-3 mt-2">
-              {isCreatingNewDirectory ? (
-                <form className="input-group ps-3" onSubmit={onSubmit}>
-                  <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-                </form>
-              ) : (
-                <IconButton
-                  icon={BootstrapIcon.PLUS_DOTTED}
-                  color={BootstrapColor.LIGHT}
-                  activeColor={BootstrapColor.LIGHT}
-                  onClickButton={() => setIsCreatingNewDirectory(true)}
-                />
-              )}
-            </StyledDiv>
-            <button className="mt-3 btn btn-secondary w-100" onClick={closeDirectoryHierarchieModal}>
-              {t.cancel}
-            </button>
-          </ModalBody>
-        </Modal>
+        <WebevModal isOpen={isDisplayDirectoryHierarchie} toggle={closeDirectoryHierarchieModal} title={t.directory}>
+          {paginationResult?.docs.map((directory) => {
+            return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />;
+          })}
+          <StyledDiv className="text-center mx-3 mt-2">
+            {isCreatingNewDirectory ? (
+              <form className="input-group ps-3" onSubmit={onSubmit}>
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+              </form>
+            ) : (
+              <IconButton
+                icon={BootstrapIcon.PLUS_DOTTED}
+                color={BootstrapColor.LIGHT}
+                activeColor={BootstrapColor.LIGHT}
+                onClickButton={() => setIsCreatingNewDirectory(true)}
+              />
+            )}
+          </StyledDiv>
+        </WebevModal>
       </LoginRequiredWrapper>
     </>
   );

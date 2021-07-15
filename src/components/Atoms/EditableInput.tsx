@@ -5,10 +5,13 @@ import styled from 'styled-components';
 type Props = {
   value: string;
   onSubmit: (inputValue: string) => void;
+  isHeader?: boolean;
+  isAllowEmpty?: boolean;
+  placeholder?: string;
 };
 
 export const EditableInput: VFC<Props> = (props) => {
-  const { value, onSubmit } = props;
+  const { value, onSubmit, isHeader, isAllowEmpty = false, placeholder } = props;
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
@@ -19,8 +22,7 @@ export const EditableInput: VFC<Props> = (props) => {
     if (e.key != 'Enter') {
       return;
     }
-    // name is required
-    if (inputValue?.trim() === '') {
+    if (!isAllowEmpty && inputValue?.trim() === '') {
       return;
     }
     // do nothing, no change
@@ -33,10 +35,11 @@ export const EditableInput: VFC<Props> = (props) => {
 
   return (
     <StyledInput
-      className="form-control text-white text-nowrap overflow-scroll fs-1 pt-0 pb-2 pb-md-0 w-100"
+      className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} py-0 pb-md-0 w-100`}
       onChange={(e) => setInputValue(e.target.value)}
       onKeyPress={handleKeyPress}
       value={inputValue || ''}
+      placeholder={placeholder || ''}
     />
   );
 };
