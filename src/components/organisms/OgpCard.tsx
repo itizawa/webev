@@ -116,6 +116,12 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
                   <span className="ms-2 text-nowrap">{t.return_button}</span>
                 </DropdownItem>
               )}
+              {page.directoryId != null && (
+                <DropdownItem tag="button" onClick={openAddDirectoryModal}>
+                  <Icon icon={BootstrapIcon.REMOVE_FROM_DIRECTORY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2">{t.remove_page_from_directory}</span>
+                </DropdownItem>
+              )}
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
