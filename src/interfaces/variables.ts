@@ -28,6 +28,7 @@ export enum BootstrapIcon {
   THREE_DOTS_HORIZONAL = 'three-dots-horizonal',
   THREE_DOTS_VERTICAL = 'three-dots-vertical',
   DIRECTORY = 'directory',
+  DIRECTORY_OUT = 'directory-out',
   ADD_TO_DIRECTORY = 'add-to-directory',
   ARROW = 'arrow',
   ARROW_RIGHT = 'arrow-right',
