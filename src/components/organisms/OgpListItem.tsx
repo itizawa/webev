@@ -202,7 +202,7 @@ const StyledRow = styled.div`
 
 const StyledButton = styled.button`
   color: #fff;
-  background-color: #008078;
+  background-color: #6f42c1;
 
   :hover {
     color: #fff;

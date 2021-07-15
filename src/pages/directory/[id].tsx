@@ -211,7 +211,7 @@ const Index: VFC = () => {
                 <>
                   <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
                   <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" />
                   </StyledEmojiPickerWrapper>
                 </>
               )}
