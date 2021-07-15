@@ -91,4 +91,7 @@ export const en = {
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
 
   input_url: 'Input Url',
+
+  login_description:
+    'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and signin or signup Webev！',
 };
