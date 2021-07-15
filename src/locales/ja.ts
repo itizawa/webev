@@ -91,4 +91,7 @@ export const ja = {
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
   input_url: 'Url を入力する',
+
+  login_description:
+    '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
 };
