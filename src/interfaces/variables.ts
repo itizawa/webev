@@ -40,6 +40,7 @@ export enum BootstrapIcon {
   CHEVRON_DOUBLE_RIGHT = 'chevron-double-right',
   CHEVRON_RIGHT = 'chevron-right',
   GOOGLE = 'google',
+  REMOVE_FROM_DIRECTORY = 'remove-from-directory',
   TWITTER = 'twitter',
   GITHUB = 'github',
   QUESTION = 'question',

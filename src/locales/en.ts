@@ -67,6 +67,7 @@ export const en = {
   rename_directory: 'Rename Directory',
   save_page_to_directory: 'Add Page to Directory',
   add_page_already_saved: 'Add Page Saved Already',
+  remove_page_from_directory: 'Remove Page from Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 

@@ -67,6 +67,7 @@ export const ja = {
   rename_directory: 'ディレクトリの名前変更',
   save_page_to_directory: 'ディレクトリにページを追加する',
   add_page_already_saved: 'すでに保存しているページを追加する',
+  remove_page_from_directory: 'ディレクトリからページを除外する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
 
