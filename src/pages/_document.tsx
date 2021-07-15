@@ -30,11 +30,11 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
           <link rel="manifest" href="/favicons/site.webmanifest" />
-          <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#000000" />
+          <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#6f42c1" />
           <link rel="shortcut icon" href="/favicons/favicon.ico" />
-          <meta name="msapplication-TileColor" content="#ffffff" />
+          <meta name="msapplication-TileColor" content="#6f42c1" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-          <meta name="theme-color" content="#ffffff" />
+          <meta name="theme-color" content="#6f42c1" />
         </Head>
         <body>
           <Main />
