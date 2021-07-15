@@ -74,6 +74,18 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     mutatePageForAddDirectory(page);
   };
 
+  const handleRemovePageButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page?._id}/directories`, {
+        directoryId: null,
+      });
+      toastSuccess(t.remove_page_from_directory);
+      mutatePageList();
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
@@ -115,6 +127,12 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 <DropdownItem tag="button" onClick={switchArchive}>
                   <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
                   <span className="ms-2 text-nowrap">{t.return_button}</span>
+                </DropdownItem>
+              )}
+              {page.directoryId != null && (
+                <DropdownItem tag="button" onClick={handleRemovePageButton}>
+                  <Icon icon={BootstrapIcon.REMOVE_FROM_DIRECTORY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2">{t.remove_page_from_directory}</span>
                 </DropdownItem>
               )}
             </DropdownMenu>
