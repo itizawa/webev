@@ -108,20 +108,22 @@ export const SidebarDirectory: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <StyledDiv className="text-center mx-3 mt-2">
-        {isCreatingNewDirectory ? (
-          <form className="input-group ps-3" onSubmit={onSubmit}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-          </form>
-        ) : (
-          <IconButton
-            icon={BootstrapIcon.PLUS_DOTTED}
-            color={BootstrapColor.LIGHT}
-            activeColor={BootstrapColor.LIGHT}
-            onClickButton={() => setIsCreatingNewDirectory(true)}
-          />
-        )}
-      </StyledDiv>
+      {directories.length < 10 && (
+        <StyledDiv className="text-center mx-3 mt-2">
+          {isCreatingNewDirectory ? (
+            <form className="input-group ps-3" onSubmit={onSubmit}>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+            </form>
+          ) : (
+            <IconButton
+              icon={BootstrapIcon.PLUS_DOTTED}
+              color={BootstrapColor.LIGHT}
+              activeColor={BootstrapColor.LIGHT}
+              onClickButton={() => setIsCreatingNewDirectory(true)}
+            />
+          )}
+        </StyledDiv>
+      )}
     </>
   );
 };
