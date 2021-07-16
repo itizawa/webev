@@ -49,7 +49,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory, isValidating: isValidatingDirectory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
@@ -135,6 +135,14 @@ const Index: VFC = () => {
     }
   };
 
+  if (isValidatingDirectory) {
+    return (
+      <div className="text-center pt-5">
+        <Loader type="Oval" color="#00BFFF" height={64} width={64} />
+      </div>
+    );
+  }
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${directory?.name}`} />
@@ -211,7 +219,7 @@ const Index: VFC = () => {
                 <>
                   <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
                   <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" />
                   </StyledEmojiPickerWrapper>
                 </>
               )}

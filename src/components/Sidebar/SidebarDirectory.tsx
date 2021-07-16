@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
+import Loader from 'react-loader-spinner';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
@@ -20,7 +21,7 @@ export const SidebarDirectory: VFC = () => {
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: allParentDirectories, mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { data: allParentDirectories, mutate: mutateAllParentDirectories, isValidating: isValidatingAllParentDirectories } = useAllParentDirectories();
 
   const [directories, setDirectories] = useState<Directory[]>([]);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -77,6 +78,14 @@ export const SidebarDirectory: VFC = () => {
     router.push(`/directory/${directoryId}`);
   };
 
+  if (isValidatingAllParentDirectories) {
+    return (
+      <div className="text-center">
+        <Loader type="Oval" color="#00BFFF" height={64} width={64} />
+      </div>
+    );
+  }
+
   return (
     <>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -99,20 +108,22 @@ export const SidebarDirectory: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      <StyledDiv className="text-center mx-3 mt-2">
-        {isCreatingNewDirectory ? (
-          <form className="input-group ps-3" onSubmit={onSubmit}>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-          </form>
-        ) : (
-          <IconButton
-            icon={BootstrapIcon.PLUS_DOTTED}
-            color={BootstrapColor.LIGHT}
-            activeColor={BootstrapColor.LIGHT}
-            onClickButton={() => setIsCreatingNewDirectory(true)}
-          />
-        )}
-      </StyledDiv>
+      {directories.length < 10 && (
+        <StyledDiv className="text-center mx-3 mt-2">
+          {isCreatingNewDirectory ? (
+            <form className="input-group ps-3" onSubmit={onSubmit}>
+              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+            </form>
+          ) : (
+            <IconButton
+              icon={BootstrapIcon.PLUS_DOTTED}
+              color={BootstrapColor.LIGHT}
+              activeColor={BootstrapColor.LIGHT}
+              onClickButton={() => setIsCreatingNewDirectory(true)}
+            />
+          )}
+        </StyledDiv>
+      )}
     </>
   );
 };

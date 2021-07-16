@@ -4,4 +4,6 @@ export const imagePath = {
   BOOKS: '/images/books.png',
   NO_IMAGE: '/images/no-image.png',
   NO_PAGE: '/images/no_page.png',
+  LOGO: '/images/logo.png',
+  SIGNIN_GOOGLE: '/images/signin-google.png',
 };
