@@ -49,7 +49,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory, isValidating: isValidatingDirectory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
@@ -134,6 +134,14 @@ const Index: VFC = () => {
       setPickerLeft(emojiRef.current.offsetLeft);
     }
   };
+
+  if (isValidatingDirectory) {
+    return (
+      <div className="text-center pt-5">
+        <Loader type="Oval" color="#00BFFF" height={64} width={64} />
+      </div>
+    );
+  }
 
   return (
     <>

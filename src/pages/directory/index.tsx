@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { VFC, useState, useEffect } from 'react';
 
 import styled from 'styled-components';
@@ -7,7 +6,6 @@ import Loader from 'react-loader-spinner';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { IconButton } from '~/components/Icons/IconButton';
-import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
@@ -19,33 +17,19 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { PageStatus } from '~/domains/Page';
-import { WebevModal } from '~/components/Atoms/WebevModal';
 
 const Index: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
-
-  const directoryId = router.query.id;
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageStatus } = usePageStatus();
 
-  const [isDisplayDirectoryHierarchie, setIsDisplayDirectoryHierarchie] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
   }, []);
-
-  const closeDirectoryHierarchieModal = () => {
-    setIsDisplayDirectoryHierarchie(false);
-  };
-
-  const handleClickDirectory = (directoryId: string) => {
-    setIsDisplayDirectoryHierarchie(false);
-    router.push(`/directory/${directoryId}`);
-  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -70,53 +54,47 @@ const Index: VFC = () => {
       <WebevOgpHead title={`Webev | ${t.directory}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
-          <div className="d-flex align-items-center justify-content-between mb-3">
-            <h1 className="mb-0">{t.directory}</h1>
-            <IconButton
-              width={18}
-              height={18}
-              icon={BootstrapIcon.GEAR}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
-              isActive={isDisplayDirectoryHierarchie}
-              onClickButton={() => setIsDisplayDirectoryHierarchie(true)}
-              text={t.manage_directory}
-            />
-          </div>
+          <h1>{t.directory}</h1>
           {paginationResult == null && (
             <div className="text-center pt-5">
               <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
             </div>
           )}
           {paginationResult != null && (
-            <div className="row">
-              {paginationResult.docs.map((directory) => (
-                <div className="col-xl-4 col-md-6" key={directory._id}>
-                  <DirectoryListItem directory={directory} />
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="row">
+                {paginationResult.docs.map((directory) => (
+                  <div className="col-xl-4 col-md-6" key={directory._id}>
+                    <DirectoryListItem directory={directory} />
+                  </div>
+                ))}
+              </div>
+              {paginationResult?.docs.length < 10 && (
+                <StyledDiv className="text-center mx-3 mt-2 d-md-none">
+                  {isCreatingNewDirectory ? (
+                    <form className="input-group ps-3" onSubmit={onSubmit}>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="form-control bg-white"
+                        placeholder="...name"
+                        autoFocus
+                      />
+                    </form>
+                  ) : (
+                    <IconButton
+                      icon={BootstrapIcon.PLUS_DOTTED}
+                      color={BootstrapColor.LIGHT}
+                      activeColor={BootstrapColor.LIGHT}
+                      onClickButton={() => setIsCreatingNewDirectory(true)}
+                    />
+                  )}
+                </StyledDiv>
+              )}
+            </>
           )}
         </div>
-        <WebevModal isOpen={isDisplayDirectoryHierarchie} toggle={closeDirectoryHierarchieModal} title={t.directory}>
-          {paginationResult?.docs.map((directory) => {
-            return <DirectoryItem key={directory._id} directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />;
-          })}
-          <StyledDiv className="text-center mx-3 mt-2">
-            {isCreatingNewDirectory ? (
-              <form className="input-group ps-3" onSubmit={onSubmit}>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
-              </form>
-            ) : (
-              <IconButton
-                icon={BootstrapIcon.PLUS_DOTTED}
-                color={BootstrapColor.LIGHT}
-                activeColor={BootstrapColor.LIGHT}
-                onClickButton={() => setIsCreatingNewDirectory(true)}
-              />
-            )}
-          </StyledDiv>
-        </WebevModal>
       </LoginRequiredWrapper>
     </>
   );
