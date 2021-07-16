@@ -28,7 +28,7 @@ export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard }) => {
         decoding="sync"
       />
       <StyledDivRgiht className="px-3 py-2 d-flex flex-column">
-        <StyledTitle className="small fw-bold text-break mb-0">{title || url}</StyledTitle>
+        <StyledTitle className="small fw-bold text-break mb-0 overflow-hidden">{title || url}</StyledTitle>
         <StyledDescription className="small text-truncate mb-0">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </StyledDescription>
