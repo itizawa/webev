@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { VFC, useState, useEffect } from 'react';
 
 import styled from 'styled-components';
@@ -7,7 +6,6 @@ import Loader from 'react-loader-spinner';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { IconButton } from '~/components/Icons/IconButton';
-import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
@@ -19,33 +17,19 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { PageStatus } from '~/domains/Page';
-import { WebevModal } from '~/components/Atoms/WebevModal';
 
 const Index: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
-
-  const directoryId = router.query.id;
 
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
   const { mutate: mutatePageStatus } = usePageStatus();
 
-  const [isDisplayDirectoryHierarchie, setIsDisplayDirectoryHierarchie] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
   }, []);
-
-  const closeDirectoryHierarchieModal = () => {
-    setIsDisplayDirectoryHierarchie(false);
-  };
-
-  const handleClickDirectory = (directoryId: string) => {
-    setIsDisplayDirectoryHierarchie(false);
-    router.push(`/directory/${directoryId}`);
-  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
