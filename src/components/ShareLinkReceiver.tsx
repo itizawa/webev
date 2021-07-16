@@ -30,6 +30,7 @@ export const ShareLinkReceiver: VFC = () => {
   const handleClickCloseButton = () => {
     setTitle(null);
     setUrl(null);
+    router.push(router.pathname);
   };
 
   const handleClickSubmitButton = async () => {
@@ -39,6 +40,7 @@ export const ShareLinkReceiver: VFC = () => {
       setTitle(null);
       setUrl(null);
       mutatePageList();
+      router.push(router.pathname);
     } catch (err) {
       toastError(err);
     }
@@ -46,8 +48,10 @@ export const ShareLinkReceiver: VFC = () => {
 
   return (
     <WebevModal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
-      <p>{title || 'No title'}</p>
-      <p>{url}</p>
+      <div className="text-center">
+        <p>{title || 'No title'}</p>
+        <p>{url}</p>
+      </div>
       <div className="d-flex justify-content-evenly mt-5">
         <button className="btn btn-secondary" onClick={handleClickCloseButton}>
           {t.cancel}
