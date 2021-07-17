@@ -10,10 +10,10 @@ export const SortButtonGroup: VFC = () => {
 
   return (
     <div className="btn-group btn-group-sm" role="group">
-      <button className={`btn btn-outline-indigo text-white text-nowrap ${!isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(false)}>
+      <button className={`btn btn-outline-primary text-white text-nowrap ${!isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(false)}>
         {t.latest_order}
       </button>
-      <button className={`btn btn-outline-indigo text-white text-nowrap ${isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(true)}>
+      <button className={`btn btn-outline-primary text-white text-nowrap ${isSortCreatedAt ? 'active' : ''}`} onClick={() => mutateIsSortCreatedAt(true)}>
         {t.oldest_order}
       </button>
     </div>
