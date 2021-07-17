@@ -81,13 +81,13 @@ export const PersonalDropdown: VFC = () => {
         </div>
         <div className="px-3 my-3 d-flex justify-content-between">
           <button
-            className={`btn btn-outline-indigo ${ogpCardLayout === OgpLayoutType.LIST ? 'active' : ''}`}
+            className={`btn btn-outline-primary ${ogpCardLayout === OgpLayoutType.LIST ? 'active' : ''}`}
             onClick={() => handleClickOgpCardLayout(OgpLayoutType.LIST)}
           >
             <Icon height={20} width={20} icon={BootstrapIcon.LIST} color={BootstrapColor.WHITE} />
           </button>
           <button
-            className={`btn btn-outline-indigo ${ogpCardLayout === OgpLayoutType.CARD ? 'active' : ''}`}
+            className={`btn btn-outline-primary ${ogpCardLayout === OgpLayoutType.CARD ? 'active' : ''}`}
             onClick={() => handleClickOgpCardLayout(OgpLayoutType.CARD)}
           >
             <Icon height={20} width={20} icon={BootstrapIcon.GRID} color={BootstrapColor.WHITE} />

@@ -186,10 +186,10 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
           )}
         </small>
         {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
-          <StyledButton className="btn btn-sm d-flex ms-auto" onClick={switchArchive}>
+          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={switchArchive}>
             <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
-          </StyledButton>
+          </button>
         )}
       </div>
     </StyledRow>
@@ -198,14 +198,4 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
 const StyledRow = styled.div`
   border-top: 1px solid #404040;
-`;
-
-const StyledButton = styled.button`
-  color: #fff;
-  background-color: #6f42c1;
-
-  :hover {
-    color: #fff;
-    opacity: 0.8;
-  }
 `;
