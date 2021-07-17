@@ -147,7 +147,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectortTrees?.map((childrenDirectortTree) => {
+          {/* {childrenDirectortTrees?.map((childrenDirectortTree) => {
             return (
               <DirectoryItem
                 key={childrenDirectortTree._id}
@@ -157,7 +157,7 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
               />
             );
           })}
-          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>} */}
         </div>
       </Collapse>
     </>
