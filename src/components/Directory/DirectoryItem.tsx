@@ -22,33 +22,11 @@ type Props = {
 export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
   const { t } = useLocale();
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  console.log('allParentDirectories', allParentDirectories);
-
-  // let allParentDirectoryIds = [];
-  // allParentDirectoryIds = Object.values(allParentDirectories.values._id);
-  // const allParentDirectoryIds = allParentDirectories[0]._id;
-  // console.log('allParentDirectoryIds', allParentDirectoryIds);
-
-  // const Objectvalues = Object.values(allParentDirectories);
-  // console.log('Objectvalues', Objectvalues);
-
-  // Object.entries(allParentDirectories).forEach((key, value) => {
-  //   console.log(`${key}: ${value}`);
-  // });
-
-  // for (const [key, value] of Object.entries(allParentDirectories)) {
-  // let allParentDirectoryIds = [];
-  // console.log(`key = ${key}, value = ${value._id}`);
-  // allParentDirectoryIds = value._id;
-  // }
 
   const allParentDirectoryIds = [];
   for (const value of Object.values(allParentDirectories)) {
-    console.log(`value = ${value._id}`);
     allParentDirectoryIds.push(value._id);
   }
-
-  console.log(allParentDirectoryIds);
 
   // TODO: need to set args allParentDirectories' ids
   const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildrens(allParentDirectoryIds);
