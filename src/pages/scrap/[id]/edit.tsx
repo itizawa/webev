@@ -36,6 +36,7 @@ const Index: VFC = () => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
 
   const [selectedPages, setSelectedPages] = useState<Page[]>([]);
+  const [isPublic, setIsPublic] = useState<boolean>(false);
 
   const { data: paginationResult } = useAllPages({ activePage, searchKeyWord });
 
@@ -51,6 +52,12 @@ const Index: VFC = () => {
       if (result != null) {
         setEmoji(result[0]);
       }
+    }
+  }, [scrap]);
+
+  useEffect(() => {
+    if (scrap != null) {
+      setIsPublic(scrap.isPublic);
     }
   }, [scrap]);
 
@@ -116,6 +123,21 @@ const Index: VFC = () => {
                   </>
                 )}
                 <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
+                <div className="px-3">
+                  <div className="form-check form-switch text-nowrap">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      id="switchIsPublishScrap"
+                      checked={isPublic}
+                      onChange={() => setIsPublic((prevState) => !prevState)}
+                    />
+                    <label className="form-check-label" htmlFor="switchIsPublishScrap">
+                      {t.publish}
+                    </label>
+                  </div>
+                </div>
+                <button className="btn btn-purple btn-sm text-nowrap">{isPublic ? t.update_scrap : t.save_draft}</button>
               </StyledTitle>
               <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
