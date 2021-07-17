@@ -99,6 +99,9 @@ export const en = {
   scrap_title_placeholder: 'Read Scraps',
   description: 'Description',
   scrap_description_placeholder: 'ex) I tried to summarize the scraps I read today!',
+  publish: 'Publish',
+  update_scrap: 'Update Scrap',
+  save_draft: 'Save Draft',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and signin or signup Webev！',

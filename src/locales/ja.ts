@@ -100,6 +100,10 @@ export const ja = {
   scrap_title_placeholder: '今日読んだ記事',
   description: '説明',
   scrap_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
+  publish: '公開する',
+  update_scrap: '内容を更新',
+  save_draft: '下書き保存',
+
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
 };
