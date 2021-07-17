@@ -74,6 +74,18 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     mutatePageForAddDirectory(page);
   };
 
+  const handleRemovePageButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page?._id}/directories`, {
+        directoryId: null,
+      });
+      toastSuccess(t.remove_page_from_directory);
+      mutatePageList();
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
@@ -111,10 +123,16 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                 <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
-              {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+              {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_ARCHIVE && (
                 <DropdownItem tag="button" onClick={switchArchive}>
                   <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
                   <span className="ms-2 text-nowrap">{t.return_button}</span>
+                </DropdownItem>
+              )}
+              {page.directoryId != null && (
+                <DropdownItem tag="button" onClick={handleRemovePageButton}>
+                  <Icon icon={BootstrapIcon.REMOVE_FROM_DIRECTORY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2">{t.remove_page_from_directory}</span>
                 </DropdownItem>
               )}
             </DropdownMenu>
@@ -169,7 +187,7 @@ export const OgpListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
         </small>
         {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
           <StyledButton className="btn btn-sm d-flex ms-auto" onClick={switchArchive}>
-            <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+            <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </StyledButton>
         )}
@@ -184,7 +202,7 @@ const StyledRow = styled.div`
 
 const StyledButton = styled.button`
   color: #fff;
-  background-color: #008078;
+  background-color: #6f42c1;
 
   :hover {
     color: #fff;

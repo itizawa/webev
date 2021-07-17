@@ -75,12 +75,24 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     mutatePageForAddDirectory(page);
   };
 
+  const handleRemovePageButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page?._id}/directories`, {
+        directoryId: null,
+      });
+      toastSuccess(t.remove_page_from_directory);
+      mutatePageList();
+    } catch (error) {
+      toastError(error);
+    }
+  };
+
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
 
   return (
-    <StyledCard className="card border-0 shadow h-100">
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       <a href={url} target="blank" rel="noopener noreferrer">
         <FixedImage imageUrl={image} />
       </a>
@@ -110,10 +122,16 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
                 <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
-              {status === PageStatus.PAGE_STATUS_ARCHIVE && (
+              {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_ARCHIVE && (
                 <DropdownItem tag="button" onClick={switchArchive}>
                   <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
                   <span className="ms-2 text-nowrap">{t.return_button}</span>
+                </DropdownItem>
+              )}
+              {page.directoryId != null && (
+                <DropdownItem tag="button" onClick={handleRemovePageButton}>
+                  <Icon icon={BootstrapIcon.REMOVE_FROM_DIRECTORY} color={BootstrapColor.WHITE} />
+                  <span className="ms-2">{t.remove_page_from_directory}</span>
                 </DropdownItem>
               )}
             </DropdownMenu>
@@ -180,7 +198,7 @@ const StyledCard = styled.div`
 
 const StyledButton = styled.button`
   color: #fff;
-  background-color: #008078;
+  background-color: #6f42c1;
 
   :hover {
     color: #fff;

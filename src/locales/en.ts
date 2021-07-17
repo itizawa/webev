@@ -63,6 +63,9 @@ export const en = {
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
   rename_directory: 'Rename Directory',
+  save_page_to_directory: 'Add Page to Directory',
+  add_page_already_saved: 'Add Page Saved Already',
+  remove_page_from_directory: 'Remove Page from Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 
@@ -86,4 +89,9 @@ export const en = {
   tutorial_desc1: 'Webev is bookmark manager.',
   tutorial_desc2: 'Immediately, I saved how to use Webev！',
   tutorial_desc3: 'After reading, Press <span class="fw-bold">Read</span> to take a record.',
+
+  input_url: 'Input Url',
+
+  login_description:
+    'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and signin or signup Webev！',
 };
