@@ -42,11 +42,13 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   // allParentDirectoryIds = value._id;
   // }
 
+  const allParentDirectoryIds = [];
   for (const value of Object.values(allParentDirectories)) {
-    // let allParentDirectoryIds = [];
     console.log(`value = ${value._id}`);
-    // allParentDirectoryIds = value._id;
+    allParentDirectoryIds.push(value._id);
   }
+
+  console.log(allParentDirectoryIds);
 
   // TODO: need to set args allParentDirectories' ids
   const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildrens(allParentDirectoryIds);
