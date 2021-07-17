@@ -36,9 +36,15 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
   //   console.log(`${key}: ${value}`);
   // });
 
-  for (const [key, value] of Object.entries(allParentDirectories)) {
+  // for (const [key, value] of Object.entries(allParentDirectories)) {
+  // let allParentDirectoryIds = [];
+  // console.log(`key = ${key}, value = ${value._id}`);
+  // allParentDirectoryIds = value._id;
+  // }
+
+  for (const value of Object.values(allParentDirectories)) {
     // let allParentDirectoryIds = [];
-    console.log(`key = ${key}, value = ${value._id}`);
+    console.log(`value = ${value._id}`);
     // allParentDirectoryIds = value._id;
   }
 
