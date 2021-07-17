@@ -33,8 +33,8 @@ export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<Di
   });
 };
 
-export const useDirectoryChildrens = (directoryIds?: string): SWRResponse<DirectoryTree[], Error> => {
-  const endpoint = directoryIds != null ? `/directories/children` : null;
+export const useDirectoryChildrens = (parentDirectoryIds?: string): SWRResponse<DirectoryTree[], Error> => {
+  const endpoint = parentDirectoryIds != null ? `/directories/children?parentDirectoryIds=${parentDirectoryIds}` : null;
   return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
