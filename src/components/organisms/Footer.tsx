@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 export const Footer: FC = () => {
   const { t } = useLocale();
@@ -48,9 +47,9 @@ export const Footer: FC = () => {
             <IconButton
               width={24}
               height={24}
-              icon={BootstrapIcon.GITHUB}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
+              icon="GITHUB"
+              color="SECONDARY"
+              activeColor="SECONDARY"
               onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
             />
           </div>
@@ -61,9 +60,9 @@ export const Footer: FC = () => {
             <IconButton
               width={24}
               height={24}
-              icon={BootstrapIcon.TWITTER}
-              color={BootstrapColor.SECONDARY}
-              activeColor={BootstrapColor.SECONDARY}
+              icon="TWITTER"
+              color="SECONDARY"
+              activeColor="SECONDARY"
               onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
             />
           </div>

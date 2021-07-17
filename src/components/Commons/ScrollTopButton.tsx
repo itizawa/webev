@@ -2,7 +2,6 @@ import { VFC, useState, useEffect } from 'react';
 import { throttle } from 'throttle-debounce';
 import style from 'styled-components';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Icon } from '~/components/Icons/Icon';
 
 export const ScrollTopButton: VFC = () => {
@@ -31,7 +30,7 @@ export const ScrollTopButton: VFC = () => {
 
   return (
     <StyledButton id="scroll-to-top" onClick={scrollTop} className={`btn btn-light btn-lg ${showScroll ? 'show' : ''}`}>
-      <Icon icon={BootstrapIcon.ARROW} color={BootstrapColor.SECONDARY} />
+      <Icon icon="ARROW" color="SECONDARY" />
     </StyledButton>
   );
 };

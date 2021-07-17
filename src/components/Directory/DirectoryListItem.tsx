@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { Directory } from '~/domains/Directory';
-import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 
@@ -59,24 +59,24 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
             <IconButton
               width={18}
               height={18}
-              icon={BootstrapIcon.THREE_DOTS_VERTICAL}
-              color={BootstrapColor.WHITE}
-              activeColor={BootstrapColor.WHITE}
+              icon="THREE_DOTS_VERTICAL"
+              color="WHITE"
+              activeColor="WHITE"
               onClickButton={(e) => handleClickManageButton(e, directory._id)}
               isRemovePadding
             />
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-dark" positionFixed right>
             <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
-              <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+              <Icon icon="TRASH" color="WHITE" />
               <span className="ms-2">Trash</span>
             </DropdownItem>
             <DropdownItem tag="button" onClick={(e) => openRenameModal(e, directory)}>
-              <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+              <Icon icon="PENCIL" color="WHITE" />
               <span className="ms-2">Rename</span>
             </DropdownItem>
             <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
-              <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+              <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
               <span className="ms-2">Create Directory</span>
             </DropdownItem>
           </DropdownMenu>

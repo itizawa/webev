@@ -6,7 +6,6 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { FixedImage } from '~/components/Atoms/FixedImage';
 import { DirectoryItem } from '~/components/Directory/DirectoryItem';
 import { Icon } from '~/components/Icons/Icon';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -72,10 +71,10 @@ export const AddDirectoryModal: VFC = () => {
         </div>
         <div className="col-12 col-md-2 text-center">
           <div className="d-none d-md-block mt-5">
-            <Icon height={48} width={48} icon={BootstrapIcon.ARROW_RIGHT} color={BootstrapColor.WHITE} />
+            <Icon height={48} width={48} icon="ARROW_RIGHT" color="WHITE" />
           </div>
           <div className="d-md-none d-block my-3">
-            <Icon height={48} width={48} icon={BootstrapIcon.ARROW_DOWN} color={BootstrapColor.WHITE} />
+            <Icon height={48} width={48} icon="ARROW_DOWN" color="WHITE" />
           </div>
         </div>
         <StyledDiv className="col-12 col-md-5">
@@ -88,12 +87,7 @@ export const AddDirectoryModal: VFC = () => {
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
               </form>
             ) : (
-              <IconButton
-                icon={BootstrapIcon.PLUS_DOTTED}
-                color={BootstrapColor.LIGHT}
-                activeColor={BootstrapColor.LIGHT}
-                onClickButton={() => setIsCreatingNewDirectory(true)}
-              />
+              <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />
             )}
           </StyledCreateFormDiv>
         </StyledDiv>

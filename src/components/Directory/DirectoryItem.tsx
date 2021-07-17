@@ -10,7 +10,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useAllDirectories, useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
@@ -89,9 +89,9 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
                   width={18}
                   height={18}
                   isActive={isActive}
-                  icon={BootstrapIcon.CARET_DOWN}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WHITE}
+                  icon="CARET_DOWN"
+                  color="SECONDARY"
+                  activeColor="WHITE"
                   onClickButton={handleToggleCollapse}
                   isRemovePadding
                 />
@@ -100,9 +100,9 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
                   width={18}
                   height={18}
                   isActive={isActive}
-                  icon={BootstrapIcon.CARET_RIGHT}
-                  color={BootstrapColor.SECONDARY}
-                  activeColor={BootstrapColor.WHITE}
+                  icon="CARET_RIGHT"
+                  color="SECONDARY"
+                  activeColor="WHITE"
                   onClickButton={handleToggleCollapse}
                   isRemovePadding
                 />
@@ -121,9 +121,9 @@ export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeD
             width={18}
             height={18}
             isActive={isActive}
-            icon={BootstrapIcon.ADD_TO_DIRECTORY}
-            color={BootstrapColor.WHITE}
-            activeColor={BootstrapColor.WHITE}
+            icon="ADD_TO_DIRECTORY"
+            color="WHITE"
+            activeColor="WHITE"
             onClickButton={handleClickPencilIcon}
             isRemovePadding
           />

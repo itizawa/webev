@@ -12,7 +12,6 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
@@ -106,31 +105,31 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           <UncontrolledDropdown direction="left">
             <DropdownToggle tag="span">
               <div id={`manage-for-${page._id}`}>
-                <IconButton width={18} height={18} icon={BootstrapIcon.THREE_DOTS_VERTICAL} color={BootstrapColor.WHITE} activeColor={BootstrapColor.WHITE} />
+                <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
               </div>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-dark" positionFixed>
               <DropdownItem tag="button" onClick={openDeleteModal}>
-                <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                <Icon icon="TRASH" color="WHITE" />
                 <span className="ms-2">{t.delete}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={sharePage}>
-                <Icon icon={BootstrapIcon.TWITTER} color={BootstrapColor.WHITE} />
+                <Icon icon="TWITTER" color="WHITE" />
                 <span className="ms-2">{t.share}</span>
               </DropdownItem>
               <DropdownItem tag="button" onClick={openAddDirectoryModal}>
-                <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
                 <span className="ms-2">{t.move_directory}</span>
               </DropdownItem>
               {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_ARCHIVE && (
                 <DropdownItem tag="button" onClick={switchArchive}>
-                  <Icon height={20} width={20} icon={BootstrapIcon.REPLY} color={BootstrapColor.WHITE} />
+                  <Icon height={20} width={20} icon="REPLY" color="WHITE" />
                   <span className="ms-2 text-nowrap">{t.return_button}</span>
                 </DropdownItem>
               )}
               {page.directoryId != null && (
                 <DropdownItem tag="button" onClick={handleRemovePageButton}>
-                  <Icon icon={BootstrapIcon.REMOVE_FROM_DIRECTORY} color={BootstrapColor.WHITE} />
+                  <Icon icon="REMOVE_FROM_DIRECTORY" color="WHITE" />
                   <span className="ms-2">{t.remove_page_from_directory}</span>
                 </DropdownItem>
               )}
@@ -141,7 +140,7 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           <div className="mt-2">
             <Link href={`/directory/${directoryOfPage._id}`}>
               <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
-                <Icon height={14} width={14} icon={BootstrapIcon.DIRECTORY} color={BootstrapColor.WHITE} />
+                <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
                 <span className="ms-1">{directoryOfPage.name}</span>
               </span>
             </Link>
@@ -182,7 +181,7 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           </small>
           {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
             <button className="btn btn-sm btn-primary d-flex" onClick={switchArchive}>
-              <Icon height={20} width={20} icon={BootstrapIcon.CHECK} color={BootstrapColor.WHITE} />
+              <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>
           )}
