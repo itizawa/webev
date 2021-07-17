@@ -103,7 +103,7 @@ const Index: VFC = () => {
         <div className="p-3">
           <div className="row">
             <div className="col-12">
-              <div className="d-flex gap-3 align-items-center my-2">
+              <StyledTitle className="d-flex gap-3 align-items-center my-2 py-2 sticky-top">
                 <div ref={emojiRef}>
                   <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
@@ -116,7 +116,7 @@ const Index: VFC = () => {
                   </>
                 )}
                 <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
-              </div>
+              </StyledTitle>
               <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
               {selectedPages.map((page) => {
@@ -194,6 +194,11 @@ const Index: VFC = () => {
 };
 
 export default Index;
+
+const StyledTitle = styled.div`
+  top: 4px;
+  background: #0e1f25;
+`;
 
 const StyledIconButtonWrapper = styled.div`
   > .btn {
