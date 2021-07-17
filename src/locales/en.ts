@@ -8,6 +8,7 @@ export const en = {
   logout: 'Logout',
   delete: 'Delete',
   cancel: 'Cancel',
+  close: 'Close',
   settings: 'Settings',
   search: 'Search',
   save: 'Save',

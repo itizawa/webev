@@ -68,7 +68,6 @@ const Index: VFC = () => {
     setSelectedPages((prevState) => {
       return [...prevState, page];
     });
-    setIsAddPage(false);
   };
 
   const removePageFromSelectedPages = (page: Page) => {
@@ -141,24 +140,13 @@ const Index: VFC = () => {
               </StyledTitle>
               <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
-              {selectedPages.map((page) => {
-                return (
-                  <div key={page._id} className="mb-3">
-                    <OgpPreviewCard
-                      page={page}
-                      onClickCard={() => window.open(page.url, '_blank')}
-                      onClickClearButton={() => removePageFromSelectedPages(page)}
-                    />
-                  </div>
-                );
-              })}
               {isAddPage && (
-                <div className="p-3 border border-secondary">
+                <div className="p-3 border border-secondary mb-3">
                   <div className="d-flex gap-1 align-items-center mb-3">
                     <Emoji emoji="mag" size={18} />
                     <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
                     <button className="btn btn-secondary btn-sm text-nowrap" onClick={() => setIsAddPage(false)}>
-                      {t.cancel}
+                      {t.close}
                     </button>
                   </div>
                   {paginationResult == null ? (
@@ -198,7 +186,7 @@ const Index: VFC = () => {
                 </div>
               )}
               {!isAddPage && (
-                <StyledIconButtonWrapper className="text-center mt-3">
+                <StyledIconButtonWrapper className="text-center my-3">
                   <IconButton
                     icon={BootstrapIcon.PLUS_DOTTED}
                     color={BootstrapColor.LIGHT}
@@ -207,6 +195,17 @@ const Index: VFC = () => {
                   />
                 </StyledIconButtonWrapper>
               )}
+              {selectedPages.map((page) => {
+                return (
+                  <div key={page._id} className="mb-3">
+                    <OgpPreviewCard
+                      page={page}
+                      onClickCard={() => window.open(page.url, '_blank')}
+                      onClickClearButton={() => removePageFromSelectedPages(page)}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

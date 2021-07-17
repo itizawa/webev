@@ -8,6 +8,7 @@ export const ja = {
   logout: 'ログアウト',
   delete: '削除',
   cancel: 'キャンセル',
+  close: '閉じる',
   settings: '設定',
   search: '検索',
   save: '保存',
