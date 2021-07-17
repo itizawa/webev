@@ -4,7 +4,7 @@
 @import 'emoji-mart/css/emoji-mart.css';
 
 $theme-colors: (
-  'primary': $primary,
+  'primary': $purple,
   'secondary': $secondary,
   'success': $success,
   'info': $info,
@@ -17,8 +17,6 @@ $theme-colors: (
   'pink': $pink,
   'orange': $orange,
   'teal': $teal,
-  'google': #db3236,
-  'twitter': #1da1f2,
 );
 
 @import '../../node_modules/bootstrap/scss/_buttons';
