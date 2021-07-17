@@ -1,6 +1,5 @@
 import { VFC } from 'react';
 import { IconButton } from '~/components/Icons/IconButton';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   totalItemsCount: number;
@@ -44,20 +43,20 @@ export const PaginationWrapper: VFC<Props> = (props) => {
     return (
       <>
         <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CHEVRON_DOUBLE_LEFT}
+          color="LIGHT"
+          buttonColor="SECONDARY"
+          activeColor="LIGHT"
+          icon="CHEVRON_DOUBLE_LEFT"
           disabled={activePage === 1}
           onClickButton={() => {
             handlePaginationButton(1);
           }}
         />
         <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CHEVRON_LEFT}
+          color="LIGHT"
+          buttonColor="SECONDARY"
+          activeColor="LIGHT"
+          icon="CHEVRON_LEFT"
           disabled={activePage === 1}
           onClickButton={() => {
             handlePaginationButton(activePage - 1);
@@ -99,20 +98,20 @@ export const PaginationWrapper: VFC<Props> = (props) => {
     return (
       <>
         <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CHEVRON_DOUBLE_RIGHT}
+          color="LIGHT"
+          buttonColor="SECONDARY"
+          activeColor="LIGHT"
+          icon="CHEVRON_DOUBLE_RIGHT"
           disabled={totalPage === activePage}
           onClickButton={() => {
             handlePaginationButton(activePage + 1);
           }}
         />
         <IconButton
-          color={BootstrapColor.LIGHT}
-          buttonColor={BootstrapColor.SECONDARY}
-          activeColor={BootstrapColor.LIGHT}
-          icon={BootstrapIcon.CHEVRON_RIGHT}
+          color="LIGHT"
+          buttonColor="SECONDARY"
+          activeColor="LIGHT"
+          icon="CHEVRON_RIGHT"
           disabled={totalPage === activePage}
           onClickButton={() => {
             handlePaginationButton(totalPage);

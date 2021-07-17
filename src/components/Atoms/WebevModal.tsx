@@ -3,7 +3,6 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import styled from 'styled-components';
 import { IconButton } from '../Icons/IconButton';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 type Props = {
   isOpen: boolean;
@@ -18,15 +17,7 @@ export const WebevModal: FC<Props> = (props) => {
     <Modal size="lg" isOpen={isOpen} toggle={toggle}>
       <StyledModalHeader className="bg-dark">
         {title}
-        {toggle != null && (
-          <IconButton
-            color={BootstrapColor.LIGHT}
-            buttonColor={BootstrapColor.SECONDARY}
-            activeColor={BootstrapColor.LIGHT}
-            icon={BootstrapIcon.CLOSE}
-            onClickButton={toggle}
-          />
-        )}
+        {toggle != null && <IconButton color="LIGHT" buttonColor="SECONDARY" activeColor="LIGHT" icon="CLOSE" onClickButton={toggle} />}
       </StyledModalHeader>
       <ModalBody className="bg-dark text-break">{children}</ModalBody>
     </Modal>

@@ -29,7 +29,7 @@ export const IconButton: VFC<Props> = (props) => {
     btnClassName.push(`btn-${buttonSize}`);
   }
   if (buttonColor != null) {
-    btnClassName.push(`btn-${buttonColor}`);
+    btnClassName.push(`btn-${BootstrapColor[buttonColor]}`);
   }
   if (disabled) {
     btnClassName.push('disabled');
@@ -41,7 +41,7 @@ export const IconButton: VFC<Props> = (props) => {
   return (
     <button className={btnClassName.join(' ')} onClick={handleClickButton}>
       <Icon width={width} height={height} icon={icon} color={textColor} />
-      {text && <span className={`ms-2 text-${textColor}`}>{text}</span>}
+      {text && <span className={`ms-2 text-${BootstrapColor[textColor]}`}>{text}</span>}
     </button>
   );
 };

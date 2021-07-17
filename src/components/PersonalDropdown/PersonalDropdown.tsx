@@ -16,8 +16,6 @@ import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/interfaces/contexts';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
 
@@ -84,13 +82,13 @@ export const PersonalDropdown: VFC = () => {
             className={`btn btn-outline-primary ${ogpCardLayout === OgpLayoutType.LIST ? 'active' : ''}`}
             onClick={() => handleClickOgpCardLayout(OgpLayoutType.LIST)}
           >
-            <Icon height={20} width={20} icon={BootstrapIcon.LIST} color={BootstrapColor.WHITE} />
+            <Icon height={20} width={20} icon="LIST" color="WHITE" />
           </button>
           <button
             className={`btn btn-outline-primary ${ogpCardLayout === OgpLayoutType.CARD ? 'active' : ''}`}
             onClick={() => handleClickOgpCardLayout(OgpLayoutType.CARD)}
           >
-            <Icon height={20} width={20} icon={BootstrapIcon.GRID} color={BootstrapColor.WHITE} />
+            <Icon height={20} width={20} icon="GRID" color="WHITE" />
           </button>
         </div>
         <DropdownItem divider />

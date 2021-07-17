@@ -3,9 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
+import { BootstrapIcon } from '~/interfaces/variables';
 import { SidebarDirectory } from '~/components/Sidebar/SidebarDirectory';
 import { Icon } from '~/components/Icons/Icon';
 
@@ -13,10 +13,10 @@ export const Sidebar: VFC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
-  const navbarItemMappings = [
-    { text: t.home, url: '/home', icon: BootstrapIcon.HOME },
-    { text: t.read, url: '/read', icon: BootstrapIcon.CHECK },
-    { text: t.directory, url: '/directory', icon: BootstrapIcon.DIRECTORY },
+  const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
+    { text: t.home, url: '/home', icon: 'HOME' },
+    { text: t.read, url: '/read', icon: 'CHECK' },
+    { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
   ];
 
   return (
@@ -26,7 +26,7 @@ export const Sidebar: VFC = () => {
           return (
             <Link key={v.text} href={v.url}>
               <StyledList className="list-group-item mx-3 border-0" isActive={v.url === router.pathname} role="button">
-                {v.icon != null && <Icon icon={v.icon} color={BootstrapColor.LIGHT} />}
+                {v.icon != null && <Icon icon={v.icon} color="LIGHT" />}
                 <span className="ms-3">{v.text}</span>
               </StyledList>
             </Link>

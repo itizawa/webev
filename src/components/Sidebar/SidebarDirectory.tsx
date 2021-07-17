@@ -10,7 +10,6 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/Icons/IconButton';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { useAllParentDirectories } from '~/stores/directory';
 import { Directory } from '~/domains/Directory';
@@ -115,12 +114,7 @@ export const SidebarDirectory: VFC = () => {
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           ) : (
-            <IconButton
-              icon={BootstrapIcon.PLUS_DOTTED}
-              color={BootstrapColor.LIGHT}
-              activeColor={BootstrapColor.LIGHT}
-              onClickButton={() => setIsCreatingNewDirectory(true)}
-            />
+            <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />
           )}
         </StyledDiv>
       )}

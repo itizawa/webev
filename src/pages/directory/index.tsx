@@ -15,7 +15,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 import { PageStatus } from '~/domains/Page';
 
 const Index: VFC = () => {
@@ -83,12 +82,7 @@ const Index: VFC = () => {
                       />
                     </form>
                   ) : (
-                    <IconButton
-                      icon={BootstrapIcon.PLUS_DOTTED}
-                      color={BootstrapColor.LIGHT}
-                      activeColor={BootstrapColor.LIGHT}
-                      onClickButton={() => setIsCreatingNewDirectory(true)}
-                    />
+                    <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />
                   )}
                 </StyledDiv>
               )}
