@@ -22,7 +22,7 @@ type Props = {
 export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
   const { t } = useLocale();
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  console.log('useAllParentDirectories', useAllParentDirectories);
+  console.log('allParentDirectories', allParentDirectories);
 
   // TODO: need to set args allParentDirectories' ids
   const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildrens(directory?._id);
