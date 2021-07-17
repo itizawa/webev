@@ -11,7 +11,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useAllDirectories, useDirectoryChildren } from '~/stores/directory';
+import { useAllDirectories, useDirectoryChildrens } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
@@ -22,7 +22,7 @@ type Props = {
 export const DirectoryItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
   const { t } = useLocale();
 
-  const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildren(directory?._id);
+  const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildrens(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
