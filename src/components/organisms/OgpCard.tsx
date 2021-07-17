@@ -99,7 +99,7 @@ export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
       <div className="card-body p-2 d-flex flex-column">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white webev-anchor" href={url} target="blank" rel="noopener noreferrer">
+            <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
               {title || url}
             </a>
           </p>

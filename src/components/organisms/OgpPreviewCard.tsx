@@ -28,7 +28,7 @@ export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard }) => {
         decoding="sync"
       />
       <StyledDivRgiht className="px-3 py-2 d-flex flex-column">
-        <StyledTitle className="small fw-bold text-break mb-0 overflow-hidden">{title || url}</StyledTitle>
+        <p className="small fw-bold text-break mb-0 webev-limit-2lines">{title || url}</p>
         <StyledDescription className="small text-truncate mb-0">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </StyledDescription>
@@ -70,12 +70,6 @@ const StyledImg = styled.img`
 const StyledDivRgiht = styled.div`
   width: calc(100% - 100px);
   height: 100px;
-`;
-
-const StyledTitle = styled.p`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
 `;
 
 const StyledDescription = styled.p`
