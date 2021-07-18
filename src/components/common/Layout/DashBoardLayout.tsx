@@ -15,7 +15,7 @@ import { AddDirectoryModal } from '~/components/PageModals/AddDirectoryModal';
 import { CreateDirectoryModal } from '~/components/PageModals/CreateDirectoryModal';
 import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { DeleteDirectoryModal } from '~/components/PageModals/DeleteDirectoryModal';
-import { RenameDirectoryModal } from '~/components/PageModals/RenameDirectoryModal';
+import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
@@ -65,7 +65,7 @@ export const DashBoardLayout: FC = ({ children }) => {
             <AddDirectoryModal />
             <CreateDirectoryModal />
             <DeleteDirectoryModal />
-            <RenameDirectoryModal />
+            <DirectoryRenameModal />
             <PageDeleteModal />
             <PageSaveModal />
           </>

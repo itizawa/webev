@@ -1,7 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
-import { Modal } from '../base/molecules/Modal';
+import { Modal } from '../../../../base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -10,7 +10,7 @@ import { useDirectoryForRename } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useAllDirectories, useAllParentDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 
-export const RenameDirectoryModal: VFC = () => {
+export const DirectoryRenameModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
