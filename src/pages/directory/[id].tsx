@@ -15,10 +15,10 @@ import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { SearchForm } from '~/components/Commons/SearchForm';
+import { SortButtonGroup } from '~/components/commons/SortButtonGroup';
+import { SearchForm } from '~/components/commons/SearchForm';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';

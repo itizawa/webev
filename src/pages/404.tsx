@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import Link from 'next/link';
 
 import { useLocale } from '~/hooks/useLocale';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
 
 const Page: VFC = () => {
   const { t } = useLocale();

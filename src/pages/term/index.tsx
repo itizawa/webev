@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
 
 import { Term } from '~/components/domain/Term/molecules/Term';
 import { useLocale } from '~/hooks/useLocale';

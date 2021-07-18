@@ -6,7 +6,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
+import { PaginationWrapper } from '~/components/commons/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { OgpPreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
