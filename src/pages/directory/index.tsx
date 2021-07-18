@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 

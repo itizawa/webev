@@ -1,5 +1,5 @@
 import { VFC, ComponentProps, MouseEvent } from 'react';
-import { Icon } from '../base/atoms/Icon';
+import { Icon } from '../../atoms/Icon';
 import { BootstrapColor } from '~/interfaces/variables';
 
 type Props = {

@@ -19,7 +19,7 @@ import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';

@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 
 export const Footer: FC = () => {

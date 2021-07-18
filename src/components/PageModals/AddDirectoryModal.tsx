@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { VFC, useState } from 'react';
 import styled from 'styled-components';
 
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { Icon } from '~/components/base/atoms/Icon';

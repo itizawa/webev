@@ -7,7 +7,7 @@ import { Emoji } from 'emoji-mart';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/interfaces/variables';

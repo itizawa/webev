@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 type Props = {
   totalItemsCount: number;

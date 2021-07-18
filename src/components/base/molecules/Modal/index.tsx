@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Modal as ReactStrapModal, ModalHeader, ModalBody } from 'reactstrap';
 
 import styled from 'styled-components';
-import { IconButton } from '../../../Icons/IconButton';
+import { IconButton } from '../IconButton';
 
 type Props = {
   isOpen: boolean;

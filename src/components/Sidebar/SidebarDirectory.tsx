@@ -9,7 +9,7 @@ import { DirectorySidebarListItem } from '~/components/domain/Directory/molecule
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { IconButton } from '~/components/Icons/IconButton';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 import { useAllParentDirectories } from '~/stores/directory';
 import { Directory } from '~/domains/Directory';
