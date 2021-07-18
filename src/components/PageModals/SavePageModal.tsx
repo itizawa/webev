@@ -7,7 +7,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
-import { EditableInput } from '~/components/Atoms/EditableInput';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 

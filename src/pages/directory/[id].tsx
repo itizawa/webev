@@ -22,7 +22,7 @@ import { SearchForm } from '~/components/Commons/SearchForm';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
-import { EditableInput } from '~/components/Atoms/EditableInput';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';

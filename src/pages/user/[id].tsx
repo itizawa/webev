@@ -10,7 +10,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { UserIcon } from '~/components/Icons/UserIcon';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { EditableInput } from '~/components/Atoms/EditableInput';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
 
 const Index: VFC = () => {
   const { t } = useLocale();
