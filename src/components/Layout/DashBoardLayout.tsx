@@ -14,8 +14,8 @@ import { Footer } from '~/components/organisms/Footer';
 import { PageModals } from '~/components/PageModals/PageModals';
 import { ShareLinkReceiver } from '~/components/ShareLinkReceiver';
 import { SocketConnector } from '~/components/SocketConnector';
-import { TutorialDitecter } from '~/components/TutorialDitecter';
-import { ScrollTopButton } from '~/components/Commons/ScrollTopButton';
+import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
+import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 
@@ -57,7 +57,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <PageModals />}
         {session && <SocketConnector />}
         {session && <ShareLinkReceiver />}
-        {currentUser && <TutorialDitecter />}
+        {currentUser && <TutorialDitecterModal />}
         <ScrollTopButton />
       </StyledDiv>
       <Footer />
