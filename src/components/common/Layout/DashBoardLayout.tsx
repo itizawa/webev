@@ -11,7 +11,13 @@ import { Sidebar } from '~/components/common/Sidebar';
 import { SubnavBar } from '~/components/common/SubnavBar';
 import { Footer } from '~/components/common/Footer';
 
-import { PageModals } from '~/components/PageModals/PageModals';
+import { AddDirectoryModal } from '~/components/PageModals/AddDirectoryModal';
+import { CreateDirectoryModal } from '~/components/PageModals/CreateDirectoryModal';
+import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
+import { DeleteDirectoryModal } from '~/components/PageModals/DeleteDirectoryModal';
+import { RenameDirectoryModal } from '~/components/PageModals/RenameDirectoryModal';
+import { SavePageModal } from '~/components/PageModals/SavePageModal';
+
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
@@ -54,7 +60,16 @@ export const DashBoardLayout: FC = ({ children }) => {
           <Sidebar />
         </div>
         <div className="col-12 col-md-9">{children}</div>
-        {session && <PageModals />}
+        {session && (
+          <>
+            <PageDeleteModal />
+            <AddDirectoryModal />
+            <CreateDirectoryModal />
+            <DeleteDirectoryModal />
+            <RenameDirectoryModal />
+            <SavePageModal />
+          </>
+        )}
         {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDitecterModal />}

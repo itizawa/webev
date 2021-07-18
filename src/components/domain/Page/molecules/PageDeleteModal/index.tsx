@@ -10,7 +10,7 @@ import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-export const DeletePageModal: VFC = () => {
+export const PageDeleteModal: VFC = () => {
   const { t } = useLocale();
 
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
