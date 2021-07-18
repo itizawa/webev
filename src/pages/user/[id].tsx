@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
-import { UserIcon } from '~/components/Icons/UserIcon';
+import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 
