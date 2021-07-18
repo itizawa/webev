@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
-import { DirectoryItem } from '../Directory/DirectoryItem';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -96,7 +96,7 @@ export const SidebarDirectory: VFC = () => {
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectoryItem directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />
+                        <DirectoryListItem directory={directory} onClickDirectory={handleClickDirectory} activeDirectoryId={directoryId as string} />
                       </div>
                     )}
                   </Draggable>
