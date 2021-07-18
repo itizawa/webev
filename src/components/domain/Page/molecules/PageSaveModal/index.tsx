@@ -17,7 +17,7 @@ import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 
-export const SavePageModal: VFC = () => {
+export const PageSaveModal: VFC = () => {
   const { t } = useLocale();
 
   const [url, setUrl] = useState('');
