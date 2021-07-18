@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { Navbar } from '~/components/organisms/Navbar';
-import { Footer } from '~/components/organisms/Footer';
+import { Navbar } from '~/components/common/Navbar';
+import { Footer } from '~/components/common/Footer';
 import { useLocale } from '~/hooks/useLocale';
 
 export const MaintenanceLayout: VFC = () => {

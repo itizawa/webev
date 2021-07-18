@@ -6,10 +6,10 @@ import styled from 'styled-components';
 import { useActivePage, useDirectoryId, useSearchKeyWord } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
-import { Navbar } from '~/components/organisms/Navbar';
-import { Sidebar } from '~/components/organisms/Sidebar';
-import { SubnavBar } from '~/components/organisms/SubnavBar';
-import { Footer } from '~/components/organisms/Footer';
+import { Navbar } from '~/components/common/Navbar';
+import { Sidebar } from '~/components/common/Sidebar';
+import { SubnavBar } from '~/components/common/SubnavBar';
+import { Footer } from '~/components/common/Footer';
 
 import { PageModals } from '~/components/PageModals/PageModals';
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
