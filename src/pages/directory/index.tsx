@@ -3,7 +3,7 @@ import { VFC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';

@@ -9,7 +9,7 @@ import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
-import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 
 const Index: VFC = () => {

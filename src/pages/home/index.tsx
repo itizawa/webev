@@ -1,15 +1,15 @@
 import { useEffect, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
-import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { PageStatus } from '~/domains/Page';
 import { usePageListSWR, usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/commons/SortButtonGroup';
-import { SearchForm } from '~/components/commons/SearchForm';
+import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+import { SearchForm } from '~/components/common/SearchForm';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 const Index: VFC = () => {
