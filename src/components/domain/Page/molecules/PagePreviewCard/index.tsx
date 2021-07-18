@@ -15,7 +15,7 @@ type Props = {
   onClickClearButton?: () => void;
 };
 
-export const OgpPreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearButton }) => {
+export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearButton }) => {
   const { url, image, favicon, title, description } = page;
 
   const handleClickClearButton = (e: React.MouseEvent<HTMLButtonElement>) => {

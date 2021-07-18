@@ -3,8 +3,8 @@ import { VFC } from 'react';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 const Index: VFC = () => {
   const { t } = useLocale();

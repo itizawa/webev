@@ -8,19 +8,19 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { IconButton } from '~/components/Icons/IconButton';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useAllPages } from '~/stores/page';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
-import { EditableInput } from '~/components/Atoms/EditableInput';
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
-import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { IconButton } from '~/components/base/molecules/IconButton';
+
+import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
+import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
+import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 import { Page } from '~/domains/Page';
+import { useAllPages } from '~/stores/page';
 import { useScrapById } from '~/stores/scrap';
-import { EditableTextares } from '~/components/case/molecules/EditableTextarea';
+import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
 
 const emojiSize = 40;
 
@@ -138,7 +138,7 @@ const Index: VFC = () => {
                 </div>
                 <button className="btn btn-purple btn-sm text-nowrap">{isPublic ? t.update_scrap : t.save_draft}</button>
               </StyledTitle>
-              <EditableTextares placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
+              <EditableTextarea placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
               {isAddPage && (
                 <div className="p-3 border border-secondary mb-3">
@@ -162,7 +162,7 @@ const Index: VFC = () => {
                           }
                           return (
                             <div key={page._id} className="mb-3">
-                              <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
+                              <PagePreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
                             </div>
                           );
                         })}
@@ -187,18 +187,13 @@ const Index: VFC = () => {
               )}
               {!isAddPage && (
                 <StyledIconButtonWrapper className="text-center my-3">
-                  <IconButton
-                    icon={BootstrapIcon.PLUS_DOTTED}
-                    color={BootstrapColor.LIGHT}
-                    activeColor={BootstrapColor.LIGHT}
-                    onClickButton={() => setIsAddPage(true)}
-                  />
+                  <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} />
                 </StyledIconButtonWrapper>
               )}
               {selectedPages.map((page) => {
                 return (
                   <div key={page._id} className="mb-3">
-                    <OgpPreviewCard
+                    <PagePreviewCard
                       page={page}
                       onClickCard={() => window.open(page.url, '_blank')}
                       onClickClearButton={() => removePageFromSelectedPages(page)}
