@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { Footer } from '../organisms/Footer';
+import { Footer } from '../../organisms/Footer';
 
 import { Navbar } from '~/components/organisms/Navbar';
 
