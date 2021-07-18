@@ -12,7 +12,7 @@ import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { Footer } from '~/components/organisms/Footer';
 
 import { PageModals } from '~/components/PageModals/PageModals';
-import { SocketConnector } from '~/components/SocketConnector';
+import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
