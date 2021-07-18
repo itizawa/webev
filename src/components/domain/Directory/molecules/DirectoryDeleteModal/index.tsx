@@ -10,7 +10,7 @@ import { useDirectoryForDelete } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useAllParentDirectories, useDirectoryChildren } from '~/stores/directory';
 
-export const DeleteDirectoryModal: VFC = () => {
+export const DirectoryDeleteModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
