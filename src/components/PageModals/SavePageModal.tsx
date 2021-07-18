@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
-import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
+import { OgpPreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
