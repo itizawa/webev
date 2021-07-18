@@ -23,7 +23,7 @@ import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/Atoms/EditableInput';
-import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';
 import { PageStatus } from '~/domains/Page';

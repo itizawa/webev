@@ -7,7 +7,7 @@ import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { usePageStatus } from '~/stores/page';
