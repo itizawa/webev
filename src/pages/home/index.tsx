@@ -10,7 +10,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
-import { PageList } from '~/components/Page/PageList';
+import { PageList } from '~/components/domain/page/PageList';
 
 const Index: VFC = () => {
   const { t } = useLocale();
