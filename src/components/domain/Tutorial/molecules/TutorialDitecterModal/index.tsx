@@ -12,7 +12,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 const HOW_TO_USE_URL = 'https://www.webev.cloud/ja/news/xmaua8n1qes6';
 
-export const TutorialDitecter: VFC = () => {
+export const TutorialDitecterModal: VFC = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { t } = useLocale();
 
