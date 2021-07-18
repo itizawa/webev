@@ -12,8 +12,8 @@ import { SubnavBar } from '~/components/organisms/SubnavBar';
 import { Footer } from '~/components/organisms/Footer';
 
 import { PageModals } from '~/components/PageModals/PageModals';
-import { ShareLinkReceiver } from '~/components/ShareLinkReceiver';
 import { SocketConnector } from '~/components/SocketConnector';
+import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
@@ -56,7 +56,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-9">{children}</div>
         {session && <PageModals />}
         {session && <SocketConnector />}
-        {session && <ShareLinkReceiver />}
+        {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDitecterModal />}
         <ScrollTopButton />
       </StyledDiv>
