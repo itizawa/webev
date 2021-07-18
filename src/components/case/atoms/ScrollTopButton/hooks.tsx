@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import { throttle } from 'throttle-debounce';
 
-import { ViewProps } from './presenter';
-
-export const useHooks = (): ViewProps => {
-  const [showScroll, setShowScroll] = useState(false);
+export const useHooks = (): { isShowScroll: boolean; scrollTop: () => void } => {
+  const [isShowScroll, setIsShowScroll] = useState(false);
 
   const throttleCheckScrollTop = throttle(300, () => {
     const currentYOffset = window.pageYOffset;
     if (currentYOffset > 1000) {
-      setShowScroll(true);
+      setIsShowScroll(true);
     }
     if (currentYOffset <= 1000) {
-      setShowScroll(false);
+      setIsShowScroll(false);
     }
   });
 
@@ -28,7 +26,7 @@ export const useHooks = (): ViewProps => {
   }, []);
 
   return {
-    showScroll,
+    isShowScroll,
     scrollTop,
   };
 };
