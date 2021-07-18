@@ -5,7 +5,7 @@ import { usePageListSWR, usePageStatus } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { PageList } from '~/components/domain/Page/PageList';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
