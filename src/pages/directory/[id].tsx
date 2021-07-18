@@ -16,7 +16,7 @@ import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirecto
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { SearchForm } from '~/components/common/SearchForm';
 import { IconButton } from '~/components/base/molecules/IconButton';

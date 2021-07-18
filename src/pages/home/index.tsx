@@ -7,7 +7,7 @@ import { PageStatus } from '~/domains/Page';
 import { usePageListSWR, usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { SearchForm } from '~/components/common/SearchForm';
 import { PageList } from '~/components/domain/Page/molecules/PageList';

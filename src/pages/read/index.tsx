@@ -6,7 +6,7 @@ import { usePageListSWR, usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { PageList } from '~/components/domain/Page/molecules/PageList';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { SearchForm } from '~/components/common/SearchForm';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
