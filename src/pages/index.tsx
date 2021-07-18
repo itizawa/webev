@@ -5,7 +5,7 @@ import Image from 'next/image';
 import CountUp from 'react-countup';
 import axios from 'axios';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { useLocale } from '~/hooks/useLocale';
 import { imagePath } from '~/const/imagePath';
