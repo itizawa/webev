@@ -20,7 +20,7 @@ import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredW
 import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
 import { IconButton } from '~/components/Icons/IconButton';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';

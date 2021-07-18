@@ -2,7 +2,7 @@ import { useEffect, useState, VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 import { useLocale } from '~/hooks/useLocale';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useSearchKeyWord } from '~/stores/page';

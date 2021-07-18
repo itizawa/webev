@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { BootstrapIcon } from '~/interfaces/variables';
 import { SidebarDirectory } from '~/components/Sidebar/SidebarDirectory';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 
 export const Sidebar: VFC = () => {
   const router = useRouter();

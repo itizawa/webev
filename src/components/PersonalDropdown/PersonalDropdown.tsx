@@ -7,7 +7,7 @@ import Loader from 'react-loader-spinner';
 
 import { toastSuccess } from '~/utils/toastr';
 
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 import { UserIcon } from '~/components/Icons/UserIcon';
 
 import { useLocale } from '~/hooks/useLocale';

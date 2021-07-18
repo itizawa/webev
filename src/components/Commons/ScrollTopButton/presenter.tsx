@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 
 import { StyledButton } from './style';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 
 export type ViewProps = {
   scrollTop: () => void;

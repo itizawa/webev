@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { BootstrapIcon } from '~/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 
 export const SubnavBar: VFC = () => {
   const router = useRouter();

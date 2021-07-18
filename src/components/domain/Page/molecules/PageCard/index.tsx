@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { format } from 'date-fns';
 
 import { FixedImage } from '~/components/base/atoms/FixedImage';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';

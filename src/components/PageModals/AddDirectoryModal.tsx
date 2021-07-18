@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { IconButton } from '~/components/Icons/IconButton';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';

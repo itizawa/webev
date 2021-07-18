@@ -11,7 +11,7 @@ import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 
 import { IconButton } from '~/components/Icons/IconButton';
-import { Icon } from '~/components/Icons/Icon';
+import { Icon } from '~/components/base/atoms/Icon';
 
 type Props = {
   directory: Directory;
