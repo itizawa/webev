@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
 import { FixedImage } from '~/components/Atoms/FixedImage';
-import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
+import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { Icon } from '~/components/Icons/Icon';
 
 import { restClient } from '~/utils/rest-client';
@@ -80,7 +80,12 @@ export const AddDirectoryModal: VFC = () => {
         <StyledDiv className="col-12 col-md-5">
           {allParentDirectories.map((directory) => {
             return (
-              <DirectoryListItem key={directory._id} directory={directory} onClickDirectory={addPageToDirectory} activeDirectoryId={directoryId as string} />
+              <DirectorySidebarListItem
+                key={directory._id}
+                directory={directory}
+                onClickDirectory={addPageToDirectory}
+                activeDirectoryId={directoryId as string}
+              />
             );
           })}
           <StyledCreateFormDiv className="text-center mx-3 mt-2">

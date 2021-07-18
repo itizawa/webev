@@ -19,7 +19,7 @@ type Props = {
   onClickDirectory?: (directoryId: string) => void;
 };
 
-export const DirectoryListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
   const { t } = useLocale();
 
   const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildren(directory?._id);
@@ -141,7 +141,7 @@ export const DirectoryListItem: VFC<Props> = ({ directory, onClickDirectory, act
           )}
           {childrenDirectortTrees?.map((childrenDirectortTree) => {
             return (
-              <DirectoryListItem
+              <DirectorySidebarListItem
                 key={childrenDirectortTree._id}
                 directory={childrenDirectortTree.descendant as Directory}
                 onClickDirectory={onClickDirectory}
