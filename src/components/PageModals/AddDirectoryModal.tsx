@@ -14,7 +14,7 @@ import { useAllParentDirectories } from '~/stores/directory';
 import { usePageForAddDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
-import { WebevModal } from '~/components/Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 
 export const AddDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -63,7 +63,7 @@ export const AddDirectoryModal: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={pageForAddDirectory != null} toggle={() => mutatePageForAddDirectory(null)} title={t.move_directory}>
+    <Modal isOpen={pageForAddDirectory != null} toggle={() => mutatePageForAddDirectory(null)} title={t.move_directory}>
       <div className="row">
         <div className="col-12 col-md-5">
           <FixedImage imageUrl={pageForAddDirectory?.image} />
@@ -99,7 +99,7 @@ export const AddDirectoryModal: VFC = () => {
           </StyledCreateFormDiv>
         </StyledDiv>
       </div>
-    </WebevModal>
+    </Modal>
   );
 };
 

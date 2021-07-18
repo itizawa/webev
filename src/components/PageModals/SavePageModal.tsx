@@ -9,7 +9,7 @@ import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
-import { WebevModal } from '~/components/Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
 import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
@@ -77,7 +77,7 @@ export const SavePageModal: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={directoryForSavePage != null} toggle={closeModal} title={t.save_page_to_directory}>
+    <Modal isOpen={directoryForSavePage != null} toggle={closeModal} title={t.save_page_to_directory}>
       <div className="row align-items-center">
         <div className="col-12 col-md-3 text-md-end">
           <span>{t.input_url}</span>
@@ -126,6 +126,6 @@ export const SavePageModal: VFC = () => {
           )}
         </>
       )}
-    </WebevModal>
+    </Modal>
   );
 };

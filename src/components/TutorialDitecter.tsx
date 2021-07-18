@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 
-import { WebevModal } from './Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -32,7 +32,7 @@ export const TutorialDitecter: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={!currentUser?.isExecutedTutorial} title={t.welcome_webev}>
+    <Modal isOpen={!currentUser?.isExecutedTutorial} title={t.welcome_webev}>
       <div className="text-center">
         <h3>🎉 {t.welcome_webev} 🎉</h3>
         <p>
@@ -47,6 +47,6 @@ export const TutorialDitecter: VFC = () => {
           </button>
         </div>
       </div>
-    </WebevModal>
+    </Modal>
   );
 };

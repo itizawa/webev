@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 
-import { WebevModal } from '../Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 import { FixedImage } from '~/components/Atoms/FixedImage';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -32,7 +32,7 @@ export const DeletePageModal: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={pageForDelete != null} toggle={closeDeleteModal} title={t.delete_page}>
+    <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal} title={t.delete_page}>
       <FixedImage imageUrl={pageForDelete?.image} />
       <h5 className="card-title my-3">{pageForDelete?.title}</h5>
       <div className="d-flex justify-content-evenly">
@@ -43,6 +43,6 @@ export const DeletePageModal: VFC = () => {
           {t.delete}
         </button>
       </div>
-    </WebevModal>
+    </Modal>
   );
 };

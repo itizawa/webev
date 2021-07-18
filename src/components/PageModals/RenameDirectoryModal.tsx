@@ -1,7 +1,7 @@
 import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
-import { WebevModal } from '../Atoms/WebevModal';
+import { Modal } from '../base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -48,13 +48,13 @@ export const RenameDirectoryModal: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={directoryForRename != null} toggle={closeDeleteModal} title={t.rename_directory}>
+    <Modal isOpen={directoryForRename != null} toggle={closeDeleteModal} title={t.rename_directory}>
       <form className="input-group my-2" onSubmit={handleSubmit}>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
         <button className="btn btn-success" type="submit" disabled={name.trim() === '' || name === directoryForRename?.name}>
           {t.save}
         </button>
       </form>
-    </WebevModal>
+    </Modal>
   );
 };

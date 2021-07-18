@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 
-import { WebevModal } from './Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useSocketId } from '~/stores/contexts';
 import { usePageListSWR } from '~/stores/page';
@@ -47,7 +47,7 @@ export const ShareLinkReceiver: VFC = () => {
   };
 
   return (
-    <WebevModal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
+    <Modal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
       <div className="text-center">
         <p>{title || 'No title'}</p>
         <p>{url}</p>
@@ -60,6 +60,6 @@ export const ShareLinkReceiver: VFC = () => {
           {t.save}
         </button>
       </div>
-    </WebevModal>
+    </Modal>
   );
 };

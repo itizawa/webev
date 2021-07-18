@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 
 import { useRouter } from 'next/router';
-import { WebevModal } from '../Atoms/WebevModal';
+import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -39,7 +39,7 @@ export const DeleteDirectoryModal: VFC = () => {
   };
 
   return (
-    <WebevModal isOpen={directoryForDelete != null} toggle={closeDeleteModal} title={t.delete_directory}>
+    <Modal isOpen={directoryForDelete != null} toggle={closeDeleteModal} title={t.delete_directory}>
       <h5 className="mt-3 mb-5 text-center">{directoryForDelete?.name}</h5>
       <div className="d-flex justify-content-evenly">
         <button className="btn btn-secondary" onClick={closeDeleteModal}>
@@ -49,6 +49,6 @@ export const DeleteDirectoryModal: VFC = () => {
           {t.delete}
         </button>
       </div>
-    </WebevModal>
+    </Modal>
   );
 };
