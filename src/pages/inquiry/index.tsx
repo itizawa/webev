@@ -2,7 +2,7 @@ import { useMemo, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
 
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
