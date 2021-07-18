@@ -11,11 +11,11 @@ import { Sidebar } from '~/components/common/Sidebar';
 import { SubnavBar } from '~/components/common/SubnavBar';
 import { Footer } from '~/components/common/Footer';
 
-import { AddDirectoryModal } from '~/components/PageModals/AddDirectoryModal';
+import { DirectoryAddModal } from '~/components/domain/Directory/molecules/DirectoryAddModal';
 import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
-import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
 import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
+import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
@@ -62,7 +62,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-9">{children}</div>
         {session && (
           <>
-            <AddDirectoryModal />
+            <DirectoryAddModal />
             <DirectoryCreateModal />
             <DirectoryDeleteModal />
             <DirectoryRenameModal />

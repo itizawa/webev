@@ -16,7 +16,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { usePageListSWR } from '~/stores/page';
 import { Modal } from '~/components/base/molecules/Modal';
 
-export const AddDirectoryModal: VFC = () => {
+export const DirectoryAddModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const directoryId = router.query.id;
