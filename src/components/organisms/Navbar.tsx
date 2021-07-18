@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
-import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
+import { PersonalDropdown } from '~/components/domain/User/molecules/PersonalDropdown';
 import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInputForm';
 
 export const Navbar: VFC = () => {
