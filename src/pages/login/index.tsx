@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { signIn } from 'next-auth/client';
 
 import { LoginRequiredWrapper } from '~/components/Authentication/LogoutRequiredWrapper';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/commons/WebevOgpHead';
 import { imagePath } from '~/const/imagePath';
 import { toastSuccess } from '~/utils/toastr';
 import { useLocale } from '~/hooks/useLocale';
