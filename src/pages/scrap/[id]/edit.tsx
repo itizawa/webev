@@ -20,7 +20,7 @@ import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
 
 import { Page } from '~/domains/Page';
 import { useScrapById } from '~/stores/scrap';
-import { EditableTextares } from '~/components/Atoms/EditableTextarea';
+import { EditableTextares } from '~/components/case/molecules/EditableTextarea';
 
 const emojiSize = 40;
 
