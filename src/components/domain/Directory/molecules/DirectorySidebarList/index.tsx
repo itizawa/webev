@@ -15,7 +15,7 @@ import { useAllParentDirectories } from '~/stores/directory';
 import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 
-export const SidebarDirectory: VFC = () => {
+export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
   const directoryId = router.query.id;
