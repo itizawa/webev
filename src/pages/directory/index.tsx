@@ -3,11 +3,11 @@ import { VFC, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { IconButton } from '~/components/Icons/IconButton';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { IconButton } from '~/components/base/molecules/IconButton';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { useDirectoryListSWR } from '~/stores/directory';
 import { usePageStatus } from '~/stores/page';

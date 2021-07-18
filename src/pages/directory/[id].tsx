@@ -15,15 +15,15 @@ import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { SearchForm } from '~/components/Commons/SearchForm';
-import { IconButton } from '~/components/Icons/IconButton';
-import { Icon } from '~/components/Icons/Icon';
-import { PageList } from '~/components/Page/PageList';
-import { EditableInput } from '~/components/Atoms/EditableInput';
-import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+import { SearchForm } from '~/components/common/SearchForm';
+import { IconButton } from '~/components/base/molecules/IconButton';
+import { Icon } from '~/components/base/atoms/Icon';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';
 import { PageStatus } from '~/domains/Page';
