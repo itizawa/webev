@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
 
-import { Term } from '~/components/Term/Term';
+import { Term } from '~/components/domain/Term/molecules/Term';
 import { useLocale } from '~/hooks/useLocale';
 
 const Index: VFC = () => {
