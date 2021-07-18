@@ -9,7 +9,7 @@ import { useParentDirectoryForCreateDirectory } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useDirectoryChildren } from '~/stores/directory';
 
-export const CreateDirectoryModal: VFC = () => {
+export const DirectoryCreateModal: VFC = () => {
   const { t } = useLocale();
 
   const { data: parentDirectoryForCreateDirectory, mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();

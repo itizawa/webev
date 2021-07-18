@@ -12,7 +12,7 @@ import { SubnavBar } from '~/components/common/SubnavBar';
 import { Footer } from '~/components/common/Footer';
 
 import { AddDirectoryModal } from '~/components/PageModals/AddDirectoryModal';
-import { CreateDirectoryModal } from '~/components/PageModals/CreateDirectoryModal';
+import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
 import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
 import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
@@ -63,7 +63,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && (
           <>
             <AddDirectoryModal />
-            <CreateDirectoryModal />
+            <DirectoryCreateModal />
             <DirectoryDeleteModal />
             <DirectoryRenameModal />
             <PageDeleteModal />
