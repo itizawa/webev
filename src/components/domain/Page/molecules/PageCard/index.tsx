@@ -6,7 +6,7 @@ import { UncontrolledTooltip, UncontrolledDropdown, DropdownToggle, DropdownMenu
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
-import { FixedImage } from '~/components/Atoms/FixedImage';
+import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/Icons/Icon';
 import { IconButton } from '~/components/Icons/IconButton';
 import { restClient } from '~/utils/rest-client';

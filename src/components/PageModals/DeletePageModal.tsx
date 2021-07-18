@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 
 import { Modal } from '~/components/base/molecules/Modal';
-import { FixedImage } from '~/components/Atoms/FixedImage';
+import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 

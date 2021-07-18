@@ -3,7 +3,7 @@ import { VFC, useState } from 'react';
 import styled from 'styled-components';
 
 import { IconButton } from '~/components/Icons/IconButton';
-import { FixedImage } from '~/components/Atoms/FixedImage';
+import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { Icon } from '~/components/Icons/Icon';
 
