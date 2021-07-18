@@ -5,7 +5,7 @@ import Loader from 'react-loader-spinner';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
+import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { OgpPreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
