@@ -5,7 +5,7 @@ import { useSession } from 'next-auth/client';
 import styled from 'styled-components';
 
 import { PersonalDropdown } from '~/components/PersonalDropdown/PersonalDropdown';
-import { InputForm } from '~/components/molecules/InputForm';
+import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInputForm';
 
 export const Navbar: VFC = () => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
@@ -29,7 +29,7 @@ export const Navbar: VFC = () => {
         {session != null && !isMaintenanceMode && (
           <div className="d-flex justify-content-between align-items-center">
             <div className="col col-md-9 my-md-0 my-0 me-2">
-              <InputForm />
+              <PageUrlInputForm />
             </div>
             <PersonalDropdown />
           </div>

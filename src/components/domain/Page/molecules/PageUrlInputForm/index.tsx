@@ -7,7 +7,7 @@ import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 import { useUrlFromClipBoard, useSocketId } from '~/stores/contexts';
 
-export const InputForm: VFC = () => {
+export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
