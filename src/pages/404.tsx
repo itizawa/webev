@@ -5,7 +5,7 @@ import { VFC } from 'react';
 import { imagePath } from '~/const/imagePath';
 
 import { useLocale } from '~/hooks/useLocale';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 const Page: VFC = () => {
   const { t } = useLocale();

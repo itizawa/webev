@@ -5,11 +5,11 @@ import { usePageListSWR, usePageStatus } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { PageList } from '~/components/Page/PageList';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { SearchForm } from '~/components/Commons/SearchForm';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+import { SearchForm } from '~/components/common/SearchForm';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { PageStatus } from '~/domains/Page';
 
