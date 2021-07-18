@@ -6,7 +6,7 @@ import { OgpLayoutType } from '~/interfaces/contexts';
 
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
-import { OgpListItem } from '~/components/organisms/OgpListItem';
+import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
 import { useActivePage } from '~/stores/page';
@@ -29,7 +29,7 @@ export const PageList: VFC<Props> = (props) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
             <div className="col-12" key={page._id}>
-              <OgpListItem page={page} isHideArchiveButton={isHideArchiveButton} />
+              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} />
             </div>
           );
         }
