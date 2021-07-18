@@ -21,7 +21,7 @@ import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
 import { SearchForm } from '~/components/Commons/SearchForm';
 import { IconButton } from '~/components/Icons/IconButton';
 import { Icon } from '~/components/Icons/Icon';
-import { PageList } from '~/components/domain/page/PageList';
+import { PageList } from '~/components/domain/Page/PageList';
 import { EditableInput } from '~/components/Atoms/EditableInput';
 import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
 
