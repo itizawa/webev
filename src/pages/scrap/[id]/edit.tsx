@@ -8,19 +8,19 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { IconButton } from '~/components/Icons/IconButton';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-import { useAllPages } from '~/stores/page';
-import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
-import { EditableInput } from '~/components/Atoms/EditableInput';
-import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
-import { OgpPreviewCard } from '~/components/organisms/OgpPreviewCard';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { IconButton } from '~/components/base/molecules/IconButton';
+
+import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
+import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
+import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 import { Page } from '~/domains/Page';
+import { useAllPages } from '~/stores/page';
 import { useScrapById } from '~/stores/scrap';
-import { EditableTextares } from '~/components/Atoms/EditableTextarea';
+import { EditableTextares } from '~/components/case/molecules/EditableTextares';
 
 const emojiSize = 40;
 
@@ -122,7 +122,7 @@ const Index: VFC = () => {
               {selectedPages.map((page) => {
                 return (
                   <div key={page._id} className="mb-3">
-                    <OgpPreviewCard
+                    <PagePreviewCard
                       page={page}
                       onClickCard={() => window.open(page.url, '_blank')}
                       onClickClearButton={() => removePageFromSelectedPages(page)}
@@ -152,7 +152,7 @@ const Index: VFC = () => {
                           }
                           return (
                             <div key={page._id} className="mb-3">
-                              <OgpPreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
+                              <PagePreviewCard page={page} onClickCard={() => addPageToSelectedPages(page)} />
                             </div>
                           );
                         })}
@@ -177,12 +177,7 @@ const Index: VFC = () => {
               )}
               {!isAddPage && (
                 <StyledIconButtonWrapper className="text-center mt-3">
-                  <IconButton
-                    icon={BootstrapIcon.PLUS_DOTTED}
-                    color={BootstrapColor.LIGHT}
-                    activeColor={BootstrapColor.LIGHT}
-                    onClickButton={() => setIsAddPage(true)}
-                  />
+                  <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} />
                 </StyledIconButtonWrapper>
               )}
             </div>
