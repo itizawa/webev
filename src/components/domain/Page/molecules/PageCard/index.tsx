@@ -28,7 +28,7 @@ type Props = {
   isHideArchiveButton?: boolean;
 };
 
-export const OgpCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();

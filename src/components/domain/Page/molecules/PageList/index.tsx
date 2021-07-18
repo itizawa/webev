@@ -7,7 +7,7 @@ import { OgpLayoutType } from '~/interfaces/contexts';
 import { NoPageAlert } from '~/components/Alerts/NoPageAlert';
 import { PaginationWrapper } from '~/components/Commons/PaginationWrapper';
 import { OgpListItem } from '~/components/organisms/OgpListItem';
-import { OgpCard } from '~/components/organisms/OgpCard';
+import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
 import { useActivePage } from '~/stores/page';
 
@@ -35,7 +35,7 @@ export const PageList: VFC<Props> = (props) => {
         }
         return (
           <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <OgpCard page={page} isHideArchiveButton={isHideArchiveButton} />
+            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} />
           </div>
         );
       })}
