@@ -58,6 +58,7 @@ export const en = {
   function_details: 'function details',
 
   delete_page: 'Delete Page',
+  add_page: 'Add Page',
   obtained_from_clipboard: 'Obtained from Clipboard',
 
   delete_directory: 'Delete Directory',
