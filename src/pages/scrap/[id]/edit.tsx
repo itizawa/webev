@@ -23,6 +23,9 @@ import { Page } from '~/domains/Page';
 import { useAllPages } from '~/stores/page';
 import { useScrapById } from '~/stores/scrap';
 
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+
 const emojiSize = 40;
 
 const Index: VFC = () => {
@@ -36,6 +39,8 @@ const Index: VFC = () => {
   const [activePage, setActivePage] = useState(1);
   const [searchKeyWord, setSearchKeyWord] = useState('');
 
+  const [title, setTitle] = useState<string>('');
+  const [body, setBody] = useState<string>('');
   const [selectedPages, setSelectedPages] = useState<Page[]>([]);
   const [isPublic, setIsPublic] = useState<boolean>(false);
 
@@ -58,7 +63,10 @@ const Index: VFC = () => {
 
   useEffect(() => {
     if (scrap != null) {
+      setTitle(scrap.title);
+      setBody(scrap.body);
       setIsPublic(scrap.isPublic);
+      setSelectedPages(scrap.pages);
     }
   }, [scrap]);
 
@@ -79,7 +87,11 @@ const Index: VFC = () => {
   };
 
   const updateScrapTitle = (title: string) => {
-    console.log(title);
+    setTitle(title);
+  };
+
+  const updateScrapBody = (body: string) => {
+    setBody(body);
   };
 
   const handleSelectEmoji = async (emoji: EmojiData) => {
@@ -92,6 +104,17 @@ const Index: VFC = () => {
     if (emojiRef.current != null) {
       setPickerTop(emojiRef.current.offsetTop + emojiSize + 10);
       setPickerLeft(emojiRef.current.offsetLeft);
+    }
+  };
+
+  const handleClickUpdateButton = async () => {
+    try {
+      await restClient.apiPut(`/scraps/${scrap?._id}`, {
+        property: { title, body, pages: selectedPages, emojiId: emoji.id, isPublic },
+      });
+      toastSuccess(t.toastr_update_scrap);
+    } catch (err) {
+      toastError(err);
     }
   };
 
@@ -122,7 +145,7 @@ const Index: VFC = () => {
                     </StyledEmojiPickerWrapper>
                   </>
                 )}
-                <EditableInput value={scrap.title} onSubmit={updateScrapTitle} isHeader />
+                <EditableInput value={title} onSubmit={updateScrapTitle} isHeader />
                 <div className="px-3">
                   <div className="form-check form-switch text-nowrap">
                     <input
@@ -137,9 +160,11 @@ const Index: VFC = () => {
                     </label>
                   </div>
                 </div>
-                <button className="btn btn-purple btn-sm text-nowrap">{isPublic ? t.update_scrap : t.save_draft}</button>
+                <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton}>
+                  {isPublic ? t.update_scrap : t.save_draft}
+                </button>
               </StyledTitle>
-              <EditableTextarea placeholder={t.scrap_description_placeholder} onBlur={() => console.log('')} value={scrap.body} isAllowEmpty />
+              <EditableTextarea placeholder={t.scrap_description_placeholder} onBlur={updateScrapBody} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
               <StyledIconButtonWrapper className="text-center my-3">
                 <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} text={t.add_page} />
@@ -172,7 +197,7 @@ const Index: VFC = () => {
               <>
                 <div className=" overflow-scroll">
                   {paginationResult.docs.map((page) => {
-                    if (selectedPages.includes(page)) {
+                    if (selectedPages.some((v) => v._id === page._id)) {
                       return null;
                     }
                     return (
