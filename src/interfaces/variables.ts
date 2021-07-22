@@ -14,6 +14,7 @@ export type BootstrapColor = keyof typeof BootstrapColor;
 export const BootstrapIcon = {
   HOME: 'home',
   SEARCH: 'search',
+  SCRAP: 'scrap',
   CLOSE: 'close',
   PLUS_BOARD: 'plus',
   PLUS_DOTTED: 'plus-dotted',

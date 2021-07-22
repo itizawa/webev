@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
-import { OgpPreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
+import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
@@ -106,7 +106,7 @@ export const PageSaveModal: VFC = () => {
           {paginationResult.docs.map((page) => {
             return (
               <div key={page._id} className="mb-3">
-                <OgpPreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
+                <PagePreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
               </div>
             );
           })}

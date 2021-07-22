@@ -10,7 +10,7 @@ type Props = {
   placeholder?: string;
 };
 
-export const EditableTextares: VFC<Props> = (props) => {
+export const EditableTextarea: VFC<Props> = (props) => {
   const { value, onBlur, isHeader, isAllowEmpty = false, placeholder } = props;
   const [inputValue, setInputValue] = useState('');
 

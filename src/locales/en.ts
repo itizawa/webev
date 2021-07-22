@@ -8,6 +8,7 @@ export const en = {
   logout: 'Logout',
   delete: 'Delete',
   cancel: 'Cancel',
+  close: 'Close',
   settings: 'Settings',
   search: 'Search',
   save: 'Save',
@@ -26,6 +27,7 @@ export const en = {
   toastr_update_directory_name: 'Update Directory Name',
   toastr_update_directory_description: 'Update Directory Description',
   toastr_update_emoji: 'Update Directory Emoji',
+  toastr_update_scrap: 'Update Scrap',
   toastr_create_scrap: 'Create Scrap',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
@@ -57,6 +59,7 @@ export const en = {
   function_details: 'function details',
 
   delete_page: 'Delete Page',
+  add_page: 'Add Page',
   obtained_from_clipboard: 'Obtained from Clipboard',
 
   delete_directory: 'Delete Directory',
@@ -99,6 +102,9 @@ export const en = {
   scrap_title_placeholder: 'Read Scraps',
   description: 'Description',
   scrap_description_placeholder: 'ex) I tried to summarize the scraps I read today!',
+  publish: 'Publish',
+  update_scrap: 'Update Scrap',
+  save_draft: 'Save Draft',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and signin or signup Webev！',
