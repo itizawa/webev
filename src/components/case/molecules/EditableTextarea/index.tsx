@@ -1,39 +1,36 @@
 import { useEffect, useState, VFC } from 'react';
 
 import styled from 'styled-components';
+import { useDebounce } from '~/hooks/useDebounce';
 
 type Props = {
   value: string;
-  onBlur: (inputValue: string) => void;
+  onChange: (inputValue: string) => void;
   isHeader?: boolean;
   isAllowEmpty?: boolean;
   placeholder?: string;
 };
 
 export const EditableTextarea: VFC<Props> = (props) => {
-  const { value, onBlur, isHeader, isAllowEmpty = false, placeholder } = props;
+  const { value, onChange, isHeader, isAllowEmpty = false, placeholder } = props;
   const [inputValue, setInputValue] = useState('');
+  const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
 
   useEffect(() => {
-    setInputValue(value);
-  }, [value]);
-
-  const handleKeyPress = (): void => {
-    if (!isAllowEmpty && inputValue?.trim() === '') {
+    if (!isAllowEmpty && debouncedValue?.trim() === '') {
       return;
     }
     // do nothing, no change
-    if (inputValue === value) {
+    if (debouncedValue === value) {
       return;
     }
-    onBlur(inputValue);
-  };
+    onChange(debouncedValue);
+  }, [debouncedValue]);
 
   return (
     <StyledInput
       className={`form-control text-white text-nowrap overflow-scroll ${isHeader ? 'fs-1' : ''} pb-md-0 w-100`}
       onChange={(e) => setInputValue(e.target.value)}
-      onBlur={handleKeyPress}
       value={inputValue || ''}
       placeholder={placeholder || ''}
     />

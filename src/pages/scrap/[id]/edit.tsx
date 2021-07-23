@@ -164,7 +164,7 @@ const Index: VFC = () => {
                   {isPublic ? t.update_scrap : t.save_draft}
                 </button>
               </StyledTitle>
-              <EditableTextarea placeholder={t.scrap_description_placeholder} onBlur={updateScrapBody} value={scrap.body} isAllowEmpty />
+              <EditableTextarea placeholder={t.scrap_description_placeholder} onChange={updateScrapBody} value={scrap.body} isAllowEmpty />
               <h2>Page</h2>
               <StyledIconButtonWrapper className="text-center my-3">
                 <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} text={t.add_page} />
