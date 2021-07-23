@@ -48,7 +48,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory, isValidating: isValidatingDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
@@ -134,7 +134,7 @@ const Index: VFC = () => {
     }
   };
 
-  if (isValidatingDirectory) {
+  if (directory == null) {
     return (
       <div className="text-center pt-5">
         <Loader type="Oval" color="#00BFFF" height={64} width={64} />
@@ -144,7 +144,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | ${directory?.name}`} />
+      <WebevOgpHead title={`Webev | ${directory.name}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
           {directory != null && (
@@ -173,7 +173,7 @@ const Index: VFC = () => {
                 <div ref={emojiRef}>
                   <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
-                <EditableInput value={directory.name} onSubmit={updateDirectroyName} isHeader />
+                <EditableInput value={directory.name} onChange={updateDirectroyName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -216,7 +216,7 @@ const Index: VFC = () => {
                   </StyledEmojiPickerWrapper>
                 </>
               )}
-              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
+              <EditableInput value={directory.description} onChange={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
             </>
           )}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (

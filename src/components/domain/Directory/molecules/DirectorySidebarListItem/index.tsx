@@ -110,7 +110,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
             </>
           )}
           {!isHoverDirectoryItem && (
-            <StyledEmojiWrapper className="px-2">
+            <StyledEmojiWrapper className="px-2" onClick={handleToggleCollapse}>
               <Emoji emoji={directory?.emojiId || ''} size={18} />
             </StyledEmojiWrapper>
           )}

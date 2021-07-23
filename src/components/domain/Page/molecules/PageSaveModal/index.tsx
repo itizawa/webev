@@ -95,7 +95,7 @@ export const PageSaveModal: VFC = () => {
       <p>{t.add_page_already_saved}</p>
       <div className="d-flex gap-1 align-items-center mb-3">
         <Emoji emoji="mag" size={18} />
-        <EditableInput onSubmit={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+        <EditableInput onChange={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
       </div>
       {paginationResult == null ? (
         <div className="text-center pt-5">
