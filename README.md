@@ -49,7 +49,8 @@ If you can use the make command, run `make up-front` and `make up-back` in eithe
 
 |Key | e.g. | Required | Which set? | What is this? | memo |
 |---|---|---|---|---|---|
-|NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT | <http://localhost:8000> | ✅ | front | url of backend ||
+|NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT | <http://localhost:8000> | ✅ | front | url of backend from client ||
+|BACKEND_URL_FROM_NEXT_SERVER | <http://backend:8000> | ✅ | front | url of backend from Next server ||
 |GOOGLE_CLIENT_ID |  | ✅ | front | client id for authentication of google ||
 |GOOGLE_CLIENT_SECRET |  | ✅ | front | client secret for authentication of google ||
 |MONGO_URI | mongodb://mongo:27017/webev | ✅ | front and back | For storing credentials for using by next-auth  | |
