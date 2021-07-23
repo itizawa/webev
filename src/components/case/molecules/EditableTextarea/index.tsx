@@ -17,6 +17,10 @@ export const EditableTextarea: VFC<Props> = (props) => {
   const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
 
   useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
+  useEffect(() => {
     if (!isAllowEmpty && debouncedValue?.trim() === '') {
       return;
     }
