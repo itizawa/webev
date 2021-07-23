@@ -10,9 +10,9 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
-import { UserIcon } from '~/components/Icons/UserIcon';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { EditableInput } from '~/components/Atoms/EditableInput';
+import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -45,7 +45,7 @@ const Index: VFC = () => {
 
   const handleBlurTextInput = async (name: string): Promise<void> => {
     try {
-      await restClient.apiPut('/users/me', { properity: { name } });
+      await restClient.apiPut('/users/me', { property: { name } });
       mutateCurrentUser();
       mutateUserById();
       toastSuccess('success');
@@ -75,7 +75,7 @@ const Index: VFC = () => {
             <UserIcon image={user.image} size={140} isCircle />
           </div>
           <div className="col-9">
-            {currentUser?._id === user._id ? <EditableInput onSubmit={handleBlurTextInput} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
+            {currentUser?._id === user._id ? <EditableInput onChange={handleBlurTextInput} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
             {/* TODO impl description*/}
             {/* <p>Hello 😄</p> */}
           </div>
