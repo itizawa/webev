@@ -32,7 +32,7 @@ const Index: VFC = () => {
             <p>{t.tutorial_desc1}</p>
             <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
             <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
-              <Image src={imagePath.SIGNIN_GOOGLE} height={46} width={191} />
+              <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
             </StyledLoginButtonWrapper>
           </StyledDiv>
         </div>

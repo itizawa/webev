@@ -12,7 +12,7 @@ export const SearchForm: VFC = () => {
   const [isExpand, setIsExpand] = useState(false);
 
   const { t } = useLocale();
-  const { data: searchKeyWord, mutate: mutateSearchKeyord } = useSearchKeyWord();
+  const { data: searchKeyWord, mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   useEffect(() => {
     if (searchKeyWord != null) {
@@ -23,7 +23,7 @@ export const SearchForm: VFC = () => {
   const onSubmitSearchForm = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    mutateSearchKeyord(inputValue);
+    mutateSearchKeyword(inputValue);
   };
 
   return (

@@ -58,7 +58,7 @@ export const PageSaveModal: VFC = () => {
     mutateDirectoryForSavePage(null);
   };
 
-  const updateDirectroyName = async (searchWord: string) => {
+  const updateDirectoryName = async (searchWord: string) => {
     setSearchKeyWord(searchWord);
   };
 
@@ -95,7 +95,7 @@ export const PageSaveModal: VFC = () => {
       <p>{t.add_page_already_saved}</p>
       <div className="d-flex gap-1 align-items-center mb-3">
         <Emoji emoji="mag" size={18} />
-        <EditableInput onChange={updateDirectroyName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+        <EditableInput onChange={updateDirectoryName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
       </div>
       {paginationResult == null ? (
         <div className="text-center pt-5">

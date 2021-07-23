@@ -27,9 +27,22 @@
       "source.fixAll.markdownlint": true
     },
     "cSpell.words": [
+      "NEXTAUTH",
       "Subnav",
       "Webev",
-      "toastr"
+      "browserconfig",
+      "countup",
+      "favicons",
+      "gtag",
+      "itizawa",
+      "mixins",
+      "msapplication",
+      "noopener",
+      "noreferrer",
+      "pageview",
+      "stylelint",
+      "toastr",
+      "unstyled"
     ]
   }
   

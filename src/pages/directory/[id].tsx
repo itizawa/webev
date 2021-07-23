@@ -10,7 +10,7 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
-import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
+import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -48,7 +48,7 @@ const Index: VFC = () => {
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
-  const { data: directory, mutate: mutateDirectory } = useDirectoryInfomation(id as string);
+  const { data: directory, mutate: mutateDirectory } = useDirectoryInformation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
@@ -88,7 +88,7 @@ const Index: VFC = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  const updateDirectroyName = async (name: string): Promise<void> => {
+  const updateDirectoryName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
       mutateDirectory();
@@ -101,7 +101,7 @@ const Index: VFC = () => {
     }
   };
 
-  const updateDirectroyDescription = async (description: string): Promise<void> => {
+  const updateDirectoryDescription = async (description: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       mutateAllDirectories();
@@ -154,13 +154,13 @@ const Index: VFC = () => {
                   <a className="webev-anchor text-white">{t.directory}</a>
                 </Link>
                 <span className="mx-1">{'/'}</span>
-                {ancestorDirectories?.map((ancestorDirectorie) => {
-                  const ancestorDirectory = ancestorDirectorie.ancestor as Directory;
+                {ancestorDirectories?.map((directory) => {
+                  const ancestorDirectory = directory.ancestor as Directory;
                   if (ancestorDirectory._id === directory._id) {
                     return null;
                   }
                   return (
-                    <Fragment key={ancestorDirectorie._id}>
+                    <Fragment key={ancestorDirectory._id}>
                       <Link href={`/directory/${ancestorDirectory._id}`}>
                         <a className="webev-anchor text-white">{ancestorDirectory.name}</a>
                       </Link>
@@ -173,7 +173,7 @@ const Index: VFC = () => {
                 <div ref={emojiRef}>
                   <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
-                <EditableInput value={directory.name} onChange={updateDirectroyName} isHeader />
+                <EditableInput value={directory.name} onChange={updateDirectoryName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -190,7 +190,7 @@ const Index: VFC = () => {
                 </UncontrolledTooltip>
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
-                    <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONAL" color="SECONDARY" activeColor="WARNING" />
+                    <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
                     <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
@@ -216,7 +216,7 @@ const Index: VFC = () => {
                   </StyledEmojiPickerWrapper>
                 </>
               )}
-              <EditableInput value={directory.description} onChange={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
+              <EditableInput value={directory.description} onChange={updateDirectoryDescription} isAllowEmpty placeholder={t.no_description} />
             </>
           )}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (

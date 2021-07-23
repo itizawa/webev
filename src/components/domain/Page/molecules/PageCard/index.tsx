@@ -21,7 +21,7 @@ import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
-const MAX_WORD_COUNT_OF_SITENAME = 10;
+const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 
 type Props = {
   page: Page;
@@ -46,7 +46,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const sharePage = async () => {
     if (window != null) {
       const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&hashtags=${siteName}`);
-      window.open(twitterUrl.toString(), '_blanck');
+      window.open(twitterUrl.toString(), '_blank');
     }
   };
 
@@ -153,7 +153,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center mt-auto">
-          <small className="text-truncate me-auto" id={`sitename-for-${page._id}`}>
+          <small className="text-truncate me-auto" id={`site-name-for-${page._id}`}>
             {favicon != null && (
               <img
                 className="me-1"
@@ -171,8 +171,8 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
               {siteName}
             </a>
-            {siteName?.length > MAX_WORD_COUNT_OF_SITENAME && (
-              <UncontrolledTooltip placement="top" target={`sitename-for-${page._id}`}>
+            {siteName?.length > MAX_WORD_COUNT_OF_SITE_NAME && (
+              <UncontrolledTooltip placement="top" target={`site-name-for-${page._id}`}>
                 {siteName}
               </UncontrolledTooltip>
             )}

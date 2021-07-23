@@ -71,7 +71,7 @@ export const PaginationWrapper: VFC<Props> = (props) => {
    *  ex. << < 4 5 6 7 8 > >>, << < 1 2 3 4 > >>
    * this function set  numbers
    */
-  const renderPaginations = (activePage: number, paginationStart: number, maxViewPageNum: number) => {
+  const renderPagination = (activePage: number, paginationStart: number, maxViewPageNum: number) => {
     const paginationItems = [];
     for (let number = paginationStart; number <= maxViewPageNum; number++) {
       paginationItems.push(
@@ -124,7 +124,7 @@ export const PaginationWrapper: VFC<Props> = (props) => {
   return (
     <div className="btn-group" role="group">
       {renderFirstPrev(activePage)}
-      {renderPaginations(activePage, paginationStart, maxViewPageNum)}
+      {renderPagination(activePage, paginationStart, maxViewPageNum)}
       {renderNextLast(activePage, totalPage)}
     </div>
   );

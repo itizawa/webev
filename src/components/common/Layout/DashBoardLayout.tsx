@@ -20,7 +20,7 @@ import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal'
 
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
+import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
@@ -31,7 +31,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
-  const { mutate: mutateSearchKeyord } = useSearchKeyWord();
+  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const { data: currentUser } = useCurrentUser();
 
@@ -40,7 +40,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutateSearchKeyord('');
+    mutateSearchKeyword('');
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
@@ -72,7 +72,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         )}
         {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
-        {currentUser && <TutorialDitecterModal />}
+        {currentUser && <TutorialDetectorModal />}
         <ScrollTopButton />
       </StyledDiv>
       <Footer />

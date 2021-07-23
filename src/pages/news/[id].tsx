@@ -29,7 +29,7 @@ const Index: VFC<Props> = (props) => {
 
   return (
     <>
-      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumnail?.url} />
+      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumbnail?.url} />
       <div className="p-2">
         <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
         <h1 className="text-center my-3">{news.title}</h1>
