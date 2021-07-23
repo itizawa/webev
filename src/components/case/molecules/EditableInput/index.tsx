@@ -5,14 +5,14 @@ import { useDebounce } from '~/hooks/useDebounce';
 
 type Props = {
   value: string;
-  onSubmit: (inputValue: string) => void;
+  onChange: (inputValue: string) => void;
   isHeader?: boolean;
   isAllowEmpty?: boolean;
   placeholder?: string;
 };
 
 export const EditableInput: VFC<Props> = (props) => {
-  const { value, onSubmit, isHeader, isAllowEmpty = false, placeholder } = props;
+  const { value, onChange, isHeader, isAllowEmpty = false, placeholder } = props;
   const [inputValue, setInputValue] = useState(value);
   const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
 
@@ -24,7 +24,7 @@ export const EditableInput: VFC<Props> = (props) => {
     if (debouncedValue === value) {
       return;
     }
-    onSubmit(debouncedValue);
+    onChange(debouncedValue);
   }, [debouncedValue]);
 
   return (

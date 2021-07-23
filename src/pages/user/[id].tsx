@@ -60,7 +60,7 @@ const Index: VFC = () => {
             <UserIcon image={user.image} size={140} isCircle />
           </div>
           <div className="col-9">
-            {currentUser?._id === user._id ? <EditableInput onSubmit={handleBlurTextInput} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
+            {currentUser?._id === user._id ? <EditableInput onChange={handleBlurTextInput} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
             {/* TODO impl description*/}
             {/* <p>Hello 😄</p> */}
           </div>

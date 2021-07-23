@@ -145,7 +145,7 @@ const Index: VFC = () => {
                     </StyledEmojiPickerWrapper>
                   </>
                 )}
-                <EditableInput value={title} onSubmit={updateScrapTitle} isHeader />
+                <EditableInput value={title} onChange={updateScrapTitle} isHeader />
                 <div className="px-3">
                   <div className="form-check form-switch text-nowrap">
                     <input
@@ -187,7 +187,7 @@ const Index: VFC = () => {
           <div className="p-3">
             <div className="d-flex gap-1 align-items-center mb-3">
               <Emoji emoji="mag" size={18} />
-              <EditableInput onSubmit={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+              <EditableInput onChange={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
             </div>
             {paginationResult == null ? (
               <div className="text-center pt-5">

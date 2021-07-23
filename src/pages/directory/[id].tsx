@@ -173,7 +173,7 @@ const Index: VFC = () => {
                 <div ref={emojiRef}>
                   <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
-                <EditableInput value={directory.name} onSubmit={updateDirectroyName} isHeader />
+                <EditableInput value={directory.name} onChange={updateDirectroyName} isHeader />
                 <div id="save-page-to-directory">
                   <IconButton
                     width={18}
@@ -216,7 +216,7 @@ const Index: VFC = () => {
                   </StyledEmojiPickerWrapper>
                 </>
               )}
-              <EditableInput value={directory.description} onSubmit={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
+              <EditableInput value={directory.description} onChange={updateDirectroyDescription} isAllowEmpty placeholder={t.no_description} />
             </>
           )}
           {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
