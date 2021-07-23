@@ -9,22 +9,21 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 
 import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
-import { BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInfomation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
-import { LoginRequiredWrapper } from '~/components/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/Commons/SortButtonGroup';
-import { SearchForm } from '~/components/Commons/SearchForm';
-import { IconButton } from '~/components/Icons/IconButton';
-import { Icon } from '~/components/Icons/Icon';
-import { PageList } from '~/components/Page/PageList';
-import { EditableInput } from '~/components/Atoms/EditableInput';
-import { DirectoryListItem } from '~/components/Directory/DirectoryListItem';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
+import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+import { SearchForm } from '~/components/common/SearchForm';
+import { IconButton } from '~/components/base/molecules/IconButton';
+import { Icon } from '~/components/base/atoms/Icon';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { EditableInput } from '~/components/case/molecules/EditableInput';
+import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';
 import { PageStatus } from '~/domains/Page';
@@ -179,9 +178,9 @@ const Index: VFC = () => {
                   <IconButton
                     width={18}
                     height={18}
-                    icon={BootstrapIcon.SAVE}
-                    color={BootstrapColor.SECONDARY}
-                    activeColor={BootstrapColor.WARNING}
+                    icon="SAVE"
+                    color="SECONDARY"
+                    activeColor="WARNING"
                     isActive={urlFromClipBoard != null}
                     onClickButton={() => mutateDirectoryForSavePage(directory)}
                   />
@@ -191,25 +190,19 @@ const Index: VFC = () => {
                 </UncontrolledTooltip>
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
-                    <IconButton
-                      width={18}
-                      height={18}
-                      icon={BootstrapIcon.THREE_DOTS_HORIZONAL}
-                      color={BootstrapColor.SECONDARY}
-                      activeColor={BootstrapColor.WARNING}
-                    />
+                    <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONAL" color="SECONDARY" activeColor="WARNING" />
                   </DropdownToggle>
                   <DropdownMenu className="dropdown-menu-dark" positionFixed right>
                     <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
-                      <Icon icon={BootstrapIcon.TRASH} color={BootstrapColor.WHITE} />
+                      <Icon icon="TRASH" color="WHITE" />
                       <span className="ms-2">{t.delete}</span>
                     </DropdownItem>
                     <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
-                      <Icon icon={BootstrapIcon.PENCIL} color={BootstrapColor.WHITE} />
+                      <Icon icon="PENCIL" color="WHITE" />
                       <span className="ms-2">{t.rename_directory}</span>
                     </DropdownItem>
                     <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
-                      <Icon icon={BootstrapIcon.ADD_TO_DIRECTORY} color={BootstrapColor.WHITE} />
+                      <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
                       <span className="ms-2">{t.create_directory}</span>
                     </DropdownItem>
                   </DropdownMenu>
