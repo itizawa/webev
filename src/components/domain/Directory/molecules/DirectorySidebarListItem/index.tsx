@@ -10,8 +10,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-// import { BootstrapBreakpoints, BootstrapColor, BootstrapIcon } from '~/interfaces/variables';
-// import { useAllDirectories, useAllParentDirectories, useDirectoryChildrens } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useAllDirectories, useDirectoryChildrens, useAllParentDirectories } from '~/stores/directory';
 
