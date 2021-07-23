@@ -25,6 +25,10 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true,
       "source.fixAll.markdownlint": true
-    }
+    },
+    "cSpell.words": [
+      "Webev",
+      "toastr"
+    ]
   }
   
