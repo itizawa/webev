@@ -45,7 +45,7 @@ const Index: VFC<Props> = (props) => {
 export async function getStaticProps() {
   let count = 0;
   try {
-    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT || 'http://localhost:8000'}/api/v1/pages/all`);
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL_FROM_NEXT_SERVER || 'http://localhost:8000'}/api/v1/pages/all`);
     count = res.data;
   } catch (error) {
     console.log(error);
