@@ -9,7 +9,7 @@ class RestClient {
 
   constructor() {
     this.axios = axiosBase.create({
-      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000',
+      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT || 'http://localhost:8000',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
