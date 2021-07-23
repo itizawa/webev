@@ -23,7 +23,7 @@ const ScrapIcon: VFC = () => {
   );
 };
 
-const SerachIcon: VFC = () => (
+const SearchIcon: VFC = () => (
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
 );
 
@@ -93,7 +93,7 @@ const SaveIcon: VFC = () => (
   <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z" />
 );
 
-const ThreeDotsHorisonalIcon: VFC = () => (
+const ThreeDotsHorizontalIcon: VFC = () => (
   <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
 );
 
@@ -220,9 +220,9 @@ const IconComponentMapping = {
   REMOVE_FROM_DIRECTORY: <RemoveFromDirectory />,
   SCRAP: <ScrapIcon />,
   STAR: <StarIcon />,
-  SEARCH: <SerachIcon />,
+  SEARCH: <SearchIcon />,
   SAVE: <SaveIcon />,
-  THREE_DOTS_HORIZONAL: <ThreeDotsHorisonalIcon />,
+  THREE_DOTS_HORIZONTAL: <ThreeDotsHorizontalIcon />,
   THREE_DOTS_VERTICAL: <ThreeDotsVerticalIcon />,
   TRASH: <TrashIcon />,
   TWITTER: <Twitter />,

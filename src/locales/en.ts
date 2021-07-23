@@ -107,5 +107,5 @@ export const en = {
   save_draft: 'Save Draft',
 
   login_description:
-    'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and signin or signup Webev！',
+    'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',
 };

@@ -42,7 +42,7 @@ const Index: VFC = () => {
 
   const handleBlurTextInput = async (name: string): Promise<void> => {
     try {
-      await restClient.apiPut('/users/me', { properity: { name } });
+      await restClient.apiPut('/users/me', { property: { name } });
       mutateCurrentUser();
       mutateUserById();
       toastSuccess('success');

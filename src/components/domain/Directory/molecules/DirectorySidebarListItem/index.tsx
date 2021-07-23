@@ -22,7 +22,7 @@ type Props = {
 export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
   const { t } = useLocale();
 
-  const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildren(directory?._id);
+  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoryTrees } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +57,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
       await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateChildrenDirectortTrees();
+      mutateChildrenDirectoryTrees();
       mutateAllDirectories();
       setIsCreatingNewDirectory(false);
     } catch (err) {
@@ -139,17 +139,17 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectortTrees?.map((childrenDirectortTree) => {
+          {childrenDirectoryTrees?.map((childrenDirectoryTree) => {
             return (
               <DirectorySidebarListItem
-                key={childrenDirectortTree._id}
-                directory={childrenDirectortTree.descendant as Directory}
+                key={childrenDirectoryTree._id}
+                directory={childrenDirectoryTree.descendant as Directory}
                 onClickDirectory={onClickDirectory}
                 activeDirectoryId={activeDirectoryId}
               />
             );
           })}
-          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectoryTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>

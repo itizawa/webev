@@ -36,7 +36,7 @@ export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearBut
         referrerPolicy="no-referrer"
         decoding="sync"
       />
-      <StyledDivRgiht className="px-3 py-2 d-flex flex-column position-relative">
+      <StyledDivRight className="px-3 py-2 d-flex flex-column position-relative">
         {!!onClickClearButton && (
           <StyledButton type="button" className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill" onClick={handleClickClearButton}>
             ×
@@ -63,7 +63,7 @@ export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearBut
           )}
           {new URL(url).hostname}
         </StyledUrl>
-      </StyledDivRgiht>
+      </StyledDivRight>
     </StyledDiv>
   );
 };
@@ -91,7 +91,7 @@ const StyledImg = styled.img`
   object-fit: cover;
 `;
 
-const StyledDivRgiht = styled.div`
+const StyledDivRight = styled.div`
   width: calc(100% - 100px);
   height: 100px;
 `;
