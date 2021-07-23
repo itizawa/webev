@@ -149,7 +149,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {/* {childrenDirectortTrees?.map((childrenDirectortTree) => {
+          {childrenDirectortTrees?.map((childrenDirectortTree) => {
             return (
               <DirectorySidebarListItem
                 key={childrenDirectortTree._id}
@@ -159,7 +159,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               />
             );
           })}
-          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>} */}
+          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
