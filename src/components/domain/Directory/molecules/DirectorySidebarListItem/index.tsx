@@ -29,7 +29,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
   }
 
   // TODO: need to set args allParentDirectories' ids
-  const { data: childrenDirectortTrees, mutate: mutateChildrenDirectortTrees } = useDirectoryChildrens(allParentDirectoryIds);
+  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoryTrees } = useDirectoryChildrens(allParentDirectoryIds);
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +64,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
       await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateChildrenDirectortTrees();
+      mutateChildrenDirectoryTrees();
       mutateAllParentDirectories();
       mutateAllDirectories();
       setIsCreatingNewDirectory(false);
@@ -147,17 +147,17 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectortTrees?.map((childrenDirectortTree) => {
+          {/* {childrenDirectoryTrees?.map((childrenDirectoryTree) => {
             return (
               <DirectorySidebarListItem
-                key={childrenDirectortTree._id}
-                directory={childrenDirectortTree.descendant as Directory}
+                key={childrenDirectoryTree._id}
+                directory={childrenDirectoryTree.descendant as Directory}
                 onClickDirectory={onClickDirectory}
                 activeDirectoryId={activeDirectoryId}
               />
             );
-          })}
-          {childrenDirectortTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          })} */}
+          {childrenDirectoryTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
