@@ -8,6 +8,7 @@ export const ja = {
   logout: 'ログアウト',
   delete: '削除',
   cancel: 'キャンセル',
+  close: '閉じる',
   settings: '設定',
   search: '検索',
   save: '保存',
@@ -26,6 +27,8 @@ export const ja = {
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
   toastr_update_emoji: '絵文字を更新しました',
+  toastr_update_scrap: 'スクラップを更新しました',
+  toastr_create_scrap: 'スクラップを作成しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
@@ -41,6 +44,7 @@ export const ja = {
   news: 'ニュース',
   share: '共有',
   user: 'ユーザーページ',
+  scrap: 'スクラップ',
 
   return_news_list: 'ニュースリストに戻る',
 
@@ -55,6 +59,7 @@ export const ja = {
   function_details: '機能の詳細',
 
   delete_page: 'ページを削除します',
+  add_page: 'ページを追加します',
   obtained_from_clipboard: 'クリップボードから取得しました',
 
   delete_directory: 'ディレクトリを削除します',
@@ -91,6 +96,16 @@ export const ja = {
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
   input_url: 'Url を入力する',
+
+  create_scrap: 'スクラップを作成する',
+  scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
+  title: 'タイトル',
+  scrap_title_placeholder: '今日読んだ記事',
+  description: '説明',
+  scrap_description_placeholder: '例) 今日読んだ記事をまとめてみました!',
+  publish: '公開する',
+  update_scrap: '内容を更新',
+  save_draft: '下書き保存',
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
