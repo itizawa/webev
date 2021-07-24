@@ -38,4 +38,4 @@ jobs:
           consumer_secret: ${{ secrets.CONSUMER_SECRET }}
           access_token_key: ${{ secrets.ACCESS_TOKEN_KEY }}
           access_token_secret: ${{ secrets.ACCESS_TOKEN_SECRET }}
-          tweet_body: "Webev ${{ github.event.pull_request.title }}をリリースしました！ \n https://github.com/webev-dev/webev-front/releases/tag/${{ github.event.pull_request.title }} \n \n お試しはこちらから → https://webev.cloud/ja \n #Webev-dev"
+          tweet_body: "Webev ${{ github.event.pull_request.title }}をリリースしました！ \n https://github.com/webev-dev/webev-front/releases/tag/${{ github.event.pull_request.title }} \n \n お試しはこちらから → https://webev.cloud/ja \n #Webev"

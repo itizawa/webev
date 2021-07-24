@@ -15,13 +15,13 @@ export class News {
   createdAt: Date;
   publishedAt: Date;
   title: string;
-  thumnail: Thumbnail;
-  constructor({ id, body, createdAt, publishedAt, title, thumnail }: News) {
+  thumbnail: Thumbnail;
+  constructor({ id, body, createdAt, publishedAt, title, thumbnail }: News) {
     this.id = id;
     this.body = body;
     this.createdAt = createdAt;
     this.publishedAt = publishedAt;
     this.title = title;
-    this.thumnail = thumnail;
+    this.thumbnail = thumbnail;
   }
 }

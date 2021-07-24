@@ -1,0 +1,1 @@
+export { ShareLinkReceiverModal } from './ShareLinkReceiverModal';

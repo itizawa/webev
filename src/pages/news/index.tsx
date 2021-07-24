@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/news';
-import { WebevOgpHead } from '~/components/Commons/WebevOgpHead';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 type Props = {
   contents: News[];

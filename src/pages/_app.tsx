@@ -5,10 +5,10 @@ import { Provider } from 'next-auth/client';
 
 import '~/styles/global.scss';
 
-import { MaintenanceLayout } from '~/components/Layout/MaintenanceLayout';
-import { DashBoardLayout } from '~/components/Layout/DashBoardLayout';
+import { MaintenanceLayout } from '~/components/common/Layout/MaintenanceLayout';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { PathNames, PathConfigs, LayoutNames } from '~/interfaces/route';
-import { DefaultLayout } from '~/components/Layout/DefaultLayout';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 import { usePageView } from '~/hooks/usePageView';
 

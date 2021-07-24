@@ -1,0 +1,1 @@
+export { FixedImage } from './FixedImage';
