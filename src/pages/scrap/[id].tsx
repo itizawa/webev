@@ -51,18 +51,8 @@ const Index: VFC = () => {
   return (
     <>
       <WebevOgpHead title={`Webev | New ${t.scrap}`} />
-      <div className="d-flex">
-        <div className="col-md-8 col-12 px-2">
-          <h2 className="my-3">Page</h2>
-          {scrap.pages.map((page) => {
-            return (
-              <div key={page._id} className="mb-3">
-                <PagePreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
-              </div>
-            );
-          })}
-        </div>
-        <div className="col-md-4 col-12 px-2">
+      <div className="d-flex flex-md-row flex-column flex-md-row-reverse ">
+        <div className="col-md-4 px-2">
           {createdUser != null && (
             <>
               <div className="text-center py-3">
@@ -89,6 +79,16 @@ const Index: VFC = () => {
             {t.created_at} : {format(new Date(scrap.createdAt), 'yyyy/MM/dd')}
           </p>
           <p>{scrap.body}</p>
+        </div>
+        <div className="col-md-8 px-2">
+          <h2 className="my-3">Page</h2>
+          {scrap.pages.map((page) => {
+            return (
+              <div key={page._id} className="mb-3">
+                <PagePreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
