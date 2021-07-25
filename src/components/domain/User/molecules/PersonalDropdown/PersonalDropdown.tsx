@@ -20,7 +20,7 @@ export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
-  const { data: currentUer } = useCurrentUser();
+  const { data: currentUser } = useCurrentUser();
 
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
@@ -43,22 +43,22 @@ export const PersonalDropdown: VFC = () => {
     mutateOgpCardLayout(type);
   };
 
-  if (currentUer == null) {
+  if (currentUser == null) {
     return <Loader type="Oval" color="#00BFFF" height={32} width={32} />;
   }
 
   return (
     <UncontrolledDropdown>
       <DropdownToggle className="nav-link p-0" tag="a" role="button">
-        <UserIcon image={currentUer.image} />
+        <UserIcon image={currentUser.image} />
       </DropdownToggle>
       <StyledDropdownMenu right className="dropdown-menu-dark">
         <DropdownItem header>
           <div className="text-center">
-            <Link href={`/user/${currentUer._id}`}>
+            <Link href={`/user/${currentUser._id}`}>
               <a className="text-white webev-anchor">
-                <UserIcon image={currentUer.image} size={48} isCircle />
-                <h5 className="my-2">{currentUer.name}</h5>
+                <UserIcon image={currentUser.image} size={48} isCircle />
+                <h5 className="my-2">{currentUser.name}</h5>
               </a>
             </Link>
           </div>
