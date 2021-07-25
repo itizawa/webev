@@ -11,9 +11,10 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 import { useScrapById } from '~/stores/scrap';
-import { useUserById } from '~/stores/user';
+import { useCurrentUser, useUserById } from '~/stores/user';
 import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 const emojiSize = 40;
@@ -23,6 +24,7 @@ const Index: VFC = () => {
   const router = useRouter();
   const { id: scrapId } = router.query;
 
+  const { data: currentUser } = useCurrentUser();
   const { data: scrap } = useScrapById({ scrapId: scrapId as string });
   const { data: createdUser } = useUserById({ userId: scrap?.createdUser });
 
@@ -77,7 +79,12 @@ const Index: VFC = () => {
           <div className="p-3 text-center">
             <Emoji emoji={emoji} size={emojiSize} />
           </div>
-          <h1 className="webev-limit-2lines">{scrap.title}</h1>
+          <div className="d-flex">
+            <h5 className="webev-limit-2lines me-auto">{scrap.title}</h5>
+            {createdUser?._id === currentUser?._id && (
+              <IconButton color="LIGHT" activeColor="LIGHT" icon="PENCIL" onClickButton={() => router.push(`/scrap/${scrap._id}/edit`)} />
+            )}
+          </div>
           <p>
             {t.created_at} : {format(new Date(scrap.createdAt), 'yyyy/MM/dd')}
           </p>
