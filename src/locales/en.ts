@@ -105,6 +105,7 @@ export const en = {
   publish: 'Publish',
   update_scrap: 'Update Scrap',
   save_draft: 'Save Draft',
+  tooltip_update_scrap: 'At least one page is required to update scrap',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',

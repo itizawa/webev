@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, VFC } from 'react';
 
+import { UncontrolledTooltip } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -162,9 +163,16 @@ const Index: VFC = () => {
                   </label>
                 </div>
               </div>
-              <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton}>
-                {isPublic ? t.update_scrap : t.save_draft}
-              </button>
+              {selectedPages.length === 0 && (
+                <UncontrolledTooltip placement="top" target="update-scrap-button">
+                  {t.tooltip_update_scrap}
+                </UncontrolledTooltip>
+              )}
+              <div id="update-scrap-button">
+                <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton} disabled={selectedPages.length === 0}>
+                  {isPublic ? t.update_scrap : t.save_draft}
+                </button>
+              </div>
             </div>
           </StyledTitle>
           <EditableTextarea placeholder={t.scrap_description_placeholder} onChange={updateScrapBody} value={scrap.body} isAllowEmpty />

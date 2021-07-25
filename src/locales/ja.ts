@@ -106,6 +106,7 @@ export const ja = {
   publish: '公開する',
   update_scrap: '内容を更新',
   save_draft: '下書き保存',
+  tooltip_update_scrap: 'スクラップを更新するには最低でも 1件以上ページを指定する必要があります',
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',

@@ -50,7 +50,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | New ${t.scrap}`} />
+      <WebevOgpHead title={`Webev | ${scrap.title}`} />
       <div className="d-flex flex-md-row flex-column flex-md-row-reverse ">
         <div className="col-md-4 px-2">
           {createdUser != null && (
