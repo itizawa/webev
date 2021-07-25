@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, VFC } from 'react';
 
+import { UncontrolledTooltip } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -112,6 +113,7 @@ const Index: VFC = () => {
       await restClient.apiPut(`/scraps/${scrap?._id}`, {
         property: { title, body, pages: selectedPages, emojiId: emoji.id, isPublic },
       });
+      router.push(`/scrap/${scrap?._id}`);
       toastSuccess(t.toastr_update_scrap);
     } catch (err) {
       toastError(err);
@@ -131,57 +133,60 @@ const Index: VFC = () => {
       <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
-          <div className="row">
-            <div className="col-12">
-              <StyledTitle className="d-flex gap-3 align-items-center my-2 py-2 sticky-top">
-                <div ref={emojiRef}>
-                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+          <StyledTitle className="d-flex flex-md-row flex-column gap-3 align-items-center justify-content-between my-2 py-2 sticky-md-top">
+            <div className="d-flex align-items-center">
+              <div ref={emojiRef}>
+                <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+              </div>
+              {isEmojiSettingMode && (
+                <>
+                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
+                  </StyledEmojiPickerWrapper>
+                </>
+              )}
+              <EditableInput value={title} onChange={updateScrapTitle} isHeader />
+            </div>
+            <div className="d-flex align-items-center">
+              <div className="px-3">
+                <div className="form-check form-switch text-nowrap">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="switchIsPublishScrap"
+                    checked={isPublic}
+                    onChange={() => setIsPublic((prevState) => !prevState)}
+                  />
+                  <label className="form-check-label" htmlFor="switchIsPublishScrap">
+                    {t.publish}
+                  </label>
                 </div>
-                {isEmojiSettingMode && (
-                  <>
-                    <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
-                    <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                      <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} />
-                    </StyledEmojiPickerWrapper>
-                  </>
-                )}
-                <EditableInput value={title} onChange={updateScrapTitle} isHeader />
-                <div className="px-3">
-                  <div className="form-check form-switch text-nowrap">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="switchIsPublishScrap"
-                      checked={isPublic}
-                      onChange={() => setIsPublic((prevState) => !prevState)}
-                    />
-                    <label className="form-check-label" htmlFor="switchIsPublishScrap">
-                      {t.publish}
-                    </label>
-                  </div>
-                </div>
-                <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton}>
+              </div>
+              {selectedPages.length === 0 && (
+                <UncontrolledTooltip placement="top" target="update-scrap-button">
+                  {t.tooltip_update_scrap}
+                </UncontrolledTooltip>
+              )}
+              <div id="update-scrap-button">
+                <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton} disabled={selectedPages.length === 0}>
                   {isPublic ? t.update_scrap : t.save_draft}
                 </button>
-              </StyledTitle>
-              <EditableTextarea placeholder={t.scrap_description_placeholder} onChange={updateScrapBody} value={scrap.body} isAllowEmpty />
-              <h2>Page</h2>
-              <StyledIconButtonWrapper className="text-center my-3">
-                <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} text={t.add_page} />
-              </StyledIconButtonWrapper>
-              {selectedPages.map((page) => {
-                return (
-                  <div key={page._id} className="mb-3">
-                    <PagePreviewCard
-                      page={page}
-                      onClickCard={() => window.open(page.url, '_blank')}
-                      onClickClearButton={() => removePageFromSelectedPages(page)}
-                    />
-                  </div>
-                );
-              })}
+              </div>
             </div>
-          </div>
+          </StyledTitle>
+          <EditableTextarea placeholder={t.scrap_description_placeholder} onChange={updateScrapBody} value={scrap.body} isAllowEmpty />
+          <h2>Page</h2>
+          <StyledIconButtonWrapper className="text-center my-3">
+            <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsAddPage(true)} text={t.add_page} />
+          </StyledIconButtonWrapper>
+          {selectedPages.map((page) => {
+            return (
+              <div key={page._id} className="mb-3">
+                <PagePreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} onClickClearButton={() => removePageFromSelectedPages(page)} />
+              </div>
+            );
+          })}
         </div>
         <Modal isOpen={isAddPage} toggle={() => setIsAddPage(false)} title={t.add_page}>
           <div className="p-3">
