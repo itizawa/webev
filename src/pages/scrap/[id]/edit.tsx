@@ -112,6 +112,7 @@ const Index: VFC = () => {
       await restClient.apiPut(`/scraps/${scrap?._id}`, {
         property: { title, body, pages: selectedPages, emojiId: emoji.id, isPublic },
       });
+      router.push(`/scrap/${scrap?._id}`);
       toastSuccess(t.toastr_update_scrap);
     } catch (err) {
       toastError(err);
