@@ -69,7 +69,7 @@ const Index: VFC = () => {
           <div className="p-3 text-center">
             <Emoji emoji={emoji} size={emojiSize} />
           </div>
-          <div className="d-flex">
+          <div className="d-flex align-items-center">
             <h5 className="webev-limit-2lines me-auto">{scrap.title}</h5>
             {createdUser?._id === currentUser?._id && (
               <IconButton color="LIGHT" activeColor="LIGHT" icon="PENCIL" onClickButton={() => router.push(`/scrap/${scrap._id}/edit`)} />

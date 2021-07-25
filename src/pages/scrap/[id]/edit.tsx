@@ -132,8 +132,8 @@ const Index: VFC = () => {
       <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
-          <StyledTitle className="d-flex flex-md-row flex-column gap-3 align-items-center my-2 py-2 sticky-md-top">
-            <div className="d-flex">
+          <StyledTitle className="d-flex flex-md-row flex-column gap-3 align-items-center justify-content-between my-2 py-2 sticky-md-top">
+            <div className="d-flex align-items-center">
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
@@ -147,7 +147,7 @@ const Index: VFC = () => {
               )}
               <EditableInput value={title} onChange={updateScrapTitle} isHeader />
             </div>
-            <div className="d-flex">
+            <div className="d-flex align-items-center">
               <div className="px-3">
                 <div className="form-check form-switch text-nowrap">
                   <input
