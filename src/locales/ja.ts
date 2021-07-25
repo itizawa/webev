@@ -75,6 +75,7 @@ export const ja = {
   'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
+  data_not_found: 'データが見つかりませんでした',
   go_to_top: 'トップページに戻る',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',

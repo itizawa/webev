@@ -75,6 +75,7 @@ export const en = {
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 
   this_is_the_404_page: 'This is the 404 page',
+  data_not_found: 'Data Not Found',
   go_to_top: 'Go to Top Page',
 
   inquiry_email_desc: 'Please enter if you need a reply',
