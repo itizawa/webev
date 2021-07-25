@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, VFC } from 'react';
 
@@ -7,15 +8,17 @@ import { Emoji, EmojiData, emojiIndex } from 'emoji-mart';
 import { format } from 'date-fns';
 
 import { openFileFolderEmoji } from '~/const/emoji';
+import { imagePath } from '~/const/imagePath';
+
 import { useLocale } from '~/hooks/useLocale';
 
+import { IconButton } from '~/components/base/molecules/IconButton';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
-import { IconButton } from '~/components/base/molecules/IconButton';
+import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 import { useScrapById } from '~/stores/scrap';
 import { useCurrentUser, useUserById } from '~/stores/user';
-import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 const emojiSize = 40;
 
@@ -25,7 +28,7 @@ const Index: VFC = () => {
   const { id: scrapId } = router.query;
 
   const { data: currentUser } = useCurrentUser();
-  const { data: scrap } = useScrapById({ scrapId: scrapId as string });
+  const { data: scrap, isValidating: isValidatingScrap } = useScrapById({ scrapId: scrapId as string });
   const { data: createdUser } = useUserById({ userId: scrap?.createdUser });
 
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
@@ -39,14 +42,32 @@ const Index: VFC = () => {
     }
   }, [scrap]);
 
-  if (scrap == null) {
+  if (isValidatingScrap) {
     return (
       <div className="text-center pt-5">
         <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
       </div>
     );
   }
-  console.log(scrap);
+
+  if (scrap == null) {
+    return (
+      <>
+        <WebevOgpHead title={`Webev | ${t.data_not_found}`} />
+        <div className="p-3">
+          <h1 className="m-3 text-center">{t.data_not_found}</h1>
+          <div className="w-50 mx-auto">
+            <Image src={imagePath.SEARCH} height={958} width={1000} />
+          </div>
+          <h2 className="text-center">
+            <Link href="/">
+              <a className="text-white webev-anchor">{t.go_to_top}</a>
+            </Link>
+          </h2>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
