@@ -20,7 +20,7 @@ export const SidebarDirectoryList: VFC = () => {
   const router = useRouter();
   const directoryId = router.query.id;
 
-  const { data: allParentDirectories, mutate: mutateAllParentDirectories, isValidating: isValidatingAllParentDirectories } = useAllParentDirectories();
+  const { data: allParentDirectories, mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
   const [directories, setDirectories] = useState<Directory[]>([]);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -77,7 +77,7 @@ export const SidebarDirectoryList: VFC = () => {
     router.push(`/directory/${directoryId}`);
   };
 
-  if (isValidatingAllParentDirectories) {
+  if (allParentDirectories == null) {
     return (
       <div className="text-center">
         <Loader type="Oval" color="#00BFFF" height={64} width={64} />
