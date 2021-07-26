@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import { useRouter } from 'next/router';
 import { useCurrentUser, useUserById } from '~/stores/user';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastError } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -16,10 +16,10 @@ const Index: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
-  const { data: currentUser, mutate: mutateCurrentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
-  const { data: user, mutate: mutateUserById, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
+  const { data: user, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
 
-  if (isValidatingCurrentUser || isValidatingUser) {
+  if (isValidatingUser) {
     return (
       <div className="text-center pt-5">
         <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
@@ -44,8 +44,6 @@ const Index: VFC = () => {
     try {
       await restClient.apiPut('/users/me', { property: { name } });
       mutateCurrentUser();
-      mutateUserById();
-      toastSuccess('success');
     } catch (err) {
       toastError(err);
     }
