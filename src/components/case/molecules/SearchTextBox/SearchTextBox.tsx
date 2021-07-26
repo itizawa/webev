@@ -4,7 +4,7 @@ import { EditableInput } from '../EditableInput';
 
 type Props = {
   onChange: (input: string) => void;
-  value: string;
+  value?: string;
   placeholder?: string;
 };
 

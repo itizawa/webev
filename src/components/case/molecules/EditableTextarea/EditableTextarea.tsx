@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDebounce } from '~/hooks/useDebounce';
 
 type Props = {
-  value: string;
+  value?: string;
   onChange: (inputValue: string) => void;
   isHeader?: boolean;
   isAllowEmpty?: boolean;
@@ -17,7 +17,9 @@ export const EditableTextarea: VFC<Props> = (props) => {
   const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
 
   useEffect(() => {
-    setInputValue(value);
+    if (value != null) {
+      setInputValue(value);
+    }
   }, [value]);
 
   useEffect(() => {
