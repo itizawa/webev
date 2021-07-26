@@ -192,7 +192,7 @@ const Index: VFC = () => {
         <Modal isOpen={isAddPage} toggle={() => setIsAddPage(false)} title={t.add_page}>
           <div className="p-3">
             <div className="mb-3">
-              <SearchTextBox onChange={(searchWord: string) => setSearchKeyWord(searchWord)} value={searchKeyWord} />
+              <SearchTextBox onChange={(searchWord: string) => setSearchKeyWord(searchWord)} />
             </div>
             {paginationResult == null ? (
               <div className="text-center pt-5">
