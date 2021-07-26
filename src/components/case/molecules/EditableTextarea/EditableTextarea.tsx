@@ -13,14 +13,8 @@ type Props = {
 
 export const EditableTextarea: VFC<Props> = (props) => {
   const { value, onChange, isHeader, isAllowEmpty = false, placeholder } = props;
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(value || '');
   const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
-
-  useEffect(() => {
-    if (value != null) {
-      setInputValue(value);
-    }
-  }, [value]);
 
   useEffect(() => {
     if (!isAllowEmpty && debouncedValue?.trim() === '') {
