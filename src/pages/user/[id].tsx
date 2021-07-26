@@ -20,7 +20,7 @@ const Index: VFC = () => {
   const router = useRouter();
 
   const { data: currentUser, mutate: mutateCurrentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
-  const { data: user, mutate: mutateUserById, isValidating: isValidatingUser } = useUserById({ id: router.query.id as string });
+  const { data: user, mutate: mutateUserById, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
 
   if (isValidatingCurrentUser || isValidatingUser) {
     return (

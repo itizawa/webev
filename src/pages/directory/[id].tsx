@@ -154,15 +154,15 @@ const Index: VFC = () => {
                   <a className="webev-anchor text-white">{t.directory}</a>
                 </Link>
                 <span className="mx-1">{'/'}</span>
-                {ancestorDirectories?.map((directory) => {
-                  const ancestorDirectory = directory.ancestor as Directory;
-                  if (ancestorDirectory._id === directory._id) {
+                {ancestorDirectories?.map((ancestorDirectory) => {
+                  const targetDirectory = ancestorDirectory.ancestor as Directory;
+                  if (targetDirectory._id === directory._id) {
                     return null;
                   }
                   return (
-                    <Fragment key={ancestorDirectory._id}>
-                      <Link href={`/directory/${ancestorDirectory._id}`}>
-                        <a className="webev-anchor text-white">{ancestorDirectory.name}</a>
+                    <Fragment key={targetDirectory._id}>
+                      <Link href={`/directory/${targetDirectory._id}`}>
+                        <a className="webev-anchor text-white">{targetDirectory.name}</a>
                       </Link>
                       <span className="mx-1">{'/'}</span>
                     </Fragment>

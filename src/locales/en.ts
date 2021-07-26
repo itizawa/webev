@@ -75,6 +75,7 @@ export const en = {
   'your_pages_don’t_exist': 'Your pages don’t exist.',
 
   this_is_the_404_page: 'This is the 404 page',
+  data_not_found: 'Data Not Found',
   go_to_top: 'Go to Top Page',
 
   inquiry_email_desc: 'Please enter if you need a reply',
@@ -105,6 +106,7 @@ export const en = {
   publish: 'Publish',
   update_scrap: 'Update Scrap',
   save_draft: 'Save Draft',
+  tooltip_update_scrap: 'At least one page is required to update scrap',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',
