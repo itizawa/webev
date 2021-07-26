@@ -1,5 +1,4 @@
 import { VFC, useState, useEffect } from 'react';
-import { Emoji } from 'emoji-mart';
 import Loader from 'react-loader-spinner';
 
 import { restClient } from '~/utils/rest-client';
@@ -7,7 +6,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
-import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 
@@ -16,6 +14,7 @@ import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 
 export const PageSaveModal: VFC = () => {
   const { t } = useLocale();
@@ -93,9 +92,8 @@ export const PageSaveModal: VFC = () => {
       </div>
       <hr className="mt-4" />
       <p>{t.add_page_already_saved}</p>
-      <div className="d-flex gap-1 align-items-center mb-3">
-        <Emoji emoji="mag" size={18} />
-        <EditableInput onChange={updateDirectoryName} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+      <div className="mb-3">
+        <SearchTextBox onChange={updateDirectoryName} />
       </div>
       {paginationResult == null ? (
         <div className="text-center pt-5">

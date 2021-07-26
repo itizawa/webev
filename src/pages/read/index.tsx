@@ -1,15 +1,15 @@
 import { useEffect, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
-import { usePageListSWR, usePageStatus } from '~/stores/page';
+import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { SearchForm } from '~/components/common/SearchForm';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 import { PageStatus } from '~/domains/Page';
 
@@ -18,6 +18,7 @@ const Index: VFC = () => {
 
   const { mutate: mutatePageStatus } = usePageStatus();
   const { data: paginationResult } = usePageListSWR();
+  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE]);
@@ -35,9 +36,7 @@ const Index: VFC = () => {
             </div>
           </div>
           <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <div>
-              <SearchForm />
-            </div>
+            <SearchTextBox onChange={(inputValue: string) => mutateSearchKeyword(inputValue)} />
             <SortButtonGroup />
           </div>
           {paginationResult == null && (

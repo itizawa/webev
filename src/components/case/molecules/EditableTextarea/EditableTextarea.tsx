@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useDebounce } from '~/hooks/useDebounce';
 
 type Props = {
-  value: string;
+  value?: string;
   onChange: (inputValue: string) => void;
   isHeader?: boolean;
   isAllowEmpty?: boolean;
@@ -13,12 +13,8 @@ type Props = {
 
 export const EditableTextarea: VFC<Props> = (props) => {
   const { value, onChange, isHeader, isAllowEmpty = false, placeholder } = props;
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(value || '');
   const { debouncedValue } = useDebounce({ value: inputValue, delay: 300 });
-
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
 
   useEffect(() => {
     if (!isAllowEmpty && debouncedValue?.trim() === '') {
