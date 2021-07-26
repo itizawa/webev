@@ -4,7 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import { useRouter } from 'next/router';
 import { useCurrentUser, useUserById } from '~/stores/user';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastError } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -17,7 +17,7 @@ const Index: VFC = () => {
   const router = useRouter();
 
   const { data: currentUser, mutate: mutateCurrentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
-  const { data: user, mutate: mutateUserById, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
+  const { data: user, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
 
   if (isValidatingCurrentUser || isValidatingUser) {
     return (
@@ -44,8 +44,6 @@ const Index: VFC = () => {
     try {
       await restClient.apiPut('/users/me', { property: { name } });
       mutateCurrentUser();
-      mutateUserById();
-      toastSuccess('success');
     } catch (err) {
       toastError(err);
     }
