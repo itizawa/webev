@@ -16,10 +16,10 @@ const Index: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
-  const { data: currentUser, mutate: mutateCurrentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
+  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: user, isValidating: isValidatingUser } = useUserById({ userId: router.query.id as string });
 
-  if (isValidatingCurrentUser || isValidatingUser) {
+  if (isValidatingUser) {
     return (
       <div className="text-center pt-5">
         <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
