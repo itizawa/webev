@@ -95,7 +95,6 @@ const Index: VFC = () => {
       mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
-      toastSuccess(t.toastr_update_directory_name);
     } catch (err) {
       toastError(err);
     }
@@ -105,7 +104,6 @@ const Index: VFC = () => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       mutateAllDirectories();
-      toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
     }
