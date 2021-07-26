@@ -91,7 +91,6 @@ const Index: VFC = () => {
   const updateDirectoryName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateDirectory();
       mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
