@@ -5,15 +5,14 @@ import { EditableInput } from '../EditableInput';
 type Props = {
   onChange: (input: string) => void;
   value?: string;
-  placeholder?: string;
 };
 
 export const SearchTextBox: VFC<Props> = (props) => {
-  const { onChange, value, placeholder } = props;
+  const { onChange, value } = props;
   return (
     <div className="d-flex gap-1 align-items-center">
       <Emoji emoji="mag" size={18} />
-      <EditableInput onChange={onChange} value={value} placeholder={placeholder} isAllowEmpty />
+      <EditableInput onChange={onChange} value={value} placeholder="Search..." isAllowEmpty />
     </div>
   );
 };

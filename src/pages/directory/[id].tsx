@@ -236,7 +236,7 @@ const Index: VFC = () => {
             </div>
           )}
           <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} placeholder="Search..." />
+            <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
             <SortButtonGroup />
           </div>
           {paginationResult == null && (

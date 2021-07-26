@@ -93,7 +93,7 @@ export const PageSaveModal: VFC = () => {
       <hr className="mt-4" />
       <p>{t.add_page_already_saved}</p>
       <div className="mb-3">
-        <SearchTextBox onChange={updateDirectoryName} value={searchKeyWord} placeholder="Search..." />
+        <SearchTextBox onChange={updateDirectoryName} value={searchKeyWord} />
       </div>
       {paginationResult == null ? (
         <div className="text-center pt-5">
