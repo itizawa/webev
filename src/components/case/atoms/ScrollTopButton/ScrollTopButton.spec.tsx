@@ -14,7 +14,7 @@ test('ScrollTopButton isShowScroll is false', () => {
 
 jest.mock('./hooks', () => ({
   useHooks: () => {
-    return { isShowScroll: false, scrollTop: jest.fn() };
+    return { isShowScroll: true, scrollTop: jest.fn() };
   },
 }));
 test('ScrollTopButton isShowScroll is true', () => {
