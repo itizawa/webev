@@ -128,7 +128,7 @@ jobs:
           isCompactMode: true
           url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
- run-tests:
+  run-tests:
     name: Run test
     runs-on: ubuntu-latest
 
