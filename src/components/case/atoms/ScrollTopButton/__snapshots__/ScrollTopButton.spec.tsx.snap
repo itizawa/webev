@@ -2,7 +2,7 @@
 
 exports[`ScrollTopButton isShowScroll is false 1`] = `
 <button
-  className="sc-bdnxRM eJfPil btn btn-light btn-lg show"
+  className="btn btn-light btn-lg show"
   id="scroll-to-top"
   onClick={[MockFunction]}
 >
@@ -24,7 +24,7 @@ exports[`ScrollTopButton isShowScroll is false 1`] = `
 
 exports[`ScrollTopButton isShowScroll is true 1`] = `
 <button
-  className="sc-bdnxRM eJfPil btn btn-light btn-lg show"
+  className="btn btn-light btn-lg show"
   id="scroll-to-top"
   onClick={[MockFunction]}
 >
