@@ -127,3 +127,64 @@ jobs:
           channel: '#webev-ci'
           isCompactMode: true
           url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+ run-tests:
+    name: Run test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: before cache
+        run: |
+          mkdir -p node_modules
+          ls node_modules
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - name: Cache/Restore node_modules
+        id: cache-dependencies
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-node_modules-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Get yarn cache dir
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        id: cache-yarn
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache/Restore yarn cache
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.cache-yarn.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-${{ matrix.node-version }}-
+
+      # ESLint and Prettier must be in `package.json`
+      - name: Install Node.js dependencies
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: yarn test
+        run: |
+          yarn test
+      
+      - name: Slack Notification
+        uses: weseek/ghaction-slack-notification@master
+        with:
+          type: ${{ job.status }}
+          job_name: '*test webev front*'
+          channel: '#webev-ci'
+          isCompactMode: true
+          url: ${{ secrets.SLACK_WEBHOOK_URL }}
