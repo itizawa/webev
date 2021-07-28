@@ -75,6 +75,7 @@ export const ja = {
   'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
+  data_not_found: 'データが見つかりませんでした',
   go_to_top: 'トップページに戻る',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',
@@ -106,6 +107,7 @@ export const ja = {
   publish: '公開する',
   update_scrap: '内容を更新',
   save_draft: '下書き保存',
+  tooltip_update_scrap: 'スクラップを更新するには最低でも 1件以上ページを指定する必要があります',
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
