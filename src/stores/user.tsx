@@ -11,7 +11,7 @@ export const useCurrentUser = (): SWRResponse<User, Error> => {
   });
 };
 
-export const useApiToken = (): SWRResponse<User, Error> => {
+export const useApiToken = (): SWRResponse<string, Error> => {
   return useAuthenticationSWR('/users/api-token', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
