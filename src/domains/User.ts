@@ -1,15 +1,17 @@
 export class User {
   _id: string;
   name: string;
+  description: string;
   email: string;
   image: string;
   admin: boolean;
   isExecutedTutorial: boolean;
   createdAt: Date;
   updatedAt: Date;
-  constructor({ _id, name, email, image, admin, isExecutedTutorial, createdAt, updatedAt }: User) {
+  constructor({ _id, name, description, email, image, admin, isExecutedTutorial, createdAt, updatedAt }: User) {
     this._id = _id;
     this.name = name;
+    this.description = description;
     this.email = email;
     this.image = image;
     this.admin = admin;

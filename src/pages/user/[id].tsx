@@ -11,6 +11,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
+import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -40,9 +41,18 @@ const Index: VFC = () => {
     );
   }
 
-  const handleBlurTextInput = async (name: string): Promise<void> => {
+  const updateName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut('/users/me', { property: { name } });
+      mutateCurrentUser();
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
+  const updateDescription = async (description: string): Promise<void> => {
+    try {
+      await restClient.apiPut('/users/me', { property: { description } });
       mutateCurrentUser();
     } catch (err) {
       toastError(err);
@@ -57,10 +67,13 @@ const Index: VFC = () => {
           <div className="col-3 text-center">
             <UserIcon image={user.image} size={140} isCircle />
           </div>
-          <div className="col-9">
-            {currentUser?._id === user._id ? <EditableInput onChange={handleBlurTextInput} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
-            {/* TODO impl description*/}
-            {/* <p>Hello 😄</p> */}
+          <div className="col-9 d-flex flex-column gap-2">
+            {currentUser?._id === user._id ? <EditableInput onChange={updateName} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
+            {currentUser?._id === user._id ? (
+              <EditableTextarea value={user.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
+            ) : (
+              <p className="p-2">{user.description}</p>
+            )}
           </div>
         </div>
       </div>
