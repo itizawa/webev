@@ -43,7 +43,8 @@ export const en = {
   directory: 'Directory',
   news: 'News',
   share: 'Share',
-  user: 'User Page',
+  user: 'User',
+  user_page: 'User Page',
   scrap: 'Scrap',
 
   return_news_list: 'Return News List',
