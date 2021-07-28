@@ -61,7 +61,7 @@ const Index: VFC = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | ${t.user}`} />
+      <WebevOgpHead title={`Webev | ${t.user_page}`} />
       <div className="container">
         <div className="row mt-3">
           <div className="col-3 text-center">
