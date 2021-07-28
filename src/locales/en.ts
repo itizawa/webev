@@ -28,6 +28,7 @@ export const en = {
   toastr_update_directory_description: 'Update Directory Description',
   toastr_update_emoji: 'Update Directory Emoji',
   toastr_update_scrap: 'Update Scrap',
+  toastr_update_api_token: 'Update Api Token',
   toastr_create_scrap: 'Create Scrap',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
@@ -43,7 +44,8 @@ export const en = {
   directory: 'Directory',
   news: 'News',
   share: 'Share',
-  user: 'User Page',
+  user: 'User',
+  user_page: 'User Page',
   scrap: 'Scrap',
 
   return_news_list: 'Return News List',
