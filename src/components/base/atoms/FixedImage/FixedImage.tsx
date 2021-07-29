@@ -28,9 +28,5 @@ const StyledImageWrapper = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
-
-    background-image: url('/spinner.gif');
-    background-repeat: no-repeat;
-    background-position: center center;
   }
 `;

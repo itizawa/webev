@@ -28,6 +28,7 @@ export const ja = {
   toastr_update_directory_description: '説明を更新しました',
   toastr_update_emoji: '絵文字を更新しました',
   toastr_update_scrap: 'スクラップを更新しました',
+  toastr_update_api_token: 'Api Token を更新しました',
   toastr_create_scrap: 'スクラップを作成しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
@@ -43,7 +44,8 @@ export const ja = {
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
-  user: 'ユーザーページ',
+  user: 'ユーザー',
+  user_page: 'ユーザーページ',
   scrap: 'スクラップ',
 
   return_news_list: 'ニュースリストに戻る',

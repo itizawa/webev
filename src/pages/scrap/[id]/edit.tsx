@@ -17,6 +17,7 @@ import { Modal } from '~/components/base/molecules/Modal';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
 import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
@@ -190,9 +191,8 @@ const Index: VFC = () => {
         </div>
         <Modal isOpen={isAddPage} toggle={() => setIsAddPage(false)} title={t.add_page}>
           <div className="p-3">
-            <div className="d-flex gap-1 align-items-center mb-3">
-              <Emoji emoji="mag" size={18} />
-              <EditableInput onChange={(searchWord) => setSearchKeyWord(searchWord)} value={searchKeyWord} placeholder="Search..." isAllowEmpty />
+            <div className="mb-3">
+              <SearchTextBox onChange={(searchWord: string) => setSearchKeyWord(searchWord)} />
             </div>
             {paginationResult == null ? (
               <div className="text-center pt-5">

@@ -14,8 +14,9 @@ export const SubnavBar: VFC = () => {
 
   const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
     { text: t.home, url: '/home', icon: 'HOME' },
+    { text: t.read, url: '/read', icon: 'CHECK' },
     { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
-    { text: t.scrap, url: '/scrap', icon: 'SCRAP' },
+    // { text: t.scrap, url: '/scrap', icon: 'SCRAP' },
   ];
 
   return (
@@ -23,7 +24,7 @@ export const SubnavBar: VFC = () => {
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>
-            <StyledSubnavBarItem className="text-center col py-2" isActive={v.url === router.pathname}>
+            <StyledSubnavBarItem className="text-center col py-2" isActive={router.pathname.startsWith(v.url)}>
               {v.icon != null && <Icon icon={v.icon} color="SECONDARY" />}
               <small className="ms-1">{v.text}</small>
             </StyledSubnavBarItem>

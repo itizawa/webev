@@ -11,14 +11,13 @@ import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
+import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { SearchForm } from '~/components/common/SearchForm';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
@@ -30,6 +29,7 @@ import { PageStatus } from '~/domains/Page';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 
 const emojiSize = 40;
 
@@ -54,6 +54,7 @@ const Index: VFC = () => {
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
@@ -91,11 +92,9 @@ const Index: VFC = () => {
   const updateDirectoryName = async (name: string): Promise<void> => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateDirectory();
       mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
-      toastSuccess(t.toastr_update_directory_name);
     } catch (err) {
       toastError(err);
     }
@@ -105,7 +104,6 @@ const Index: VFC = () => {
     try {
       await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
       mutateAllDirectories();
-      toastSuccess(t.toastr_update_directory_description);
     } catch (err) {
       toastError(err);
     }
@@ -235,9 +233,7 @@ const Index: VFC = () => {
             </div>
           )}
           <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <div>
-              <SearchForm />
-            </div>
+            <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
             <SortButtonGroup />
           </div>
           {paginationResult == null && (
