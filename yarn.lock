@@ -5638,6 +5638,11 @@ js-yaml@^4.0.0:
   dependencies:
     argparse "^2.0.1"
 
+jsdom-global@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/jsdom-global/-/jsdom-global-3.0.2.tgz#6bd299c13b0c4626b2da2c0393cd4385d606acb9"
+  integrity sha1-a9KZwTsMRiay2iwDk81DhdYGrLk=
+
 jsdom@^16.6.0:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-16.6.0.tgz#f79b3786682065492a3da6a60a4695da983805ac"
