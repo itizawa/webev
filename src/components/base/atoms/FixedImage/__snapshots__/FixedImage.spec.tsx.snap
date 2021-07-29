@@ -5,6 +5,7 @@ exports[`FixedImage 1`] = `
   position: relative;
   width: 100%;
   padding-top: 55%;
+  object-fit: scale-down;
 }
 
 .c0:hover {
@@ -36,6 +37,7 @@ exports[`FixedImage imageUrl is null 1`] = `
   position: relative;
   width: 100%;
   padding-top: 55%;
+  object-fit: scale-down;
 }
 
 .c0:hover {
