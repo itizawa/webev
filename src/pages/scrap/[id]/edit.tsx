@@ -63,6 +63,7 @@ const Index: VFC = () => {
     }
   }, [scrap]);
 
+  console.log(title);
   useEffect(() => {
     if (scrap != null) {
       setTitle(scrap.title);
@@ -147,7 +148,7 @@ const Index: VFC = () => {
                   </StyledEmojiPickerWrapper>
                 </>
               )}
-              <EditableInput value={title} onChange={updateScrapTitle} isHeader />
+              {title && <EditableInput value={title} onChange={updateScrapTitle} isHeader />}
             </div>
             <div className="d-flex align-items-center">
               <div className="px-3">
