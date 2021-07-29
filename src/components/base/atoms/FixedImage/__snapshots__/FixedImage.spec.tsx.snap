@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FixedImage 1`] = `
+<div
+  className=""
+>
+  <img
+    alt="example.png"
+    decoding="sync"
+    loading="lazy"
+    referrerPolicy="no-referrer"
+    src="example.png"
+  />
+</div>
+`;
+
+exports[`FixedImage imageUrl is null 1`] = `
+<div
+  className=""
+>
+  <img
+    alt="/images/no-image.png"
+    decoding="sync"
+    loading="lazy"
+    referrerPolicy="no-referrer"
+    src="/images/no-image.png"
+  />
+</div>
+`;
