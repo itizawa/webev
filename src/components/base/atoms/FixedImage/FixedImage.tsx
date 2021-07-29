@@ -18,13 +18,13 @@ const StyledImageWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-top: 55%;
-  object-fit: scale-down;
 
   :hover {
     opacity: 0.8;
   }
 
   img {
+    object-fit: scale-down;
     position: absolute;
     top: 0;
     width: 100%;
