@@ -1,8 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ScrollTopButton isShowScroll is false 1`] = `
+.c0 {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+
+.c0.show {
+  opacity: 0.5;
+}
+
+.c0.show:hover {
+  opacity: 0.7;
+}
+
 <button
-  className="btn btn-light btn-lg show"
+  className="c0 btn btn-light btn-lg show"
   id="scroll-to-top"
   onClick={[MockFunction]}
 >
@@ -23,8 +44,29 @@ exports[`ScrollTopButton isShowScroll is false 1`] = `
 `;
 
 exports[`ScrollTopButton isShowScroll is true 1`] = `
+.c0 {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+
+.c0.show {
+  opacity: 0.5;
+}
+
+.c0.show:hover {
+  opacity: 0.7;
+}
+
 <button
-  className="btn btn-light btn-lg show"
+  className="c0 btn btn-light btn-lg show"
   id="scroll-to-top"
   onClick={[MockFunction]}
 >
