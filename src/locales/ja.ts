@@ -48,7 +48,7 @@ export const ja = {
   share: '共有',
   user: 'ユーザー',
   user_page: 'ユーザーページ',
-  scrap: 'スクラップ',
+  scrap: 'スクラップ (α版)',
 
   return_news_list: 'ニュースリストに戻る',
 

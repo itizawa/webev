@@ -48,7 +48,7 @@ export const en = {
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
-  scrap: 'Scrap',
+  scrap: 'Scrap (α version)',
 
   return_news_list: 'Return News List',
 
