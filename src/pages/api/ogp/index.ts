@@ -1,6 +1,7 @@
 import path from 'path';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createCanvas, registerFont, loadImage } from 'canvas';
+import { toArray } from '~/utils/toArray';
 
 const WIDTH = 1200 as const;
 const HEIGHT = 630 as const;
@@ -31,8 +32,8 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
 
   ctx.font = '40px ipagp';
 
-  if (pages != null && Array.isArray(pages)) {
-    Array.from(pages).forEach((page, index) => {
+  if (pages != null) {
+    Array.from(toArray(pages)).forEach((page, index) => {
       ctx.fillText(page, 600, PAGES_HEIGHT[index]);
     });
   }
