@@ -9,6 +9,7 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { useScrapList } from '~/stores/scrap';
+import { ScrapCard } from '~/components/domain/Scrap/molecules/ScrapCard';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -32,24 +33,24 @@ const Index: VFC = () => {
           <div className="my-3">
             <SearchTextBox onChange={(searchWord: string) => setSearchKeyWord(searchWord)} />
           </div>
-          {paginationResult == null && (
-            <div className="text-center pt-5">
-              <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-            </div>
-          )}
-          {paginationResult != null && (
-            <>
-              {paginationResult.docs.map((scrap) => {
-                return (
-                  <Link href={`/scrap/${scrap._id}`} key={scrap._id}>
-                    <a>
-                      <div>{scrap.title}</div>
-                    </a>
-                  </Link>
-                );
-              })}
-            </>
-          )}
+          <div className="row">
+            {paginationResult == null && (
+              <div className="text-center pt-5">
+                <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+              </div>
+            )}
+            {paginationResult != null && (
+              <>
+                {paginationResult.docs.map((scrap) => {
+                  return (
+                    <div className="col-xl-4 col-md-6 mb-3" key={scrap._id}>
+                      <ScrapCard scrap={scrap} />
+                    </div>
+                  );
+                })}
+              </>
+            )}
+          </div>
         </div>
       </LoginRequiredWrapper>
     </>

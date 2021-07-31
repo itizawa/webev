@@ -25,8 +25,10 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'middle';
 
-  ctx.textAlign = 'right';
-  ctx.fillText(username as string, 1150, 550);
+  if (username != null) {
+    ctx.textAlign = 'right';
+    ctx.fillText(username as string, 1150, 550);
+  }
   ctx.textAlign = 'center';
   ctx.fillText(title as string, 600, 300);
 
