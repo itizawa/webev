@@ -21,33 +21,33 @@ const Index: VFC = () => {
             <h1 className="mb-0">{t.scrap}</h1>
             <div className="ms-auto">
               <Link href="/scrap/new">
-                <a className="btn btn-primary btn-sm text-white">{`${t.create_scrap} >`}</a>
+                <a className="btn btn-primary btn-sm text-white">{`${t.new_create} >`}</a>
               </Link>
             </div>
           </div>
-        </div>
-        <div className="btn-group btn-group-sm w-100" role="group">
-          <button
-            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Public' ? 'active' : ''}`}
-            onClick={() => setActiveTabType('Public')}
-          >
-            {t.publish}
-          </button>
-          <button
-            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Private' ? 'active' : ''}`}
-            onClick={() => setActiveTabType('Private')}
-          >
-            {t.private}
-          </button>
-          <button
-            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'All' ? 'active' : ''}`}
-            onClick={() => setActiveTabType('All')}
-          >
-            {t.all_users}
-          </button>
-        </div>
-        <div className="tab-content" id="nav-tabContent">
-          <ScrapTab />
+          <div className="btn-group btn-group-sm w-100 mt-3" role="group">
+            <button
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Public' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('Public')}
+            >
+              {t.publish}
+            </button>
+            <button
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Private' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('Private')}
+            >
+              {t.private}
+            </button>
+            <button
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'All' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('All')}
+            >
+              {t.all_users}
+            </button>
+          </div>
+          <div className="tab-content" id="nav-tabContent">
+            <ScrapTab />
+          </div>
         </div>
       </LoginRequiredWrapper>
     </>

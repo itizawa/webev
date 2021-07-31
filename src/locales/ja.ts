@@ -15,6 +15,7 @@ export const ja = {
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
+  new_create: '新規作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
   latest_order: '新しい順',

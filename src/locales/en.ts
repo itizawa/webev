@@ -15,6 +15,7 @@ export const en = {
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
+  new_create: 'New Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
   latest_order: 'Latest Order',
