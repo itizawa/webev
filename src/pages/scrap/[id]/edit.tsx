@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState, useEffect, useRef, VFC } from 'react';
 
 import { UncontrolledTooltip } from 'reactstrap';
@@ -135,6 +136,11 @@ const Index: VFC = () => {
       <WebevOgpHead title={`Webev | New ${t.create_scrap}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
+          <div className="d-flex align-items-center">
+            <Link href={`/scrap/${scrap._id}`}>
+              <a className="btn btn-primary btn-sm text-white">{`< ${t.return_scrap}`}</a>
+            </Link>
+          </div>
           <StyledTitle className="d-flex flex-md-row flex-column gap-3 align-items-center justify-content-between my-2 py-2 sticky-md-top">
             <div className="d-flex align-items-center w-100">
               <div ref={emojiRef}>

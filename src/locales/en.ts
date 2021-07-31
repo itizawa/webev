@@ -12,6 +12,7 @@ export const en = {
   settings: 'Settings',
   search: 'Search',
   save: 'Save',
+  return_list: 'Return List',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
@@ -101,6 +102,7 @@ export const en = {
 
   input_url: 'Input Url',
   create_scrap: 'Create Scrap',
+  return_scrap: 'Return Scrap',
   scrap_description: 'Create scraps and make your own summary!',
   title: 'Title',
   scrap_title_placeholder: 'Read Scraps',

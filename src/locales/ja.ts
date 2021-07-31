@@ -12,6 +12,7 @@ export const ja = {
   settings: '設定',
   search: '検索',
   save: '保存',
+  return_list: 'リストに戻る',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
@@ -102,6 +103,7 @@ export const ja = {
   input_url: 'Url を入力する',
 
   create_scrap: 'スクラップを作成する',
+  return_scrap: 'スクラップに戻る',
   scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
   title: 'タイトル',
   scrap_title_placeholder: '今日読んだ記事',

@@ -55,31 +55,38 @@ const Index: VFC = () => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${scrap.title}`} />
-      <div className="d-flex flex-md-row flex-column flex-md-row-reverse ">
-        <div className="col-md-4 px-2">
-          {createdUser != null && (
-            <div className="text-center py-3">
-              <Link href={`/user/${createdUser._id}`}>
-                <a className="text-white webev-anchor d-flex align-items-center">
-                  <UserIcon image={createdUser.image} size={36} isCircle />
-                  <span className="ms-3 text-truncate">{createdUser.name}</span>
-                </a>
-              </Link>
-            </div>
-          )}
-          <div>
-            <ScrapCard scrap={scrap} />
-          </div>
+      <div className="p-3">
+        <div className="d-flex align-items-center">
+          <Link href="/scrap">
+            <a className="btn btn-primary btn-sm text-white">{`< ${t.return_list}`}</a>
+          </Link>
         </div>
-        <div className="col-md-8 px-2">
-          <h2 className="my-3">Page</h2>
-          {scrap.pages.map((page) => {
-            return (
-              <div key={page._id} className="mb-3">
-                <PagePreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
+        <div className="d-flex flex-md-row flex-column flex-md-row-reverse">
+          <div className="col-md-4 px-2">
+            {createdUser != null && (
+              <div className="text-center py-3">
+                <Link href={`/user/${createdUser._id}`}>
+                  <a className="text-white webev-anchor d-flex align-items-center">
+                    <UserIcon image={createdUser.image} size={36} isCircle />
+                    <span className="ms-3 text-truncate">{createdUser.name}</span>
+                  </a>
+                </Link>
               </div>
-            );
-          })}
+            )}
+            <div>
+              <ScrapCard scrap={scrap} />
+            </div>
+          </div>
+          <div className="col-md-8 px-2">
+            <h2 className="my-3">Page</h2>
+            {scrap.pages.map((page) => {
+              return (
+                <div key={page._id} className="mb-3">
+                  <PagePreviewCard page={page} onClickCard={() => window.open(page.url, '_blank')} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
