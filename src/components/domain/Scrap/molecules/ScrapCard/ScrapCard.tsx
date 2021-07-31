@@ -45,7 +45,7 @@ export const ScrapCard: VFC<Props> = ({ scrap }) => {
         </a>
       </Link>
       <div className="card-body p-2 d-flex flex-column">
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center mb-2">
           <Emoji emoji={emoji} size={emojiSize} />
           <Link href={`/scrap/${scrap._id}`}>
             <a className="webev-anchor text-white me-auto ms-3">
@@ -56,7 +56,7 @@ export const ScrapCard: VFC<Props> = ({ scrap }) => {
             <IconButton color="LIGHT" activeColor="LIGHT" icon="PENCIL" onClickButton={() => router.push(`/scrap/${scrap._id}/edit`)} />
           )}
         </div>
-        <p className="mb-2">
+        <p className="mb-2 small">
           {t.created_at} : {format(new Date(scrap.createdAt), 'yyyy/MM/dd')}
         </p>
         {scrap.body != null && <p className="small p-1">{scrap.body}</p>}
