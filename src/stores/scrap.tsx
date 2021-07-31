@@ -28,7 +28,7 @@ export const useScrapList = ({
 
   const endpoint = `/scraps/list?page=${activePage}&limit=${limit}${searchKeyWord != '' ? `&q=${searchKeyWord}` : ``}${
     userId != null ? `&userId=${userId}` : ``
-  }${isPublic != null ? `&isPublic=${isPublic}` : ``}
+  }${isPublic != null ? `&isPublic=${isPublic}` : ``}&sort=-updatedAt
   `;
 
   return useSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
