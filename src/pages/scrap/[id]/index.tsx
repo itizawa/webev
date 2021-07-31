@@ -87,6 +87,7 @@ const Index: VFC = () => {
               <hr />
             </>
           )}
+          <img width="100%" src="/api/ogp" loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
           <div className="p-3 text-center">
             <Emoji emoji={emoji} size={emojiSize} />
           </div>
