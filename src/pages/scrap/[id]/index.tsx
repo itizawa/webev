@@ -19,6 +19,7 @@ import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewC
 
 import { useScrapById } from '~/stores/scrap';
 import { useCurrentUser, useUserById } from '~/stores/user';
+import { FixedImage } from '~/components/base/atoms/FixedImage';
 
 const emojiSize = 40;
 
@@ -87,7 +88,7 @@ const Index: VFC = () => {
               <hr />
             </>
           )}
-          <img width="100%" src="/api/ogp" loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+          <FixedImage imageUrl={`/api/ogp?title=${scrap.title}`} />
           <div className="p-3 text-center">
             <Emoji emoji={emoji} size={emojiSize} />
           </div>

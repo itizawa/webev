@@ -1,8 +1,10 @@
 import path from 'path';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createCanvas, registerFont } from 'canvas';
+import { createCanvas, registerFont, loadImage } from 'canvas';
 
 const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const { title } = req.query;
+
   const WIDTH = 1200 as const;
   const HEIGHT = 630 as const;
   const DX = 0 as const;
@@ -15,11 +17,15 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
   registerFont(path.resolve('./public/fonts/ipagp.ttf'), {
     family: 'ipagp',
   });
+  // Add background
+  const backgroundImage = await loadImage('./public/images/scrap-ogp.png');
+  ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT);
+
   ctx.font = '60px ipagp';
-  ctx.fillStyle = '#CCC';
+  ctx.fillStyle = '#000';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText('OGP画像を生成したい！！！！！', 600, 300);
+  ctx.fillText(title as string, 600, 300);
 
   const buffer = canvas.toBuffer();
 
