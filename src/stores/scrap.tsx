@@ -16,13 +16,10 @@ export const useScrapById = ({ scrapId }: { scrapId: string }): SWRResponse<Scra
 export const useScrapList = ({ activePage, searchKeyWord }: { activePage: number; searchKeyWord: string }): SWRResponse<PaginationResult<Scrap>, Error> => {
   const limit = 30;
 
-  return useSWR(
-    ['/scraps/list', activePage, limit, searchKeyWord],
-    (endpoint, page, limit, searchKeyWord) =>
-      restClient.apiGet(`${endpoint}?page=${page}&limit=${limit}&${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`).then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    },
-  );
+  const endpoint = `/scraps/list?page=${activePage}&limit=${limit}&${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`;
+
+  return useSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 };
