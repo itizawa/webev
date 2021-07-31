@@ -55,11 +55,11 @@ exports[`FixedImage imageUrl is null 1`] = `
   className="c0"
 >
   <img
-    alt="/images/no-image.png"
+    alt="/images/no-image-ogp.png"
     decoding="sync"
     loading="lazy"
     referrerPolicy="no-referrer"
-    src="/images/no-image.png"
+    src="/images/no-image-ogp.png"
   />
 </div>
 `;
