@@ -1,21 +1,15 @@
 import Link from 'next/link';
-import { VFC, useState } from 'react';
+import { VFC } from 'react';
 
-import Loader from 'react-loader-spinner';
 import { useLocale } from '~/hooks/useLocale';
 
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { useScrapList } from '~/stores/scrap';
-import { ScrapCard } from '~/components/domain/Scrap/molecules/ScrapCard';
+import { ScrapTab } from '~/components/domain/Scrap/molecules/ScrapTab';
 
 const Index: VFC = () => {
   const { t } = useLocale();
-  const [searchKeyWord, setSearchKeyWord] = useState('');
-
-  const { data: paginationResult } = useScrapList({ activePage: 1, searchKeyWord });
 
   return (
     <>
@@ -30,28 +24,8 @@ const Index: VFC = () => {
               </Link>
             </div>
           </div>
-          <div className="my-3">
-            <SearchTextBox onChange={(searchWord: string) => setSearchKeyWord(searchWord)} />
-          </div>
-          <div className="row">
-            {paginationResult == null && (
-              <div className="text-center pt-5">
-                <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-              </div>
-            )}
-            {paginationResult != null && (
-              <>
-                {paginationResult.docs.map((scrap) => {
-                  return (
-                    <div className="col-xl-4 col-md-6 mb-3" key={scrap._id}>
-                      <ScrapCard scrap={scrap} />
-                    </div>
-                  );
-                })}
-              </>
-            )}
-          </div>
         </div>
+        <ScrapTab />
       </LoginRequiredWrapper>
     </>
   );

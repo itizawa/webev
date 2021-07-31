@@ -1,0 +1,1 @@
+export { ScrapTab } from './ScrapTab';
