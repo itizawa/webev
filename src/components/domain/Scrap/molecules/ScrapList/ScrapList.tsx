@@ -6,10 +6,15 @@ import { ScrapCard } from '~/components/domain/Scrap/molecules/ScrapCard';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useScrapList } from '~/stores/scrap';
 
-export const ScrapTab: VFC = () => {
+type Props = {
+  targetUserId?: string;
+  isPublic?: boolean;
+};
+
+export const ScrapList: VFC<Props> = ({ targetUserId, isPublic }) => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
 
-  const { data: paginationResult } = useScrapList({ activePage: 1, searchKeyWord });
+  const { data: paginationResult } = useScrapList({ activePage: 1, searchKeyWord, userId: targetUserId, isPublic });
 
   return (
     <>

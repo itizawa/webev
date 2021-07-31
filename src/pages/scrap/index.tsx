@@ -6,11 +6,15 @@ import { useLocale } from '~/hooks/useLocale';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { ScrapTab } from '~/components/domain/Scrap/molecules/ScrapTab';
+import { ScrapList } from '~/components/domain/Scrap/molecules/ScrapList';
+import { useCurrentUser } from '~/stores/user';
+
+type ActiveTabType = 'PUBLIC' | 'PRIVATE' | 'ALL';
 
 const Index: VFC = () => {
   const { t } = useLocale();
-  const [activeTabType, setActiveTabType] = useState<string>('Public');
+  const { data: currentUser } = useCurrentUser();
+  const [activeTabType, setActiveTabType] = useState<ActiveTabType>('PUBLIC');
 
   return (
     <>
@@ -27,26 +31,26 @@ const Index: VFC = () => {
           </div>
           <div className="btn-group btn-group-sm w-100 mt-3" role="group">
             <button
-              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Public' ? 'active' : ''}`}
-              onClick={() => setActiveTabType('Public')}
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'PUBLIC' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('PUBLIC')}
             >
-              {t.publish}
+              {t.published}
             </button>
             <button
-              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Private' ? 'active' : ''}`}
-              onClick={() => setActiveTabType('Private')}
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'PRIVATE' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('PRIVATE')}
             >
               {t.private}
             </button>
             <button
-              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'All' ? 'active' : ''}`}
-              onClick={() => setActiveTabType('All')}
+              className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'ALL' ? 'active' : ''}`}
+              onClick={() => setActiveTabType('ALL')}
             >
               {t.all_users}
             </button>
           </div>
-          <div className="tab-content" id="nav-tabContent">
-            <ScrapTab />
+          <div>
+            <ScrapList targetUserId={activeTabType !== 'ALL' ? currentUser?._id : undefined} isPublic={activeTabType !== 'PRIVATE'} />
           </div>
         </div>
       </LoginRequiredWrapper>
