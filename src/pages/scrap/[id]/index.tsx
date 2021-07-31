@@ -33,6 +33,7 @@ const Index: VFC = () => {
   const { data: createdUser } = useUserById({ userId: scrap?.createdUser });
 
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  console.log(emoji);
 
   useEffect(() => {
     if (scrap != null) {
@@ -88,7 +89,7 @@ const Index: VFC = () => {
               <hr />
             </>
           )}
-          <FixedImage imageUrl={`/api/ogp?title=${scrap.title}`} />
+          <FixedImage imageUrl={`/api/ogp?title=${scrap.title}&username=${createdUser?.name}`} />
           <div className="p-3 text-center">
             <Emoji emoji={emoji} size={emojiSize} />
           </div>
