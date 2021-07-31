@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { createCanvas, registerFont, loadImage } from 'canvas';
 
 const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const { title } = req.query;
+  const { title, username } = req.query;
 
   const WIDTH = 1200 as const;
   const HEIGHT = 630 as const;
@@ -23,8 +23,11 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
 
   ctx.font = '60px ipagp';
   ctx.fillStyle = '#000';
-  ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
+
+  ctx.textAlign = 'right';
+  ctx.fillText(username as string, 1150, 550);
+  ctx.textAlign = 'center';
   ctx.fillText(title as string, 600, 300);
 
   const buffer = canvas.toBuffer();
