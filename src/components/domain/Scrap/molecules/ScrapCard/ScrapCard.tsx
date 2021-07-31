@@ -34,11 +34,14 @@ export const ScrapCard: VFC<Props> = ({ scrap }) => {
     }
   }, [scrap]);
 
+  const pagesForOgp = scrap.pages.slice(0, 3);
+  const imageUrlForOgp = `/api/ogp?title=${scrap.title}&pageCount=${scrap.pages.length}${pagesForOgp.map((v) => `&pages=${v.title}`).join('')}`;
+
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       <Link href={`/scrap/${scrap._id}`}>
         <a>
-          <FixedImage imageUrl={`/api/ogp?title=${scrap.title}`} />
+          <FixedImage imageUrl={imageUrlForOgp} />
         </a>
       </Link>
       <div className="card-body p-2 d-flex flex-column">

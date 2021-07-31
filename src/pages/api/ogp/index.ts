@@ -2,13 +2,14 @@ import path from 'path';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { createCanvas, registerFont, loadImage } from 'canvas';
 
-const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  const { title, username } = req.query;
+const WIDTH = 1200 as const;
+const HEIGHT = 630 as const;
+const DX = 0 as const;
+const DY = 0 as const;
+const PAGES_HEIGHT = [250, 300, 350];
 
-  const WIDTH = 1200 as const;
-  const HEIGHT = 630 as const;
-  const DX = 0 as const;
-  const DY = 0 as const;
+const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+  const { title, username, pageCount, pages } = req.query;
   const canvas = createCanvas(WIDTH, HEIGHT);
   const ctx = canvas.getContext('2d');
 
@@ -25,12 +26,24 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'middle';
 
+  ctx.textAlign = 'center';
+  ctx.fillText(title as string, 600, 150);
+
+  ctx.font = '40px ipagp';
+
+  if (pages != null && Array.isArray(pages)) {
+    Array.from(pages).forEach((page, index) => {
+      ctx.fillText(page, 600, PAGES_HEIGHT[index]);
+    });
+  }
+  if (parseInt(pageCount as string) > 3) {
+    ctx.fillText(`...他 ${pageCount} サイト`, 900, 450);
+  }
+
   if (username != null) {
     ctx.textAlign = 'right';
     ctx.fillText(username as string, 1150, 550);
   }
-  ctx.textAlign = 'center';
-  ctx.fillText(title as string, 600, 300);
 
   const buffer = canvas.toBuffer();
 
