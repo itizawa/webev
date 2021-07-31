@@ -7,7 +7,8 @@ const WIDTH = 1200 as const;
 const HEIGHT = 630 as const;
 const DX = 0 as const;
 const DY = 0 as const;
-const PAGES_HEIGHT = [250, 300, 350];
+const PAGES_HEIGHT = [250, 300, 350] as const;
+const MAX_WORD_COUNT_OF_PAGE_TITLE = 30 as const;
 
 const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   const { title, username, pageCount, pages } = req.query;
@@ -34,7 +35,8 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
 
   if (pages != null) {
     Array.from(toArray(pages)).forEach((page, index) => {
-      ctx.fillText(page, 600, PAGES_HEIGHT[index]);
+      const displayPage = page?.length > MAX_WORD_COUNT_OF_PAGE_TITLE ? page?.substr(0, MAX_WORD_COUNT_OF_PAGE_TITLE) + '...' : page;
+      ctx.fillText(displayPage, 600, PAGES_HEIGHT[index]);
     });
   }
   if (parseInt(pageCount as string) > 3) {
