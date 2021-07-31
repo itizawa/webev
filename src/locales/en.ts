@@ -12,9 +12,11 @@ export const en = {
   settings: 'Settings',
   search: 'Search',
   save: 'Save',
+  return_list: 'Return List',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
+  new_create: 'New Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
   latest_order: 'Latest Order',
@@ -46,7 +48,7 @@ export const en = {
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
-  scrap: 'Scrap',
+  scrap: 'Scrap (α version)',
 
   return_news_list: 'Return News List',
 
@@ -100,6 +102,7 @@ export const en = {
 
   input_url: 'Input Url',
   create_scrap: 'Create Scrap',
+  return_scrap: 'Return Scrap',
   scrap_description: 'Create scraps and make your own summary!',
   title: 'Title',
   scrap_title_placeholder: 'Read Scraps',
@@ -109,6 +112,9 @@ export const en = {
   update_scrap: 'Update Scrap',
   save_draft: 'Save Draft',
   tooltip_update_scrap: 'At least one page is required to update scrap',
+  published: 'Published',
+  private: 'Private',
+  all_users: 'All Users',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',
