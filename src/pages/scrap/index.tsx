@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { useState, VFC } from 'react';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -10,6 +10,7 @@ import { ScrapTab } from '~/components/domain/Scrap/molecules/ScrapTab';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const [activeTabType, setActiveTabType] = useState<string>('Public');
 
   return (
     <>
@@ -25,7 +26,29 @@ const Index: VFC = () => {
             </div>
           </div>
         </div>
-        <ScrapTab />
+        <div className="btn-group btn-group-sm w-100" role="group">
+          <button
+            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Public' ? 'active' : ''}`}
+            onClick={() => setActiveTabType('Public')}
+          >
+            {t.publish}
+          </button>
+          <button
+            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'Private' ? 'active' : ''}`}
+            onClick={() => setActiveTabType('Private')}
+          >
+            {t.private}
+          </button>
+          <button
+            className={`col-1 btn btn-outline-primary text-white text-nowrap ${activeTabType === 'All' ? 'active' : ''}`}
+            onClick={() => setActiveTabType('All')}
+          >
+            {t.all_users}
+          </button>
+        </div>
+        <div className="tab-content" id="nav-tabContent">
+          <ScrapTab />
+        </div>
       </LoginRequiredWrapper>
     </>
   );

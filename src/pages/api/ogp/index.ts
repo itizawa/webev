@@ -8,6 +8,7 @@ const HEIGHT = 630 as const;
 const DX = 0 as const;
 const DY = 0 as const;
 const PAGES_HEIGHT = [250, 300, 350] as const;
+const MAX_WORD_COUNT_OF_SCRAP_TITLE = 25 as const;
 const MAX_WORD_COUNT_OF_PAGE_TITLE = 30 as const;
 
 const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
@@ -29,7 +30,10 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
   ctx.textBaseline = 'middle';
 
   ctx.textAlign = 'center';
-  ctx.fillText(title as string, 600, 150);
+  if (typeof title === 'string') {
+    const displayPage = title?.length > MAX_WORD_COUNT_OF_SCRAP_TITLE ? title?.substr(0, MAX_WORD_COUNT_OF_SCRAP_TITLE) + '...' : title;
+    ctx.fillText(displayPage, 600, 150);
+  }
 
   ctx.font = '40px ipagp';
 

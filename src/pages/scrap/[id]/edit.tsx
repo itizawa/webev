@@ -136,7 +136,7 @@ const Index: VFC = () => {
       <LoginRequiredWrapper>
         <div className="p-3">
           <StyledTitle className="d-flex flex-md-row flex-column gap-3 align-items-center justify-content-between my-2 py-2 sticky-md-top">
-            <div className="d-flex align-items-center">
+            <div className="d-flex align-items-center w-100">
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
