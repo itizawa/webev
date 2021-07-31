@@ -26,7 +26,7 @@ const Index: VFC = () => {
             <h1 className="mb-0">{t.scrap}</h1>
             <div className="ms-auto">
               <Link href="/scrap/new">
-                <a className="btn btn-primary text-white">{`${t.create_scrap} >`}</a>
+                <a className="btn btn-primary btn-sm text-white">{`${t.create_scrap} >`}</a>
               </Link>
             </div>
           </div>

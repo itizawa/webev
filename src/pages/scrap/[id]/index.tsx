@@ -33,7 +33,6 @@ const Index: VFC = () => {
   const { data: createdUser } = useUserById({ userId: scrap?.createdUser });
 
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
-  console.log(emoji);
 
   useEffect(() => {
     if (scrap != null) {
