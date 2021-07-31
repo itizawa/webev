@@ -21,7 +21,7 @@ import { useScrapById } from '~/stores/scrap';
 import { useCurrentUser, useUserById } from '~/stores/user';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 
-const emojiSize = 40;
+const emojiSize = 24;
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -89,11 +89,9 @@ const Index: VFC = () => {
             </>
           )}
           <FixedImage imageUrl={`/api/ogp?title=${scrap.title}&username=${createdUser?.name}`} />
-          <div className="p-3 text-center">
+          <div className="d-flex align-items-center mt-3">
             <Emoji emoji={emoji} size={emojiSize} />
-          </div>
-          <div className="d-flex align-items-center">
-            <h5 className="webev-limit-2lines me-auto">{scrap.title}</h5>
+            <h5 className="webev-limit-2lines me-auto ms-3">{scrap.title}</h5>
             {createdUser?._id === currentUser?._id && (
               <IconButton color="LIGHT" activeColor="LIGHT" icon="PENCIL" onClickButton={() => router.push(`/scrap/${scrap._id}/edit`)} />
             )}
