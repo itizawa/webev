@@ -42,7 +42,7 @@ export const Footer: FC = () => {
             <a className="text-muted webev-anchor">Japanese</a>
           </Link>
         </div>
-        <div className="col-3 d-flex">
+        <div className="col-3 d-flex justify-content-end">
           <Tooltip text="Webev is OSS">
             <IconButton
               width={24}

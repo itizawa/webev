@@ -11,9 +11,7 @@ export const Tooltip: FC<Props> = ({ children, text, placement = 'top' }) => {
 
   return (
     <>
-      <div ref={ref} className="ms-auto">
-        {children}
-      </div>
+      <div ref={ref}>{children}</div>
       <UncontrolledTooltip placement={placement} target={ref}>
         {text}
       </UncontrolledTooltip>

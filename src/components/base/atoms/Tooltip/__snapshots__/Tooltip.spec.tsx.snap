@@ -1,17 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltip 1`] = `
-<div
-  className="ms-auto"
->
+<div>
   target
 </div>
 `;
 
 exports[`Tooltip without placement 1`] = `
-<div
-  className="ms-auto"
->
+<div>
   target
 </div>
 `;
