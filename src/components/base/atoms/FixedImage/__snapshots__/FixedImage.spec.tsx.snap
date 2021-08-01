@@ -4,7 +4,7 @@ exports[`FixedImage 1`] = `
 .c0 {
   position: relative;
   width: 100%;
-  padding-top: 55%;
+  padding-top: 52.5%;
 }
 
 .c0:hover {
@@ -12,6 +12,7 @@ exports[`FixedImage 1`] = `
 }
 
 .c0 img {
+  object-fit: cover;
   position: absolute;
   top: 0;
   width: 100%;
@@ -35,7 +36,7 @@ exports[`FixedImage imageUrl is null 1`] = `
 .c0 {
   position: relative;
   width: 100%;
-  padding-top: 55%;
+  padding-top: 52.5%;
 }
 
 .c0:hover {
@@ -43,6 +44,7 @@ exports[`FixedImage imageUrl is null 1`] = `
 }
 
 .c0 img {
+  object-fit: cover;
   position: absolute;
   top: 0;
   width: 100%;
@@ -53,11 +55,11 @@ exports[`FixedImage imageUrl is null 1`] = `
   className="c0"
 >
   <img
-    alt="/images/no-image.png"
+    alt="/images/no-image-ogp.png"
     decoding="sync"
     loading="lazy"
     referrerPolicy="no-referrer"
-    src="/images/no-image.png"
+    src="/images/no-image-ogp.png"
   />
 </div>
 `;

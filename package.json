@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "now-build": "yum install libuuid-devel libmount-devel && cp /lib64/{libuuid,libmount,libblkid}.so.1 node_modules/canvas/build/Release/ && npm run build",
     "start": "next start",
     "lint:styles": "stylelint \"./**/*.{scss,css}\"",
     "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
@@ -27,6 +28,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "bootstrap-icons": "^1.5.0",
+    "canvas": "2.6.1",
     "date-fns": "^2.22.1",
     "emoji-mart": "^3.0.1",
     "mongodb": "^3.6.10",

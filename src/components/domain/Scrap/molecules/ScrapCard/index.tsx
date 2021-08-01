@@ -1,0 +1,1 @@
+export { ScrapCard } from './ScrapCard';

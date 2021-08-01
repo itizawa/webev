@@ -12,9 +12,11 @@ export const ja = {
   settings: '設定',
   search: '検索',
   save: '保存',
+  return_list: 'リストに戻る',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
+  new_create: '新規作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
   latest_order: '新しい順',
@@ -46,7 +48,7 @@ export const ja = {
   share: '共有',
   user: 'ユーザー',
   user_page: 'ユーザーページ',
-  scrap: 'スクラップ',
+  scrap: 'スクラップ (α版)',
 
   return_news_list: 'ニュースリストに戻る',
 
@@ -101,6 +103,7 @@ export const ja = {
   input_url: 'Url を入力する',
 
   create_scrap: 'スクラップを作成する',
+  return_scrap: 'スクラップに戻る',
   scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
   title: 'タイトル',
   scrap_title_placeholder: '今日読んだ記事',
@@ -110,6 +113,9 @@ export const ja = {
   update_scrap: '内容を更新',
   save_draft: '下書き保存',
   tooltip_update_scrap: 'スクラップを更新するには最低でも 1件以上ページを指定する必要があります',
+  published: '公開済み',
+  private: '下書き',
+  all_users: '全ユーザー',
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
