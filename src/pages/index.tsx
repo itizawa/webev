@@ -2,19 +2,19 @@ import { VFC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import CountUp from 'react-countup';
 import axios from 'axios';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { useLocale } from '~/hooks/useLocale';
 import { imagePath } from '~/const/imagePath';
+import { PageCountupCard } from '~/components/domain/Page/atoms/PageCountupCard';
 
 type Props = {
   count: number;
 };
 
-const Index: VFC<Props> = (props) => {
+const Index: VFC<Props> = ({ count }) => {
   const { t } = useLocale();
 
   return (
@@ -24,12 +24,7 @@ const Index: VFC<Props> = (props) => {
       <Image src={imagePath.EYE_CATCH_DARK} alt={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
         <div className="col-12 col-md-6 offset-md-3">
-          <div className="card bg-dark border border-warning text-white p-3 text-center">
-            <h2>
-              <CountUp end={props.count} delay={1} /> Pages
-            </h2>
-            <p>{t.total_pages}</p>
-          </div>
+          <PageCountupCard count={count} text={t.total_pages} />
         </div>
       </div>
       <div className="text-center">
