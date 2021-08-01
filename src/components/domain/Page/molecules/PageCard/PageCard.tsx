@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -139,16 +140,13 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
         {directoryOfPage != null && (
           <div className="mt-2">
             <Link href={`/directory/${directoryOfPage._id}`}>
-              <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
-                <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
-                <span className="ms-1">{directoryOfPage.name}</span>
-              </span>
+              <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+                <span role="button" className="badge bg-secondary text-white">
+                  <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
+                  <span className="ms-1">{directoryOfPage.name}</span>
+                </span>
+              </Tooltip>
             </Link>
-            {directoryOfPage.description.trim() !== '' && (
-              <UncontrolledTooltip placement="top" target={`directory-for-${page._id}`} fade={false}>
-                {directoryOfPage.description}
-              </UncontrolledTooltip>
-            )}
           </div>
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>

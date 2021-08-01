@@ -118,16 +118,18 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
           <span className="ms-2">{directory?.name}</span>
         </div>
         <Tooltip text={t.create_directory} placement="left">
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon="ADD_TO_DIRECTORY"
-            color="WHITE"
-            activeColor="WHITE"
-            onClickButton={handleClickPencilIcon}
-            isRemovePadding
-          />
+          <div className="create-directory-button">
+            <IconButton
+              width={18}
+              height={18}
+              isActive={isActive}
+              icon="ADD_TO_DIRECTORY"
+              color="WHITE"
+              activeColor="WHITE"
+              onClickButton={handleClickPencilIcon}
+              isRemovePadding
+            />
+          </div>
         </Tooltip>
       </StyledDiv>
       <Collapse isOpen={isOpen}>
