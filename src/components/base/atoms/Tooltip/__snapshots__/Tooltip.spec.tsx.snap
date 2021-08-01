@@ -1,19 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltip 1`] = `
-<div>
+<span>
   target
-</div>
+</span>
+`;
+
+exports[`Tooltip with disabled 1`] = `
+<span>
+  target
+</span>
 `;
 
 exports[`Tooltip with fade 1`] = `
-<div>
+<span>
   target
-</div>
+</span>
 `;
 
 exports[`Tooltip without placement 1`] = `
-<div>
+<span>
   target
-</div>
+</span>
 `;

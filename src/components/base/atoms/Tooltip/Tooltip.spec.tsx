@@ -30,3 +30,15 @@ test('Tooltip with fade', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+test('Tooltip with disabled', () => {
+  const tree = renderer
+    .create(
+      <Tooltip text="Tooltip" disabled>
+        target
+      </Tooltip>,
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

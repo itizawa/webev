@@ -3,19 +3,22 @@ import { UncontrolledTooltip } from 'reactstrap';
 
 type Props = {
   text: string;
+  disabled?: boolean;
   fade?: boolean;
   placement?: 'top' | 'left' | 'right' | 'bottom';
 };
 
-export const Tooltip: FC<Props> = ({ children, text, fade, placement = 'top' }) => {
+export const Tooltip: FC<Props> = ({ children, disabled, text, fade, placement = 'top' }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <div ref={ref}>{children}</div>
-      <UncontrolledTooltip fade={!!fade} placement={placement} target={ref}>
-        {text}
-      </UncontrolledTooltip>
+      <span ref={ref}>{children}</span>
+      {!disabled && (
+        <UncontrolledTooltip fade={!!fade} placement={placement} target={ref}>
+          {text}
+        </UncontrolledTooltip>
+      )}
     </>
   );
 };
