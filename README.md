@@ -11,7 +11,7 @@ Webev is OSS of bookmark manager that improves the organization of information.
 - 🐇 **Fast**: Saved as soon as you enter the url and press the button.
 - ✨ **Visualization**: Visually display the information obtained by ogp.
 - 🛠 **Organized**: You Can be organized in a hierarchical structure.
-- 🤝 **Share and Retrieve**: No longer use searches contaminated with SEO hacks.(TBD)
+- 🤝 **Share and Retrieve**: No longer use searches contaminated with SEO hacks.
 
 ## Demo
 
