@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -43,7 +43,7 @@ export const Footer: FC = () => {
           </Link>
         </div>
         <div className="col-3 d-flex">
-          <div id="github-link-button" className="ms-auto">
+          <Tooltip text="Webev is OSS">
             <IconButton
               width={24}
               height={24}
@@ -52,11 +52,8 @@ export const Footer: FC = () => {
               activeColor="SECONDARY"
               onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
             />
-          </div>
-          <UncontrolledTooltip placement="top" target="github-link-button">
-            Webev is OSS
-          </UncontrolledTooltip>
-          <div id="twitter-link-button">
+          </Tooltip>
+          <Tooltip text="Please feel free to contact me!">
             <IconButton
               width={24}
               height={24}
@@ -65,10 +62,7 @@ export const Footer: FC = () => {
               activeColor="SECONDARY"
               onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
             />
-          </div>
-          <UncontrolledTooltip placement="top" target="twitter-link-button">
-            Please feel free to contact me!
-          </UncontrolledTooltip>
+          </Tooltip>
         </div>
       </StyledDiv>
     </StyledFooter>
