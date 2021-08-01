@@ -43,7 +43,7 @@ export const Footer: FC = () => {
           </Link>
         </div>
         <div className="col-3 d-flex justify-content-end">
-          <Tooltip text="Webev is OSS">
+          <Tooltip text="Webev is OSS" fade>
             <IconButton
               width={24}
               height={24}
@@ -53,7 +53,7 @@ export const Footer: FC = () => {
               onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
             />
           </Tooltip>
-          <Tooltip text="Please feel free to contact me!">
+          <Tooltip text="Please feel free to contact me!" fade>
             <IconButton
               width={24}
               height={24}
