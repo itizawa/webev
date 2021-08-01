@@ -1,0 +1,61 @@
+import Link from 'next/link';
+import { VFC, useState, useEffect } from 'react';
+
+import { format } from 'date-fns';
+import styled from 'styled-components';
+import { Emoji, EmojiData, emojiIndex } from 'emoji-mart';
+
+import { FixedImage } from '~/components/base/atoms/FixedImage';
+import { Scrap } from '~/domains/Scrap';
+import { useLocale } from '~/hooks/useLocale';
+import { openFileFolderEmoji } from '~/const/emoji';
+
+const emojiSize = 24;
+
+type Props = {
+  scrap: Scrap;
+};
+
+export const ScrapCard: VFC<Props> = ({ scrap }) => {
+  const { t } = useLocale();
+
+  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+
+  useEffect(() => {
+    const result = emojiIndex.search(scrap.emojiId);
+    if (result != null) {
+      setEmoji(result[0]);
+    }
+  }, [scrap]);
+
+  const pagesForOgp = scrap.pages.slice(0, 3);
+  const imageUrlForOgp = `/api/ogp?title=${scrap.title}&pageCount=${scrap.pages.length}${pagesForOgp.map((v) => `&pages=${v.title}`).join('')}`;
+
+  return (
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
+      <Link href={`/scrap/${scrap._id}`}>
+        <a>
+          <FixedImage imageUrl={imageUrlForOgp} />
+        </a>
+      </Link>
+      <div className="card-body p-2 d-flex flex-column">
+        <div className="d-flex align-items-center mb-2">
+          <Emoji emoji={emoji} size={emojiSize} />
+          <Link href={`/scrap/${scrap._id}`}>
+            <a className="webev-anchor text-white me-auto ms-3">
+              <span className="webev-limit-2lines">{scrap.title}</span>
+            </a>
+          </Link>
+        </div>
+        <p className="mb-2 small">
+          {t.created_at} : {format(new Date(scrap.createdAt), 'yyyy/MM/dd')}
+        </p>
+        {scrap.body != null && <p className="small p-1">{scrap.body}</p>}
+      </div>
+    </StyledCard>
+  );
+};
+
+const StyledCard = styled.div`
+  background-color: #2f363d;
+`;

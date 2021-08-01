@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
@@ -18,6 +19,7 @@ import { OgpLayoutType } from '~/interfaces/contexts';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const { data: currentUser } = useCurrentUser();
@@ -91,6 +93,10 @@ export const PersonalDropdown: VFC = () => {
             <Icon height={20} width={20} icon="GRID" color="WHITE" />
           </button>
         </div>
+        <DropdownItem divider />
+        <DropdownItem tag="button" onClick={() => router.push('/user/settings')}>
+          {t.settings}
+        </DropdownItem>
         <DropdownItem divider />
         <DropdownItem tag="button" onClick={() => signOut({ callbackUrl: '/' })}>
           {t.logout}

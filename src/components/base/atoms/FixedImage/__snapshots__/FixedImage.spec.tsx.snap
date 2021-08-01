@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FixedImage 1`] = `
+.c0 {
+  position: relative;
+  width: 100%;
+  padding-top: 52.5%;
+}
+
+.c0:hover {
+  opacity: 0.8;
+}
+
+.c0 img {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+<div
+  className="c0"
+>
+  <img
+    alt="example.png"
+    decoding="sync"
+    loading="lazy"
+    referrerPolicy="no-referrer"
+    src="example.png"
+  />
+</div>
+`;
+
+exports[`FixedImage imageUrl is null 1`] = `
+.c0 {
+  position: relative;
+  width: 100%;
+  padding-top: 52.5%;
+}
+
+.c0:hover {
+  opacity: 0.8;
+}
+
+.c0 img {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+<div
+  className="c0"
+>
+  <img
+    alt="/images/no-image-ogp.png"
+    decoding="sync"
+    loading="lazy"
+    referrerPolicy="no-referrer"
+    src="/images/no-image-ogp.png"
+  />
+</div>
+`;

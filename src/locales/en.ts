@@ -12,9 +12,11 @@ export const en = {
   settings: 'Settings',
   search: 'Search',
   save: 'Save',
+  return_list: 'Return List',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
+  new_create: 'New Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
   latest_order: 'Latest Order',
@@ -28,6 +30,7 @@ export const en = {
   toastr_update_directory_description: 'Update Directory Description',
   toastr_update_emoji: 'Update Directory Emoji',
   toastr_update_scrap: 'Update Scrap',
+  toastr_update_api_token: 'Update Api Token',
   toastr_create_scrap: 'Create Scrap',
   toastr_delete_url: 'Delete Url',
   toastr_save_url: 'Save Url',
@@ -43,8 +46,9 @@ export const en = {
   directory: 'Directory',
   news: 'News',
   share: 'Share',
-  user: 'User Page',
-  scrap: 'Scrap',
+  user: 'User',
+  user_page: 'User Page',
+  scrap: 'Scrap (α version)',
 
   return_news_list: 'Return News List',
 
@@ -98,6 +102,8 @@ export const en = {
 
   input_url: 'Input Url',
   create_scrap: 'Create Scrap',
+  edit_scrap: 'Edit Scrap',
+  return_scrap: 'Return Scrap',
   scrap_description: 'Create scraps and make your own summary!',
   title: 'Title',
   scrap_title_placeholder: 'Read Scraps',
@@ -107,6 +113,9 @@ export const en = {
   update_scrap: 'Update Scrap',
   save_draft: 'Save Draft',
   tooltip_update_scrap: 'At least one page is required to update scrap',
+  published: 'Published',
+  private: 'Private',
+  all_users: 'All Users',
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',

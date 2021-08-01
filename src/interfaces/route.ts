@@ -5,6 +5,7 @@ export const PathNames = {
   TERM: '/term',
   HOME: '/home',
   USER: '/user',
+  USER_SETTINGS: '/user/settings',
   READ: '/read',
   DIRECTORY: '/directory',
   DIRECTORY_ID: '/directory/[id]',
@@ -40,6 +41,9 @@ export const PathConfigs = {
     layout: LayoutNames.DASHBOARD,
   },
   [PathNames.USER]: {
+    layout: LayoutNames.DASHBOARD,
+  },
+  [PathNames.USER_SETTINGS]: {
     layout: LayoutNames.DASHBOARD,
   },
   [PathNames.READ]: {

@@ -16,7 +16,7 @@ export const SubnavBar: VFC = () => {
     { text: t.home, url: '/home', icon: 'HOME' },
     { text: t.read, url: '/read', icon: 'CHECK' },
     { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
-    // { text: t.scrap, url: '/scrap', icon: 'SCRAP' },
+    { text: t.scrap, url: '/scrap', icon: 'SCRAP' },
   ];
 
   return (
@@ -24,9 +24,13 @@ export const SubnavBar: VFC = () => {
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>
-            <StyledSubnavBarItem className="text-center col py-2" isActive={router.pathname.startsWith(v.url)}>
-              {v.icon != null && <Icon icon={v.icon} color="SECONDARY" />}
-              <small className="ms-1">{v.text}</small>
+            <StyledSubnavBarItem className="text-center col py-2 d-flex flex-column" isActive={router.pathname.startsWith(v.url)}>
+              {v.icon != null && (
+                <div className="mx-auto">
+                  <Icon icon={v.icon} color="SECONDARY" />
+                </div>
+              )}
+              <small className="ms-1 text-nowrap">{v.text}</small>
             </StyledSubnavBarItem>
           </Link>
         );
