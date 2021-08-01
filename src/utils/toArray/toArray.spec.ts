@@ -28,7 +28,7 @@ describe('toArray', (): void => {
 
   test('pass undefined', (): void => {
     const response = toArray(undefined);
-    expect(response).toEqual([undefined]);
+    expect(response).toEqual([]);
   });
 
   test('pass object', (): void => {
