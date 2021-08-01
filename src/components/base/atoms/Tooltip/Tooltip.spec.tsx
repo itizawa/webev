@@ -18,3 +18,15 @@ test('Tooltip without placement', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+test('Tooltip with fade', () => {
+  const tree = renderer
+    .create(
+      <Tooltip text="Tooltip" fade>
+        target
+      </Tooltip>,
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

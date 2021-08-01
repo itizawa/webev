@@ -6,6 +6,12 @@ exports[`Tooltip 1`] = `
 </div>
 `;
 
+exports[`Tooltip with fade 1`] = `
+<div>
+  target
+</div>
+`;
+
 exports[`Tooltip without placement 1`] = `
 <div>
   target
