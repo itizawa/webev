@@ -24,7 +24,7 @@ const Index: VFC<Props> = ({ count }) => {
       <Image src={imagePath.EYE_CATCH_DARK} alt={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
         <div className="col-12 col-md-6 offset-md-3">
-          <PageCountupCard count={count} />
+          <PageCountupCard count={count} text={t.total_pages} />
         </div>
       </div>
       <div className="text-center">
