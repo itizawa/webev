@@ -22,7 +22,7 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
     family: 'ipagp',
   });
   // Add background
-  const backgroundImage = await loadImage('./public/images/scrap-ogp.png');
+  const backgroundImage = await loadImage(path.resolve('./public/images/scrap-ogp.png'));
   ctx.drawImage(backgroundImage, 0, 0, WIDTH, HEIGHT);
 
   ctx.font = '60px ipagp';
