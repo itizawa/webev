@@ -54,9 +54,12 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
 
   const buffer = canvas.toBuffer();
 
+  const cacheAge = 7 * 24 * 60;
   res.writeHead(200, {
     'Content-Type': 'image/png',
     'Content-Length': buffer.length,
+    'Cache-Control': `public, max-age=${cacheAge}`,
+    Expires: new Date(Date.now() + cacheAge).toUTCString(),
   });
   res.end(buffer, 'binary');
 };
