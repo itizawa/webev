@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect, useRef, VFC } from 'react';
 
-import { UncontrolledTooltip } from 'reactstrap';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -14,6 +13,7 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { IconButton } from '~/components/base/molecules/IconButton';
 
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { Modal } from '~/components/base/molecules/Modal';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
@@ -171,16 +171,13 @@ const Index: VFC = () => {
                   </label>
                 </div>
               </div>
-              {selectedPages.length === 0 && (
-                <UncontrolledTooltip placement="top" target="update-scrap-button">
-                  {t.tooltip_update_scrap}
-                </UncontrolledTooltip>
-              )}
-              <div id="update-scrap-button">
-                <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton} disabled={selectedPages.length === 0}>
-                  {isPublic ? t.update_scrap : t.save_draft}
-                </button>
-              </div>
+              <Tooltip disabled={selectedPages.length !== 0} text={t.tooltip_update_scrap}>
+                <div id="update-scrap-button">
+                  <button className="btn btn-purple btn-sm text-nowrap" onClick={handleClickUpdateButton} disabled={selectedPages.length === 0}>
+                    {isPublic ? t.update_scrap : t.save_draft}
+                  </button>
+                </div>
+              </Tooltip>
             </div>
           </StyledTitle>
           <EditableTextarea placeholder={t.scrap_description_placeholder} onChange={updateScrapBody} value={scrap.body} isAllowEmpty />
