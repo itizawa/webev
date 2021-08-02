@@ -30,22 +30,14 @@ export const usePageListSWR = ({ searchKeyWord }: { searchKeyWord?: string }): S
   const { data: isSortCreatedAt = false } = useIsSortCreatedAt();
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
+  const endpoint = `/pages/list?${status.map((v: PageStatus) => `status[]=${v}&`).join('')}&page=${activePage}&limit=${limit}&sort=${sort}${
+    searchKeyWord != null ? `&q=${searchKeyWord}` : ``
+  }${directoryId != null ? `&directoryId=${directoryId}` : ``}`;
 
-  return useAuthenticationSWR(
-    ['/pages/list', status, activePage, limit, sort, searchKeyWord, directoryId],
-    (endpoint, status, page, limit, sort, searchKeyWord, directoryId) =>
-      restClient
-        .apiGet(
-          `${endpoint}?${status.map((v: PageStatus) => `status[]=${v}&`).join('')}&page=${page}&limit=${limit}&sort=${sort}${
-            searchKeyWord != null ? `&q=${searchKeyWord}` : ``
-          }${directoryId != null ? `&directoryId=${directoryId}` : ``}`,
-        )
-        .then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: true,
-    },
-  );
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+  });
 };
 
 export const usePageNotBelongDirectory = ({
