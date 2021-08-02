@@ -44,7 +44,7 @@ const createOgp = async (req: NextApiRequest, res: NextApiResponse): Promise<voi
     });
   }
   if (parseInt(pageCount as string) > 3) {
-    ctx.fillText(`...他 ${pageCount} サイト`, 900, 450);
+    ctx.fillText(`...他 ${parseInt(pageCount as string) - 3} サイト`, 900, 450);
   }
 
   if (username != null) {

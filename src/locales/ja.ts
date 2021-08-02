@@ -104,6 +104,7 @@ export const ja = {
 
   create_scrap: 'スクラップを作成する',
   return_scrap: 'スクラップに戻る',
+  edit_scrap: 'スクラップを編集する',
   scrap_description: 'スクラップを作成してあなただけのまとめを作ろう！',
   title: 'タイトル',
   scrap_title_placeholder: '今日読んだ記事',

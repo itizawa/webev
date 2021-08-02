@@ -14,8 +14,9 @@ import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 
 import { useScrapById } from '~/stores/scrap';
-import { useUserById } from '~/stores/user';
+import { useCurrentUser, useUserById } from '~/stores/user';
 import { ScrapCard } from '~/components/domain/Scrap/molecules/ScrapCard';
+import { Icon } from '~/components/base/atoms/Icon';
 
 const Index: VFC = () => {
   const { t } = useLocale();
@@ -24,6 +25,7 @@ const Index: VFC = () => {
 
   const { data: scrap, isValidating: isValidatingScrap } = useScrapById({ scrapId: scrapId as string });
   const { data: createdUser } = useUserById({ userId: scrap?.createdUser });
+  const { data: currentUser } = useCurrentUser();
 
   if (isValidatingScrap) {
     return (
@@ -56,10 +58,18 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | ${scrap.title}`} />
       <div className="p-3">
-        <div className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-between">
           <Link href="/scrap">
             <a className="btn btn-primary btn-sm text-white">{`< ${t.return_list}`}</a>
           </Link>
+          {scrap.createdUser === currentUser?._id && (
+            <Link href={`/scrap/${scrap._id}/edit`}>
+              <a className="btn btn-secondary btn-sm text-white">
+                <Icon icon="PENCIL" height={16} width={16} color="WHITE" />
+                <span className="ms-2">{t.edit_scrap}</span>
+              </a>
+            </Link>
+          )}
         </div>
         <div className="d-flex flex-md-row flex-column flex-md-row-reverse">
           <div className="col-md-4 px-2">

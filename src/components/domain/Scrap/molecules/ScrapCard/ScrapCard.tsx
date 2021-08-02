@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { VFC, useState, useEffect } from 'react';
 
 import { format } from 'date-fns';
@@ -10,8 +9,6 @@ import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Scrap } from '~/domains/Scrap';
 import { useLocale } from '~/hooks/useLocale';
 import { openFileFolderEmoji } from '~/const/emoji';
-import { useCurrentUser } from '~/stores/user';
-import { IconButton } from '~/components/base/molecules/IconButton';
 
 const emojiSize = 24;
 
@@ -21,9 +18,6 @@ type Props = {
 
 export const ScrapCard: VFC<Props> = ({ scrap }) => {
   const { t } = useLocale();
-  const router = useRouter();
-
-  const { data: currentUser } = useCurrentUser();
 
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
 
@@ -52,9 +46,6 @@ export const ScrapCard: VFC<Props> = ({ scrap }) => {
               <span className="webev-limit-2lines">{scrap.title}</span>
             </a>
           </Link>
-          {scrap.createdUser === currentUser?._id && (
-            <IconButton color="LIGHT" activeColor="LIGHT" icon="PENCIL" onClickButton={() => router.push(`/scrap/${scrap._id}/edit`)} />
-          )}
         </div>
         <p className="mb-2 small">
           {t.created_at} : {format(new Date(scrap.createdAt), 'yyyy/MM/dd')}

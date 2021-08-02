@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState, useRef, VFC } from 'react';
 
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown, UncontrolledTooltip } from 'reactstrap';
+import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 
 import { openFileFolderEmoji } from '~/const/emoji';
@@ -15,10 +15,11 @@ import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from 
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
+import { IconButton } from '~/components/base/molecules/IconButton';
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { IconButton } from '~/components/base/molecules/IconButton';
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
@@ -172,20 +173,19 @@ const Index: VFC = () => {
                   <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
                 </div>
                 <EditableInput value={directory.name} onChange={updateDirectoryName} isHeader />
-                <div id="save-page-to-directory">
-                  <IconButton
-                    width={18}
-                    height={18}
-                    icon="SAVE"
-                    color="SECONDARY"
-                    activeColor="WARNING"
-                    isActive={urlFromClipBoard != null}
-                    onClickButton={() => mutateDirectoryForSavePage(directory)}
-                  />
-                </div>
-                <UncontrolledTooltip placement="top" target="save-page-to-directory">
-                  {t.save_to_directory(directory.name)}
-                </UncontrolledTooltip>
+                <Tooltip text={t.save_to_directory(directory.name)}>
+                  <div id="save-page-to-directory">
+                    <IconButton
+                      width={18}
+                      height={18}
+                      icon="SAVE"
+                      color="SECONDARY"
+                      activeColor="WARNING"
+                      isActive={urlFromClipBoard != null}
+                      onClickButton={() => mutateDirectoryForSavePage(directory)}
+                    />
+                  </div>
+                </Tooltip>
                 <UncontrolledDropdown direction="down">
                   <DropdownToggle tag="div">
                     <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />

@@ -1,5 +1,5 @@
 import { useCallback, useState, VFC } from 'react';
-import { Collapse, UncontrolledTooltip } from 'reactstrap';
+import { Collapse } from 'reactstrap';
 
 import styled from 'styled-components';
 
@@ -12,6 +12,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useAllDirectories, useDirectoryChildren } from '~/stores/directory';
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 
 type Props = {
   directory?: Directory;
@@ -74,7 +75,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
   return (
     <>
       <StyledDiv
-        className="text-white text-left rounded d-flex"
+        className="text-white text-left rounded d-flex justify-content-between"
         role="button"
         onClick={handleClickDirectory}
         isActive={isActive}
@@ -116,21 +117,20 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
           )}
           <span className="ms-2">{directory?.name}</span>
         </div>
-        <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon="ADD_TO_DIRECTORY"
-            color="WHITE"
-            activeColor="WHITE"
-            onClickButton={handleClickPencilIcon}
-            isRemovePadding
-          />
-        </div>
-        <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
-          {t.create_directory}
-        </UncontrolledTooltip>
+        <Tooltip text={t.create_directory} placement="left">
+          <div className="create-directory-button">
+            <IconButton
+              width={18}
+              height={18}
+              isActive={isActive}
+              icon="ADD_TO_DIRECTORY"
+              color="WHITE"
+              activeColor="WHITE"
+              onClickButton={handleClickPencilIcon}
+              isRemovePadding
+            />
+          </div>
+        </Tooltip>
       </StyledDiv>
       <Collapse isOpen={isOpen}>
         <div className="ps-3 pt-1">

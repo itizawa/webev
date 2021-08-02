@@ -102,6 +102,7 @@ export const en = {
 
   input_url: 'Input Url',
   create_scrap: 'Create Scrap',
+  edit_scrap: 'Edit Scrap',
   return_scrap: 'Return Scrap',
   scrap_description: 'Create scraps and make your own summary!',
   title: 'Title',
