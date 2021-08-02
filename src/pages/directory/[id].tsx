@@ -11,7 +11,7 @@ import { openFileFolderEmoji } from '~/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -40,6 +40,8 @@ const Index: VFC = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+
   const { mutate: mutateDirectoryId } = useDirectoryId();
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
@@ -51,11 +53,10 @@ const Index: VFC = () => {
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInformation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { data: paginationResult } = usePageListSWR();
+  const { data: paginationResult } = usePageListSWR({ searchKeyWord });
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
@@ -233,7 +234,7 @@ const Index: VFC = () => {
             </div>
           )}
           <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
+            <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
             <SortButtonGroup />
           </div>
           {paginationResult == null && (

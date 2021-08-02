@@ -1,10 +1,10 @@
-import { useEffect, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import Loader from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { PageStatus } from '~/domains/Page';
-import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { usePageListSWR, usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
@@ -14,10 +14,10 @@ import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 const Index: VFC = () => {
   const { t } = useLocale();
+  const [searchKeyWord, setSearchKeyWord] = useState('');
 
-  const { data: paginationResult } = usePageListSWR();
+  const { data: paginationResult } = usePageListSWR({ searchKeyWord });
   const { mutate: mutatePageStatus } = usePageStatus();
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_STOCK]);
@@ -35,7 +35,7 @@ const Index: VFC = () => {
             </div>
           </div>
           <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <SearchTextBox onChange={(inputValue: string) => mutateSearchKeyword(inputValue)} />
+            <SearchTextBox onChange={(inputValue: string) => setSearchKeyWord(inputValue)} />
             <SortButtonGroup />
           </div>
           {paginationResult == null && (

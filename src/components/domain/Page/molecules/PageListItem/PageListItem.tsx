@@ -31,7 +31,7 @@ type Props = {
 export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR({});
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 

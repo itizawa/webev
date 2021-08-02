@@ -26,7 +26,7 @@ export const PageSaveModal: VFC = () => {
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
   const { data: socketId } = useSocketId();
 
-  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutate: pageListMutate } = usePageListSWR({});
   const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage, searchKeyWord });
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 

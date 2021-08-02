@@ -21,10 +21,12 @@ export const DirectoryAddModal: VFC = () => {
   const router = useRouter();
   const directoryId = router.query.id;
 
+  const [searchKeyWord] = useState('');
+
   const { data: pageForAddDirectory, mutate: mutatePageForAddDirectory } = usePageForAddDirectory();
 
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR({ searchKeyWord });
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');

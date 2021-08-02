@@ -14,7 +14,7 @@ export const PageDeleteModal: VFC = () => {
   const { t } = useLocale();
 
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
-  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutate: pageListMutate } = usePageListSWR({});
 
   const deletePage = async () => {
     try {

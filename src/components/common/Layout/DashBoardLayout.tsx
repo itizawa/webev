@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId, useSearchKeyWord } from '~/stores/page';
+import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -31,8 +31,6 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
-
   const { data: currentUser } = useCurrentUser();
 
   if (typeof window === 'undefined') {
@@ -40,8 +38,6 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutateSearchKeyword('');
-
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
     }
