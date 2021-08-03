@@ -93,15 +93,29 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
-      <a href={url} target="blank" rel="noopener noreferrer">
-        <FixedImage imageUrl={image} />
-      </a>
+      {page.body ? (
+        <Link href={`/page/${page._id}`}>
+          <a>
+            <FixedImage imageUrl={image} />
+          </a>
+        </Link>
+      ) : (
+        <a href={url} target="blank" rel="noopener noreferrer">
+          <FixedImage imageUrl={image} />
+        </a>
+      )}
       <div className="card-body p-2 d-flex flex-column">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
-              {title || url}
-            </a>
+            {page.body ? (
+              <Link href={`/page/${page._id}`}>
+                <a className="text-white webev-anchor webev-limit-2lines">{title || url}</a>
+              </Link>
+            ) : (
+              <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
+                {title || url}
+              </a>
+            )}
           </p>
           <UncontrolledDropdown direction="left">
             <DropdownToggle tag="span">
