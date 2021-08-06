@@ -16,7 +16,6 @@ export const SubnavBar: VFC = () => {
     { text: t.home, url: '/home', icon: 'HOME' },
     { text: t.read, url: '/read', icon: 'CHECK' },
     { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
-    { text: t.scrap, url: '/scrap', icon: 'SCRAP' },
   ];
 
   return (
