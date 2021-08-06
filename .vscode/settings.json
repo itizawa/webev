@@ -34,6 +34,8 @@
       "countup",
       "favicons",
       "gtag",
+      "hoge",
+      "huga",
       "ipagp",
       "itizawa",
       "mixins",
@@ -41,6 +43,8 @@
       "noopener",
       "noreferrer",
       "pageview",
+      "piyo",
+      "randomstring",
       "stylelint",
       "toastr",
       "unstyled"
