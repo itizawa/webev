@@ -30,11 +30,7 @@ const Page: WebevNextPage = () => {
   );
 };
 
-const getLayout = (page: ReactNode) => (
-  <DefaultLayout>
-    <div>{page}</div>
-  </DefaultLayout>
-);
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
 
 Page.getLayout = getLayout;
 export default Page;
