@@ -10,11 +10,13 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 import { usePageByPageId } from '~/stores/page';
 import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { useLocale } from '~/hooks/useLocale';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const { t } = useLocale();
   const { data: page } = usePageByPageId({ pageId: id as string });
 
   if (page == null) {
@@ -27,12 +29,17 @@ const Page: WebevNextPage = () => {
 
   return (
     <>
-      <WebevOgpHead title={`Webev | ${page?.title}`} />
+      <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <div className="p-3">
-          <h1 className="text-center my-3">{page?.title}</h1>
+        <div className="p-3 pt-5">
+          <h1 className="text-center">{page.title}</h1>
+          <div className="text-center mt-3">
+            <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
+              {t.view_original}
+            </a>
+          </div>
           <StyledDiv
-            className="mx-auto"
+            className="mx-auto mt-5"
             dangerouslySetInnerHTML={{
               __html: `${page?.body}`,
             }}
@@ -53,6 +60,11 @@ const StyledDiv = styled.div`
 
   a {
     color: #ccc;
+  }
+
+  pre {
+    padding: 16px;
+    background: black;
   }
 `;
 
