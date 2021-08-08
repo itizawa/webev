@@ -15,6 +15,7 @@ import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { isValidUrl } from '~/utils/isValidUrl';
 
 export const PageSaveModal: VFC = () => {
   const { t } = useLocale();
@@ -84,7 +85,7 @@ export const PageSaveModal: VFC = () => {
         <div className="col-12 col-md-9">
           <form className="input-group my-2" onSubmit={handleSubmit}>
             <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
-            <button className="btn btn-success" type="submit" disabled={url.trim() === ''}>
+            <button className="btn btn-success" type="submit" disabled={isValidUrl(url.trim())}>
               {t.save}
             </button>
           </form>
