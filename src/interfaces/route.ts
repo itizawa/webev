@@ -13,9 +13,3 @@ export const PathNames = {
   NEWS_ID: '/news/[id]',
 } as const;
 export type PathNames = typeof PathNames[keyof typeof PathNames];
-
-export const LayoutNames = {
-  DEFAULT: 'default',
-  DASHBOARD: 'dashboard',
-} as const;
-export type LayoutName = typeof LayoutNames[keyof typeof LayoutNames];
