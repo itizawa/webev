@@ -63,9 +63,7 @@ export const getStaticPaths = async () => {
   try {
     const response = await microCMSClient.get<{ contents: News[] }>({
       endpoint: 'news',
-      useGlobalDraftKey: false, // This is an option if your have set the globalDraftKey. Default value true.
     });
-    console.log(response);
 
     const paths = response.contents.map((content) => `/news/${content.id}`);
     return { paths, fallback: true };
