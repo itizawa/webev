@@ -70,7 +70,9 @@ export const usePageNotBelongDirectory = ({
     ['/pages/list', activePage, searchKeyWord],
     (endpoint, page, searchKeyWord) =>
       restClient
-        .apiGet(`${endpoint}?status[]=stocked&status[]=archived&directoryId=null&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`)
+        .apiGet(
+          `${endpoint}?status[]=stocked&status[]=archived&directoryId=null&sort=-createdAt&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`,
+        )
         .then((result) => result.data),
     {
       revalidateOnFocus: false,
