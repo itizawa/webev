@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { VFC } from 'react';
-import axios from 'axios';
 
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/news';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { microCMSClient } from '~/utils/microCMSClient';
 
 type Props = {
   contents: News[];
@@ -45,16 +45,15 @@ const StyledDiv = styled.div`
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async () => {
-  const key: { headers: { [key: string]: string } } = {
-    headers: { 'X-API-KEY': process.env.CMS_API_KEY as string },
-  };
   try {
-    const response = await axios.get('https://webev.microcms.io/api/v1/news', key);
-    const { contents } = response.data;
+    const response = await microCMSClient.get<{ contents: News[] }>({
+      endpoint: 'news',
+      useGlobalDraftKey: false, // This is an option if your have set the globalDraftKey. Default value true.
+    });
 
     return {
       props: {
-        contents,
+        contents: response.contents as News[],
       },
     };
   } catch (error) {

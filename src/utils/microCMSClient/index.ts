@@ -1,0 +1,1 @@
+export { microCMSClient } from './microCMSClient';
