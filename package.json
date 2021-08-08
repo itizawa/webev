@@ -31,6 +31,7 @@
     "canvas": "2.6.1",
     "date-fns": "^2.22.1",
     "emoji-mart": "^3.0.1",
+    "microcms-js-sdk": "^1.2.0",
     "mongodb": "^3.6.10",
     "next": "^11.0.1",
     "next-auth": "^3.27.3",
