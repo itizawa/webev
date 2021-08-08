@@ -1,4 +1,4 @@
-export const PathNames = {
+export const Route = {
   ROOT: '/',
   NOT_FOUND: '/404',
   LOGIN: '/login',
@@ -12,4 +12,4 @@ export const PathNames = {
   NEWS: '/news',
   NEWS_ID: '/news/[id]',
 } as const;
-export type PathNames = typeof PathNames[keyof typeof PathNames];
+export type Route = typeof Route[keyof typeof Route];
