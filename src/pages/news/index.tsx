@@ -46,7 +46,7 @@ const StyledDiv = styled.div`
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getStaticProps = async () => {
   try {
-    const response = await microCMSClient.get<{ contents: News[] }>({
+    const response = await microCMSClient.client.get<{ contents: News[] }>({
       endpoint: 'news',
       useGlobalDraftKey: false, // This is an option if your have set the globalDraftKey. Default value true.
     });
