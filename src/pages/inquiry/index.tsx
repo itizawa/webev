@@ -1,4 +1,4 @@
-import { useMemo, useState, VFC } from 'react';
+import { useMemo, useState, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -8,8 +8,10 @@ import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
   const router = useRouter();
 
@@ -85,4 +87,7 @@ const StyledDiv = styled.div`
   max-width: 600px;
 `;
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
