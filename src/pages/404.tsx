@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 
 import { imagePath } from '~/const/imagePath';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
-const Page: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   return (
@@ -28,4 +30,11 @@ const Page: VFC = () => {
   );
 };
 
+const getLayout = (page: ReactNode) => (
+  <DefaultLayout>
+    <div>{page}</div>
+  </DefaultLayout>
+);
+
+Page.getLayout = getLayout;
 export default Page;
