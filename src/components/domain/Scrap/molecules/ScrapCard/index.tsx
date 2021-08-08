@@ -1,1 +1,0 @@
-export { ScrapCard } from './ScrapCard';
