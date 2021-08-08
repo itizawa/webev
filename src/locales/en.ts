@@ -46,6 +46,7 @@ export const en = {
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
+  view_original: 'View Original',
 
   return_news_list: 'Return News List',
 
