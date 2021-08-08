@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, useRef, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
@@ -31,10 +31,12 @@ import { PageStatus } from '~/domains/Page';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const emojiSize = 40;
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const router = useRouter();
@@ -250,7 +252,10 @@ const Index: VFC = () => {
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
 
 const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
   position: absolute;

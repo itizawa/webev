@@ -1,5 +1,4 @@
-import { VFC } from 'react';
-
+import { ReactNode } from 'react';
 import { useApiToken } from '~/stores/user';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { toastSuccess, toastError } from '~/utils/toastr';
@@ -7,8 +6,10 @@ import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: apiToken, mutate: mutateApiToken } = useApiToken();
@@ -47,4 +48,7 @@ const Index: VFC = () => {
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;

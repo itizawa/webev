@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useEffect, VFC } from 'react';
+import { useEffect, ReactNode } from 'react';
 
 import styled from 'styled-components';
 
@@ -11,8 +11,10 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { imagePath } from '~/const/imagePath';
 import { toastSuccess } from '~/utils/toastr';
 import { useLocale } from '~/hooks/useLocale';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const router = useRouter();
   const { t } = useLocale();
 
@@ -41,7 +43,10 @@ const Index: VFC = () => {
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
 
 const StyledDiv = styled.div`
   max-width: 400px;

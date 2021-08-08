@@ -1,4 +1,4 @@
-import { useEffect, VFC } from 'react';
+import { useEffect, ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
@@ -7,12 +7,15 @@ import { PageStatus } from '~/domains/Page';
 import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
-const Index: VFC = () => {
+const Index: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
@@ -52,4 +55,7 @@ const Index: VFC = () => {
   );
 };
 
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
+
+Index.getLayout = getLayout;
 export default Index;

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import axios from 'axios';
 
 import styled from 'styled-components';
@@ -9,12 +9,14 @@ import { format } from 'date-fns';
 import { News } from '~/interfaces/news';
 import { useLocale } from '~/hooks/useLocale';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
   news: News;
 };
 
-const Index: VFC<Props> = (props) => {
+const Page: WebevNextPage<Props> = (props) => {
   const { news } = props;
   const { t } = useLocale();
   const router = useRouter();
@@ -109,4 +111,7 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
   }
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;

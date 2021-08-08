@@ -6,6 +6,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 import { useUrlFromClipBoard, useSocketId } from '~/stores/contexts';
+import { isValidUrl } from '~/utils/isValidUrl';
 
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
@@ -74,7 +75,7 @@ export const PageUrlInputForm: VFC = () => {
   return (
     <form className="input-group" onSubmit={onSubmit}>
       <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3 bg-white" placeholder="...URL" />
-      <button className="btn btn-secondary" type="submit" id="input-group" disabled={url.length === 0}>
+      <button className="btn btn-secondary" type="submit" id="input-group" disabled={!isValidUrl(url)}>
         {t.save}
       </button>
     </form>
