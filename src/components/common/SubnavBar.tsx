@@ -24,12 +24,10 @@ export const SubnavBar: VFC = () => {
         return (
           <Link key={v.text} href={v.url}>
             <StyledSubnavBarItem className="text-center col py-2" isActive={router.pathname.startsWith(v.url)}>
-              {v.icon != null && (
-                <div className="mx-auto">
-                  <Icon icon={v.icon} color="SECONDARY" />
-                </div>
-              )}
-              <small className="ms-1 text-nowrap">{v.text}</small>
+              <small className="ms-1 text-nowrap">
+                {v.icon != null && <Icon icon={v.icon} color="SECONDARY" />}
+                <span className="ms-2">{v.text}</span>
+              </small>
             </StyledSubnavBarItem>
           </Link>
         );
