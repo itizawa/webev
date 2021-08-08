@@ -11,6 +11,11 @@ describe('isValidUrl', (): void => {
     expect(response).toBeFalsy();
   });
 
+  test('empty string', (): void => {
+    const response = isValidUrl('');
+    expect(response).toBeFalsy();
+  });
+
   test('https', (): void => {
     const response = isValidUrl('https://example.com');
     expect(response).toBeTruthy();
