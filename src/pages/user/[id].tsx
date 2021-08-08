@@ -12,8 +12,8 @@ import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
@@ -83,7 +83,7 @@ const Page: WebevNextPage = () => {
   );
 };
 
-const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
 
 Page.getLayout = getLayout;
 export default Page;
