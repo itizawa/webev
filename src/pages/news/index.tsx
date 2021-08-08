@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import axios from 'axios';
 
 import styled from 'styled-components';
@@ -7,12 +7,14 @@ import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/news';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
   contents: News[];
 };
 
-const Index: VFC<Props> = ({ contents }) => {
+const Page: WebevNextPage<Props> = ({ contents }) => {
   const { t } = useLocale();
 
   return (
@@ -67,4 +69,7 @@ export const getStaticProps = async () => {
   }
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
