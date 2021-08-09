@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
 // import { useFileUpload } from 'use-file-upload';
 import styled from 'styled-components';
@@ -14,8 +14,10 @@ import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
   // const [userImage, setUserImage] = useFileUpload();
   const router = useRouter();
@@ -95,8 +97,6 @@ const Index: VFC = () => {
   );
 };
 
-export default Index;
-
 const StyledDiv = styled.div`
   :hover {
     > img {
@@ -115,3 +115,7 @@ const StyledDiv = styled.div`
     transform: translate(-50%, -50%);
   }
 `;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;

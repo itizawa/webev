@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -9,12 +9,14 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { useLocale } from '~/hooks/useLocale';
 import { imagePath } from '~/const/imagePath';
 import { PageCountupCard } from '~/components/domain/Page/atoms/PageCountupCard';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
   count: number;
 };
 
-const Index: VFC<Props> = ({ count }) => {
+const Page: WebevNextPage<Props> = ({ count }) => {
   const { t } = useLocale();
 
   return (
@@ -54,4 +56,7 @@ export async function getStaticProps() {
   };
 }
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
