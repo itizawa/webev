@@ -55,11 +55,11 @@ export const DashBoardLayout: FC = ({ children }) => {
       </div>
       <StyledBorder />
       <SubnavBar />
-      <StyledDiv className="d-flex mx-auto">
+      <StyledDiv className="row mx-0">
         <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-9">{children}</div>
+        <div className="col-12 col-md-9 pt-3">{children}</div>
         {session && (
           <>
             <DirectoryAddModal />
@@ -73,7 +73,9 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <ScrollTopButton />
+        <div>
+          <ScrollTopButton />
+        </div>
       </StyledDiv>
       <Footer />
     </div>
@@ -81,7 +83,6 @@ export const DashBoardLayout: FC = ({ children }) => {
 };
 
 const StyledDiv = styled.div`
-  max-width: 1240px;
   /* 画面全体からNavbarとFooterの高さを引く */
   min-height: calc(100vh - 100px - 100px);
 `;

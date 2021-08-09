@@ -140,14 +140,14 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
         </div>
         {directoryOfPage != null && (
           <div className="">
-            <Link href={`/directory/${directoryOfPage._id}`}>
-              <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
+            <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
+              <Link href={`/directory/${directoryOfPage._id}`}>
                 <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
                   <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
                   <span className="ms-1">{directoryOfPage.name}</span>
                 </span>
-              </Tooltip>
-            </Link>
+              </Link>
+            </Tooltip>
           </div>
         )}
         <span className="small p-1 d-none d-sm-block">
