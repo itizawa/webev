@@ -69,6 +69,7 @@ export const en = {
   create_directory: 'Create New Directory',
   manage_directory: 'Manage Directory',
   rename_directory: 'Rename Directory',
+  import: 'Import',
   save_page_to_directory: 'Add Page to Directory',
   add_page_already_saved: 'Add Page Saved Already',
   remove_page_from_directory: 'Remove Page from Directory',

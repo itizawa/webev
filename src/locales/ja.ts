@@ -69,6 +69,7 @@ export const ja = {
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
+  import: 'インポート',
   save_page_to_directory: 'ディレクトリにページを追加する',
   add_page_already_saved: 'すでに保存しているページを追加する',
   remove_page_from_directory: 'ディレクトリからページを除外する',
