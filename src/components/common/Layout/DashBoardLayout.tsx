@@ -73,7 +73,9 @@ export const DashBoardLayout: FC = ({ children }) => {
         {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <ScrollTopButton />
+        <div>
+          <ScrollTopButton />
+        </div>
       </StyledDiv>
       <Footer />
     </div>
