@@ -20,23 +20,21 @@ const Page: WebevNextPage<Props> = ({ contents }) => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.news}`} />
-      <div className="p-2">
-        <h1 className="text-center my-3">{t.news}</h1>
-        {contents.length === 0 && <span>No News</span>}
-        <StyledDiv className="mx-auto">
-          <ul>
-            {contents.map((v) => {
-              return (
-                <li key={v.id} role="button">
-                  <Link href={`/news/${v.id}`}>
-                    <a className="text-white fw-bold webev-anchor">{v.title}</a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </StyledDiv>
-      </div>
+      <h1 className="text-center my-3">{t.news}</h1>
+      {contents.length === 0 && <span>No News</span>}
+      <StyledDiv className="mx-auto">
+        <ul>
+          {contents.map((v) => {
+            return (
+              <li key={v.id} role="button">
+                <Link href={`/news/${v.id}`}>
+                  <a className="text-white fw-bold webev-anchor">{v.title}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </StyledDiv>
     </>
   );
 };

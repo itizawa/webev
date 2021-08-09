@@ -46,6 +46,8 @@ export const ja = {
   share: '共有',
   user: 'ユーザー',
   user_page: 'ユーザーページ',
+  view_original: '元の記事を見る',
+  back: '戻る',
 
   return_news_list: 'ニュースリストに戻る',
 

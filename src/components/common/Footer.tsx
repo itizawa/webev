@@ -13,7 +13,7 @@ export const Footer: FC = () => {
 
   return (
     <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
-      <StyledDiv className="row mx-auto">
+      <div className="row mx-auto">
         <div className="col-9">
           <h5 className="text-muted mb-0 text-white">Webev</h5>
           <ul className="ps-0">
@@ -64,15 +64,11 @@ export const Footer: FC = () => {
             />
           </Tooltip>
         </div>
-      </StyledDiv>
+      </div>
     </StyledFooter>
   );
 };
 
 const StyledFooter = styled.footer`
   padding-bottom: 80px;
-`;
-
-const StyledDiv = styled.div`
-  max-width: 1240px;
 `;

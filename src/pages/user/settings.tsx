@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { WebevNextPage } from '~/interfaces/webevNextPage';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
@@ -28,19 +28,17 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.user}${t.settings}`} />
       <LoginRequiredWrapper>
-        <div className="p-3">
-          <h1 className="mb-0">
-            {t.user}
-            {t.settings}
-          </h1>
-          <div className="row my-3">
-            <label className="col-md-2 mb-2">Api Token</label>
-            <div className="input-group col-md-10 col-12">
-              <input className="form-control" type="text" readOnly value={apiToken} />
-              <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
-                更新
-              </button>
-            </div>
+        <h1 className="mb-0">
+          {t.user}
+          {t.settings}
+        </h1>
+        <div className="row my-3">
+          <label className="col-md-2 mb-2">Api Token</label>
+          <div className="input-group col-md-10 col-12">
+            <input className="form-control" type="text" readOnly value={apiToken} />
+            <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
+              更新
+            </button>
           </div>
         </div>
       </LoginRequiredWrapper>
@@ -48,7 +46,7 @@ const Page: WebevNextPage = () => {
   );
 };
 
-const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
 
 Page.getLayout = getLayout;
 export default Page;

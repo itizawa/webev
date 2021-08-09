@@ -28,16 +28,14 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title="Webev | Login" />
       <LoginRequiredWrapper>
-        <div className="pt-5">
-          <StyledDiv className="mx-auto card border-0 p-4">
-            <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
-            <p>{t.tutorial_desc1}</p>
-            <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
-            <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
-              <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
-            </StyledLoginButtonWrapper>
-          </StyledDiv>
-        </div>
+        <StyledDiv className="mx-auto card border-0 p-4">
+          <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
+          <p>{t.tutorial_desc1}</p>
+          <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
+          <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
+            <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
+          </StyledLoginButtonWrapper>
+        </StyledDiv>
       </LoginRequiredWrapper>
     </>
   );

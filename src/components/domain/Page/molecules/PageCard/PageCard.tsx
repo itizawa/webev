@@ -93,15 +93,29 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
-      <a href={url} target="blank" rel="noopener noreferrer">
-        <FixedImage imageUrl={image} />
-      </a>
+      {page.body ? (
+        <Link href={`/page/${page._id}`}>
+          <a>
+            <FixedImage imageUrl={image} />
+          </a>
+        </Link>
+      ) : (
+        <a href={url} target="blank" rel="noopener noreferrer">
+          <FixedImage imageUrl={image} />
+        </a>
+      )}
       <div className="card-body p-2 d-flex flex-column">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
-              {title || url}
-            </a>
+            {page.body ? (
+              <Link href={`/page/${page._id}`}>
+                <a className="text-white webev-anchor webev-limit-2lines">{title || url}</a>
+              </Link>
+            ) : (
+              <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
+                {title || url}
+              </a>
+            )}
           </p>
           <UncontrolledDropdown direction="left">
             <DropdownToggle tag="span">
@@ -139,14 +153,14 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
         </div>
         {directoryOfPage != null && (
           <div className="mt-2">
-            <Link href={`/directory/${directoryOfPage._id}`}>
-              <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+            <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+              <Link href={`/directory/${directoryOfPage._id}`}>
                 <span role="button" className="badge bg-secondary text-white">
                   <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
                   <span className="ms-1">{directoryOfPage.name}</span>
                 </span>
-              </Tooltip>
-            </Link>
+              </Link>
+            </Tooltip>
           </div>
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>

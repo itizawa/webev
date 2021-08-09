@@ -26,6 +26,13 @@ export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, 
   return useStaticSWR('isSortCreatedAt', initialData);
 };
 
+export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Page, Error> => {
+  return useAuthenticationSWR(`/pages/${pageId}`, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+};
+
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: status = [PageStatus.PAGE_STATUS_STOCK] } = usePageStatus();
@@ -63,7 +70,9 @@ export const usePageNotBelongDirectory = ({
     ['/pages/list', activePage, searchKeyWord],
     (endpoint, page, searchKeyWord) =>
       restClient
-        .apiGet(`${endpoint}?status[]=stocked&status[]=archived&directoryId=null&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`)
+        .apiGet(
+          `${endpoint}?status[]=stocked&status[]=archived&directoryId=null&sort=-createdAt&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`,
+        )
         .then((result) => result.data),
     {
       revalidateOnFocus: false,
