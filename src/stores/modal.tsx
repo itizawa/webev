@@ -26,3 +26,7 @@ export const useDirectoryForRename = (initialData?: Directory): SWRResponse<Dire
 export const useParentDirectoryForCreateDirectory = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
   return useStaticSWR<Directory | null, Error>('parentDirectoryForCreateDirectory', initialData);
 };
+
+export const useDirectoryForImport = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
+  return useStaticSWR<Directory | null, Error>('directoryForImport', initialData);
+};

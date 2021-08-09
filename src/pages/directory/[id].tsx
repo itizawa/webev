@@ -12,7 +12,13 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
-import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
+import {
+  useDirectoryForDelete,
+  useParentDirectoryForCreateDirectory,
+  useDirectoryForRename,
+  useDirectoryForSavePage,
+  useDirectoryForImport,
+} from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -46,6 +52,7 @@ const Page: WebevNextPage = () => {
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
+  const { mutate: mutateDirectoryForImport } = useDirectoryForImport();
 
   const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
@@ -90,6 +97,10 @@ const Page: WebevNextPage = () => {
 
   const openAddDirectoryModal = (directory: Directory) => {
     mutateParentDirectoryForCreateDirectory(directory);
+  };
+
+  const openImportModal = (directory: Directory) => {
+    mutateDirectoryForImport(directory);
   };
 
   const updateDirectoryName = async (name: string): Promise<void> => {
@@ -204,6 +215,10 @@ const Page: WebevNextPage = () => {
                     <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
                       <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
                       <span className="ms-2">{t.create_directory}</span>
+                    </DropdownItem>
+                    <DropdownItem tag="button" onClick={() => openImportModal(directory)}>
+                      <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
+                      <span className="ms-2">{t.import}</span>
                     </DropdownItem>
                   </DropdownMenu>
                 </UncontrolledDropdown>
