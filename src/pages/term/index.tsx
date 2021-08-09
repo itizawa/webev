@@ -12,10 +12,8 @@ const Page: WebevNextPage = () => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.term}`} />
-      <div className="p-3">
-        <h1>{t.term}</h1>
-        <Term />
-      </div>
+      <h1>{t.term}</h1>
+      <Term />
     </>
   );
 };

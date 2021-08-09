@@ -14,7 +14,7 @@ export const DefaultLayout: FC = ({ children }) => {
         <Navbar />
       </div>
       <StyledBorder />
-      <div className="webev-container container">{children}</div>
+      <div className="webev-container container pt-3">{children}</div>
       <Footer />
     </div>
   );

@@ -64,19 +64,17 @@ const Page: WebevNextPage = () => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.user_page}`} />
-      <div className="container">
-        <div className="row mt-3">
-          <div className="col-md-3 col-12 text-center mb-3">
-            <UserIcon image={user.image} size={140} isCircle />
-          </div>
-          <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            {currentUser?._id === user._id ? <EditableInput onChange={updateName} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
-            {currentUser?._id === user._id ? (
-              <EditableTextarea value={user.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
-            ) : (
-              <p className="p-2">{user.description}</p>
-            )}
-          </div>
+      <div className="row mt-3">
+        <div className="col-md-3 col-12 text-center mb-3">
+          <UserIcon image={user.image} size={140} isCircle />
+        </div>
+        <div className="col-md-9 col-12 d-flex flex-column gap-2">
+          {currentUser?._id === user._id ? <EditableInput onChange={updateName} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
+          {currentUser?._id === user._id ? (
+            <EditableTextarea value={user.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
+          ) : (
+            <p className="p-2">{user.description}</p>
+          )}
         </div>
       </div>
     </>
