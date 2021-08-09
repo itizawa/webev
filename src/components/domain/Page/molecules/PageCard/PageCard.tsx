@@ -153,14 +153,14 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
         </div>
         {directoryOfPage != null && (
           <div className="mt-2">
-            <Link href={`/directory/${directoryOfPage._id}`}>
-              <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+            <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+              <Link href={`/directory/${directoryOfPage._id}`}>
                 <span role="button" className="badge bg-secondary text-white">
                   <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
                   <span className="ms-1">{directoryOfPage.name}</span>
                 </span>
-              </Tooltip>
-            </Link>
+              </Link>
+            </Tooltip>
           </div>
         )}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
