@@ -1,7 +1,7 @@
 import { VFC, useState } from 'react';
 
+import * as cheerio from 'cheerio';
 import { Modal } from '~/components/base/molecules/Modal';
-
 import { useDirectoryForImport } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -15,8 +15,11 @@ export const DirectoryImportModal: VFC = () => {
   const { data: directoryForImport, mutate: mutateDirectoryForImport } = useDirectoryForImport();
 
   const importPages = async () => {
-    console.log(await selectedFile?.text());
-    console.log('import');
+    const html: string = selectedFile != null ? await selectedFile.text() : '';
+    const $ = cheerio.load(html);
+    console.log($('H3'));
+    // ディレクトリとファイルの階層構造をObjectで再現
+    // dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
   };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
