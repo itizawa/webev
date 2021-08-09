@@ -32,9 +32,6 @@ const Page: WebevNextPage = () => {
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
         <div className="p-3">
-          <button className="btn btn-indigo btn-sm text-white mt-2" onClick={() => router.back()}>
-            {`< ${t.back}`}
-          </button>
           <h1 className="text-center mt-5">{page.title}</h1>
           <div className="text-center mt-3">
             <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
