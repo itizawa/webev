@@ -59,7 +59,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-9 pt-3">{children}</div>
+        <div className="col-12 col-md-8 pt-3">{children}</div>
         {session && (
           <>
             <DirectoryAddModal />
