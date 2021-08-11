@@ -49,5 +49,6 @@ export const Navbar: VFC = () => {
 };
 
 const StyledDiv = styled.div`
+  max-width: 1440px;
   min-height: 56px;
 `;
