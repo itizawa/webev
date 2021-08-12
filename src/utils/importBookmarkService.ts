@@ -1,20 +1,22 @@
 import * as cheerio from 'cheerio';
 
+// ディレクトリとファイルの階層構造を Object で再現
+// dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
+// ex.
+// - Bookmarks(root dir)
+//   - [example](http://example.com)
+//   - hoge(dir)
+//     - [hogefuga])http://hogefuga.com)
+// >>>
+// [
+//  {id: '', name: 'Bookmarks', childrenDirIds: ['1'], childrenPage: [{url: 'http://example.com', title: 'example'}] },
+//  {id: '1', name: 'hoge', childrenDirIds: [], childrenPage: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
+// ]
 export const convertToObjFromHtml = (html: string): any => {
   const root = cheerio.load(html);
-  // ディレクトリとファイルの階層構造を Object で再現
-  // dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
-  // ex.
-  // - Bookmarks(root dir)
-  //   - [example](http://example.com)
-  //   - hoge(dir)
-  //     - [hogefuga])http://hogefuga.com)
-  // >>>
-  // [
-  //  {id: '', name: 'Bookmarks', childrenDirIds: ['1'], childrenPage: [{url: 'http://example.com', title: 'example'}] },
-  //  {id: '1', name: 'hoge', childrenDirIds: [], childrenPage: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
-  // ]
-  const res = root('dl').map((_: number, nodeDL: cheerio.Element): any => {
+  const res = [];
+
+  root('dl').map((_: number, nodeDL: cheerio.Element): any => {
     const dir = { id: '', name: '', childrenDirIds: [], childrenPages: [] };
 
     // 同名ディレクトリ区別のため、作成日+ディレクトリ名を id として設定（safari には ADD_DATE がないため、同名ディレクトリは区別できない）
@@ -44,7 +46,7 @@ export const convertToObjFromHtml = (html: string): any => {
       }
     });
 
-    return dir;
+    res.push(dir);
   });
 
   return res;
