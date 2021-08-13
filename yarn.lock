@@ -7201,7 +7201,7 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-auth@^3.28.0:
+next-auth@^3.27.3:
   version "3.28.0"
   resolved "https://registry.yarnpkg.com/next-auth/-/next-auth-3.28.0.tgz#fe516bc82670738eb6c68d71fde32566e24bddbb"
   integrity sha512-k79s1DRmExG+pLQaMkEazMe6MOR8IG1NMgFVGZoJ82bVuasU8oTlLWhGaU6zOY3BiH3WQYs1jl1wj0mg+sfFIw==
@@ -7231,7 +7231,7 @@ next-pwa@^5.2.24:
     workbox-webpack-plugin "^6.1.5"
     workbox-window "^6.1.5"
 
-next@^11.0.0:
+next@^11.1.0:
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/next/-/next-11.1.0.tgz#767d4c4fa0b9b0c768cdbd6c9f03dd86b5d701c0"
   integrity sha512-GHBk/c7Wyr6YbFRFZF37I0X7HKzkHHI8pur/loyXo5AIE8wdkbGPGO0ds3vNAO6f8AxZAKGCRYtAzoGlVLoifA==
