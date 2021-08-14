@@ -93,16 +93,30 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   return (
     <StyledRow className="row py-2">
       <div className="col-3 col-md-2 p-1 p-md-2">
-        <a href={url} target="blank" rel="noopener noreferrer">
-          <FixedImage imageUrl={image} />
-        </a>
+        {page.body ? (
+          <Link href={`/page/${page._id}`}>
+            <a>
+              <FixedImage imageUrl={image} />
+            </a>
+          </Link>
+        ) : (
+          <a href={url} target="blank" rel="noopener noreferrer">
+            <FixedImage imageUrl={image} />
+          </a>
+        )}
       </div>
       <div className="col-9 col-md-10">
         <div className="d-flex align-items-center">
           <p className="fw-bold text-break mb-0 me-auto">
-            <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
-              {title || url}
-            </a>
+            {page.body ? (
+              <Link href={`/page/${page._id}`}>
+                <a className="text-white webev-anchor webev-limit-2lines">{title || url}</a>
+              </Link>
+            ) : (
+              <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
+                {title || url}
+              </a>
+            )}
           </p>
           <UncontrolledDropdown direction="left">
             <DropdownToggle tag="span">
@@ -140,14 +154,14 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
         </div>
         {directoryOfPage != null && (
           <div className="">
-            <Link href={`/directory/${directoryOfPage._id}`}>
-              <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
+            <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
+              <Link href={`/directory/${directoryOfPage._id}`}>
                 <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
                   <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
                   <span className="ms-1">{directoryOfPage.name}</span>
                 </span>
-              </Tooltip>
-            </Link>
+              </Link>
+            </Tooltip>
           </div>
         )}
         <span className="small p-1 d-none d-sm-block">

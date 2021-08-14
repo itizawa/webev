@@ -11,11 +11,10 @@ const options = {
     }),
   ],
 
-  // A database is optional, but required to persist accounts in a database
   database: process.env.MONGO_URI || 'mongodb://localhost:27017/webev',
 
-  sessionMaxAge: 30 * 24 * 60 * 60 * 1000, // Expire sessions after 30 days of being idle
-  sessionUpdateAge: 24 * 60 * 60 * 1000, // Update session expiry only if session was updated more recently than the last 24 hours
+  sessionMaxAge: 30 * 24 * 60 * 60 * 1000,
+  sessionUpdateAge: 24 * 60 * 60 * 1000,
 };
 
 export default (req: NextApiRequest, res: NextApiResponse): void | Promise<void> => NextAuth(req, res, options);

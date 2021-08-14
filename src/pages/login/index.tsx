@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useEffect, VFC } from 'react';
+import { useEffect, ReactNode } from 'react';
 
 import styled from 'styled-components';
 
@@ -11,8 +11,10 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { imagePath } from '~/const/imagePath';
 import { toastSuccess } from '~/utils/toastr';
 import { useLocale } from '~/hooks/useLocale';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const router = useRouter();
   const { t } = useLocale();
 
@@ -26,22 +28,23 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title="Webev | Login" />
       <LoginRequiredWrapper>
-        <div className="pt-5">
-          <StyledDiv className="mx-auto card border-0 p-4">
-            <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
-            <p>{t.tutorial_desc1}</p>
-            <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
-            <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
-              <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
-            </StyledLoginButtonWrapper>
-          </StyledDiv>
-        </div>
+        <StyledDiv className="mx-auto card border-0 p-4">
+          <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
+          <p>{t.tutorial_desc1}</p>
+          <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
+          <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
+            <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
+          </StyledLoginButtonWrapper>
+        </StyledDiv>
       </LoginRequiredWrapper>
     </>
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
 
 const StyledDiv = styled.div`
   max-width: 400px;

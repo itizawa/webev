@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
 
 import { useRouter } from 'next/router';
@@ -12,8 +12,10 @@ import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
   const router = useRouter();
 
@@ -62,23 +64,24 @@ const Index: VFC = () => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.user_page}`} />
-      <div className="container">
-        <div className="row mt-3">
-          <div className="col-md-3 col-12 text-center mb-3">
-            <UserIcon image={user.image} size={140} isCircle />
-          </div>
-          <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            {currentUser?._id === user._id ? <EditableInput onChange={updateName} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
-            {currentUser?._id === user._id ? (
-              <EditableTextarea value={user.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
-            ) : (
-              <p className="p-2">{user.description}</p>
-            )}
-          </div>
+      <div className="row mt-3">
+        <div className="col-md-3 col-12 text-center mb-3">
+          <UserIcon image={user.image} size={140} isCircle />
+        </div>
+        <div className="col-md-9 col-12 d-flex flex-column gap-2">
+          {currentUser?._id === user._id ? <EditableInput onChange={updateName} value={user.name} isHeader /> : <h1 className="p-2">{user.name}</h1>}
+          {currentUser?._id === user._id ? (
+            <EditableTextarea value={user.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
+          ) : (
+            <p className="p-2">{user.description}</p>
+          )}
         </div>
       </div>
     </>
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
+
+Page.getLayout = getLayout;
+export default Page;

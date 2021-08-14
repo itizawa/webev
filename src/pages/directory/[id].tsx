@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState, useRef, VFC } from 'react';
+import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
@@ -31,10 +31,12 @@ import { PageStatus } from '~/domains/Page';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const emojiSize = 40;
 
-const Index: VFC = () => {
+const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const router = useRouter();
@@ -145,112 +147,113 @@ const Index: VFC = () => {
     <>
       <WebevOgpHead title={`Webev | ${directory.name}`} />
       <LoginRequiredWrapper>
-        <div className="p-3">
-          {directory != null && (
-            <>
-              <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
-                <Link href="/directory">
-                  <a className="webev-anchor text-white">{t.directory}</a>
-                </Link>
-                <span className="mx-1">{'/'}</span>
-                {ancestorDirectories?.map((ancestorDirectory) => {
-                  const targetDirectory = ancestorDirectory.ancestor as Directory;
-                  if (targetDirectory._id === directory._id) {
-                    return null;
-                  }
-                  return (
-                    <Fragment key={targetDirectory._id}>
-                      <Link href={`/directory/${targetDirectory._id}`}>
-                        <a className="webev-anchor text-white">{targetDirectory.name}</a>
-                      </Link>
-                      <span className="mx-1">{'/'}</span>
-                    </Fragment>
-                  );
-                })}
+        {directory != null && (
+          <>
+            <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
+              <Link href="/directory">
+                <a className="webev-anchor text-white">{t.directory}</a>
+              </Link>
+              <span className="mx-1">{'/'}</span>
+              {ancestorDirectories?.map((ancestorDirectory) => {
+                const targetDirectory = ancestorDirectory.ancestor as Directory;
+                if (targetDirectory._id === directory._id) {
+                  return null;
+                }
+                return (
+                  <Fragment key={targetDirectory._id}>
+                    <Link href={`/directory/${targetDirectory._id}`}>
+                      <a className="webev-anchor text-white">{targetDirectory.name}</a>
+                    </Link>
+                    <span className="mx-1">{'/'}</span>
+                  </Fragment>
+                );
+              })}
+            </div>
+            <div className="d-flex gap-3 align-items-center my-2">
+              <div ref={emojiRef}>
+                <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
-              <div className="d-flex gap-3 align-items-center my-2">
-                <div ref={emojiRef}>
-                  <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
+              <EditableInput value={directory.name} onChange={updateDirectoryName} isHeader />
+              <Tooltip text={t.save_to_directory(directory.name)}>
+                <div id="save-page-to-directory">
+                  <IconButton
+                    width={18}
+                    height={18}
+                    icon="SAVE"
+                    color="SECONDARY"
+                    activeColor="WARNING"
+                    isActive={urlFromClipBoard != null}
+                    onClickButton={() => mutateDirectoryForSavePage(directory)}
+                  />
                 </div>
-                <EditableInput value={directory.name} onChange={updateDirectoryName} isHeader />
-                <Tooltip text={t.save_to_directory(directory.name)}>
-                  <div id="save-page-to-directory">
-                    <IconButton
-                      width={18}
-                      height={18}
-                      icon="SAVE"
-                      color="SECONDARY"
-                      activeColor="WARNING"
-                      isActive={urlFromClipBoard != null}
-                      onClickButton={() => mutateDirectoryForSavePage(directory)}
-                    />
+              </Tooltip>
+              <UncontrolledDropdown direction="down">
+                <DropdownToggle tag="div">
+                  <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />
+                </DropdownToggle>
+                <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                  <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
+                    <Icon icon="TRASH" color="WHITE" />
+                    <span className="ms-2">{t.delete}</span>
+                  </DropdownItem>
+                  <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
+                    <Icon icon="PENCIL" color="WHITE" />
+                    <span className="ms-2">{t.rename_directory}</span>
+                  </DropdownItem>
+                  <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
+                    <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
+                    <span className="ms-2">{t.create_directory}</span>
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            </div>
+            {isEmojiSettingMode && (
+              <>
+                <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
+                <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
+                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" />
+                </StyledEmojiPickerWrapper>
+              </>
+            )}
+            <EditableInput value={directory.description} onChange={updateDirectoryDescription} isAllowEmpty placeholder={t.no_description} />
+          </>
+        )}
+        {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
+          <div className="my-3 bg-dark shadow p-3">
+            <h5>{t.child_directory}</h5>
+            <div className="row">
+              {childrenDirectoryTrees.map((v) => {
+                const directory = v.descendant as Directory;
+                return (
+                  <div className="col-xl-4 col-md-6 col-12" key={directory._id}>
+                    <DirectoryListItem directory={directory} />
                   </div>
-                </Tooltip>
-                <UncontrolledDropdown direction="down">
-                  <DropdownToggle tag="div">
-                    <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-dark" positionFixed right>
-                    <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
-                      <Icon icon="TRASH" color="WHITE" />
-                      <span className="ms-2">{t.delete}</span>
-                    </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
-                      <Icon icon="PENCIL" color="WHITE" />
-                      <span className="ms-2">{t.rename_directory}</span>
-                    </DropdownItem>
-                    <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
-                      <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
-                      <span className="ms-2">{t.create_directory}</span>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </div>
-              {isEmojiSettingMode && (
-                <>
-                  <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
-                  <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                    <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" />
-                  </StyledEmojiPickerWrapper>
-                </>
-              )}
-              <EditableInput value={directory.description} onChange={updateDirectoryDescription} isAllowEmpty placeholder={t.no_description} />
-            </>
-          )}
-          {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
-            <div className="my-3 bg-dark shadow p-3">
-              <h5>{t.child_directory}</h5>
-              <div className="row">
-                {childrenDirectoryTrees.map((v) => {
-                  const directory = v.descendant as Directory;
-                  return (
-                    <div className="col-xl-4 col-md-6 col-12" key={directory._id}>
-                      <DirectoryListItem directory={directory} />
-                    </div>
-                  );
-                })}
-              </div>
+                );
+              })}
             </div>
-          )}
-          <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-            <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
-            <SortButtonGroup />
           </div>
-          {paginationResult == null && (
-            <div className="text-center pt-5">
-              <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-            </div>
-          )}
-          {paginationResult != null && (
-            <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
-          )}
+        )}
+        <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
+          <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
+          <SortButtonGroup />
         </div>
+        {paginationResult == null && (
+          <div className="text-center pt-5">
+            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          </div>
+        )}
+        {paginationResult != null && (
+          <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
+        )}
       </LoginRequiredWrapper>
     </>
   );
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
 
 const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
   position: absolute;
