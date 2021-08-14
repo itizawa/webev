@@ -54,7 +54,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const switchArchive = async () => {
     const bool = !isArchive;
     try {
-      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: bool });
+      const { data: page } = await restClient.apiPut<Page>(`/pages/${_id}/archive`, { isArchive: bool });
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {

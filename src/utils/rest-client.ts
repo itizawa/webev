@@ -37,7 +37,7 @@ class RestClient {
     }
   }
 
-  async apiPost(url: string, body = {}): Promise<AxiosResponse> {
+  async apiPost<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -46,7 +46,7 @@ class RestClient {
     }
   }
 
-  async apiPut(url: string, body = {}): Promise<AxiosResponse> {
+  async apiPut<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
@@ -55,7 +55,7 @@ class RestClient {
     }
   }
 
-  async apiDelete(url: string, body = {}): Promise<AxiosResponse> {
+  async apiDelete<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
