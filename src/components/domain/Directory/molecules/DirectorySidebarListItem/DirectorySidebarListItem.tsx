@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
@@ -31,6 +31,10 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
+
+  useEffect(() => {
+    setChildrenDirectoriesForDisplay(childrenDirectories);
+  }, [childrenDirectories]);
 
   const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
