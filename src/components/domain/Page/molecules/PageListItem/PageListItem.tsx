@@ -53,7 +53,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const switchArchive = async () => {
     const bool = !isArchive;
     try {
-      const { data: page } = await restClient.apiPut(`/pages/${_id}/archive`, { isArchive: !isArchive });
+      const { data: page } = await restClient.apiPut<Page>(`/pages/${_id}/archive`, { isArchive: !isArchive });
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {
