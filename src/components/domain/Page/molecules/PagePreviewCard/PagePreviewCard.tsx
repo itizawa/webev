@@ -2,7 +2,7 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
 
 import { Page } from '~/domains/Page';
 import { BootstrapBreakpoints } from '~/interfaces/variables';

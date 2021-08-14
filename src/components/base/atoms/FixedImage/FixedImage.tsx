@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
 
 type Props = {
   imageUrl?: string;

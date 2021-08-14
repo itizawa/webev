@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 
-import { openFileFolderEmoji } from '~/const/emoji';
+import { openFileFolderEmoji } from '~/libs/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';

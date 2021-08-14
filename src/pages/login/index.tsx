@@ -8,7 +8,7 @@ import { signIn } from 'next-auth/client';
 
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LogoutRequiredWrapper';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
 import { toastSuccess } from '~/utils/toastr';
 import { useLocale } from '~/hooks/useLocale';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
