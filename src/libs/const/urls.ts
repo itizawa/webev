@@ -39,3 +39,9 @@ export const NOT_FOUND_URL = '/404';
 
 // ルート
 export const TOP_URL = '/';
+
+// webev の github
+export const WEBEV_GITHUB_URL = 'https://github.com/webev-dev';
+
+// itizawa の twitter
+export const ITIZAWA_TWITTER_URL = 'https://twitter.com/itizawa_pen';
