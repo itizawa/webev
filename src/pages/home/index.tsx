@@ -7,7 +7,7 @@ import { PageStatus } from '~/domains/Page';
 import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';

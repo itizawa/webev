@@ -7,7 +7,7 @@ import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
 import { User } from '~/domains/User';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
@@ -39,9 +39,9 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const updateProfile = async (newObject: Partial<User>): Promise<void> => {
+  const updateProfile = (newObject: Partial<User>): void => {
     try {
-      await restClient.apiPut<User>('/users/me', { property: newObject });
+      restClient.apiPut<User>('/users/me', { property: newObject });
       mutateCurrentUser({ ...currentUser, ...newObject }, false);
     } catch (err) {
       toastError(err);

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { SidebarDirectoryList } from '~/components/domain/Directory/molecules/DirectorySidebarList';
 import { Icon } from '~/components/base/atoms/Icon';
 

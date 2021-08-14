@@ -3,8 +3,10 @@ import { useState, useEffect, ReactNode } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
+import { PageStatus } from '~/domains/Page';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
@@ -15,8 +17,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { PageStatus } from '~/domains/Page';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {

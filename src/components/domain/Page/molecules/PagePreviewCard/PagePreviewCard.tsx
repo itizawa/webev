@@ -2,10 +2,10 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 import { Page } from '~/domains/Page';
-import { BootstrapBreakpoints } from '~/interfaces/variables';
 
 const MAX_WORD_COUNT_OF_BODY = 40;
 

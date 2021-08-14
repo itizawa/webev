@@ -7,7 +7,7 @@ import '~/styles/global.scss';
 import { MaintenanceLayout } from '~/components/common/Layout/MaintenanceLayout';
 
 import { usePageView } from '~/hooks/usePageView';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { children?: ReactNode } }) => JSX.Element = ({
   Component,

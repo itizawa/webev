@@ -12,7 +12,7 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 import { PageStatus } from '~/domains/Page';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {

@@ -6,10 +6,13 @@ import styled from 'styled-components';
 
 import { format } from 'date-fns';
 
-import { News } from '~/interfaces/news';
+import { News } from '~/libs/interfaces/news';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { NEWS_INDEX_URL } from '~/libs/const/urls';
+
 import { useLocale } from '~/hooks/useLocale';
+
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
@@ -22,7 +25,7 @@ const Page: WebevNextPage<Props> = (props) => {
   const router = useRouter();
 
   const handleClickReturnNewsListButton = () => {
-    router.push('/news');
+    router.push(NEWS_INDEX_URL);
   };
 
   if (news == null) {

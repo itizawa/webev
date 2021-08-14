@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { BootstrapIcon, BootstrapColor } from '~/interfaces/variables';
+import { BootstrapIcon, BootstrapColor } from '~/libs/interfaces/variables';
 
 type Props = {
   width?: number;

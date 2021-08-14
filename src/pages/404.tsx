@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import { imagePath } from '~/const/imagePath';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { imagePath } from '~/libs/const/imagePath';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
