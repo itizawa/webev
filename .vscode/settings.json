@@ -25,6 +25,29 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true,
       "source.fixAll.markdownlint": true
-    }
+    },
+    "cSpell.words": [
+      "NEXTAUTH",
+      "Subnav",
+      "Webev",
+      "browserconfig",
+      "countup",
+      "favicons",
+      "gtag",
+      "hoge",
+      "huga",
+      "ipagp",
+      "itizawa",
+      "mixins",
+      "msapplication",
+      "noopener",
+      "noreferrer",
+      "pageview",
+      "piyo",
+      "randomstring",
+      "stylelint",
+      "toastr",
+      "unstyled"
+    ]
   }
   

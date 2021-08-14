@@ -20,7 +20,7 @@ import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal'
 
 import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-import { TutorialDitecterModal } from '~/components/domain/Tutorial/molecules/TutorialDitecterModal';
+import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/interfaces/variables';
@@ -31,7 +31,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
-  const { mutate: mutateSearchKeyord } = useSearchKeyWord();
+  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const { data: currentUser } = useCurrentUser();
 
@@ -40,7 +40,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutateSearchKeyord('');
+    mutateSearchKeyword('');
 
     if (router.pathname !== '/directory/[id]') {
       mutateDirectoryId(null);
@@ -55,11 +55,11 @@ export const DashBoardLayout: FC = ({ children }) => {
       </div>
       <StyledBorder />
       <SubnavBar />
-      <StyledDiv className="d-flex mx-auto">
+      <StyledDiv className="row mx-auto">
         <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
-        <div className="col-12 col-md-9">{children}</div>
+        <div className="col-12 col-md-8 pt-3">{children}</div>
         {session && (
           <>
             <DirectoryAddModal />
@@ -72,8 +72,10 @@ export const DashBoardLayout: FC = ({ children }) => {
         )}
         {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
-        {currentUser && <TutorialDitecterModal />}
-        <ScrollTopButton />
+        {currentUser && <TutorialDetectorModal />}
+        <div>
+          <ScrollTopButton />
+        </div>
       </StyledDiv>
       <Footer />
     </div>
@@ -81,7 +83,7 @@ export const DashBoardLayout: FC = ({ children }) => {
 };
 
 const StyledDiv = styled.div`
-  max-width: 1240px;
+  max-width: 1440px;
   /* 画面全体からNavbarとFooterの高さを引く */
   min-height: calc(100vh - 100px - 100px);
 `;

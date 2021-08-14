@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScrollTopButton isShowScroll is false 1`] = `
+.c0 {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+
+@media (min-width:768px) {
+  .c0.show {
+    opacity: 0.5;
+  }
+
+  .c0.show:hover {
+    opacity: 0.7;
+  }
+}
+
+<button
+  className="c0 btn btn-light btn-lg show"
+  id="scroll-to-top"
+  onClick={[MockFunction]}
+>
+  <svg
+    className="align-text-bottom text-secondary"
+    fill="currentColor"
+    height={18}
+    viewBox="0 0 16 16"
+    width={18}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+      fillRule="evenodd"
+    />
+  </svg>
+</button>
+`;
+
+exports[`ScrollTopButton isShowScroll is true 1`] = `
+.c0 {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
+  -webkit-transition-duration: 200ms;
+  transition-duration: 200ms;
+  -webkit-transition-property: all;
+  transition-property: all;
+}
+
+@media (min-width:768px) {
+  .c0.show {
+    opacity: 0.5;
+  }
+
+  .c0.show:hover {
+    opacity: 0.7;
+  }
+}
+
+<button
+  className="c0 btn btn-light btn-lg show"
+  id="scroll-to-top"
+  onClick={[MockFunction]}
+>
+  <svg
+    className="align-text-bottom text-secondary"
+    fill="currentColor"
+    height={18}
+    viewBox="0 0 16 16"
+    width={18}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z"
+      fillRule="evenodd"
+    />
+  </svg>
+</button>
+`;

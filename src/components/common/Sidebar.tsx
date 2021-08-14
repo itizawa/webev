@@ -25,7 +25,7 @@ export const Sidebar: VFC = () => {
         {navbarItemMappings.map((v) => {
           return (
             <Link key={v.text} href={v.url}>
-              <StyledList className="list-group-item mx-3 border-0" isActive={v.url === router.pathname} role="button">
+              <StyledList className="list-group-item mx-3 border-0" isActive={router.pathname.startsWith(v.url)} role="button">
                 {v.icon != null && <Icon icon={v.icon} color="LIGHT" />}
                 <span className="ms-3">{v.text}</span>
               </StyledList>

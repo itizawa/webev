@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageCountupCard 1`] = `
+<div
+  className="card bg-dark border border-warning text-white p-3 text-center"
+>
+  <h2>
+    <span />
+     Pages
+  </h2>
+  <p>
+    Total Page
+  </p>
+</div>
+`;

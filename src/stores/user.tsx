@@ -11,9 +11,17 @@ export const useCurrentUser = (): SWRResponse<User, Error> => {
   });
 };
 
-export const useUserById = ({ id }: { id: string }): SWRResponse<User, Error> => {
-  return useSWR(['/users/', id], (endpoint, id) => restClient.apiGet(`${endpoint}${id}`).then((result) => result.data), {
+export const useApiToken = (): SWRResponse<string, Error> => {
+  return useAuthenticationSWR('/users/api-token', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
-    revalidateOnReconnect: true,
+    revalidateOnReconnect: false,
+  });
+};
+
+export const useUserById = ({ userId }: { userId?: string }): SWRResponse<User, Error> => {
+  const endpoint = userId != null ? `/users/${userId}` : null;
+  return useSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
   });
 };

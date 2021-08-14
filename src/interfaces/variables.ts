@@ -26,7 +26,7 @@ export const BootstrapIcon = {
   PENCIL: 'pencil',
   TRASH: 'trash',
   SAVE: 'save',
-  THREE_DOTS_HORIZONAL: 'three-dots-horizonal',
+  THREE_DOTS_HORIZONTAL: 'three-dots-horizontal',
   THREE_DOTS_VERTICAL: 'three-dots-vertical',
   DIRECTORY: 'directory',
   ADD_TO_DIRECTORY: 'add-to-directory',

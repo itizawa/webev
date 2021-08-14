@@ -8,12 +8,15 @@ export const ja = {
   logout: 'ログアウト',
   delete: '削除',
   cancel: 'キャンセル',
+  close: '閉じる',
   settings: '設定',
   search: '検索',
   save: '保存',
+  return_list: 'リストに戻る',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
   create: '作成',
+  new_create: '新規作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
   latest_order: '新しい順',
@@ -26,6 +29,7 @@ export const ja = {
   toastr_update_directory_name: '名前を更新しました',
   toastr_update_directory_description: '説明を更新しました',
   toastr_update_emoji: '絵文字を更新しました',
+  toastr_update_api_token: 'Api Token を更新しました',
   toastr_delete_url: 'Url を削除しました',
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
@@ -40,7 +44,10 @@ export const ja = {
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
-  user: 'ユーザーページ',
+  user: 'ユーザー',
+  user_page: 'ユーザーページ',
+  view_original: '元の記事を見る',
+  back: '戻る',
 
   return_news_list: 'ニュースリストに戻る',
 
@@ -55,6 +62,7 @@ export const ja = {
   function_details: '機能の詳細',
 
   delete_page: 'ページを削除します',
+  add_page: 'ページを追加します',
   obtained_from_clipboard: 'クリップボードから取得しました',
 
   delete_directory: 'ディレクトリを削除します',
@@ -70,6 +78,7 @@ export const ja = {
   'your_pages_don’t_exist': 'ページが存在しません',
 
   this_is_the_404_page: '404 page です',
+  data_not_found: 'データが見つかりませんでした',
   go_to_top: 'トップページに戻る',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',
@@ -91,6 +100,14 @@ export const ja = {
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
   input_url: 'Url を入力する',
+
+  title: 'タイトル',
+  description: '説明',
+  publish: '公開する',
+  save_draft: '下書き保存',
+  published: '公開済み',
+  private: '下書き',
+  all_users: '全ユーザー',
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',

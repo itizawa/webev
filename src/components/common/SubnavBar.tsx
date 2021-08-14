@@ -1,7 +1,6 @@
 import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styled from 'styled-components';
 
 import { BootstrapIcon } from '~/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
@@ -19,25 +18,18 @@ export const SubnavBar: VFC = () => {
   ];
 
   return (
-    <StyledSubnavBar className="sticky-top bg-dark d-flex justify-content-evenly d-md-none">
+    <div className="fixed-bottom bg-dark d-flex justify-content-evenly d-md-none">
       {navbarItemMappings.map((v) => {
+        const isActive = router.pathname.startsWith(v.url);
         return (
           <Link key={v.text} href={v.url}>
-            <StyledSubnavBarItem className="text-center col py-2" isActive={v.url === router.pathname}>
-              {v.icon != null && <Icon icon={v.icon} color="SECONDARY" />}
-              <small className="ms-1">{v.text}</small>
-            </StyledSubnavBarItem>
+            <div className="text-center col d-flex flex-column bg-dark border-top pt-2 border-secondary">
+              <small className="ms-1 text-nowrap">{v.icon != null && <Icon icon={v.icon} color={isActive ? 'WHITE' : 'SECONDARY'} />}</small>
+              <span className={`ms-2 ${isActive ? 'text-white' : 'text-secondary'}`}>{v.text}</span>
+            </div>
           </Link>
         );
       })}
-    </StyledSubnavBar>
+    </div>
   );
 };
-
-const StyledSubnavBar = styled.div`
-  top: -1px;
-`;
-
-const StyledSubnavBarItem = styled.div<{ isActive: boolean }>`
-  ${({ isActive }) => isActive && `border-bottom: 4px solid slateblue;`}
-`;

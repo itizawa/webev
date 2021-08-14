@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { UncontrolledTooltip } from 'reactstrap';
 import styled from 'styled-components';
 
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -12,7 +12,7 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
+    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
       <StyledDiv className="row mx-auto">
         <div className="col-9">
           <h5 className="text-muted mb-0 text-white">Webev</h5>
@@ -42,8 +42,8 @@ export const Footer: FC = () => {
             <a className="text-muted webev-anchor">Japanese</a>
           </Link>
         </div>
-        <div className="col-3 d-flex">
-          <div id="github-link-button" className="ms-auto">
+        <div className="col-3 d-flex justify-content-end">
+          <Tooltip text="Webev is OSS" fade>
             <IconButton
               width={24}
               height={24}
@@ -52,11 +52,8 @@ export const Footer: FC = () => {
               activeColor="SECONDARY"
               onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
             />
-          </div>
-          <UncontrolledTooltip placement="top" target="github-link-button">
-            Webev is OSS
-          </UncontrolledTooltip>
-          <div id="twitter-link-button">
+          </Tooltip>
+          <Tooltip text="Please feel free to contact me!" fade>
             <IconButton
               width={24}
               height={24}
@@ -65,10 +62,7 @@ export const Footer: FC = () => {
               activeColor="SECONDARY"
               onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
             />
-          </div>
-          <UncontrolledTooltip placement="top" target="twitter-link-button">
-            Please feel free to contact me!
-          </UncontrolledTooltip>
+          </Tooltip>
         </div>
       </StyledDiv>
     </StyledFooter>
@@ -76,9 +70,9 @@ export const Footer: FC = () => {
 };
 
 const StyledFooter = styled.footer`
-  padding-bottom: 80px;
+  padding-bottom: 70px;
 `;
 
 const StyledDiv = styled.div`
-  max-width: 1240px;
+  max-width: 1440px;
 `;

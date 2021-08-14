@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import axios from 'axios';
 
 import styled from 'styled-components';
@@ -9,12 +9,14 @@ import { format } from 'date-fns';
 import { News } from '~/interfaces/news';
 import { useLocale } from '~/hooks/useLocale';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
   news: News;
 };
 
-const Index: VFC<Props> = (props) => {
+const Page: WebevNextPage<Props> = (props) => {
   const { news } = props;
   const { t } = useLocale();
   const router = useRouter();
@@ -29,18 +31,16 @@ const Index: VFC<Props> = (props) => {
 
   return (
     <>
-      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumnail?.url} />
-      <div className="p-2">
-        <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
-        <h1 className="text-center my-3">{news.title}</h1>
-        <p className="text-center">記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>
-        <StyledDiv
-          className="mx-auto"
-          dangerouslySetInnerHTML={{
-            __html: `${news.body}`,
-          }}
-        />
-      </div>
+      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumbnail?.url} />
+      <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
+      <h1 className="text-center my-3">{news.title}</h1>
+      <p className="text-center">記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>
+      <StyledDiv
+        className="mx-auto"
+        dangerouslySetInnerHTML={{
+          __html: `${news.body}`,
+        }}
+      />
     </>
   );
 };
@@ -109,4 +109,7 @@ export const getStaticProps = async (context: { params: { id: string } }) => {
   }
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;

@@ -49,7 +49,7 @@ export const useAncestorDirectories = (directoryId?: string): SWRResponse<Direct
   });
 };
 
-export const useDirectoryInfomation = (directoryId: string): SWRResponse<Directory, Error> => {
+export const useDirectoryInformation = (directoryId: string): SWRResponse<Directory, Error> => {
   const endpoint = directoryId != null ? `/directories/${directoryId}` : null;
 
   return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {

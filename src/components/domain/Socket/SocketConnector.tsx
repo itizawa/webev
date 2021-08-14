@@ -4,7 +4,7 @@ import { usePageListSWR } from '~/stores/page';
 import { useSocketId } from '~/stores/contexts';
 
 export const SocketConnector: VFC = () => {
-  const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000'));
+  const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT || 'http://localhost:8000'));
   const { mutate: pageListMutate } = usePageListSWR();
   const { mutate: mutateSocketId } = useSocketId();
 

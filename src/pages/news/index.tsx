@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC } from 'react';
+import { ReactNode } from 'react';
 import axios from 'axios';
 
 import styled from 'styled-components';
@@ -7,34 +7,34 @@ import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 import { News } from '~/interfaces/news';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
   contents: News[];
 };
 
-const Index: VFC<Props> = ({ contents }) => {
+const Page: WebevNextPage<Props> = ({ contents }) => {
   const { t } = useLocale();
 
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.news}`} />
-      <div className="p-2">
-        <h1 className="text-center my-3">{t.news}</h1>
-        {contents.length === 0 && <span>No News</span>}
-        <StyledDiv className="mx-auto">
-          <ul>
-            {contents.map((v) => {
-              return (
-                <li key={v.id} role="button">
-                  <Link href={`/news/${v.id}`}>
-                    <a className="text-white fw-bold webev-anchor">{v.title}</a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </StyledDiv>
-      </div>
+      <h1 className="text-center my-3">{t.news}</h1>
+      {contents.length === 0 && <span>No News</span>}
+      <StyledDiv className="mx-auto">
+        <ul>
+          {contents.map((v) => {
+            return (
+              <li key={v.id} role="button">
+                <Link href={`/news/${v.id}`}>
+                  <a className="text-white fw-bold webev-anchor">{v.title}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </StyledDiv>
     </>
   );
 };
@@ -67,4 +67,7 @@ export const getStaticProps = async () => {
   }
 };
 
-export default Index;
+const getLayout = (page: ReactNode) => <DefaultLayout>{page}</DefaultLayout>;
+
+Page.getLayout = getLayout;
+export default Page;
