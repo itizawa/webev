@@ -11,25 +11,17 @@ import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
-import { useAllDirectories, useDirectoryChildrens, useAllParentDirectories } from '~/stores/directory';
+import { useAllDirectories } from '~/stores/directory';
 
 type Props = {
   directory?: Directory;
   activeDirectoryId: string;
   onClickDirectory?: (directoryId: string) => void;
+  childrenDirectories: Directory[];
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId, childrenDirectories }) => {
   const { t } = useLocale();
-  const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-
-  const allParentDirectoryIds = [];
-  for (const value of Object.values(allParentDirectories)) {
-    allParentDirectoryIds.push(value._id);
-  }
-
-  // TODO: need to set args allParentDirectories' ids
-  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoryTrees } = useDirectoryChildrens(allParentDirectoryIds);
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +56,6 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
       await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateChildrenDirectoryTrees();
-      mutateAllParentDirectories();
       mutateAllDirectories();
       setIsCreatingNewDirectory(false);
     } catch (err) {
@@ -157,7 +147,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               />
             );
           })} */}
-          {childrenDirectoryTrees?.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectories.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
