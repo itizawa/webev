@@ -10,7 +10,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 
-import { useAllParentDirectories, useDirectoryChildrens } from '~/stores/directory';
+import { useAllParentDirectories, useDirectoriesChildren } from '~/stores/directory';
 import { Directory } from '~/domains/Directory';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -18,14 +18,7 @@ export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-
-  const allParentDirectoryIds: string[] = [];
-  for (const value of Object.values(allParentDirectories)) {
-    allParentDirectoryIds.push(value._id);
-  }
-
-  // TODO: need to set args allParentDirectories' ids
-  const { data: childrenDirectoryTrees = [] } = useDirectoryChildrens(allParentDirectoryIds);
+  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(allParentDirectories.map((v) => v._id));
 
   const [directories, setDirectories] = useState<Directory[]>([]);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
