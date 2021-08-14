@@ -8,7 +8,10 @@ import { format } from 'date-fns';
 
 import { News } from '~/libs/interfaces/news';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { NEWS_INDEX_URL } from '~/libs/const/urls';
+
 import { useLocale } from '~/hooks/useLocale';
+
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
@@ -22,7 +25,7 @@ const Page: WebevNextPage<Props> = (props) => {
   const router = useRouter();
 
   const handleClickReturnNewsListButton = () => {
-    router.push('/news');
+    router.push(NEWS_INDEX_URL);
   };
 
   if (news == null) {
