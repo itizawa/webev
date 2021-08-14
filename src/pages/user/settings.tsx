@@ -6,7 +6,9 @@ import { toastSuccess, toastError } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
+import { User } from '~/domains/User';
 import { WebevNextPage } from '~/interfaces/webevNextPage';
+
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
@@ -19,6 +21,14 @@ const Page: WebevNextPage = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: apiToken, mutate: mutateApiToken } = useApiToken();
 
+  if (!currentUser || !apiToken) {
+    return (
+      <div className="text-center pt-5">
+        <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+      </div>
+    );
+  }
+
   const handleUpdateApiToken = async () => {
     try {
       await restClient.apiPut('/users/api-token');
@@ -29,31 +39,14 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const updateName = async (name: string): Promise<void> => {
+  const updateProfile = async (newObject: Partial<User>): Promise<void> => {
     try {
-      await restClient.apiPut('/users/me', { property: { name } });
-      mutateCurrentUser();
+      await restClient.apiPut<User>('/users/me', { property: newObject });
+      mutateCurrentUser({ ...currentUser, ...newObject }, false);
     } catch (err) {
       toastError(err);
     }
   };
-
-  const updateDescription = async (description: string): Promise<void> => {
-    try {
-      await restClient.apiPut('/users/me', { property: { description } });
-      mutateCurrentUser();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
-  if (!currentUser) {
-    return (
-      <div className="text-center pt-5">
-        <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
-      </div>
-    );
-  }
 
   return (
     <>
@@ -64,8 +57,13 @@ const Page: WebevNextPage = () => {
             <UserIcon image={currentUser.image} size={140} isCircle />
           </div>
           <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            <EditableInput onChange={updateName} value={currentUser.name} isHeader />
-            <EditableTextarea value={currentUser.description} onChange={updateDescription} isAllowEmpty placeholder={t.no_description} />
+            <EditableInput onChange={(input) => updateProfile({ name: input })} value={currentUser.name} isHeader />
+            <EditableTextarea
+              value={currentUser.description}
+              onChange={(input) => updateProfile({ description: input })}
+              isAllowEmpty
+              placeholder={t.no_description}
+            />
           </div>
         </div>
         <div className="row my-3">
