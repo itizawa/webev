@@ -31,9 +31,9 @@ const Page: WebevNextPage = () => {
 
   const handleUpdateApiToken = async () => {
     try {
-      await restClient.apiPut('/users/api-token');
+      const { data: user } = await restClient.apiPut<User>('/users/api-token');
       toastSuccess(t.toastr_update_api_token);
-      mutateApiToken();
+      mutateApiToken(user.apiTokenForExtension, false);
     } catch (err) {
       toastError(err);
     }
