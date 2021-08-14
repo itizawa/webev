@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
@@ -17,8 +16,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
-  const router = useRouter();
-  const directoryId = router.query.id;
 
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
 
@@ -81,10 +78,6 @@ export const SidebarDirectoryList: VFC = () => {
     setIsCreatingNewDirectory(false);
   };
 
-  const handleClickDirectory = (directoryId: string) => {
-    router.push(`/directory/${directoryId}`);
-  };
-
   if (allParentDirectories == null) {
     return (
       <div className="text-center">
@@ -103,20 +96,13 @@ export const SidebarDirectoryList: VFC = () => {
                 // 子供のディレクトリを抽出
                 const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === directory._id).map((v) => v.descendant as Directory);
                 return (
-                  <>
-                    <Draggable key={directory._id} draggableId={directory._id} index={index}>
-                      {(provided) => (
-                        <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                          <DirectorySidebarListItem
-                            directory={directory}
-                            onClickDirectory={handleClickDirectory}
-                            activeDirectoryId={directoryId as string}
-                            childrenDirectories={childrenDirectories}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  </>
+                  <Draggable key={directory._id} draggableId={directory._id} index={index}>
+                    {(provided) => (
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
+                        <DirectorySidebarListItem directory={directory} childrenDirectories={childrenDirectories} />
+                      </div>
+                    )}
+                  </Draggable>
                 );
               })}
               {provided.placeholder}

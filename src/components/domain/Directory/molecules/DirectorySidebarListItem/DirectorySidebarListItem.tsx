@@ -1,9 +1,10 @@
-import { useCallback, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
+import { useRouter } from 'next/router';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -14,22 +15,21 @@ import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useAllDirectories } from '~/stores/directory';
 
 type Props = {
-  directory?: Directory;
-  activeDirectoryId: string;
-  onClickDirectory?: (directoryId: string) => void;
+  directory: Directory;
   childrenDirectories: Directory[];
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirectory, activeDirectoryId, childrenDirectories }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirectories }) => {
   const { t } = useLocale();
+  const router = useRouter();
+  const isActive = directory._id === router.query.id;
+
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  const isActive = directory?._id === activeDirectoryId;
 
   const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -63,18 +63,12 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
     }
   };
 
-  const handleClickDirectory = useCallback(() => {
-    if (onClickDirectory != null) {
-      onClickDirectory(directory?._id as string);
-    }
-  }, [directory?._id]);
-
   return (
     <>
       <StyledDiv
         className="text-white text-left rounded d-flex"
         role="button"
-        onClick={handleClickDirectory}
+        onClick={() => router.push(`/directory/${directory._id}`)}
         isActive={isActive}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
@@ -137,16 +131,9 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, onClickDirecto
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {/* {childrenDirectoryTrees?.map((childrenDirectoryTree) => {
-            return (
-              <DirectorySidebarListItem
-                key={childrenDirectoryTree._id}
-                directory={childrenDirectoryTree.descendant as Directory}
-                onClickDirectory={onClickDirectory}
-                activeDirectoryId={activeDirectoryId}
-              />
-            );
-          })} */}
+          {childrenDirectories.map((childDirectory) => {
+            return <DirectorySidebarListItem key={childDirectory._id} directory={childDirectory} childrenDirectories={[]} />;
+          })}
           {childrenDirectories.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
