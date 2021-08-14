@@ -31,7 +31,7 @@ import { PageStatus } from '~/domains/Page';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const emojiSize = 40;

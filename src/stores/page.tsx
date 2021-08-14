@@ -1,7 +1,7 @@
 import { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
-import { PaginationResult } from '~/interfaces/paginationResult';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 import { Page, PageStatus } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';

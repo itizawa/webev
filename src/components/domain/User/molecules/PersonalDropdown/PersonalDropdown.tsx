@@ -15,7 +15,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
-import { OgpLayoutType } from '~/interfaces/contexts';
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();

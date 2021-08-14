@@ -7,7 +7,7 @@ import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
 import { User } from '~/domains/User';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';

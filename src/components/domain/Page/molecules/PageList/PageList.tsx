@@ -2,7 +2,7 @@ import { VFC } from 'react';
 
 import { Page } from '~/domains/Page';
 import { useOgpCardLayout } from '~/stores/contexts';
-import { OgpLayoutType } from '~/interfaces/contexts';
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
