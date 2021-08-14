@@ -12,7 +12,7 @@ import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/interfaces/variables';
-import { useAllDirectories, useDirectoriesChildren } from '~/stores/directory';
+import { useDirectoriesChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
@@ -24,8 +24,8 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const { mutate: mutateAllDirectories } = useAllDirectories();
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(childrenDirectories.map((v) => v._id));
+  const [childrenDirectoriesForDisplay, setChildrenDirectoriesForDisplay] = useState<Directory[]>(childrenDirectories);
+  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(childrenDirectoriesForDisplay.map((v) => v._id));
 
   const [isOpen, setIsOpen] = useState(false);
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
@@ -54,10 +54,10 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
     }
 
     try {
-      await restClient.apiPost('/directories', { name, parentDirectoryId: directory?._id });
+      const { data } = await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateAllDirectories();
+      setChildrenDirectoriesForDisplay((prevState) => [...prevState, data]);
       setIsCreatingNewDirectory(false);
     } catch (err) {
       toastError(err);
@@ -132,12 +132,12 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectories.map((childDirectory) => {
+          {childrenDirectoriesForDisplay.map((childDirectory) => {
             // 子供のディレクトリを抽出
             const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === childDirectory._id).map((v) => v.descendant as Directory);
             return <DirectorySidebarListItem key={childDirectory._id} directory={childDirectory} childrenDirectories={childrenDirectories} />;
           })}
-          {childrenDirectories.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectoriesForDisplay.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
