@@ -39,9 +39,9 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const updateProfile = async (newObject: Partial<User>): Promise<void> => {
+  const updateProfile = (newObject: Partial<User>): void => {
     try {
-      await restClient.apiPut<User>('/users/me', { property: newObject });
+      restClient.apiPut<User>('/users/me', { property: newObject });
       mutateCurrentUser({ ...currentUser, ...newObject }, false);
     } catch (err) {
       toastError(err);
