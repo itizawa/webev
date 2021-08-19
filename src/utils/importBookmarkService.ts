@@ -1,26 +1,43 @@
 import * as cheerio from 'cheerio';
+import { Cheerio } from 'cheerio';
+import { PageForImport, DirForImport } from '~/interfaces/importBookmark';
 
-// ディレクトリとファイルの階層構造を Object で再現
+// ブラウザからエクスポートしたブックマークhtmlの内容をスクレイピング
+// ディレクトリとファイルの階層構造を以下のような Object の配列で再現
 // dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
+// dirs の各要素は一つのディレクトリを示し、以下の key をもつ
+// - id: 識別子
+// - name: ディレクトリ名
+// - childrenDirIds: 子ディレクトリ識別子の配列
+// - childrenPages: 子ページオブジェクトの配列
+//
 // ex.
-// - Bookmarks(root dir)
-//   - [example](http://example.com)
-//   - hoge(dir)
-//     - [hogefuga])http://hogefuga.com)
-// >>>
+// インポートするブックマークの階層構造
+// - (Root Dir)Bookmarks
+//   - (Page)[example](http://example.com)
+//   - (Dir)hoge
+//     - (page)[hogefuga])http://hogefuga.com)
+// 出力結果
 // [
-//  {id: '', name: 'Bookmarks', childrenDirIds: ['1'], childrenPage: [{url: 'http://example.com', title: 'example'}] },
-//  {id: '1', name: 'hoge', childrenDirIds: [], childrenPage: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
+//  {id: '', name: '', childrenDirIds: ['1591786320hoge'], childrenPage: [{url: 'http://example.com', title: 'example'}] },
+//  {id: '1591786320hoge', name: 'hoge', childrenDirIds: [], childrenPage: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
 // ]
-export const convertToObjFromHtml = (html: string): any => {
+export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
   const root = cheerio.load(html);
-  const res = [];
+  const result: DirForImport[] = [];
 
-  root('dl').map((_: number, nodeDL: cheerio.Element): any => {
-    const dir = { id: '', name: '', childrenDirIds: [], childrenPages: [] };
+  // ディレクトリを表す要素を一件一件見ていく
+  root('dl').map((_: number, nodeDL: Cheerio.Element): void => {
+    const dir: DirForImport = {
+      id: '',
+      name: '',
+      childrenDirIds: [],
+      childrenPages: [],
+    };
 
-    // 同名ディレクトリ区別のため、作成日+ディレクトリ名を id として設定（safari には ADD_DATE がないため、同名ディレクトリは区別できない）
-    // 一個上のエレメントのfirstchild をcheerio化
+    // id と name の取得
+    // 同名ディレクトリ区別のため、ディレクトリ作成日+ディレクトリ名を id として設定（safari には ADD_DATE がないため、同名ディレクトリは区別できない）
+    // ディレクトリ作成日とディレクトリ名は同階層の二つ上の要素にあるため、nodeDL.previousSibling.previousSibling を取得
     const previousNode = cheerio.load(nodeDL.previousSibling.previousSibling);
     const dirCreateAt = previousNode('h3').attr('add_date') || '';
     const dirName = previousNode('h3').text() || '';
@@ -28,26 +45,54 @@ export const convertToObjFromHtml = (html: string): any => {
     dir.name = dirName;
 
     // 子要素から配下ディレクトリと配下ページを取得
-    nodeDL.childNodes.forEach((node: Node) => {
-      if (node.name == 'dt') {
-        const child = node.firstChild;
-        if (child.name == 'a') {
-          // 配下ページ
-          const page: { url: string; title: string } = { url: '', title: '' };
-          page.url = child.attribs.href;
-          page.title = child.children[0].data;
-          dir.childrenPages.push(page);
-        } else if (child.name == 'h3') {
-          // 配下ディレクトリ
-          const childDirCreateAt = child.attribs?.add_date || '';
-          const childDirName = child.children[0].data || '';
-          dir.childrenDirIds.push(childDirCreateAt + childDirName);
-        }
+    nodeDL.childNodes.forEach((node: Cheerio.Element) => {
+      const $ = cheerio.load(node);
+
+      // 配下ページ
+      const childPage = $('a');
+      if (childPage.length > 0) {
+        const page: PageForImport = { url: '', title: '' };
+        page.url = childPage.attr('href') || '';
+        page.title = childPage.text();
+        dir.childrenPages.push(page);
+      }
+
+      // // 配下ディレクトリ
+      const childDir = $('h3');
+      if (childDir.length > 0) {
+        const childDirCreateAt = childDir.attr('add_date');
+        const childDirName = childDir.text();
+        dir.childrenDirIds.push(childDirCreateAt + childDirName);
       }
     });
 
-    res.push(dir);
+    result.push(dir);
   });
 
-  return res;
+  return result;
+};
+
+export const convertFromHtmlToPageUrls = (html: string): string[] => {
+  const root = cheerio.load(html);
+  const result: string[] = [];
+
+  root('a').map((_: number, node: Cheerio.Element): void => {
+    result.push(node.attribs.href);
+  });
+
+  return result;
+};
+
+export const convertFromHtmlToPages = (html: string): PageForImport[] => {
+  const root = cheerio.load(html);
+  const result: PageForImport[] = [];
+
+  root('a').map((_: number, node: Cheerio.Element): void => {
+    const $ = cheerio.load(node);
+    const url = $('a').attr('href') || '';
+    const title = $('a').text();
+    result.push({ url, title });
+  });
+
+  return result;
 };
