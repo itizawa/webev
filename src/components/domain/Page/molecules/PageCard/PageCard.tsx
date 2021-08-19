@@ -22,7 +22,6 @@ import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
-const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 
 type Props = {
   page: Page;
@@ -180,11 +179,9 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
                 decoding="sync"
               />
             )}
-            <Tooltip disabled={siteName?.length < MAX_WORD_COUNT_OF_SITE_NAME} text={siteName}>
-              <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
-                {siteName}
-              </a>
-            </Tooltip>
+            <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
+              {siteName}
+            </a>
             {siteName != null && <br />}
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
