@@ -65,6 +65,13 @@ const StyledDiv = styled.div`
     padding: 16px;
     background: black;
   }
+  h1 {
+    border-bottom: 2px solid #6f42c1;
+    padding-bottom: 5px;
+  }
+  p {
+    line-height: 2rem;
+  }
 `;
 
 const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
