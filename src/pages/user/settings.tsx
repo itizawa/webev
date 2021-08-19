@@ -69,7 +69,7 @@ const Page: WebevNextPage = () => {
         <div className="row my-3">
           <label className="col-md-2 mb-2">Api Token</label>
           <div className="input-group col-md-10 col-12">
-            <input className="form-control" type="text" readOnly value={apiToken} />
+            <input className="form-control" type="text" readOnly value={apiToken || ''} />
             <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
               更新
             </button>
