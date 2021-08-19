@@ -72,6 +72,12 @@ const StyledDiv = styled.div`
   p {
     line-height: 2rem;
   }
+  li {
+    margin-bottom: 10px;
+  }
+  code {
+    margin: 0 5px;
+  }
 `;
 
 const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
