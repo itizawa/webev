@@ -50,6 +50,7 @@ const Page: WebevNextPage = () => {
 
 const StyledDiv = styled.div`
   max-width: 800px;
+  word-break: break-all;
 
   img {
     width: 100%;
