@@ -19,9 +19,9 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { data: apiToken, mutate: mutateApiToken } = useApiToken();
+  const { data: apiToken, mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
 
-  if (!currentUser || !apiToken) {
+  if (currentUser == null || isValidatingApiToken) {
     return (
       <div className="text-center pt-5">
         <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
