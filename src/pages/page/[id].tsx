@@ -50,6 +50,7 @@ const Page: WebevNextPage = () => {
 
 const StyledDiv = styled.div`
   max-width: 800px;
+  word-break: break-all;
 
   img {
     width: 100%;
@@ -63,6 +64,19 @@ const StyledDiv = styled.div`
   pre {
     padding: 16px;
     background: black;
+  }
+  h1 {
+    border-bottom: 2px solid #6f42c1;
+    padding-bottom: 5px;
+  }
+  p {
+    line-height: 2rem;
+  }
+  li {
+    margin-bottom: 10px;
+  }
+  code {
+    margin: 0 5px;
   }
 `;
 
