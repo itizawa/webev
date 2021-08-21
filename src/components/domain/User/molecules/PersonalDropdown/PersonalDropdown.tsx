@@ -6,6 +6,9 @@ import { signOut } from 'next-auth/client';
 import style from 'styled-components';
 import Loader from 'react-loader-spinner';
 
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
+import { USER_SETTINGS_URL } from '~/libs/const/urls';
+
 import { toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -15,7 +18,6 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
-import { OgpLayoutType } from '~/interfaces/contexts';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
@@ -94,7 +96,7 @@ export const PersonalDropdown: VFC = () => {
           </button>
         </div>
         <DropdownItem divider />
-        <DropdownItem tag="button" onClick={() => router.push('/user/settings')}>
+        <DropdownItem tag="button" onClick={() => router.push(USER_SETTINGS_URL)}>
           {t.settings}
         </DropdownItem>
         <DropdownItem divider />

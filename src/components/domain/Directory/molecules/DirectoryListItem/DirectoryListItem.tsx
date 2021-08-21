@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { Directory } from '~/domains/Directory';
-import { BootstrapBreakpoints } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
 

@@ -3,7 +3,7 @@ import style from 'styled-components';
 
 import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
-import { BootstrapBreakpoints } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 export const ScrollTopButton: VFC = () => {
   const { scrollTop, isShowScroll } = useHooks();

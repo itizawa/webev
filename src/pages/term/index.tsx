@@ -4,7 +4,7 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { Term } from '~/components/domain/Term/molecules/Term';
 import { useLocale } from '~/hooks/useLocale';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

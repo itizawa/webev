@@ -5,9 +5,10 @@ import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { useDirectoryForDelete } from '~/stores/modal';
+import { DIRECTORY_INDEX_URL } from '~/libs/const/urls';
 
 import { useLocale } from '~/hooks/useLocale';
+import { useDirectoryForDelete } from '~/stores/modal';
 import { useAllParentDirectories, useDirectoryChildren } from '~/stores/directory';
 
 export const DirectoryDeleteModal: VFC = () => {
@@ -24,7 +25,7 @@ export const DirectoryDeleteModal: VFC = () => {
       toastSuccess(t.toastr_delete_directory);
       // delete current page directory
       if (router.query.id === directoryForDelete?._id) {
-        router.push('/directory');
+        router.push(DIRECTORY_INDEX_URL);
       }
       mutateAllParentDirectories();
       mutateDirectoryChildren();

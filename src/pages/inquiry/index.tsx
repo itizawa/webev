@@ -4,11 +4,13 @@ import styled from 'styled-components';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { TOP_URL } from '~/libs/const/urls';
+
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 const Page: WebevNextPage = () => {
@@ -25,7 +27,7 @@ const Page: WebevNextPage = () => {
     try {
       await restClient.apiPost('/inquiries', { type: inquiryType, email: inquiryEmail, text: inquiryText });
       toastSuccess(t.toastr_success_send_inquiry);
-      router.push('/');
+      router.push(TOP_URL);
     } catch (err) {
       toastError(err);
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useRouter } from 'next/router';
 import { VFC, useState } from 'react';
 import styled from 'styled-components';
@@ -79,14 +80,7 @@ export const DirectoryAddModal: VFC = () => {
         </div>
         <StyledDiv className="col-12 col-md-5">
           {allParentDirectories.map((directory) => {
-            return (
-              <DirectorySidebarListItem
-                key={directory._id}
-                directory={directory}
-                onClickDirectory={addPageToDirectory}
-                activeDirectoryId={directoryId as string}
-              />
-            );
+            return <DirectorySidebarListItem key={directory._id} directory={directory} childrenDirectories={[]} />;
           })}
           <StyledCreateFormDiv className="text-center mx-3 mt-2">
             {isCreatingNewDirectory ? (
