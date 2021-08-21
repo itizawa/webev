@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';
 
-export const SubnavBar: VFC = () => {
+export const FooterSubnavBar: VFC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
@@ -23,7 +23,7 @@ export const SubnavBar: VFC = () => {
         const isActive = router.pathname.startsWith(v.url);
         return (
           <Link key={v.text} href={v.url}>
-            <div className="text-center col d-flex flex-column bg-dark border-top pt-2 border-secondary">
+            <div className="text-center col d-flex flex-column bg-dark border-top py-2 border-secondary">
               <small className="ms-1 text-nowrap">{v.icon != null && <Icon icon={v.icon} color={isActive ? 'WHITE' : 'SECONDARY'} />}</small>
               <span className={`ms-2 ${isActive ? 'text-white' : 'text-secondary'}`}>{v.text}</span>
             </div>

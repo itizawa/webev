@@ -8,7 +8,7 @@ import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
 import { Sidebar } from '~/components/common/Sidebar';
-import { SubnavBar } from '~/components/common/SubnavBar';
+import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Footer';
 
 import { DirectoryAddModal } from '~/components/domain/Directory/molecules/DirectoryAddModal';
@@ -54,7 +54,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         <Navbar />
       </div>
       <StyledBorder />
-      <SubnavBar />
+      <FooterSubnavBar />
       <StyledDiv className="row mx-auto">
         <div className="d-none d-md-block col-md-3">
           <Sidebar />

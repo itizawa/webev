@@ -31,14 +31,14 @@ export const PersonalDropdown: VFC = () => {
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
-    setIsEnableReadFromClipboard(retrieveValue('isReadFromClipboard') === 'true');
+    setIsEnableReadFromClipboard(retrieveValue('isEnableReadFromClipboard') === 'true');
     mutateOgpCardLayout(retrieveValue<OgpLayoutType>('cardLayout'));
   }, []);
 
   const handleSwitch = () => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
-    storeValue('isReadFromClipboard', bool.toString());
+    storeValue('isEnableReadFromClipboard', bool.toString());
     toastSuccess(t.toastr_update_setting);
   };
 
