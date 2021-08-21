@@ -9,9 +9,8 @@ import { useCurrentUser } from '~/stores/user';
 import { Navbar } from '~/components/common/Navbar';
 import { Sidebar } from '~/components/common/Sidebar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
-import { Footer } from '~/components/common/Footer';
+import { Footer } from '~/components/common/Parts/Footer';
 
-import { DirectoryAddModal } from '~/components/domain/Directory/molecules/DirectoryAddModal';
 import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
 import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
 import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
@@ -62,7 +61,6 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-8 pt-3">{children}</div>
         {session && (
           <>
-            <DirectoryAddModal />
             <DirectoryCreateModal />
             <DirectoryDeleteModal />
             <DirectoryRenameModal />
