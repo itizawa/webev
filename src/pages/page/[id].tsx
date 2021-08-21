@@ -65,16 +65,20 @@ const StyledDiv = styled.div`
     padding: 16px;
     background: black;
   }
+
   h1 {
-    border-bottom: 2px solid #6f42c1;
     padding-bottom: 5px;
+    border-bottom: 2px solid #6f42c1;
   }
+
   p {
     line-height: 2rem;
   }
+
   li {
     margin-bottom: 10px;
   }
+
   code {
     margin: 0 5px;
   }
