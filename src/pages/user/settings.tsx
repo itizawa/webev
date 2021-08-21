@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
+import { useDebouncedCallback } from 'use-debounce';
+
 import { useApiToken, useCurrentUser } from '~/stores/user';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { toastSuccess, toastError } from '~/utils/toastr';
@@ -21,6 +23,15 @@ const Page: WebevNextPage = () => {
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: apiToken, mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
 
+  const updateProfile = (newObject: Partial<User>): void => {
+    try {
+      restClient.apiPut<User>('/users/me', { property: newObject });
+    } catch (err) {
+      toastError(err);
+    }
+  };
+  const debounceUpdateProfile = useDebouncedCallback(updateProfile, 300);
+
   if (currentUser == null || isValidatingApiToken) {
     return (
       <div className="text-center pt-5">
@@ -39,13 +50,9 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const updateProfile = (newObject: Partial<User>): void => {
-    try {
-      restClient.apiPut<User>('/users/me', { property: newObject });
-      mutateCurrentUser({ ...currentUser, ...newObject }, false);
-    } catch (err) {
-      toastError(err);
-    }
+  const changeProfile = (newObject: Partial<User>): void => {
+    mutateCurrentUser({ ...currentUser, ...newObject }, false);
+    debounceUpdateProfile(newObject);
   };
 
   return (
@@ -57,11 +64,10 @@ const Page: WebevNextPage = () => {
             <UserIcon image={currentUser.image} size={140} isCircle />
           </div>
           <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            <EditableInput onChange={(input) => updateProfile({ name: input })} value={currentUser.name} isHeader />
+            <EditableInput onChange={(inputValue) => changeProfile({ name: inputValue })} value={currentUser.name} isHeader />
             <EditableTextarea
               value={currentUser.description}
-              onChange={(input) => updateProfile({ description: input })}
-              isAllowEmpty
+              onChange={(inputValue) => changeProfile({ description: inputValue })}
               placeholder={t.no_description}
             />
           </div>
