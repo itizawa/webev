@@ -18,6 +18,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
+import { useLocalStorage } from '~/hooks/useLocalStorage';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
@@ -25,25 +26,24 @@ export const PersonalDropdown: VFC = () => {
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const { data: currentUser } = useCurrentUser();
+  const { storeValue, retrieveValue } = useLocalStorage();
 
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
-    const isEnableReadFromClipboard = localStorage.getItem('isEnableReadFromClipboard') === 'true';
-    setIsEnableReadFromClipboard(isEnableReadFromClipboard);
-    const ogpCardLayout = localStorage.getItem('ogpCardLayout') as OgpLayoutType;
-    mutateOgpCardLayout(ogpCardLayout);
+    setIsEnableReadFromClipboard(retrieveValue('isReadFromClipboard') === 'true');
+    mutateOgpCardLayout(retrieveValue<OgpLayoutType>('cardLayout'));
   }, []);
 
   const handleSwitch = () => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
-    localStorage.setItem('isEnableReadFromClipboard', bool.toString());
+    storeValue('isReadFromClipboard', bool.toString());
     toastSuccess(t.toastr_update_setting);
   };
 
   const handleClickOgpCardLayout = (type: OgpLayoutType) => {
-    localStorage.setItem('ogpCardLayout', type);
+    storeValue('cardLayout', type);
     mutateOgpCardLayout(type);
   };
 
