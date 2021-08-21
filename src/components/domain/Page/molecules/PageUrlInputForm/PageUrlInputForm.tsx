@@ -7,6 +7,7 @@ import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 import { useUrlFromClipBoard, useSocketId } from '~/stores/contexts';
 import { isValidUrl } from '~/utils/isValidUrl';
+import { useLocalStorage } from '~/hooks/useLocalStorage';
 
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
@@ -14,6 +15,7 @@ export const PageUrlInputForm: VFC = () => {
   const { mutate: mutatePageList } = usePageListSWR();
   const { data: socketId } = useSocketId();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
+  const { retrieveValue } = useLocalStorage();
 
   const [url, setUrl] = useState('');
   const [usedClipboardTexts, setUsedClipboardTexts] = useState<string[]>([]);
@@ -43,13 +45,13 @@ export const PageUrlInputForm: VFC = () => {
   // read clipboard and set when not used in the past
   const readClipboardText = async () => {
     // TODO use vars from DB instead of local storage
-    if (localStorage.getItem('isEnableReadFromClipboard') !== 'true') {
+    if (retrieveValue('isEnableReadFromClipboard') === 'true') {
       return;
     }
     const clipboardText = await navigator.clipboard.readText();
 
     // check url
-    if (!clipboardText.match(/^(http|https):\/\//i)) {
+    if (!isValidUrl(clipboardText)) {
       return mutateUrlFromClipBoard(null);
     }
 
