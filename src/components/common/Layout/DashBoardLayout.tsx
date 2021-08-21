@@ -8,7 +8,6 @@ import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
 import { Sidebar } from '~/components/common/Sidebar';
-import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Footer';
 
@@ -55,7 +54,6 @@ export const DashBoardLayout: FC = ({ children }) => {
         <Navbar />
       </div>
       <StyledBorder />
-      <TopSubnavBar />
       <FooterSubnavBar />
       <StyledDiv className="row mx-auto">
         <div className="d-none d-md-block col-md-3">
