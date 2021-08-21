@@ -1,6 +1,6 @@
 import { User } from '~/domains/User';
 
-export const generateMockUser = (mock: Partial<User>): User => {
+export const generateMockUser = (mock: Partial<User> = {}): User => {
   return new User({
     _id: mock._id || 'mockId',
     name: mock.name || 'mockName',

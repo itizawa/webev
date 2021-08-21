@@ -1,6 +1,6 @@
 import { Page, PageStatus } from '~/domains/Page';
 
-export const generateMockPage = (mock: Partial<Page>): Page => {
+export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({
     _id: mock._id || 'mockId',
     url: mock.url || 'mockUrl',
