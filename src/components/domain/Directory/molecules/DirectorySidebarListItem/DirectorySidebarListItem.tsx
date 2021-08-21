@@ -7,11 +7,11 @@ import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { BootstrapBreakpoints } from '~/interfaces/variables';
 import { useDirectoriesChildren } from '~/stores/directory';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { VFC, ComponentProps, MouseEvent } from 'react';
 import { Icon } from '../../atoms/Icon';
-import { BootstrapColor } from '~/interfaces/variables';
+import { BootstrapColor } from '~/libs/interfaces/variables';
 
 type Props = {
   isActive?: boolean;

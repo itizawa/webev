@@ -7,7 +7,7 @@ import { PageStatus } from '~/domains/Page';
 import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { WebevNextPage } from '~/interfaces/webevNextPage';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -37,7 +37,7 @@ const Index: WebevNextPage = () => {
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(inputValue: string) => mutateSearchKeyword(inputValue)} />
+          <SearchTextBox onChange={mutateSearchKeyword} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (

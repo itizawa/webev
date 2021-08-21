@@ -5,7 +5,7 @@ import { Footer } from '../Footer';
 
 import { Navbar } from '~/components/common/Navbar';
 
-import { BootstrapBreakpoints } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 export const DefaultLayout: FC = ({ children }) => {
   return (

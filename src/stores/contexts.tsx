@@ -1,5 +1,5 @@
 import { SWRResponse } from 'swr';
-import { OgpLayoutType } from '~/interfaces/contexts';
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
 export const useSocketId = (initialData?: string): SWRResponse<string, Error> => {

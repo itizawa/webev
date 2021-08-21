@@ -48,7 +48,8 @@
     "throttle-debounce": "^3.0.1",
     "toastr": "^2.1.4",
     "url-join": "^4.0.1",
-    "use-file-upload": "^1.0.9"
+    "use-file-upload": "^1.0.9",
+    "use-debounce": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

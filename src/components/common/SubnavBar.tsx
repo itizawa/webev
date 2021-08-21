@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { BootstrapIcon } from '~/interfaces/variables';
+import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';

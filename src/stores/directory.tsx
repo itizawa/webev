@@ -1,7 +1,7 @@
 import { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
-import { PaginationResult } from '~/interfaces/paginationResult';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';

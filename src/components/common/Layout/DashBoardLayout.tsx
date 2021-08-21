@@ -23,7 +23,7 @@ import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
-import { BootstrapBreakpoints } from '~/interfaces/variables';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
