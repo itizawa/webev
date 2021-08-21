@@ -9,7 +9,7 @@ import { useCurrentUser } from '~/stores/user';
 import { Navbar } from '~/components/common/Navbar';
 import { Sidebar } from '~/components/common/Sidebar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
-import { Footer } from '~/components/common/Footer';
+import { Footer } from '~/components/common/Parts/Footer';
 
 import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
 import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
