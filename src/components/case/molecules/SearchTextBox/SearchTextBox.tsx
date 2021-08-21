@@ -1,5 +1,6 @@
 import { Emoji } from 'emoji-mart';
-import { VFC } from 'react';
+import { VFC, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 import { EditableInput } from '../EditableInput';
 
 type Props = {
@@ -8,10 +9,18 @@ type Props = {
 
 export const SearchTextBox: VFC<Props> = (props) => {
   const { onChange } = props;
+  const [value, setValue] = useState('');
+  const debounceChangeSearchText = useDebouncedCallback(onChange, 300);
+
+  const changeSearchText = (input: string) => {
+    setValue(input);
+    debounceChangeSearchText(input);
+  };
+
   return (
     <div className="d-flex gap-1 align-items-center">
       <Emoji emoji="mag" size={18} />
-      <EditableInput onChange={onChange} placeholder="Search..." isAllowEmpty />
+      <EditableInput value={value} onChange={changeSearchText} placeholder="Search..." />
     </div>
   );
 };

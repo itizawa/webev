@@ -265,7 +265,7 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
+          <SearchTextBox onChange={mutateSearchKeyword} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
