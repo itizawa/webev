@@ -52,7 +52,7 @@ export const ja = {
   return_news_list: 'ニュースリストに戻る',
 
   read_button: '読了',
-  return_button: 'ホームに戻す',
+  return_button: '戻す',
 
   child_directory: '子ディレクトリ',
 

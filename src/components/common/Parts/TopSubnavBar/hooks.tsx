@@ -15,7 +15,7 @@ export const useHooks = (): { isShowScroll: boolean } => {
 
   const isShowScroll = useMemo(() => {
     // 特定の高さかつ上方向にスクロールしたときに表示
-    return currentYOffset > 500 && currentYOffset < prevYOffset;
+    return currentYOffset > 300 && currentYOffset < prevYOffset;
   }, [currentYOffset, prevYOffset]);
 
   const throttleCheckScrollTop = throttle(300, () => {
