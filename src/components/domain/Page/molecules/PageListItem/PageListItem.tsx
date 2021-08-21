@@ -5,6 +5,7 @@ import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from
 
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -125,6 +126,12 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </div>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-dark" positionFixed>
+              <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
+                <DropdownItem>
+                  <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
+                  <span className="ms-2">{t.copy_url}</span>
+                </DropdownItem>
+              </CopyToClipboard>
               <DropdownItem tag="button" onClick={openDeleteModal}>
                 <Icon icon="TRASH" color="WHITE" />
                 <span className="ms-2">{t.delete}</span>
