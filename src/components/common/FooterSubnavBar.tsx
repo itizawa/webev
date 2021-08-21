@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';
 
-export const SubnavBar: VFC = () => {
+export const FooterSubnavBar: VFC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
