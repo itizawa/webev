@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
 import { useDebouncedCallback } from 'use-debounce';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import { useApiToken, useCurrentUser } from '~/stores/user';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -75,7 +76,9 @@ const Page: WebevNextPage = () => {
         <div className="row my-3">
           <label className="col-md-2 mb-2">Api Token</label>
           <div className="input-group col-md-10 col-12">
-            <input className="form-control" type="text" readOnly value={apiToken || ''} />
+            <CopyToClipboard text={apiToken || ''} onCopy={() => toastSuccess('Api Token をコピーしました')}>
+              <input className="form-control" type="text" readOnly value={apiToken || ''} />
+            </CopyToClipboard>
             <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
               更新
             </button>
