@@ -75,8 +75,7 @@ const Page: WebevNextPage = () => {
       return;
     }
     try {
-      const { data } = await restClient.apiPut<Directory>(`/directories/${directory?._id}/rename`, { name });
-      mutateDirectory(data, false);
+      await restClient.apiPut<Directory>(`/directories/${directory?._id}/rename`, { name });
       mutateAllParentDirectories();
       mutateDirectoryChildren();
       mutateAllDirectories();
