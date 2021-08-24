@@ -153,26 +153,6 @@ const Page: WebevNextPage = () => {
     mutateDirectoryForImport(directory);
   };
 
-  const updateDirectoryName = async (name: string): Promise<void> => {
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateAllParentDirectories();
-      mutateDirectoryChildren();
-      mutateAllDirectories();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
-  const updateDirectoryDescription = async (description: string): Promise<void> => {
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
-      mutateAllDirectories();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
   const handleSelectEmoji = async (emoji: EmojiData) => {
     const emojiId = emoji.id;
 
