@@ -15,6 +15,7 @@ export const BootstrapIcon = {
   HOME: 'home',
   SEARCH: 'search',
   CLOSE: 'close',
+  CLIP_BOARD_PLUS: 'clip-board-plus',
   PLUS_BOARD: 'plus',
   PLUS_DOTTED: 'plus-dotted',
   CHECK: 'check',

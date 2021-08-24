@@ -6,10 +6,13 @@ import styled from 'styled-components';
 
 import { format } from 'date-fns';
 
-import { News } from '~/interfaces/news';
+import { News } from '~/libs/interfaces/news';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { NEWS_INDEX_URL } from '~/libs/const/urls';
+
 import { useLocale } from '~/hooks/useLocale';
+
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
@@ -22,7 +25,7 @@ const Page: WebevNextPage<Props> = (props) => {
   const router = useRouter();
 
   const handleClickReturnNewsListButton = () => {
-    router.push('/news');
+    router.push(NEWS_INDEX_URL);
   };
 
   if (news == null) {
@@ -32,17 +35,15 @@ const Page: WebevNextPage<Props> = (props) => {
   return (
     <>
       <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumbnail?.url} />
-      <div className="p-2">
-        <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
-        <h1 className="text-center my-3">{news.title}</h1>
-        <p className="text-center">記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>
-        <StyledDiv
-          className="mx-auto"
-          dangerouslySetInnerHTML={{
-            __html: `${news.body}`,
-          }}
-        />
-      </div>
+      <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
+      <h1 className="text-center my-3">{news.title}</h1>
+      <p className="text-center">記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>
+      <StyledDiv
+        className="mx-auto"
+        dangerouslySetInnerHTML={{
+          __html: `${news.body}`,
+        }}
+      />
     </>
   );
 };

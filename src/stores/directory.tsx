@@ -1,7 +1,7 @@
 import { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
-import { PaginationResult } from '~/interfaces/paginationResult';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
@@ -27,6 +27,14 @@ export const useAllParentDirectories = (): SWRResponse<Directory[], Error> => {
 
 export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<DirectoryTree[], Error> => {
   const endpoint = parentDirectoryId != null ? `/directories/${parentDirectoryId}/children` : null;
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+};
+
+export const useDirectoriesChildren = (parentDirectoryIds: Array<string>): SWRResponse<DirectoryTree[], Error> => {
+  const endpoint = parentDirectoryIds.length > 0 ? `/directories/children?${parentDirectoryIds.map((v) => `parentDirectoryIds[]=${v}`).join('&')}` : null;
   return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

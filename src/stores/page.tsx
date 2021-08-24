@@ -1,7 +1,7 @@
 import { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
-import { PaginationResult } from '~/interfaces/paginationResult';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 import { Page, PageStatus } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
@@ -24,6 +24,13 @@ export const useSearchKeyWord = (initialData?: string | null): SWRResponse<strin
 
 export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, Error> => {
   return useStaticSWR('isSortCreatedAt', initialData);
+};
+
+export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Page, Error> => {
+  return useAuthenticationSWR(`/pages/${pageId}`, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 };
 
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
@@ -63,7 +70,9 @@ export const usePageNotBelongDirectory = ({
     ['/pages/list', activePage, searchKeyWord],
     (endpoint, page, searchKeyWord) =>
       restClient
-        .apiGet(`${endpoint}?status[]=stocked&status[]=archived&directoryId=null&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`)
+        .apiGet(
+          `${endpoint}?status[]=stocked&status[]=archived&directoryId=null&sort=-createdAt&page=${page}${searchKeyWord != null ? `&q=${searchKeyWord}` : ``}`,
+        )
         .then((result) => result.data),
     {
       revalidateOnFocus: false,

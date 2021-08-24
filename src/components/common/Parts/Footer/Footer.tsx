@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import styled from 'styled-components';
 
+import { INQUIRY_URL, ITIZAWA_TWITTER_URL, NEWS_INDEX_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/const/urls';
+
 import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
@@ -12,23 +14,23 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 py-3 bg-dark border-top border-secondary">
+    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
       <StyledDiv className="row mx-auto">
         <div className="col-9">
           <h5 className="text-muted mb-0 text-white">Webev</h5>
           <ul className="ps-0">
             <li className="list-unstyled my-1" role="button">
-              <Link href="/term">
+              <Link href={TERM_URL}>
                 <a className="fw-bold text-muted webev-anchor">{t.term}</a>
               </Link>
             </li>
             <li className="list-unstyled my-1" role="button">
-              <Link href="/news">
+              <Link href={NEWS_INDEX_URL}>
                 <a className="fw-bold text-muted webev-anchor">{t.news}</a>
               </Link>
             </li>
             <li className="list-unstyled my-1" role="button">
-              <Link href="/inquiry">
+              <Link href={INQUIRY_URL}>
                 <a className="fw-bold text-muted webev-anchor">{t.inquiry}</a>
               </Link>
             </li>
@@ -50,7 +52,7 @@ export const Footer: FC = () => {
               icon="GITHUB"
               color="SECONDARY"
               activeColor="SECONDARY"
-              onClickButton={() => window.open('https://github.com/webev-dev', '_blank')}
+              onClickButton={() => window.open(WEBEV_GITHUB_URL, '_blank')}
             />
           </Tooltip>
           <Tooltip text="Please feel free to contact me!" fade>
@@ -60,7 +62,7 @@ export const Footer: FC = () => {
               icon="TWITTER"
               color="SECONDARY"
               activeColor="SECONDARY"
-              onClickButton={() => window.open('https://twitter.com/itizawa_pen', '_blank')}
+              onClickButton={() => window.open(ITIZAWA_TWITTER_URL, '_blank')}
             />
           </Tooltip>
         </div>
@@ -70,9 +72,9 @@ export const Footer: FC = () => {
 };
 
 const StyledFooter = styled.footer`
-  padding-bottom: 80px;
+  padding-bottom: 70px;
 `;
 
 const StyledDiv = styled.div`
-  max-width: 1240px;
+  max-width: 1440px;
 `;

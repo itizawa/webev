@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
 
 type Props = {
   imageUrl?: string;
@@ -9,7 +9,14 @@ type Props = {
 export const FixedImage: VFC<Props> = ({ imageUrl }) => {
   return (
     <StyledImageWrapper>
-      <img src={imageUrl || imagePath.NO_IMAGE} alt={imageUrl || imagePath.NO_IMAGE} loading="lazy" referrerPolicy="no-referrer" decoding="sync" />
+      <img
+        src={imageUrl || imagePath.NO_IMAGE}
+        alt={imageUrl || imagePath.NO_IMAGE}
+        className="overflow-auto"
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        decoding="sync"
+      />
     </StyledImageWrapper>
   );
 };

@@ -6,6 +6,9 @@ import { signOut } from 'next-auth/client';
 import style from 'styled-components';
 import Loader from 'react-loader-spinner';
 
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
+import { USER_SETTINGS_URL } from '~/libs/const/urls';
+
 import { toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -15,7 +18,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
-import { OgpLayoutType } from '~/interfaces/contexts';
+import { useLocalStorage } from '~/hooks/useLocalStorage';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
@@ -23,25 +26,24 @@ export const PersonalDropdown: VFC = () => {
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const { data: currentUser } = useCurrentUser();
+  const { storeValue, retrieveValue } = useLocalStorage();
 
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
 
   useEffect(() => {
-    const isEnableReadFromClipboard = localStorage.getItem('isEnableReadFromClipboard') === 'true';
-    setIsEnableReadFromClipboard(isEnableReadFromClipboard);
-    const ogpCardLayout = localStorage.getItem('ogpCardLayout') as OgpLayoutType;
-    mutateOgpCardLayout(ogpCardLayout);
+    setIsEnableReadFromClipboard(retrieveValue('isEnableReadFromClipboard') === 'true');
+    mutateOgpCardLayout(retrieveValue<OgpLayoutType>('cardLayout'));
   }, []);
 
   const handleSwitch = () => {
     const bool = !isEnableReadFromClipboard;
     setIsEnableReadFromClipboard(bool);
-    localStorage.setItem('isEnableReadFromClipboard', bool.toString());
+    storeValue('isEnableReadFromClipboard', bool.toString());
     toastSuccess(t.toastr_update_setting);
   };
 
   const handleClickOgpCardLayout = (type: OgpLayoutType) => {
-    localStorage.setItem('ogpCardLayout', type);
+    storeValue('cardLayout', type);
     mutateOgpCardLayout(type);
   };
 
@@ -94,7 +96,7 @@ export const PersonalDropdown: VFC = () => {
           </button>
         </div>
         <DropdownItem divider />
-        <DropdownItem tag="button" onClick={() => router.push('/user/settings')}>
+        <DropdownItem tag="button" onClick={() => router.push(USER_SETTINGS_URL)}>
           {t.settings}
         </DropdownItem>
         <DropdownItem divider />

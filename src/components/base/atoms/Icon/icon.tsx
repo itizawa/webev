@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { BootstrapIcon, BootstrapColor } from '~/interfaces/variables';
+import { BootstrapIcon, BootstrapColor } from '~/libs/interfaces/variables';
 
 type Props = {
   width?: number;
@@ -21,6 +21,14 @@ const SearchIcon: VFC = () => (
 const CloseIcon: VFC = () => (
   <>
     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+  </>
+);
+
+const ClipBoardPlus: VFC = () => (
+  <>
+    <path fillRule="evenodd" d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
+    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
   </>
 );
 
@@ -195,6 +203,7 @@ const IconComponentMapping = {
   CHEVRON_LEFT: <ChevronLeft />,
   CHEVRON_RIGHT: <ChevronRight />,
   CLOSE: <CloseIcon />,
+  CLIP_BOARD_PLUS: <ClipBoardPlus />,
   DIRECTORY: <DirectoryIcon />,
   GEAR: <Gear />,
   GITHUB: <Github />,

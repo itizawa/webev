@@ -14,12 +14,14 @@ exports[`ScrollTopButton isShowScroll is false 1`] = `
   transition-property: all;
 }
 
-.c0.show {
-  opacity: 0.5;
-}
+@media (min-width:768px) {
+  .c0.show {
+    opacity: 0.5;
+  }
 
-.c0.show:hover {
-  opacity: 0.7;
+  .c0.show:hover {
+    opacity: 0.7;
+  }
 }
 
 <button
@@ -57,12 +59,14 @@ exports[`ScrollTopButton isShowScroll is true 1`] = `
   transition-property: all;
 }
 
-.c0.show {
-  opacity: 0.5;
-}
+@media (min-width:768px) {
+  .c0.show {
+    opacity: 0.5;
+  }
 
-.c0.show:hover {
-  opacity: 0.7;
+  .c0.show:hover {
+    opacity: 0.7;
+  }
 }
 
 <button

@@ -5,9 +5,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { useLocale } from '~/hooks/useLocale';
-import { News } from '~/interfaces/news';
+import { News } from '~/libs/interfaces/news';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 
 type Props = {
@@ -20,23 +20,21 @@ const Page: WebevNextPage<Props> = ({ contents }) => {
   return (
     <>
       <WebevOgpHead title={`Webev | ${t.news}`} />
-      <div className="p-2">
-        <h1 className="text-center my-3">{t.news}</h1>
-        {contents.length === 0 && <span>No News</span>}
-        <StyledDiv className="mx-auto">
-          <ul>
-            {contents.map((v) => {
-              return (
-                <li key={v.id} role="button">
-                  <Link href={`/news/${v.id}`}>
-                    <a className="text-white fw-bold webev-anchor">{v.title}</a>
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </StyledDiv>
-      </div>
+      <h1 className="text-center my-3">{t.news}</h1>
+      {contents.length === 0 && <span>No News</span>}
+      <StyledDiv className="mx-auto">
+        <ul>
+          {contents.map((v) => {
+            return (
+              <li key={v.id} role="button">
+                <Link href={`/news/${v.id}`}>
+                  <a className="text-white fw-bold webev-anchor">{v.title}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </StyledDiv>
     </>
   );
 };

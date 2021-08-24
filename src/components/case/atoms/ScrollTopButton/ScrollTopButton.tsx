@@ -3,6 +3,7 @@ import style from 'styled-components';
 
 import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 export const ScrollTopButton: VFC = () => {
   const { scrollTop, isShowScroll } = useHooks();
@@ -22,11 +23,12 @@ opacity: 0;
 transition: opacity 0.4s;
 transition-duration: 200ms;
 transition-property: all;
-
-&.show{
-  opacity: 0.5;
-  &:hover{
-    opacity: 0.7;
+@media (min-width: ${BootstrapBreakpoints.md}px) {
+  &.show{
+    opacity: 0.5;
+    &:hover{
+      opacity: 0.7;
+    }
   }
 }
 `;

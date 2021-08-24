@@ -24,6 +24,7 @@ exports[`FixedImage 1`] = `
 >
   <img
     alt="example.png"
+    className="overflow-auto"
     decoding="sync"
     loading="lazy"
     referrerPolicy="no-referrer"
@@ -56,6 +57,7 @@ exports[`FixedImage imageUrl is null 1`] = `
 >
   <img
     alt="/images/no-image-ogp.png"
+    className="overflow-auto"
     decoding="sync"
     loading="lazy"
     referrerPolicy="no-referrer"

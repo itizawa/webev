@@ -5,6 +5,7 @@ export const en = {
   term: 'Terms of Service',
   inquiry: 'Inquiry',
 
+  copy_url: 'Copy URL',
   logout: 'Logout',
   delete: 'Delete',
   cancel: 'Cancel',
@@ -34,6 +35,7 @@ export const en = {
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
+  toastr_success_copy_url: 'Copy Url!',
   toastr_success_read: 'Read!',
   toastr_success_put_back: 'Put Back Home!',
   toastr_success_add_directory: 'Add Directory',
@@ -46,6 +48,8 @@ export const en = {
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
+  view_original: 'View Original',
+  back: 'Return',
 
   return_news_list: 'Return News List',
 

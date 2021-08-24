@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 
+import { HOME_URL } from '~/libs/const/urls';
+
 export const LoginRequiredWrapper: FC = ({ children }) => {
   const [session, loading] = useSession();
   const router = useRouter();
@@ -10,7 +12,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   useEffect(() => {
     // If session exists, redirect home page
     if (!loading && session != null) {
-      router.push('/home');
+      router.push(HOME_URL);
     }
   }, [loading, session]);
 

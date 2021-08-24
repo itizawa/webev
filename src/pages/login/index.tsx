@@ -6,13 +6,15 @@ import styled from 'styled-components';
 
 import { signIn } from 'next-auth/client';
 
-import { LoginRequiredWrapper } from '~/components/common/Authentication/LogoutRequiredWrapper';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { imagePath } from '~/const/imagePath';
+import { imagePath } from '~/libs/const/imagePath';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+
 import { toastSuccess } from '~/utils/toastr';
 import { useLocale } from '~/hooks/useLocale';
+
+import { LoginRequiredWrapper } from '~/components/common/Authentication/LogoutRequiredWrapper';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
-import { WebevNextPage } from '~/interfaces/webevNextPage';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
@@ -28,16 +30,14 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title="Webev | Login" />
       <LoginRequiredWrapper>
-        <div className="pt-5">
-          <StyledDiv className="mx-auto card border-0 p-4">
-            <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
-            <p>{t.tutorial_desc1}</p>
-            <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
-            <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
-              <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
-            </StyledLoginButtonWrapper>
-          </StyledDiv>
-        </div>
+        <StyledDiv className="mx-auto card border-0 p-4">
+          <h3 className="ms-3 text-center my-3">🎉 {t.welcome_webev} 🎉</h3>
+          <p>{t.tutorial_desc1}</p>
+          <span className="mb-2" dangerouslySetInnerHTML={{ __html: t.login_description }} />
+          <StyledLoginButtonWrapper className="text-center" role="button" onClick={() => signIn('google')}>
+            <Image src={imagePath.SIGN_IN_GOOGLE} height={46} width={191} />
+          </StyledLoginButtonWrapper>
+        </StyledDiv>
       </LoginRequiredWrapper>
     </>
   );

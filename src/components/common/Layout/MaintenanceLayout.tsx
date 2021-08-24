@@ -2,8 +2,10 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
+import { TOP_URL } from '~/libs/const/urls';
+
 import { Navbar } from '~/components/common/Navbar';
-import { Footer } from '~/components/common/Footer';
+import { Footer } from '~/components/common/Parts/Footer/Footer';
 import { useLocale } from '~/hooks/useLocale';
 
 export const MaintenanceLayout: VFC = () => {
@@ -17,7 +19,7 @@ export const MaintenanceLayout: VFC = () => {
       </div>
       <StyledDiv className="container text-center pt-5">
         <h1>{t.maintenance}</h1>
-        <button className="mt-4 btn btn-indigo btn-bg" onClick={() => router.push('/')}>
+        <button className="mt-4 btn btn-indigo btn-bg" onClick={() => router.push(TOP_URL)}>
           {t.go_to_top}
         </button>
       </StyledDiv>
