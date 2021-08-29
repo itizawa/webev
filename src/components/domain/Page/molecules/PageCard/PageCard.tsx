@@ -1,4 +1,4 @@
-import { VFC, useEffect, useState, useMemo } from 'react';
+import { VFC, useMemo } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -18,6 +18,7 @@ import { usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
+import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -30,15 +31,12 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
+  const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
+
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
-  const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
-
-  useEffect(() => {
-    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-  }, [page]);
 
   const sharePage = async () => {
     if (window != null) {
@@ -47,17 +45,11 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     }
   };
 
-  const switchArchive = async () => {
-    const bool = !isArchive;
+  const handleSwitchArchive = async () => {
+    const bool = !(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
     try {
-      const { data: page } = await restClient.apiPut<Page>(`/pages/${_id}/archive`, { isArchive: bool });
-      if (bool) {
-        toastSuccess(t.toastr_success_read);
-      } else {
-        toastSuccess(t.toastr_success_put_back);
-      }
-      setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-      mutatePageList();
+      await switchArchive(_id, bool);
+      toastSuccess(t.toastr_success_read);
     } catch (err) {
       toastError(err);
     }
@@ -114,7 +106,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             isHideArchiveButton={isHideArchiveButton}
             onClickDeleteButton={openDeleteModal}
             onClickSharePageButton={sharePage}
-            onClickSwitchArchiveButton={switchArchive}
+            onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
           />
         </div>
@@ -154,7 +146,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
           {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
-            <button className="btn btn-sm btn-primary d-flex" onClick={switchArchive}>
+            <button className="btn btn-sm btn-primary d-flex" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>
