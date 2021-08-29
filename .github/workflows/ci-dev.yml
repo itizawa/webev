@@ -60,6 +60,7 @@ jobs:
 
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
+        if: failure()
         with:
           type: ${{ job.status }}
           job_name: '*build webev front*'
@@ -182,6 +183,7 @@ jobs:
       
       - name: Slack Notification
         uses: weseek/ghaction-slack-notification@master
+        if: failure()
         with:
           type: ${{ job.status }}
           job_name: '*test webev front*'
