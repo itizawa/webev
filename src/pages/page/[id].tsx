@@ -11,15 +11,19 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePageByPageId } from '~/stores/page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
+import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
+import { Page, PageStatus } from '~/domains/Page';
 
-const Page: WebevNextPage = () => {
+const Index: WebevNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const { t } = useLocale();
-  const { data: page } = usePageByPageId({ pageId: id as string });
+  const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
 
-  if (page == null) {
+  if (!page) {
     return (
       <div className="text-center pt-5">
         <Loader type="Oval" color="#00BFFF" height={100} width={100} />
@@ -27,10 +31,26 @@ const Page: WebevNextPage = () => {
     );
   }
 
+  const switchArchive = async () => {
+    const bool = page.status === PageStatus.PAGE_STATUS_STOCK;
+    try {
+      const { data } = await restClient.apiPut<Page>(`/pages/${page._id}/archive`, { isArchive: bool });
+      mutatePage(data, false);
+      if (bool) {
+        toastSuccess(t.toastr_success_read);
+      } else {
+        toastSuccess(t.toastr_success_put_back);
+      }
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
+        <TopSubnavBar title={page.title} onClickReadButton={switchArchive} isArchived={page.status === PageStatus.PAGE_STATUS_ARCHIVE} />
         <h1 className="text-center mt-5">{page.title}</h1>
         <div className="text-center mt-3">
           <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
@@ -65,16 +85,20 @@ const StyledDiv = styled.div`
     padding: 16px;
     background: black;
   }
+
   h1 {
-    border-bottom: 2px solid #6f42c1;
     padding-bottom: 5px;
+    border-bottom: 2px solid #6f42c1;
   }
+
   p {
     line-height: 2rem;
   }
+
   li {
     margin-bottom: 10px;
   }
+
   code {
     margin: 0 5px;
   }
@@ -82,5 +106,5 @@ const StyledDiv = styled.div`
 
 const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
 
-Page.getLayout = getLayout;
-export default Page;
+Index.getLayout = getLayout;
+export default Index;

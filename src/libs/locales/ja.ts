@@ -5,6 +5,7 @@ export const ja = {
   term: '利用規約',
   inquiry: 'お問い合わせ',
 
+  copy_url: 'URL をコピーする',
   logout: 'ログアウト',
   delete: '削除',
   cancel: 'キャンセル',
@@ -34,6 +35,7 @@ export const ja = {
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
   toastr_delete_directory: 'ディレクトリを削除しました',
+  toastr_success_copy_url: 'Url をコピーしました!',
   toastr_success_read: '読みました！',
   toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
@@ -52,7 +54,7 @@ export const ja = {
   return_news_list: 'ニュースリストに戻る',
 
   read_button: '読了',
-  return_button: 'ホームに戻す',
+  return_button: '戻す',
 
   child_directory: '子ディレクトリ',
 

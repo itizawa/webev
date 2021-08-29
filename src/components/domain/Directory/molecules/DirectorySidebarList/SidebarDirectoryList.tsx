@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
@@ -10,17 +10,14 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 
-import { useAllParentDirectories, useDirectoriesChildren } from '~/stores/directory';
-import { Directory } from '~/domains/Directory';
+import { useAllParentDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(allParentDirectories.map((v) => v._id));
 
-  const [directories, setDirectories] = useState<Directory[]>([]);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
@@ -40,17 +37,9 @@ export const SidebarDirectoryList: VFC = () => {
       toastError(err);
     }
 
-    const reorderedItems = directories.splice(result.source.index, 1);
-    directories.splice(result.destination.index, 0, ...reorderedItems);
-
-    setDirectories(directories);
+    const reorderedItems = allParentDirectories.splice(result.source.index, 1);
+    allParentDirectories.splice(result.destination.index, 0, ...reorderedItems);
   };
-
-  useEffect(() => {
-    if (allParentDirectories != null) {
-      setDirectories(allParentDirectories);
-    }
-  }, [allParentDirectories]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -85,14 +74,12 @@ export const SidebarDirectoryList: VFC = () => {
         <Droppable droppableId="directories">
           {(provided) => (
             <StyledDirectoryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
-              {directories.map((directory, index) => {
-                // 子供のディレクトリを抽出
-                const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === directory._id).map((v) => v.descendant as Directory);
+              {allParentDirectories.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
                       <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectorySidebarListItem directory={directory} childrenDirectories={childrenDirectories} />
+                        <DirectorySidebarListItem directory={directory} />
                       </div>
                     )}
                   </Draggable>
@@ -103,7 +90,7 @@ export const SidebarDirectoryList: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      {directories.length < 10 && (
+      {allParentDirectories.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
             <form className="input-group ps-3" onSubmit={onSubmit}>
