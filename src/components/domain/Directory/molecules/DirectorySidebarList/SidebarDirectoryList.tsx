@@ -78,8 +78,8 @@ export const SidebarDirectoryList: VFC = () => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
-                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectorySidebarListItem directory={directory} />
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} className="my-1">
+                        <DirectorySidebarListItem directory={directory} draggableProvidedDragHandleProps={provided.dragHandleProps} />
                       </div>
                     )}
                   </Draggable>
