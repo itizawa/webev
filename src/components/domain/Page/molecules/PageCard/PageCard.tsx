@@ -1,4 +1,4 @@
-import { VFC, useMemo } from 'react';
+import { VFC, useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -34,9 +34,14 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
+  const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
+
+  useEffect(() => {
+    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
+  }, [page]);
 
   const sharePage = async () => {
     if (window != null) {
@@ -46,10 +51,14 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   };
 
   const handleSwitchArchive = async () => {
-    const bool = !(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
+    const bool = !isArchive;
     try {
       await switchArchive(_id, bool);
-      toastSuccess(t.toastr_success_read);
+      if (bool) {
+        toastSuccess(t.toastr_success_read);
+      } else {
+        toastSuccess(t.toastr_success_put_back);
+      }
     } catch (err) {
       toastError(err);
     }
