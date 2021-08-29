@@ -1,9 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { Footer } from '../Footer';
-
 import { Navbar } from '~/components/common/Navbar';
+import { Footer } from '~/components/common/Parts/Footer/Footer';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 

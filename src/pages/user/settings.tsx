@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
 import Loader from 'react-loader-spinner';
+import { useDebouncedCallback } from 'use-debounce';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+
 import { useApiToken, useCurrentUser } from '~/stores/user';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { toastSuccess, toastError } from '~/utils/toastr';
@@ -19,9 +22,18 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { data: apiToken, mutate: mutateApiToken } = useApiToken();
+  const { data: apiToken, mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
 
-  if (!currentUser || !apiToken) {
+  const updateProfile = (newObject: Partial<User>): void => {
+    try {
+      restClient.apiPut<User>('/users/me', { property: newObject });
+    } catch (err) {
+      toastError(err);
+    }
+  };
+  const debounceUpdateProfile = useDebouncedCallback(updateProfile, 300);
+
+  if (currentUser == null || isValidatingApiToken) {
     return (
       <div className="text-center pt-5">
         <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
@@ -39,13 +51,9 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const updateProfile = (newObject: Partial<User>): void => {
-    try {
-      restClient.apiPut<User>('/users/me', { property: newObject });
-      mutateCurrentUser({ ...currentUser, ...newObject }, false);
-    } catch (err) {
-      toastError(err);
-    }
+  const changeProfile = (newObject: Partial<User>): void => {
+    mutateCurrentUser({ ...currentUser, ...newObject }, false);
+    debounceUpdateProfile(newObject);
   };
 
   return (
@@ -57,11 +65,10 @@ const Page: WebevNextPage = () => {
             <UserIcon image={currentUser.image} size={140} isCircle />
           </div>
           <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            <EditableInput onChange={(input) => updateProfile({ name: input })} value={currentUser.name} isHeader />
+            <EditableInput onChange={(inputValue) => changeProfile({ name: inputValue })} value={currentUser.name} isHeader />
             <EditableTextarea
               value={currentUser.description}
-              onChange={(input) => updateProfile({ description: input })}
-              isAllowEmpty
+              onChange={(inputValue) => changeProfile({ description: inputValue })}
               placeholder={t.no_description}
             />
           </div>
@@ -69,7 +76,9 @@ const Page: WebevNextPage = () => {
         <div className="row my-3">
           <label className="col-md-2 mb-2">Api Token</label>
           <div className="input-group col-md-10 col-12">
-            <input className="form-control" type="text" readOnly value={apiToken} />
+            <CopyToClipboard text={apiToken || ''} onCopy={() => toastSuccess('Api Token をコピーしました')}>
+              <input className="form-control" type="text" readOnly value={apiToken || ''} />
+            </CopyToClipboard>
             <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
               更新
             </button>

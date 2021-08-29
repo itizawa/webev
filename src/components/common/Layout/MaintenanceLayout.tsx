@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { TOP_URL } from '~/libs/const/urls';
 
 import { Navbar } from '~/components/common/Navbar';
-import { Footer } from '~/components/common/Footer';
+import { Footer } from '~/components/common/Parts/Footer/Footer';
 import { useLocale } from '~/hooks/useLocale';
 
 export const MaintenanceLayout: VFC = () => {

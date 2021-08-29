@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { openFileFolderEmoji } from '~/libs/const/emoji';
 import { useLocale } from '~/hooks/useLocale';
@@ -65,6 +66,55 @@ const Page: WebevNextPage = () => {
   const [pickerLeft, setPickerLeft] = useState<number>(0);
   const emojiRef = useRef<HTMLDivElement>(null);
 
+  const [newDirectoryName, setNewDirectoryName] = useState<string>('');
+  const [newDirectoryDescription, setNewDirectoryDescription] = useState<string>('');
+
+  const updateDirectoryName = async (name: string): Promise<void> => {
+    // 前回から変更がなかったら何もしない
+    if (!directory || name === directory?.name) {
+      return;
+    }
+    try {
+      await restClient.apiPut<Directory>(`/directories/${directory?._id}/rename`, { name });
+      mutateAllParentDirectories();
+      mutateDirectoryChildren();
+      mutateAllDirectories();
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
+  const debounceUpdateDirectoryName = useDebouncedCallback(updateDirectoryName, 300);
+  useEffect(() => {
+    debounceUpdateDirectoryName(newDirectoryName);
+  }, [newDirectoryName]);
+
+  const updateDirectoryDescription = async (description: string): Promise<void> => {
+    // 前回から変更がなかったら何もしない
+    if (!directory || description === directory?.description) {
+      return;
+    }
+    try {
+      const { data } = await restClient.apiPut<Directory>(`/directories/${directory?._id}/description`, { description });
+      mutateDirectory(data, false);
+      mutateAllDirectories();
+    } catch (err) {
+      toastError(err);
+    }
+  };
+
+  const debounceUpdateDirectoryDescription = useDebouncedCallback(updateDirectoryDescription, 300);
+  useEffect(() => {
+    debounceUpdateDirectoryDescription(newDirectoryDescription);
+  }, [newDirectoryDescription]);
+
+  useEffect(() => {
+    if (directory) {
+      setNewDirectoryName(directory.name);
+      setNewDirectoryDescription(directory.description);
+    }
+  }, [directory]);
+
   useEffect(() => {
     if (directory != null) {
       const result = emojiIndex.search(directory.emojiId);
@@ -90,26 +140,6 @@ const Page: WebevNextPage = () => {
 
   const openAddDirectoryModal = (directory: Directory) => {
     mutateParentDirectoryForCreateDirectory(directory);
-  };
-
-  const updateDirectoryName = async (name: string): Promise<void> => {
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/rename`, { name });
-      mutateAllParentDirectories();
-      mutateDirectoryChildren();
-      mutateAllDirectories();
-    } catch (err) {
-      toastError(err);
-    }
-  };
-
-  const updateDirectoryDescription = async (description: string): Promise<void> => {
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/description`, { description });
-      mutateAllDirectories();
-    } catch (err) {
-      toastError(err);
-    }
   };
 
   const handleSelectEmoji = async (emoji: EmojiData) => {
@@ -173,7 +203,7 @@ const Page: WebevNextPage = () => {
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
-              <EditableInput value={directory.name} onChange={updateDirectoryName} isHeader />
+              <EditableInput value={newDirectoryName} onChange={setNewDirectoryName} isHeader />
               <Tooltip text={t.save_to_directory(directory.name)}>
                 <div id="save-page-to-directory">
                   <IconButton
@@ -215,7 +245,7 @@ const Page: WebevNextPage = () => {
                 </StyledEmojiPickerWrapper>
               </>
             )}
-            <EditableInput value={directory.description} onChange={updateDirectoryDescription} isAllowEmpty placeholder={t.no_description} />
+            <EditableInput value={newDirectoryDescription} onChange={setNewDirectoryDescription} placeholder={t.no_description} />
           </>
         )}
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
@@ -234,7 +264,7 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(inputValue) => mutateSearchKeyword(inputValue)} />
+          <SearchTextBox onChange={mutateSearchKeyword} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
