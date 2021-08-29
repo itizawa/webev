@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -16,9 +17,10 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
+  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvidedDragHandleProps }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
@@ -72,6 +74,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
         isActive={isActive}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
+        {...draggableProvidedDragHandleProps}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
