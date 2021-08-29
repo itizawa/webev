@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
@@ -12,29 +12,24 @@ import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { useDirectoriesChildren } from '~/stores/directory';
+import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
-  childrenDirectories: Directory[];
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirectories }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const [childrenDirectoriesForDisplay, setChildrenDirectoriesForDisplay] = useState<Directory[]>(childrenDirectories);
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(childrenDirectoriesForDisplay.map((v) => v._id));
-
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: childrenDirectoryTrees = [], mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isOpen ? directory._id : undefined);
+
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  useEffect(() => {
-    setChildrenDirectoriesForDisplay(childrenDirectories);
-  }, [childrenDirectories]);
 
   const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -58,11 +53,11 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
     }
 
     try {
-      const { data } = await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
+      await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      setChildrenDirectoriesForDisplay((prevState) => [...prevState, data]);
       setIsCreatingNewDirectory(false);
+      mutateChildrenDirectoriesForDisplay();
     } catch (err) {
       toastError(err);
     }
@@ -136,12 +131,11 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectoriesForDisplay.map((childDirectory) => {
-            // 子供のディレクトリを抽出
-            const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === childDirectory._id).map((v) => v.descendant as Directory);
-            return <DirectorySidebarListItem key={childDirectory._id} directory={childDirectory} childrenDirectories={childrenDirectories} />;
+          {childrenDirectoryTrees.map((childrenDirectoryTree) => {
+            const childDirectory = childrenDirectoryTree.descendant as Directory;
+            return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
           })}
-          {childrenDirectoriesForDisplay.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
         </div>
       </Collapse>
     </>
