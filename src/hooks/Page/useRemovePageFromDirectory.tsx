@@ -3,14 +3,16 @@ import { Page } from '~/domains/Page';
 import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
 
-export const useSwitchArchive = (): { isLoading: boolean; switchArchive: (pageId: string, bool: boolean) => void } => {
+export const useRemovePageFromDirectory = (): { isLoading: boolean; removePageFromDirectory: (pageId: string) => void } => {
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
   const [isLoading, setIsLoading] = useState(false);
 
-  const switchArchive = async (pageId: string, bool: boolean) => {
+  const removePageFromDirectory = async (pageId: string) => {
     setIsLoading(true);
 
-    const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/archive`, { isArchive: bool });
+    const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/directories`, {
+      directoryId: null,
+    });
 
     if (!pageList) {
       return;
@@ -23,9 +25,8 @@ export const useSwitchArchive = (): { isLoading: boolean; switchArchive: (pageId
       },
       false,
     );
-
     setIsLoading(false);
   };
 
-  return { isLoading, switchArchive };
+  return { isLoading, removePageFromDirectory };
 };

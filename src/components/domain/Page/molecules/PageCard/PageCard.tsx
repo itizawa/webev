@@ -8,7 +8,6 @@ import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page, PageStatus } from '~/domains/Page';
@@ -19,6 +18,7 @@ import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -32,6 +32,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const { mutate: mutatePageList } = usePageListSWR();
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
+  const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
@@ -70,9 +71,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const handleRemovePageButton = async () => {
     try {
-      await restClient.apiPut(`/pages/${page?._id}/directories`, {
-        directoryId: null,
-      });
+      await removePageFromDirectory(page._id);
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
     } catch (error) {
