@@ -29,11 +29,7 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
   <div
     className="col-3 col-md-2 p-1 p-md-2"
   >
-    <a
-      href="/page/mockId"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
+    <a>
       <div
         className="c1"
       >
@@ -59,9 +55,6 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
       >
         <a
           className="text-white webev-anchor webev-limit-2lines"
-          href="/page/mockId"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
         >
           mockTitle
         </a>
@@ -293,11 +286,7 @@ exports[`PageListItem 1`] = `
   <div
     className="col-3 col-md-2 p-1 p-md-2"
   >
-    <a
-      href="/page/mockId"
-      onClick={[Function]}
-      onMouseEnter={[Function]}
-    >
+    <a>
       <div
         className="c1"
       >
@@ -323,9 +312,6 @@ exports[`PageListItem 1`] = `
       >
         <a
           className="text-white webev-anchor webev-limit-2lines"
-          href="/page/mockId"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
         >
           mockTitle
         </a>

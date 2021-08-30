@@ -26,11 +26,7 @@ exports[`PageCard 1`] = `
 <div
   className="c0 card border-0 shadow h-100 overflow-hidden"
 >
-  <a
-    href="/page/mockId"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-  >
+  <a>
     <div
       className="c1"
     >
@@ -55,9 +51,6 @@ exports[`PageCard 1`] = `
       >
         <a
           className="text-white webev-anchor webev-limit-2lines"
-          href="/page/mockId"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
         >
           mockTitle
         </a>
@@ -306,11 +299,7 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
 <div
   className="c0 card border-0 shadow h-100 overflow-hidden"
 >
-  <a
-    href="/page/mockId"
-    onClick={[Function]}
-    onMouseEnter={[Function]}
-  >
+  <a>
     <div
       className="c1"
     >
@@ -335,9 +324,6 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
       >
         <a
           className="text-white webev-anchor webev-limit-2lines"
-          href="/page/mockId"
-          onClick={[Function]}
-          onMouseEnter={[Function]}
         >
           mockTitle
         </a>
