@@ -3,7 +3,7 @@ import { Page, PageStatus } from '~/domains/Page';
 export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({
     _id: mock._id || 'mockId',
-    url: mock.url || 'mockUrl',
+    url: mock.url || 'https://example.com',
     image: mock.image || 'mockImage',
     favicon: mock.favicon || 'mockFavicon',
     description: mock.description || 'mockDescription',
