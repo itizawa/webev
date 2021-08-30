@@ -273,7 +273,7 @@ exports[`PageCard 1`] = `
           mockSiteName
         </a>
         <br />
-        2021/08/31
+        2020/01/01
       </small>
     </div>
   </div>
@@ -528,7 +528,7 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
           mockSiteName
         </a>
         <br />
-        2021/08/31
+        2020/01/01
       </small>
     </div>
   </div>

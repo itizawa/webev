@@ -233,7 +233,7 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
     <small
       className="me-3 text-truncate"
     >
-      2021/08/31
+      2020/01/01
     </small>
     <img
       alt="mockFavicon"
@@ -522,7 +522,7 @@ exports[`PageListItem 1`] = `
     <small
       className="me-3 text-truncate"
     >
-      2021/08/31
+      2020/01/01
     </small>
     <img
       alt="mockFavicon"
