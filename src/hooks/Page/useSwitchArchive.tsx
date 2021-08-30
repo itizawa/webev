@@ -23,6 +23,8 @@ export const useSwitchArchive = (): { isLoading: boolean; switchArchive: (pageId
       },
       false,
     );
+
+    setIsLoading(false);
   };
 
   return { isLoading, switchArchive };
