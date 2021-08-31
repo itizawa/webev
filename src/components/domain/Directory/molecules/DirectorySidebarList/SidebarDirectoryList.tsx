@@ -10,15 +10,13 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 
-import { useAllParentDirectories, useDirectoriesChildren } from '~/stores/directory';
-import { Directory } from '~/domains/Directory';
+import { useAllParentDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
   const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(allParentDirectories.map((v) => v._id));
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
@@ -77,13 +75,11 @@ export const SidebarDirectoryList: VFC = () => {
           {(provided) => (
             <StyledDirectoryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
               {allParentDirectories.map((directory, index) => {
-                // 子供のディレクトリを抽出
-                const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === directory._id).map((v) => v.descendant as Directory);
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
-                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectorySidebarListItem directory={directory} childrenDirectories={childrenDirectories} />
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} className="my-1">
+                        <DirectorySidebarListItem directory={directory} draggableProvidedDragHandleProps={provided.dragHandleProps} />
                       </div>
                     )}
                   </Draggable>

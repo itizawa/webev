@@ -54,7 +54,7 @@ export const DashBoardLayout: FC = ({ children }) => {
       </div>
       <StyledBorder />
       <FooterSubnavBar />
-      <StyledDiv className="row mx-auto">
+      <StyledDiv className="row mx-auto overflow-hidden">
         <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>

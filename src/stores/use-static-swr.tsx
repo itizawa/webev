@@ -1,12 +1,8 @@
-import useSWR, { Key, SWRResponse, mutate, cache } from 'swr';
+import useSWR, { Key, SWRResponse, mutate } from 'swr';
 import { Fetcher } from 'swr/dist/types';
 
-export const useStaticSWR = <Data, Error>(key: Key, updateData?: Data | Fetcher<Data>, initialData?: Data | Fetcher<Data>): SWRResponse<Data, Error> => {
-  if (updateData == null) {
-    if (!cache.has(key) && initialData != null) {
-      mutate(key, initialData, false);
-    }
-  } else {
+export const useStaticSWR = <Data, Error>(key: Key, updateData?: Data | Fetcher<Data>): SWRResponse<Data, Error> => {
+  if (!updateData) {
     mutate(key, updateData);
   }
 

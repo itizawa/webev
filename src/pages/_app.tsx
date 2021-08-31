@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Session } from 'next-auth';
 import { Provider } from 'next-auth/client';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 import '~/styles/global.scss';
 
@@ -29,7 +30,9 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
 
   return (
     <Provider options={{ clientMaxAge: 0, keepAlive: 0 }} session={pageProps.session}>
-      {getLayout(<Component {...pageProps} />)}
+      <SkeletonTheme color="#213243" highlightColor="#444">
+        {getLayout(<Component {...pageProps} />)}
+      </SkeletonTheme>
     </Provider>
   );
 };
