@@ -26,8 +26,9 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
   const isActive = directory._id === router.query.id;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isFetchDirectory, setIsFetchDirectory] = useState(false);
 
-  const { data: childrenDirectoryTrees = [], mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isOpen ? directory._id : undefined);
+  const { data: childrenDirectoryTrees = [], mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isFetchDirectory ? directory._id : undefined);
 
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -38,12 +39,14 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
     if (!isOpen) {
       setIsCreatingNewDirectory(false);
     }
+    setIsFetchDirectory(true);
     setIsOpen((prevState) => !prevState);
   };
 
   const handleClickPencilIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen(true);
+    setIsFetchDirectory(true);
     setIsCreatingNewDirectory(true);
   };
 
