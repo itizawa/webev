@@ -50,7 +50,7 @@ const Index: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar url={page.url} title={page.title} onClickReadButton={switchArchive} isArchived={page.status === PageStatus.PAGE_STATUS_ARCHIVE} />
+        <TopSubnavBar page={page} onClickReadButton={switchArchive} isArchived={page.status === PageStatus.PAGE_STATUS_ARCHIVE} />
         <h1 className="text-center mt-5">{page.title}</h1>
         <div className="text-center mt-3">
           <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">

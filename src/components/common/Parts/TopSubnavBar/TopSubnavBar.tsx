@@ -4,23 +4,43 @@ import styled from 'styled-components';
 import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
 import { useLocale } from '~/hooks/useLocale';
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { Page } from '~/domains/Page';
+import { usePageForDelete } from '~/stores/modal';
+import { toastError, toastSuccess } from '~/utils/toastr';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 type Props = {
-  url: string;
-  title: string;
+  page: Page;
   onClickReadButton: () => void;
   isArchived: boolean;
 };
-export const TopSubnavBar: VFC<Props> = ({ url, title, onClickReadButton, isArchived }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton, isArchived }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
+
+  const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { removePageFromDirectory } = useRemovePageFromDirectory();
+
+  const openDeleteModal = async () => {
+    mutatePageForDelete(page);
+  };
+
+  const handleRemovePageButton = async () => {
+    try {
+      await removePageFromDirectory(page?._id);
+      toastSuccess(t.remove_page_from_directory);
+    } catch (error) {
+      toastError(error);
+    }
+  };
 
   return (
     <StyledDiv $isShow={isShowScroll} className="fixed-top">
       <div className="bg-dark d-flex justify-content-evenly align-items-center p-2">
         <div className="me-2">
-          <StyledAnchor className="webev-limit-2lines text-white webev-anchor" href={url} target="blank" rel="noopener noreferrer">
-            {title}
+          <StyledAnchor className="webev-limit-2lines text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
+            {page.title}
           </StyledAnchor>
         </div>
         {isArchived ? (
@@ -34,6 +54,9 @@ export const TopSubnavBar: VFC<Props> = ({ url, title, onClickReadButton, isArch
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
         )}
+        <div className="ms-2">
+          <PageManageDropdown page={page} isHideArchiveButton onClickDeleteButton={openDeleteModal} onClickRemovePageButton={handleRemovePageButton} />
+        </div>
       </div>
       <StyledBorder />
     </StyledDiv>
