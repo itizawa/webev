@@ -15,6 +15,10 @@ import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { Page, PageStatus } from '~/domains/Page';
+import { Icon } from '~/components/base/atoms/Icon';
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { usePageForDelete } from '~/stores/modal';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 const Index: WebevNextPage = () => {
   const router = useRouter();
@@ -22,6 +26,8 @@ const Index: WebevNextPage = () => {
 
   const { t } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
+  const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   if (!page) {
     return (
@@ -30,6 +36,21 @@ const Index: WebevNextPage = () => {
       </div>
     );
   }
+
+  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
+
+  const openDeleteModal = async () => {
+    mutatePageForDelete(page);
+  };
+
+  const handleRemovePageButton = async () => {
+    try {
+      await removePageFromDirectory(page?._id);
+      toastSuccess(t.remove_page_from_directory);
+    } catch (error) {
+      toastError(error);
+    }
+  };
 
   const switchArchive = async () => {
     const bool = page.status === PageStatus.PAGE_STATUS_STOCK;
@@ -51,8 +72,24 @@ const Index: WebevNextPage = () => {
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
         <TopSubnavBar page={page} onClickReadButton={switchArchive} />
-        <h1 className="text-center mt-5">{page.title}</h1>
-        <div className="text-center mt-3">
+        <div className="ms-2 d-flex align-items-center">
+          {isArchived ? (
+            <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={switchArchive}>
+              <Icon height={20} width={20} icon="REPLY" color="WHITE" />
+              <span className="ms-2 text-nowrap">{t.return_button}</span>
+            </button>
+          ) : (
+            <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={switchArchive}>
+              <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+              <span className="ms-2 text-nowrap">{t.read_button}</span>
+            </button>
+          )}
+          <div className="ms-2">
+            <PageManageDropdown page={page} isHideArchiveButton onClickDeleteButton={openDeleteModal} onClickRemovePageButton={handleRemovePageButton} />
+          </div>
+        </div>
+        <h1 className="text-center my-3">{page.title}</h1>
+        <div className="text-center">
           <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
             {t.view_original}
           </a>
