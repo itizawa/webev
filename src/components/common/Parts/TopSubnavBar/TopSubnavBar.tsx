@@ -5,7 +5,7 @@ import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
 import { useLocale } from '~/hooks/useLocale';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
-import { Page } from '~/domains/Page';
+import { Page, PageStatus } from '~/domains/Page';
 import { usePageForDelete } from '~/stores/modal';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
@@ -13,11 +13,11 @@ import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirect
 type Props = {
   page: Page;
   onClickReadButton: () => void;
-  isArchived: boolean;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton, isArchived }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
+  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
