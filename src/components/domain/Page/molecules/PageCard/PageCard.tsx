@@ -44,13 +44,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
   }, [page]);
 
-  const sharePage = async () => {
-    if (window != null) {
-      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&hashtags=${siteName}`);
-      window.open(twitterUrl.toString(), '_blank');
-    }
-  };
-
   const handleSwitchArchive = async () => {
     const bool = !isArchive;
     try {
@@ -113,7 +106,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             page={page}
             isHideArchiveButton={isHideArchiveButton}
             onClickDeleteButton={openDeleteModal}
-            onClickSharePageButton={sharePage}
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
           />
