@@ -6,11 +6,12 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useDirectoryListSWR = ({ searchKeyWord }: { searchKeyWord: string }): SWRResponse<PaginationResult<Directory>, Error> => {
+export const useDirectoryListSWR = ({ searchKeyWord, isRoot }: { searchKeyWord: string; isRoot: boolean }): SWRResponse<PaginationResult<Directory>, Error> => {
   const page = 1;
   return useAuthenticationSWR(
-    ['/directories/list', page, searchKeyWord],
-    (endpoint, page, searchKeyWord) => restClient.apiGet(`${endpoint}?page=${page}${searchKeyWord ? `&q=${searchKeyWord}` : ``}`).then((result) => result.data),
+    ['/directories/list', isRoot, searchKeyWord],
+    (endpoint, isRoot, searchKeyWord) =>
+      restClient.apiGet(`${endpoint}?page=${page}&isRoot=${isRoot}${searchKeyWord ? `&q=${searchKeyWord}` : ``}`).then((result) => result.data),
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: true,

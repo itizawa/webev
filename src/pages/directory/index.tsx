@@ -24,8 +24,7 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
-
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord });
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord, isRoot: true });
   const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -57,7 +56,7 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.directory}`} />
       <LoginRequiredWrapper>
-        <h1>{t.directory}</h1>
+        <h1 className="mb-0">{t.directory}</h1>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
           <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
         </div>
