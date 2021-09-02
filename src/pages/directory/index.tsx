@@ -18,11 +18,14 @@ import { useLocale } from '~/hooks/useLocale';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord });
   const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -55,6 +58,9 @@ const Page: WebevNextPage = () => {
       <WebevOgpHead title={`Webev | ${t.directory}`} />
       <LoginRequiredWrapper>
         <h1>{t.directory}</h1>
+        <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
+          <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
+        </div>
         {paginationResult == null && (
           <div className="text-center pt-5">
             <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
