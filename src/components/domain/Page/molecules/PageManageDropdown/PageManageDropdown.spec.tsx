@@ -11,7 +11,6 @@ test('PageManageDropdown isHideArchiveButton ois true', () => {
         page={mockPage}
         isHideArchiveButton
         onClickDeleteButton={() => console.log('test')}
-        onClickSharePageButton={() => console.log('test')}
         onClickSwitchArchiveButton={() => console.log('test')}
         onClickRemovePageButton={() => console.log('test')}
       />,
@@ -28,7 +27,6 @@ test('PageManageDropdown isHideArchiveButton ois true', () => {
         page={mockPage}
         isHideArchiveButton={false}
         onClickDeleteButton={() => console.log('test')}
-        onClickSharePageButton={() => console.log('test')}
         onClickSwitchArchiveButton={() => console.log('test')}
         onClickRemovePageButton={() => console.log('test')}
       />,

@@ -1678,6 +1678,11 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
+"@kzmat/eslint-plugin-commentout@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@kzmat/eslint-plugin-commentout/-/eslint-plugin-commentout-0.0.4.tgz#fe7f597a17eb130f18d58ec0120b2cba4f3e2b18"
+  integrity sha512-ywestfX7Pybl74FKkza3fl+N+P4YO/y92G5tQ0K6se2c8DuaLDLqpE/2kj4C2mHxQlmA/b6iE9yM8rnWheEVsg==
+
 "@napi-rs/triples@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@napi-rs/triples/-/triples-1.0.3.tgz#76d6d0c3f4d16013c61e45dfca5ff1e6c31ae53c"

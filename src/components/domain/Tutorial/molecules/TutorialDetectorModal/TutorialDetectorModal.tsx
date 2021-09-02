@@ -2,36 +2,27 @@ import { useRef, VFC } from 'react';
 
 import Reward from 'react-rewards';
 import { Modal } from '~/components/base/molecules/Modal';
-import { restClient } from '~/utils/rest-client';
+import { useUpdateIsExecutedTutorial } from '~/hooks/Tutorial/useUpdateIsExecutedTutorial';
 
 import { useLocale } from '~/hooks/useLocale';
-
-import { User } from '~/domains/User';
 import { useCurrentUser } from '~/stores/user';
-import { usePageListSWR } from '~/stores/page';
-import { useSocketId } from '~/stores/contexts';
+
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-const HOW_TO_USE_URL = 'https://www.webev.cloud/ja/news/xmaua8n1qes6';
-
 export const TutorialDetectorModal: VFC = () => {
-  const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-
   const { t } = useLocale();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const okButtonRef = useRef<any>();
 
-  const { mutate: mutatePageList } = usePageListSWR();
-  const { data: socketId } = useSocketId();
+  const { data: currentUser } = useCurrentUser();
+  const { updateIsExecutedTutorial } = useUpdateIsExecutedTutorial();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const okButtonRef = useRef<any>(null);
 
   const handleOkButton = async () => {
     try {
-      const { data } = await restClient.apiPut<User>('/users/me/isExecutedTutorial');
-      await restClient.apiPost('/pages', { url: HOW_TO_USE_URL, socketId });
       okButtonRef.current.rewardMe();
+      await updateIsExecutedTutorial();
       toastSuccess(t.toastr_save_url);
-      mutatePageList();
-      setTimeout(() => mutateCurrentUser(data, false), 2000);
     } catch (err) {
       toastError(err);
     }

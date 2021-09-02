@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-// eslint-disable-next-line no-undef
+// NOTE: eslint-disable-next-line no-undef
 export const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '';
 
 export const pageview = (path) => {

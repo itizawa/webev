@@ -1,47 +1,50 @@
-// directory 一覧ページ
+// NOTE: directory 一覧ページ
 export const DIRECTORY_INDEX_URL = '/directory';
 
-// directory 詳細
+// NOTE: directory 詳細
 export const DIRECTORY_ID_URL = '/directory/[id]';
 
-// ダッシュボードのホームページ
+// NOTE: ダッシュボードのホームページ
 export const HOME_URL = '/home';
 
-// お問い合わせページ
+// NOTE: お問い合わせページ
 export const INQUIRY_URL = '/inquiry';
 
-// ログインページ
+// NOTE: ログインページ
 export const LOGIN_URL = '/login';
 
-// ニュースページ
+// NOTE: ニュースページ
 export const NEWS_INDEX_URL = '/news';
 
-// ニュース詳細ページ
+// NOTE: ニュース詳細ページ
 export const NEWS_ID_URL = '/news/[id]';
 
-// ページ詳細ページ
+// NOTE: ページ詳細ページ
 export const PAGES_ID_URL = '/pages/[id]';
 
-// 既読ページ
+// NOTE: 既読ページ
 export const READ_URL = '/read';
 
-// 利用規約ページ
+// NOTE: 利用規約ページ
 export const TERM_URL = '/term';
 
-// ユーザー詳細ページ
+// NOTE: ユーザー詳細ページ
 export const USER_ID_URL = '/user/[id]';
 
-// ユーザー設定ページ
+// NOTE: ユーザー設定ページ
 export const USER_SETTINGS_URL = '/user/settings';
 
-// 404 ページ
+// NOTE: 404 ページ
 export const NOT_FOUND_URL = '/404';
 
-// ルート
+// NOTE: ルート
 export const TOP_URL = '/';
 
-// webev の github
+// NOTE: webev の github
 export const WEBEV_GITHUB_URL = 'https://github.com/webev-dev';
 
-// itizawa の twitter
+// NOTE: itizawa の twitter
 export const ITIZAWA_TWITTER_URL = 'https://twitter.com/itizawa_pen';
+
+// NOTE: 使い方のページ
+export const HOW_TO_USE_URL = 'https://www.webev.cloud/ja/news/xmaua8n1qes6';

@@ -11,20 +11,20 @@ type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
   onClickDeleteButton: () => void;
-  onClickSharePageButton: () => void;
-  onClickSwitchArchiveButton: () => void;
+  onClickSwitchArchiveButton?: () => void;
   onClickRemovePageButton: () => void;
 };
 
-export const PageManageDropdown: VFC<Props> = ({
-  page,
-  isHideArchiveButton,
-  onClickDeleteButton,
-  onClickSharePageButton,
-  onClickSwitchArchiveButton,
-  onClickRemovePageButton,
-}) => {
+export const PageManageDropdown: VFC<Props> = ({ page, isHideArchiveButton, onClickDeleteButton, onClickSwitchArchiveButton, onClickRemovePageButton }) => {
   const { t } = useLocale();
+
+  const sharePage = async () => {
+    if (window != null) {
+      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
+      window.open(twitterUrl.toString(), '_blank');
+    }
+  };
+
   return (
     <UncontrolledDropdown direction="left">
       <DropdownToggle tag="span">
@@ -43,7 +43,7 @@ export const PageManageDropdown: VFC<Props> = ({
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
-        <DropdownItem tag="button" onClick={onClickSharePageButton}>
+        <DropdownItem tag="button" onClick={sharePage}>
           <Icon icon="TWITTER" color="WHITE" />
           <span className="ms-2">{t.share}</span>
         </DropdownItem>

@@ -56,6 +56,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@kzmat/eslint-plugin-commentout": "^0.0.4",
     "@types/emoji-mart": "^3.0.5",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^26.0.24",
