@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
+exports[`PageManageDropdown directoryId is undefined 1`] = `
 <div
   className="dropleft dropdown"
   onKeyDown={[Function]}
@@ -182,7 +182,7 @@ exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
 </div>
 `;
 
-exports[`PageManageDropdown isHideArchiveButton is true 2`] = `
+exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
 <div
   className="dropleft dropdown"
   onKeyDown={[Function]}
