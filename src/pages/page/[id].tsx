@@ -46,7 +46,7 @@ const Index: WebevNextPage = () => {
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page?._id);
+      await removePageFromDirectory(page._id);
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
       toastError(error);
