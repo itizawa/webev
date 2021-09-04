@@ -19,16 +19,16 @@ export const PageAddToDirectoryModal: VFC = () => {
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord });
-  const { addPageToDirectory } = useAddPageToDirectory();
+  const { isLoading, addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
 
   const handleClickDirectoryList = async (directoryId: string) => {
-    if (!pageForAddToDirectory) {
+    if (!pageForAddToDirectory || isLoading) {
       return;
     }
 
     try {
-      addPageToDirectory(pageForAddToDirectory._id, directoryId);
+      await addPageToDirectory(pageForAddToDirectory._id, directoryId);
       mutatePageForAddToDirectory(null);
       toastSuccess(t.toastr_success_add_directory);
     } catch (err) {
