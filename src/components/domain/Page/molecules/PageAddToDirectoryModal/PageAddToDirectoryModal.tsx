@@ -1,5 +1,8 @@
-import { VFC } from 'react';
+import { useState, VFC } from 'react';
 
+import Loader from 'react-loader-spinner';
+import styled from 'styled-components';
+import { Emoji } from 'emoji-mart';
 import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -8,18 +11,23 @@ import { usePageForAddToDirectory } from '~/stores/modal';
 import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { useDirectoryListSWR } from '~/stores/directory';
+import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
 export const PageAddToDirectoryModal: VFC = () => {
   const { t } = useLocale();
 
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+  const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord });
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
   const { mutate: pageListMutate } = usePageListSWR();
 
-  const deletePage = async () => {
+  const addPageToDirectory = async (directoryId: string) => {
     try {
-      await restClient.apiDelete(`/pages/${pageForAddToDirectory?._id}`);
+      await restClient.apiPut(`/pages/${pageForAddToDirectory?._id}/directories`, { directoryId });
       mutatePageForAddToDirectory(null);
-      toastSuccess(t.toastr_delete_url);
+      toastSuccess(t.toastr_success_add_directory);
       pageListMutate();
     } catch (err) {
       toastError(err);
@@ -32,7 +40,68 @@ export const PageAddToDirectoryModal: VFC = () => {
 
   return (
     <Modal isOpen={pageForAddToDirectory != null} toggle={closeDeleteModal} title={t.add_page}>
-      hoge
+      <div className="mb-4">
+        <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
+      </div>
+      {paginationResult == null && (
+        <div className="text-center pt-5">
+          <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+        </div>
+      )}
+      {paginationResult != null && (
+        <>
+          {paginationResult.docs.map((directory) => (
+            <StyledList className="d-flex" role="button" key={directory._id} onClick={() => addPageToDirectory(directory._id)}>
+              <div className="w-100 text-truncate">
+                <StyledEmojiWrapper>
+                  <Emoji emoji={directory.emojiId} size={20} />
+                </StyledEmojiWrapper>
+                <span className="ms-3" role="button">
+                  {directory.name}
+                </span>
+              </div>
+            </StyledList>
+          ))}
+        </>
+      )}
     </Modal>
   );
 };
+
+const StyledEmojiWrapper = styled.span`
+  .emoji-mart-emoji {
+    vertical-align: text-bottom;
+  }
+`;
+
+const StyledList = styled.li<{ isActive?: boolean }>`
+  padding: 10px;
+  color: #eee;
+  background-color: inherit;
+  border-radius: 3px;
+
+  .manage-directory-button {
+    height: 24px;
+    @media (min-width: ${BootstrapBreakpoints.md}px) {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .manage-directory-button {
+      display: block;
+    }
+  }
+
+  ${({ isActive }) =>
+    isActive
+      ? `
+    margin-top: 0px;
+    background-color: #00acc1;
+    box-shadow: 0 12px 20px -10px rgba(0, 172, 193, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 172, 193, 0.2);
+  `
+      : `:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+    transition: all 300ms linear;
+  }`}
+`;
