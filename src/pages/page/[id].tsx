@@ -1,24 +1,30 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
-import Loader from 'react-loader-spinner';
+import { ReactNode, useMemo } from 'react';
 
+import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
+
+import { Page, PageStatus } from '~/domains/Page';
+
+import { usePageByPageId } from '~/stores/page';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { useLocale } from '~/hooks/useLocale';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
+
+import { Icon } from '~/components/base/atoms/Icon';
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-
-import { usePageByPageId } from '~/stores/page';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { useLocale } from '~/hooks/useLocale';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { restClient } from '~/utils/rest-client';
-import { Page, PageStatus } from '~/domains/Page';
-import { Icon } from '~/components/base/atoms/Icon';
+
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { useAllDirectories } from '~/stores/directory';
 
 const Index: WebevNextPage = () => {
   const router = useRouter();
@@ -26,9 +32,14 @@ const Index: WebevNextPage = () => {
 
   const { t } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
+  const { data: allDirectories } = useAllDirectories();
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+
+  const directoryOfPage = useMemo(() => {
+    return allDirectories?.find((v) => v._id === page?.directoryId);
+  }, [allDirectories, page?.directoryId]);
 
   if (!page) {
     return (
@@ -78,6 +89,18 @@ const Index: WebevNextPage = () => {
       <LoginRequiredWrapper>
         <TopSubnavBar page={page} onClickReadButton={switchArchive} />
         <div className="ms-2 d-flex align-items-center">
+          {directoryOfPage && (
+            <div className="mt-2">
+              <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+                <Link href={`/directory/${directoryOfPage._id}`}>
+                  <span role="button" className="badge bg-secondary text-white">
+                    <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
+                    <span className="ms-1">{directoryOfPage.name}</span>
+                  </span>
+                </Link>
+              </Tooltip>
+            </div>
+          )}
           {isArchived ? (
             <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={switchArchive}>
               <Icon height={20} width={20} icon="REPLY" color="WHITE" />
