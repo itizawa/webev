@@ -15,14 +15,17 @@ import { useDirectoryListSWR } from '~/stores/directory';
 import { usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR();
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord, isRoot: true });
+  const { createDirectory } = useCreateDirectory();
   const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -40,9 +43,9 @@ const Page: WebevNextPage = () => {
     }
 
     try {
-      await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
+      await createDirectory(name);
       mutateDirectoryList();
     } catch (err) {
       toastError(err);
@@ -54,7 +57,10 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.directory}`} />
       <LoginRequiredWrapper>
-        <h1>{t.directory}</h1>
+        <h1 className="mb-0">{t.directory}</h1>
+        <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
+          <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
+        </div>
         {paginationResult == null && (
           <div className="text-center pt-5">
             <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
@@ -69,7 +75,7 @@ const Page: WebevNextPage = () => {
                 </div>
               ))}
             </div>
-            {paginationResult?.docs.length < 10 && (
+            {paginationResult.docs.length < 10 && !searchKeyWord && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>

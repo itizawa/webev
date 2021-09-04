@@ -89,7 +89,7 @@ exports[`PageCard 1`] = `
         </span>
         <div
           aria-hidden={true}
-          className="dropdown-menu-dark dropdown-menu"
+          className="dropdown-menu-dark border-secondary dropdown-menu"
           role="menu"
           tabIndex="-1"
         >
@@ -362,7 +362,7 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
         </span>
         <div
           aria-hidden={true}
-          className="dropdown-menu-dark dropdown-menu"
+          className="dropdown-menu-dark border-secondary dropdown-menu"
           role="menu"
           tabIndex="-1"
         >

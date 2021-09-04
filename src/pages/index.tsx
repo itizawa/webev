@@ -24,7 +24,7 @@ const Page: WebevNextPage<Props> = ({ count }) => {
   return (
     <>
       <WebevOgpHead />
-      <h1 className="my-3">{t.welcome_webev}</h1>
+      <h1>{t.welcome_webev}</h1>
       <Image src={imagePath.EYE_CATCH_DARK} alt={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
         <div className="col-12 col-md-6 offset-md-3">
