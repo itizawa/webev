@@ -22,13 +22,6 @@ export const useDirectoryPaginationResult = ({
   });
 };
 
-export const useAllParentDirectories = (): SWRResponse<Directory[], Error> => {
-  return useAuthenticationSWR('/directories/parents', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
-  });
-};
-
 export const useDirectoryChildren = (parentDirectoryId?: string): SWRResponse<DirectoryTree[], Error> => {
   const endpoint = parentDirectoryId != null ? `/directories/${parentDirectoryId}/children` : null;
   return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
