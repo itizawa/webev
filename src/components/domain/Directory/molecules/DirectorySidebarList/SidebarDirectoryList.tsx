@@ -23,7 +23,6 @@ export const SidebarDirectoryList: VFC = () => {
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-  console.table(directoryPaginationResult?.docs);
 
   const handleOnDragEnd = (result: DragUpdate) => {
     if (!directoryPaginationResult) {
