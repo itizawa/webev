@@ -10,7 +10,7 @@ import { usePageForAddToDirectory } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
-import { useDirectoryListSWR } from '~/stores/directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
 import { PaginationWrapper } from '~/components/common/PaginationWrapper';
@@ -20,7 +20,7 @@ export const PageAddToDirectoryModal: VFC = () => {
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [activePage, setActivePage] = useState(1);
-  const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord, activePage });
+  const { data: directoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, activePage });
   const { isLoading, addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
 
@@ -47,14 +47,14 @@ export const PageAddToDirectoryModal: VFC = () => {
       <div className="mb-4">
         <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
       </div>
-      {paginationResult == null && (
+      {directoryPaginationResult == null && (
         <div className="text-center pt-5">
           <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
         </div>
       )}
-      {paginationResult != null && (
+      {directoryPaginationResult != null && (
         <>
-          {paginationResult.docs.map((directory) => (
+          {directoryPaginationResult.docs.map((directory) => (
             <StyledList className="d-flex" role="button" key={directory._id} onClick={() => handleClickDirectoryList(directory._id)}>
               <div className="w-100 text-truncate">
                 <StyledEmojiWrapper>
@@ -68,8 +68,8 @@ export const PageAddToDirectoryModal: VFC = () => {
           ))}
           <div className="text-center mt-4">
             <PaginationWrapper
-              pagingLimit={paginationResult.limit}
-              totalItemsCount={paginationResult.totalDocs}
+              pagingLimit={directoryPaginationResult.limit}
+              totalItemsCount={directoryPaginationResult.totalDocs}
               activePage={activePage}
               mutateActivePage={(number) => setActivePage(number)}
             />

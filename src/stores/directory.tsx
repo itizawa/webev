@@ -6,7 +6,7 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useDirectoryListSWR = ({
+export const useDirectoryPaginationResult = ({
   searchKeyWord,
   activePage = 1,
   isRoot,
