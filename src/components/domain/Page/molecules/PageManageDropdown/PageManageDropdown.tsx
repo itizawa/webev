@@ -9,16 +9,14 @@ import { toastSuccess } from '~/utils/toastr';
 
 type Props = {
   page: Page;
-  isHideArchiveButton?: boolean;
   onClickDeleteButton: () => void;
-  onClickSwitchArchiveButton?: () => void;
+  onClickSwitchArchiveButton: () => void;
   onClickRemovePageButton: () => void;
   onClickAddPageToDirectoryButton: () => void;
 };
 
 export const PageManageDropdown: VFC<Props> = ({
   page,
-  isHideArchiveButton,
   onClickDeleteButton,
   onClickSwitchArchiveButton,
   onClickRemovePageButton,
@@ -55,7 +53,7 @@ export const PageManageDropdown: VFC<Props> = ({
           <Icon icon="TWITTER" color="WHITE" />
           <span className="ms-2">{t.share}</span>
         </DropdownItem>
-        {!isHideArchiveButton && page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
+        {page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
           <DropdownItem tag="button" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
