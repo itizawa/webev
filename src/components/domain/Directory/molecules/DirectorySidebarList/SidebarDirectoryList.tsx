@@ -10,35 +10,68 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 
-import { useAllParentDirectories } from '~/stores/directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
+import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
+import { Directory } from '~/domains/Directory';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
-  const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
+  const { createDirectory } = useCreateDirectory();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
   const handleOnDragEnd = (result: DragUpdate) => {
-    // may not have any destination (drag to nowhere)
-    if (result.destination == null) {
+    if (!directoryPaginationResult) {
       return;
     }
+    // may not have any destination (drag to nowhere)
+    if (!result.destination) {
+      return;
+    }
+    const destOrder = result.destination.index + 1;
+    const sourceOrder = result.source.index + 1;
+
     // Do nothing if in the same place
-    if (result.source.index === result.destination.index) {
+    if (sourceOrder === destOrder) {
       return;
     }
 
     try {
-      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
     } catch (err) {
       toastError(err);
     }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
 
-    const reorderedItems = allParentDirectories.splice(result.source.index, 1);
-    allParentDirectories.splice(result.destination.index, 0, ...reorderedItems);
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+    }
+
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
+
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -49,10 +82,18 @@ export const SidebarDirectoryList: VFC = () => {
     }
 
     try {
-      await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateAllParentDirectories();
+      const result = await createDirectory(name);
+      if (directoryPaginationResult) {
+        mutateDirectoryPaginationResult(
+          {
+            ...directoryPaginationResult,
+            docs: [...directoryPaginationResult.docs, result],
+          },
+          false,
+        );
+      }
     } catch (err) {
       toastError(err);
     }
@@ -60,7 +101,7 @@ export const SidebarDirectoryList: VFC = () => {
     setIsCreatingNewDirectory(false);
   };
 
-  if (allParentDirectories == null) {
+  if (directoryPaginationResult == null) {
     return (
       <div className="text-center">
         <Loader type="Oval" color="#00BFFF" height={64} width={64} />
@@ -74,7 +115,7 @@ export const SidebarDirectoryList: VFC = () => {
         <Droppable droppableId="directories">
           {(provided) => (
             <StyledDirectoryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
-              {allParentDirectories.map((directory, index) => {
+              {directoryPaginationResult.docs.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
@@ -90,7 +131,7 @@ export const SidebarDirectoryList: VFC = () => {
           )}
         </Droppable>
       </DragDropContext>
-      {allParentDirectories.length < 10 && (
+      {directoryPaginationResult.docs.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
             <form className="input-group ps-3" onSubmit={onSubmit}>
