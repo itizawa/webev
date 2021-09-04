@@ -21,12 +21,12 @@ const toastrOption = {
   },
 };
 
-// accepts both a single error and an array of errors
+// NOTE: accepts both a single error and an array of errors
 export const toastError = (err: { message: string }, header = 'Error', option = toastrOption.error): void => {
   error(err.message, header, option);
 };
 
-// only accepts a single item
+// NOTE: only accepts a single item
 export const toastSuccess = (body: string, header = 'Success', option = toastrOption.success): void => {
   success(body, header, option);
 };

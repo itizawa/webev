@@ -3,8 +3,10 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
+import Skeleton from 'react-loading-skeleton';
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -16,16 +18,18 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
+  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvidedDragHandleProps }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isFetchDirectory, setIsFetchDirectory] = useState(false);
 
-  const { data: childrenDirectoryTrees = [], mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isOpen ? directory._id : undefined);
+  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isFetchDirectory ? directory._id : undefined);
 
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -36,12 +40,14 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
     if (!isOpen) {
       setIsCreatingNewDirectory(false);
     }
+    setIsFetchDirectory(true);
     setIsOpen((prevState) => !prevState);
   };
 
   const handleClickPencilIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen(true);
+    setIsFetchDirectory(true);
     setIsCreatingNewDirectory(true);
   };
 
@@ -72,6 +78,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
         isActive={isActive}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
+        {...draggableProvidedDragHandleProps}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
@@ -131,11 +138,21 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectoryTrees.map((childrenDirectoryTree) => {
-            const childDirectory = childrenDirectoryTree.descendant as Directory;
-            return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
-          })}
-          {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectoryTrees ? (
+            <>
+              {childrenDirectoryTrees.map((childrenDirectoryTree) => {
+                const childDirectory = childrenDirectoryTree.descendant as Directory;
+                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
+              })}
+              {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+            </>
+          ) : (
+            <>
+              {[...Array(5)].map((_v, index) => {
+                return <Skeleton key={index} />;
+              })}
+            </>
+          )}
         </div>
       </Collapse>
     </>

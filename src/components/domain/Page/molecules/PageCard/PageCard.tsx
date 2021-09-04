@@ -1,4 +1,4 @@
-import { VFC, useEffect, useState, useMemo } from 'react';
+import { VFC, useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -8,7 +8,6 @@ import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page, PageStatus } from '~/domains/Page';
@@ -18,6 +17,8 @@ import { usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
+import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -30,6 +31,9 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { mutate: mutatePageList } = usePageListSWR();
+  const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
+  const { removePageFromDirectory } = useRemovePageFromDirectory();
+
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
 
@@ -40,24 +44,15 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
   }, [page]);
 
-  const sharePage = async () => {
-    if (window != null) {
-      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&hashtags=${siteName}`);
-      window.open(twitterUrl.toString(), '_blank');
-    }
-  };
-
-  const switchArchive = async () => {
+  const handleSwitchArchive = async () => {
     const bool = !isArchive;
     try {
-      const { data: page } = await restClient.apiPut<Page>(`/pages/${_id}/archive`, { isArchive: bool });
+      await switchArchive(_id, bool);
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {
         toastSuccess(t.toastr_success_put_back);
       }
-      setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-      mutatePageList();
     } catch (err) {
       toastError(err);
     }
@@ -69,9 +64,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const handleRemovePageButton = async () => {
     try {
-      await restClient.apiPut(`/pages/${page?._id}/directories`, {
-        directoryId: null,
-      });
+      await removePageFromDirectory(page._id);
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
     } catch (error) {
@@ -113,8 +106,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             page={page}
             isHideArchiveButton={isHideArchiveButton}
             onClickDeleteButton={openDeleteModal}
-            onClickSharePageButton={sharePage}
-            onClickSwitchArchiveButton={switchArchive}
+            onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
           />
         </div>
@@ -154,7 +146,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
           {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
-            <button className="btn btn-sm btn-primary d-flex" onClick={switchArchive}>
+            <button className="btn btn-sm btn-primary d-flex" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>

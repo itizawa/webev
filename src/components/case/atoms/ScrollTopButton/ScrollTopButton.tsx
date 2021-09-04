@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import style from 'styled-components';
+import styled from 'styled-components';
 
 import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -15,20 +15,20 @@ export const ScrollTopButton: VFC = () => {
   );
 };
 
-export const StyledButton = style.button`
-position: fixed;
-right: 20px;
-bottom: 20px;
-opacity: 0;
-transition: opacity 0.4s;
-transition-duration: 200ms;
-transition-property: all;
-@media (min-width: ${BootstrapBreakpoints.md}px) {
-  &.show{
-    opacity: 0.5;
-    &:hover{
-      opacity: 0.7;
+export const StyledButton = styled.button`
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  transition-duration: 200ms;
+  transition-property: all;
+  @media (min-width: ${BootstrapBreakpoints.md}px) {
+    &.show {
+      opacity: 0.5;
+      &:hover {
+        opacity: 0.7;
+      }
     }
   }
-}
 `;

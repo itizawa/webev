@@ -23,7 +23,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'import'],
+  plugins: ['@typescript-eslint', 'react', 'import', '@kzmat/commentout'],
   settings: {
     'import/resolver': {
       node: {
@@ -54,6 +54,7 @@ module.exports = {
     'import/order': ['error'],
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
+    '@kzmat/commentout/commentout': ['error'],
     'prettier/prettier': [
       'error',
       {
