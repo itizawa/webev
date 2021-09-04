@@ -1,4 +1,4 @@
-import { VFC, useEffect, useState, useMemo } from 'react';
+import { VFC, useMemo } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -17,6 +17,7 @@ import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { usePageListSWR } from '~/stores/page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;
@@ -30,23 +31,30 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
+  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
-  const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
 
-  useEffect(() => {
-    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-  }, [page]);
+  const isArchive = useMemo(() => page.status === PageStatus.PAGE_STATUS_ARCHIVE, [status]);
 
   const handleSwitchArchive = async () => {
     const bool = !isArchive;
     try {
       await switchArchive(_id, bool);
+      if (pageList) {
+        mutatePageList(
+          {
+            ...pageList,
+            docs: pageList.docs.filter((v) => v._id !== _id),
+          },
+          false,
+        );
+      }
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {

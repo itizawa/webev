@@ -5,14 +5,13 @@ import { ReactNode, useMemo } from 'react';
 import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 
-import { Page, PageStatus } from '~/domains/Page';
+import { PageStatus } from '~/domains/Page';
 
 import { usePageByPageId } from '~/stores/page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -25,8 +24,9 @@ import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 import { useAllDirectories } from '~/stores/directory';
+import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 
-const Index: WebevNextPage = () => {
+const Page: WebevNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
@@ -36,10 +36,13 @@ const Index: WebevNextPage = () => {
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+  const { isLoading, switchArchive } = useSwitchArchive();
 
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page?.directoryId);
   }, [allDirectories, page?.directoryId]);
+
+  const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
 
   if (!page) {
     return (
@@ -48,8 +51,6 @@ const Index: WebevNextPage = () => {
       </div>
     );
   }
-
-  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
@@ -64,15 +65,14 @@ const Index: WebevNextPage = () => {
     }
   };
 
-  const switchArchive = async () => {
-    const bool = page.status === PageStatus.PAGE_STATUS_STOCK;
+  const handleClickSwitchArchiveButton = async () => {
     try {
-      const { data } = await restClient.apiPut<Page>(`/pages/${page._id}/archive`, { isArchive: bool });
+      const data = await switchArchive(page._id, !isArchived);
       mutatePage(data, false);
-      if (bool) {
-        toastSuccess(t.toastr_success_read);
-      } else {
+      if (isArchived) {
         toastSuccess(t.toastr_success_put_back);
+      } else {
+        toastSuccess(t.toastr_success_read);
       }
     } catch (err) {
       toastError(err);
@@ -87,7 +87,7 @@ const Index: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar page={page} onClickReadButton={switchArchive} />
+        <TopSubnavBar page={page} onClickReadButton={handleClickSwitchArchiveButton} />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (
             <div className="mt-2">
@@ -102,12 +102,12 @@ const Index: WebevNextPage = () => {
             </div>
           )}
           {isArchived ? (
-            <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={switchArchive}>
+            <button className="btn btn-sm btn-secondary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="REPLY" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.return_button}</span>
             </button>
           ) : (
-            <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={switchArchive}>
+            <button className="btn btn-sm btn-primary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>
@@ -177,5 +177,5 @@ const StyledDiv = styled.div`
 
 const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
 
-Index.getLayout = getLayout;
-export default Index;
+Page.getLayout = getLayout;
+export default Page;
