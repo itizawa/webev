@@ -47,9 +47,9 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
     (endpoint, status, page, limit, sort, searchKeyWord, directoryId) =>
       restClient
         .apiGet(
-          `${endpoint}?${status.map((v: PageStatus) => `status[]=${v}&`).join('')}&page=${page}&limit=${limit}&sort=${sort}${
-            searchKeyWord != null ? `&q=${searchKeyWord}` : ``
-          }${directoryId != null ? `&directoryId=${directoryId}` : ``}`,
+          `${endpoint}?${status.map((v: PageStatus) => `status[]=${v}&`).join('')}page=${page}&limit=${limit}&sort=${sort}${
+            searchKeyWord ? `&q=${searchKeyWord}` : ``
+          }${directoryId ? `&directoryId=${directoryId}` : ``}`,
         )
         .then((result) => result.data),
     {
