@@ -71,7 +71,16 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page._id);
+      const data = await removePageFromDirectory(page._id);
+      if (pageList) {
+        mutatePageList(
+          {
+            ...pageList,
+            docs: [...pageList.docs.filter((v) => v._id !== page._id), data],
+          },
+          false,
+        );
+      }
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
     } catch (error) {

@@ -7,33 +7,22 @@ import { useLocale } from '~/hooks/useLocale';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 import { Page, PageStatus } from '~/domains/Page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 type Props = {
   page: Page;
+  onClickRemovePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
-  const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
-  };
-
-  const handleRemovePageButton = async () => {
-    try {
-      await removePageFromDirectory(page?._id);
-      toastSuccess(t.remove_page_from_directory);
-    } catch (error) {
-      toastError(error);
-    }
   };
 
   const handleClickAddPageToDirectoryButton = () => {
@@ -64,7 +53,7 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) =
             page={page}
             onClickDeleteButton={openDeleteModal}
             onClickSwitchArchiveButton={onClickSwitchArchiveButton}
-            onClickRemovePageButton={handleRemovePageButton}
+            onClickRemovePageButton={onClickRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
           />
         </div>

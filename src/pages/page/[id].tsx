@@ -58,7 +58,8 @@ const Page: WebevNextPage = () => {
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page._id);
+      const data = await removePageFromDirectory(page._id);
+      mutatePage(data, false);
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
       toastError(error);
@@ -87,7 +88,7 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar page={page} onClickSwitchArchiveButton={handleClickSwitchArchiveButton} />
+        <TopSubnavBar page={page} onClickRemovePageButton={handleRemovePageButton} onClickSwitchArchiveButton={handleClickSwitchArchiveButton} />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (
             <div className="mt-2">
