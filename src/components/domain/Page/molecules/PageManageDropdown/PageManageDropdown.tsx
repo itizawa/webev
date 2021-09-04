@@ -59,6 +59,10 @@ export const PageManageDropdown: VFC<Props> = ({ page, isHideArchiveButton, onCl
             <span className="ms-2">{t.remove_page_from_directory}</span>
           </DropdownItem>
         )}
+        <DropdownItem tag="button" onClick={onClickRemovePageButton}>
+          <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
+          <span className="ms-2">{t.save_page_to_directory}</span>
+        </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
   );
