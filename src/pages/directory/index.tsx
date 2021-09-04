@@ -74,7 +74,7 @@ const Page: WebevNextPage = () => {
                 </div>
               ))}
             </div>
-            {paginationResult?.docs.length < 10 && (
+            {paginationResult.docs.length < 10 && !searchKeyWord && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>
