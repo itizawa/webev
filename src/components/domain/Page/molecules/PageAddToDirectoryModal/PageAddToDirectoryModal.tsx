@@ -13,12 +13,14 @@ import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useDirectoryListSWR } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
+import { PaginationWrapper } from '~/components/common/PaginationWrapper';
 
 export const PageAddToDirectoryModal: VFC = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
-  const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord });
+  const [activePage, setActivePage] = useState(1);
+  const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord, activePage });
   const { isLoading, addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
 
@@ -64,6 +66,14 @@ export const PageAddToDirectoryModal: VFC = () => {
               </div>
             </StyledList>
           ))}
+          <div className="text-center mt-4">
+            <PaginationWrapper
+              pagingLimit={paginationResult.limit}
+              totalItemsCount={paginationResult.totalDocs}
+              activePage={activePage}
+              mutateActivePage={(number) => setActivePage(number)}
+            />
+          </div>
         </>
       )}
     </Modal>
