@@ -13,7 +13,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -33,6 +33,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { mutate: mutatePageList } = usePageListSWR();
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
   const [isArchive, setIsArchive] = useState(false);
@@ -76,6 +77,10 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
 
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
+  };
+
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       {page.body ? (
@@ -108,6 +113,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickDeleteButton={openDeleteModal}
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
           />
         </div>
         {directoryOfPage != null && (

@@ -17,7 +17,7 @@ import { restClient } from '~/utils/rest-client';
 import { Page, PageStatus } from '~/domains/Page';
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
 const Index: WebevNextPage = () => {
@@ -27,6 +27,7 @@ const Index: WebevNextPage = () => {
   const { t } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
   const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   if (!page) {
@@ -45,7 +46,7 @@ const Index: WebevNextPage = () => {
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page?._id);
+      await removePageFromDirectory(page._id);
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
       toastError(error);
@@ -67,6 +68,10 @@ const Index: WebevNextPage = () => {
     }
   };
 
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
@@ -85,7 +90,13 @@ const Index: WebevNextPage = () => {
             </button>
           )}
           <div className="ms-2">
-            <PageManageDropdown page={page} isHideArchiveButton onClickDeleteButton={openDeleteModal} onClickRemovePageButton={handleRemovePageButton} />
+            <PageManageDropdown
+              page={page}
+              isHideArchiveButton
+              onClickDeleteButton={openDeleteModal}
+              onClickRemovePageButton={handleRemovePageButton}
+              onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+            />
           </div>
         </div>
         <h1 className="text-center my-3">{page.title}</h1>
