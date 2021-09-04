@@ -13,6 +13,7 @@ import { IconButton } from '~/components/base/molecules/IconButton';
 import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
+import { Directory } from '~/domains/Directory';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
@@ -22,36 +23,56 @@ export const SidebarDirectoryList: VFC = () => {
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
+  console.table(directoryPaginationResult?.docs);
 
   const handleOnDragEnd = (result: DragUpdate) => {
     if (!directoryPaginationResult) {
       return;
     }
     // may not have any destination (drag to nowhere)
-    if (result.destination == null) {
+    if (!result.destination) {
       return;
     }
+    const destOrder = result.destination.index + 1;
+    const sourceOrder = result.source.index + 1;
+
     // Do nothing if in the same place
-    if (result.source.index === result.destination.index) {
+    if (sourceOrder === destOrder) {
       return;
     }
 
     try {
-      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
     } catch (err) {
       toastError(err);
     }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
 
-    // mutateDirectoryPaginationResult(
-    //   {
-    //     ...directoryPaginationResult,
-    //     docs: [...directoryPaginationResult.docs.filter((v) => v._id !== result.draggableId), data],
-    //   },
-    //   false,
-    // );
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+    }
 
-    // const reorderedItems = directoryPaginationResult.docs.splice(result.source.index, 1);
-    // directoryPaginationResult.docs.splice(result.destination.index, 0, ...reorderedItems);
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
+
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
