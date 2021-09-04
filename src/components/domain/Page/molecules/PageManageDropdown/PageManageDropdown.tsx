@@ -61,16 +61,18 @@ export const PageManageDropdown: VFC<Props> = ({
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </DropdownItem>
         )}
-        {page.directoryId != null && (
+        {page.directoryId && (
           <DropdownItem tag="button" onClick={onClickRemovePageButton}>
             <Icon icon="REMOVE_FROM_DIRECTORY" color="WHITE" />
             <span className="ms-2">{t.remove_page_from_directory}</span>
           </DropdownItem>
         )}
-        <DropdownItem tag="button" onClick={onClickAddPageToDirectoryButton}>
-          <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
-          <span className="ms-2">{t.save_page_to_directory}</span>
-        </DropdownItem>
+        {!page.directoryId && (
+          <DropdownItem tag="button" onClick={onClickAddPageToDirectoryButton}>
+            <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
+            <span className="ms-2">{t.save_page_to_directory}</span>
+          </DropdownItem>
+        )}
       </DropdownMenu>
     </UncontrolledDropdown>
   );

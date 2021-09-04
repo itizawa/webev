@@ -12,7 +12,7 @@ export class Page {
   title: string;
   body?: string;
   siteName: string;
-  directoryId: string;
+  directoryId?: string;
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;

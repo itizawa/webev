@@ -21,7 +21,25 @@ test('PageManageDropdown isHideArchiveButton ois true', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('PageManageDropdown isHideArchiveButton ois true', () => {
+test('PageManageDropdown isHideArchiveButton is true', () => {
+  const tree = renderer
+    .create(
+      <PageManageDropdown
+        page={mockPage}
+        isHideArchiveButton={false}
+        onClickDeleteButton={() => console.log('test')}
+        onClickSwitchArchiveButton={() => console.log('test')}
+        onClickRemovePageButton={() => console.log('test')}
+        onClickAddPageToDirectoryButton={() => console.log('test')}
+      />,
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+mockPage.directoryId = undefined;
+test('PageManageDropdown directoryId is undefined', () => {
   const tree = renderer
     .create(
       <PageManageDropdown
