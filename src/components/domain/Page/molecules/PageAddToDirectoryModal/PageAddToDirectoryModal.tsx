@@ -4,31 +4,33 @@ import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
 import { Emoji } from 'emoji-mart';
 import { Modal } from '~/components/base/molecules/Modal';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { usePageForAddToDirectory } from '~/stores/modal';
-import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useDirectoryListSWR } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
 
 export const PageAddToDirectoryModal: VFC = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const { data: paginationResult } = useDirectoryListSWR({ searchKeyWord });
+  const { addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
-  const { mutate: pageListMutate } = usePageListSWR();
 
-  const addPageToDirectory = async (directoryId: string) => {
+  const handleClickDirectoryList = async (directoryId: string) => {
+    if (!pageForAddToDirectory) {
+      return;
+    }
+
     try {
-      await restClient.apiPut(`/pages/${pageForAddToDirectory?._id}/directories`, { directoryId });
+      addPageToDirectory(pageForAddToDirectory._id, directoryId);
       mutatePageForAddToDirectory(null);
       toastSuccess(t.toastr_success_add_directory);
-      pageListMutate();
     } catch (err) {
       toastError(err);
     }
@@ -51,7 +53,7 @@ export const PageAddToDirectoryModal: VFC = () => {
       {paginationResult != null && (
         <>
           {paginationResult.docs.map((directory) => (
-            <StyledList className="d-flex" role="button" key={directory._id} onClick={() => addPageToDirectory(directory._id)}>
+            <StyledList className="d-flex" role="button" key={directory._id} onClick={() => handleClickDirectoryList(directory._id)}>
               <div className="w-100 text-truncate">
                 <StyledEmojiWrapper>
                   <Emoji emoji={directory.emojiId} size={20} />
