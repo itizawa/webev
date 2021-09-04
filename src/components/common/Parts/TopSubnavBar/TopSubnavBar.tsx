@@ -6,7 +6,7 @@ import { Icon } from '~/components/base/atoms/Icon';
 import { useLocale } from '~/hooks/useLocale';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 import { Page, PageStatus } from '~/domains/Page';
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
@@ -20,6 +20,7 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const openDeleteModal = async () => {
@@ -33,6 +34,10 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
     } catch (error) {
       toastError(error);
     }
+  };
+
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
   };
 
   return (
@@ -55,7 +60,13 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
           </button>
         )}
         <div className="ms-2">
-          <PageManageDropdown page={page} isHideArchiveButton onClickDeleteButton={openDeleteModal} onClickRemovePageButton={handleRemovePageButton} />
+          <PageManageDropdown
+            page={page}
+            isHideArchiveButton
+            onClickDeleteButton={openDeleteModal}
+            onClickRemovePageButton={handleRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+          />
         </div>
       </div>
       <StyledBorder />

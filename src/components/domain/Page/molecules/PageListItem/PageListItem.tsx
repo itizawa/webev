@@ -12,7 +12,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page, PageStatus } from '~/domains/Page';
 
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
@@ -30,6 +30,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
@@ -67,6 +68,10 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     } catch (error) {
       toastError(error);
     }
+  };
+
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
   };
 
   const directoryOfPage = useMemo(() => {
@@ -107,6 +112,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickDeleteButton={openDeleteModal}
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
           />
         </div>
         {directoryOfPage != null && (
