@@ -87,7 +87,7 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar page={page} onClickReadButton={handleClickSwitchArchiveButton} />
+        <TopSubnavBar page={page} onClickSwitchArchiveButton={handleClickSwitchArchiveButton} />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (
             <div className="mt-2">
@@ -115,8 +115,8 @@ const Page: WebevNextPage = () => {
           <div className="ms-2">
             <PageManageDropdown
               page={page}
-              isHideArchiveButton
               onClickDeleteButton={openDeleteModal}
+              onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
               onClickRemovePageButton={handleRemovePageButton}
               onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
             />

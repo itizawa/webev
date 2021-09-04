@@ -12,9 +12,9 @@ import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirect
 
 type Props = {
   page: Page;
-  onClickReadButton: () => void;
+  onClickSwitchArchiveButton: () => void;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
@@ -49,12 +49,12 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
           </StyledAnchor>
         </div>
         {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </button>
         ) : (
-          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
@@ -62,8 +62,8 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
         <div className="ms-2">
           <PageManageDropdown
             page={page}
-            isHideArchiveButton
             onClickDeleteButton={openDeleteModal}
+            onClickSwitchArchiveButton={onClickSwitchArchiveButton}
             onClickRemovePageButton={handleRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
           />

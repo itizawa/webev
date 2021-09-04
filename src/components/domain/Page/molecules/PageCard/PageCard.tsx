@@ -115,7 +115,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           </p>
           <PageManageDropdown
             page={page}
-            isHideArchiveButton={isHideArchiveButton}
             onClickDeleteButton={openDeleteModal}
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
