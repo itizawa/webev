@@ -15,16 +15,17 @@ import { useDirectoryListSWR } from '~/stores/directory';
 import { usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord, isRoot: true });
+  const { createDirectory } = useCreateDirectory();
   const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -42,9 +43,9 @@ const Page: WebevNextPage = () => {
     }
 
     try {
-      await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
+      await createDirectory(name);
       mutateDirectoryList();
     } catch (err) {
       toastError(err);
