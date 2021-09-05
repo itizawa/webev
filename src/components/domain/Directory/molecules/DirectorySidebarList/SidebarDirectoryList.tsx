@@ -114,7 +114,7 @@ export const SidebarDirectoryList: VFC = () => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
-            <StyledDirectoryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
+            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
               {directoryPaginationResult.docs.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
@@ -127,7 +127,7 @@ export const SidebarDirectoryList: VFC = () => {
                 );
               })}
               {provided.placeholder}
-            </StyledDirectoryDiv>
+            </div>
           )}
         </Droppable>
       </DragDropContext>
@@ -146,9 +146,6 @@ export const SidebarDirectoryList: VFC = () => {
   );
 };
 
-const StyledDirectoryDiv = styled.div`
-  max-height: 60vh;
-`;
 const StyledDiv = styled.div`
   > .btn {
     width: 100%;

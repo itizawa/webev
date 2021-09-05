@@ -147,11 +147,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
               {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
             </>
           ) : (
-            <>
-              {[...Array(5)].map((_v, index) => {
-                return <Skeleton key={index} />;
-              })}
-            </>
+            <Skeleton />
           )}
         </div>
       </Collapse>
