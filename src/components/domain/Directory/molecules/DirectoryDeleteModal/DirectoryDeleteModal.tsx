@@ -5,7 +5,7 @@ import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { DIRECTORY_INDEX_URL } from '~/libs/const/urls';
+import { DIRECTORY_INDEX_URL } from '~/libs/constants/urls';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useDirectoryForDelete } from '~/stores/modal';

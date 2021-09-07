@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { TOP_URL } from '~/libs/const/urls';
+import { TOP_URL } from '~/libs/constants/urls';
 
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
