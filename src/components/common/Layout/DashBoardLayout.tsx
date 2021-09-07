@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId, useSearchKeyWord } from '~/stores/page';
+import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -24,14 +24,14 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/Tu
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { zIndex } from '~/libs/constants/zIndex';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
-
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const { data: currentUser } = useCurrentUser();
 
@@ -40,9 +40,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutateSearchKeyword('');
-
-    if (router.pathname !== '/directory/[id]') {
+    if (router.pathname !== DIRECTORY_ID_URL) {
       mutateDirectoryId(null);
     }
     mutateActivePage(1);
@@ -94,6 +92,6 @@ const StyledBorder = styled.div`
   @media (min-width: ${BootstrapBreakpoints.md}px) {
     position: sticky;
     top: 0;
-    z-index: 980;
+    z-index: ${zIndex.TOP_BORDER};
   }
 `;

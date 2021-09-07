@@ -7,11 +7,8 @@ export const useCreateDirectory = (): { isLoading: boolean; createDirectory: (na
 
   const createDirectory = async (name: string): Promise<Directory> => {
     setIsLoading(true);
-
     const { data } = await restClient.apiPost<Directory>('/directories', { name });
-
     setIsLoading(false);
-
     return data;
   };
 

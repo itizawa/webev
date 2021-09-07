@@ -1,34 +1,48 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
-import Loader from 'react-loader-spinner';
+import { ReactNode, useMemo } from 'react';
 
+import Loader from 'react-loader-spinner';
 import styled from 'styled-components';
+
+import { PageStatus } from '~/domains/Page';
+
+import { usePageByPageId } from '~/stores/page';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { useLocale } from '~/hooks/useLocale';
+import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { toastError, toastSuccess } from '~/utils/toastr';
+
+import { Icon } from '~/components/base/atoms/Icon';
+import { Tooltip } from '~/components/base/atoms/Tooltip';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-
-import { usePageByPageId } from '~/stores/page';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { useLocale } from '~/hooks/useLocale';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { restClient } from '~/utils/rest-client';
-import { Page, PageStatus } from '~/domains/Page';
-import { Icon } from '~/components/base/atoms/Icon';
-import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 
-const Index: WebevNextPage = () => {
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { useAllDirectories } from '~/stores/directory';
+import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
+
+const Page: WebevNextPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
   const { t } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
+  const { data: allDirectories } = useAllDirectories();
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+  const { isLoading, switchArchive } = useSwitchArchive();
+
+  const directoryOfPage = useMemo(() => {
+    return allDirectories?.find((v) => v._id === page?.directoryId);
+  }, [allDirectories, page?.directoryId]);
+
+  const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
 
   if (!page) {
     return (
@@ -38,30 +52,28 @@ const Index: WebevNextPage = () => {
     );
   }
 
-  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
-
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
   };
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page._id);
+      const data = await removePageFromDirectory(page._id);
+      mutatePage(data, false);
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
       toastError(error);
     }
   };
 
-  const switchArchive = async () => {
-    const bool = page.status === PageStatus.PAGE_STATUS_STOCK;
+  const handleClickSwitchArchiveButton = async () => {
     try {
-      const { data } = await restClient.apiPut<Page>(`/pages/${page._id}/archive`, { isArchive: bool });
+      const data = await switchArchive(page._id, !isArchived);
       mutatePage(data, false);
-      if (bool) {
-        toastSuccess(t.toastr_success_read);
-      } else {
+      if (isArchived) {
         toastSuccess(t.toastr_success_put_back);
+      } else {
+        toastSuccess(t.toastr_success_read);
       }
     } catch (err) {
       toastError(err);
@@ -76,15 +88,27 @@ const Index: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar page={page} onClickReadButton={switchArchive} />
+        <TopSubnavBar page={page} onClickRemovePageButton={handleRemovePageButton} onClickSwitchArchiveButton={handleClickSwitchArchiveButton} />
         <div className="ms-2 d-flex align-items-center">
+          {directoryOfPage && (
+            <div className="mt-2">
+              <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
+                <Link href={`/directory/${directoryOfPage._id}`}>
+                  <span role="button" className="badge bg-secondary text-white">
+                    <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
+                    <span className="ms-1">{directoryOfPage.name}</span>
+                  </span>
+                </Link>
+              </Tooltip>
+            </div>
+          )}
           {isArchived ? (
-            <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={switchArchive}>
+            <button className="btn btn-sm btn-secondary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="REPLY" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.return_button}</span>
             </button>
           ) : (
-            <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={switchArchive}>
+            <button className="btn btn-sm btn-primary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>
@@ -92,8 +116,8 @@ const Index: WebevNextPage = () => {
           <div className="ms-2">
             <PageManageDropdown
               page={page}
-              isHideArchiveButton
               onClickDeleteButton={openDeleteModal}
+              onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
               onClickRemovePageButton={handleRemovePageButton}
               onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
             />
@@ -154,5 +178,5 @@ const StyledDiv = styled.div`
 
 const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>;
 
-Index.getLayout = getLayout;
-export default Index;
+Page.getLayout = getLayout;
+export default Page;

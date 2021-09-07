@@ -6,7 +6,7 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useDirectoryListSWR = ({
+export const useDirectoryPaginationResult = ({
   searchKeyWord,
   activePage = 1,
   isRoot,
@@ -15,21 +15,8 @@ export const useDirectoryListSWR = ({
   activePage?: number;
   isRoot?: boolean;
 }): SWRResponse<PaginationResult<Directory>, Error> => {
-  return useAuthenticationSWR(
-    ['/directories/list', activePage, isRoot, searchKeyWord],
-    (endpoint, activePage, isRoot, searchKeyWord) =>
-      restClient
-        .apiGet(`${endpoint}?page=${activePage}${isRoot ? `&isRoot=${isRoot}` : ''}${searchKeyWord ? `&q=${searchKeyWord}` : ``}`)
-        .then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: true,
-    },
-  );
-};
-
-export const useAllParentDirectories = (): SWRResponse<Directory[], Error> => {
-  return useAuthenticationSWR('/directories/parents', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  const endpoint = `/directories/list?page=${activePage}${isRoot ? `&isRoot=${isRoot}` : ''}${searchKeyWord ? `&q=${searchKeyWord}` : ``}`;
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
@@ -69,7 +56,7 @@ export const useDirectoryInformation = (directoryId: string): SWRResponse<Direct
 };
 
 export const useAllDirectories = (): SWRResponse<Directory[], Error> => {
-  return useAuthenticationSWR(['/directories/all'], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR('/directories/all', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
