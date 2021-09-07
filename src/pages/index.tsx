@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { imagePath } from '~/libs/const/imagePath';
+import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';

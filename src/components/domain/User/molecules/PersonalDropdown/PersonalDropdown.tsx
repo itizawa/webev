@@ -7,7 +7,7 @@ import style from 'styled-components';
 import Loader from 'react-loader-spinner';
 
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
-import { USER_SETTINGS_URL } from '~/libs/const/urls';
+import { USER_SETTINGS_URL } from '~/libs/constants/urls';
 
 import { toastSuccess } from '~/utils/toastr';
 

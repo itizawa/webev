@@ -24,7 +24,7 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/Tu
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
-import { DIRECTORY_ID_URL } from '~/libs/const/urls';
+import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();

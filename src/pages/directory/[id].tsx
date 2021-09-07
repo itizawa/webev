@@ -8,7 +8,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { openFileFolderEmoji } from '~/libs/const/emoji';
+import { openFileFolderEmoji } from '~/libs/constants/emoji';
 import { useLocale } from '~/hooks/useLocale';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';

@@ -7,7 +7,7 @@ import { useCurrentUser } from '~/stores/user';
 import { useSocketId } from '~/stores/contexts';
 
 import { restClient } from '~/utils/rest-client';
-import { HOW_TO_USE_URL } from '~/libs/const/urls';
+import { HOW_TO_USE_URL } from '~/libs/constants/urls';
 
 export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExecutedTutorial: () => Promise<void> } => {
   const { mutate: mutatePageList } = usePageListSWR();
