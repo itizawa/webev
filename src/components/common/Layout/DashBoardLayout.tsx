@@ -25,6 +25,7 @@ import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { zIndex } from '~/libs/constants/zIndex';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -91,6 +92,6 @@ const StyledBorder = styled.div`
   @media (min-width: ${BootstrapBreakpoints.md}px) {
     position: sticky;
     top: 0;
-    z-index: 980;
+    z-index: ${zIndex.TOP_BORDER};
   }
 `;

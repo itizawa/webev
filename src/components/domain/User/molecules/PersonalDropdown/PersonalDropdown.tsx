@@ -6,19 +6,18 @@ import { signOut } from 'next-auth/client';
 import style from 'styled-components';
 import Loader from 'react-loader-spinner';
 
-import { OgpLayoutType } from '~/libs/interfaces/contexts';
-import { USER_SETTINGS_URL } from '~/libs/constants/urls';
-
-import { toastSuccess } from '~/utils/toastr';
-
 import { Icon } from '~/components/base/atoms/Icon';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
-
-import { useLocale } from '~/hooks/useLocale';
 
 import { useCurrentUser } from '~/stores/user';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { useLocalStorage } from '~/hooks/useLocalStorage';
+import { useLocale } from '~/hooks/useLocale';
+
+import { OgpLayoutType } from '~/libs/interfaces/contexts';
+import { toastSuccess } from '~/utils/toastr';
+import { USER_SETTINGS_URL } from '~/libs/constants/urls';
+import { zIndex } from '~/libs/constants/zIndex';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
@@ -109,5 +108,5 @@ export const PersonalDropdown: VFC = () => {
 };
 
 const StyledDropdownMenu = style(DropdownMenu)`
-  z-index: 1300;
+  z-index: ${zIndex.DROPDOWN_MENU};
 `;

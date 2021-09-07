@@ -1,12 +1,17 @@
 import { VFC } from 'react';
 
 import styled from 'styled-components';
+
 import { useHooks } from './hooks';
-import { Icon } from '~/components/base/atoms/Icon';
-import { useLocale } from '~/hooks/useLocale';
-import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+
 import { Page, PageStatus } from '~/domains/Page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+
+import { Icon } from '~/components/base/atoms/Icon';
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { useLocale } from '~/hooks/useLocale';
+
+import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   page: Page;
@@ -83,7 +88,7 @@ const StyledAnchor = styled.a`
 `;
 
 const StyledBorder = styled.div`
-  z-index: 980;
+  z-index: ${zIndex.TOP_BORDER};
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);
