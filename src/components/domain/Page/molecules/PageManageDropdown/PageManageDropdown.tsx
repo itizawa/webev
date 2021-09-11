@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { VFC, useMemo } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -24,12 +24,34 @@ export const PageManageDropdown: VFC<Props> = ({
 }) => {
   const { t } = useLocale();
 
+  /**
+   * Twitter の共有
+   */
   const sharePage = async () => {
     if (window != null) {
       const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
       window.open(twitterUrl.toString(), '_blank');
     }
   };
+
+  /**
+   * Web share api を使った共有
+   */
+  const sharePageByNavigator = () => {
+    navigator.share({
+      title: page.title,
+      text: page.description,
+      url: page.url,
+    });
+  };
+
+  /**
+   * Web share api が使えるかどうか(MobileかSafariだと使用可能)
+   * @returns {boolean}
+   */
+  const canShareByNavigator = useMemo(() => {
+    return !!navigator?.share;
+  }, [navigator]);
 
   return (
     <UncontrolledDropdown direction="left">
@@ -49,10 +71,17 @@ export const PageManageDropdown: VFC<Props> = ({
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
-        <DropdownItem tag="button" onClick={sharePage}>
-          <Icon icon="TWITTER" color="WHITE" />
-          <span className="ms-2">{t.share}</span>
-        </DropdownItem>
+        {canShareByNavigator ? (
+          <DropdownItem tag="button" onClick={sharePageByNavigator}>
+            <Icon icon="TWITTER" color="WHITE" />
+            <span className="ms-2">{t.share}</span>
+          </DropdownItem>
+        ) : (
+          <DropdownItem tag="button" onClick={sharePage}>
+            <Icon icon="TWITTER" color="WHITE" />
+            <span className="ms-2">{t.share}</span>
+          </DropdownItem>
+        )}
         {page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
           <DropdownItem tag="button" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
