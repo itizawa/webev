@@ -81,7 +81,7 @@ const Page: WebevNextPage = () => {
       mutateDirectoryChildren();
       mutateAllDirectories();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
@@ -100,7 +100,7 @@ const Page: WebevNextPage = () => {
       mutateDirectory(data, false);
       mutateAllDirectories();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

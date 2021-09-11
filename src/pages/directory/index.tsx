@@ -56,7 +56,7 @@ const Page: WebevNextPage = () => {
         );
       }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
 
     setIsCreatingNewDirectory(false);

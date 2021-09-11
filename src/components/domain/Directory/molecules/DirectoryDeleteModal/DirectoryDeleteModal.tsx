@@ -31,7 +31,7 @@ export const DirectoryDeleteModal: VFC = () => {
       mutateDirectoryChildren();
       mutateDirectoryForDelete(null);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

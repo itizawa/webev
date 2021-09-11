@@ -65,7 +65,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
       setIsCreatingNewDirectory(false);
       mutateChildrenDirectoriesForDisplay();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

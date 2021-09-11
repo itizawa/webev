@@ -39,7 +39,7 @@ export const DirectoryRenameModal: VFC = () => {
       mutateAllDirectories();
       mutateDirectoryForRename(null);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

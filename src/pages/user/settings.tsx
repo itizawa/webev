@@ -28,7 +28,7 @@ const Page: WebevNextPage = () => {
     try {
       restClient.apiPut<User>('/users/me', { property: newObject });
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
   const debounceUpdateProfile = useDebouncedCallback(updateProfile, 300);
@@ -47,7 +47,7 @@ const Page: WebevNextPage = () => {
       toastSuccess(t.toastr_update_api_token);
       mutateApiToken(user.apiTokenForExtension, false);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
