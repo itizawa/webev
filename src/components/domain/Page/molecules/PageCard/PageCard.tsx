@@ -84,7 +84,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
     } catch (error) {
-      toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 

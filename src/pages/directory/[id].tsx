@@ -154,7 +154,7 @@ const Page: WebevNextPage = () => {
       setIsEmojiSettingMode(false);
       mutateDirectoryPaginationResult();
     } catch (error) {
-      toastError(error);
+      if (err instanceof Error) toastError(error);
     }
   };
 
