@@ -42,7 +42,7 @@ export const ShareLinkReceiverModal: VFC = () => {
       mutatePageList();
       router.push(router.pathname);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

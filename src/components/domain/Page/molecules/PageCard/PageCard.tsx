@@ -61,7 +61,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
         toastSuccess(t.toastr_success_put_back);
       }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

@@ -29,7 +29,7 @@ const Page: WebevNextPage = () => {
       toastSuccess(t.toastr_success_send_inquiry);
       router.push(TOP_URL);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) if (err instanceof Error) toastError(err);
     }
   };
 

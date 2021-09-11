@@ -43,7 +43,7 @@ export const SidebarDirectoryList: VFC = () => {
     try {
       restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
     const { docs } = directoryPaginationResult;
     const isUp = destOrder > sourceOrder;
@@ -95,7 +95,7 @@ export const SidebarDirectoryList: VFC = () => {
         );
       }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
 
     setIsCreatingNewDirectory(false);

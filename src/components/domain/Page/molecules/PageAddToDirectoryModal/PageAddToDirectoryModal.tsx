@@ -34,7 +34,7 @@ export const PageAddToDirectoryModal: VFC = () => {
       mutatePageForAddToDirectory(null);
       toastSuccess(t.toastr_success_add_directory);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

@@ -76,7 +76,7 @@ const Page: WebevNextPage = () => {
         toastSuccess(t.toastr_success_read);
       }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

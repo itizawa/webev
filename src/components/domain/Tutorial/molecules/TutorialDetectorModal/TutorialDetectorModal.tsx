@@ -24,7 +24,7 @@ export const TutorialDetectorModal: VFC = () => {
       await updateIsExecutedTutorial();
       toastSuccess(t.toastr_save_url);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
