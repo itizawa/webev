@@ -23,9 +23,7 @@ import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
-import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
-import { zIndex } from '~/libs/constants/zIndex';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -89,9 +87,4 @@ const StyledDiv = styled.div`
 const StyledBorder = styled.div`
   height: 4px;
   background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);
-  @media (min-width: ${BootstrapBreakpoints.md}px) {
-    position: sticky;
-    top: 0;
-    z-index: ${zIndex.TOP_BORDER};
-  }
 `;
