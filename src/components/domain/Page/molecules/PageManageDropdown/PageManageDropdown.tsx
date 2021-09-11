@@ -73,7 +73,7 @@ export const PageManageDropdown: VFC<Props> = ({
         </DropdownItem>
         {canShareByNavigator ? (
           <DropdownItem tag="button" onClick={sharePageByNavigator}>
-            <Icon icon="TWITTER" color="WHITE" />
+            <Icon icon="SHARE" color="WHITE" />
             <span className="ms-2">{t.share}</span>
           </DropdownItem>
         ) : (
