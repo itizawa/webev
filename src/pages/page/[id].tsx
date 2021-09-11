@@ -62,7 +62,7 @@ const Page: WebevNextPage = () => {
       mutatePage(data, false);
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
-      if (err instanceof Error) toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 

@@ -71,8 +71,7 @@ export const PageSaveModal: VFC = () => {
       mutatePageNotBelongDirectory();
       pageListMutate();
     } catch (error) {
-      console.log(error);
-      if (err instanceof Error) toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 
