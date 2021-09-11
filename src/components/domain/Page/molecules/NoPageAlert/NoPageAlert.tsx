@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { VFC } from 'react';
-import { imagePath } from '~/libs/const/imagePath';
+import { imagePath } from '~/libs/constants/imagePath';
 
 import { useLocale } from '~/hooks/useLocale';
 

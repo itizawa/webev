@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { VFC } from 'react';
-import { imagePath } from '~/libs/const/imagePath';
+import { imagePath } from '~/libs/constants/imagePath';
 
 type Props = {
   siteName?: string;

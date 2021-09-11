@@ -48,7 +48,7 @@ export const PageSaveModal: VFC = () => {
       pageListMutate();
       closeModal();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

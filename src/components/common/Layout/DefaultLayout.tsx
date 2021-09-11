@@ -5,6 +5,7 @@ import { Navbar } from '~/components/common/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { zIndex } from '~/libs/constants/zIndex';
 
 export const DefaultLayout: FC = ({ children }) => {
   return (
@@ -25,6 +26,6 @@ const StyledBorder = styled.div`
   @media (min-width: ${BootstrapBreakpoints.md}px) {
     position: sticky;
     top: 0;
-    z-index: 980;
+    z-index: ${zIndex.TOP_BORDER};
   }
 `;

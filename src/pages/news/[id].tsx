@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 
 import { News } from '~/libs/interfaces/news';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { NEWS_INDEX_URL } from '~/libs/const/urls';
+import { NEWS_INDEX_URL } from '~/libs/constants/urls';
 
 import { useLocale } from '~/hooks/useLocale';
 
