@@ -83,7 +83,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
       }
       toastSuccess(t.remove_page_from_directory);
     } catch (error) {
-      if (err instanceof Error) toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 
