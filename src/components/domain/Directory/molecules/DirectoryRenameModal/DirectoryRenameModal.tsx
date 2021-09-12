@@ -8,7 +8,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { useDirectoryForRename } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useAllDirectories, useAllParentDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
+import { useAllDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DirectoryRenameModal: VFC = () => {
   const { t } = useLocale();
@@ -18,7 +18,7 @@ export const DirectoryRenameModal: VFC = () => {
   const { data: directoryForRename, mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateDirectory } = useDirectoryInformation(directoryForRename?._id as string);
   const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
-  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
   useEffect(() => {
@@ -34,12 +34,12 @@ export const DirectoryRenameModal: VFC = () => {
       await restClient.apiPut(`/directories/${directoryForRename?._id}/rename`, { name });
       toastSuccess(t.toastr_update_directory_name);
       mutateDirectory();
-      mutateAllParentDirectories();
+      mutateDirectoryPaginationResult();
       mutateDirectoryChildren();
       mutateAllDirectories();
       mutateDirectoryForRename(null);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

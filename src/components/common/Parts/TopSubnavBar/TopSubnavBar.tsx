@@ -1,38 +1,37 @@
 import { VFC } from 'react';
 
 import styled from 'styled-components';
+
 import { useHooks } from './hooks';
-import { Icon } from '~/components/base/atoms/Icon';
-import { useLocale } from '~/hooks/useLocale';
-import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+
 import { Page, PageStatus } from '~/domains/Page';
-import { usePageForDelete } from '~/stores/modal';
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+
+import { Icon } from '~/components/base/atoms/Icon';
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { useLocale } from '~/hooks/useLocale';
+
+import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   page: Page;
-  onClickReadButton: () => void;
+  onClickRemovePageButton: () => void;
+  onClickSwitchArchiveButton: () => void;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { removePageFromDirectory } = useRemovePageFromDirectory();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
   };
 
-  const handleRemovePageButton = async () => {
-    try {
-      await removePageFromDirectory(page?._id);
-      toastSuccess(t.remove_page_from_directory);
-    } catch (error) {
-      toastError(error);
-    }
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
   };
 
   return (
@@ -44,18 +43,24 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickReadButton }) => {
           </StyledAnchor>
         </div>
         {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </button>
         ) : (
-          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
         )}
         <div className="ms-2">
-          <PageManageDropdown page={page} isHideArchiveButton onClickDeleteButton={openDeleteModal} onClickRemovePageButton={handleRemovePageButton} />
+          <PageManageDropdown
+            page={page}
+            onClickDeleteButton={openDeleteModal}
+            onClickSwitchArchiveButton={onClickSwitchArchiveButton}
+            onClickRemovePageButton={onClickRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+          />
         </div>
       </div>
       <StyledBorder />
@@ -83,7 +88,7 @@ const StyledAnchor = styled.a`
 `;
 
 const StyledBorder = styled.div`
-  z-index: 980;
+  z-index: ${zIndex.TOP_BORDER};
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);

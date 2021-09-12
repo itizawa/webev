@@ -8,20 +8,19 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { openFileFolderEmoji } from '~/libs/const/emoji';
-import { useLocale } from '~/hooks/useLocale';
-
-import { useAllDirectories, useAllParentDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation } from '~/stores/directory';
+import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
+import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
+import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { Icon } from '~/components/base/atoms/Icon';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
@@ -31,9 +30,11 @@ import { PageStatus } from '~/domains/Page';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
+import { useLocale } from '~/hooks/useLocale';
+import { openFileFolderEmoji } from '~/libs/constants/emoji';
+import { zIndex } from '~/libs/constants/zIndex';
 
 const emojiSize = 40;
 
@@ -57,7 +58,7 @@ const Page: WebevNextPage = () => {
   const { data: paginationResult } = usePageListSWR();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
-  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
   const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
@@ -76,11 +77,11 @@ const Page: WebevNextPage = () => {
     }
     try {
       await restClient.apiPut<Directory>(`/directories/${directory?._id}/rename`, { name });
-      mutateAllParentDirectories();
+      mutateDirectoryPaginationResult();
       mutateDirectoryChildren();
       mutateAllDirectories();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
@@ -99,7 +100,7 @@ const Page: WebevNextPage = () => {
       mutateDirectory(data, false);
       mutateAllDirectories();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
@@ -151,9 +152,9 @@ const Page: WebevNextPage = () => {
       toastSuccess(t.toastr_update_emoji);
       setEmoji(emoji);
       setIsEmojiSettingMode(false);
-      mutateAllParentDirectories();
+      mutateDirectoryPaginationResult();
     } catch (error) {
-      toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 
@@ -289,5 +290,5 @@ const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
   position: absolute;
   top: ${(props) => props.top}px;
   left: ${(props) => props.left}px;
-  z-index: 1300;
+  z-index: ${zIndex.DROPDOWN_MENU};
 `;

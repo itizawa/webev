@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { TOP_URL } from '~/libs/const/urls';
+import { TOP_URL } from '~/libs/constants/urls';
 
 import { useLocale } from '~/hooks/useLocale';
 import { InquiryType } from '~/domains/Inquiry';
@@ -29,7 +29,7 @@ const Page: WebevNextPage = () => {
       toastSuccess(t.toastr_success_send_inquiry);
       router.push(TOP_URL);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) if (err instanceof Error) toastError(err);
     }
   };
 

@@ -11,20 +11,21 @@ import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
-import { useDirectoryListSWR } from '~/stores/directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 import { usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
-  const { data: paginationResult, mutate: mutateDirectoryList } = useDirectoryListSWR({ searchKeyWord, isRoot: true });
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, isRoot: true });
+  const { createDirectory } = useCreateDirectory();
   const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -42,12 +43,20 @@ const Page: WebevNextPage = () => {
     }
 
     try {
-      await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateDirectoryList();
+      const result = await createDirectory(name);
+      if (directoryPaginationResult) {
+        mutateDirectoryPaginationResult(
+          {
+            ...directoryPaginationResult,
+            docs: [...directoryPaginationResult.docs, result],
+          },
+          false,
+        );
+      }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
 
     setIsCreatingNewDirectory(false);
@@ -60,21 +69,21 @@ const Page: WebevNextPage = () => {
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
           <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
         </div>
-        {paginationResult == null && (
+        {directoryPaginationResult == null && (
           <div className="text-center pt-5">
             <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
           </div>
         )}
-        {paginationResult != null && (
+        {directoryPaginationResult != null && (
           <>
             <div className="row">
-              {paginationResult.docs.map((directory) => (
+              {directoryPaginationResult.docs.map((directory) => (
                 <div className="col-xl-4 col-md-6" key={directory._id}>
                   <DirectoryListItem directory={directory} />
                 </div>
               ))}
             </div>
-            {paginationResult?.docs.length < 10 && (
+            {directoryPaginationResult.docs.length < 10 && !searchKeyWord && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>

@@ -23,7 +23,7 @@ export const PageDeleteModal: VFC = () => {
       toastSuccess(t.toastr_delete_url);
       pageListMutate();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

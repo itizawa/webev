@@ -1,4 +1,4 @@
-import { VFC, useMemo, useState, useEffect } from 'react';
+import { VFC, useMemo } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -13,7 +13,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Page, PageStatus } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete } from '~/stores/modal';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -30,31 +30,38 @@ type Props = {
 export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
-  const [isArchive, setIsArchive] = useState(false);
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
 
-  useEffect(() => {
-    setIsArchive(page.status === PageStatus.PAGE_STATUS_ARCHIVE);
-  }, [page]);
+  const isArchive = useMemo(() => page.status === PageStatus.PAGE_STATUS_ARCHIVE, [status]);
 
   const handleSwitchArchive = async () => {
     const bool = !isArchive;
     try {
       await switchArchive(_id, bool);
+      if (pageList) {
+        mutatePageList(
+          {
+            ...pageList,
+            docs: pageList.docs.filter((v) => v._id !== _id),
+          },
+          false,
+        );
+      }
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {
         toastSuccess(t.toastr_success_put_back);
       }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
@@ -64,17 +71,30 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const handleRemovePageButton = async () => {
     try {
-      await removePageFromDirectory(page._id);
+      const data = await removePageFromDirectory(page._id);
+      if (pageList) {
+        mutatePageList(
+          {
+            ...pageList,
+            docs: [...pageList.docs.filter((v) => v._id !== page._id), data],
+          },
+          false,
+        );
+      }
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
     } catch (error) {
-      toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
+
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
+  };
 
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
@@ -104,10 +124,10 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           </p>
           <PageManageDropdown
             page={page}
-            isHideArchiveButton={isHideArchiveButton}
             onClickDeleteButton={openDeleteModal}
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
           />
         </div>
         {directoryOfPage != null && (

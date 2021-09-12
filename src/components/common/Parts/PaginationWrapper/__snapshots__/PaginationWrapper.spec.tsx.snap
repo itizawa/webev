@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationWrapper 1`] = `
+<div
+  className="btn-group"
+  role="group"
+>
+  <button
+    className="btn px-2 border-0 btn-secondary"
+    onClick={[Function]}
+  >
+    <svg
+      className="align-text-bottom text-light"
+      fill="currentColor"
+      height={18}
+      viewBox="0 0 16 16"
+      width={18}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        fillRule="evenodd"
+      />
+      <path
+        d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="btn px-2 border-0 btn-secondary"
+    onClick={[Function]}
+  >
+    <svg
+      className="align-text-bottom text-light"
+      fill="currentColor"
+      height={18}
+      viewBox="0 0 16 16"
+      width={18}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="btn btn-secondary "
+    onClick={[Function]}
+  >
+    1
+  </button>
+  <button
+    className="btn btn-secondary "
+    onClick={[Function]}
+  >
+    2
+  </button>
+  <button
+    className="btn btn-secondary active"
+    onClick={[Function]}
+  >
+    3
+  </button>
+  <button
+    className="btn btn-secondary "
+    onClick={[Function]}
+  >
+    4
+  </button>
+  <button
+    className="btn btn-secondary "
+    onClick={[Function]}
+  >
+    5
+  </button>
+  <button
+    className="btn px-2 border-0 btn-secondary"
+    onClick={[Function]}
+  >
+    <svg
+      className="align-text-bottom text-light"
+      fill="currentColor"
+      height={18}
+      viewBox="0 0 16 16"
+      width={18}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
+        fillRule="evenodd"
+      />
+      <path
+        d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+  <button
+    className="btn px-2 border-0 btn-secondary"
+    onClick={[Function]}
+  >
+    <svg
+      className="align-text-bottom text-light"
+      fill="currentColor"
+      height={18}
+      viewBox="0 0 16 16"
+      width={18}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"
+        fillRule="evenodd"
+      />
+    </svg>
+  </button>
+</div>
+`;
