@@ -12,7 +12,6 @@ export const PaginationWrapper: VFC<Props> = (props) => {
   const { totalItemsCount, pagingLimit, activePage, mutateActivePage } = props;
 
   const handlePaginationButton = (page: number) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     mutateActivePage(page);
   };
 

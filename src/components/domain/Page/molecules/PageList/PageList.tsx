@@ -45,7 +45,15 @@ export const PageList: VFC<Props> = (props) => {
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={mutateActivePage} />
+          <PaginationWrapper
+            pagingLimit={pagingLimit}
+            totalItemsCount={totalItemsCount}
+            activePage={activePage}
+            mutateActivePage={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              mutateActivePage;
+            }}
+          />
         </div>
       )}
     </div>
