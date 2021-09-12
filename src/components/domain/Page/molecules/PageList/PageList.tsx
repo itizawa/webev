@@ -5,7 +5,7 @@ import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 

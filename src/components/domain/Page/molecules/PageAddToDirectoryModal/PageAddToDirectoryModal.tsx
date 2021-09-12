@@ -13,7 +13,7 @@ import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useDirectoryPaginationResult } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
-import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 
 export const PageAddToDirectoryModal: VFC = () => {
   const { t } = useLocale();
