@@ -32,7 +32,8 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.get(`/api/v1${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       throw apiErrorHandler(err);
     }
   }
@@ -41,7 +42,8 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.post(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       throw apiErrorHandler(err);
     }
   }
@@ -50,7 +52,8 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.put(`/api/v1${url}`, body, { headers: { Authorization: `Bearer ${accessToken}` } });
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       throw apiErrorHandler(err);
     }
   }
@@ -59,7 +62,8 @@ class RestClient {
     const accessToken = await this.getAccessToken();
     try {
       return await this.axios.delete(`/api/v1${url}`, { headers: { Authorization: `Bearer ${accessToken}` }, data: body });
-    } catch (err) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
       throw apiErrorHandler(err);
     }
   }
