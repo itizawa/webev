@@ -53,6 +53,7 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'import/order': ['error'],
     'no-unused-vars': 'off',
+    'react/display-name': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     '@kzmat/commentout/commentout': ['error'],
     'prettier/prettier': [

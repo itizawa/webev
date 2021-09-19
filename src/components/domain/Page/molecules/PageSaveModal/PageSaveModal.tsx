@@ -5,7 +5,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 
@@ -71,8 +71,7 @@ export const PageSaveModal: VFC = () => {
       mutatePageNotBelongDirectory();
       pageListMutate();
     } catch (error) {
-      console.log(error);
-      toastError(error);
+      if (error instanceof Error) toastError(error);
     }
   };
 
