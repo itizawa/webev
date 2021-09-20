@@ -49,9 +49,9 @@ export const PageList: VFC<Props> = (props) => {
             pagingLimit={pagingLimit}
             totalItemsCount={totalItemsCount}
             activePage={activePage}
-            mutateActivePage={() => {
+            mutateActivePage={(page) => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
-              mutateActivePage;
+              mutateActivePage(page);
             }}
           />
         </div>
