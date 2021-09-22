@@ -23,6 +23,11 @@ export const PageList: VFC<Props> = (props) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
 
+  const handleMutateActivePage = (page: number) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mutateActivePage(page);
+  };
+
   return (
     <div className="row">
       {pages.map((page) => {
@@ -45,15 +50,7 @@ export const PageList: VFC<Props> = (props) => {
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper
-            pagingLimit={pagingLimit}
-            totalItemsCount={totalItemsCount}
-            activePage={activePage}
-            mutateActivePage={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              mutateActivePage;
-            }}
-          />
+          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
         </div>
       )}
     </div>
