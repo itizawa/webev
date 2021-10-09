@@ -10,13 +10,11 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // If session exists, redirect home page
     if (!loading && session != null) {
       router.push(HOME_URL);
     }
   }, [loading, session]);
 
-  // When rendering client side don't display anything until loading is complete
   if (typeof window !== 'undefined' && loading)
     return (
       <div className="text-center pt-5">
