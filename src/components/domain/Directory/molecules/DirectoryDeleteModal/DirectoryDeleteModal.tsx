@@ -23,7 +23,6 @@ export const DirectoryDeleteModal: VFC = () => {
     try {
       await restClient.apiDelete(`/directories/${directoryForDelete?._id}`);
       toastSuccess(t.toastr_delete_directory);
-      // delete current page directory
       if (router.query.id === directoryForDelete?._id) {
         router.push(DIRECTORY_INDEX_URL);
       }

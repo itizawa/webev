@@ -18,14 +18,12 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   pageProps: { children?: ReactNode; session?: Session };
 }) => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-  // GA
   usePageView();
 
   if (isMaintenanceMode) {
     return <MaintenanceLayout />;
   }
 
-  // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
