@@ -28,14 +28,12 @@ export const SidebarDirectoryList: VFC = () => {
     if (!directoryPaginationResult) {
       return;
     }
-    // may not have any destination (drag to nowhere)
     if (!result.destination) {
       return;
     }
     const destOrder = result.destination.index + 1;
     const sourceOrder = result.source.index + 1;
 
-    // Do nothing if in the same place
     if (sourceOrder === destOrder) {
       return;
     }

@@ -38,6 +38,7 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/ignore': ['node_modules'],
   },
   rules: {
     '@typescript-eslint/ban-types': [
