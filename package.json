@@ -59,7 +59,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.10.1",
-    "@types/react": "^17.0.24",
+    "@types/react": "17.0.29",
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/react-test-renderer": "^17.0.1",
