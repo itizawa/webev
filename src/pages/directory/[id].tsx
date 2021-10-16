@@ -71,7 +71,6 @@ const Page: WebevNextPage = () => {
   const [newDirectoryDescription, setNewDirectoryDescription] = useState<string>('');
 
   const updateDirectoryName = async (name: string): Promise<void> => {
-    // 前回から変更がなかったら何もしない
     if (!directory || name === directory?.name) {
       return;
     }
@@ -91,7 +90,6 @@ const Page: WebevNextPage = () => {
   }, [newDirectoryName]);
 
   const updateDirectoryDescription = async (description: string): Promise<void> => {
-    // 前回から変更がなかったら何もしない
     if (!directory || description === directory?.description) {
       return;
     }

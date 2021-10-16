@@ -42,7 +42,6 @@ export const PageUrlInputForm: VFC = () => {
     }
   };
 
-  // read clipboard and set when not used in the past
   const readClipboardText = async () => {
     // TODO use vars from DB instead of local storage
     if (retrieveValue('isEnableReadFromClipboard') !== 'true') {
@@ -50,7 +49,6 @@ export const PageUrlInputForm: VFC = () => {
     }
     const clipboardText = await navigator.clipboard.readText();
 
-    // check url
     if (!isValidUrl(clipboardText)) {
       return mutateUrlFromClipBoard(null);
     }
