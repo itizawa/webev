@@ -1,5 +1,4 @@
 import * as cheerio from 'cheerio';
-import { Cheerio } from 'cheerio';
 import { PageForImport, DirForImport } from '~/interfaces/importBookmark';
 
 // ブラウザからエクスポートしたブックマークhtmlの内容をスクレイピング
@@ -19,15 +18,15 @@ import { PageForImport, DirForImport } from '~/interfaces/importBookmark';
 //     - (page)[hogefuga])http://hogefuga.com)
 // 出力結果
 // [
-//  {id: '', name: '', childrenDirIds: ['1591786320hoge'], childrenPage: [{url: 'http://example.com', title: 'example'}] },
-//  {id: '1591786320hoge', name: 'hoge', childrenDirIds: [], childrenPage: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
+//  {id: '', name: '', childrenDirIds: ['1591786320hoge'], childrenPages: [{url: 'http://example.com', title: 'example'}] },
+//  {id: '1591786320hoge', name: 'hoge', childrenDirIds: [], childrenPages: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
 // ]
 export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
   const root = cheerio.load(html);
   const result: DirForImport[] = [];
 
   // ディレクトリを表す要素を一件一件見ていく
-  root('dl').map((_: number, nodeDL: Cheerio.Element): void => {
+  root('dl').map((_: number, nodeDL: any): void => {
     const dir: DirForImport = {
       id: '',
       name: '',
@@ -45,7 +44,7 @@ export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
     dir.name = dirName;
 
     // 子要素から配下ディレクトリと配下ページを取得
-    nodeDL.childNodes.forEach((node: Cheerio.Element) => {
+    nodeDL.childNodes.forEach((node: any) => {
       const $ = cheerio.load(node);
 
       // 配下ページ
@@ -57,7 +56,7 @@ export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
         dir.childrenPages.push(page);
       }
 
-      // // 配下ディレクトリ
+      // 配下ディレクトリ
       const childDir = $('h3');
       if (childDir.length > 0) {
         const childDirCreateAt = childDir.attr('add_date');
@@ -76,7 +75,7 @@ export const convertFromHtmlToPageUrls = (html: string): string[] => {
   const root = cheerio.load(html);
   const result: string[] = [];
 
-  root('a').map((_: number, node: Cheerio.Element): void => {
+  root('a').map((_: number, node: any): void => {
     result.push(node.attribs.href);
   });
 
@@ -87,7 +86,7 @@ export const convertFromHtmlToPages = (html: string): PageForImport[] => {
   const root = cheerio.load(html);
   const result: PageForImport[] = [];
 
-  root('a').map((_: number, node: Cheerio.Element): void => {
+  root('a').map((_: number, node: any): void => {
     const $ = cheerio.load(node);
     const url = $('a').attr('href') || '';
     const title = $('a').text();
