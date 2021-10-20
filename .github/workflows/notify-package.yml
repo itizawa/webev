@@ -8,7 +8,7 @@ jobs:
   npm:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - run: yarn
     - uses: MeilCli/npm-update-check-action@v4
       id: outdated

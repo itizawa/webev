@@ -10,7 +10,7 @@ export const generateMockUser = (mock: Partial<User> = {}): User => {
     admin: mock.admin || false,
     isExecutedTutorial: mock.isExecutedTutorial || true,
     apiTokenForExtension: mock.apiTokenForExtension || 'mockApiTokenForExtension',
-    createdAt: mock.createdAt || new Date(),
-    updatedAt: mock.updatedAt || new Date(),
+    createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
+    updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
   });
 };

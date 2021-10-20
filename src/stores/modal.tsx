@@ -7,6 +7,10 @@ export const usePageForDelete = (initialData?: Page): SWRResponse<Page | null, E
   return useStaticSWR<Page | null, Error>('pageForDeletePageModal', initialData);
 };
 
+export const usePageForAddToDirectory = (initialData?: Page): SWRResponse<Page | null, Error> => {
+  return useStaticSWR<Page | null, Error>('pageForAddToDirectory', initialData);
+};
+
 export const useDirectoryForSavePage = (initialData?: Directory): SWRResponse<Directory | null, Error> => {
   return useStaticSWR<Directory | null, Error>('directoryForSavePage', initialData);
 };

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { INQUIRY_URL, ITIZAWA_TWITTER_URL, NEWS_INDEX_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/const/urls';
+import { INQUIRY_URL, ITIZAWA_TWITTER_URL, NEWS_INDEX_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
 
 import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';

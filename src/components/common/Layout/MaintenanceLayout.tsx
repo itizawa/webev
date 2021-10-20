@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { TOP_URL } from '~/libs/const/urls';
+import { TOP_URL } from '~/libs/constants/urls';
 
 import { Navbar } from '~/components/common/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';

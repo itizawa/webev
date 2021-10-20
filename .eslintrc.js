@@ -23,7 +23,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'react', 'import'],
+  plugins: ['@typescript-eslint', 'react', 'import', '@kzmat/commentout'],
   settings: {
     'import/resolver': {
       node: {
@@ -38,6 +38,7 @@ module.exports = {
     react: {
       version: 'detect',
     },
+    'import/ignore': ['node_modules'],
   },
   rules: {
     '@typescript-eslint/ban-types': [
@@ -53,7 +54,9 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx'] }],
     'import/order': ['error'],
     'no-unused-vars': 'off',
+    'react/display-name': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
+    '@kzmat/commentout/commentout': ['error'],
     'prettier/prettier': [
       'error',
       {

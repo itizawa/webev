@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId, useSearchKeyWord } from '~/stores/page';
+import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -14,7 +14,7 @@ import { Footer } from '~/components/common/Parts/Footer';
 import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
 import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
 import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
-import { DirectoryImportModal } from '~/components/domain/Directory/molecules/DirectoryImportModal';
+import { PageAddToDirectoryModal } from '~/components/domain/Page/molecules/PageAddToDirectoryModal';
 import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
@@ -23,15 +23,13 @@ import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
-import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
-
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const { data: currentUser } = useCurrentUser();
 
@@ -40,9 +38,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   }
 
   useEffect(() => {
-    mutateSearchKeyword('');
-
-    if (router.pathname !== '/directory/[id]') {
+    if (router.pathname !== DIRECTORY_ID_URL) {
       mutateDirectoryId(null);
     }
     mutateActivePage(1);
@@ -55,7 +51,7 @@ export const DashBoardLayout: FC = ({ children }) => {
       </div>
       <StyledBorder />
       <FooterSubnavBar />
-      <StyledDiv className="row mx-auto">
+      <StyledDiv className="row mx-auto overflow-hidden">
         <div className="d-none d-md-block col-md-3">
           <Sidebar />
         </div>
@@ -65,8 +61,8 @@ export const DashBoardLayout: FC = ({ children }) => {
             <DirectoryCreateModal />
             <DirectoryDeleteModal />
             <DirectoryRenameModal />
-            <DirectoryImportModal />
             <PageDeleteModal />
+            <PageAddToDirectoryModal />
             <PageSaveModal />
           </>
         )}
@@ -91,9 +87,4 @@ const StyledDiv = styled.div`
 const StyledBorder = styled.div`
   height: 4px;
   background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);
-  @media (min-width: ${BootstrapBreakpoints.md}px) {
-    position: sticky;
-    top: 0;
-    z-index: 980;
-  }
 `;

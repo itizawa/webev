@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { VFC, useMemo } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -9,22 +9,50 @@ import { toastSuccess } from '~/utils/toastr';
 
 type Props = {
   page: Page;
-  isHideArchiveButton?: boolean;
   onClickDeleteButton: () => void;
-  onClickSharePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
   onClickRemovePageButton: () => void;
+  onClickAddPageToDirectoryButton: () => void;
 };
 
 export const PageManageDropdown: VFC<Props> = ({
   page,
-  isHideArchiveButton,
   onClickDeleteButton,
-  onClickSharePageButton,
   onClickSwitchArchiveButton,
   onClickRemovePageButton,
+  onClickAddPageToDirectoryButton,
 }) => {
   const { t } = useLocale();
+
+  /**
+   * Twitter の共有
+   */
+  const sharePage = async () => {
+    if (window != null) {
+      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
+      window.open(twitterUrl.toString(), '_blank');
+    }
+  };
+
+  /**
+   * Web share api を使った共有
+   */
+  const sharePageByNavigator = () => {
+    navigator.share({
+      title: page.title,
+      text: page.description,
+      url: page.url,
+    });
+  };
+
+  /**
+   * Web share api が使えるかどうか(MobileかSafariだと使用可能)
+   * @returns {boolean}
+   */
+  const canShareByNavigator = useMemo(() => {
+    return !!navigator?.share;
+  }, [navigator]);
+
   return (
     <UncontrolledDropdown direction="left">
       <DropdownToggle tag="span">
@@ -32,7 +60,7 @@ export const PageManageDropdown: VFC<Props> = ({
           <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
         </div>
       </DropdownToggle>
-      <DropdownMenu className="dropdown-menu-dark" positionFixed>
+      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed>
         <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
           <DropdownItem>
             <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
@@ -43,20 +71,33 @@ export const PageManageDropdown: VFC<Props> = ({
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
-        <DropdownItem tag="button" onClick={onClickSharePageButton}>
-          <Icon icon="TWITTER" color="WHITE" />
-          <span className="ms-2">{t.share}</span>
-        </DropdownItem>
-        {!isHideArchiveButton && page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
+        {canShareByNavigator ? (
+          <DropdownItem tag="button" onClick={sharePageByNavigator}>
+            <Icon icon="SHARE" color="WHITE" />
+            <span className="ms-2">{t.share}</span>
+          </DropdownItem>
+        ) : (
+          <DropdownItem tag="button" onClick={sharePage}>
+            <Icon icon="TWITTER" color="WHITE" />
+            <span className="ms-2">{t.share}</span>
+          </DropdownItem>
+        )}
+        {page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
           <DropdownItem tag="button" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </DropdownItem>
         )}
-        {page.directoryId != null && (
+        {page.directoryId && (
           <DropdownItem tag="button" onClick={onClickRemovePageButton}>
             <Icon icon="REMOVE_FROM_DIRECTORY" color="WHITE" />
             <span className="ms-2">{t.remove_page_from_directory}</span>
+          </DropdownItem>
+        )}
+        {!page.directoryId && (
+          <DropdownItem tag="button" onClick={onClickAddPageToDirectoryButton}>
+            <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
+            <span className="ms-2">{t.save_page_to_directory}</span>
           </DropdownItem>
         )}
       </DropdownMenu>

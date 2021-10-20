@@ -1,4 +1,4 @@
-// Layout of Ogp
+// NOTE: Layout of Ogp
 export const OgpLayoutType = {
   LIST: 'list',
   CARD: 'card',

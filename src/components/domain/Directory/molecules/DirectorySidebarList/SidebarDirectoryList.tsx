@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import Loader from 'react-loader-spinner';
 
@@ -10,47 +10,67 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 
-import { useAllParentDirectories, useDirectoriesChildren } from '~/stores/directory';
-import { Directory } from '~/domains/Directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
+import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
+import { Directory } from '~/domains/Directory';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
-  const { data: allParentDirectories = [], mutate: mutateAllParentDirectories } = useAllParentDirectories();
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(allParentDirectories.map((v) => v._id));
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
+  const { createDirectory } = useCreateDirectory();
 
-  const [directories, setDirectories] = useState<Directory[]>([]);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
   const handleOnDragEnd = (result: DragUpdate) => {
-    // may not have any destination (drag to nowhere)
-    if (result.destination == null) {
+    if (!directoryPaginationResult) {
       return;
     }
-    // Do nothing if in the same place
-    if (result.source.index === result.destination.index) {
+    if (!result.destination) {
+      return;
+    }
+    const destOrder = result.destination.index + 1;
+    const sourceOrder = result.source.index + 1;
+
+    if (sourceOrder === destOrder) {
       return;
     }
 
     try {
-      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: result.destination.index + 1 });
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
+    }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
+
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
     }
 
-    const reorderedItems = directories.splice(result.source.index, 1);
-    directories.splice(result.destination.index, 0, ...reorderedItems);
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
 
-    setDirectories(directories);
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
   };
-
-  useEffect(() => {
-    if (allParentDirectories != null) {
-      setDirectories(allParentDirectories);
-    }
-  }, [allParentDirectories]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -60,18 +80,26 @@ export const SidebarDirectoryList: VFC = () => {
     }
 
     try {
-      await restClient.apiPost('/directories', { name });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      mutateAllParentDirectories();
+      const result = await createDirectory(name);
+      if (directoryPaginationResult) {
+        mutateDirectoryPaginationResult(
+          {
+            ...directoryPaginationResult,
+            docs: [...directoryPaginationResult.docs, result],
+          },
+          false,
+        );
+      }
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
 
     setIsCreatingNewDirectory(false);
   };
 
-  if (allParentDirectories == null) {
+  if (directoryPaginationResult == null) {
     return (
       <div className="text-center">
         <Loader type="Oval" color="#00BFFF" height={64} width={64} />
@@ -84,26 +112,24 @@ export const SidebarDirectoryList: VFC = () => {
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="directories">
           {(provided) => (
-            <StyledDirectoryDiv className="px-3 overflow-auto" {...provided.droppableProps} ref={provided.innerRef}>
-              {directories.map((directory, index) => {
-                // 子供のディレクトリを抽出
-                const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === directory._id).map((v) => v.descendant as Directory);
+            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
+              {directoryPaginationResult.docs.map((directory, index) => {
                 return (
                   <Draggable key={directory._id} draggableId={directory._id} index={index}>
                     {(provided) => (
-                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="my-1">
-                        <DirectorySidebarListItem directory={directory} childrenDirectories={childrenDirectories} />
+                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} className="my-1">
+                        <DirectorySidebarListItem directory={directory} draggableProvidedDragHandleProps={provided.dragHandleProps} />
                       </div>
                     )}
                   </Draggable>
                 );
               })}
               {provided.placeholder}
-            </StyledDirectoryDiv>
+            </div>
           )}
         </Droppable>
       </DragDropContext>
-      {directories.length < 10 && (
+      {directoryPaginationResult.docs.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
             <form className="input-group ps-3" onSubmit={onSubmit}>
@@ -118,9 +144,6 @@ export const SidebarDirectoryList: VFC = () => {
   );
 };
 
-const StyledDirectoryDiv = styled.div`
-  max-height: 60vh;
-`;
 const StyledDiv = styled.div`
   > .btn {
     width: 100%;

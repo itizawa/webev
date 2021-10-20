@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { signIn } from 'next-auth/client';
 
-import { imagePath } from '~/libs/const/imagePath';
+import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { toastSuccess } from '~/utils/toastr';

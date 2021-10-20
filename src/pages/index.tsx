@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { imagePath } from '~/libs/const/imagePath';
+import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -24,7 +24,7 @@ const Page: WebevNextPage<Props> = ({ count }) => {
   return (
     <>
       <WebevOgpHead />
-      <h1 className="my-3">{t.welcome_webev}</h1>
+      <h1>{t.welcome_webev}</h1>
       <Image src={imagePath.EYE_CATCH_DARK} alt={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
       <div className="row my-3">
         <div className="col-12 col-md-6 offset-md-3">

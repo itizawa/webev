@@ -4,21 +4,15 @@ import { generateMockPage } from '~/mock/generateMockPage';
 
 const mockPage = generateMockPage();
 
-jest.mock('next/router', () => ({
-  useRouter: () => {
-    return { locale: 'ja' };
-  },
-}));
-test('PageManageDropdown isHideArchiveButton ois true', () => {
+test('PageManageDropdown isHideArchiveButton is true', () => {
   const tree = renderer
     .create(
       <PageManageDropdown
         page={mockPage}
-        isHideArchiveButton
-        onClickDeleteButton={expect.any(Function)}
-        onClickSharePageButton={expect.any(Function)}
-        onClickSwitchArchiveButton={expect.any(Function)}
-        onClickRemovePageButton={expect.any(Function)}
+        onClickDeleteButton={() => console.log('test')}
+        onClickSwitchArchiveButton={() => console.log('test')}
+        onClickRemovePageButton={() => console.log('test')}
+        onClickAddPageToDirectoryButton={() => console.log('test')}
       />,
     )
     .toJSON();
@@ -26,16 +20,37 @@ test('PageManageDropdown isHideArchiveButton ois true', () => {
   expect(tree).toMatchSnapshot();
 });
 
-test('PageManageDropdown isHideArchiveButton ois true', () => {
+mockPage.directoryId = undefined;
+test('PageManageDropdown directoryId is undefined', () => {
   const tree = renderer
     .create(
       <PageManageDropdown
         page={mockPage}
-        isHideArchiveButton={false}
-        onClickDeleteButton={expect.any(Function)}
-        onClickSharePageButton={expect.any(Function)}
-        onClickSwitchArchiveButton={expect.any(Function)}
-        onClickRemovePageButton={expect.any(Function)}
+        onClickDeleteButton={() => console.log('test')}
+        onClickSwitchArchiveButton={() => console.log('test')}
+        onClickRemovePageButton={() => console.log('test')}
+        onClickAddPageToDirectoryButton={() => console.log('test')}
+      />,
+    )
+    .toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+global.navigator = {
+  ...global.navigator,
+  share: jest.fn(),
+};
+
+test('PageManageDropdown directoryId is undefined', () => {
+  const tree = renderer
+    .create(
+      <PageManageDropdown
+        page={mockPage}
+        onClickDeleteButton={() => console.log('test')}
+        onClickSwitchArchiveButton={() => console.log('test')}
+        onClickRemovePageButton={() => console.log('test')}
+        onClickAddPageToDirectoryButton={() => console.log('test')}
       />,
     )
     .toJSON();

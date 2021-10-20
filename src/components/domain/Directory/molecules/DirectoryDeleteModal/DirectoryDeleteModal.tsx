@@ -5,11 +5,11 @@ import { Modal } from '~/components/base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { DIRECTORY_INDEX_URL } from '~/libs/const/urls';
+import { DIRECTORY_INDEX_URL } from '~/libs/constants/urls';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useDirectoryForDelete } from '~/stores/modal';
-import { useAllParentDirectories, useDirectoryChildren } from '~/stores/directory';
+import { useDirectoryChildren, useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DirectoryDeleteModal: VFC = () => {
   const { t } = useLocale();
@@ -17,21 +17,20 @@ export const DirectoryDeleteModal: VFC = () => {
 
   const { data: directoryForDelete, mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
-  const { mutate: mutateAllParentDirectories } = useAllParentDirectories();
+  const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
 
   const deletePage = async () => {
     try {
       await restClient.apiDelete(`/directories/${directoryForDelete?._id}`);
       toastSuccess(t.toastr_delete_directory);
-      // delete current page directory
       if (router.query.id === directoryForDelete?._id) {
         router.push(DIRECTORY_INDEX_URL);
       }
-      mutateAllParentDirectories();
+      mutateDirectoryPaginationResult();
       mutateDirectoryChildren();
       mutateDirectoryForDelete(null);
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

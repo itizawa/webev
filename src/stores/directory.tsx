@@ -6,20 +6,17 @@ import { Directory } from '~/domains/Directory';
 import { DirectoryTree } from '~/domains/DirectoryTree';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useDirectoryListSWR = (limit = 30): SWRResponse<PaginationResult<Directory>, Error> => {
-  const page = 1;
-  return useAuthenticationSWR(
-    ['/directories/list', page, limit],
-    (endpoint, page, limit) => restClient.apiGet(`${endpoint}?page=${page}&limit=${limit}`).then((result) => result.data),
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: true,
-    },
-  );
-};
-
-export const useAllParentDirectories = (): SWRResponse<Directory[], Error> => {
-  return useAuthenticationSWR('/directories/parents', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+export const useDirectoryPaginationResult = ({
+  searchKeyWord,
+  activePage = 1,
+  isRoot,
+}: {
+  searchKeyWord: string;
+  activePage?: number;
+  isRoot?: boolean;
+}): SWRResponse<PaginationResult<Directory>, Error> => {
+  const endpoint = `/directories/list?page=${activePage}${isRoot ? `&isRoot=${isRoot}` : ''}${searchKeyWord ? `&q=${searchKeyWord}` : ``}`;
+  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
@@ -59,7 +56,7 @@ export const useDirectoryInformation = (directoryId: string): SWRResponse<Direct
 };
 
 export const useAllDirectories = (): SWRResponse<Directory[], Error> => {
-  return useAuthenticationSWR(['/directories/all'], (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR('/directories/all', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });

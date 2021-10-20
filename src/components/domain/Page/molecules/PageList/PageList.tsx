@@ -5,7 +5,7 @@ import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/common/PaginationWrapper';
+import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
@@ -22,6 +22,11 @@ export const PageList: VFC<Props> = (props) => {
   const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
+
+  const handleMutateActivePage = (page: number) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mutateActivePage(page);
+  };
 
   return (
     <div className="row">
@@ -45,7 +50,7 @@ export const PageList: VFC<Props> = (props) => {
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={mutateActivePage} />
+          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
         </div>
       )}
     </div>

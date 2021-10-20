@@ -1,10 +1,12 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
+import Skeleton from 'react-loading-skeleton';
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -12,41 +14,40 @@ import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { useDirectoriesChildren } from '~/stores/directory';
+import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
-  childrenDirectories: Directory[];
+  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirectories }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvidedDragHandleProps }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const [childrenDirectoriesForDisplay, setChildrenDirectoriesForDisplay] = useState<Directory[]>(childrenDirectories);
-  const { data: childrenDirectoryTrees = [] } = useDirectoriesChildren(childrenDirectoriesForDisplay.map((v) => v._id));
-
   const [isOpen, setIsOpen] = useState(false);
+  const [isFetchDirectory, setIsFetchDirectory] = useState(false);
+
+  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isFetchDirectory ? directory._id : undefined);
+
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  useEffect(() => {
-    setChildrenDirectoriesForDisplay(childrenDirectories);
-  }, [childrenDirectories]);
 
   const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     if (!isOpen) {
       setIsCreatingNewDirectory(false);
     }
+    setIsFetchDirectory(true);
     setIsOpen((prevState) => !prevState);
   };
 
   const handleClickPencilIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen(true);
+    setIsFetchDirectory(true);
     setIsCreatingNewDirectory(true);
   };
 
@@ -58,13 +59,13 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
     }
 
     try {
-      const { data } = await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
+      await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
       toastSuccess(t.toastr_save_directory);
       setName('');
-      setChildrenDirectoriesForDisplay((prevState) => [...prevState, data]);
       setIsCreatingNewDirectory(false);
+      mutateChildrenDirectoriesForDisplay();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 
@@ -77,6 +78,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
         isActive={isActive}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
+        {...draggableProvidedDragHandleProps}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
@@ -136,12 +138,17 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, childrenDirect
               <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
             </form>
           )}
-          {childrenDirectoriesForDisplay.map((childDirectory) => {
-            // 子供のディレクトリを抽出
-            const childrenDirectories = childrenDirectoryTrees.filter((v) => v.ancestor === childDirectory._id).map((v) => v.descendant as Directory);
-            return <DirectorySidebarListItem key={childDirectory._id} directory={childDirectory} childrenDirectories={childrenDirectories} />;
-          })}
-          {childrenDirectoriesForDisplay.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+          {childrenDirectoryTrees ? (
+            <>
+              {childrenDirectoryTrees.map((childrenDirectoryTree) => {
+                const childDirectory = childrenDirectoryTree.descendant as Directory;
+                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
+              })}
+              {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
+            </>
+          ) : (
+            <Skeleton />
+          )}
         </div>
       </Collapse>
     </>

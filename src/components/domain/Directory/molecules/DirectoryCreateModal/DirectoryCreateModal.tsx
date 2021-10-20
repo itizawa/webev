@@ -35,7 +35,7 @@ export const DirectoryCreateModal: VFC = () => {
       mutateDirectoryChildren();
       closeDeleteModal();
     } catch (err) {
-      toastError(err);
+      if (err instanceof Error) toastError(err);
     }
   };
 

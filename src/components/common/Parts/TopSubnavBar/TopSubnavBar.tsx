@@ -1,36 +1,67 @@
 import { VFC } from 'react';
 
 import styled from 'styled-components';
+
 import { useHooks } from './hooks';
+
+import { Page, PageStatus } from '~/domains/Page';
+import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+
 import { Icon } from '~/components/base/atoms/Icon';
+import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 import { useLocale } from '~/hooks/useLocale';
 
+import { zIndex } from '~/libs/constants/zIndex';
+
 type Props = {
-  title: string;
-  onClickReadButton: () => void;
-  isArchived: boolean;
+  page: Page;
+  onClickRemovePageButton: () => void;
+  onClickSwitchArchiveButton: () => void;
 };
-export const TopSubnavBar: VFC<Props> = ({ title, onClickReadButton, isArchived }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
+  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
+
+  const { mutate: mutatePageForDelete } = usePageForDelete();
+  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
+
+  const openDeleteModal = async () => {
+    mutatePageForDelete(page);
+  };
+
+  const handleClickAddPageToDirectoryButton = () => {
+    mutateUsePageForAddToDirectory(page);
+  };
 
   return (
-    <StyledDiv $isShow={isShowScroll} className="fixed-top d-md-none">
+    <StyledDiv $isShow={isShowScroll} className="fixed-top">
       <div className="bg-dark d-flex justify-content-evenly align-items-center p-2">
-        <div>
-          <StyledSpan className="webev-limit-2lines">{title}</StyledSpan>
+        <div className="me-2">
+          <StyledAnchor className="webev-limit-2lines text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
+            {page.title}
+          </StyledAnchor>
         </div>
         {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </button>
         ) : (
-          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickReadButton}>
+          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
         )}
+        <div className="ms-2">
+          <PageManageDropdown
+            page={page}
+            onClickDeleteButton={openDeleteModal}
+            onClickSwitchArchiveButton={onClickSwitchArchiveButton}
+            onClickRemovePageButton={onClickRemovePageButton}
+            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+          />
+        </div>
       </div>
       <StyledBorder />
     </StyledDiv>
@@ -52,12 +83,12 @@ const StyledDiv = styled.div<{ $isShow: boolean }>`
   `}
 `;
 
-const StyledSpan = styled.span`
+const StyledAnchor = styled.a`
   font-size: 12px;
 `;
 
 const StyledBorder = styled.div`
-  z-index: 980;
+  z-index: ${zIndex.TOP_BORDER};
   width: 100%;
   height: 4px;
   background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);

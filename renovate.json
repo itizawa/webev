@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "group:allNonMajor",
+    "schedule:earlyMondays"
+  ],
+  "packageRules": [
+    {
+      "groupName": "definitelyTyped",
+      "matchPackagePrefixes": [
+        "@types/"
+      ]
+    }
+  ]
+}
