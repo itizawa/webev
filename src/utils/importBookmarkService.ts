@@ -1,31 +1,35 @@
 import * as cheerio from 'cheerio';
 import { PageForImport, DirForImport } from '~/interfaces/importBookmark';
 
-// ブラウザからエクスポートしたブックマークhtmlの内容をスクレイピング
-// ディレクトリとファイルの階層構造を以下のような Object の配列で再現
-// dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
-// dirs の各要素は一つのディレクトリを示し、以下の key をもつ
-// - id: 識別子
-// - name: ディレクトリ名
-// - childrenDirIds: 子ディレクトリ識別子の配列
-// - childrenPages: 子ページオブジェクトの配列
-//
-// ex.
-// インポートするブックマークの階層構造
-// - (Root Dir)Bookmarks
-//   - (Page)[example](http://example.com)
-//   - (Dir)hoge
-//     - (page)[hogefuga])http://hogefuga.com)
-// 出力結果
-// [
-//  {id: '', name: '', childrenDirIds: ['1591786320hoge'], childrenPages: [{url: 'http://example.com', title: 'example'}] },
-//  {id: '1591786320hoge', name: 'hoge', childrenDirIds: [], childrenPages: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
-// ]
+/*
+ブラウザからエクスポートしたブックマークhtmlの内容をスクレイピング
+ディレクトリとファイルの階層構造を以下のような Object の配列で再現
+dirs: {id, name, childrenDirIds: string[], childrenPages: {url, title}[]}[]
+dirs の各要素は一つのディレクトリを示し、以下の key をもつ
+- id: 識別子
+- name: ディレクトリ名
+- childrenDirIds: 子ディレクトリ識別子の配列
+- childrenPages: 子ページオブジェクトの配列
+
+ex.
+インポートするブックマークの階層構造
+- (Root Dir)Bookmarks
+  - (Page)[example](http://example.com)
+  - (Dir)hoge
+    - (page)[hogefuga])http://hogefuga.com)
+出力結果
+[
+ {id: '', name: '', childrenDirIds: ['1591786320hoge'], childrenPages: [{url: 'http://example.com', title: 'example'}] },
+ {id: '1591786320hoge', name: 'hoge', childrenDirIds: [], childrenPages: [{url: 'http://hogefuga.com', title: 'hogefuga'}] },
+]
+*/
 export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
   const root = cheerio.load(html);
   const result: DirForImport[] = [];
 
-  // ディレクトリを表す要素を一件一件見ていく
+  /*
+  ディレクトリを表す要素を一件一件見ていく
+  */
   root('dl').map((_: number, nodeDL: any): void => {
     const dir: DirForImport = {
       id: '',
@@ -34,20 +38,26 @@ export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
       childrenPages: [],
     };
 
-    // id と name の取得
-    // 同名ディレクトリ区別のため、ディレクトリ作成日+ディレクトリ名を id として設定（safari には ADD_DATE がないため、同名ディレクトリは区別できない）
-    // ディレクトリ作成日とディレクトリ名は同階層の二つ上の要素にあるため、nodeDL.previousSibling.previousSibling を取得
+    /*
+    id と name の取得
+    同名ディレクトリ区別のため、ディレクトリ作成日+ディレクトリ名を id として設定（safari には ADD_DATE がないため、同名ディレクトリは区別できない）
+    ディレクトリ作成日とディレクトリ名は同階層の二つ上の要素にあるため、nodeDL.previousSibling.previousSibling を取得
+    */
     const previousNode = cheerio.load(nodeDL.previousSibling.previousSibling);
     const dirCreateAt = previousNode('h3').attr('add_date') || '';
     const dirName = previousNode('h3').text() || '';
     dir.id = dirCreateAt + dirName;
     dir.name = dirName;
 
-    // 子要素から配下ディレクトリと配下ページを取得
+    /*
+    子要素から配下ディレクトリと配下ページを取得
+    */
     nodeDL.childNodes.forEach((node: any) => {
       const $ = cheerio.load(node);
 
-      // 配下ページ
+      /*
+      配下ページ
+      */
       const childPage = $('a');
       if (childPage.length > 0) {
         const page: PageForImport = { url: '', title: '' };
@@ -56,7 +66,9 @@ export const convertFromHtmlToDirs = (html: string): DirForImport[] => {
         dir.childrenPages.push(page);
       }
 
-      // 配下ディレクトリ
+      /*
+      配下ディレクトリ
+      */
       const childDir = $('h3');
       if (childDir.length > 0) {
         const childDirCreateAt = childDir.attr('add_date');

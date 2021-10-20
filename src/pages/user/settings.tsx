@@ -78,14 +78,12 @@ const Page: WebevNextPage = () => {
         params = { pages: convertFromHtmlToPages(html) };
         url = '/pages/from-page-object';
         toastError(new Error('タイトル付きインポートは現在利用できません。'));
-        // break;
-        return;
+        break;
       case 'withDirectories':
         params = { dirs: convertFromHtmlToDirs(html) };
         url = '/pages/from-dir-object';
         toastError(new Error('ディレクトリ付きインポートは現在利用できません。'));
-        // break;
-        return;
+        break;
     }
 
     const { data } = await restClient.apiPost(url, params);
@@ -158,7 +156,7 @@ const Page: WebevNextPage = () => {
                   id="with-title"
                   value="withTitle"
                   checked={importOption === 'withTitle'}
-                  onChange={() => setImportOption('withTitle')}
+                  disabled
                 />
                 <label className="form-check-label" htmlFor="with-title">
                   ブックマークタイトルを含める
