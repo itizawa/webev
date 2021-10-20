@@ -10,13 +10,7 @@ import { useDebouncedCallback } from 'use-debounce';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
-import {
-  useDirectoryForDelete,
-  useParentDirectoryForCreateDirectory,
-  useDirectoryForRename,
-  useDirectoryForSavePage,
-  useDirectoryForImport,
-} from '~/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -54,7 +48,6 @@ const Page: WebevNextPage = () => {
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
-  const { mutate: mutateDirectoryForImport } = useDirectoryForImport();
 
   const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
@@ -148,10 +141,6 @@ const Page: WebevNextPage = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  const openImportModal = (directory: Directory) => {
-    mutateDirectoryForImport(directory);
-  };
-
   const handleSelectEmoji = async (emoji: EmojiData) => {
     const emojiId = emoji.id;
 
@@ -243,10 +232,6 @@ const Page: WebevNextPage = () => {
                   <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
                     <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
                     <span className="ms-2">{t.create_directory}</span>
-                  </DropdownItem>
-                  <DropdownItem tag="button" onClick={() => openImportModal(directory)}>
-                    <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
-                    <span className="ms-2">{t.import}</span>
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
