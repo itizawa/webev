@@ -62,7 +62,7 @@ const Page: WebevNextPage = () => {
 
   const handleImportBookmark = async () => {
     if (uploadedFile == null) {
-      toastError(new Error('ファイルが指定されていません。'));
+      toastError(new Error(t.file_is_not_selected));
       return;
     }
 
@@ -90,7 +90,7 @@ const Page: WebevNextPage = () => {
 
     const { data } = await restClient.apiPost(url, params);
     console.log(data);
-    toastSuccess('インポートが完了しました。');
+    toastSuccess(t.toastr_success_import_bookmark);
   };
 
   const changeProfile = (newObject: Partial<User>): void => {

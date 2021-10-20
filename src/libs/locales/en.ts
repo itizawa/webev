@@ -40,6 +40,7 @@ export const en = {
   toastr_success_put_back: 'Put Back Home!',
   toastr_success_add_directory: 'Add Directory',
   toastr_success_send_inquiry: 'Send Inquiry',
+  toastr_success_import_bookmark: 'Complete importing bookmark!',
 
   home: 'Home',
   read: 'Read',
@@ -95,6 +96,7 @@ export const en = {
   development: 'Development (We are looking for help)',
   others: 'Others',
   inquiry_submit: 'Send',
+  file_is_not_selected: 'File is not selected',
 
   maintenance: 'The management screen is under maintenance',
 
