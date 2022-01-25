@@ -58,16 +58,6 @@ jobs:
         run: |
           yarn build
 
-      - name: Slack Notification
-        uses: weseek/ghaction-slack-notification@master
-        if: failure()
-        with:
-          type: ${{ job.status }}
-          job_name: '*build webev front*'
-          channel: '#webev-ci'
-          isCompactMode: true
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
-
   run-linters:
     name: Run lint
     runs-on: ubuntu-latest
@@ -119,15 +109,6 @@ jobs:
       - name: yarn lint
         run: |
           yarn lint
-      
-      - name: Slack Notification
-        uses: weseek/ghaction-slack-notification@master
-        with:
-          type: ${{ job.status }}
-          job_name: '*lint webev front*'
-          channel: '#webev-ci'
-          isCompactMode: true
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   run-tests:
     name: Run test
@@ -180,13 +161,3 @@ jobs:
       - name: yarn test
         run: |
           yarn test
-      
-      - name: Slack Notification
-        uses: weseek/ghaction-slack-notification@master
-        if: failure()
-        with:
-          type: ${{ job.status }}
-          job_name: '*test webev front*'
-          channel: '#webev-ci'
-          isCompactMode: true
-          url: ${{ secrets.SLACK_WEBHOOK_URL }}
