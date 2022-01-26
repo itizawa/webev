@@ -6,9 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint:styles": "stylelint \"./**/*.{scss,css}\"",
-    "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "lint": "npm-run-all -p lint:js lint:styles",
+    "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
     "upgrade:package": "yarn ncu -u"
