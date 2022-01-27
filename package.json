@@ -1,14 +1,12 @@
 {
   "name": "webev-front",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint:styles": "stylelint \"./**/*.{scss,css}\"",
-    "lint:js": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "lint": "npm-run-all -p lint:js lint:styles",
+    "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
     "upgrade:package": "yarn ncu -u"
@@ -92,7 +90,7 @@
     "prettier": "2.4.1",
     "react-test-renderer": "17.0.2",
     "stylelint": "13.13.1",
-    "stylelint-config-recess-order": "2.5.0",
+    "stylelint-config-recess-order": "2.6.0",
     "ts-jest": "27.0.7",
     "typescript": "4.4.4"
   },
