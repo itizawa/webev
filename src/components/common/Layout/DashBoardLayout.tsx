@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -26,7 +26,7 @@ import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
 
 export const DashBoardLayout: FC = ({ children }) => {
-  const [session] = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();

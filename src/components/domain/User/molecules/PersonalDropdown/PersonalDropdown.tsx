@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import style from 'styled-components';
 import Loader from 'react-loader-spinner';
 

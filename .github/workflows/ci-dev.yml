@@ -158,6 +158,6 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn
 
-      - name: yarn test
-        run: |
-          yarn test
+      # - name: yarn test
+      #   run: |
+      #     yarn test
