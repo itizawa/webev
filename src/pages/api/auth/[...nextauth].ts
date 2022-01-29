@@ -8,8 +8,4 @@ export default NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
   ],
-  secret: process.env.SESSION_COOKIE_SECRET,
-  jwt: {
-    secret: process.env.SESSION_COOKIE_SECRET,
-  },
 });
