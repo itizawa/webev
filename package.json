@@ -8,8 +8,7 @@
     "start": "next start",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
-    "test:coverage": "jest --collect-coverage",
-    "upgrade:package": "yarn ncu -u"
+    "test:coverage": "jest --collect-coverage"
   },
   "repository": {
     "type": "git",
@@ -85,7 +84,6 @@
     "jest-styled-components": "7.0.8",
     "jsdom": "18.0.0",
     "jsdom-global": "3.0.2",
-    "npm-check-updates": "11.8.5",
     "npm-run-all": "4.1.5",
     "prettier": "2.5.1",
     "react-test-renderer": "17.0.2",
