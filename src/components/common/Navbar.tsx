@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import Link from 'next/link';
 
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 
 import { PersonalDropdown } from '~/components/domain/User/molecules/PersonalDropdown';
@@ -9,8 +9,7 @@ import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInpu
 
 export const Navbar: VFC = () => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-
-  const [session, loading] = useSession();
+  const { status } = useSession();
 
   if (typeof window === 'undefined') {
     return null;
@@ -26,7 +25,7 @@ export const Navbar: VFC = () => {
         </Link>
       </div>
       <div className="col-9">
-        {session != null && !isMaintenanceMode && (
+        {status === 'authenticated' && !isMaintenanceMode && (
           <div className="d-flex justify-content-between align-items-center">
             <div className="col col-md-9 my-md-0 my-0 me-2">
               <PageUrlInputForm />
@@ -34,7 +33,7 @@ export const Navbar: VFC = () => {
             <PersonalDropdown />
           </div>
         )}
-        {session == null && !loading && (
+        {status === 'unauthenticated' && (
           <div className="d-flex align-items-center justify-content-end">
             <Link href="/login">
               <span className="mb-0 text-white" role="button">
