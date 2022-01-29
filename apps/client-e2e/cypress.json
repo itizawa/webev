@@ -6,7 +6,7 @@
   "supportFile": "./src/support/index.ts",
   "pluginsFile": false,
   "video": true,
-  "videosFolder": "../../dist/cypress/apps/tuskdesk-e2e/videos",
-  "screenshotsFolder": "../../dist/cypress/apps/tuskdesk-e2e/screenshots",
+  "videosFolder": "../../dist/cypress/apps/client-e2e/videos",
+  "screenshotsFolder": "../../dist/cypress/apps/client-e2e/screenshots",
   "chromeWebSecurity": false
 }

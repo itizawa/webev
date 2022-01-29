@@ -1,6 +1,6 @@
 {
-  "root": "apps/tuskdesk",
-  "sourceRoot": "apps/tuskdesk",
+  "root": "apps/client",
+  "sourceRoot": "apps/client",
   "projectType": "application",
   "targets": {
     "build": {
@@ -8,8 +8,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "root": "apps/tuskdesk",
-        "outputPath": "dist/apps/tuskdesk"
+        "root": "apps/client",
+        "outputPath": "dist/apps/client"
       },
       "configurations": {
         "production": {}
@@ -18,12 +18,12 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "options": {
-        "buildTarget": "tuskdesk:build",
+        "buildTarget": "client:build",
         "dev": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "tuskdesk:build:production",
+          "buildTarget": "client:build:production",
           "dev": false
         }
       }
@@ -31,14 +31,14 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "tuskdesk:build:production"
+        "buildTarget": "client:build:production"
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/tuskdesk"],
+      "outputs": ["coverage/apps/client"],
       "options": {
-        "jestConfig": "apps/tuskdesk/jest.config.js",
+        "jestConfig": "apps/client/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -46,7 +46,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/tuskdesk/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/client/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
