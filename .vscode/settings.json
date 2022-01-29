@@ -27,9 +27,6 @@
       "source.fixAll.markdownlint": true
     },
     "cSpell.words": [
-      "NEXTAUTH",
-      "Subnav",
-      "Webev",
       "browserconfig",
       "commentout",
       "countup",
@@ -42,14 +39,18 @@
       "kzmat",
       "mixins",
       "msapplication",
+      "NEXTAUTH",
+      "nextui",
       "noopener",
       "noreferrer",
       "pageview",
       "piyo",
       "randomstring",
       "stylelint",
+      "Subnav",
       "toastr",
-      "unstyled"
+      "unstyled",
+      "Webev"
     ]
   }
   
