@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 import axios from 'axios';
 
-import { useSession } from 'next-auth/react';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { imagePath } from '~/libs/constants/imagePath';
@@ -21,8 +20,6 @@ type Props = {
 
 const Page: WebevNextPage<Props> = ({ count }) => {
   const { t } = useLocale();
-  const { data: session } = useSession();
-  console.log(25, session);
 
   return (
     <>
