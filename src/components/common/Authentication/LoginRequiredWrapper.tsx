@@ -11,7 +11,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
     if (status === 'unauthenticated') {
       router.push('/login?isRedirect=true');
     }
-  }, [router, status]);
+  }, [status, router]);
 
   if (status === 'loading')
     return (

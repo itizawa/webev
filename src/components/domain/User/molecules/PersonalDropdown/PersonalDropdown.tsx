@@ -32,7 +32,7 @@ export const PersonalDropdown: VFC = () => {
   useEffect(() => {
     setIsEnableReadFromClipboard(retrieveValue('isEnableReadFromClipboard') === 'true');
     mutateOgpCardLayout(retrieveValue<OgpLayoutType>('cardLayout'));
-  }, []);
+  }, [mutateOgpCardLayout, retrieveValue]);
 
   const handleSwitch = () => {
     const bool = !isEnableReadFromClipboard;
