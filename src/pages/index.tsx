@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import axios from 'axios';
 
+import { Button } from '@nextui-org/react';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { imagePath } from '~/libs/constants/imagePath';
@@ -31,11 +32,9 @@ const Page: WebevNextPage<Props> = ({ count }) => {
           <PageCountupCard count={count} text={t.total_pages} />
         </div>
       </div>
-      <div className="text-center">
-        <Link href="/home">
-          <button className="btn btn-purple mt-3">{t.start_immediately}</button>
-        </Link>
-      </div>
+      <Link href="/home">
+        <Button color="secondary">{t.start_immediately}</Button>
+      </Link>
     </>
   );
 };
