@@ -7,13 +7,10 @@ import styled from 'styled-components';
 import { PersonalDropdown } from '~/components/domain/User/molecules/PersonalDropdown';
 import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInputForm';
 
-export const Navbar: VFC = () => {
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-  const { status } = useSession();
+const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 
-  if (typeof window === 'undefined') {
-    return null;
-  }
+export const Navbar: VFC = () => {
+  const { status } = useSession();
 
   return (
     <StyledDiv className="navbar mx-auto row">
