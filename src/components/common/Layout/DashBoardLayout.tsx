@@ -33,16 +33,16 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   const { data: currentUser } = useCurrentUser();
 
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
   useEffect(() => {
     if (router.pathname !== DIRECTORY_ID_URL) {
       mutateDirectoryId(null);
     }
     mutateActivePage(1);
-  }, [router]);
+  }, [mutateActivePage, mutateDirectoryId, router]);
+
+  if (typeof window === 'undefined') {
+    return null;
+  }
 
   return (
     <div>

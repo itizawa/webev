@@ -40,7 +40,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
 
-  const isArchive = useMemo(() => page.status === PageStatus.PAGE_STATUS_ARCHIVE, [status]);
+  const isArchive = useMemo(() => page.status === PageStatus.PAGE_STATUS_ARCHIVE, [page.status]);
 
   const handleSwitchArchive = async () => {
     const bool = !isArchive;

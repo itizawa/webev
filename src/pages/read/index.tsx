@@ -24,7 +24,7 @@ const Page: WebevNextPage = () => {
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE]);
-  }, []);
+  }, [mutatePageStatus]);
 
   return (
     <>
