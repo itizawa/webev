@@ -2,12 +2,14 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { CssBaseline } from '@nextui-org/react';
 import { GA_ID } from '~/utils/gtag';
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
       <Html lang="ja">
         <Head>
+          {CssBaseline.flush()}
           {/* Google Analytics */}
           {GA_ID !== '' && (
             <>
