@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "tuskdesk": "apps/tuskdesk",
+    "tuskdesk-e2e": "apps/tuskdesk-e2e"
+  }
+}
