@@ -2261,11 +2261,6 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@kzmat/eslint-plugin-commentout@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@kzmat/eslint-plugin-commentout/-/eslint-plugin-commentout-0.1.0.tgz#2869d910d0612ff1eaa3202e8bd11c5f35c5fcd0"
-  integrity sha512-/pJPEuDXLDjWdkUruAANXN+VdYHwBlmzZ39Z3dxL7a1SHFNed//WBjhBTV3v3caPQw7eftXnFzroYBrgzWtAfw==
-
 "@napi-rs/triples@^1.0.3":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@napi-rs/triples/-/triples-1.1.0.tgz#88c35b72e79a20b79bb4c9b3e2817241a1c9f4f9"
