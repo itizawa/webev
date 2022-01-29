@@ -87,7 +87,7 @@ const Page: WebevNextPage = () => {
   const debounceUpdateDirectoryName = useDebouncedCallback(updateDirectoryName, 300);
   useEffect(() => {
     debounceUpdateDirectoryName(newDirectoryName);
-  }, [newDirectoryName]);
+  }, [debounceUpdateDirectoryName, newDirectoryName]);
 
   const updateDirectoryDescription = async (description: string): Promise<void> => {
     if (!directory || description === directory?.description) {
@@ -105,7 +105,7 @@ const Page: WebevNextPage = () => {
   const debounceUpdateDirectoryDescription = useDebouncedCallback(updateDirectoryDescription, 300);
   useEffect(() => {
     debounceUpdateDirectoryDescription(newDirectoryDescription);
-  }, [newDirectoryDescription]);
+  }, [debounceUpdateDirectoryDescription, newDirectoryDescription]);
 
   useEffect(() => {
     if (directory) {
@@ -127,7 +127,7 @@ const Page: WebevNextPage = () => {
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
-  }, []);
+  }, [mutatePageStatus]);
 
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);

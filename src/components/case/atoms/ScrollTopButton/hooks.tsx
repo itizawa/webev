@@ -23,7 +23,7 @@ export const useHooks = (): { isShowScroll: boolean; scrollTop: () => void } => 
     return () => {
       window.removeEventListener('scroll', throttleCheckScrollTop);
     };
-  }, []);
+  }, [throttleCheckScrollTop]);
 
   return {
     isShowScroll,

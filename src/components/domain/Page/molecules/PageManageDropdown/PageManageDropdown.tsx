@@ -51,7 +51,7 @@ export const PageManageDropdown: VFC<Props> = ({
    */
   const canShareByNavigator = useMemo(() => {
     return !!navigator?.share;
-  }, [navigator]);
+  }, []);
 
   return (
     <UncontrolledDropdown direction="left">

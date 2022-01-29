@@ -26,7 +26,7 @@ export const SocketConnector: VFC = () => {
     return () => {
       socket.close();
     };
-  }, []);
+  }, [mutateSocketId, pageListMutate, socket]);
 
   return null;
 };
