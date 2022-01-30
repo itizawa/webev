@@ -27,7 +27,7 @@
     "bootstrap-icons": "^1.5.0",
     "date-fns": "^2.24.0",
     "emoji-mart": "^3.0.1",
-    "mongodb": "^3.6.9",
+    "mongodb": "^4.0.0",
     "next": "^11.1.2",
     "next-auth": "^3.29.0",
     "next-pwa": "^5.3.1",
