@@ -13,7 +13,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
     if (!loading && session != null) {
       router.push(HOME_URL);
     }
-  }, [loading, session]);
+  }, [loading, router, session]);
 
   if (typeof window !== 'undefined' && loading)
     return (

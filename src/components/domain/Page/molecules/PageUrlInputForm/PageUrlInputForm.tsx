@@ -1,4 +1,4 @@
-import { VFC, useState, useEffect } from 'react';
+import { VFC, useState, useEffect, useCallback } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -42,7 +42,7 @@ export const PageUrlInputForm: VFC = () => {
     }
   };
 
-  const readClipboardText = async () => {
+  const readClipboardText = useCallback(async () => {
     // TODO use vars from DB instead of local storage
     if (retrieveValue('isEnableReadFromClipboard') !== 'true') {
       return;
@@ -59,7 +59,7 @@ export const PageUrlInputForm: VFC = () => {
     mutateUrlFromClipBoard(clipboardText);
     toastSuccess(t.obtained_from_clipboard);
     setUsedClipboardTexts((prevState) => [...prevState, clipboardText]);
-  };
+  }, [mutateUrlFromClipBoard, retrieveValue, t.obtained_from_clipboard, usedClipboardTexts]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -70,7 +70,7 @@ export const PageUrlInputForm: VFC = () => {
         window.removeEventListener('focus', readClipboardText);
       }
     };
-  }, [window]);
+  }, [readClipboardText]);
 
   return (
     <form className="input-group" onSubmit={onSubmit}>

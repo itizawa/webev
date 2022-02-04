@@ -1,4 +1,4 @@
-FROM node:16.11.1
+FROM node:17.4.0
 
 RUN mkdir /webev-front
 

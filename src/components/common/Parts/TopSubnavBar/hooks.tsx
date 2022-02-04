@@ -27,7 +27,7 @@ export const useHooks = (): { isShowScroll: boolean } => {
     return () => {
       window.removeEventListener('scroll', throttleCheckScrollTop);
     };
-  }, []);
+  }, [throttleCheckScrollTop]);
 
   return {
     isShowScroll,
