@@ -4,6 +4,15 @@ exports[`EditableTextarea 1`] = `
 .c0 {
   background: transparent;
   border: none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+}
+
+.c0::-webkit-scrollbar {
+  display: none;
 }
 
 .c0:hover {
@@ -58,6 +67,15 @@ exports[`EditableTextarea is header 1`] = `
 .c0 {
   background: transparent;
   border: none;
+  -ms-overflow-style: none;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+}
+
+.c0::-webkit-scrollbar {
+  display: none;
 }
 
 .c0:hover {
