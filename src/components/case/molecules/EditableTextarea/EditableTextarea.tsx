@@ -25,7 +25,11 @@ export const EditableTextarea: VFC<Props> = (props) => {
 const StyledInput = styled.textarea`
   background: transparent;
   border: none;
-
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &:hover {
     background: #232323;
     ::placeholder {
