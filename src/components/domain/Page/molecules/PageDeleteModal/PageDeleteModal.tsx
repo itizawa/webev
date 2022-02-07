@@ -6,7 +6,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { usePageForDelete } from '~/stores/modal';
-import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -15,7 +15,6 @@ export const PageDeleteModal: VFC = () => {
 
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: pageListMutate } = usePageListSWR();
-  const { mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage: 1, searchKeyWord: '' });
 
   const deletePage = async () => {
     try {
@@ -23,7 +22,6 @@ export const PageDeleteModal: VFC = () => {
       mutatePageForDelete(null);
       toastSuccess(t.toastr_delete_url);
       pageListMutate();
-      mutatePageNotBelongDirectory();
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }

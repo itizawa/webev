@@ -14,7 +14,6 @@ import { useDirectoryPaginationResult } from '~/stores/directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
 import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
-import { usePageNotBelongDirectory } from '~/stores/page';
 
 export const PageAddToDirectoryModal: VFC = () => {
   const { t } = useLocale();
@@ -22,7 +21,6 @@ export const PageAddToDirectoryModal: VFC = () => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [activePage, setActivePage] = useState(1);
   const { data: directoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, activePage });
-  const { mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage: 1, searchKeyWord: '' });
 
   const { isLoading, addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
@@ -35,7 +33,6 @@ export const PageAddToDirectoryModal: VFC = () => {
     try {
       await addPageToDirectory(pageForAddToDirectory._id, directoryId);
       mutatePageForAddToDirectory(null);
-      mutatePageNotBelongDirectory();
       toastSuccess(t.toastr_success_add_directory);
     } catch (err) {
       if (err instanceof Error) toastError(err);

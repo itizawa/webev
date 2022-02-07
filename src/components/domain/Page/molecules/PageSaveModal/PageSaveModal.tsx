@@ -32,6 +32,10 @@ export const PageSaveModal: VFC = () => {
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
+    mutatePageNotBelongDirectory();
+  }, [directoryForSavePage, mutatePageNotBelongDirectory]);
+
+  useEffect(() => {
     if (urlFromClipBoard != null) {
       setUrl(urlFromClipBoard);
     } else {

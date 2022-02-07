@@ -1,12 +1,11 @@
 import { VFC, useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 import { useSocketId } from '~/stores/contexts';
 
 export const SocketConnector: VFC = () => {
   const [socket] = useState(() => io(process.env.NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT || 'http://localhost:8000'));
   const { mutate: pageListMutate } = usePageListSWR();
-  const { mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage: 1, searchKeyWord: '' });
 
   const { mutate: mutateSocketId } = useSocketId();
 
@@ -20,7 +19,6 @@ export const SocketConnector: VFC = () => {
     socket.on('update-page', () => {
       console.log('Get Updated Data');
       pageListMutate();
-      mutatePageNotBelongDirectory();
     });
     socket.on('issue-token', ({ socketId }: { socketId: string }) => {
       mutateSocketId(socketId);
@@ -29,7 +27,7 @@ export const SocketConnector: VFC = () => {
     return () => {
       socket.close();
     };
-  }, [mutateSocketId, pageListMutate, mutatePageNotBelongDirectory, socket]);
+  }, [mutateSocketId, pageListMutate, socket]);
 
   return null;
 };
