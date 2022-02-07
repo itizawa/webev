@@ -44,7 +44,7 @@ export const PageSaveModal: VFC = () => {
 
     try {
       await restClient.apiPost('/pages', { url, socketId, directoryId: directoryForSavePage?._id });
-      toastSuccess(t.toastr_delete_url);
+      toastSuccess(t.toastr_save_url);
       pageListMutate();
       closeModal();
     } catch (err) {
