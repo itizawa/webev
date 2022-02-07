@@ -12,7 +12,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page, PageStatus } from '~/domains/Page';
 
-import { usePageListSWR } from '~/stores/page';
+import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
 
@@ -31,6 +31,8 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+  const { mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage: 1, searchKeyWord: '' });
+
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
@@ -83,6 +85,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
       }
       toastSuccess(t.remove_page_from_directory);
       mutatePageList();
+      mutatePageNotBelongDirectory();
     } catch (error) {
       if (error instanceof Error) toastError(error);
     }
