@@ -12,11 +12,14 @@ import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirecto
 
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Icon } from '~/components/base/atoms/Icon';
+import { useLocale } from '~/hooks/useLocale';
 
 type Props = {
   directory: Directory;
 };
 export const DirectoryListItem: VFC<Props> = ({ directory }) => {
+  const { t } = useLocale();
+
   const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState('');
 
   const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
@@ -69,15 +72,15 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
           <DropdownMenu className="dropdown-menu-dark" positionFixed right>
             <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
               <Icon icon="TRASH" color="WHITE" />
-              <span className="ms-2">Trash</span>
+              <span className="ms-2">{t.delete}</span>
             </DropdownItem>
             <DropdownItem tag="button" onClick={(e) => openRenameModal(e, directory)}>
               <Icon icon="PENCIL" color="WHITE" />
-              <span className="ms-2">Rename</span>
+              <span className="ms-2">{t.rename_directory}</span>
             </DropdownItem>
             <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
               <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
-              <span className="ms-2">Create Directory</span>
+              <span className="ms-2">{t.create_directory}</span>
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
