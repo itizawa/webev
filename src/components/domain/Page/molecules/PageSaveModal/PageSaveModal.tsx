@@ -32,6 +32,10 @@ export const PageSaveModal: VFC = () => {
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
+    mutatePageNotBelongDirectory();
+  }, [directoryForSavePage, mutatePageNotBelongDirectory]);
+
+  useEffect(() => {
     if (urlFromClipBoard != null) {
       setUrl(urlFromClipBoard);
     } else {
@@ -44,7 +48,7 @@ export const PageSaveModal: VFC = () => {
 
     try {
       await restClient.apiPost('/pages', { url, socketId, directoryId: directoryForSavePage?._id });
-      toastSuccess(t.toastr_delete_url);
+      toastSuccess(t.toastr_save_url);
       pageListMutate();
       closeModal();
     } catch (err) {
