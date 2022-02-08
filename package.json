@@ -79,7 +79,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
-    "jest": "27.4.7",
+    "jest": "27.5.0",
     "jest-styled-components": "7.0.8",
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
