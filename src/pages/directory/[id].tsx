@@ -178,7 +178,7 @@ const Page: WebevNextPage = () => {
       <LoginRequiredWrapper>
         {directory != null && (
           <>
-            <div className="text-nowrap overflow-scroll small pb-2 pb-md-0">
+            <StyledDiv className="text-nowrap overflow-scroll small pb-2 pb-md-0">
               <Link href="/directory">
                 <a className="webev-anchor text-white">{t.directory}</a>
               </Link>
@@ -197,7 +197,7 @@ const Page: WebevNextPage = () => {
                   </Fragment>
                 );
               })}
-            </div>
+            </StyledDiv>
             <div className="d-flex gap-3 align-items-center my-2">
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
@@ -283,6 +283,14 @@ const getLayout = (page: ReactNode) => <DashBoardLayout>{page}</DashBoardLayout>
 
 Page.getLayout = getLayout;
 export default Page;
+
+const StyledDiv = styled.div`
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const StyledEmojiPickerWrapper = styled.div<{ top: number; left: number }>`
   position: absolute;

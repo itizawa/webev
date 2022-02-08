@@ -21,6 +21,7 @@ export const PageAddToDirectoryModal: VFC = () => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const [activePage, setActivePage] = useState(1);
   const { data: directoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, activePage });
+
   const { isLoading, addPageToDirectory } = useAddPageToDirectory();
   const { data: pageForAddToDirectory, mutate: mutatePageForAddToDirectory } = usePageForAddToDirectory();
 

@@ -31,6 +31,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
