@@ -54,13 +54,13 @@ export const PageManageDropdown: VFC<Props> = ({
   }, []);
 
   return (
-    <UncontrolledDropdown direction="left">
+    <UncontrolledDropdown direction="start">
       <DropdownToggle tag="span">
         <div id={`manage-for-${page._id}`}>
           <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
         </div>
       </DropdownToggle>
-      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed>
+      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
         <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
           <DropdownItem>
             <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
