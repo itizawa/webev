@@ -60,7 +60,7 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
         </a>
       </p>
       <div
-        className="dropleft dropdown"
+        className="dropdown dropstart"
         onKeyDown={[Function]}
       >
         <span
@@ -94,6 +94,7 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
         <div
           aria-hidden={true}
           className="dropdown-menu-dark border-secondary dropdown-menu"
+          positionFixed={true}
           role="menu"
           tabIndex="-1"
         >
@@ -342,7 +343,7 @@ exports[`PageListItem 1`] = `
         </a>
       </p>
       <div
-        className="dropleft dropdown"
+        className="dropdown dropstart"
         onKeyDown={[Function]}
       >
         <span
@@ -376,6 +377,7 @@ exports[`PageListItem 1`] = `
         <div
           aria-hidden={true}
           className="dropdown-menu-dark border-secondary dropdown-menu"
+          positionFixed={true}
           role="menu"
           tabIndex="-1"
         >

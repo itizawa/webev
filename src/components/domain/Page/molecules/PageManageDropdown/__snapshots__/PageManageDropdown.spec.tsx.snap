@@ -2,7 +2,7 @@
 
 exports[`PageManageDropdown directoryId is undefined 1`] = `
 <div
-  className="dropleft dropdown"
+  className="dropdown dropstart"
   onKeyDown={[Function]}
 >
   <span
@@ -36,6 +36,7 @@ exports[`PageManageDropdown directoryId is undefined 1`] = `
   <div
     aria-hidden={true}
     className="dropdown-menu-dark border-secondary dropdown-menu"
+    positionFixed={true}
     role="menu"
     tabIndex="-1"
   >
@@ -184,7 +185,7 @@ exports[`PageManageDropdown directoryId is undefined 1`] = `
 
 exports[`PageManageDropdown directoryId is undefined 2`] = `
 <div
-  className="dropleft dropdown"
+  className="dropdown dropstart"
   onKeyDown={[Function]}
 >
   <span
@@ -218,6 +219,7 @@ exports[`PageManageDropdown directoryId is undefined 2`] = `
   <div
     aria-hidden={true}
     className="dropdown-menu-dark border-secondary dropdown-menu"
+    positionFixed={true}
     role="menu"
     tabIndex="-1"
   >
@@ -366,7 +368,7 @@ exports[`PageManageDropdown directoryId is undefined 2`] = `
 
 exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
 <div
-  className="dropleft dropdown"
+  className="dropdown dropstart"
   onKeyDown={[Function]}
 >
   <span
@@ -400,6 +402,7 @@ exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
   <div
     aria-hidden={true}
     className="dropdown-menu-dark border-secondary dropdown-menu"
+    positionFixed={true}
     role="menu"
     tabIndex="-1"
   >
