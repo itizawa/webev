@@ -28,7 +28,7 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
 
   return (
     <Provider options={{ clientMaxAge: 0, keepAlive: 0 }} session={pageProps.session}>
-      <SkeletonTheme color="#213243" highlightColor="#444">
+      <SkeletonTheme baseColor="#213243" highlightColor="#444">
         {getLayout(<Component {...pageProps} />)}
       </SkeletonTheme>
     </Provider>
