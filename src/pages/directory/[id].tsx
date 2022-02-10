@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
-import Loader from 'react-loader-spinner';
+import { Oval, Triangle } from 'react-loader-spinner';
 import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
@@ -166,8 +166,8 @@ const Page: WebevNextPage = () => {
 
   if (directory == null) {
     return (
-      <div className="text-center pt-5">
-        <Loader type="Oval" color="#00BFFF" height={64} width={64} />
+      <div className="pt-5 d-flex align-items-center justify-content-center">
+        <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
       </div>
     );
   }
@@ -267,8 +267,8 @@ const Page: WebevNextPage = () => {
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
-          <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          <div className="pt-5 d-flex align-items-center justify-content-center">
+            <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
         {paginationResult != null && (

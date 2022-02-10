@@ -1,5 +1,5 @@
 import { useEffect, ReactNode } from 'react';
-import Loader from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
@@ -41,8 +41,8 @@ const Index: WebevNextPage = () => {
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
-          <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          <div className="pt-5 d-flex align-items-center justify-content-center">
+            <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
         {paginationResult != null && (
