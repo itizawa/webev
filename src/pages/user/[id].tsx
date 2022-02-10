@@ -19,7 +19,7 @@ const Page: WebevNextPage = () => {
 
   if (isValidatingUser) {
     return (
-      <div className="text-center pt-5">
+      <div className="pt-5 d-flex align-items-center justify-content-center">
         <Triangle color="#00BFFF" height={100} width={100} />
       </div>
     );

@@ -166,7 +166,7 @@ const Page: WebevNextPage = () => {
 
   if (directory == null) {
     return (
-      <div className="text-center pt-5">
+      <div className="pt-5 d-flex align-items-center justify-content-center">
         <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
       </div>
     );
@@ -267,7 +267,7 @@ const Page: WebevNextPage = () => {
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
-          <div className="text-center pt-5">
+          <div className="pt-5 d-flex align-items-center justify-content-center">
             <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}

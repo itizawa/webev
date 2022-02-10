@@ -17,7 +17,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
 
   if (typeof window !== 'undefined' && loading)
     return (
-      <div className="text-center pt-5">
+      <div className="pt-5 d-flex align-items-center justify-content-center">
         <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
       </div>
     );
@@ -27,7 +27,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   }
 
   return (
-    <div className="text-center pt-5">
+    <div className="pt-5 d-flex align-items-center justify-content-center">
       <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
     </div>
   );

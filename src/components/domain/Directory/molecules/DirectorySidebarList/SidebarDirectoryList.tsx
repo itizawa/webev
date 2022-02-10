@@ -101,7 +101,7 @@ export const SidebarDirectoryList: VFC = () => {
 
   if (directoryPaginationResult == null) {
     return (
-      <div className="text-center">
+      <div className="d-flex align-items-center justify-content-center">
         <Oval color="#00bfff" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
       </div>
     );
