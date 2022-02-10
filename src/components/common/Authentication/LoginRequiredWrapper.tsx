@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
-import Loader from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 export const LoginRequiredWrapper: FC = ({ children }) => {
   const [session, loading] = useSession();
@@ -16,7 +16,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   if (typeof window !== 'undefined' && loading)
     return (
       <div className="text-center pt-5">
-        <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+        <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
       </div>
     );
 
@@ -26,7 +26,7 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
 
   return (
     <div className="text-center pt-5">
-      <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+      <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
     </div>
   );
 };

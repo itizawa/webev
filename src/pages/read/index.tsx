@@ -1,5 +1,5 @@
 import { useEffect, ReactNode } from 'react';
-import Loader from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
 import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
 
@@ -42,7 +42,7 @@ const Page: WebevNextPage = () => {
         </div>
         {paginationResult == null && (
           <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+            <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
         {paginationResult != null && <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}

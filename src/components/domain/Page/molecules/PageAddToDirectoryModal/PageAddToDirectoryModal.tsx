@@ -1,6 +1,6 @@
 import { useState, VFC } from 'react';
 
-import Loader from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 import styled from 'styled-components';
 import { Emoji } from 'emoji-mart';
 import { Modal } from '~/components/base/molecules/Modal';
@@ -50,7 +50,7 @@ export const PageAddToDirectoryModal: VFC = () => {
       </div>
       {directoryPaginationResult == null && (
         <div className="text-center pt-5">
-          <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          <Triangle color="#00BFFF" height={100} width={100} />
         </div>
       )}
       {directoryPaginationResult != null && (

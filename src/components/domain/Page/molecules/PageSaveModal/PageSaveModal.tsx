@@ -1,5 +1,5 @@
 import { VFC, useState, useEffect } from 'react';
-import Loader from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -101,7 +101,7 @@ export const PageSaveModal: VFC = () => {
       </div>
       {paginationResult == null ? (
         <div className="text-center pt-5">
-          <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          <Triangle color="#00BFFF" height={100} width={100} />
         </div>
       ) : (
         <>
