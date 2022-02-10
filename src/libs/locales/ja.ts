@@ -40,6 +40,7 @@ export const ja = {
   toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',
   toastr_success_send_inquiry: '送信しました',
+  toastr_success_import_bookmark: 'インポートが完了しました。',
 
   home: 'ホーム',
   read: '読んだ記事',
@@ -73,6 +74,7 @@ export const ja = {
   create_directory: 'ディレクトリの新規作成',
   manage_directory: 'ディレクトリの編集',
   rename_directory: 'ディレクトリの名前変更',
+  import: 'インポート',
   save_page_to_directory: 'ディレクトリにページを追加する',
   add_page_already_saved: 'すでに保存しているページを追加する',
   remove_page_from_directory: 'ディレクトリからページを除外する',
@@ -94,6 +96,7 @@ export const ja = {
   development: '開発に関すること(お手伝い募集中です)',
   others: 'その他',
   inquiry_submit: '送信',
+  file_is_not_selected: 'ファイルが指定されていません。',
 
   maintenance: '管理画面はメンテナンス中です',
 

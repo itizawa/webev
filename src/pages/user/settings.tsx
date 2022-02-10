@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import Loader from 'react-loader-spinner';
 import { useDebouncedCallback } from 'use-debounce';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -18,11 +18,16 @@ import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { EditableTextarea } from '~/components/case/molecules/EditableTextarea';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 
+import { convertFromHtmlToDirs, convertFromHtmlToPageUrls, convertFromHtmlToPages } from '~/utils/importBookmarkService';
+
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
   const { data: apiToken, mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
+
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [importOption, setImportOption] = useState<string>('withoutTitle');
 
   const updateProfile = (newObject: Partial<User>): void => {
     try {
@@ -49,6 +54,41 @@ const Page: WebevNextPage = () => {
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
+  };
+
+  const handleUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUploadedFile(e.target.files !== null ? e.target.files[0] : null);
+  };
+
+  const handleImportBookmark = async () => {
+    if (uploadedFile == null) {
+      toastError(new Error(t.file_is_not_selected));
+      return;
+    }
+
+    const html = await uploadedFile.text();
+    let params = {};
+    let url = '';
+    switch (importOption) {
+      case 'withoutTitle':
+        params = { url: convertFromHtmlToPageUrls(html) };
+        url = '/pages';
+        break;
+      case 'withTitle':
+        params = { pages: convertFromHtmlToPages(html) };
+        url = '/pages/from-page-object';
+        toastError(new Error('タイトル付きインポートは現在利用できません。'));
+        break;
+      case 'withDirectories':
+        params = { dirs: convertFromHtmlToDirs(html) };
+        url = '/pages/from-dir-object';
+        toastError(new Error('ディレクトリ付きインポートは現在利用できません。'));
+        break;
+    }
+
+    const { data } = await restClient.apiPost(url, params);
+    console.log(data);
+    toastSuccess(t.toastr_success_import_bookmark);
   };
 
   const changeProfile = (newObject: Partial<User>): void => {
@@ -82,6 +122,61 @@ const Page: WebevNextPage = () => {
             <button className="btn btn-secondary input-group-text" onClick={handleUpdateApiToken}>
               更新
             </button>
+          </div>
+        </div>
+        <div className="row my-3">
+          <label className="col-md-2 mb-2">Import Bookmark</label>
+          <div className="input-group col-md-10 col-12">
+            <div className="col-12">
+              <input type="file" name="bookmark-file" accept=".html" onChange={handleUploadFile} />
+              <button className="btn btn-secondary input-group-text" onClick={handleImportBookmark}>
+                {t.import}
+              </button>
+            </div>
+            <div className="col-12 my-3">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="import-option"
+                  id="without-title"
+                  value="withoutTitle"
+                  checked={importOption === 'withoutTitle'}
+                  onChange={() => setImportOption('withoutTitle')}
+                />
+                <label className="form-check-label" htmlFor="without-title">
+                  ブックマークタイトルを含めない
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="import-option"
+                  id="with-title"
+                  value="withTitle"
+                  checked={importOption === 'withTitle'}
+                  disabled
+                />
+                <label className="form-check-label" htmlFor="with-title">
+                  ブックマークタイトルを含める
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="import-option"
+                  id="with-directories"
+                  value="withDirectories"
+                  checked={importOption === 'withDirectories'}
+                  disabled
+                />
+                <label className="form-check-label" htmlFor="with-directories">
+                  ディレクトリを含める
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </LoginRequiredWrapper>
