@@ -4,7 +4,7 @@ import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/client';
 import style from 'styled-components';
-import Loader from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
@@ -47,7 +47,7 @@ export const PersonalDropdown: VFC = () => {
   };
 
   if (currentUser == null) {
-    return <Loader type="Oval" color="#00BFFF" height={32} width={32} />;
+    return <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={32} width={32} />;
   }
 
   return (

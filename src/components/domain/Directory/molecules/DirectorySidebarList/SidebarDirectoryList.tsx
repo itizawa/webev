@@ -1,6 +1,6 @@
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
-import Loader from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 
 import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
 
@@ -101,8 +101,8 @@ export const SidebarDirectoryList: VFC = () => {
 
   if (directoryPaginationResult == null) {
     return (
-      <div className="text-center">
-        <Loader type="Oval" color="#00BFFF" height={64} width={64} />
+      <div className="d-flex align-items-center justify-content-center">
+        <Oval color="#00bfff" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
       </div>
     );
   }

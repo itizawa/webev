@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode, useMemo } from 'react';
 
-import Loader from 'react-loader-spinner';
+import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { PageStatus } from '~/domains/Page';
@@ -46,8 +46,8 @@ const Page: WebevNextPage = () => {
 
   if (!page) {
     return (
-      <div className="text-center pt-5">
-        <Loader type="Oval" color="#00BFFF" height={100} width={100} />
+      <div className="pt-5 d-flex align-items-center justify-content-center">
+        <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
       </div>
     );
   }

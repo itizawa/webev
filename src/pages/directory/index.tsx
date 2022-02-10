@@ -1,7 +1,7 @@
 import { useState, useEffect, ReactNode } from 'react';
 
 import styled from 'styled-components';
-import Loader from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
@@ -70,8 +70,8 @@ const Page: WebevNextPage = () => {
           <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
         </div>
         {directoryPaginationResult == null && (
-          <div className="text-center pt-5">
-            <Loader type="Triangle" color="#00BFFF" height={100} width={100} />
+          <div className="pt-5 d-flex align-items-center justify-content-center">
+            <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
         {directoryPaginationResult != null && (
