@@ -54,7 +54,7 @@
     "@types/emoji-mart": "3.0.9",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/jest": "27.4.0",
-    "@types/node": "16.11.22",
+    "@types/node": "16.11.24",
     "@types/react": "17.0.39",
     "@types/react-beautiful-dnd": "13.1.2",
     "@types/react-copy-to-clipboard": "5.0.2",
