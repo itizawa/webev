@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
@@ -53,34 +53,29 @@ export const DashBoardLayout: FC = ({ children }) => {
         </div>
         <StyledBorder />
         <FooterSubnavBar />
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <StyledDiv className="row mx-auto overflow-hidden" ref={provided.innerRef} {...provided.droppableProps}>
-              <div className="d-none d-md-block col-md-3">
-                <Sidebar />
-              </div>
-              <div className="col-12 col-md-8 pt-3">{children}</div>
-              {provided.placeholder}
+        <StyledDiv className="row mx-auto overflow-hidden">
+          <div className="d-none d-md-block col-md-3">
+            <Sidebar />
+          </div>
+          <div className="col-12 col-md-8 pt-3">{children}</div>
 
-              {session && (
-                <>
-                  <DirectoryCreateModal />
-                  <DirectoryDeleteModal />
-                  <DirectoryRenameModal />
-                  <PageDeleteModal />
-                  <PageAddToDirectoryModal />
-                  <PageSaveModal />
-                </>
-              )}
-              {session && <SocketConnector />}
-              {session && <ShareLinkReceiverModal />}
-              {currentUser && <TutorialDetectorModal />}
-              <div>
-                <ScrollTopButton />
-              </div>
-            </StyledDiv>
+          {session && (
+            <>
+              <DirectoryCreateModal />
+              <DirectoryDeleteModal />
+              <DirectoryRenameModal />
+              <PageDeleteModal />
+              <PageAddToDirectoryModal />
+              <PageSaveModal />
+            </>
           )}
-        </Droppable>
+          {session && <SocketConnector />}
+          {session && <ShareLinkReceiverModal />}
+          {currentUser && <TutorialDetectorModal />}
+          <div>
+            <ScrollTopButton />
+          </div>
+        </StyledDiv>
         <Footer />
       </div>
     </DragDropContext>
