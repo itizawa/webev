@@ -1,5 +1,6 @@
 import { VFC } from 'react';
 
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { Page } from '~/domains/Page';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
@@ -29,30 +30,43 @@ export const PageList: VFC<Props> = (props) => {
   };
 
   return (
-    <div className="row">
-      {pages.map((page) => {
-        if (ogpCardLayout === OgpLayoutType.LIST) {
-          return (
-            <div className="col-12" key={page._id}>
-              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} />
+    <Droppable droppableId="pages">
+      {(provided) => (
+        <div className="row" ref={provided.innerRef} {...provided.droppableProps}>
+          {pages.map((page, index) => {
+            if (ogpCardLayout === OgpLayoutType.LIST) {
+              return (
+                <Draggable key={page._id} draggableId={page._id} index={index}>
+                  {(provided) => (
+                    <div className="col-12" ref={provided.innerRef} {...provided.draggableProps}>
+                      <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} draggableProvidedDragHandleProps={provided.dragHandleProps} />
+                    </div>
+                  )}
+                </Draggable>
+              );
+            }
+            return (
+              <Draggable key={page._id} draggableId={page._id} index={index}>
+                {(provided) => (
+                  <div className="col-xl-4 col-md-6 mb-3" key={page._id} ref={provided.innerRef} {...provided.draggableProps}>
+                    <PageCard page={page} isHideArchiveButton={isHideArchiveButton} draggableProvidedDragHandleProps={provided.dragHandleProps} />
+                  </div>
+                )}
+              </Draggable>
+            );
+          })}
+          {pages.length === 0 ? (
+            <div className="col-12">
+              <NoPageAlert />
             </div>
-          );
-        }
-        return (
-          <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} />
-          </div>
-        );
-      })}
-      {pages.length === 0 ? (
-        <div className="col-12">
-          <NoPageAlert />
-        </div>
-      ) : (
-        <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
+          ) : (
+            <div className="text-center">
+              <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
+            </div>
+          )}
+          {provided.placeholder}
         </div>
       )}
-    </div>
+    </Droppable>
   );
 };
