@@ -27,9 +27,10 @@ type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
   draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
+  isDragging?: boolean;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps }) => {
+export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps, isDragging = false }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
@@ -98,7 +99,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, draggableP
   }, [allDirectories, page.directoryId]);
 
   return (
-    <StyledRow className="row py-2" {...draggableProvidedDragHandleProps}>
+    <StyledRow className="row py-2" isDragging={isDragging} {...draggableProvidedDragHandleProps}>
       <div className="col-3 col-md-2 p-1 p-md-2">
         {page.body ? (
           <Link href={`/page/${page._id}`}>
@@ -183,6 +184,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, draggableP
   );
 };
 
-const StyledRow = styled.div`
+const StyledRow = styled.div<{ isDragging: boolean }>`
   border-top: 1px solid #404040;
+  opacity: ${({ isDragging }) => (isDragging ? 0.6 : 1)};
 `;

@@ -37,9 +37,14 @@ export const PageList: VFC<Props> = (props) => {
             if (ogpCardLayout === OgpLayoutType.LIST) {
               return (
                 <Draggable key={page._id} draggableId={page._id} index={index}>
-                  {(provided) => (
+                  {(provided, snapshot) => (
                     <div className="col-12" ref={provided.innerRef} {...provided.draggableProps}>
-                      <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} draggableProvidedDragHandleProps={provided.dragHandleProps} />
+                      <PageListItem
+                        page={page}
+                        isHideArchiveButton={isHideArchiveButton}
+                        draggableProvidedDragHandleProps={provided.dragHandleProps}
+                        isDragging={snapshot.isDragging}
+                      />
                     </div>
                   )}
                 </Draggable>
@@ -47,9 +52,14 @@ export const PageList: VFC<Props> = (props) => {
             }
             return (
               <Draggable key={page._id} draggableId={page._id} index={index}>
-                {(provided) => (
+                {(provided, snapshot) => (
                   <div className="col-xl-4 col-md-6 mb-3" key={page._id} ref={provided.innerRef} {...provided.draggableProps}>
-                    <PageCard page={page} isHideArchiveButton={isHideArchiveButton} draggableProvidedDragHandleProps={provided.dragHandleProps} />
+                    <PageCard
+                      page={page}
+                      isHideArchiveButton={isHideArchiveButton}
+                      draggableProvidedDragHandleProps={provided.dragHandleProps}
+                      isDragging={snapshot.isDragging}
+                    />
                   </div>
                 )}
               </Draggable>

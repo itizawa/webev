@@ -27,9 +27,10 @@ type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
   draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
+  isDragging?: boolean;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps, isDragging = false }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
@@ -100,7 +101,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, draggableProvi
   };
 
   return (
-    <StyledCard className="card border-0 shadow h-100 overflow-hidden" {...draggableProvidedDragHandleProps}>
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden" {...draggableProvidedDragHandleProps} isDragging={isDragging}>
       {page.body ? (
         <Link href={`/page/${page._id}`}>
           <a>
@@ -180,6 +181,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, draggableProvi
   );
 };
 
-const StyledCard = styled.div`
+const StyledCard = styled.div<{ isDragging: boolean }>`
   background-color: #2f363d;
+  opacity: ${({ isDragging }) => (isDragging ? 0.6 : 1)};
 `;
