@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DragUpdate } from 'react-beautiful-dnd';
 import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
@@ -25,12 +25,17 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/Tu
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { restClient } from '~/utils/rest-client';
+import { toastError } from '~/utils/toastr';
+import { Directory } from '~/domains/Directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
   const router = useRouter();
   const { mutate: mutateActivePage } = useActivePage();
   const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
 
   const { data: currentUser } = useCurrentUser();
 
@@ -41,12 +46,61 @@ export const DashBoardLayout: FC = ({ children }) => {
     mutateActivePage(1);
   }, [mutateActivePage, mutateDirectoryId, router]);
 
+  const handleOnDragEnd = (result: DragUpdate) => {
+    if (!directoryPaginationResult) {
+      return;
+    }
+
+    if (!result.destination) {
+      return;
+    }
+    const destOrder = result.destination.index + 1;
+    const sourceOrder = result.source.index + 1;
+
+    if (sourceOrder === destOrder) {
+      return;
+    }
+
+    try {
+      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
+
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+    }
+
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
+
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
+  };
+
   if (typeof window === 'undefined') {
     return null;
   }
 
   return (
-    <DragDropContext onDragEnd={() => console.log('drag')}>
+    <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
         <div className="bg-dark">
           <Navbar />
