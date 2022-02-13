@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -25,9 +26,10 @@ const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
+  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
@@ -96,7 +98,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   }, [allDirectories, page.directoryId]);
 
   return (
-    <StyledRow className="row py-2">
+    <StyledRow className="row py-2" {...draggableProvidedDragHandleProps}>
       <div className="col-3 col-md-2 p-1 p-md-2">
         {page.body ? (
           <Link href={`/page/${page._id}`}>

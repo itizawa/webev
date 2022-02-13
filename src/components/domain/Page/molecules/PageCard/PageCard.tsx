@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -25,9 +26,10 @@ const MAX_WORD_COUNT_OF_BODY = 96;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
+  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, draggableProvidedDragHandleProps }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
@@ -98,7 +100,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   };
 
   return (
-    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden" {...draggableProvidedDragHandleProps}>
       {page.body ? (
         <Link href={`/page/${page._id}`}>
           <a>
