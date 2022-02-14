@@ -36,7 +36,7 @@ export const PageList: VFC<Props> = (props) => {
           {pages.map((page, index) => {
             if (ogpCardLayout === OgpLayoutType.LIST) {
               return (
-                <Draggable key={page._id} draggableId={page._id} index={index}>
+                <Draggable key={page._id} draggableId={'p' + page._id} index={index}>
                   {(provided, snapshot) => (
                     <div className="col-12" ref={provided.innerRef} {...provided.draggableProps}>
                       <PageListItem
@@ -51,7 +51,7 @@ export const PageList: VFC<Props> = (props) => {
               );
             }
             return (
-              <Draggable key={page._id} draggableId={page._id} index={index}>
+              <Draggable key={page._id} draggableId={'p' + page._id} index={index}>
                 {(provided, snapshot) => (
                   <div className="col-xl-4 col-md-6 mb-3" key={page._id} ref={provided.innerRef} {...provided.draggableProps}>
                     <PageCard

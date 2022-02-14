@@ -64,7 +64,7 @@ export const SidebarDirectoryList: VFC = () => {
           <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
             {directoryPaginationResult.docs.map((directory, index) => {
               return (
-                <Draggable key={directory._id} draggableId={directory._id} index={index}>
+                <Draggable key={directory._id} draggableId={'d' + directory._id} index={index}>
                   {(provided) => (
                     <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} className="my-1">
                       <DirectorySidebarListItem directory={directory} draggableProvidedDragHandleProps={provided.dragHandleProps} />

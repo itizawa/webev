@@ -47,6 +47,11 @@ export const DashBoardLayout: FC = ({ children }) => {
   }, [mutateActivePage, mutateDirectoryId, router]);
 
   const handleOnDragEnd = (result: DragUpdate) => {
+    if ('p' === result.draggableId[0]) {
+      // TODO: pageをdropしたときの処理を実装する
+      return;
+    }
+
     if (!directoryPaginationResult) {
       return;
     }
@@ -62,7 +67,7 @@ export const DashBoardLayout: FC = ({ children }) => {
     }
 
     try {
-      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
+      restClient.apiPut(`/directories/${result.draggableId.substring(1)}/order`, { order: destOrder });
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
