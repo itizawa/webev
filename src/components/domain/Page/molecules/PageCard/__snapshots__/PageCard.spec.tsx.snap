@@ -21,6 +21,7 @@ exports[`PageCard 1`] = `
 
 .c0 {
   background-color: #2f363d;
+  opacity: 1;
 }
 
 <div
@@ -295,6 +296,7 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
 
 .c0 {
   background-color: #2f363d;
+  opacity: 1;
 }
 
 <div

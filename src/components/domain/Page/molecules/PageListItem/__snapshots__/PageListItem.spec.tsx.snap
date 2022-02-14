@@ -21,6 +21,7 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
 
 .c0 {
   border-top: 1px solid #404040;
+  opacity: 1;
 }
 
 <div
@@ -304,6 +305,7 @@ exports[`PageListItem 1`] = `
 
 .c0 {
   border-top: 1px solid #404040;
+  opacity: 1;
 }
 
 <div
