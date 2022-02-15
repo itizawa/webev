@@ -25,6 +25,7 @@ import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 import { useAllDirectories } from '~/stores/directory';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
+import { restClient } from '~/utils/rest-client';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
@@ -84,11 +85,26 @@ const Page: WebevNextPage = () => {
     mutateUsePageForAddToDirectory(page);
   };
 
+  const handleFetchButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page._id}/ogp`);
+      toastSuccess(t.toastr_success_fetch_page);
+      mutatePage();
+    } catch (error) {
+      if (error instanceof Error) toastError(error);
+    }
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar page={page} onClickRemovePageButton={handleRemovePageButton} onClickSwitchArchiveButton={handleClickSwitchArchiveButton} />
+        <TopSubnavBar
+          page={page}
+          onClickRemovePageButton={handleRemovePageButton}
+          onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
+          onClickFetchButton={handleFetchButton}
+        />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (
             <div className="mt-2">
@@ -120,6 +136,7 @@ const Page: WebevNextPage = () => {
               onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
               onClickRemovePageButton={handleRemovePageButton}
               onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+              onClickFetchButton={handleFetchButton}
             />
           </div>
         </div>

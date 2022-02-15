@@ -17,8 +17,9 @@ type Props = {
   page: Page;
   onClickRemovePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
+  onClickFetchButton: () => void;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton }) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton, onClickFetchButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
@@ -60,6 +61,7 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClic
             onClickSwitchArchiveButton={onClickSwitchArchiveButton}
             onClickRemovePageButton={onClickRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+            onClickFetchButton={onClickFetchButton}
           />
         </div>
       </div>
