@@ -33,6 +33,7 @@ export const BootstrapIcon = {
   DIRECTORY: 'directory',
   ADD_TO_DIRECTORY: 'add-to-directory',
   ARROW: 'arrow',
+  ARROW_CLOCKWISE: 'arrow-clockwise',
   ARROW_RIGHT: 'arrow-right',
   ARROW_DOWN: 'arrow-down',
   CARET_RIGHT: 'caret-right',
