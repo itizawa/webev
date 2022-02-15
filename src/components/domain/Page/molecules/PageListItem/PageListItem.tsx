@@ -18,6 +18,7 @@ import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 import { usePageListSWR } from '~/stores/page';
+import { restClient } from '~/utils/rest-client';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;
@@ -95,6 +96,16 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     return allDirectories?.find((v) => v._id === page.directoryId);
   }, [allDirectories, page.directoryId]);
 
+  const handleFetchButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page._id}/ogp`);
+      toastSuccess(t.toastr_success_fetch_page);
+      mutatePageList();
+    } catch (error) {
+      if (error instanceof Error) toastError(error);
+    }
+  };
+
   return (
     <StyledRow className="row py-2">
       <div className="col-3 col-md-2 p-1 p-md-2">
@@ -129,6 +140,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+            onClickFetchButton={handleFetchButton}
           />
         </div>
         {directoryOfPage != null && (

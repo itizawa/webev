@@ -37,6 +37,7 @@ export const ja = {
   toastr_save_directory: 'ディレクトリを保存しました',
   toastr_delete_directory: 'ディレクトリを削除しました',
   toastr_success_copy_url: 'Url をコピーしました!',
+  toastr_success_fetch_page: 'ページを再取得しました!',
   toastr_success_read: '読みました！',
   toastr_success_put_back: 'ホームに戻しました！',
   toastr_success_add_directory: 'ディレクトリに追加しました',

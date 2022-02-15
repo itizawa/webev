@@ -37,6 +37,7 @@ export const en = {
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
   toastr_success_copy_url: 'Copy Url!',
+  toastr_success_fetch_page: 'Fetch Page!',
   toastr_success_read: 'Read!',
   toastr_success_put_back: 'Put Back Home!',
   toastr_success_add_directory: 'Add Directory',
