@@ -8,6 +8,7 @@ export const en = {
   copy_url: 'Copy URL',
   logout: 'Logout',
   delete: 'Delete',
+  fetch: 'Fetch Page',
   cancel: 'Cancel',
   close: 'Close',
   settings: 'Settings',

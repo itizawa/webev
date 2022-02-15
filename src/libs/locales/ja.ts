@@ -8,6 +8,7 @@ export const ja = {
   copy_url: 'URL をコピーする',
   logout: 'ログアウト',
   delete: '削除',
+  fetch: 'ページを再取得する',
   cancel: 'キャンセル',
   close: '閉じる',
   settings: '設定',
