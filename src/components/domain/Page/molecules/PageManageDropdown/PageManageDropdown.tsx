@@ -13,6 +13,7 @@ type Props = {
   onClickSwitchArchiveButton: () => void;
   onClickRemovePageButton: () => void;
   onClickAddPageToDirectoryButton: () => void;
+  onClickFetchButton: () => void;
 };
 
 export const PageManageDropdown: VFC<Props> = ({
@@ -21,6 +22,7 @@ export const PageManageDropdown: VFC<Props> = ({
   onClickSwitchArchiveButton,
   onClickRemovePageButton,
   onClickAddPageToDirectoryButton,
+  onClickFetchButton,
 }) => {
   const { t } = useLocale();
 
@@ -70,6 +72,10 @@ export const PageManageDropdown: VFC<Props> = ({
         <DropdownItem tag="button" onClick={onClickDeleteButton}>
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
+        </DropdownItem>
+        <DropdownItem tag="button" onClick={onClickFetchButton}>
+          <Icon icon="ARROW_CLOCKWISE" color="WHITE" />
+          <span className="ms-2">{t.fetch}</span>
         </DropdownItem>
         {canShareByNavigator ? (
           <DropdownItem tag="button" onClick={sharePageByNavigator}>
