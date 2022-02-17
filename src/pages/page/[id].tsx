@@ -149,6 +149,10 @@ const Page: WebevNextPage = () => {
           onClickRemovePageButton={handleRemovePageButton}
           onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
           onClickFetchButton={handleFetchButton}
+          onClickPlayButton={handleClickPlayButton}
+          onClickPauseButton={handleClickPauseButton}
+          onClickStopButton={handleClickStopButton}
+          isReading={isReading}
         />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (

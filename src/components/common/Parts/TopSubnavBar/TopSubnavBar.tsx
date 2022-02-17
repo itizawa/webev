@@ -12,14 +12,28 @@ import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManag
 import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 type Props = {
   page: Page;
   onClickRemovePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
   onClickFetchButton: () => void;
+  onClickPlayButton: () => void;
+  onClickPauseButton: () => void;
+  onClickStopButton: () => void;
+  isReading: boolean;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClickSwitchArchiveButton, onClickFetchButton }) => {
+export const TopSubnavBar: VFC<Props> = ({
+  page,
+  onClickRemovePageButton,
+  onClickSwitchArchiveButton,
+  onClickFetchButton,
+  onClickPlayButton,
+  onClickPauseButton,
+  onClickStopButton,
+  isReading,
+}) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
   const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
@@ -43,13 +57,21 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClic
             {page.title}
           </StyledAnchor>
         </div>
+        <div className="ms-auto me-2">
+          {isReading ? (
+            <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPauseButton} />
+          ) : (
+            <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPlayButton} />
+          )}
+          <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickStopButton} />
+        </div>
         {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
+          <button className="btn btn-sm btn-secondary d-flex" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="REPLY" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.return_button}</span>
           </button>
         ) : (
-          <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={onClickSwitchArchiveButton}>
+          <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
