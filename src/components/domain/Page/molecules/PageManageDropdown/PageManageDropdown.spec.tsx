@@ -13,6 +13,7 @@ test('PageManageDropdown isHideArchiveButton is true', () => {
         onClickSwitchArchiveButton={() => console.log('test')}
         onClickRemovePageButton={() => console.log('test')}
         onClickAddPageToDirectoryButton={() => console.log('test')}
+        onClickFetchButton={() => console.log('test')}
       />,
     )
     .toJSON();
@@ -30,6 +31,7 @@ test('PageManageDropdown directoryId is undefined', () => {
         onClickSwitchArchiveButton={() => console.log('test')}
         onClickRemovePageButton={() => console.log('test')}
         onClickAddPageToDirectoryButton={() => console.log('test')}
+        onClickFetchButton={() => console.log('test')}
       />,
     )
     .toJSON();
@@ -51,6 +53,7 @@ test('PageManageDropdown directoryId is undefined', () => {
         onClickSwitchArchiveButton={() => console.log('test')}
         onClickRemovePageButton={() => console.log('test')}
         onClickAddPageToDirectoryButton={() => console.log('test')}
+        onClickFetchButton={() => console.log('test')}
       />,
     )
     .toJSON();

@@ -117,6 +117,35 @@ exports[`PageManageDropdown directoryId is undefined 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
+          d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+          fillRule="evenodd"
+        />
+        <path
+          d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+        />
+      </svg>
+      <span
+        className="ms-2"
+      >
+        ページを再取得する
+      </span>
+    </button>
+    <button
+      className="dropdown-item"
+      onClick={[Function]}
+      role="menuitem"
+      tabIndex="0"
+      type="button"
+    >
+      <svg
+        className="align-text-bottom text-white"
+        fill="currentColor"
+        height={18}
+        viewBox="0 0 16 16"
+        width={18}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
           d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
         />
       </svg>
@@ -300,6 +329,35 @@ exports[`PageManageDropdown directoryId is undefined 2`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
+          d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+          fillRule="evenodd"
+        />
+        <path
+          d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+        />
+      </svg>
+      <span
+        className="ms-2"
+      >
+        ページを再取得する
+      </span>
+    </button>
+    <button
+      className="dropdown-item"
+      onClick={[Function]}
+      role="menuitem"
+      tabIndex="0"
+      type="button"
+    >
+      <svg
+        className="align-text-bottom text-white"
+        fill="currentColor"
+        height={18}
+        viewBox="0 0 16 16"
+        width={18}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
           d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"
         />
       </svg>
@@ -465,6 +523,35 @@ exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
         className="ms-2"
       >
         削除
+      </span>
+    </button>
+    <button
+      className="dropdown-item"
+      onClick={[Function]}
+      role="menuitem"
+      tabIndex="0"
+      type="button"
+    >
+      <svg
+        className="align-text-bottom text-white"
+        fill="currentColor"
+        height={18}
+        viewBox="0 0 16 16"
+        width={18}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"
+          fillRule="evenodd"
+        />
+        <path
+          d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"
+        />
+      </svg>
+      <span
+        className="ms-2"
+      >
+        ページを再取得する
       </span>
     </button>
     <button

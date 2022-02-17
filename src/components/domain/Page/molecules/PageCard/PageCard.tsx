@@ -19,6 +19,7 @@ import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
+import { restClient } from '~/utils/rest-client';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -97,6 +98,16 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     mutateUsePageForAddToDirectory(page);
   };
 
+  const handleFetchButton = async () => {
+    try {
+      await restClient.apiPut(`/pages/${page._id}/ogp`);
+      toastSuccess(t.toastr_success_fetch_page);
+      mutatePageList();
+    } catch (error) {
+      if (error instanceof Error) toastError(error);
+    }
+  };
+
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       {page.body ? (
@@ -129,6 +140,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
+            onClickFetchButton={handleFetchButton}
           />
         </div>
         {directoryOfPage != null && (
