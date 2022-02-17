@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 
 import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
@@ -26,18 +26,22 @@ import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManag
 import { useAllDirectories } from '~/stores/directory';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { restClient } from '~/utils/rest-client';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
+
   const { id } = router.query;
 
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
   const { data: allDirectories } = useAllDirectories();
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { isLoading, switchArchive } = useSwitchArchive();
+
+  const [isReading, setIsReading] = useState(false);
 
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page?.directoryId);
@@ -95,6 +99,34 @@ const Page: WebevNextPage = () => {
     }
   };
 
+  const handleClickPlayButton = () => {
+    if (!('speechSynthesis' in window)) {
+      toastSuccess(t.not_support_text_to_speech);
+      return;
+    }
+
+    if (!page.body) {
+      toastSuccess(t.data_not_found);
+      return;
+    }
+    const speechSynthesisUtterance = new SpeechSynthesisUtterance();
+
+    speechSynthesisUtterance.text = page.body;
+
+    speechSynthesisUtterance.lang = locale === 'ja' ? 'ja-JP' : 'en-US';
+
+    speechSynthesisUtterance.rate = 1;
+
+    speechSynthesisUtterance.pitch = 1;
+
+    speechSynthesisUtterance.volume = 1;
+
+    window.speechSynthesis.speak(speechSynthesisUtterance);
+    setIsReading(true);
+  };
+
+  const handleClickPauseButton = () => {};
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
@@ -118,13 +150,20 @@ const Page: WebevNextPage = () => {
               </Tooltip>
             </div>
           )}
+          <div className="ms-auto me-1">
+            {isReading ? (
+              <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickPauseButton} />
+            ) : (
+              <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickPlayButton} />
+            )}
+          </div>
           {isArchived ? (
-            <button className="btn btn-sm btn-secondary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
+            <button className="btn btn-sm btn-secondary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="REPLY" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.return_button}</span>
             </button>
           ) : (
-            <button className="btn btn-sm btn-primary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
+            <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>

@@ -84,6 +84,7 @@ export const ja = {
   this_is_the_404_page: '404 page です',
   data_not_found: 'データが見つかりませんでした',
   go_to_top: 'トップページに戻る',
+  not_support_text_to_speech: 'このブラウザは音声合成に対応していません',
 
   inquiry_email_desc: '返信が必要な場合は入力してください',
   inquiry_type: '種類',
