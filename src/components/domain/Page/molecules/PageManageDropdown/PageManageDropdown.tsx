@@ -1,11 +1,13 @@
 import { VFC, useMemo } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import styled from 'styled-components';
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Page, PageStatus } from '~/domains/Page';
 import { useLocale } from '~/hooks/useLocale';
 import { toastSuccess } from '~/utils/toastr';
+import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   page: Page;
@@ -14,6 +16,7 @@ type Props = {
   onClickRemovePageButton: () => void;
   onClickAddPageToDirectoryButton: () => void;
   onClickFetchButton: () => void;
+  direction?: 'up' | 'down' | 'start' | 'end';
 };
 
 export const PageManageDropdown: VFC<Props> = ({
@@ -23,6 +26,7 @@ export const PageManageDropdown: VFC<Props> = ({
   onClickRemovePageButton,
   onClickAddPageToDirectoryButton,
   onClickFetchButton,
+  direction = 'start',
 }) => {
   const { t } = useLocale();
 
@@ -56,13 +60,13 @@ export const PageManageDropdown: VFC<Props> = ({
   }, []);
 
   return (
-    <UncontrolledDropdown direction="start">
+    <UncontrolledDropdown direction={direction}>
       <DropdownToggle tag="span">
         <div id={`manage-for-${page._id}`}>
           <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
         </div>
       </DropdownToggle>
-      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
+      <StyledDropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
         <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
           <DropdownItem>
             <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
@@ -106,7 +110,11 @@ export const PageManageDropdown: VFC<Props> = ({
             <span className="ms-2">{t.save_page_to_directory}</span>
           </DropdownItem>
         )}
-      </DropdownMenu>
+      </StyledDropdownMenu>
     </UncontrolledDropdown>
   );
 };
+
+const StyledDropdownMenu = styled(DropdownMenu)`
+  z-index: ${zIndex.DROPDOWN_MENU};
+`;

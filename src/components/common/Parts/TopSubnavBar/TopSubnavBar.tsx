@@ -62,6 +62,7 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickRemovePageButton, onClic
             onClickRemovePageButton={onClickRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
             onClickFetchButton={onClickFetchButton}
+            direction="down"
           />
         </div>
       </div>
