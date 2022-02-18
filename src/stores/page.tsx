@@ -29,7 +29,7 @@ export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Pag
   });
 };
 
-export const usePageListSWR = ({ limit = 27, searchKeyWord }: { limit?: number; searchKeyWord: string }): SWRResponse<PaginationResult<Page>, Error> => {
+export const usePageListSWR = ({ limit = 27, searchKeyWord }: { limit?: number; searchKeyWord?: string }): SWRResponse<PaginationResult<Page>, Error> => {
   const { data: activePage = 1 } = useActivePage();
   const { data: status = [PageStatus.PAGE_STATUS_STOCK] } = usePageStatus();
   const { data: directoryId } = useDirectoryId();

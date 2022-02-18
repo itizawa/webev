@@ -13,7 +13,7 @@ export const ShareLinkReceiverModal: VFC = () => {
   const { t } = useLocale();
 
   const { data: socketId } = useSocketId();
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR({});
 
   const [title, setTitle] = useState<string | null>();
   const [url, setUrl] = useState<string | null>();

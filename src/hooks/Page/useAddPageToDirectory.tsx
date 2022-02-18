@@ -4,7 +4,7 @@ import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
 
 export const useAddPageToDirectory = (): { isLoading: boolean; addPageToDirectory: (pageId: string, directoryId: string) => void } => {
-  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+  const { data: pageList, mutate: mutatePageList } = usePageListSWR({});
   const [isLoading, setIsLoading] = useState(false);
 
   const addPageToDirectory = async (pageId: string, directoryId: string) => {

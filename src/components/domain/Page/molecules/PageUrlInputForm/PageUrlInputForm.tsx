@@ -12,7 +12,7 @@ import { useLocalStorage } from '~/hooks/useLocalStorage';
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
 
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutate: mutatePageList } = usePageListSWR({});
   const { data: socketId } = useSocketId();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
   const { retrieveValue } = useLocalStorage();
