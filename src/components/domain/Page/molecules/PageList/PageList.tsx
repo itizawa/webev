@@ -16,10 +16,11 @@ type Props = {
   pagingLimit: number;
   totalItemsCount: number;
   isHideArchiveButton?: boolean;
+  searchKeyWord: string;
 };
 
 export const PageList: VFC<Props> = (props) => {
-  const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
+  const { pages, pagingLimit, totalItemsCount, isHideArchiveButton, searchKeyWord } = props;
   const { data: ogpCardLayout } = useOgpCardLayout();
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
 
@@ -34,13 +35,13 @@ export const PageList: VFC<Props> = (props) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
             <div className="col-12" key={page._id}>
-              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} />
+              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} searchKeyWord={searchKeyWord} />
             </div>
           );
         }
         return (
           <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} />
+            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} searchKeyWord={searchKeyWord} />
           </div>
         );
       })}

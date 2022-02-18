@@ -52,15 +52,16 @@ const Page: WebevNextPage = () => {
   const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
+  const [searchKeyWord, setSearchKeyWord] = useState('');
+
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInformation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { data: paginationResult } = usePageListSWR();
+  const { data: paginationResult } = usePageListSWR({ searchKeyWord });
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
 
-  const [value, setValue] = useState('');
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
   const [pickerTop, setPickerTop] = useState<number>(0);
@@ -263,7 +264,7 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(text) => setValue(text)} />
+          <SearchTextBox onChange={(text) => setSearchKeyWord(text)} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
@@ -272,7 +273,13 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         {paginationResult != null && (
-          <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
+          <PageList
+            pages={paginationResult.docs}
+            pagingLimit={paginationResult.limit}
+            totalItemsCount={paginationResult.totalDocs}
+            isHideArchiveButton
+            searchKeyWord={searchKeyWord}
+          />
         )}
       </LoginRequiredWrapper>
     </>

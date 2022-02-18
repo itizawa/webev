@@ -26,13 +26,14 @@ const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
+  searchKeyWord: string;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, searchKeyWord }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
-  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+  const { data: pageList, mutate: mutatePageList } = usePageListSWR({ searchKeyWord });
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 

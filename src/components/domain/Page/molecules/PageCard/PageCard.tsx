@@ -26,12 +26,13 @@ const MAX_WORD_COUNT_OF_BODY = 96;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
+  searchKeyWord: string;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, searchKeyWord }) => {
   const { t } = useLocale();
 
-  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+  const { data: pageList, mutate: mutatePageList } = usePageListSWR({ searchKeyWord });
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();

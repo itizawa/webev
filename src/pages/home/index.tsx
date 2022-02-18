@@ -17,9 +17,9 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
-  const [value, setValue] = useState('');
+  const [searchKeyWord, setSearchKeyWord] = useState('');
 
-  const { data: paginationResult } = usePageListSWR();
+  const { data: paginationResult } = usePageListSWR({ searchKeyWord });
   const { mutate: mutatePageStatus } = usePageStatus();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const Index: WebevNextPage = () => {
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(text) => setValue(text)} />
+          <SearchTextBox onChange={(text) => setSearchKeyWord(text)} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
@@ -46,7 +46,12 @@ const Index: WebevNextPage = () => {
           </div>
         )}
         {paginationResult != null && (
-          <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+          <PageList
+            pages={paginationResult?.docs}
+            pagingLimit={paginationResult.limit}
+            totalItemsCount={paginationResult.totalDocs}
+            searchKeyWord={searchKeyWord}
+          />
         )}
       </LoginRequiredWrapper>
     </>
