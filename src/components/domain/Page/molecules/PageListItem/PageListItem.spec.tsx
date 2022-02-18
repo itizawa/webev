@@ -4,13 +4,13 @@ import { generateMockPage } from '~/mock/generateMockPage';
 
 const mockPage = generateMockPage();
 test('PageListItem', () => {
-  const tree = renderer.create(<PageListItem page={mockPage} isHideArchiveButton={false} />).toJSON();
+  const tree = renderer.create(<PageListItem page={mockPage} isHideArchiveButton={false} searchKeyWord="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 test('PageList with isHideArchiveButton is true', () => {
-  const tree = renderer.create(<PageListItem page={mockPage} isHideArchiveButton />).toJSON();
+  const tree = renderer.create(<PageListItem page={mockPage} isHideArchiveButton searchKeyWord="" />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
