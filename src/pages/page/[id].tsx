@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
@@ -49,6 +49,12 @@ const Page: WebevNextPage = () => {
   }, [allDirectories, page?.directoryId]);
 
   const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
+
+  useEffect(() => {
+    window.speechSynthesis.cancel();
+    setIsReading(false);
+    setLastSpeechSynthesisUtterance(null);
+  }, [locale]);
 
   if (!page) {
     return (
@@ -118,7 +124,9 @@ const Page: WebevNextPage = () => {
     }
     const speechSynthesisUtterance = new SpeechSynthesisUtterance();
 
-    speechSynthesisUtterance.text = page.body;
+    const div = document.createElement('div');
+    div.innerHTML = page.body;
+    speechSynthesisUtterance.text = div.innerText;
     speechSynthesisUtterance.lang = locale === 'ja' ? 'ja-JP' : 'en-US';
     speechSynthesisUtterance.rate = 1;
     speechSynthesisUtterance.pitch = 1;
