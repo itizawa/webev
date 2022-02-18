@@ -9,7 +9,7 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { useDirectoryId, usePageListSWR, usePageStatus } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -59,8 +59,8 @@ const Page: WebevNextPage = () => {
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
+  const [value, setValue] = useState('');
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
   const [pickerTop, setPickerTop] = useState<number>(0);
@@ -263,7 +263,7 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
+          <SearchTextBox onChange={(text) => setValue(text)} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (

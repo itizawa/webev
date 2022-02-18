@@ -1,7 +1,7 @@
-import { useEffect, ReactNode } from 'react';
+import { useEffect, ReactNode, useState } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
-import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { usePageListSWR, usePageStatus } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -18,9 +18,9 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
+  const [value, setValue] = useState('');
   const { mutate: mutatePageStatus } = usePageStatus();
   const { data: paginationResult } = usePageListSWR();
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   useEffect(() => {
     mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE]);
@@ -37,7 +37,7 @@ const Page: WebevNextPage = () => {
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
+          <SearchTextBox onChange={(text) => setValue(text)} />
           <SortButtonGroup />
         </div>
         {paginationResult == null && (
