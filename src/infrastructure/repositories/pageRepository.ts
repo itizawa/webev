@@ -1,4 +1,4 @@
-import { model, Model, Schema, Types, Document } from 'mongoose';
+import { model, models, Model, Schema, Types, Document } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { Page, PageStatus } from '~/domains/Page';
 import { IPageRepository } from '~/application/repositories/IPageRepository';
@@ -14,7 +14,7 @@ export const PageSchema: Schema = new Schema(
     body: { type: String },
     siteName: { type: String, index: true },
     status: {
-      type: PageStatus,
+      type: String,
       required: true,
       default: PageStatus.PAGE_STATUS_STOCK,
     },
@@ -40,7 +40,7 @@ export class PageRepository implements IPageRepository {
   constructor() {
     PageSchema.plugin(mongoosePaginate);
 
-    this.PageModel = model<Page & Document>('Page', PageSchema);
+    this.PageModel = models.Page || model<Page & Document>('Page', PageSchema);
   }
 
   private convertPage(page: Page): Page {
@@ -61,7 +61,7 @@ export class PageRepository implements IPageRepository {
     });
   }
 
-  async create(pages: Page): Promise<Page> {
+  async create(pages: Partial<Page>): Promise<Page> {
     const result = await this.PageModel.create(pages);
 
     return this.convertPage(result);
