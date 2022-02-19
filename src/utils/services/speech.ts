@@ -1,13 +1,14 @@
 class Speech {
   isEnabled: boolean;
-  speechSynthesisUtterance: SpeechSynthesisUtterance;
+  speechSynthesisUtterance: SpeechSynthesisUtterance | null;
 
   constructor() {
     this.isEnabled = typeof window !== 'undefined' ? 'speechSynthesis' in window : false;
-    this.speechSynthesisUtterance = new SpeechSynthesisUtterance();
+    this.speechSynthesisUtterance = typeof window !== 'undefined' ? new SpeechSynthesisUtterance() : null;
   }
 
   play(text: string, lang: string) {
+    if (!this.speechSynthesisUtterance) return;
     this.speechSynthesisUtterance.text = text;
     this.speechSynthesisUtterance.lang = lang;
     this.speechSynthesisUtterance.rate = 1;
