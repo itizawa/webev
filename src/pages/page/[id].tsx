@@ -16,17 +16,18 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+
 import { useAllDirectories } from '~/stores/directory';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { restClient } from '~/utils/rest-client';
-import { IconButton } from '~/components/base/molecules/IconButton';
+import { speech } from '~/utils/services';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const Page: WebevNextPage = () => {
   const { isLoading, switchArchive } = useSwitchArchive();
 
   const [isReading, setIsReading] = useState(false);
-  const [lastSpeechSynthesisUtterance, setLastSpeechSynthesisUtterance] = useState<SpeechSynthesisUtterance | null>(null);
+  const [isMidway, setIsMidway] = useState(false);
 
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page?.directoryId);
@@ -53,7 +54,7 @@ const Page: WebevNextPage = () => {
   useEffect(() => {
     window.speechSynthesis.cancel();
     setIsReading(false);
-    setLastSpeechSynthesisUtterance(null);
+    setIsMidway(false);
   }, [locale]);
 
   if (!page) {
@@ -107,34 +108,22 @@ const Page: WebevNextPage = () => {
   };
 
   const handleClickPlayButton = () => {
-    if (!('speechSynthesis' in window)) {
-      toastSuccess(t.not_support_text_to_speech);
-      return;
-    }
-
     if (!page.body) {
       toastSuccess(t.data_not_found);
       return;
     }
 
-    if (lastSpeechSynthesisUtterance) {
+    if (isMidway) {
       window.speechSynthesis.resume();
       setIsReading(true);
       return;
     }
-    const speechSynthesisUtterance = new SpeechSynthesisUtterance();
 
     const div = document.createElement('div');
     div.innerHTML = page.body;
-    speechSynthesisUtterance.text = div.innerText;
-    speechSynthesisUtterance.lang = locale === 'ja' ? 'ja-JP' : 'en-US';
-    speechSynthesisUtterance.rate = 1;
-    speechSynthesisUtterance.pitch = 1;
-    speechSynthesisUtterance.volume = 1;
-
-    window.speechSynthesis.speak(speechSynthesisUtterance);
+    speech.play(div.innerText, locale === 'ja' ? 'ja-JP' : 'en-US');
     setIsReading(true);
-    setLastSpeechSynthesisUtterance(speechSynthesisUtterance);
+    setIsMidway(true);
   };
 
   const handleClickPauseButton = () => {
@@ -145,7 +134,7 @@ const Page: WebevNextPage = () => {
   const handleClickStopButton = () => {
     window.speechSynthesis.cancel();
     setIsReading(false);
-    setLastSpeechSynthesisUtterance(null);
+    setIsMidway(false);
   };
 
   return (
