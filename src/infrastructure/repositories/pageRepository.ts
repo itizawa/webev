@@ -61,9 +61,9 @@ export class PageRepository implements IPageRepository {
     });
   }
 
-  async createPages({ pages }: { pages: Page[] }): Promise<Page[]> {
-    const result = await this.PageModel.insertMany(pages);
+  async create(pages: Page): Promise<Page> {
+    const result = await this.PageModel.create(pages);
 
-    return result.map((page) => this.convertPage(page));
+    return this.convertPage(result);
   }
 }
