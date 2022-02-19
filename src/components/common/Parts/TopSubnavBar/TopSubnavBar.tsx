@@ -13,6 +13,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';
 import { IconButton } from '~/components/base/molecules/IconButton';
+import { speech } from '~/utils/services';
 
 type Props = {
   page: Page;
@@ -58,12 +59,16 @@ export const TopSubnavBar: VFC<Props> = ({
           </StyledAnchor>
         </div>
         <div className="ms-auto me-2">
-          {isReading ? (
-            <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPauseButton} />
-          ) : (
-            <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPlayButton} />
+          {speech.isEnabled && page.body && (
+            <>
+              {isReading ? (
+                <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPauseButton} />
+              ) : (
+                <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPlayButton} />
+              )}
+              <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickStopButton} />
+            </>
           )}
-          <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickStopButton} />
         </div>
         {isArchived ? (
           <button className="btn btn-sm btn-secondary d-flex" onClick={onClickSwitchArchiveButton}>

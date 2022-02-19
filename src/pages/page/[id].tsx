@@ -108,10 +108,7 @@ const Page: WebevNextPage = () => {
   };
 
   const handleClickPlayButton = () => {
-    if (!page.body) {
-      toastSuccess(t.data_not_found);
-      return;
-    }
+    if (!page.body) return;
 
     if (isMidway) {
       window.speechSynthesis.resume();
@@ -127,12 +124,12 @@ const Page: WebevNextPage = () => {
   };
 
   const handleClickPauseButton = () => {
-    window.speechSynthesis.pause();
+    speech.pause();
     setIsReading(false);
   };
 
   const handleClickStopButton = () => {
-    window.speechSynthesis.cancel();
+    speech.cancel();
     setIsReading(false);
     setIsMidway(false);
   };
@@ -165,12 +162,32 @@ const Page: WebevNextPage = () => {
             </div>
           )}
           <div className="ms-auto me-2">
-            {isReading ? (
-              <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickPauseButton} />
-            ) : (
-              <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickPlayButton} />
+            {speech.isEnabled && page.body && (
+              <>
+                {isReading ? (
+                  <IconButton
+                    icon="PAUSE_CIRCLE"
+                    color="WHITE"
+                    activeColor="SUCCESS"
+                    width={24}
+                    height={24}
+                    isRemovePadding
+                    onClickButton={handleClickPauseButton}
+                  />
+                ) : (
+                  <IconButton
+                    icon="PLAY_CIRCLE"
+                    color="WHITE"
+                    activeColor="SUCCESS"
+                    width={24}
+                    height={24}
+                    isRemovePadding
+                    onClickButton={handleClickPlayButton}
+                  />
+                )}
+                <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickStopButton} />
+              </>
             )}
-            <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickStopButton} />
           </div>
           {isArchived ? (
             <button className="btn btn-sm btn-secondary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
