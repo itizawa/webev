@@ -52,7 +52,7 @@ const Page: WebevNextPage = () => {
   const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
 
   useEffect(() => {
-    window.speechSynthesis.cancel();
+    speech.cancel();
     setIsReading(false);
     setIsMidway(false);
   }, [locale]);
@@ -111,7 +111,7 @@ const Page: WebevNextPage = () => {
     if (!page.body) return;
 
     if (isMidway) {
-      window.speechSynthesis.resume();
+      speech.resume();
       setIsReading(true);
       return;
     }
