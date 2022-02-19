@@ -13,7 +13,6 @@ export const generateMockPage = (mock: Partial<Page> = {}): Page => {
     directoryId: mock.directoryId || 'mockDirectoryId',
     createdUser: mock.createdUser || 'mockCreatedUser',
     status: mock.status || PageStatus.PAGE_STATUS_ARCHIVE,
-    isFavorite: mock.isFavorite || false,
     createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
     updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
   });
