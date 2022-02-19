@@ -3,7 +3,7 @@ class Speech {
   speechSynthesisUtterance: SpeechSynthesisUtterance;
 
   constructor() {
-    this.isEnabled = 'speechSynthesis' in window;
+    this.isEnabled = typeof window !== 'undefined' ? 'speechSynthesis' in window : false;
     this.speechSynthesisUtterance = new SpeechSynthesisUtterance();
   }
 
@@ -13,16 +13,24 @@ class Speech {
     this.speechSynthesisUtterance.rate = 1;
     this.speechSynthesisUtterance.pitch = 1;
     this.speechSynthesisUtterance.volume = 1;
-    window.speechSynthesis.speak(this.speechSynthesisUtterance);
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis.speak(this.speechSynthesisUtterance);
+    }
   }
   resume() {
-    window.speechSynthesis.resume();
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis.resume();
+    }
   }
   pause() {
-    window.speechSynthesis.pause();
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis.pause();
+    }
   }
   cancel() {
-    window.speechSynthesis.cancel();
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis.cancel();
+    }
   }
 }
 
