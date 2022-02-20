@@ -8,7 +8,7 @@ const handler = nc()
   .use(connectDB)
   .use(injectUserToRequest)
   .get(async (req: WebevApiRequest, res: NextApiResponse) => {
-    res.send({ user: req.user });
+    res.send(req.user);
   });
 
 export default handler;
