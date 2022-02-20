@@ -9,7 +9,7 @@ import { Oval } from 'react-loader-spinner';
 import { Icon } from '~/components/base/atoms/Icon';
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 
-import { useCurrentUser } from '~/stores/user';
+import { useCurrentUser } from '~/stores/users';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { useLocalStorage } from '~/hooks/useLocalStorage';
 import { useLocale } from '~/hooks/useLocale';
