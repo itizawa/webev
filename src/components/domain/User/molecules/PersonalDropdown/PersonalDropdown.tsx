@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import style from 'styled-components';
 import { Oval } from 'react-loader-spinner';
 
@@ -25,6 +25,7 @@ export const PersonalDropdown: VFC = () => {
 
   const { data: ogpCardLayout = OgpLayoutType.CARD, mutate: mutateOgpCardLayout } = useOgpCardLayout();
   const { data: currentUser } = useCurrentUser();
+
   const { storeValue, retrieveValue } = useLocalStorage();
 
   const [isEnableReadFromClipboard, setIsEnableReadFromClipboard] = useState(false);
@@ -46,7 +47,7 @@ export const PersonalDropdown: VFC = () => {
     mutateOgpCardLayout(type);
   };
 
-  if (currentUser == null) {
+  if (!currentUser) {
     return <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={32} width={32} />;
   }
 
