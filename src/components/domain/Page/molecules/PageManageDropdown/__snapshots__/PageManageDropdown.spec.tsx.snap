@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageManageDropdown directoryId is undefined 1`] = `
+.c0 {
+  z-index: 1300;
+}
+
 <div
   className="dropdown dropstart"
   onKeyDown={[Function]}
@@ -35,7 +39,7 @@ exports[`PageManageDropdown directoryId is undefined 1`] = `
   </span>
   <div
     aria-hidden={true}
-    className="dropdown-menu-dark border-secondary dropdown-menu"
+    className="c0 dropdown-menu-dark border-secondary dropdown-menu"
     positionFixed={true}
     role="menu"
     tabIndex="-1"
@@ -213,6 +217,10 @@ exports[`PageManageDropdown directoryId is undefined 1`] = `
 `;
 
 exports[`PageManageDropdown directoryId is undefined 2`] = `
+.c0 {
+  z-index: 1300;
+}
+
 <div
   className="dropdown dropstart"
   onKeyDown={[Function]}
@@ -247,7 +255,7 @@ exports[`PageManageDropdown directoryId is undefined 2`] = `
   </span>
   <div
     aria-hidden={true}
-    className="dropdown-menu-dark border-secondary dropdown-menu"
+    className="c0 dropdown-menu-dark border-secondary dropdown-menu"
     positionFixed={true}
     role="menu"
     tabIndex="-1"
@@ -425,6 +433,10 @@ exports[`PageManageDropdown directoryId is undefined 2`] = `
 `;
 
 exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
+.c0 {
+  z-index: 1300;
+}
+
 <div
   className="dropdown dropstart"
   onKeyDown={[Function]}
@@ -459,7 +471,7 @@ exports[`PageManageDropdown isHideArchiveButton is true 1`] = `
   </span>
   <div
     aria-hidden={true}
-    className="dropdown-menu-dark border-secondary dropdown-menu"
+    className="c0 dropdown-menu-dark border-secondary dropdown-menu"
     positionFixed={true}
     role="menu"
     tabIndex="-1"

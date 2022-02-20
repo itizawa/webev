@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
@@ -16,22 +16,25 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
+import { IconButton } from '~/components/base/molecules/IconButton';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+
 import { useAllDirectories } from '~/stores/directory';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { restClient } from '~/utils/rest-client';
+import { speech } from '~/utils/services';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
+
   const { id } = router.query;
 
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
   const { data: allDirectories } = useAllDirectories();
   const { mutate: mutatePageForDelete } = usePageForDelete();
@@ -39,11 +42,20 @@ const Page: WebevNextPage = () => {
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { isLoading, switchArchive } = useSwitchArchive();
 
+  const [isReading, setIsReading] = useState(false);
+  const [isMidway, setIsMidway] = useState(false);
+
   const directoryOfPage = useMemo(() => {
     return allDirectories?.find((v) => v._id === page?.directoryId);
   }, [allDirectories, page?.directoryId]);
 
   const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
+
+  useEffect(() => {
+    speech.cancel();
+    setIsReading(false);
+    setIsMidway(false);
+  }, [locale]);
 
   if (!page) {
     return (
@@ -95,6 +107,33 @@ const Page: WebevNextPage = () => {
     }
   };
 
+  const handleClickPlayButton = () => {
+    if (!page.body) return;
+
+    if (isMidway) {
+      speech.resume();
+      setIsReading(true);
+      return;
+    }
+
+    const div = document.createElement('div');
+    div.innerHTML = page.body;
+    speech.play(div.innerText, locale === 'ja' ? 'ja-JP' : 'en-US');
+    setIsReading(true);
+    setIsMidway(true);
+  };
+
+  const handleClickPauseButton = () => {
+    speech.pause();
+    setIsReading(false);
+  };
+
+  const handleClickStopButton = () => {
+    speech.cancel();
+    setIsReading(false);
+    setIsMidway(false);
+  };
+
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
@@ -104,6 +143,10 @@ const Page: WebevNextPage = () => {
           onClickRemovePageButton={handleRemovePageButton}
           onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
           onClickFetchButton={handleFetchButton}
+          onClickPlayButton={handleClickPlayButton}
+          onClickPauseButton={handleClickPauseButton}
+          onClickStopButton={handleClickStopButton}
+          isReading={isReading}
         />
         <div className="ms-2 d-flex align-items-center">
           {directoryOfPage && (
@@ -118,13 +161,41 @@ const Page: WebevNextPage = () => {
               </Tooltip>
             </div>
           )}
+          <div className="ms-auto me-2">
+            {speech.isEnabled && page.body && (
+              <>
+                {isReading ? (
+                  <IconButton
+                    icon="PAUSE_CIRCLE"
+                    color="WHITE"
+                    activeColor="SUCCESS"
+                    width={24}
+                    height={24}
+                    isRemovePadding
+                    onClickButton={handleClickPauseButton}
+                  />
+                ) : (
+                  <IconButton
+                    icon="PLAY_CIRCLE"
+                    color="WHITE"
+                    activeColor="SUCCESS"
+                    width={24}
+                    height={24}
+                    isRemovePadding
+                    onClickButton={handleClickPlayButton}
+                  />
+                )}
+                <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickStopButton} />
+              </>
+            )}
+          </div>
           {isArchived ? (
-            <button className="btn btn-sm btn-secondary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
+            <button className="btn btn-sm btn-secondary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="REPLY" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.return_button}</span>
             </button>
           ) : (
-            <button className="btn btn-sm btn-primary d-flex ms-auto" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
+            <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>
             </button>
