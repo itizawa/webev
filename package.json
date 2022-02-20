@@ -1,6 +1,6 @@
 {
   "name": "webev-front",
-  "version": "0.7.16",
+  "version": "0.7.17",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -33,6 +33,7 @@
     "mongoose-paginate-v2": "^1.6.2",
     "next": "^12.1.0",
     "next-auth": "^4.2.1",
+    "next-connect": "^0.12.2",
     "next-pwa": "^5.3.1",
     "react": "latest",
     "react-beautiful-dnd": "^13.1.0",
