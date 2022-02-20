@@ -1,6 +1,6 @@
 import axiosBase, { AxiosInstance, AxiosResponse } from 'axios';
 import { Session } from 'next-auth';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 import { apiErrorHandler } from './apiErrorHandler';
 
 class RestClient {

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { Session } from 'next-auth';
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 
 import '~/styles/global.scss';
@@ -35,11 +35,11 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <Provider options={{ clientMaxAge: 0, keepAlive: 0 }} session={pageProps.session}>
+    <SessionProvider session={pageProps.session}>
       <SkeletonTheme baseColor="#213243" highlightColor="#444">
         {getLayout(<Component {...pageProps} />)}
       </SkeletonTheme>
-    </Provider>
+    </SessionProvider>
   );
 };
 
