@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/webev-dev/webev#readme",
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "bootstrap": "^5.1.1",
     "bootstrap-icons": "^1.5.0",
     "date-fns": "^2.24.0",
