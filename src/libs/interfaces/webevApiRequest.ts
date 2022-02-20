@@ -1,4 +1,4 @@
 import { NextApiRequest } from 'next';
-import { Session } from 'next-auth';
+import { User } from '~/domains/User';
 
-export type WebevApiRequest = NextApiRequest & { user?: Session['user'] };
+export type WebevApiRequest = NextApiRequest & { user?: User };
