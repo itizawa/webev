@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import { NextApiRequest, NextApiResponse } from 'next';
+import { NextHandler } from 'next-connect';
 
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -41,3 +43,14 @@ async function dbConnect() {
 }
 
 export default dbConnect;
+
+/**
+ * DBに接続するミドルウェア
+ * @param _req
+ * @param _res
+ * @param next
+ */
+export const connectDB = async (_req: NextApiRequest, _res: NextApiResponse, next: NextHandler) => {
+  console.log('req');
+  next();
+};
