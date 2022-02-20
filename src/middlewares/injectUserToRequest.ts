@@ -26,4 +26,6 @@ export const injectUserToRequest = async (req: WebevApiRequest, _res: NextApiRes
   }
 
   req.user = user;
+
+  return next();
 };
