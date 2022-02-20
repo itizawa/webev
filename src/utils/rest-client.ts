@@ -9,7 +9,6 @@ class RestClient {
 
   constructor() {
     this.axios = axiosBase.create({
-      baseURL: process.env.NEXT_PUBLIC_BACKEND_URL_FROM_CLIENT || 'http://localhost:8000',
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
@@ -31,7 +30,7 @@ class RestClient {
   async apiGet(url: string, query = {}): Promise<AxiosResponse> {
     const accessToken = await this.getAccessToken();
     try {
-      return await this.axios.get(`/api/v1${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
+      return await this.axios.get(`/api/${url}`, { ...query, headers: { Authorization: `Bearer ${accessToken}` } });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       throw apiErrorHandler(err);
