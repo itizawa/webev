@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageCard 1`] = `
+.c2 {
+  z-index: 1300;
+}
+
 .c1 {
   position: relative;
   width: 100%;
@@ -89,7 +93,7 @@ exports[`PageCard 1`] = `
         </span>
         <div
           aria-hidden={true}
-          className="dropdown-menu-dark border-secondary dropdown-menu"
+          className="c2 dropdown-menu-dark border-secondary dropdown-menu"
           positionFixed={true}
           role="menu"
           tabIndex="-1"
@@ -304,6 +308,10 @@ exports[`PageCard 1`] = `
 `;
 
 exports[`PageCard with isHideArchiveButton is true 1`] = `
+.c2 {
+  z-index: 1300;
+}
+
 .c1 {
   position: relative;
   width: 100%;
@@ -392,7 +400,7 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
         </span>
         <div
           aria-hidden={true}
-          className="dropdown-menu-dark border-secondary dropdown-menu"
+          className="c2 dropdown-menu-dark border-secondary dropdown-menu"
           positionFixed={true}
           role="menu"
           tabIndex="-1"

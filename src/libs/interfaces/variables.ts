@@ -48,6 +48,9 @@ export const BootstrapIcon = {
   GITHUB: 'github',
   QUESTION: 'question',
   GEAR: 'gear',
+  PAUSE_CIRCLE: 'pause-circle',
+  PLAY_CIRCLE: 'play-circle',
+  STOP_CIRCLE: 'stop-circle',
 } as const;
 export type BootstrapIcon = keyof typeof BootstrapIcon;
 
