@@ -51,6 +51,6 @@ export default dbConnect;
  * @param next
  */
 export const connectDB = async (_req: NextApiRequest, _res: NextApiResponse, next: NextHandler) => {
-  console.log('req');
+  await dbConnect();
   next();
 };
