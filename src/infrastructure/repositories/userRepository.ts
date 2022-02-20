@@ -1,4 +1,4 @@
-import { model, Model, Schema, Document } from 'mongoose';
+import { model, models, Model, Schema, Document } from 'mongoose';
 import * as mongoosePaginate from 'mongoose-paginate-v2';
 import { IUserRepository } from '~/application/repositories';
 
@@ -28,7 +28,7 @@ export class UserRepository implements IUserRepository {
   UserModel: Model<User & Document> & { paginate?: typeof mongoosePaginate };
 
   constructor() {
-    this.UserModel = model<User & Document>('User', UserSchema);
+    this.UserModel = models.User || model<User & Document>('User', UserSchema);
   }
 
   private convert(user: User): User {
