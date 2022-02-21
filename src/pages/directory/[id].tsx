@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
-import { Oval, Triangle } from 'react-loader-spinner';
+import { Triangle } from 'react-loader-spinner';
 import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
@@ -164,17 +164,9 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  if (directory == null) {
-    return (
-      <div className="pt-5 d-flex align-items-center justify-content-center">
-        <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
-      </div>
-    );
-  }
-
   return (
     <>
-      <WebevOgpHead title={`Webev | ${directory.name}`} />
+      <WebevOgpHead title={`Webev | ${directory?.name}`} />
       <LoginRequiredWrapper>
         {directory != null && (
           <>
