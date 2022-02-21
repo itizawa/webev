@@ -36,6 +36,7 @@ export const en = {
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
+  toastr_start_webev: 'Start Webev!!',
   toastr_success_copy_url: 'Copy Url!',
   toastr_success_fetch_page: 'Fetch Page!',
   toastr_success_read: 'Read!',
