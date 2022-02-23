@@ -40,14 +40,12 @@ const Index: WebevNextPage = () => {
           <SearchTextBox onChange={mutateSearchKeyword} />
           <SortButtonGroup />
         </div>
-        {paginationResult == null && (
+        {!paginationResult && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
             <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
-        {paginationResult != null && (
-          <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
-        )}
+        {paginationResult && <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
       </LoginRequiredWrapper>
     </>
   );
