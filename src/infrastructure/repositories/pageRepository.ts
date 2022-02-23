@@ -69,6 +69,10 @@ export class PageRepository implements IPageRepository {
     return this.convertPage(result);
   }
 
+  async count(): Promise<number> {
+    return this.PageModel.estimatedDocumentCount();
+  }
+
   async find(query: FilterQuery<Page>, options: PaginationOptions): Promise<PaginationResult<Page>> {
     const result: PaginationResult<Page> = await this.PageModel.paginate(query, options);
     return {

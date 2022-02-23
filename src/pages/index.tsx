@@ -40,11 +40,11 @@ const Page: WebevNextPage<Props> = ({ count }) => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export async function getStaticProps() {
   let count = 0;
   try {
-    const res = await axios.get(`${process.env.BACKEND_URL_FROM_NEXT_SERVER || 'http://localhost:8000'}/api/v1/pages/all`);
+    const res = await axios.get(`${process.env.FRONTEND_URL_FROM_NEXT_SERVER || 'http://localhost:3000'}/api/pages/all`);
+
     count = res.data;
   } catch (error) {
     console.log(error);
