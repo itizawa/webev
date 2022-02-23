@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import Skeleton from 'react-loading-skeleton';
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -18,13 +19,18 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
-  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvidedDragHandleProps }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: directory._id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFetchDirectory, setIsFetchDirectory] = useState(false);
@@ -73,12 +79,14 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
     <>
       <StyledDiv
         className="text-white text-left rounded d-flex"
-        role="button"
         onClick={() => router.push(`/directory/${directory._id}`)}
         isActive={isActive}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
-        {...draggableProvidedDragHandleProps}
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
