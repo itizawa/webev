@@ -1,19 +1,21 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
-import { PostPageByUrlUseCase } from '~/application/useCases/page/PostPageByUrlUseCase';
+import { CountAllPagesUseCase } from '~/application/useCases/page';
 import { PageRepository } from '~/infrastructure/repositories/pageRepository';
 import { connectDB } from '~/middlewares/dbConnect';
 
 import { WebevApiRequest } from '~/libs/interfaces/webevApiRequest';
-const postPageByUrlUseCase = new PostPageByUrlUseCase(new PageRepository());
+const countAllPagesUseCase = new CountAllPagesUseCase(new PageRepository());
 
 const handler = nc()
   .use(connectDB)
-  .post(async (req: WebevApiRequest<{ url: string }>, res: NextApiResponse) => {
-    const { body, user } = req;
-
-    const page = await postPageByUrlUseCase.execute({ url: body.url, userId: user._id });
-    res.status(200).json({ success: true, data: page });
+  .get(async (_req: WebevApiRequest, res: NextApiResponse) => {
+    try {
+      const result = await countAllPagesUseCase.execute();
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ error });
+    }
   });
 
 export default handler;
