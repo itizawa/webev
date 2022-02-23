@@ -11,6 +11,6 @@ export class PostPageByUrlUseCase {
   constructor(private readonly pageRepository: IPageRepository) {}
 
   execute({ url, directoryId, userId }: { url: string; directoryId?: string; userId: string }): Promise<Page> {
-    return this.pageRepository.create({ url, title: 'loading...', directoryId, createdUser: userId });
+    return this.pageRepository.create({ url, directoryId, createdUser: userId });
   }
 }

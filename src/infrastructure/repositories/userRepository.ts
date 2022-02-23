@@ -55,4 +55,14 @@ export class UserRepository implements IUserRepository {
 
     return this.convert(user);
   }
+
+  async update(userId: string, newObject: Partial<User>): Promise<User | null> {
+    const user = await this.UserModel.findByIdAndUpdate(userId, newObject, { new: true });
+
+    if (!user) {
+      return null;
+    }
+
+    return this.convert(user);
+  }
 }

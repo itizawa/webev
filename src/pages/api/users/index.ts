@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const page = await postPageByUrlUseCase.execute({ url: 'text', userId: '61f53b4331b03b00340cb4a0' });
         res.status(200).json({ success: true, data: page });
       } catch (error) {
-        res.status(400).json({ success: false });
+        res.status(500).json({ error });
       }
       break;
     default:
