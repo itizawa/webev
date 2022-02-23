@@ -22,8 +22,10 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
     await restClient.apiPost('/pages', { url: HOW_TO_USE_URL });
     mutatePageList();
 
-    setTimeout(() => mutateCurrentUser(data, false), 2000);
-    setIsLoading(false);
+    setTimeout(() => {
+      mutateCurrentUser(data, false);
+      setIsLoading(false);
+    }, 2000);
   }, [mutateCurrentUser, mutatePageList]);
 
   return { isLoading, updateIsExecutedTutorial };
