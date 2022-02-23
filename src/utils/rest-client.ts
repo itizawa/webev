@@ -1,6 +1,4 @@
 import axiosBase, { AxiosInstance, AxiosResponse } from 'axios';
-import { Session } from 'next-auth';
-import { getSession } from 'next-auth/react';
 
 class RestClient {
   axios: AxiosInstance;
@@ -14,16 +12,6 @@ class RestClient {
       },
       responseType: 'json',
     });
-  }
-
-  async getAccessToken() {
-    if (this.accessToken == null) {
-      const session: Session | null = await getSession({});
-      if (session != null) {
-        this.accessToken = session.accessToken as string;
-      }
-    }
-    return this.accessToken;
   }
 
   async apiGet(url: string, query = {}): Promise<AxiosResponse> {
