@@ -1,4 +1,4 @@
-import { SWRResponse } from 'swr';
+import useSWR, { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
@@ -45,7 +45,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
     searchKeyWord ? `&q=${searchKeyWord}` : ``
   }${directoryId ? `&directoryId=${directoryId}` : ``}`;
 
-  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
