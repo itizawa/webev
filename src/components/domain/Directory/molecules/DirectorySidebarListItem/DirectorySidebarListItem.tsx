@@ -19,14 +19,15 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
+  index: number;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: directory._id });
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index.toString() });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -148,9 +149,9 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
           )}
           {childrenDirectoryTrees ? (
             <>
-              {childrenDirectoryTrees.map((childrenDirectoryTree) => {
+              {childrenDirectoryTrees.map((childrenDirectoryTree, index) => {
                 const childDirectory = childrenDirectoryTree.descendant as Directory;
-                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
+                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} index={index} />;
               })}
               {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
             </>
