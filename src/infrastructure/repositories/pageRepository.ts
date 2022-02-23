@@ -1,7 +1,9 @@
-import { model, models, Model, Schema, Types, Document } from 'mongoose';
+import { model, models, Model, Schema, Types, Document, FilterQuery } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
 import { Page, PageStatus } from '~/domains/Page';
 import { IPageRepository } from '~/application/repositories/IPageRepository';
+import { PaginationOptions } from '~/libs/interfaces/pagination';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 
 export const PageSchema: Schema = new Schema(
   {
@@ -35,12 +37,12 @@ export const PageSchema: Schema = new Schema(
 );
 
 export class PageRepository implements IPageRepository {
-  PageModel: Model<Page & Document> & { paginate?: typeof mongoosePaginate };
+  PageModel: Model<Page & Document> & { paginate: (query: FilterQuery<Page>, options: PaginationOptions) => PaginationResult<Page> };
 
   constructor() {
     PageSchema.plugin(mongoosePaginate);
 
-    this.PageModel = models.Page || model<Page & Document>('Page', PageSchema);
+    this.PageModel = (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
   }
 
   private convertPage(page: Page): Page {
@@ -65,5 +67,15 @@ export class PageRepository implements IPageRepository {
     const result = await this.PageModel.create(pages);
 
     return this.convertPage(result);
+  }
+
+  async find(query: FilterQuery<Page>, options: PaginationOptions): Promise<PaginationResult<Page>> {
+    const result: PaginationResult<Page> = await this.PageModel.paginate(query, options);
+    return {
+      ...result,
+      docs: result.docs.map((doc) => {
+        return this.convertPage(doc);
+      }),
+    };
   }
 }
