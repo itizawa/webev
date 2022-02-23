@@ -12,7 +12,7 @@ const handler = nc()
   .use(connectDB)
   .use(injectUserToRequest)
   .use(loginRequired)
-  .post(async (req: WebevApiRequest, res: NextApiResponse) => {
+  .post(async (req: WebevApiRequest<{ url: string }>, res: NextApiResponse) => {
     const { body, user } = req;
 
     const page = await postPageByUrlUseCase.execute({ url: body.url, userId: user._id });

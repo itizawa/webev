@@ -1,4 +1,8 @@
 import { NextApiRequest } from 'next';
 import { User } from '~/domains/User';
-
-export type WebevApiRequest = NextApiRequest & { user: User };
+export interface WebevApiRequest<T = unknown> extends NextApiRequest {
+  user: User;
+  query: { [key: string]: string };
+  params: { [key: string]: string };
+  body: T;
+}
