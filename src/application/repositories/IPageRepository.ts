@@ -6,5 +6,6 @@ import { PaginationResult } from '~/libs/interfaces/paginationResult';
 
 export interface IPageRepository {
   create(pages: Partial<Page>): Promise<Page>;
+  count(): Promise<number>;
   find(query: FilterQuery<Page>, options: PaginationOptions): Promise<PaginationResult<Page>>;
 }
