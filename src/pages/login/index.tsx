@@ -4,7 +4,7 @@ import { useEffect, ReactNode } from 'react';
 
 import styled from 'styled-components';
 
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 
 import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';

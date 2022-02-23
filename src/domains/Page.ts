@@ -17,8 +17,7 @@ export class Page {
   createdAt: Date;
   updatedAt: Date;
   status: PageStatus;
-  isFavorite: boolean;
-  constructor({ _id, url, image, favicon, description, title, body, siteName, directoryId, createdUser, createdAt, updatedAt, status, isFavorite }: Page) {
+  constructor({ _id, url, image, favicon, description, title, body, siteName, directoryId, createdUser, createdAt, updatedAt, status }: Page) {
     this._id = _id;
     this.url = url;
     this.image = image;
@@ -32,6 +31,5 @@ export class Page {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.status = status;
-    this.isFavorite = isFavorite;
   }
 }
