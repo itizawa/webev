@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Oval } from 'react-loader-spinner';
 
 import { DndContext, DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, useDroppable } from '@dnd-kit/core';
-import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { restClient } from '~/utils/rest-client';
@@ -34,7 +34,6 @@ export const SidebarDirectoryList: VFC = () => {
     }
   }, [directoryPaginationResult]);
 
-  console.log(items);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -49,47 +48,45 @@ export const SidebarDirectoryList: VFC = () => {
     if (!over) {
       return;
     }
-    console.log(over);
-    console.log(active);
-    // const destOrder = result.destination.index + 1;
-    // const sourceOrder = result.source.index + 1;
+    const destOrder = Number(over.id) + 1;
+    const sourceOrder = Number(active.id) + 1;
 
     if (over.id === active.id) {
       return;
     }
 
-    // try {
-    //   restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
-    // } catch (err) {
-    //   if (err instanceof Error) toastError(err);
-    // }
-    // const { docs } = directoryPaginationResult;
-    // const isUp = destOrder > sourceOrder;
+    try {
+      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
 
-    // let targetDocs: Directory[] = [];
-    // if (isUp) {
-    //   targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
-    // } else {
-    //   targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
-    // }
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+    }
 
-    // const newDocs: Directory[] = [
-    //   ...docs.filter((v) => !targetDocs.includes(v)),
-    //   ...targetDocs.map((v) => {
-    //     if (v.order === sourceOrder) {
-    //       return { ...v, order: destOrder };
-    //     }
-    //     return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
-    //   }),
-    // ];
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
 
-    // mutateDirectoryPaginationResult(
-    //   {
-    //     ...directoryPaginationResult,
-    //     docs: newDocs.sort((a, b) => a.order - b.order),
-    //   },
-    //   false,
-    // );
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
