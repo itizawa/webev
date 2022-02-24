@@ -18,8 +18,7 @@ type Props = {
   isHideArchiveButton?: boolean;
 };
 
-export const PageList: VFC<Props> = (props) => {
-  const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
+export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount, isHideArchiveButton }) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
   const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
 
