@@ -67,9 +67,7 @@ export const DashBoardLayout: FC = ({ children }) => {
         )}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <div>
-          <ScrollTopButton />
-        </div>
+        <ScrollTopButton />
       </StyledDiv>
       <Footer />
     </div>
