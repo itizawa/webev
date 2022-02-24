@@ -2,7 +2,7 @@ import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import { Oval } from 'react-loader-spinner';
 
-import { DndContext, DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors, useDroppable } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
@@ -25,8 +25,7 @@ export const SidebarDirectoryList: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
-  const [items, setItems] = useState(directoryPaginationResult ? directoryPaginationResult.docs.map((_, i) => i.toString()) : []);
-  const { setNodeRef } = useDroppable({ id: 'drop' });
+  const [items, setItems] = useState<string[]>([]);
 
   useEffect(() => {
     if (directoryPaginationResult) {
@@ -131,7 +130,7 @@ export const SidebarDirectoryList: VFC = () => {
   return (
     <>
       <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleOnDragEnd}>
-        <div ref={setNodeRef} className="px-3">
+        <div className="px-3">
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             {directoryPaginationResult.docs.map((directory, index) => {
               return (
