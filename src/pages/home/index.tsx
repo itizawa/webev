@@ -1,10 +1,9 @@
-import { useEffect, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
-import { PageStatus } from '~/domains/Page';
-import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { usePageListSWR, useSearchKeyWord } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
@@ -19,12 +18,7 @@ const Index: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
-  const { mutate: mutatePageStatus } = usePageStatus();
   const { mutate: mutateSearchKeyword } = useSearchKeyWord();
-
-  useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_STOCK]);
-  }, [mutatePageStatus]);
 
   return (
     <>

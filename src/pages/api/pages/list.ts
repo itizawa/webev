@@ -18,10 +18,9 @@ const handler = nc()
   .use(loginRequired)
   .get(async (req: WebevApiRequest, res: NextApiResponse) => {
     const { user } = req;
-    const { status, directoryId, sort, page = '1', limit = '10', q = '' } = req.query;
+    const { directoryId, sort, page = '1', limit = '10', q = '' } = req.query;
 
     const query: Partial<Page> & { $or?: Array<{ url?: RegExp; title?: RegExp; siteName?: RegExp; description?: RegExp }> } = { createdUser: user._id };
-    if (status) query.status = status as Page['status'];
     if (directoryId) query.directoryId = directoryId;
 
     if (q) {

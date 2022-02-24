@@ -1,6 +1,6 @@
 import { model, models, Model, Schema, Types, Document, FilterQuery } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 import { IPageRepository } from '~/application/repositories/IPageRepository';
 import { PaginationOptions } from '~/libs/interfaces/pagination';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
@@ -15,10 +15,9 @@ export const PageSchema: Schema = new Schema(
     customizedTitle: String,
     body: { type: String },
     siteName: { type: String, index: true },
-    status: {
-      type: String,
-      required: true,
-      default: PageStatus.PAGE_STATUS_STOCK,
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     directoryId: {
       type: Types.ObjectId,
@@ -55,11 +54,11 @@ export class PageRepository implements IPageRepository {
       title: page.title,
       body: page.body,
       siteName: page.siteName,
+      isDeleted: page.isDeleted,
       directoryId: page.directoryId?.toString(),
       createdUser: page.createdUser.toString(),
       createdAt: page.createdAt,
       updatedAt: page.updatedAt,
-      status: page.status,
     });
   }
 

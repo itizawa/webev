@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { useHooks } from './hooks';
 
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -37,7 +37,6 @@ export const TopSubnavBar: VFC<Props> = ({
 }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
-  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
@@ -70,22 +69,14 @@ export const TopSubnavBar: VFC<Props> = ({
             </>
           )}
         </div>
-        {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex" onClick={onClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="REPLY" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.return_button}</span>
-          </button>
-        ) : (
-          <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="CHECK" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.read_button}</span>
-          </button>
-        )}
+        <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
+          <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+          <span className="ms-2 text-nowrap">{t.read_button}</span>
+        </button>
         <div className="ms-2">
           <PageManageDropdown
             page={page}
             onClickDeleteButton={openDeleteModal}
-            onClickSwitchArchiveButton={onClickSwitchArchiveButton}
             onClickRemovePageButton={onClickRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
             onClickFetchButton={onClickFetchButton}

@@ -5,8 +5,6 @@ import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
 
-import { PageStatus } from '~/domains/Page';
-
 import { usePageByPageId } from '~/stores/page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
@@ -49,8 +47,6 @@ const Page: WebevNextPage = () => {
     return allDirectories?.find((v) => v._id === page?.directoryId);
   }, [allDirectories, page?.directoryId]);
 
-  const isArchived = useMemo(() => page?.status === PageStatus.PAGE_STATUS_ARCHIVE, [page?.status]);
-
   useEffect(() => {
     speech.cancel();
     setIsReading(false);
@@ -81,9 +77,9 @@ const Page: WebevNextPage = () => {
 
   const handleClickSwitchArchiveButton = async () => {
     try {
-      const data = await switchArchive(page._id, !isArchived);
+      const data = await switchArchive(page._id, !false);
       mutatePage(data, false);
-      if (isArchived) {
+      if (data) {
         toastSuccess(t.toastr_success_put_back);
       } else {
         toastSuccess(t.toastr_success_read);
@@ -189,22 +185,14 @@ const Page: WebevNextPage = () => {
               </>
             )}
           </div>
-          {isArchived ? (
-            <button className="btn btn-sm btn-secondary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
-              <Icon height={20} width={20} icon="REPLY" color="WHITE" />
-              <span className="ms-2 text-nowrap">{t.return_button}</span>
-            </button>
-          ) : (
-            <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
-              <Icon height={20} width={20} icon="CHECK" color="WHITE" />
-              <span className="ms-2 text-nowrap">{t.read_button}</span>
-            </button>
-          )}
+          <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
+            <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+            <span className="ms-2 text-nowrap">{t.read_button}</span>
+          </button>
           <div className="ms-2">
             <PageManageDropdown
               page={page}
               onClickDeleteButton={openDeleteModal}
-              onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
               onClickRemovePageButton={handleRemovePageButton}
               onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
               onClickFetchButton={handleFetchButton}

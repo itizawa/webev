@@ -9,7 +9,7 @@ import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
 import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { useDirectoryId, usePageListSWR, useSearchKeyWord } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -26,7 +26,6 @@ import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';
-import { PageStatus } from '~/domains/Page';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -122,12 +121,6 @@ const Page: WebevNextPage = () => {
       }
     }
   }, [directory]);
-
-  const { mutate: mutatePageStatus } = usePageStatus();
-
-  useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
-  }, [mutatePageStatus]);
 
   const openDeleteModal = (directory: Directory) => {
     mutateDirectoryForDelete(directory);

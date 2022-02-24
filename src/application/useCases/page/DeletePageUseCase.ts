@@ -1,5 +1,5 @@
 import { IPageRepository } from '~/application/repositories/IPageRepository';
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 
 /**
  * pageを削除する
@@ -20,6 +20,6 @@ export class DeletePageUseCase {
       throw new Error('ページを削除できるのは作成者だけです');
     }
 
-    return this.pageRepository.update(id, { status: PageStatus.PAGE_STATUS_DELETED });
+    return this.pageRepository.update(id, { isDeleted: true });
   }
 }
