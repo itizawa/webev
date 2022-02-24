@@ -45,7 +45,7 @@ export class PageRepository implements IPageRepository {
     this.PageModel = (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
   }
 
-  private convertPage(page: Page): Page {
+  private convert(page: Page): Page {
     return new Page({
       _id: page._id.toString(),
       url: page.url,
@@ -66,7 +66,7 @@ export class PageRepository implements IPageRepository {
   async create(pages: Partial<Page>): Promise<Page> {
     const result = await this.PageModel.create(pages);
 
-    return this.convertPage(result);
+    return this.convert(result);
   }
 
   async count(): Promise<number> {
@@ -78,8 +78,18 @@ export class PageRepository implements IPageRepository {
     return {
       ...result,
       docs: result.docs.map((doc) => {
-        return this.convertPage(doc);
+        return this.convert(doc);
       }),
     };
+  }
+
+  async update(id: string, newObject: Partial<Page>): Promise<Page | null> {
+    const page = await this.PageModel.findByIdAndUpdate(id, newObject, { new: true });
+
+    if (!page) {
+      return null;
+    }
+
+    return this.convert(page);
   }
 }
