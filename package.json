@@ -1,6 +1,6 @@
 {
   "name": "webev-front",
-  "version": "0.7.17",
+  "version": "0.7.18",
   "main": "index.js",
   "scripts": {
     "dev": "next",
