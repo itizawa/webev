@@ -83,6 +83,16 @@ export class PageRepository implements IPageRepository {
     };
   }
 
+  async findById(id: Page['_id']): Promise<Page | null> {
+    const page = await this.PageModel.findById(id);
+
+    if (!page) {
+      return null;
+    }
+
+    return this.convert(page);
+  }
+
   async update(id: string, newObject: Partial<Page>): Promise<Page | null> {
     const page = await this.PageModel.findByIdAndUpdate(id, newObject, { new: true });
 
