@@ -20,7 +20,11 @@ const handler = nc()
     const { user } = req;
     const { directoryId, sort, page = '1', limit = '10', q = '' } = req.query;
 
-    const query: Partial<Page> & { $or?: Array<{ url?: RegExp; title?: RegExp; siteName?: RegExp; description?: RegExp }> } = { createdUser: user._id };
+    const query: Partial<Page> & { $or?: Array<{ url?: RegExp; title?: RegExp; siteName?: RegExp; description?: RegExp }> } = {
+      createdUser: user._id,
+      isDeleted: false,
+    };
+
     if (directoryId) query.directoryId = directoryId;
 
     if (q) {
