@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -25,10 +27,11 @@ const MAX_WORD_COUNT_OF_BODY = 96;
 
 type Props = {
   page: Page;
+  index: number;
   isHideArchiveButton?: boolean;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, index }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
@@ -36,6 +39,12 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index.toString() });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
 
@@ -109,7 +118,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   };
 
   return (
-    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden" ref={setNodeRef} style={style} {...attributes} {...listeners}>
       {page.body ? (
         <Link href={`/page/${page._id}`}>
           <a>

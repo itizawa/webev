@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -25,16 +27,23 @@ const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 
 type Props = {
   page: Page;
+  index: number;
   isHideArchiveButton?: boolean;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, index }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index.toString() });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
 
@@ -107,7 +116,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   };
 
   return (
-    <StyledRow className="row py-2">
+    <StyledRow className="row py-2" ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <div className="col-3 col-md-2 p-1 p-md-2">
         {page.body ? (
           <Link href={`/page/${page._id}`}>
