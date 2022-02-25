@@ -23,7 +23,7 @@ export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, 
 };
 
 export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Page, Error> => {
-  return useAuthenticationSWR(`/pages/${pageId}`, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR(`/pages/${pageId}`, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
@@ -40,7 +40,7 @@ export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, 
     directoryId ? `&directoryId=${directoryId}` : ``
   }`;
 
-  return useSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useSWR(endpoint, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
@@ -56,7 +56,7 @@ export const usePageNotBelongDirectory = ({
   const endpoint = `/pages/list?status[]=stocked&status[]=archived&directoryId=null&sort=-createdAt&page=${activePage}${
     searchKeyWord != null ? `&q=${searchKeyWord}` : ``
   }`;
-  return useAuthenticationSWR(endpoint, (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useAuthenticationSWR(endpoint, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
