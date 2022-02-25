@@ -12,11 +12,10 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Page } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+import { usePageForDelete } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 import { restClient } from '~/utils/rest-client';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -32,8 +31,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
-  const { removePageFromDirectory } = useRemovePageFromDirectory();
-  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
 
@@ -65,33 +62,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
-  };
-
-  const handleRemovePageButton = async () => {
-    try {
-      const data = await removePageFromDirectory(page._id);
-      if (pageList) {
-        mutatePageList(
-          {
-            ...pageList,
-            docs: [...pageList.docs.filter((v) => v._id !== page._id), data],
-          },
-          false,
-        );
-      }
-      toastSuccess(t.remove_page_from_directory);
-      mutatePageList();
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
-  // const directoryOfPage = useMemo(() => {
-  //   return allDirectories?.find((v) => v._id === page.directoryId);
-  // }, [allDirectories, page.directoryId]);
-
-  const handleClickAddPageToDirectoryButton = () => {
-    mutateUsePageForAddToDirectory(page);
   };
 
   const handleFetchButton = async () => {
@@ -130,26 +100,8 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown
-            page={page}
-            onClickDeleteButton={openDeleteModal}
-            onClickRemovePageButton={handleRemovePageButton}
-            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
-            onClickFetchButton={handleFetchButton}
-          />
+          <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
         </div>
-        {/* {directoryOfPage != null && (
-          <div className="mt-2">
-            <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
-              <Link href={`/directory/${directoryOfPage._id}`}>
-                <span role="button" className="badge bg-secondary text-white">
-                  <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
-                  <span className="ms-1">{directoryOfPage.name}</span>
-                </span>
-              </Link>
-            </Tooltip>
-          </div>
-        )} */}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center mt-auto justify-content-between">
           <small className="text-truncate me-auto">

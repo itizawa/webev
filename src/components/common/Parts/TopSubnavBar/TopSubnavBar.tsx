@@ -74,14 +74,7 @@ export const TopSubnavBar: VFC<Props> = ({
           <span className="ms-2 text-nowrap">{t.read_button}</span>
         </button>
         <div className="ms-2">
-          <PageManageDropdown
-            page={page}
-            onClickDeleteButton={openDeleteModal}
-            onClickRemovePageButton={onClickRemovePageButton}
-            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
-            onClickFetchButton={onClickFetchButton}
-            direction="down"
-          />
+          <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={onClickFetchButton} direction="down" />
         </div>
       </div>
       <StyledBorder />

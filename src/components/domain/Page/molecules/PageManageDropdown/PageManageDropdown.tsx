@@ -12,20 +12,11 @@ import { zIndex } from '~/libs/constants/zIndex';
 type Props = {
   page: Page;
   onClickDeleteButton: () => void;
-  onClickRemovePageButton: () => void;
-  onClickAddPageToDirectoryButton: () => void;
   onClickFetchButton: () => void;
   direction?: 'up' | 'down' | 'start' | 'end';
 };
 
-export const PageManageDropdown: VFC<Props> = ({
-  page,
-  onClickDeleteButton,
-  onClickRemovePageButton,
-  onClickAddPageToDirectoryButton,
-  onClickFetchButton,
-  direction = 'start',
-}) => {
+export const PageManageDropdown: VFC<Props> = ({ page, onClickDeleteButton, onClickFetchButton, direction = 'start' }) => {
   const { t } = useLocale();
 
   /**
@@ -88,18 +79,6 @@ export const PageManageDropdown: VFC<Props> = ({
           <DropdownItem tag="button" onClick={sharePage}>
             <Icon icon="TWITTER" color="WHITE" />
             <span className="ms-2">{t.share}</span>
-          </DropdownItem>
-        )}
-        {page.directoryId && (
-          <DropdownItem tag="button" onClick={onClickRemovePageButton}>
-            <Icon icon="REMOVE_FROM_DIRECTORY" color="WHITE" />
-            <span className="ms-2">{t.remove_page_from_directory}</span>
-          </DropdownItem>
-        )}
-        {!page.directoryId && (
-          <DropdownItem tag="button" onClick={onClickAddPageToDirectoryButton}>
-            <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
-            <span className="ms-2">{t.save_page_to_directory}</span>
           </DropdownItem>
         )}
       </StyledDropdownMenu>

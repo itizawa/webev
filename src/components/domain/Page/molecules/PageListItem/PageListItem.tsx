@@ -12,11 +12,9 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page } from '~/domains/Page';
 
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-// import { useAllDirectories } from '~/stores/directory';
+import { usePageForDelete } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
 
@@ -33,8 +31,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
-  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
-  const { removePageFromDirectory } = useRemovePageFromDirectory();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
 
@@ -67,32 +63,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
   };
-
-  const handleRemovePageButton = async () => {
-    try {
-      const data = await removePageFromDirectory(page?._id);
-      if (pageList) {
-        mutatePageList(
-          {
-            ...pageList,
-            docs: [...pageList.docs.filter((v) => v._id !== page._id), data],
-          },
-          false,
-        );
-      }
-      toastSuccess(t.remove_page_from_directory);
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
-  const handleClickAddPageToDirectoryButton = () => {
-    mutateUsePageForAddToDirectory(page);
-  };
-
-  // const directoryOfPage = useMemo(() => {
-  //   return allDirectories?.find((v) => v._id === page.directoryId);
-  // }, [allDirectories, page.directoryId]);
 
   const handleFetchButton = async () => {
     try {
@@ -132,26 +102,8 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown
-            page={page}
-            onClickDeleteButton={openDeleteModal}
-            onClickRemovePageButton={handleRemovePageButton}
-            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
-            onClickFetchButton={handleFetchButton}
-          />
+          <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
         </div>
-        {/* {directoryOfPage != null && (
-          <div className="">
-            <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
-              <Link href={`/directory/${directoryOfPage._id}`}>
-                <span role="button" className="badge bg-secondary text-white" id={`directory-for-${page._id}`}>
-                  <Icon height={14} width={14} icon="DIRECTORY" color="WHITE" />
-                  <span className="ms-1">{directoryOfPage.name}</span>
-                </span>
-              </Link>
-            </Tooltip>
-          </div>
-        )} */}
         <span className="small p-1 d-none d-sm-block">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </span>

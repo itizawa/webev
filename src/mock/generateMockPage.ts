@@ -11,7 +11,6 @@ export const generateMockPage = (mock: Partial<Page> = {}): Page => {
     body: mock.body || 'mockBody',
     siteName: mock.siteName || 'mockSiteName',
     isDeleted: mock.isDeleted || false,
-    directoryId: mock.directoryId || 'mockDirectoryId',
     createdUser: mock.createdUser || 'mockCreatedUser',
     createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
     updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
