@@ -31,7 +31,7 @@
     "emoji-mart": "^3.0.1",
     "mongodb": "^3.6.9",
     "next": "^12.1.0",
-    "next-auth": "^3.29.0",
+    "next-auth": "^4.0.0",
     "next-connect": "^0.12.2",
     "next-pwa": "^5.3.1",
     "react": "latest",
