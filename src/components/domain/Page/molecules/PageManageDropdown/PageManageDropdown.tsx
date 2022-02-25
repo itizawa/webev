@@ -4,7 +4,7 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import styled from 'styled-components';
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 import { useLocale } from '~/hooks/useLocale';
 import { toastSuccess } from '~/utils/toastr';
 import { zIndex } from '~/libs/constants/zIndex';
@@ -12,7 +12,6 @@ import { zIndex } from '~/libs/constants/zIndex';
 type Props = {
   page: Page;
   onClickDeleteButton: () => void;
-  onClickSwitchArchiveButton: () => void;
   onClickRemovePageButton: () => void;
   onClickAddPageToDirectoryButton: () => void;
   onClickFetchButton: () => void;
@@ -22,7 +21,6 @@ type Props = {
 export const PageManageDropdown: VFC<Props> = ({
   page,
   onClickDeleteButton,
-  onClickSwitchArchiveButton,
   onClickRemovePageButton,
   onClickAddPageToDirectoryButton,
   onClickFetchButton,
@@ -90,12 +88,6 @@ export const PageManageDropdown: VFC<Props> = ({
           <DropdownItem tag="button" onClick={sharePage}>
             <Icon icon="TWITTER" color="WHITE" />
             <span className="ms-2">{t.share}</span>
-          </DropdownItem>
-        )}
-        {page.status === PageStatus.PAGE_STATUS_ARCHIVE && (
-          <DropdownItem tag="button" onClick={onClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="REPLY" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.return_button}</span>
           </DropdownItem>
         )}
         {page.directoryId && (

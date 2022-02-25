@@ -1,8 +1,3 @@
-export enum PageStatus {
-  PAGE_STATUS_STOCK = 'stocked',
-  PAGE_STATUS_ARCHIVE = 'archived',
-  PAGE_STATUS_DELETED = 'deleted',
-}
 export class Page {
   _id: string;
   url: string;
@@ -12,12 +7,12 @@ export class Page {
   title: string;
   body?: string;
   siteName: string;
+  isDeleted: boolean;
   directoryId?: string;
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
-  status: PageStatus;
-  constructor({ _id, url, image, favicon, description, title, body, siteName, directoryId, createdUser, createdAt, updatedAt, status }: Page) {
+  constructor({ _id, url, image, favicon, description, title, body, siteName, isDeleted, directoryId, createdUser, createdAt, updatedAt }: Page) {
     this._id = _id;
     this.url = url;
     this.image = image;
@@ -26,10 +21,10 @@ export class Page {
     this.title = title;
     this.body = body;
     this.siteName = siteName;
+    this.isDeleted = isDeleted;
     this.directoryId = directoryId;
     this.createdUser = createdUser;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.status = status;
   }
 }

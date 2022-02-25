@@ -1,4 +1,4 @@
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 
 export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({
@@ -10,9 +10,9 @@ export const generateMockPage = (mock: Partial<Page> = {}): Page => {
     title: mock.title || 'mockTitle',
     body: mock.body || 'mockBody',
     siteName: mock.siteName || 'mockSiteName',
+    isDeleted: mock.isDeleted || false,
     directoryId: mock.directoryId || 'mockDirectoryId',
     createdUser: mock.createdUser || 'mockCreatedUser',
-    status: mock.status || PageStatus.PAGE_STATUS_ARCHIVE,
     createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
     updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
   });

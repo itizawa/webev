@@ -1,6 +1,6 @@
 import { model, models, Model, Schema, Types, Document, FilterQuery } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 import { IPageRepository } from '~/application/repositories/IPageRepository';
 import { PaginationOptions } from '~/libs/interfaces/pagination';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
@@ -15,10 +15,9 @@ export const PageSchema: Schema = new Schema(
     customizedTitle: String,
     body: { type: String },
     siteName: { type: String, index: true },
-    status: {
-      type: String,
-      required: true,
-      default: PageStatus.PAGE_STATUS_STOCK,
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     directoryId: {
       type: Types.ObjectId,
@@ -45,7 +44,7 @@ export class PageRepository implements IPageRepository {
     this.PageModel = (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
   }
 
-  private convertPage(page: Page): Page {
+  private convert(page: Page): Page {
     return new Page({
       _id: page._id.toString(),
       url: page.url,
@@ -55,18 +54,18 @@ export class PageRepository implements IPageRepository {
       title: page.title,
       body: page.body,
       siteName: page.siteName,
+      isDeleted: page.isDeleted,
       directoryId: page.directoryId?.toString(),
       createdUser: page.createdUser.toString(),
       createdAt: page.createdAt,
       updatedAt: page.updatedAt,
-      status: page.status,
     });
   }
 
   async create(pages: Partial<Page>): Promise<Page> {
     const result = await this.PageModel.create(pages);
 
-    return this.convertPage(result);
+    return this.convert(result);
   }
 
   async count(): Promise<number> {
@@ -78,8 +77,28 @@ export class PageRepository implements IPageRepository {
     return {
       ...result,
       docs: result.docs.map((doc) => {
-        return this.convertPage(doc);
+        return this.convert(doc);
       }),
     };
+  }
+
+  async findById(id: Page['_id']): Promise<Page | null> {
+    const page = await this.PageModel.findById(id);
+
+    if (!page) {
+      return null;
+    }
+
+    return this.convert(page);
+  }
+
+  async update(id: string, newObject: Partial<Page>): Promise<Page | null> {
+    const page = await this.PageModel.findByIdAndUpdate(id, newObject, { new: true });
+
+    if (!page) {
+      return null;
+    }
+
+    return this.convert(page);
   }
 }

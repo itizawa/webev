@@ -1,7 +1,7 @@
-import { useEffect, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
-import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
+import { usePageListSWR, useSearchKeyWord } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
@@ -11,20 +11,14 @@ import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 
-import { PageStatus } from '~/domains/Page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const { mutate: mutatePageStatus } = usePageStatus();
   const { data: paginationResult } = usePageListSWR();
   const { mutate: mutateSearchKeyword } = useSearchKeyWord();
-
-  useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE]);
-  }, [mutatePageStatus]);
 
   return (
     <>

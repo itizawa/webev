@@ -27,7 +27,7 @@ class RestClient {
   }
 
   async apiDelete<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
-    return await this.axios.delete(`/api/v1${url}`, { data: body });
+    return await this.axios.delete(`/api/${url}`, { data: body });
   }
 }
 

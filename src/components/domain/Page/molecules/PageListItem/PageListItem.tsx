@@ -10,7 +10,7 @@ import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { Page, PageStatus } from '~/domains/Page';
+import { Page } from '~/domains/Page';
 
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
 import { useAllDirectories } from '~/stores/directory';
@@ -36,15 +36,13 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
 
-  const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
+  const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
   const { data: allDirectories } = useAllDirectories();
 
-  const isArchive = useMemo(() => page.status === PageStatus.PAGE_STATUS_ARCHIVE, [page.status]);
-
   const handleSwitchArchive = async () => {
-    const bool = !isArchive;
+    const bool = true;
     try {
       await switchArchive(_id, bool);
       if (pageList) {
@@ -137,7 +135,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
           <PageManageDropdown
             page={page}
             onClickDeleteButton={openDeleteModal}
-            onClickSwitchArchiveButton={handleSwitchArchive}
             onClickRemovePageButton={handleRemovePageButton}
             onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
             onClickFetchButton={handleFetchButton}
@@ -182,7 +179,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             </a>
           </Tooltip>
         </small>
-        {!isHideArchiveButton && status === PageStatus.PAGE_STATUS_STOCK && (
+        {!isHideArchiveButton && (
           <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>

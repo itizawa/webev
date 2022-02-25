@@ -18,7 +18,6 @@ import { PageAddToDirectoryModal } from '~/components/domain/Page/molecules/Page
 import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
-import { SocketConnector } from '~/components/domain/Socket/SocketConnector';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
@@ -66,12 +65,9 @@ export const DashBoardLayout: FC = ({ children }) => {
             <PageSaveModal />
           </>
         )}
-        {session && <SocketConnector />}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <div>
-          <ScrollTopButton />
-        </div>
+        <ScrollTopButton />
       </StyledDiv>
       <Footer />
     </div>

@@ -1,18 +1,16 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 
 import styled from 'styled-components';
 import { Triangle } from 'react-loader-spinner';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
-import { PageStatus } from '~/domains/Page';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { useDirectoryPaginationResult } from '~/stores/directory';
-import { usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -26,14 +24,9 @@ const Page: WebevNextPage = () => {
   const [searchKeyWord, setSearchKeyWord] = useState('');
   const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, isRoot: true });
   const { createDirectory } = useCreateDirectory();
-  const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
-  }, [mutatePageStatus]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
