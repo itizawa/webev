@@ -1,4 +1,4 @@
-import { VFC, useMemo } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -13,7 +13,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Page } from '~/domains/Page';
 
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-import { useAllDirectories } from '~/stores/directory';
+// import { useAllDirectories } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
@@ -39,7 +39,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { data: allDirectories } = useAllDirectories();
+  // const { data: allDirectories } = useAllDirectories();
 
   const handleSwitchArchive = async () => {
     const bool = true;
@@ -90,9 +90,9 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     mutateUsePageForAddToDirectory(page);
   };
 
-  const directoryOfPage = useMemo(() => {
-    return allDirectories?.find((v) => v._id === page.directoryId);
-  }, [allDirectories, page.directoryId]);
+  // const directoryOfPage = useMemo(() => {
+  //   return allDirectories?.find((v) => v._id === page.directoryId);
+  // }, [allDirectories, page.directoryId]);
 
   const handleFetchButton = async () => {
     try {
@@ -140,7 +140,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickFetchButton={handleFetchButton}
           />
         </div>
-        {directoryOfPage != null && (
+        {/* {directoryOfPage != null && (
           <div className="">
             <Tooltip disabled={directoryOfPage.description.trim() === ''} text={directoryOfPage.description}>
               <Link href={`/directory/${directoryOfPage._id}`}>
@@ -151,7 +151,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </Link>
             </Tooltip>
           </div>
-        )}
+        )} */}
         <span className="small p-1 d-none d-sm-block">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </span>

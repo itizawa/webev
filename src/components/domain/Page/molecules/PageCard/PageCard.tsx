@@ -1,4 +1,4 @@
-import { VFC, useMemo } from 'react';
+import { VFC } from 'react';
 import Link from 'next/link';
 
 import styled from 'styled-components';
@@ -7,14 +7,12 @@ import { format } from 'date-fns';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
-import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
 import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
-import { useAllDirectories } from '~/stores/directory';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
@@ -40,7 +38,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { data: allDirectories } = useAllDirectories();
+  // const { data: allDirectories } = useAllDirectories();
 
   const handleSwitchArchive = async () => {
     const bool = true;
@@ -88,9 +86,9 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     }
   };
 
-  const directoryOfPage = useMemo(() => {
-    return allDirectories?.find((v) => v._id === page.directoryId);
-  }, [allDirectories, page.directoryId]);
+  // const directoryOfPage = useMemo(() => {
+  //   return allDirectories?.find((v) => v._id === page.directoryId);
+  // }, [allDirectories, page.directoryId]);
 
   const handleClickAddPageToDirectoryButton = () => {
     mutateUsePageForAddToDirectory(page);
@@ -140,7 +138,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             onClickFetchButton={handleFetchButton}
           />
         </div>
-        {directoryOfPage != null && (
+        {/* {directoryOfPage != null && (
           <div className="mt-2">
             <Tooltip text={directoryOfPage.description} disabled={directoryOfPage.description.trim() === ''}>
               <Link href={`/directory/${directoryOfPage._id}`}>
@@ -151,7 +149,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </Link>
             </Tooltip>
           </div>
-        )}
+        )} */}
         <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
         <div className="d-flex align-items-center mt-auto justify-content-between">
           <small className="text-truncate me-auto">

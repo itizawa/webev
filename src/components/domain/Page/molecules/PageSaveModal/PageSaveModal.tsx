@@ -1,39 +1,27 @@
 import { VFC, useState, useEffect } from 'react';
-import { Triangle } from 'react-loader-spinner';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
-import { PagePreviewCard } from '~/components/domain/Page/molecules/PagePreviewCard';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
-import { usePageListSWR, usePageNotBelongDirectory } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { isValidUrl } from '~/utils/isValidUrl';
 
 export const PageSaveModal: VFC = () => {
   const { t } = useLocale();
 
   const [url, setUrl] = useState('');
-  const [searchKeyWord, setSearchKeyWord] = useState('');
-  const [activePage, setActivePage] = useState(1);
 
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
   const { data: socketId } = useSocketId();
 
   const { mutate: pageListMutate } = usePageListSWR();
-  const { data: paginationResult, mutate: mutatePageNotBelongDirectory } = usePageNotBelongDirectory({ activePage, searchKeyWord });
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
-
-  useEffect(() => {
-    mutatePageNotBelongDirectory();
-  }, [directoryForSavePage, mutatePageNotBelongDirectory]);
 
   useEffect(() => {
     if (urlFromClipBoard != null) {
@@ -62,23 +50,6 @@ export const PageSaveModal: VFC = () => {
     mutateDirectoryForSavePage(null);
   };
 
-  const updateDirectoryName = async (searchWord: string) => {
-    setSearchKeyWord(searchWord);
-  };
-
-  const addPageToDirectory = async (pageId: string) => {
-    try {
-      await restClient.apiPut(`/pages/${pageId}/directories`, {
-        directoryId: directoryForSavePage?._id,
-      });
-      toastSuccess(t.toastr_success_add_directory);
-      mutatePageNotBelongDirectory();
-      pageListMutate();
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
   return (
     <Modal isOpen={directoryForSavePage != null} toggle={closeModal} title={t.save_page_to_directory}>
       <div className="row align-items-center">
@@ -96,38 +67,6 @@ export const PageSaveModal: VFC = () => {
       </div>
       <hr className="mt-4" />
       <p>{t.add_page_already_saved}</p>
-      <div className="mb-3">
-        <SearchTextBox onChange={updateDirectoryName} />
-      </div>
-      {paginationResult == null ? (
-        <div className="pt-5 d-flex align-items-center justify-content-center">
-          <Triangle color="#00BFFF" height={100} width={100} />
-        </div>
-      ) : (
-        <>
-          {paginationResult.docs.map((page) => {
-            return (
-              <div key={page._id} className="mb-3">
-                <PagePreviewCard page={page} onClickCard={() => addPageToDirectory(page._id)} />
-              </div>
-            );
-          })}
-          {paginationResult.docs.length === 0 ? (
-            <div className="col-12">
-              <NoPageAlert />
-            </div>
-          ) : (
-            <div className="text-center">
-              <PaginationWrapper
-                pagingLimit={paginationResult.limit}
-                totalItemsCount={paginationResult.totalDocs}
-                activePage={activePage}
-                mutateActivePage={(number) => setActivePage(number)}
-              />
-            </div>
-          )}
-        </>
-      )}
     </Modal>
   );
 };

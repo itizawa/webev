@@ -11,9 +11,9 @@ import { Sidebar } from '~/components/common/Sidebar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Parts/Footer';
 
-import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
-import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
-import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
+// import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
+// import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
+// import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 import { PageAddToDirectoryModal } from '~/components/domain/Page/molecules/PageAddToDirectoryModal';
 import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
@@ -57,9 +57,9 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-8 pt-3">{children}</div>
         {session && (
           <>
-            <DirectoryCreateModal />
+            {/* <DirectoryCreateModal />
             <DirectoryDeleteModal />
-            <DirectoryRenameModal />
+            <DirectoryRenameModal /> */}
             <PageDeleteModal />
             <PageAddToDirectoryModal />
             <PageSaveModal />
