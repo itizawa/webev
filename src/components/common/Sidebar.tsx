@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { useLocale } from '~/hooks/useLocale';
 
 import { BootstrapIcon } from '~/libs/interfaces/variables';
-import { SidebarDirectoryList } from '~/components/domain/Directory/molecules/DirectorySidebarList';
 import { Icon } from '~/components/base/atoms/Icon';
 
 export const Sidebar: VFC = () => {
@@ -34,7 +33,7 @@ export const Sidebar: VFC = () => {
         })}
       </ul>
       <hr className="mt-0" />
-      <SidebarDirectoryList />
+      {/* <SidebarDirectoryList /> */}
     </div>
   );
 };
