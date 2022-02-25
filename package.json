@@ -45,7 +45,7 @@
     "sass-loader": "12.1.0",
     "socket.io-client": "4.2.0",
     "styled-components": "5.3.1",
-    "swr": "1.0.1",
+    "swr": "1.2.2",
     "throttle-debounce": "3.0.1",
     "toastr": "2.1.4",
     "use-debounce": "7.0.0"
