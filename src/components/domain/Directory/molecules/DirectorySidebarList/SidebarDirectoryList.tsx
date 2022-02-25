@@ -1,8 +1,9 @@
-import { useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import { Oval } from 'react-loader-spinner';
 
-import { DragDropContext, Droppable, Draggable, DragUpdate } from 'react-beautiful-dnd';
+import { DndContext, DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { restClient } from '~/utils/rest-client';
@@ -24,22 +25,41 @@ export const SidebarDirectoryList: VFC = () => {
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
-  const handleOnDragEnd = (result: DragUpdate) => {
+  const [items, setItems] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (directoryPaginationResult) {
+      setItems(directoryPaginationResult.docs.map((_, i) => i.toString()));
+    }
+  }, [directoryPaginationResult]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleOnDragEnd = ({ active, over }: DragEndEvent) => {
     if (!directoryPaginationResult) {
       return;
     }
-    if (!result.destination) {
+    if (!over) {
       return;
     }
-    const destOrder = result.destination.index + 1;
-    const sourceOrder = result.source.index + 1;
+    const destOrder = Number(over.id) + 1;
+    const sourceOrder = Number(active.id) + 1;
 
-    if (sourceOrder === destOrder) {
+    if (over.id === active.id) {
       return;
     }
 
     try {
-      restClient.apiPut(`/directories/${result.draggableId}/order`, { order: destOrder });
+      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
@@ -109,26 +129,19 @@ export const SidebarDirectoryList: VFC = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="directories">
-          {(provided) => (
-            <div className="px-3" {...provided.droppableProps} ref={provided.innerRef}>
-              {directoryPaginationResult.docs.map((directory, index) => {
-                return (
-                  <Draggable key={directory._id} draggableId={directory._id} index={index}>
-                    {(provided) => (
-                      <div key={directory._id} ref={provided.innerRef} {...provided.draggableProps} className="my-1">
-                        <DirectorySidebarListItem directory={directory} draggableProvidedDragHandleProps={provided.dragHandleProps} />
-                      </div>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleOnDragEnd}>
+        <div className="px-3">
+          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+            {directoryPaginationResult.docs.map((directory, index) => {
+              return (
+                <div key={directory._id} className="my-1">
+                  <DirectorySidebarListItem directory={directory} index={index} />
+                </div>
+              );
+            })}
+          </SortableContext>
+        </div>
+      </DndContext>
       {directoryPaginationResult.docs.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
