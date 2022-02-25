@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useHooks } from './hooks';
 
 import { Page } from '~/domains/Page';
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+import { usePageForDelete } from '~/stores/modal';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
@@ -17,7 +17,6 @@ import { speech } from '~/utils/services';
 
 type Props = {
   page: Page;
-  onClickRemovePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
   onClickFetchButton: () => void;
   onClickPlayButton: () => void;
@@ -27,7 +26,6 @@ type Props = {
 };
 export const TopSubnavBar: VFC<Props> = ({
   page,
-  onClickRemovePageButton,
   onClickSwitchArchiveButton,
   onClickFetchButton,
   onClickPlayButton,
@@ -39,14 +37,9 @@ export const TopSubnavBar: VFC<Props> = ({
   const { isShowScroll } = useHooks();
 
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
-  };
-
-  const handleClickAddPageToDirectoryButton = () => {
-    mutateUsePageForAddToDirectory(page);
   };
 
   return (

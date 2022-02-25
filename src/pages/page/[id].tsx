@@ -8,7 +8,6 @@ import { usePageByPageId } from '~/stores/page';
 import { usePageForDelete } from '~/stores/modal';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
-import { useRemovePageFromDirectory } from '~/hooks/Page/useRemovePageFromDirectory';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -32,7 +31,6 @@ const Page: WebevNextPage = () => {
   const { t, locale } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
   const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { isLoading, switchArchive } = useSwitchArchive();
 
   const [isReading, setIsReading] = useState(false);
@@ -54,16 +52,6 @@ const Page: WebevNextPage = () => {
 
   const openDeleteModal = async () => {
     mutatePageForDelete(page);
-  };
-
-  const handleRemovePageButton = async () => {
-    try {
-      const data = await removePageFromDirectory(page._id);
-      mutatePage(data, false);
-      toastSuccess(t.remove_page_from_directory);
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
   };
 
   const handleClickSwitchArchiveButton = async () => {
@@ -123,7 +111,6 @@ const Page: WebevNextPage = () => {
       <LoginRequiredWrapper>
         <TopSubnavBar
           page={page}
-          onClickRemovePageButton={handleRemovePageButton}
           onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
           onClickFetchButton={handleFetchButton}
           onClickPlayButton={handleClickPlayButton}
