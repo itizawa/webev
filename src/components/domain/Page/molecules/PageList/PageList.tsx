@@ -30,17 +30,17 @@ export const PageList: VFC<Props> = (props) => {
 
   return (
     <div className="row">
-      {pages.map((page) => {
+      {pages.map((page, index) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
             <div className="col-12" key={page._id}>
-              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} />
+              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} index={index} />
             </div>
           );
         }
         return (
           <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} />
+            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} index={index} />
           </div>
         );
       })}
