@@ -63,6 +63,7 @@ export const DashBoardLayout: FC = ({ children }) => {
     if (over.id === active.id) {
       return;
     }
+    // dragした要素がpageListItemかPageCardだった場合、pageをdirectoryに追加する
     if (!directoryPaginationResult.docs.map((_, index) => index.toString()).includes(active.id)) {
       addPageToDirectory(active.id, directoryPaginationResult.docs[Number(over.id)]._id);
       return;
