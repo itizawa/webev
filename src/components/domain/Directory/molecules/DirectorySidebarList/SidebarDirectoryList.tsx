@@ -2,11 +2,9 @@ import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
 import { Oval } from 'react-loader-spinner';
 
-import { DndContext, DragEndEvent, closestCenter, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -14,7 +12,6 @@ import { IconButton } from '~/components/base/molecules/IconButton';
 import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
-import { Directory } from '~/domains/Directory';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
@@ -29,68 +26,9 @@ export const SidebarDirectoryList: VFC = () => {
 
   useEffect(() => {
     if (directoryPaginationResult) {
-      setItems(directoryPaginationResult.docs.map((_, i) => i.toString()));
+      setItems(directoryPaginationResult.docs.map((directory) => directory._id));
     }
   }, [directoryPaginationResult]);
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 2,
-      },
-    }),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    }),
-  );
-
-  const handleOnDragEnd = ({ active, over }: DragEndEvent) => {
-    if (!directoryPaginationResult) {
-      return;
-    }
-    if (!over) {
-      return;
-    }
-    const destOrder = Number(over.id) + 1;
-    const sourceOrder = Number(active.id) + 1;
-
-    if (over.id === active.id) {
-      return;
-    }
-
-    try {
-      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-    const { docs } = directoryPaginationResult;
-    const isUp = destOrder > sourceOrder;
-
-    let targetDocs: Directory[] = [];
-    if (isUp) {
-      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
-    } else {
-      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
-    }
-
-    const newDocs: Directory[] = [
-      ...docs.filter((v) => !targetDocs.includes(v)),
-      ...targetDocs.map((v) => {
-        if (v.order === sourceOrder) {
-          return { ...v, order: destOrder };
-        }
-        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
-      }),
-    ];
-
-    mutateDirectoryPaginationResult(
-      {
-        ...directoryPaginationResult,
-        docs: newDocs.sort((a, b) => a.order - b.order),
-      },
-      false,
-    );
-  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -129,19 +67,17 @@ export const SidebarDirectoryList: VFC = () => {
 
   return (
     <>
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleOnDragEnd}>
-        <div className="px-3">
-          <SortableContext items={items} strategy={verticalListSortingStrategy}>
-            {directoryPaginationResult.docs.map((directory, index) => {
-              return (
-                <div key={directory._id} className="my-1">
-                  <DirectorySidebarListItem directory={directory} index={index} />
-                </div>
-              );
-            })}
-          </SortableContext>
-        </div>
-      </DndContext>
+      <div className="px-3">
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          {directoryPaginationResult.docs.map((directory, index) => {
+            return (
+              <div key={directory._id} className="my-1">
+                <DirectorySidebarListItem directory={directory} index={index} />
+              </div>
+            );
+          })}
+        </SortableContext>
+      </div>
       {directoryPaginationResult.docs.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
