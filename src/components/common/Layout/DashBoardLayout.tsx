@@ -3,6 +3,8 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { closestCenter, DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
@@ -33,6 +35,22 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   const { data: currentUser } = useCurrentUser();
 
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 2,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleOnDragEnd = ({ active, over }: DragEndEvent) => {
+    console.log(active);
+    console.log(over);
+  };
+
   useEffect(() => {
     if (router.pathname !== DIRECTORY_ID_URL) {
       mutateDirectoryId(null);
@@ -52,10 +70,12 @@ export const DashBoardLayout: FC = ({ children }) => {
       <StyledBorder />
       <FooterSubnavBar />
       <StyledDiv className="row mx-auto overflow-hidden">
-        <div className="d-none d-md-block col-md-3">
-          <Sidebar />
-        </div>
-        <div className="col-12 col-md-8 pt-3">{children}</div>
+        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleOnDragEnd}>
+          <div className="d-none d-md-block col-md-3">
+            <Sidebar />
+          </div>
+          <div className="col-12 col-md-8 pt-3">{children}</div>
+        </DndContext>
         {session && (
           <>
             <DirectoryCreateModal />

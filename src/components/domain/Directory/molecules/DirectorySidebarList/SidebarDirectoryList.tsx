@@ -36,7 +36,7 @@ export const SidebarDirectoryList: VFC = () => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 5,
+        distance: 2,
       },
     }),
     useSensor(KeyboardSensor, {
