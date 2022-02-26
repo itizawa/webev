@@ -28,7 +28,16 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
 }
 
 <div
+  aria-describedby=""
+  aria-roledescription="draggable"
   className="c0 row py-2"
+  role="button"
+  style={
+    Object {
+      "transform": undefined,
+    }
+  }
+  tabIndex={0}
 >
   <div
     className="col-3 col-md-2 p-1 p-md-2"
@@ -344,7 +353,16 @@ exports[`PageListItem 1`] = `
 }
 
 <div
+  aria-describedby=""
+  aria-roledescription="draggable"
   className="c0 row py-2"
+  role="button"
+  style={
+    Object {
+      "transform": undefined,
+    }
+  }
+  tabIndex={0}
 >
   <div
     className="col-3 col-md-2 p-1 p-md-2"
