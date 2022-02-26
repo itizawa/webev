@@ -5,19 +5,22 @@ import styled from 'styled-components';
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Page } from '~/domains/Page';
+
 import { useLocale } from '~/hooks/useLocale';
+import { useModal } from '~/hooks/useModal';
+
 import { toastSuccess } from '~/utils/toastr';
 import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   page: Page;
-  onClickDeleteButton: () => void;
   onClickFetchButton: () => void;
   direction?: 'up' | 'down' | 'start' | 'end';
 };
 
-export const PageManageDropdown: VFC<Props> = ({ page, onClickDeleteButton, onClickFetchButton, direction = 'start' }) => {
+export const PageManageDropdown: VFC<Props> = ({ page, onClickFetchButton, direction = 'start' }) => {
   const { t } = useLocale();
+  const { handleModal } = useModal();
 
   /**
    * Twitter の共有
@@ -62,7 +65,7 @@ export const PageManageDropdown: VFC<Props> = ({ page, onClickDeleteButton, onCl
             <span className="ms-2">{t.copy_url}</span>
           </DropdownItem>
         </CopyToClipboard>
-        <DropdownItem tag="button" onClick={onClickDeleteButton}>
+        <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
