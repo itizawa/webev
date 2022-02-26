@@ -30,6 +30,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError } from '~/utils/toastr';
 import { Directory } from '~/domains/Directory';
 import { useDirectoryPaginationResult } from '~/stores/directory';
+import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -39,6 +40,7 @@ export const DashBoardLayout: FC = ({ children }) => {
 
   const { data: currentUser } = useCurrentUser();
   const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
+  const { addPageToDirectory } = useAddPageToDirectory();
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -58,13 +60,15 @@ export const DashBoardLayout: FC = ({ children }) => {
     if (!over) {
       return;
     }
-    console.log(active);
-    console.log(over);
+    if (!directoryPaginationResult.docs.map((directory) => directory._id).includes(active.id)) {
+      addPageToDirectory(active.id, over.id);
+      return;
+    }
     if (over.id === active.id) {
       return;
     }
-    const destOrder = over.data.current?.sortable.index + 1;
-    const sourceOrder = active.data.current?.sortable.index + 1;
+    const destOrder = directoryPaginationResult.docs.map((directory) => directory._id).indexOf(over.id) + 1;
+    const sourceOrder = directoryPaginationResult.docs.map((directory) => directory._id).indexOf(active.id) + 1;
 
     try {
       restClient.apiPut(`/directories/${active.id}/order`, { order: destOrder });
