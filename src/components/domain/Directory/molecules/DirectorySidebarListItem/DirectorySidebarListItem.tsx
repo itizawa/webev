@@ -27,7 +27,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+  const { attributes, listeners, setNodeRef, transform, transition, isOver } = useSortable({
     id: directory._id,
   });
   const style = {
@@ -84,6 +84,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
         className="text-white text-left rounded d-flex"
         onClick={() => router.push(`/directory/${directory._id}`)}
         isActive={isActive}
+        isOver={isOver}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
         ref={setNodeRef}
@@ -172,7 +173,7 @@ const StyledEmojiWrapper = styled.span`
   }
 `;
 
-const StyledDiv = styled.div<{ isActive?: boolean }>`
+const StyledDiv = styled.div<{ isActive?: boolean; isOver: boolean }>`
   align-items: center;
   /* ズレをなくすための調整 */
   height: 24px;
@@ -198,4 +199,9 @@ const StyledDiv = styled.div<{ isActive?: boolean }>`
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
   }`}
+  ${({ isOver }) =>
+    isOver &&
+    `
+  background-color: rgba(111, 66, 193, 0.2);
+    transition: all 300ms linear;`}
 `;
