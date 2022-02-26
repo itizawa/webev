@@ -28,10 +28,9 @@ const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
-  index: number;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, index }) => {
+export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
@@ -41,9 +40,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton, index }) =
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: page._id,
-    data: {
-      index,
-    },
   });
   const style = {
     transform: CSS.Translate.toString(transform),

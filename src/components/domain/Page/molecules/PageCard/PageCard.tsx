@@ -28,10 +28,9 @@ const MAX_WORD_COUNT_OF_BODY = 96;
 type Props = {
   page: Page;
   isHideArchiveButton?: boolean;
-  index: number;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, index }) => {
+export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
@@ -42,9 +41,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton, index }) => {
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: page._id,
-    data: {
-      index,
-    },
   });
   const style = {
     transform: CSS.Translate.toString(transform),
