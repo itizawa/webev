@@ -5,9 +5,7 @@ exports[`PageCountupCard 1`] = `
   className="card bg-dark border border-warning text-white p-3 text-center"
 >
   <h2>
-    <span>
-      
-    </span>
+    <span />
      Pages
   </h2>
   <p>

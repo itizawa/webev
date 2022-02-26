@@ -160,7 +160,7 @@ const Page: WebevNextPage = () => {
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
           <div className="ms-2">
-            <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
+            <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
           </div>
         </div>
         <h1 className="text-center my-3">{page.title}</h1>

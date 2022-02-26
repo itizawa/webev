@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PageList with isHideArchiveButton is true 1`] = `
-.c2 {
-  z-index: 1300;
-}
-
 .c1 {
   position: relative;
   width: 100%;
@@ -21,6 +17,10 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+.c2 {
+  z-index: 1300;
 }
 
 .c0 {
@@ -215,34 +215,6 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
               className="ms-2"
             >
               共有
-            </span>
-          </button>
-          <button
-            className="dropdown-item"
-            onClick={[Function]}
-            role="menuitem"
-            tabIndex="0"
-            type="button"
-          >
-            <svg
-              className="align-text-bottom text-white"
-              fill="currentColor"
-              height={18}
-              viewBox="0 0 16 16"
-              width={18}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m11.798 8.271-3.182 1.97c-.27.166-.616-.036-.616-.372V9.1s-2.571-.3-4 2.4c.571-4.8 3.143-4.8 4-4.8v-.769c0-.336.346-.538.616-.371l3.182 1.969c.27.166.27.576 0 .742z"
-              />
-              <path
-                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm.694 2.09A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09l-.636 7a1 1 0 0 1-.996.91H2.826a1 1 0 0 1-.995-.91l-.637-7zM6.172 2a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"
-              />
-            </svg>
-            <span
-              className="ms-2"
-            >
-              ディレクトリからページを除外する
             </span>
           </button>
         </div>
@@ -292,10 +264,6 @@ exports[`PageList with isHideArchiveButton is true 1`] = `
 `;
 
 exports[`PageListItem 1`] = `
-.c2 {
-  z-index: 1300;
-}
-
 .c1 {
   position: relative;
   width: 100%;
@@ -312,6 +280,10 @@ exports[`PageListItem 1`] = `
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+.c2 {
+  z-index: 1300;
 }
 
 .c0 {
@@ -506,34 +478,6 @@ exports[`PageListItem 1`] = `
               className="ms-2"
             >
               共有
-            </span>
-          </button>
-          <button
-            className="dropdown-item"
-            onClick={[Function]}
-            role="menuitem"
-            tabIndex="0"
-            type="button"
-          >
-            <svg
-              className="align-text-bottom text-white"
-              fill="currentColor"
-              height={18}
-              viewBox="0 0 16 16"
-              width={18}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m11.798 8.271-3.182 1.97c-.27.166-.616-.036-.616-.372V9.1s-2.571-.3-4 2.4c.571-4.8 3.143-4.8 4-4.8v-.769c0-.336.346-.538.616-.371l3.182 1.969c.27.166.27.576 0 .742z"
-              />
-              <path
-                d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm.694 2.09A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09l-.636 7a1 1 0 0 1-.996.91H2.826a1 1 0 0 1-.995-.91l-.637-7zM6.172 2a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"
-              />
-            </svg>
-            <span
-              className="ms-2"
-            >
-              ディレクトリからページを除外する
             </span>
           </button>
         </div>

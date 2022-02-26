@@ -102,7 +102,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
+          <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
         </div>
         <span className="small p-1 d-none d-sm-block">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
