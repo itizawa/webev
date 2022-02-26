@@ -15,7 +15,20 @@ type Props = {
 } & ComponentProps<typeof Icon>;
 
 export const IconButton: VFC<Props> = (props) => {
-  const { width, height, isActive, disabled, isRemovePadding = false, icon, text, color, activeColor, buttonColor, buttonSize, onClickButton } = props;
+  const {
+    width,
+    height,
+    isActive,
+    disabled,
+    isRemovePadding = false,
+    icon,
+    text,
+    color,
+    activeColor,
+    buttonColor,
+    buttonSize,
+    onClickButton,
+  } = props;
   const textColor = isActive ? activeColor : color;
 
   const handleClickButton = (e: MouseEvent<HTMLButtonElement>) => {

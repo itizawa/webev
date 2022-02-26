@@ -70,13 +70,24 @@ export const PersonalDropdown: VFC = () => {
         <DropdownItem divider />
         <div className="px-3">
           <div className="form-check form-switch">
-            <input className="form-check-input" type="checkbox" id="isEnableReadFromClipboard" checked={isEnableReadFromClipboard} onChange={handleSwitch} />
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="isEnableReadFromClipboard"
+              checked={isEnableReadFromClipboard}
+              onChange={handleSwitch}
+            />
             <label className="form-check-label" htmlFor="isEnableReadFromClipboard">
               {t.automatic_acquisition}
             </label>
           </div>
           <div className="text-center">
-            <a className="text-info small webev-anchor" href="https://itizawa-tech.growi.cloud/6055a19f2c62a800488491b4" target="blank" rel="noopener noreferrer">
+            <a
+              className="text-info small webev-anchor"
+              href="https://itizawa-tech.growi.cloud/6055a19f2c62a800488491b4"
+              target="blank"
+              rel="noopener noreferrer"
+            >
               {t.function_details}
             </a>
           </div>

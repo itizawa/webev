@@ -37,7 +37,8 @@ export class PageRepository implements IPageRepository {
   constructor() {
     PageSchema.plugin(mongoosePaginate);
 
-    this.PageModel = (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
+    this.PageModel =
+      (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
   }
 
   private convert(page: Page): Page {

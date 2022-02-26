@@ -39,7 +39,9 @@ const Index: WebevNextPage = () => {
             <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
-        {paginationResult && <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />}
+        {paginationResult && (
+          <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+        )}
       </LoginRequiredWrapper>
     </>
   );

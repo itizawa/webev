@@ -22,7 +22,10 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const [searchKeyWord, setSearchKeyWord] = useState('');
-  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, isRoot: true });
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({
+    searchKeyWord,
+    isRoot: true,
+  });
   const { createDirectory } = useCreateDirectory();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -80,7 +83,14 @@ const Page: WebevNextPage = () => {
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="form-control bg-white"
+                      placeholder="...name"
+                      autoFocus
+                    />
                   </form>
                 ) : (
                   <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />

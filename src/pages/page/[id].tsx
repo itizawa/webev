@@ -143,7 +143,15 @@ const Page: WebevNextPage = () => {
                     onClickButton={handleClickPlayButton}
                   />
                 )}
-                <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={handleClickStopButton} />
+                <IconButton
+                  icon="STOP_CIRCLE"
+                  color="WHITE"
+                  activeColor="SUCCESS"
+                  width={24}
+                  height={24}
+                  isRemovePadding
+                  onClickButton={handleClickStopButton}
+                />
               </>
             )}
           </div>

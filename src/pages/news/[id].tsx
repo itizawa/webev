@@ -34,7 +34,11 @@ const Page: WebevNextPage<Props> = (props) => {
 
   return (
     <>
-      <WebevOgpHead title={news.title} description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`} image={news.thumbnail?.url} />
+      <WebevOgpHead
+        title={news.title}
+        description={`${news.body.replace(/(<([^>]+)>)/gi, '').substr(0, 90)}...`}
+        image={news.thumbnail?.url}
+      />
       <button className="btn btn-indigo btn-sm text-white mt-2" onClick={handleClickReturnNewsListButton}>{`< ${t.return_news_list}`}</button>
       <h1 className="text-center my-3">{news.title}</h1>
       <p className="text-center">記事投稿日：{format(new Date(news.publishedAt), 'yyyy/MM/dd hh:ss')}</p>

@@ -6,7 +6,9 @@ const mockPage = generateMockPage();
 
 test('PageManageDropdown isHideArchiveButton is true', () => {
   const tree = renderer
-    .create(<PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />)
+    .create(
+      <PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />,
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -14,7 +16,9 @@ test('PageManageDropdown isHideArchiveButton is true', () => {
 
 test('PageManageDropdown directoryId is undefined', () => {
   const tree = renderer
-    .create(<PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />)
+    .create(
+      <PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />,
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -27,7 +31,9 @@ global.navigator = {
 
 test('PageManageDropdown directoryId is undefined', () => {
   const tree = renderer
-    .create(<PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />)
+    .create(
+      <PageManageDropdown page={mockPage} onClickDeleteButton={() => console.log('test')} onClickFetchButton={() => console.log('test')} />,
+    )
     .toJSON();
 
   expect(tree).toMatchSnapshot();

@@ -102,7 +102,9 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
           </p>
           <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
         </div>
-        <p className="small mt-2 p-1">{description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}</p>
+        <p className="small mt-2 p-1">
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+        </p>
         <div className="d-flex align-items-center mt-auto justify-content-between">
           <small className="text-truncate me-auto">
             {favicon != null && (

@@ -54,11 +54,35 @@ export const TopSubnavBar: VFC<Props> = ({
           {speech.isEnabled && page.body && (
             <>
               {isReading ? (
-                <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPauseButton} />
+                <IconButton
+                  icon="PAUSE_CIRCLE"
+                  color="WHITE"
+                  activeColor="SUCCESS"
+                  width={24}
+                  height={24}
+                  isRemovePadding
+                  onClickButton={onClickPauseButton}
+                />
               ) : (
-                <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPlayButton} />
+                <IconButton
+                  icon="PLAY_CIRCLE"
+                  color="WHITE"
+                  activeColor="SUCCESS"
+                  width={24}
+                  height={24}
+                  isRemovePadding
+                  onClickButton={onClickPlayButton}
+                />
               )}
-              <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickStopButton} />
+              <IconButton
+                icon="STOP_CIRCLE"
+                color="WHITE"
+                activeColor="SUCCESS"
+                width={24}
+                height={24}
+                isRemovePadding
+                onClickButton={onClickStopButton}
+              />
             </>
           )}
         </div>

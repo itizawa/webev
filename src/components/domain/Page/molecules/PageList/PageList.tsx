@@ -49,7 +49,12 @@ export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount, isHi
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
+          <PaginationWrapper
+            pagingLimit={pagingLimit}
+            totalItemsCount={totalItemsCount}
+            activePage={activePage}
+            mutateActivePage={handleMutateActivePage}
+          />
         </div>
       )}
     </div>

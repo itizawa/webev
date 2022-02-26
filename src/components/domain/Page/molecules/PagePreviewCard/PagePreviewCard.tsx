@@ -38,7 +38,11 @@ export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearBut
       />
       <StyledDivRight className="px-3 py-2 d-flex flex-column position-relative">
         {!!onClickClearButton && (
-          <StyledButton type="button" className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill" onClick={handleClickClearButton}>
+          <StyledButton
+            type="button"
+            className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill"
+            onClick={handleClickClearButton}
+          >
             ×
           </StyledButton>
         )}

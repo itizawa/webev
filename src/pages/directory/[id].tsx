@@ -8,7 +8,13 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
+import {
+  useAllDirectories,
+  useAncestorDirectories,
+  useDirectoryChildren,
+  useDirectoryInformation,
+  useDirectoryPaginationResult,
+} from '~/stores/directory';
 import { useDirectoryId, usePageListSWR, useSearchKeyWord } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
@@ -257,7 +263,12 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         {paginationResult != null && (
-          <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
+          <PageList
+            pages={paginationResult.docs}
+            pagingLimit={paginationResult.limit}
+            totalItemsCount={paginationResult.totalDocs}
+            isHideArchiveButton
+          />
         )}
       </LoginRequiredWrapper>
     </>

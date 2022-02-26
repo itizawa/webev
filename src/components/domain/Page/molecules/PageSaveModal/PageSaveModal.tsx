@@ -58,7 +58,14 @@ export const PageSaveModal: VFC = () => {
         </div>
         <div className="col-12 col-md-9">
           <form className="input-group my-2" onSubmit={handleSubmit}>
-            <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control bg-white" placeholder="...url" autoFocus />
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="form-control bg-white"
+              placeholder="...url"
+              autoFocus
+            />
             <button className="btn btn-success" type="submit" disabled={!isValidUrl(url)}>
               {t.save}
             </button>
