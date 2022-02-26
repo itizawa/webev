@@ -15,7 +15,6 @@ import { Footer } from '~/components/common/Parts/Footer';
 // import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
 // import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 import { PageAddToDirectoryModal } from '~/components/domain/Page/molecules/PageAddToDirectoryModal';
-import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
@@ -60,7 +59,6 @@ export const DashBoardLayout: FC = ({ children }) => {
             {/* <DirectoryCreateModal />
             <DirectoryDeleteModal />
             <DirectoryRenameModal /> */}
-            <PageDeleteModal />
             <PageAddToDirectoryModal />
             <PageSaveModal />
           </>

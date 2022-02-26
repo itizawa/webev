@@ -10,7 +10,12 @@ import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
-export const PageDeleteModal: VFC = () => {
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
+
+export const DeletePageModal: VFC<Props> = ({ open, onClose }) => {
   const { t } = useLocale();
 
   const { data: pageForDelete, mutate: mutatePageForDelete } = usePageForDelete();
@@ -27,16 +32,12 @@ export const PageDeleteModal: VFC = () => {
     }
   };
 
-  const closeDeleteModal = async () => {
-    mutatePageForDelete(null);
-  };
-
   return (
-    <Modal isOpen={pageForDelete != null} toggle={closeDeleteModal} title={t.delete_page}>
+    <Modal isOpen={open} toggle={onClose} title={t.delete_page}>
       <FixedImage imageUrl={pageForDelete?.image} />
       <h5 className="card-title my-3">{pageForDelete?.title}</h5>
       <div className="d-flex justify-content-evenly">
-        <button className="btn btn-secondary" onClick={closeDeleteModal}>
+        <button className="btn btn-secondary" onClick={onClose}>
           {t.cancel}
         </button>
         <button className="btn btn-danger" onClick={deletePage}>
