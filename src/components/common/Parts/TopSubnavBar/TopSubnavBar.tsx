@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useHooks } from './hooks';
 
 import { Page } from '~/domains/Page';
-import { usePageForDelete } from '~/stores/modal';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
@@ -35,12 +34,6 @@ export const TopSubnavBar: VFC<Props> = ({
 }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
-
-  const { mutate: mutatePageForDelete } = usePageForDelete();
-
-  const openDeleteModal = async () => {
-    mutatePageForDelete(page);
-  };
 
   return (
     <StyledDiv $isShow={isShowScroll} className="fixed-top">

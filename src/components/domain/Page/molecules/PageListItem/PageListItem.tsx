@@ -12,7 +12,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page } from '~/domains/Page';
 
-import { usePageForDelete } from '~/stores/modal';
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { usePageListSWR } from '~/stores/page';
@@ -33,9 +32,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { data: pageList, mutate: mutatePageList } = usePageListSWR();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
-
-  const { mutate: mutatePageForDelete } = usePageForDelete();
-  // const { data: allDirectories } = useAllDirectories();
 
   const handleSwitchArchive = async () => {
     const bool = true;
@@ -58,10 +54,6 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  };
-
-  const openDeleteModal = async () => {
-    mutatePageForDelete(page);
   };
 
   const handleFetchButton = async () => {

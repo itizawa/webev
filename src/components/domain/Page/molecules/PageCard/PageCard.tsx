@@ -12,7 +12,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Page } from '~/domains/Page';
 
 import { usePageListSWR } from '~/stores/page';
-import { usePageForDelete } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
@@ -33,9 +32,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
-
-  const { mutate: mutatePageForDelete } = usePageForDelete();
-  // const { data: allDirectories } = useAllDirectories();
 
   const handleSwitchArchive = async () => {
     const bool = true;
@@ -58,10 +54,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  };
-
-  const openDeleteModal = async () => {
-    mutatePageForDelete(page);
   };
 
   const handleFetchButton = async () => {
@@ -100,7 +92,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown page={page} onClickDeleteButton={openDeleteModal} onClickFetchButton={handleFetchButton} />
+          <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
         </div>
         <p className="small mt-2 p-1">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}

@@ -5,7 +5,6 @@ import { Oval } from 'react-loader-spinner';
 import styled from 'styled-components';
 
 import { usePageByPageId } from '~/stores/page';
-import { usePageForDelete } from '~/stores/modal';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -30,7 +29,6 @@ const Page: WebevNextPage = () => {
 
   const { t, locale } = useLocale();
   const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
-  const { mutate: mutatePageForDelete } = usePageForDelete();
   const { isLoading, switchArchive } = useSwitchArchive();
 
   const [isReading, setIsReading] = useState(false);
@@ -49,10 +47,6 @@ const Page: WebevNextPage = () => {
       </div>
     );
   }
-
-  const openDeleteModal = async () => {
-    mutatePageForDelete(page);
-  };
 
   const handleClickSwitchArchiveButton = async () => {
     try {
