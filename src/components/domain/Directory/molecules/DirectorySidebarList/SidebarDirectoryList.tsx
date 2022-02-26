@@ -26,7 +26,7 @@ export const SidebarDirectoryList: VFC = () => {
 
   useEffect(() => {
     if (directoryPaginationResult) {
-      setItems(directoryPaginationResult.docs.map((directory) => directory._id));
+      setItems(directoryPaginationResult.docs.map((_, index) => index.toString()));
     }
   }, [directoryPaginationResult]);
 

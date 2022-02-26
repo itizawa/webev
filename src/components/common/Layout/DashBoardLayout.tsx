@@ -60,18 +60,18 @@ export const DashBoardLayout: FC = ({ children }) => {
     if (!over) {
       return;
     }
-    if (!directoryPaginationResult.docs.map((directory) => directory._id).includes(active.id)) {
-      addPageToDirectory(active.id, over.id);
-      return;
-    }
     if (over.id === active.id) {
       return;
     }
-    const destOrder = directoryPaginationResult.docs.map((directory) => directory._id).indexOf(over.id) + 1;
-    const sourceOrder = directoryPaginationResult.docs.map((directory) => directory._id).indexOf(active.id) + 1;
+    if (!directoryPaginationResult.docs.map((_, index) => index.toString()).includes(active.id)) {
+      addPageToDirectory(active.id, directoryPaginationResult.docs[Number(over.id)]._id);
+      return;
+    }
+    const destOrder = Number(over.id) + 1;
+    const sourceOrder = Number(active.id) + 1;
 
     try {
-      restClient.apiPut(`/directories/${active.id}/order`, { order: destOrder });
+      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
