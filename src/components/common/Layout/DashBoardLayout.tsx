@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { closestCenter, DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
@@ -123,7 +123,7 @@ export const DashBoardLayout: FC = ({ children }) => {
       <StyledBorder />
       <FooterSubnavBar />
       <StyledDiv className="row mx-auto overflow-hidden">
-        <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleOnDragEnd}>
+        <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
           <div className="d-none d-md-block col-md-3">
             <Sidebar />
           </div>
