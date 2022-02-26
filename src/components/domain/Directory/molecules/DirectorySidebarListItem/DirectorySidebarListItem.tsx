@@ -22,13 +22,13 @@ type Props = {
   index: number;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
-    id: index.toString(),
+    id: directory._id,
   });
   const style = {
     transform: CSS.Transform.toString(transform),

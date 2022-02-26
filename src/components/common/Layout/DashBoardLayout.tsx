@@ -60,15 +60,14 @@ export const DashBoardLayout: FC = ({ children }) => {
     }
     console.log(active);
     console.log(over);
-    const destOrder = Number(over.id) + 1;
-    const sourceOrder = Number(active.id) + 1;
-
     if (over.id === active.id) {
       return;
     }
+    const destOrder = over.data.current?.sortable.index + 1;
+    const sourceOrder = active.data.current?.sortable.index + 1;
 
     try {
-      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
+      restClient.apiPut(`/directories/${active.id}/order`, { order: destOrder });
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
