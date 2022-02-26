@@ -26,6 +26,10 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/Tu
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { restClient } from '~/utils/rest-client';
+import { toastError } from '~/utils/toastr';
+import { Directory } from '~/domains/Directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -34,6 +38,7 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { data: currentUser } = useCurrentUser();
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -47,8 +52,53 @@ export const DashBoardLayout: FC = ({ children }) => {
   );
 
   const handleOnDragEnd = ({ active, over }: DragEndEvent) => {
+    if (!directoryPaginationResult) {
+      return;
+    }
+    if (!over) {
+      return;
+    }
     console.log(active);
     console.log(over);
+    const destOrder = Number(over.id) + 1;
+    const sourceOrder = Number(active.id) + 1;
+
+    if (over.id === active.id) {
+      return;
+    }
+
+    try {
+      restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(active.id)]._id}/order`, { order: destOrder });
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+    const { docs } = directoryPaginationResult;
+    const isUp = destOrder > sourceOrder;
+
+    let targetDocs: Directory[] = [];
+    if (isUp) {
+      targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+    } else {
+      targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+    }
+
+    const newDocs: Directory[] = [
+      ...docs.filter((v) => !targetDocs.includes(v)),
+      ...targetDocs.map((v) => {
+        if (v.order === sourceOrder) {
+          return { ...v, order: destOrder };
+        }
+        return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+      }),
+    ];
+
+    mutateDirectoryPaginationResult(
+      {
+        ...directoryPaginationResult,
+        docs: newDocs.sort((a, b) => a.order - b.order),
+      },
+      false,
+    );
   };
 
   useEffect(() => {

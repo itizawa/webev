@@ -8,7 +8,6 @@ import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { useDroppable } from '@dnd-kit/core';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -28,13 +27,9 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const { setNodeRef: dropSetNodeRef } = useDroppable({
-    id: directory._id,
-    data: {
-      index,
-    },
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: index.toString(),
   });
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: index.toString() });
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -85,70 +80,68 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
 
   return (
     <>
-      <div ref={dropSetNodeRef}>
-        <StyledDiv
-          className="text-white text-left rounded d-flex"
-          onClick={() => router.push(`/directory/${directory._id}`)}
-          isActive={isActive}
-          onMouseEnter={() => setIsHoverDirectoryItem(true)}
-          onMouseLeave={() => setIsHoverDirectoryItem(false)}
-          ref={setNodeRef}
-          style={style}
-          {...attributes}
-          {...listeners}
-        >
-          <div className="text-truncate">
-            {isHoverDirectoryItem && (
-              <>
-                {isOpen ? (
-                  <IconButton
-                    width={18}
-                    height={18}
-                    isActive={isActive}
-                    icon="CARET_DOWN"
-                    color="SECONDARY"
-                    activeColor="WHITE"
-                    onClickButton={handleToggleCollapse}
-                    isRemovePadding
-                  />
-                ) : (
-                  <IconButton
-                    width={18}
-                    height={18}
-                    isActive={isActive}
-                    icon="CARET_RIGHT"
-                    color="SECONDARY"
-                    activeColor="WHITE"
-                    onClickButton={handleToggleCollapse}
-                    isRemovePadding
-                  />
-                )}
-              </>
-            )}
-            {!isHoverDirectoryItem && (
-              <StyledEmojiWrapper className="px-2">
-                <Emoji emoji={directory?.emojiId || ''} size={18} />
-              </StyledEmojiWrapper>
-            )}
-            <span className="ms-2">{directory?.name}</span>
-          </div>
-          <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
-            <IconButton
-              width={18}
-              height={18}
-              isActive={isActive}
-              icon="ADD_TO_DIRECTORY"
-              color="WHITE"
-              activeColor="WHITE"
-              onClickButton={handleClickPencilIcon}
-              isRemovePadding
-            />
-          </div>
-          <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
-            {t.create_directory}
-          </UncontrolledTooltip>
-        </StyledDiv>
-      </div>
+      <StyledDiv
+        className="text-white text-left rounded d-flex"
+        onClick={() => router.push(`/directory/${directory._id}`)}
+        isActive={isActive}
+        onMouseEnter={() => setIsHoverDirectoryItem(true)}
+        onMouseLeave={() => setIsHoverDirectoryItem(false)}
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+      >
+        <div className="text-truncate">
+          {isHoverDirectoryItem && (
+            <>
+              {isOpen ? (
+                <IconButton
+                  width={18}
+                  height={18}
+                  isActive={isActive}
+                  icon="CARET_DOWN"
+                  color="SECONDARY"
+                  activeColor="WHITE"
+                  onClickButton={handleToggleCollapse}
+                  isRemovePadding
+                />
+              ) : (
+                <IconButton
+                  width={18}
+                  height={18}
+                  isActive={isActive}
+                  icon="CARET_RIGHT"
+                  color="SECONDARY"
+                  activeColor="WHITE"
+                  onClickButton={handleToggleCollapse}
+                  isRemovePadding
+                />
+              )}
+            </>
+          )}
+          {!isHoverDirectoryItem && (
+            <StyledEmojiWrapper className="px-2">
+              <Emoji emoji={directory?.emojiId || ''} size={18} />
+            </StyledEmojiWrapper>
+          )}
+          <span className="ms-2">{directory?.name}</span>
+        </div>
+        <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
+          <IconButton
+            width={18}
+            height={18}
+            isActive={isActive}
+            icon="ADD_TO_DIRECTORY"
+            color="WHITE"
+            activeColor="WHITE"
+            onClickButton={handleClickPencilIcon}
+            isRemovePadding
+          />
+        </div>
+        <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
+          {t.create_directory}
+        </UncontrolledTooltip>
+      </StyledDiv>
       <Collapse isOpen={isOpen}>
         <div className="ps-3 pt-1">
           {isCreatingNewDirectory && (
