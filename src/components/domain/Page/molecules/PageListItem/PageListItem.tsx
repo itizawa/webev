@@ -96,7 +96,7 @@ export const PageListItem: VFC<Props> = ({ page }) => {
           <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
         </div>
         <span className="small p-1 d-none d-sm-block">
-          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </span>
       </div>
       <div className="col-12 d-flex align-items-center my-1">

@@ -48,7 +48,7 @@ export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearBut
         )}
         <p className="small fw-bold text-break mb-0 webev-limit-2lines">{title || url}</p>
         <StyledDescription className="small text-truncate mb-0">
-          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </StyledDescription>
         <StyledUrl className="mb-0 align-items-middle text-truncate text-muted mt-auto">
           {favicon != null && (
