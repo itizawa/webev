@@ -8,21 +8,44 @@ import { restClient } from '~/utils/rest-client';
  */
 export const useSwitchArchive = (): {
   isLoading: boolean;
-  switchArchive: (pageId: string, bool: boolean) => Promise<Page>;
+  switchArchive: (pageId: string, bool: boolean) => Promise<void>;
 } => {
   const [isLoading, setIsLoading] = useState(false);
-  const { mutatePagePagination } = usePagePagination();
+  const { pagePagination, mutatePagePagination } = usePagePagination();
 
   const switchArchive = useCallback(
-    async (pageId: string, bool: boolean): Promise<Page> => {
+    async (pageId: string, bool: boolean): Promise<void> => {
       setIsLoading(true);
-      const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/archive`, { isArchive: bool }).finally(() => {
-        setIsLoading(false);
-      });
-      mutatePagePagination();
-      return data;
+
+      mutatePagePagination(
+        await restClient.apiPut<Page>(`/pages/${pageId}/archive`, { isArchive: bool }).then(() =>
+          pagePagination
+            ? {
+                ...pagePagination,
+                docs: pagePagination.docs.filter((page) => {
+                  return page._id !== pageId;
+                }),
+              }
+            : undefined,
+        ),
+        {
+          optimisticData: pagePagination
+            ? {
+                ...pagePagination,
+                docs: pagePagination.docs.filter((page) => {
+                  return page._id !== pageId;
+                }),
+              }
+            : undefined,
+          rollbackOnError: true,
+          revalidate: false,
+        },
+      );
+
+      setIsLoading(false);
+      return;
     },
-    [mutatePagePagination],
+    [mutatePagePagination, pagePagination],
   );
 
   return { isLoading, switchArchive };
