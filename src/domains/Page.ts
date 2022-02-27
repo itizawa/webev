@@ -11,6 +11,7 @@ export class Page {
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
+  archivedAt: Date;
   constructor(init: Page) {
     this._id = init._id;
     this.url = init.url;
@@ -24,5 +25,6 @@ export class Page {
     this.createdUser = init.createdUser;
     this.createdAt = init.createdAt;
     this.updatedAt = init.updatedAt;
+    this.archivedAt = init.archivedAt;
   }
 }

@@ -55,6 +55,7 @@ export class PageRepository implements IPageRepository {
       createdUser: page.createdUser.toString(),
       createdAt: page.createdAt,
       updatedAt: page.updatedAt,
+      archivedAt: page.archivedAt,
     });
   }
 
