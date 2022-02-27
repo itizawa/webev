@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -16,7 +16,10 @@ import { usePagePagination } from '~/hooks/Page';
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const { pagePagination } = usePagePagination();
+  const { pagePagination, setIsArchived } = usePagePagination();
+  useEffect(() => {
+    setIsArchived(true);
+  }, [setIsArchived]);
 
   return (
     <>
