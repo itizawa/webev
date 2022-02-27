@@ -15,15 +15,14 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const [searchKeyWord, setSearchKeyWord] = useState('');
+  // const [searchKeyWord, setSearchKeyWord] = useState('');
   const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({
-    searchKeyWord,
+    searchKeyWord: '',
     isRoot: true,
   });
   const { createDirectory } = useCreateDirectory();
@@ -63,7 +62,7 @@ const Page: WebevNextPage = () => {
       <LoginRequiredWrapper>
         <h1 className="mb-0">{t.directory}</h1>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
+          {/* <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} /> */}
         </div>
         {directoryPaginationResult == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
@@ -79,7 +78,7 @@ const Page: WebevNextPage = () => {
                 </div>
               ))}
             </div>
-            {directoryPaginationResult.docs.length < 10 && !searchKeyWord && (
+            {directoryPaginationResult.docs.length < 10 && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>
