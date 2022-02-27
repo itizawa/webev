@@ -1,8 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
+import { DndContext, DragEndEvent, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
@@ -24,6 +26,12 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/Tu
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { restClient } from '~/utils/rest-client';
+import { toastError } from '~/utils/toastr';
+import { Directory } from '~/domains/Directory';
+import { useDirectoryPaginationResult } from '~/stores/directory';
+import { useAddPageToDirectory } from '~/hooks/Page/useAddPageToDirectory';
+import { PaginationResult } from '~/libs/interfaces/paginationResult';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const [session] = useSession();
@@ -32,6 +40,89 @@ export const DashBoardLayout: FC = ({ children }) => {
   const { mutate: mutateDirectoryId } = useDirectoryId();
 
   const { data: currentUser } = useCurrentUser();
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
+  const { addPageToDirectory } = useAddPageToDirectory();
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 2,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
+  );
+
+  const handleSortDirectories = useCallback(
+    (overId: string, activeId: string, directoryPaginationResult: PaginationResult<Directory>) => {
+      const destOrder = Number(overId) + 1;
+      const sourceOrder = Number(activeId) + 1;
+
+      try {
+        restClient.apiPut(`/directories/${directoryPaginationResult.docs[Number(activeId)]._id}/order`, { order: destOrder });
+      } catch (err) {
+        if (err instanceof Error) toastError(err);
+      }
+      const { docs } = directoryPaginationResult;
+      const isUp = destOrder > sourceOrder;
+
+      let targetDocs: Directory[] = [];
+      if (isUp) {
+        targetDocs = docs.filter((v) => v.order >= sourceOrder && v.order <= destOrder);
+      } else {
+        targetDocs = docs.filter((v) => v.order <= sourceOrder && v.order >= destOrder);
+      }
+
+      const newDocs: Directory[] = [
+        ...docs.filter((v) => !targetDocs.includes(v)),
+        ...targetDocs.map((v) => {
+          if (v.order === sourceOrder) {
+            return { ...v, order: destOrder };
+          }
+          return { ...v, order: isUp ? v.order - 1 : v.order + 1 };
+        }),
+      ];
+
+      mutateDirectoryPaginationResult(
+        {
+          ...directoryPaginationResult,
+          docs: newDocs.sort((a, b) => a.order - b.order),
+        },
+        false,
+      );
+    },
+    [mutateDirectoryPaginationResult],
+  );
+
+  const handleAddPageToDirectory = useCallback(
+    (overId: string, activeId: string, directoryPaginationResult: PaginationResult<Directory>) => {
+      addPageToDirectory(activeId, directoryPaginationResult.docs[Number(overId)]._id);
+    },
+    [addPageToDirectory],
+  );
+
+  const handleOnDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (!directoryPaginationResult) {
+        return;
+      }
+      if (!over) {
+        return;
+      }
+      if (over.id === active.id) {
+        return;
+      }
+      // dragした要素がpageListItemかPageCardだった場合、pageをdirectoryに追加する
+      if (!directoryPaginationResult.docs.map((_, index) => index.toString()).includes(active.id)) {
+        handleAddPageToDirectory(over.id, active.id, directoryPaginationResult);
+        return;
+      }
+
+      handleSortDirectories(over.id, active.id, directoryPaginationResult);
+    },
+    [directoryPaginationResult, handleAddPageToDirectory, handleSortDirectories],
+  );
 
   useEffect(() => {
     if (router.pathname !== DIRECTORY_ID_URL) {
@@ -52,10 +143,12 @@ export const DashBoardLayout: FC = ({ children }) => {
       <StyledBorder />
       <FooterSubnavBar />
       <StyledDiv className="row mx-auto overflow-hidden">
-        <div className="d-none d-md-block col-md-3">
-          <Sidebar />
-        </div>
-        <div className="col-12 col-md-8 pt-3">{children}</div>
+        <DndContext sensors={sensors} onDragEnd={handleOnDragEnd}>
+          <div className="d-none d-md-block col-md-3">
+            <Sidebar />
+          </div>
+          <div className="col-12 col-md-8 pt-3">{children}</div>
+        </DndContext>
         {session && (
           <>
             <DirectoryCreateModal />

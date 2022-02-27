@@ -28,7 +28,16 @@ exports[`PageCard 1`] = `
 }
 
 <div
+  aria-describedby=""
+  aria-roledescription="draggable"
   className="c0 card border-0 shadow h-100 overflow-hidden"
+  role="button"
+  style={
+    Object {
+      "transform": undefined,
+    }
+  }
+  tabIndex={0}
 >
   <a>
     <div
@@ -335,7 +344,16 @@ exports[`PageCard with isHideArchiveButton is true 1`] = `
 }
 
 <div
+  aria-describedby=""
+  aria-roledescription="draggable"
   className="c0 card border-0 shadow h-100 overflow-hidden"
+  role="button"
+  style={
+    Object {
+      "transform": undefined,
+    }
+  }
+  tabIndex={0}
 >
   <a>
     <div

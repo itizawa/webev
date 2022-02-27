@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -36,6 +38,13 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
   const { removePageFromDirectory } = useRemovePageFromDirectory();
   const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
+
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: page._id,
+  });
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  };
 
   const { _id, url, siteName, image, favicon, title, description, createdAt, status } = page;
 
@@ -109,7 +118,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   };
 
   return (
-    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
+    <StyledCard className="card border-0 shadow h-100 overflow-hidden" ref={setNodeRef} style={style} {...listeners} {...attributes}>
       {page.body ? (
         <Link href={`/page/${page._id}`}>
           <a>
