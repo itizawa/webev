@@ -1,4 +1,4 @@
-import useSWR, { SWRResponse } from 'swr';
+import { SWRResponse } from 'swr';
 
 import { restClient } from '~/utils/rest-client';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
@@ -18,23 +18,6 @@ export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Pag
   return useAuthenticationSWR(`/pages/${pageId}`, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
-  });
-};
-
-export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
-  const activePage = 1;
-  const searchKeyWord = '';
-  const { data: directoryId } = useDirectoryId();
-  const { data: isSortCreatedAt = false } = useIsSortCreatedAt();
-
-  const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
-  const endpoint = `/pages/list?page=${activePage}&limit=${limit}&sort=${sort}${searchKeyWord ? `&q=${searchKeyWord}` : ``}${
-    directoryId ? `&directoryId=${directoryId}` : ``
-  }`;
-
-  return useSWR(endpoint, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: true,
   });
 };
 

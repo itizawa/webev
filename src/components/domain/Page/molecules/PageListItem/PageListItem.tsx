@@ -14,8 +14,8 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
+import { usePagePagination } from '~/hooks/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;
@@ -29,19 +29,19 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
-  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
+  const { pagePagination, mutatePagePagination } = usePagePagination();
 
-  const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
+  const { _id, url, siteName, image, favicon, title, description, createdAt, archivedAt } = page;
 
   const handleSwitchArchive = async () => {
-    const bool = true;
+    const bool = !archivedAt;
     try {
       await switchArchive(_id, bool);
-      if (pageList) {
-        mutatePageList(
+      if (pagePagination) {
+        mutatePagePagination(
           {
-            ...pageList,
-            docs: pageList.docs.filter((v) => v._id !== _id),
+            ...pagePagination,
+            docs: pagePagination.docs.filter((v) => v._id !== _id),
           },
           false,
         );
@@ -60,7 +60,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
     try {
       await restClient.apiPut(`/pages/${page._id}/ogp`);
       toastSuccess(t.toastr_success_fetch_page);
-      mutatePageList();
+      mutatePagePagination();
     } catch (error) {
       if (error instanceof Error) toastError(error);
     }

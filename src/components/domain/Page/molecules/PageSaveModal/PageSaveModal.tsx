@@ -6,11 +6,11 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
-import { usePageListSWR } from '~/stores/page';
 import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 import { isValidUrl } from '~/utils/isValidUrl';
+import { usePagePagination } from '~/hooks/Page';
 
 export const PageSaveModal: VFC = () => {
   const { t } = useLocale();
@@ -20,7 +20,7 @@ export const PageSaveModal: VFC = () => {
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
   const { data: socketId } = useSocketId();
 
-  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutatePagePagination } = usePagePagination();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const PageSaveModal: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url, socketId, directoryId: directoryForSavePage?._id });
       toastSuccess(t.toastr_save_url);
-      pageListMutate();
+      mutatePagePagination();
       closeModal();
     } catch (err) {
       if (err instanceof Error) toastError(err);

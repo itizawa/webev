@@ -15,7 +15,7 @@ import {
   useDirectoryInformation,
   useDirectoryPaginationResult,
 } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR } from '~/stores/page';
+import { useDirectoryId } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -40,6 +40,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
 import { openFileFolderEmoji } from '~/libs/constants/emoji';
 import { zIndex } from '~/libs/constants/zIndex';
+import { usePagePagination } from '~/hooks/Page';
 
 const emojiSize = 40;
 
@@ -60,7 +61,7 @@ const Page: WebevNextPage = () => {
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInformation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { data: paginationResult } = usePageListSWR();
+  const { pagePagination } = usePagePagination();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
@@ -256,16 +257,16 @@ const Page: WebevNextPage = () => {
           <SearchTextBox />
           {/* <SortButtonGroup /> */}
         </div>
-        {paginationResult == null && (
+        {pagePagination == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
             <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
-        {paginationResult != null && (
+        {pagePagination != null && (
           <PageList
-            pages={paginationResult.docs}
-            pagingLimit={paginationResult.limit}
-            totalItemsCount={paginationResult.totalDocs}
+            pages={pagePagination.docs}
+            pagingLimit={pagePagination.limit}
+            totalItemsCount={pagePagination.totalDocs}
             isHideArchiveButton
           />
         )}

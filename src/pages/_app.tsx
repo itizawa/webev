@@ -31,9 +31,9 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   return (
     <SessionProvider session={pageProps.session}>
       <SkeletonTheme baseColor="#213243" highlightColor="#444">
-        <ModalProvider>
-          <PagePaginationProvider>{getLayout(<Component {...pageProps} />)}</PagePaginationProvider>
-        </ModalProvider>
+        <PagePaginationProvider>
+          <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
+        </PagePaginationProvider>
       </SkeletonTheme>
     </SessionProvider>
   );

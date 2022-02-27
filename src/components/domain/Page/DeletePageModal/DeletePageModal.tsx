@@ -5,10 +5,9 @@ import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { usePageListSWR } from '~/stores/page';
-
 import { useLocale } from '~/hooks/useLocale';
 import { Page } from '~/domains/Page';
+import { usePagePagination } from '~/hooks/Page';
 
 type Props = {
   open: boolean;
@@ -19,13 +18,13 @@ type Props = {
 export const DeletePageModal: VFC<Props> = ({ open, onClose, page }) => {
   const { t } = useLocale();
 
-  const { mutate: pageListMutate } = usePageListSWR();
+  const { mutatePagePagination } = usePagePagination();
 
   const deletePage = async () => {
     try {
       await restClient.apiDelete(`/pages/${page._id}`);
       toastSuccess(t.toastr_delete_url);
-      pageListMutate();
+      mutatePagePagination();
       onClose();
     } catch (err) {
       if (err instanceof Error) toastError(err);
