@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -21,22 +20,18 @@ import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
-import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { usePagePagination } from '~/hooks/Page';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { mutate: mutateActivePage } = useActivePage();
-  const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { setActivePage } = usePagePagination();
 
   const { data: currentUser } = useCurrentUser();
 
   useEffect(() => {
-    if (router.pathname !== DIRECTORY_ID_URL) {
-      mutateDirectoryId(null);
-    }
-    mutateActivePage(1);
-  }, [mutateActivePage, mutateDirectoryId, router]);
+    setActivePage(1);
+  }, [setActivePage, router]);
 
   if (typeof window === 'undefined') {
     return null;

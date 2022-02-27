@@ -6,10 +6,6 @@ import { Page } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 import { useAuthenticationSWR } from '~/stores/use-authentication-swr';
 
-export const useActivePage = (initialData?: number): SWRResponse<number, Error> => {
-  return useStaticSWR('activePage', initialData);
-};
-
 export const useDirectoryId = (initialData?: string | null): SWRResponse<string | null, Error> => {
   return useStaticSWR('directoryId', initialData);
 };
@@ -30,7 +26,7 @@ export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Pag
 };
 
 export const usePageListSWR = (limit = 27): SWRResponse<PaginationResult<Page>, Error> => {
-  const { data: activePage = 1 } = useActivePage();
+  const activePage = 1;
   const { data: directoryId } = useDirectoryId();
   const { data: searchKeyWord } = useSearchKeyWord();
   const { data: isSortCreatedAt = false } = useIsSortCreatedAt();

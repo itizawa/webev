@@ -6,6 +6,7 @@ import { restClient } from '~/utils/rest-client';
 
 export const PagePaginationContext = createContext<{
   setSearchKeyword?: Dispatch<SetStateAction<string>>;
+  activePage: number;
   setActivePage?: Dispatch<SetStateAction<number>>;
   isSortCreatedAt: boolean;
   setIsSortCreatedAt?: Dispatch<SetStateAction<boolean>>;
@@ -13,6 +14,7 @@ export const PagePaginationContext = createContext<{
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
 }>({
   setSearchKeyword: undefined,
+  activePage: 1,
   setActivePage: undefined,
   isSortCreatedAt: false,
   setIsSortCreatedAt: undefined,
@@ -25,7 +27,7 @@ export const PagePaginationProvider: VFC<{
 }> = ({ children }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [activePage, setActivePage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(9);
   const [isSortCreatedAt, setIsSortCreatedAt] = useState(false);
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
@@ -38,7 +40,7 @@ export const PagePaginationProvider: VFC<{
 
   return (
     <PagePaginationContext.Provider
-      value={{ setSearchKeyword, setActivePage, isSortCreatedAt, setIsSortCreatedAt, pagePagination, mutatePagePagination }}
+      value={{ setSearchKeyword, activePage, setActivePage, isSortCreatedAt, setIsSortCreatedAt, pagePagination, mutatePagePagination }}
     >
       {children}
     </PagePaginationContext.Provider>
