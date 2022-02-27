@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { usePageByPageId } from '~/stores/page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastError } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -49,13 +49,8 @@ const Page: WebevNextPage = () => {
 
   const handleClickSwitchArchiveButton = async () => {
     try {
-      const data = await switchArchive(page._id, !false);
-      mutatePage(data, false);
-      if (data) {
-        toastSuccess(t.toastr_success_put_back);
-      } else {
-        toastSuccess(t.toastr_success_read);
-      }
+      await switchArchive(page._id, !false);
+      mutatePage();
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
