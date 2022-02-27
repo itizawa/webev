@@ -1,3 +1,4 @@
+import { FilterQuery } from 'mongoose';
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
 import { PageRepository } from '~/infrastructure/repositories/pageRepository';
@@ -18,12 +19,16 @@ const handler = nc()
   .use(loginRequired)
   .get(async (req: WebevApiRequest, res: NextApiResponse) => {
     const { user } = req;
-    const { sort, page = '1', limit = '10', q = '' } = req.query;
+    const { sort, page = '1', limit = '10', q = '', isArchived } = req.query;
 
-    const query: Partial<Page> & { $or?: Array<{ url?: RegExp; title?: RegExp; siteName?: RegExp; description?: RegExp }> } = {
+    const query: FilterQuery<Page> = {
       createdUser: user._id,
       isDeleted: false,
     };
+
+    if (isArchived) {
+      query.archivedAt = { $ne: undefined };
+    }
 
     if (q) {
       query.$or = [{ url: new RegExp(q) }, { title: new RegExp(q) }, { siteName: new RegExp(q) }, { description: new RegExp(q) }];
