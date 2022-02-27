@@ -15,7 +15,7 @@ export const Sidebar: VFC = () => {
   const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
     { text: t.home, url: '/home', icon: 'HOME' },
     { text: t.read, url: '/archived', icon: 'CHECK' },
-    { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
+    // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
   ];
 
   return (
