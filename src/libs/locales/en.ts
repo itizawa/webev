@@ -62,7 +62,6 @@ export const en = {
 
   no_description: 'no description',
 
-  automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
 
   delete_page: 'Delete Page',

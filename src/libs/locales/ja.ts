@@ -62,7 +62,6 @@ export const ja = {
 
   no_description: '説明なし',
 
-  automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
 
   delete_page: 'ページを削除します',
