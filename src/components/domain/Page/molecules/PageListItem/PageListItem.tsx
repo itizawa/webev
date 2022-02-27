@@ -14,7 +14,6 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { usePagePagination } from '~/hooks/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;
@@ -27,28 +26,13 @@ export const PageListItem: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
-  const { pagePagination, mutatePagePagination } = usePagePagination();
 
-  const { _id, url, siteName, image, favicon, title, description, createdAt, archivedAt } = page;
+  const { _id, url, siteName, image, favicon, title, description, updatedAt } = page;
 
   const handleSwitchArchive = async () => {
-    const bool = !archivedAt;
     try {
-      await switchArchive(_id, bool);
-      if (pagePagination) {
-        mutatePagePagination(
-          {
-            ...pagePagination,
-            docs: pagePagination.docs.filter((v) => v._id !== _id),
-          },
-          false,
-        );
-      }
-      if (bool) {
-        toastSuccess(t.toastr_success_read);
-      } else {
-        toastSuccess(t.toastr_success_put_back);
-      }
+      await switchArchive(_id, false);
+      toastSuccess(t.toastr_success_put_back);
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
@@ -89,7 +73,7 @@ export const PageListItem: VFC<Props> = ({ page }) => {
         </span>
       </div>
       <div className="col-12 d-flex align-items-center my-1">
-        <small className="me-3 text-truncate">{format(new Date(createdAt), 'yyyy/MM/dd')}</small>
+        <small className="me-3 text-truncate">{format(new Date(updatedAt), 'yyyy/MM/dd')}</small>
         {favicon != null && (
           <img
             className="me-1"
