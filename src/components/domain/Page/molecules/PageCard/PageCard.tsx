@@ -13,7 +13,6 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { restClient } from '~/utils/rest-client';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -43,15 +42,6 @@ export const PageCard: VFC<Props> = ({ page }) => {
     }
   };
 
-  const handleFetchButton = async () => {
-    try {
-      await restClient.apiPut(`/pages/${page._id}/ogp`);
-      toastSuccess(t.toastr_success_fetch_page);
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
   return (
     <StyledCard className="card border-0 shadow h-100 overflow-hidden">
       {page.body ? (
@@ -78,7 +68,7 @@ export const PageCard: VFC<Props> = ({ page }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
+          <PageManageDropdown page={page} />
         </div>
         <p className="small mt-2 p-1">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}

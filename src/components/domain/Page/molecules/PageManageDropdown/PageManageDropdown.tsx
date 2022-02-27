@@ -14,11 +14,10 @@ import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   page: Page;
-  onClickFetchButton: () => void;
   direction?: 'up' | 'down' | 'start' | 'end';
 };
 
-export const PageManageDropdown: VFC<Props> = ({ page, onClickFetchButton, direction = 'start' }) => {
+export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) => {
   const { t } = useLocale();
   const { handleModal } = useModal();
 
@@ -69,10 +68,11 @@ export const PageManageDropdown: VFC<Props> = ({ page, onClickFetchButton, direc
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
-        <DropdownItem tag="button" onClick={onClickFetchButton}>
+        {/* TODO: implement */}
+        {/* <DropdownItem tag="button" onClick={onClickFetchButton}>
           <Icon icon="ARROW_CLOCKWISE" color="WHITE" />
           <span className="ms-2">{t.fetch}</span>
-        </DropdownItem>
+        </DropdownItem> */}
         {canShareByNavigator ? (
           <DropdownItem tag="button" onClick={sharePageByNavigator}>
             <Icon icon="SHARE" color="WHITE" />

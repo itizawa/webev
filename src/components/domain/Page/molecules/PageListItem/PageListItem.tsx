@@ -14,7 +14,6 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { restClient } from '~/utils/rest-client';
 import { usePagePagination } from '~/hooks/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -55,16 +54,6 @@ export const PageListItem: VFC<Props> = ({ page }) => {
     }
   };
 
-  const handleFetchButton = async () => {
-    try {
-      await restClient.apiPut(`/pages/${page._id}/ogp`);
-      toastSuccess(t.toastr_success_fetch_page);
-      mutatePagePagination();
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
   return (
     <StyledRow className="row py-2">
       <div className="col-3 col-md-2 p-1 p-md-2">
@@ -93,7 +82,7 @@ export const PageListItem: VFC<Props> = ({ page }) => {
               </a>
             )}
           </p>
-          <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
+          <PageManageDropdown page={page} />
         </div>
         <span className="small p-1 d-none d-sm-block">
           {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
