@@ -26,7 +26,7 @@ const handler = nc()
       isDeleted: false,
     };
 
-    if (isArchived) {
+    if (isArchived === 'true') {
       query.archivedAt = { $ne: undefined };
     } else {
       query.archivedAt = null;
