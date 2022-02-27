@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useEffect, useState, VFC } from 'react';
 
 import { Modal } from '~/components/base/molecules/Modal';
+import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
 import { useSocketId } from '~/stores/contexts';
-import { usePageListSWR } from '~/stores/page';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -13,7 +13,7 @@ export const ShareLinkReceiverModal: VFC = () => {
   const { t } = useLocale();
 
   const { data: socketId } = useSocketId();
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutatePagePagination } = usePagePagination();
 
   const [title, setTitle] = useState<string | null>();
   const [url, setUrl] = useState<string | null>();
@@ -39,7 +39,7 @@ export const ShareLinkReceiverModal: VFC = () => {
       toastSuccess(t.toastr_save_url);
       setTitle(null);
       setUrl(null);
-      mutatePageList();
+      mutatePagePagination();
       router.push(router.pathname);
     } catch (err) {
       if (err instanceof Error) toastError(err);

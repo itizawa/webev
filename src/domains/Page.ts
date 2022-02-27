@@ -8,23 +8,23 @@ export class Page {
   body?: string;
   siteName: string;
   isDeleted: boolean;
-  directoryId?: string;
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
-  constructor({ _id, url, image, favicon, description, title, body, siteName, isDeleted, directoryId, createdUser, createdAt, updatedAt }: Page) {
-    this._id = _id;
-    this.url = url;
-    this.image = image;
-    this.favicon = favicon;
-    this.description = description;
-    this.title = title;
-    this.body = body;
-    this.siteName = siteName;
-    this.isDeleted = isDeleted;
-    this.directoryId = directoryId;
-    this.createdUser = createdUser;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  archivedAt?: Date | null;
+  constructor(init: Page) {
+    this._id = init._id;
+    this.url = init.url;
+    this.image = init.image;
+    this.favicon = init.favicon;
+    this.description = init.description;
+    this.title = init.title;
+    this.body = init.body;
+    this.siteName = init.siteName;
+    this.isDeleted = init.isDeleted;
+    this.createdUser = init.createdUser;
+    this.createdAt = init.createdAt;
+    this.updatedAt = init.updatedAt;
+    this.archivedAt = init.archivedAt;
   }
 }

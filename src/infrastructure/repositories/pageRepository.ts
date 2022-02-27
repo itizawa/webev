@@ -19,10 +19,6 @@ export const PageSchema: Schema = new Schema(
       type: Boolean,
       default: false,
     },
-    directoryId: {
-      type: Types.ObjectId,
-      default: null,
-    },
     createdUser: {
       type: Types.ObjectId,
       ref: 'User',
@@ -41,7 +37,8 @@ export class PageRepository implements IPageRepository {
   constructor() {
     PageSchema.plugin(mongoosePaginate);
 
-    this.PageModel = (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
+    this.PageModel =
+      (models.Page as PageRepository['PageModel']) || (model<Page & Document>('Page', PageSchema) as PageRepository['PageModel']);
   }
 
   private convert(page: Page): Page {
@@ -55,10 +52,10 @@ export class PageRepository implements IPageRepository {
       body: page.body,
       siteName: page.siteName,
       isDeleted: page.isDeleted,
-      directoryId: page.directoryId?.toString(),
       createdUser: page.createdUser.toString(),
       createdAt: page.createdAt,
       updatedAt: page.updatedAt,
+      archivedAt: page.archivedAt,
     });
   }
 
@@ -92,7 +89,7 @@ export class PageRepository implements IPageRepository {
     return this.convert(page);
   }
 
-  async update(id: string, newObject: Partial<Page>): Promise<Page | null> {
+  async update(id: Page['_id'], newObject: Partial<Page>): Promise<Page | null> {
     const page = await this.PageModel.findByIdAndUpdate(id, newObject, { new: true });
 
     if (!page) {

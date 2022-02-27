@@ -45,9 +45,8 @@ export const ja = {
   toastr_success_send_inquiry: '送信しました',
 
   home: 'ホーム',
-  read: '読んだ記事',
+  read: 'アーカイブ',
   directory: 'ディレクトリ',
-  news: 'ニュース',
   share: '共有',
   user: 'ユーザー',
   user_page: 'ユーザーページ',
@@ -57,18 +56,16 @@ export const ja = {
   return_news_list: 'ニュースリストに戻る',
 
   read_button: '読了',
-  return_button: '戻す',
+  return_button: 'ホームに戻す',
 
   child_directory: '子ディレクトリ',
 
   no_description: '説明なし',
 
-  automatic_acquisition: '自動取得',
   function_details: '機能の詳細',
 
   delete_page: 'ページを削除します',
   add_page: 'ページを追加します',
-  obtained_from_clipboard: 'クリップボードから取得しました',
 
   delete_directory: 'ディレクトリを削除します',
 

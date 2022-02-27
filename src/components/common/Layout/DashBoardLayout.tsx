@@ -3,7 +3,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-import { useActivePage, useDirectoryId } from '~/stores/page';
 import { useCurrentUser } from '~/stores/user';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -11,33 +10,27 @@ import { Sidebar } from '~/components/common/Sidebar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Parts/Footer';
 
-import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
-import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
-import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
-import { PageAddToDirectoryModal } from '~/components/domain/Page/molecules/PageAddToDirectoryModal';
-import { PageDeleteModal } from '~/components/domain/Page/molecules/PageDeleteModal';
+// import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
+// import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
+// import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
-import { DIRECTORY_ID_URL } from '~/libs/constants/urls';
+import { usePagePagination } from '~/hooks/Page';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { mutate: mutateActivePage } = useActivePage();
-  const { mutate: mutateDirectoryId } = useDirectoryId();
+  const { setActivePage } = usePagePagination();
 
   const { data: currentUser } = useCurrentUser();
 
   useEffect(() => {
-    if (router.pathname !== DIRECTORY_ID_URL) {
-      mutateDirectoryId(null);
-    }
-    mutateActivePage(1);
-  }, [mutateActivePage, mutateDirectoryId, router]);
+    setActivePage(1);
+  }, [setActivePage, router]);
 
   if (typeof window === 'undefined') {
     return null;
@@ -57,17 +50,18 @@ export const DashBoardLayout: FC = ({ children }) => {
         <div className="col-12 col-md-8 pt-3">{children}</div>
         {session && (
           <>
-            <DirectoryCreateModal />
+            {/* <DirectoryCreateModal />
             <DirectoryDeleteModal />
-            <DirectoryRenameModal />
-            <PageDeleteModal />
-            <PageAddToDirectoryModal />
+            <DirectoryRenameModal /> */}
             <PageSaveModal />
           </>
         )}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <ScrollTopButton />
+        {/* 横幅調整のためにdivでwrapしている */}
+        <div>
+          <ScrollTopButton />
+        </div>
       </StyledDiv>
       <Footer />
     </div>

@@ -8,10 +8,15 @@ import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from
 import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
-import { useAllDirectories, useAncestorDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, useSearchKeyWord } from '~/stores/page';
+import {
+  useAllDirectories,
+  useAncestorDirectories,
+  useDirectoryChildren,
+  useDirectoryInformation,
+  useDirectoryPaginationResult,
+} from '~/stores/directory';
+import { useDirectoryId } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
-import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -20,7 +25,7 @@ import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+// import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
@@ -34,6 +39,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
 import { openFileFolderEmoji } from '~/libs/constants/emoji';
 import { zIndex } from '~/libs/constants/zIndex';
+import { usePagePagination } from '~/hooks/Page';
 
 const emojiSize = 40;
 
@@ -48,17 +54,15 @@ const Page: WebevNextPage = () => {
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
-  const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
   const { data: directory, mutate: mutateDirectory } = useDirectoryInformation(id as string);
   const { data: ancestorDirectories } = useAncestorDirectories(id as string);
-  const { data: paginationResult } = usePageListSWR();
+  const { pagePagination } = usePagePagination();
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
@@ -196,7 +200,7 @@ const Page: WebevNextPage = () => {
                     icon="SAVE"
                     color="SECONDARY"
                     activeColor="WARNING"
-                    isActive={urlFromClipBoard != null}
+                    isActive
                     onClickButton={() => mutateDirectoryForSavePage(directory)}
                   />
                 </div>
@@ -248,16 +252,16 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
-          <SortButtonGroup />
+          <SearchTextBox />
+          {/* <SortButtonGroup /> */}
         </div>
-        {paginationResult == null && (
+        {pagePagination == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
             <Triangle color="#00BFFF" height={100} width={100} />
           </div>
         )}
-        {paginationResult != null && (
-          <PageList pages={paginationResult.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} isHideArchiveButton />
+        {pagePagination != null && (
+          <PageList pages={pagePagination.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
         )}
       </LoginRequiredWrapper>
     </>

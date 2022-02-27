@@ -45,9 +45,8 @@ export const en = {
   toastr_success_send_inquiry: 'Send Inquiry',
 
   home: 'Home',
-  read: 'Read',
+  read: 'Archived',
   directory: 'Directory',
-  news: 'News',
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
@@ -63,12 +62,10 @@ export const en = {
 
   no_description: 'no description',
 
-  automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
 
   delete_page: 'Delete Page',
   add_page: 'Add Page',
-  obtained_from_clipboard: 'Obtained from Clipboard',
 
   delete_directory: 'Delete Directory',
 

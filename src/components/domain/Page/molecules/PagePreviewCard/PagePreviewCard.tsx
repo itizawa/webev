@@ -38,13 +38,17 @@ export const PagePreviewCard: VFC<Props> = ({ page, onClickCard, onClickClearBut
       />
       <StyledDivRight className="px-3 py-2 d-flex flex-column position-relative">
         {!!onClickClearButton && (
-          <StyledButton type="button" className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill" onClick={handleClickClearButton}>
+          <StyledButton
+            type="button"
+            className="position-absolute top-0 end-0 btn btn-sm btn-danger btn-circle rounded-pill"
+            onClick={handleClickClearButton}
+          >
             ×
           </StyledButton>
         )}
         <p className="small fw-bold text-break mb-0 webev-limit-2lines">{title || url}</p>
         <StyledDescription className="small text-truncate mb-0">
-          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.substr(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
+          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
         </StyledDescription>
         <StyledUrl className="mb-0 align-items-middle text-truncate text-muted mt-auto">
           {favicon != null && (
