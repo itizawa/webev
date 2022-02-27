@@ -14,5 +14,6 @@ export const generateMockPage = (mock: Partial<Page> = {}): Page => {
     createdUser: mock.createdUser || 'mockCreatedUser',
     createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
     updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
+    archivedAt: mock.archivedAt || new Date('2020-01-01T00:00:00'),
   });
 };
