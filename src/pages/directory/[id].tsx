@@ -15,7 +15,7 @@ import {
   useDirectoryInformation,
   useDirectoryPaginationResult,
 } from '~/stores/directory';
-import { useDirectoryId, usePageListSWR, useSearchKeyWord } from '~/stores/page';
+import { useDirectoryId, usePageListSWR } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 import { useUrlFromClipBoard } from '~/stores/contexts';
 
@@ -26,7 +26,7 @@ import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+// import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
@@ -64,7 +64,6 @@ const Page: WebevNextPage = () => {
   const { data: childrenDirectoryTrees, mutate: mutateDirectoryChildren } = useDirectoryChildren(directory?._id);
   const { mutate: mutateAllDirectories } = useAllDirectories();
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
   const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
@@ -254,8 +253,8 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
-          <SortButtonGroup />
+          <SearchTextBox />
+          {/* <SortButtonGroup /> */}
         </div>
         {paginationResult == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
