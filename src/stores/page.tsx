@@ -10,10 +10,6 @@ export const useDirectoryId = (initialData?: string | null): SWRResponse<string 
   return useStaticSWR('directoryId', initialData);
 };
 
-export const useIsSortCreatedAt = (initialData?: boolean): SWRResponse<boolean, Error> => {
-  return useStaticSWR('isSortCreatedAt', initialData);
-};
-
 export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Page, Error> => {
   return useAuthenticationSWR(`/pages/${pageId}`, (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {
     revalidateOnFocus: false,

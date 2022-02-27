@@ -9,8 +9,8 @@ export const PagePaginationContext = createContext<{
   setSearchKeyword?: Dispatch<SetStateAction<string>>;
   activePage: number;
   setActivePage?: Dispatch<SetStateAction<number>>;
-  isSortCreatedAt: boolean;
-  setIsSortCreatedAt?: Dispatch<SetStateAction<boolean>>;
+  isSortUpdatedAt: boolean;
+  setIsSortUpdatedAt?: Dispatch<SetStateAction<boolean>>;
   setIsArchived?: Dispatch<SetStateAction<boolean>>;
   pagePagination?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
@@ -18,8 +18,8 @@ export const PagePaginationContext = createContext<{
   setSearchKeyword: undefined,
   activePage: 1,
   setActivePage: undefined,
-  isSortCreatedAt: false,
-  setIsSortCreatedAt: undefined,
+  isSortUpdatedAt: false,
+  setIsSortUpdatedAt: undefined,
   setIsArchived: undefined,
   pagePagination: undefined,
   mutatePagePagination: undefined,
@@ -31,10 +31,10 @@ export const PagePaginationProvider: VFC<{
   const [searchKeyword, setSearchKeyword] = useState('');
   const [activePage, setActivePage] = useState(1);
   const [limit] = useState(9);
-  const [isSortCreatedAt, setIsSortCreatedAt] = useState(false);
+  const [isSortUpdatedAt, setIsSortUpdatedAt] = useState(false);
   const [isArchived, setIsArchived] = useState(false);
 
-  const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
+  const sort = isSortUpdatedAt ? 'updatedAt' : '-updatedAt';
 
   const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`, `isArchived=${isArchived}`];
   if (searchKeyword) params.push(`&q=${searchKeyword}`);
@@ -51,8 +51,8 @@ export const PagePaginationProvider: VFC<{
         setSearchKeyword,
         activePage,
         setActivePage,
-        isSortCreatedAt,
-        setIsSortCreatedAt,
+        isSortUpdatedAt,
+        setIsSortUpdatedAt,
         setIsArchived,
         pagePagination,
         mutatePagePagination,
