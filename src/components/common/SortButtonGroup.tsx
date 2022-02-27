@@ -1,24 +1,26 @@
 import { VFC } from 'react';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useIsSortCreatedAt } from '~/stores/page';
 
-export const SortButtonGroup: VFC = () => {
+type Props = {
+  isSortCreatedAt: boolean;
+  onClickSortButton: (bool: boolean) => void;
+};
+
+export const SortButtonGroup: VFC<Props> = ({ isSortCreatedAt, onClickSortButton }) => {
   const { t } = useLocale();
-
-  const { data: isSortCreatedAt, mutate: mutateIsSortCreatedAt } = useIsSortCreatedAt();
 
   return (
     <div className="btn-group btn-group-sm" role="group">
       <button
         className={`btn btn-outline-primary text-white text-nowrap ${!isSortCreatedAt ? 'active' : ''}`}
-        onClick={() => mutateIsSortCreatedAt(false)}
+        onClick={() => onClickSortButton(false)}
       >
         {t.latest_order}
       </button>
       <button
         className={`btn btn-outline-primary text-white text-nowrap ${isSortCreatedAt ? 'active' : ''}`}
-        onClick={() => mutateIsSortCreatedAt(true)}
+        onClick={() => onClickSortButton(true)}
       >
         {t.oldest_order}
       </button>
