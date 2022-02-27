@@ -3,16 +3,16 @@ import { VFC, useState, useEffect, useCallback } from 'react';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { usePageListSWR } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 import { useUrlFromClipBoard, useSocketId } from '~/stores/contexts';
 import { isValidUrl } from '~/utils/isValidUrl';
 import { useLocalStorage } from '~/hooks/useLocalStorage';
+import { usePagePagination } from '~/hooks/Page';
 
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
 
-  const { mutate: mutatePageList } = usePageListSWR();
+  const { mutatePagePagination } = usePagePagination();
   const { data: socketId } = useSocketId();
   const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
   const { retrieveValue } = useLocalStorage();
@@ -36,7 +36,7 @@ export const PageUrlInputForm: VFC = () => {
       toastSuccess(t.toastr_save_url);
       mutateUrlFromClipBoard(null);
       setUrl('');
-      mutatePageList();
+      mutatePagePagination();
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
