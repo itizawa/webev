@@ -11,7 +11,7 @@ export class Page {
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
-  archivedAt: Date;
+  archivedAt?: Date | null;
   constructor(init: Page) {
     this._id = init._id;
     this.url = init.url;

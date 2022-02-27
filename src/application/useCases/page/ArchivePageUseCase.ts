@@ -20,6 +20,6 @@ export class ArchivePageUseCase {
       throw new Error('ページをアーカイブできるのは作成者だけです');
     }
 
-    return this.pageRepository.update(id, { archivedAt: isArchive ? new Date() : undefined });
+    return this.pageRepository.update(id, { archivedAt: isArchive ? new Date() : null });
   }
 }

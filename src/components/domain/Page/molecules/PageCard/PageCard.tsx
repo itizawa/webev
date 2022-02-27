@@ -25,7 +25,7 @@ export const PageCard: VFC<Props> = ({ page }) => {
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
-  const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
+  const { _id, url, siteName, image, favicon, title, description, updatedAt } = page;
 
   const handleSwitchArchive = async () => {
     const bool = true;
@@ -93,7 +93,7 @@ export const PageCard: VFC<Props> = ({ page }) => {
               {siteName}
             </a>
             {siteName != null && <br />}
-            {format(new Date(createdAt), 'yyyy/MM/dd')}
+            {format(new Date(updatedAt), 'yyyy/MM/dd')}
           </small>
           {!page.archivedAt && (
             <button className="btn btn-sm btn-primary d-flex" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
