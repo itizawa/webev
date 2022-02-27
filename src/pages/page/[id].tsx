@@ -19,7 +19,6 @@ import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
 
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { restClient } from '~/utils/rest-client';
 import { speech } from '~/utils/services';
 
 const Page: WebevNextPage = () => {
@@ -62,16 +61,6 @@ const Page: WebevNextPage = () => {
     }
   };
 
-  const handleFetchButton = async () => {
-    try {
-      await restClient.apiPut(`/pages/${page._id}/ogp`);
-      toastSuccess(t.toastr_success_fetch_page);
-      mutatePage();
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
-
   const handleClickPlayButton = () => {
     if (!page.body) return;
 
@@ -106,7 +95,6 @@ const Page: WebevNextPage = () => {
         <TopSubnavBar
           page={page}
           onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
-          onClickFetchButton={handleFetchButton}
           onClickPlayButton={handleClickPlayButton}
           onClickPauseButton={handleClickPauseButton}
           onClickStopButton={handleClickStopButton}
@@ -154,7 +142,7 @@ const Page: WebevNextPage = () => {
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
           <div className="ms-2">
-            <PageManageDropdown page={page} onClickFetchButton={handleFetchButton} />
+            <PageManageDropdown page={page} />
           </div>
         </div>
         <h1 className="text-center my-3">{page.title}</h1>

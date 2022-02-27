@@ -73,17 +73,10 @@ export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) =>
           <Icon icon="ARROW_CLOCKWISE" color="WHITE" />
           <span className="ms-2">{t.fetch}</span>
         </DropdownItem> */}
-        {canShareByNavigator ? (
-          <DropdownItem tag="button" onClick={sharePageByNavigator}>
-            <Icon icon="SHARE" color="WHITE" />
-            <span className="ms-2">{t.share}</span>
-          </DropdownItem>
-        ) : (
-          <DropdownItem tag="button" onClick={sharePage}>
-            <Icon icon="TWITTER" color="WHITE" />
-            <span className="ms-2">{t.share}</span>
-          </DropdownItem>
-        )}
+        <DropdownItem tag="button" onClick={canShareByNavigator ? sharePageByNavigator : sharePage}>
+          <Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} color="WHITE" />
+          <span className="ms-2">{t.share}</span>
+        </DropdownItem>
       </StyledDropdownMenu>
     </UncontrolledDropdown>
   );

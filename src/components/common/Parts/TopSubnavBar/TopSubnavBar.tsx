@@ -17,7 +17,6 @@ import { speech } from '~/utils/services';
 type Props = {
   page: Page;
   onClickSwitchArchiveButton: () => void;
-  onClickFetchButton: () => void;
   onClickPlayButton: () => void;
   onClickPauseButton: () => void;
   onClickStopButton: () => void;
@@ -26,7 +25,6 @@ type Props = {
 export const TopSubnavBar: VFC<Props> = ({
   page,
   onClickSwitchArchiveButton,
-  onClickFetchButton,
   onClickPlayButton,
   onClickPauseButton,
   onClickStopButton,
@@ -84,7 +82,7 @@ export const TopSubnavBar: VFC<Props> = ({
           <span className="ms-2 text-nowrap">{t.read_button}</span>
         </button>
         <div className="ms-2">
-          <PageManageDropdown page={page} onClickFetchButton={onClickFetchButton} direction="down" />
+          <PageManageDropdown page={page} direction="down" />
         </div>
       </div>
       <StyledBorder />
