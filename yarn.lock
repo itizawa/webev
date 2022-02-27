@@ -1060,7 +1060,7 @@
   dependencies:
     tslib "^2.0.0"
 
-"@dnd-kit/core@^5.0.1":
+"@dnd-kit/core@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@dnd-kit/core/-/core-5.0.1.tgz#ae8c01ca5a91083ab31bbd8c839c552e5cf62c26"
   integrity sha512-h02GyHb2KqbpqbELA9QW5WVLdnAQODgZs8Nv15PTg/VpEpQxEkLPn0QHqiMSSOOFBx0qJOowwYh6ggfL1ZIJPQ==
@@ -1069,7 +1069,7 @@
     "@dnd-kit/utilities" "^3.1.0"
     tslib "^2.0.0"
 
-"@dnd-kit/sortable@^6.0.0":
+"@dnd-kit/sortable@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@dnd-kit/sortable/-/sortable-6.0.0.tgz#289c06ec594fb519d75cdf04ac5de7359b14f068"
   integrity sha512-Kf0HO/rbFpd7HxXGEvxXtxBgPI6+IQuxRXDdFz6XKLhylxuDMEomi1netrhS+253KrOZ68V+sjqOmfE2RreLeQ==
@@ -5267,12 +5267,12 @@ mongodb@4.4.0:
   optionalDependencies:
     saslprep "^1.0.3"
 
-mongoose-paginate-v2@^1.6.2:
+mongoose-paginate-v2@1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.6.2.tgz#9365fd76da885418970691aa2b050003d9054e5b"
   integrity sha512-mS5Um2l3moy7R0i1D4IO2WPs+VTxQ8PMbdlojOdfGXRFT4nCDx2BbjGRYcn06s3a35GVP97Bjs8pL4o+L2NDXA==
 
-mongoose@^6.2.3:
+mongoose@6.2.3:
   version "6.2.3"
   resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.2.3.tgz#146f718a8af95893827c5ab621697117be426256"
   integrity sha512-FxF2D0MGGIw9bAJ57nSyM4Hs4tDHbu6dn9gQwT1J/lxmRB8jfaWWJ3FSJXTmeYlQ6BpyKeIaT8fj6SAX0YMNBA==
