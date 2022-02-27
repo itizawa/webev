@@ -45,7 +45,7 @@ export const en = {
   toastr_success_send_inquiry: 'Send Inquiry',
 
   home: 'Home',
-  read: 'Read',
+  read: 'Archived',
   directory: 'Directory',
   news: 'News',
   share: 'Share',

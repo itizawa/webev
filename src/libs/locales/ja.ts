@@ -45,7 +45,7 @@ export const ja = {
   toastr_success_send_inquiry: '送信しました',
 
   home: 'ホーム',
-  read: '読んだ記事',
+  read: 'アーカイブ',
   directory: 'ディレクトリ',
   news: 'ニュース',
   share: '共有',
