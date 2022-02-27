@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/react';
@@ -10,9 +11,11 @@ import { useCurrentUser } from '~/stores/users';
 import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';
+import { HOME_URL } from '~/libs/constants/urls';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();
+  const router = useRouter();
 
   const { data: currentUser } = useCurrentUser();
 
@@ -34,6 +37,9 @@ export const PersonalDropdown: VFC = () => {
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem divider />
+        <DropdownItem tag="button" onClick={() => router.push(HOME_URL)}>
+          {t.home}
+        </DropdownItem>
         <DropdownItem tag="button" onClick={() => signOut({ callbackUrl: '/' })}>
           {t.logout}
         </DropdownItem>
