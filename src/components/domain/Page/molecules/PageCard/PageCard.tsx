@@ -28,15 +28,9 @@ export const PageCard: VFC<Props> = ({ page }) => {
   const { _id, url, siteName, image, favicon, title, description, updatedAt } = page;
 
   const handleSwitchArchive = async () => {
-    const bool = true;
     try {
-      await switchArchive(_id, bool);
-
-      if (bool) {
-        toastSuccess(t.toastr_success_read);
-      } else {
-        toastSuccess(t.toastr_success_put_back);
-      }
+      await switchArchive(_id, true);
+      toastSuccess(t.toastr_success_read);
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
