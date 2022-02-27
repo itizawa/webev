@@ -66,7 +66,6 @@ export const ja = {
 
   delete_page: 'ページを削除します',
   add_page: 'ページを追加します',
-  obtained_from_clipboard: 'クリップボードから取得しました',
 
   delete_directory: 'ディレクトリを削除します',
 
