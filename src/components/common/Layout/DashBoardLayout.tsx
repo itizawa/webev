@@ -58,7 +58,10 @@ export const DashBoardLayout: FC = ({ children }) => {
         )}
         {session && <ShareLinkReceiverModal />}
         {currentUser && <TutorialDetectorModal />}
-        <ScrollTopButton />
+        {/* 横幅調整のためにdivでwrapしている */}
+        <div>
+          <ScrollTopButton />
+        </div>
       </StyledDiv>
       <Footer />
     </div>
