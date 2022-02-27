@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { Triangle } from 'react-loader-spinner';
 
-import { usePageListSWR, useSearchKeyWord } from '~/stores/page';
+import { usePageListSWR } from '~/stores/page';
 
 import { useLocale } from '~/hooks/useLocale';
 
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+// import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 
@@ -18,7 +18,6 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: paginationResult } = usePageListSWR();
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
 
   return (
     <>
@@ -31,8 +30,8 @@ const Page: WebevNextPage = () => {
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
-          <SortButtonGroup />
+          <SearchTextBox />
+          {/* <SortButtonGroup /> */}
         </div>
         {paginationResult == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
