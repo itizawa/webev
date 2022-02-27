@@ -9,7 +9,7 @@ import { Page } from '~/domains/Page';
 export class ArchivePageUseCase {
   constructor(private readonly pageRepository: IPageRepository) {}
 
-  async execute({ id, userId }: { id: string; userId: string }): Promise<Page | null> {
+  async execute({ id, userId, isArchive }: { id: string; userId: string; isArchive: boolean }): Promise<Page | null> {
     const page = await this.pageRepository.findById(id);
 
     if (!page) {
@@ -20,6 +20,6 @@ export class ArchivePageUseCase {
       throw new Error('ページをアーカイブできるのは作成者だけです');
     }
 
-    return this.pageRepository.update(id, { archivedAt: new Date() });
+    return this.pageRepository.update(id, { archivedAt: isArchive ? new Date() : undefined });
   }
 }
