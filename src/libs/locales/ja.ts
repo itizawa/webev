@@ -47,7 +47,6 @@ export const ja = {
   home: 'ホーム',
   read: 'アーカイブ',
   directory: 'ディレクトリ',
-  news: 'ニュース',
   share: '共有',
   user: 'ユーザー',
   user_page: 'ユーザーページ',

@@ -47,7 +47,6 @@ export const en = {
   home: 'Home',
   read: 'Archived',
   directory: 'Directory',
-  news: 'News',
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
