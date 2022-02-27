@@ -4,6 +4,8 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { useDraggable } from '@dnd-kit/core';
+import { CSS } from '@dnd-kit/utilities';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
@@ -28,6 +30,12 @@ export const PageListItem: VFC<Props> = ({ page }) => {
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
   const { _id, url, siteName, image, favicon, title, description, updatedAt } = page;
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: page._id,
+  });
+  const style = {
+    transform: CSS.Translate.toString(transform),
+  };
 
   const handleSwitchArchive = async () => {
     try {
@@ -39,7 +47,7 @@ export const PageListItem: VFC<Props> = ({ page }) => {
   };
 
   return (
-    <StyledRow className="row py-2">
+    <StyledRow className="row py-2" ref={setNodeRef} style={style} {...listeners} {...attributes}>
       <div className="col-3 col-md-2 p-1 p-md-2">
         {page.body ? (
           <Link href={`/page/${page._id}`}>
