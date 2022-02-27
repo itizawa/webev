@@ -1,7 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
-import { Oval } from 'react-loader-spinner';
 
 import { HOME_URL } from '~/libs/constants/urls';
 
@@ -18,7 +17,9 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
   if (typeof window !== 'undefined' && status === 'loading')
     return (
       <div className="pt-5 d-flex align-items-center justify-content-center">
-        <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
+        <div className="spinner-border text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
 
@@ -28,7 +29,9 @@ export const LoginRequiredWrapper: FC = ({ children }) => {
 
   return (
     <div className="pt-5 d-flex align-items-center justify-content-center">
-      <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={100} width={100} />
+      <div className="spinner-border text-info" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
     </div>
   );
 };

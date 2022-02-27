@@ -3,7 +3,6 @@ import { VFC } from 'react';
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { signOut } from 'next-auth/react';
 import style from 'styled-components';
-import { Oval } from 'react-loader-spinner';
 
 import { UserIcon } from '~/components/domain/User/atoms/UserIcon';
 
@@ -20,7 +19,11 @@ export const PersonalDropdown: VFC = () => {
   const { data: currentUser } = useCurrentUser();
 
   if (!currentUser) {
-    return <Oval color="#00BFFF" secondaryColor="rgba(0, 191, 255, 0.7)" height={32} width={32} />;
+    return (
+      <div className="spinner-border text-info" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
   }
 
   return (

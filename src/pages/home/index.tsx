@@ -1,5 +1,4 @@
 import { ReactNode, useEffect } from 'react';
-import { Triangle } from 'react-loader-spinner';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
@@ -36,7 +35,9 @@ const Index: WebevNextPage = () => {
         </div>
         {!pagePagination && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
-            <Triangle color="#00BFFF" height={100} width={100} />
+            <div className="spinner-border text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         )}
         {pagePagination && (

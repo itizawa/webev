@@ -1,7 +1,6 @@
 import { useState, ReactNode } from 'react';
 
 import styled from 'styled-components';
-import { Triangle } from 'react-loader-spinner';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
@@ -66,7 +65,9 @@ const Page: WebevNextPage = () => {
         </div>
         {directoryPaginationResult == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
-            <Triangle color="#00BFFF" height={100} width={100} />
+            <div className="spinner-border text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         )}
         {directoryPaginationResult != null && (

@@ -1,6 +1,5 @@
 import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
-import { Oval } from 'react-loader-spinner';
 
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
@@ -63,7 +62,9 @@ export const SidebarDirectoryList: VFC = () => {
   if (directoryPaginationResult == null) {
     return (
       <div className="d-flex align-items-center justify-content-center">
-        <Oval color="#00bfff" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
+        <div className="spinner-border text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }
