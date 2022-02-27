@@ -1,0 +1,1 @@
+export { PagePaginationProvider } from './PagePaginationProvider';

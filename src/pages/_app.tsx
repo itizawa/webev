@@ -12,6 +12,7 @@ import { usePageView } from '~/hooks/usePageView';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useSearchKeyWord } from '~/stores/page';
 import { ModalProvider } from '~/components/providers/ModalProvider';
+import { PagePaginationProvider } from '~/components/providers/PagePaginationProvider';
 
 const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { children?: ReactNode } }) => JSX.Element = ({
   Component,
@@ -38,7 +39,9 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   return (
     <SessionProvider session={pageProps.session}>
       <SkeletonTheme baseColor="#213243" highlightColor="#444">
-        <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
+        <ModalProvider>
+          <PagePaginationProvider>{getLayout(<Component {...pageProps} />)}</PagePaginationProvider>
+        </ModalProvider>
       </SkeletonTheme>
     </SessionProvider>
   );
