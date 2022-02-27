@@ -4,7 +4,7 @@ export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({
     _id: mock._id || 'mockId',
     url: mock.url || 'https://example.com',
-    image: mock.image || 'mockImage',
+    image: mock.image || 'https://www.webev.cloud/images/no-image-ogp.png',
     favicon: mock.favicon || 'mockFavicon',
     description: mock.description || 'mockDescription',
     title: mock.title || 'mockTitle',
