@@ -1,8 +1,3 @@
-export enum PageStatus {
-  PAGE_STATUS_STOCK = 'stocked',
-  PAGE_STATUS_ARCHIVE = 'archived',
-  PAGE_STATUS_DELETED = 'deleted',
-}
 export class Page {
   _id: string;
   url: string;
@@ -12,26 +7,24 @@ export class Page {
   title: string;
   body?: string;
   siteName: string;
-  directoryId?: string;
+  isDeleted: boolean;
   createdUser: string;
   createdAt: Date;
   updatedAt: Date;
-  status: PageStatus;
-  isFavorite: boolean;
-  constructor({ _id, url, image, favicon, description, title, body, siteName, directoryId, createdUser, createdAt, updatedAt, status, isFavorite }: Page) {
-    this._id = _id;
-    this.url = url;
-    this.image = image;
-    this.favicon = favicon;
-    this.description = description;
-    this.title = title;
-    this.body = body;
-    this.siteName = siteName;
-    this.directoryId = directoryId;
-    this.createdUser = createdUser;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.status = status;
-    this.isFavorite = isFavorite;
+  archivedAt?: Date | null;
+  constructor(init: Page) {
+    this._id = init._id;
+    this.url = init.url;
+    this.image = init.image;
+    this.favicon = init.favicon;
+    this.description = init.description;
+    this.title = init.title;
+    this.body = init.body;
+    this.siteName = init.siteName;
+    this.isDeleted = init.isDeleted;
+    this.createdUser = init.createdUser;
+    this.createdAt = init.createdAt;
+    this.updatedAt = init.updatedAt;
+    this.archivedAt = init.archivedAt;
   }
 }

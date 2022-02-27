@@ -1,11 +1,6 @@
-import { useEffect, ReactNode } from 'react';
-import { Triangle } from 'react-loader-spinner';
+import { ReactNode, useEffect } from 'react';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-
-import { PageStatus } from '~/domains/Page';
-import { usePageListSWR, usePageStatus, useSearchKeyWord } from '~/stores/page';
-import { useLocale } from '~/hooks/useLocale';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
@@ -14,17 +9,15 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { SortButtonGroup } from '~/components/common/SortButtonGroup';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
+import { usePagePagination } from '~/hooks/Page';
+import { useLocale } from '~/hooks/useLocale';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
-
-  const { data: paginationResult } = usePageListSWR();
-  const { mutate: mutatePageStatus } = usePageStatus();
-  const { mutate: mutateSearchKeyword } = useSearchKeyWord();
-
+  const { pagePagination, setIsArchived } = usePagePagination();
   useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_STOCK]);
-  }, [mutatePageStatus]);
+    setIsArchived(false);
+  }, [setIsArchived]);
 
   return (
     <>
@@ -33,20 +26,22 @@ const Index: WebevNextPage = () => {
         <div className="d-flex align-items-center">
           <h1 className="mb-0">{t.home}</h1>
           <div className="ms-auto">
-            <span className="badge rounded-pill bg-secondary text-white">{paginationResult?.totalDocs} Pages</span>
+            <span className="badge rounded-pill bg-secondary text-white">{pagePagination?.totalDocs} Pages</span>
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={mutateSearchKeyword} />
+          <SearchTextBox />
           <SortButtonGroup />
         </div>
-        {paginationResult == null && (
+        {!pagePagination && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
-            <Triangle color="#00BFFF" height={100} width={100} />
+            <div className="spinner-border text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         )}
-        {paginationResult != null && (
-          <PageList pages={paginationResult?.docs} pagingLimit={paginationResult.limit} totalItemsCount={paginationResult.totalDocs} />
+        {pagePagination && (
+          <PageList pages={pagePagination?.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
         )}
       </LoginRequiredWrapper>
     </>

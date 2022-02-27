@@ -36,6 +36,7 @@ export const en = {
   toastr_save_url: 'Save Url',
   toastr_save_directory: 'Save Directory',
   toastr_delete_directory: 'Delete Directory',
+  toastr_start_webev: 'Start Webev!!',
   toastr_success_copy_url: 'Copy Url!',
   toastr_success_fetch_page: 'Fetch Page!',
   toastr_success_read: 'Read!',
@@ -44,9 +45,8 @@ export const en = {
   toastr_success_send_inquiry: 'Send Inquiry',
 
   home: 'Home',
-  read: 'Read',
+  read: 'Archived',
   directory: 'Directory',
-  news: 'News',
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
@@ -62,12 +62,10 @@ export const en = {
 
   no_description: 'no description',
 
-  automatic_acquisition: 'Automatic acquisition',
   function_details: 'function details',
 
   delete_page: 'Delete Page',
   add_page: 'Add Page',
-  obtained_from_clipboard: 'Obtained from Clipboard',
 
   delete_directory: 'Delete Directory',
 

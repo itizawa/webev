@@ -63,7 +63,13 @@ const Page: WebevNextPage = () => {
               {t.inquiry_email}
             </label>
             <div>
-              <input type="email" value={inquiryEmail} className="form-control" id="inputEmail" onChange={(e) => setInquiryEmail(e.target.value)} />
+              <input
+                type="email"
+                value={inquiryEmail}
+                className="form-control"
+                id="inputEmail"
+                onChange={(e) => setInquiryEmail(e.target.value)}
+              />
             </div>
           </div>
           <div className="mb-3 mb-lg-4">
@@ -71,7 +77,13 @@ const Page: WebevNextPage = () => {
               {t.inquiry_text}
             </label>
             <div>
-              <textarea rows={5} value={inquiryText} className="form-control" id="inputText" onChange={(e) => setInquiryText(e.target.value)} />
+              <textarea
+                rows={5}
+                value={inquiryText}
+                className="form-control"
+                id="inputText"
+                onChange={(e) => setInquiryText(e.target.value)}
+              />
             </div>
           </div>
           <button type="submit" className="btn btn-purple w-100" disabled={invalidForm}>

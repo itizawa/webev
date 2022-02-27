@@ -1,39 +1,33 @@
-import { useState, useEffect, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 
 import styled from 'styled-components';
-import { Triangle } from 'react-loader-spinner';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
-import { PageStatus } from '~/domains/Page';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { useDirectoryPaginationResult } from '~/stores/directory';
-import { usePageStatus } from '~/stores/page';
 import { useLocale } from '~/hooks/useLocale';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const [searchKeyWord, setSearchKeyWord] = useState('');
-  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord, isRoot: true });
+  // const [searchKeyWord, setSearchKeyWord] = useState('');
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({
+    searchKeyWord: '',
+    isRoot: true,
+  });
   const { createDirectory } = useCreateDirectory();
-  const { mutate: mutatePageStatus } = usePageStatus();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  useEffect(() => {
-    mutatePageStatus([PageStatus.PAGE_STATUS_ARCHIVE, PageStatus.PAGE_STATUS_STOCK]);
-  }, [mutatePageStatus]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -67,11 +61,13 @@ const Page: WebevNextPage = () => {
       <LoginRequiredWrapper>
         <h1 className="mb-0">{t.directory}</h1>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} />
+          {/* <SearchTextBox onChange={(inputValue) => setSearchKeyWord(inputValue)} /> */}
         </div>
         {directoryPaginationResult == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
-            <Triangle color="#00BFFF" height={100} width={100} />
+            <div className="spinner-border text-info" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         )}
         {directoryPaginationResult != null && (
@@ -83,11 +79,18 @@ const Page: WebevNextPage = () => {
                 </div>
               ))}
             </div>
-            {directoryPaginationResult.docs.length < 10 && !searchKeyWord && (
+            {directoryPaginationResult.docs.length < 10 && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
                 {isCreatingNewDirectory ? (
                   <form className="input-group ps-3" onSubmit={onSubmit}>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="form-control bg-white"
+                      placeholder="...name"
+                      autoFocus
+                    />
                   </form>
                 ) : (
                   <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />

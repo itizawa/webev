@@ -41,9 +41,18 @@ export const DirectoryCreateModal: VFC = () => {
 
   return (
     <Modal isOpen={parentDirectoryForCreateDirectory != null} toggle={closeDeleteModal} title={t.create_directory}>
-      {parentDirectoryForCreateDirectory != null && <p className="text-center">{t.create_child_directory(parentDirectoryForCreateDirectory.name)}</p>}
+      {parentDirectoryForCreateDirectory != null && (
+        <p className="text-center">{t.create_child_directory(parentDirectoryForCreateDirectory.name)}</p>
+      )}
       <form className="input-group my-2" onSubmit={handleSubmitCreateDirectory}>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="form-control bg-white"
+          placeholder="...name"
+          autoFocus
+        />
         <button className="btn btn-success" type="submit">
           {t.create}
         </button>

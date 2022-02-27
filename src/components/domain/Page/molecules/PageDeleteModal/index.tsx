@@ -1,1 +1,0 @@
-export { PageDeleteModal } from './PageDeleteModal';

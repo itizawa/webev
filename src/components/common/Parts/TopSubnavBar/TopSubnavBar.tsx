@@ -4,8 +4,7 @@ import styled from 'styled-components';
 
 import { useHooks } from './hooks';
 
-import { Page, PageStatus } from '~/domains/Page';
-import { usePageForAddToDirectory, usePageForDelete } from '~/stores/modal';
+import { Page } from '~/domains/Page';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
@@ -17,9 +16,7 @@ import { speech } from '~/utils/services';
 
 type Props = {
   page: Page;
-  onClickRemovePageButton: () => void;
   onClickSwitchArchiveButton: () => void;
-  onClickFetchButton: () => void;
   onClickPlayButton: () => void;
   onClickPauseButton: () => void;
   onClickStopButton: () => void;
@@ -27,9 +24,7 @@ type Props = {
 };
 export const TopSubnavBar: VFC<Props> = ({
   page,
-  onClickRemovePageButton,
   onClickSwitchArchiveButton,
-  onClickFetchButton,
   onClickPlayButton,
   onClickPauseButton,
   onClickStopButton,
@@ -37,18 +32,6 @@ export const TopSubnavBar: VFC<Props> = ({
 }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
-  const isArchived = page.status === PageStatus.PAGE_STATUS_ARCHIVE;
-
-  const { mutate: mutatePageForDelete } = usePageForDelete();
-  const { mutate: mutateUsePageForAddToDirectory } = usePageForAddToDirectory();
-
-  const openDeleteModal = async () => {
-    mutatePageForDelete(page);
-  };
-
-  const handleClickAddPageToDirectoryButton = () => {
-    mutateUsePageForAddToDirectory(page);
-  };
 
   return (
     <StyledDiv $isShow={isShowScroll} className="fixed-top">
@@ -62,35 +45,44 @@ export const TopSubnavBar: VFC<Props> = ({
           {speech.isEnabled && page.body && (
             <>
               {isReading ? (
-                <IconButton icon="PAUSE_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPauseButton} />
+                <IconButton
+                  icon="PAUSE_CIRCLE"
+                  color="WHITE"
+                  activeColor="SUCCESS"
+                  width={24}
+                  height={24}
+                  isRemovePadding
+                  onClickButton={onClickPauseButton}
+                />
               ) : (
-                <IconButton icon="PLAY_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickPlayButton} />
+                <IconButton
+                  icon="PLAY_CIRCLE"
+                  color="WHITE"
+                  activeColor="SUCCESS"
+                  width={24}
+                  height={24}
+                  isRemovePadding
+                  onClickButton={onClickPlayButton}
+                />
               )}
-              <IconButton icon="STOP_CIRCLE" color="WHITE" activeColor="SUCCESS" width={24} height={24} isRemovePadding onClickButton={onClickStopButton} />
+              <IconButton
+                icon="STOP_CIRCLE"
+                color="WHITE"
+                activeColor="SUCCESS"
+                width={24}
+                height={24}
+                isRemovePadding
+                onClickButton={onClickStopButton}
+              />
             </>
           )}
         </div>
-        {isArchived ? (
-          <button className="btn btn-sm btn-secondary d-flex" onClick={onClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="REPLY" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.return_button}</span>
-          </button>
-        ) : (
-          <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="CHECK" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.read_button}</span>
-          </button>
-        )}
+        <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
+          <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+          <span className="ms-2 text-nowrap">{t.read_button}</span>
+        </button>
         <div className="ms-2">
-          <PageManageDropdown
-            page={page}
-            onClickDeleteButton={openDeleteModal}
-            onClickSwitchArchiveButton={onClickSwitchArchiveButton}
-            onClickRemovePageButton={onClickRemovePageButton}
-            onClickAddPageToDirectoryButton={handleClickAddPageToDirectoryButton}
-            onClickFetchButton={onClickFetchButton}
-            direction="down"
-          />
+          <PageManageDropdown page={page} direction="down" />
         </div>
       </div>
       <StyledBorder />

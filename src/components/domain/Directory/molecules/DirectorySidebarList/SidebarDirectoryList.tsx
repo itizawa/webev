@@ -1,6 +1,5 @@
 import { useEffect, useState, VFC } from 'react';
 import styled from 'styled-components';
-import { Oval } from 'react-loader-spinner';
 
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
@@ -16,7 +15,10 @@ import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();
 
-  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
+  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({
+    searchKeyWord: '',
+    isRoot: true,
+  });
   const { createDirectory } = useCreateDirectory();
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -60,7 +62,9 @@ export const SidebarDirectoryList: VFC = () => {
   if (directoryPaginationResult == null) {
     return (
       <div className="d-flex align-items-center justify-content-center">
-        <Oval color="#00bfff" secondaryColor="rgba(0, 191, 255, 0.7)" height={64} width={64} />
+        <div className="spinner-border text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }
@@ -82,7 +86,14 @@ export const SidebarDirectoryList: VFC = () => {
         <StyledDiv className="text-center mx-3 mt-2">
           {isCreatingNewDirectory ? (
             <form className="input-group ps-3" onSubmit={onSubmit}>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-control bg-white"
+                placeholder="...name"
+                autoFocus
+              />
             </form>
           ) : (
             <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />

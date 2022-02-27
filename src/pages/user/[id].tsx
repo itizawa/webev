@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { Triangle } from 'react-loader-spinner';
 
 import { useRouter } from 'next/router';
 import { useUserById } from '~/stores/user';
@@ -20,7 +19,9 @@ const Page: WebevNextPage = () => {
   if (isValidatingUser) {
     return (
       <div className="pt-5 d-flex align-items-center justify-content-center">
-        <Triangle color="#00BFFF" height={100} width={100} />
+        <div className="spinner-border text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
       </div>
     );
   }
