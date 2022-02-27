@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
-import { SkeletonTheme } from 'react-loading-skeleton';
 
 import '~/styles/global.scss';
 
@@ -30,11 +29,9 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
 
   return (
     <SessionProvider session={pageProps.session}>
-      <SkeletonTheme baseColor="#213243" highlightColor="#444">
-        <PagePaginationProvider>
-          <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
-        </PagePaginationProvider>
-      </SkeletonTheme>
+      <PagePaginationProvider>
+        <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
+      </PagePaginationProvider>
     </SessionProvider>
   );
 };

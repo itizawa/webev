@@ -3,7 +3,6 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
-import Skeleton from 'react-loading-skeleton';
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
 import { useSortable } from '@dnd-kit/sortable';
@@ -159,7 +158,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
               />
             </form>
           )}
-          {childrenDirectoryTrees ? (
+          {childrenDirectoryTrees && (
             <>
               {childrenDirectoryTrees.map((childrenDirectoryTree, index) => {
                 const childDirectory = childrenDirectoryTree.descendant as Directory;
@@ -167,8 +166,6 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
               })}
               {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
             </>
-          ) : (
-            <Skeleton />
           )}
         </div>
       </Collapse>
