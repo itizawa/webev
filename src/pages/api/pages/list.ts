@@ -28,6 +28,8 @@ const handler = nc()
 
     if (isArchived) {
       query.archivedAt = { $ne: undefined };
+    } else {
+      query.archivedAt = null;
     }
 
     if (q) {

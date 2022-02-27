@@ -9,7 +9,7 @@ import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
-import { useActivePage } from '~/stores/page';
+import { usePagePagination } from '~/hooks/Page';
 
 type Props = {
   pages: Page[];
@@ -20,11 +20,11 @@ type Props = {
 
 export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount, isHideArchiveButton }) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
-  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
+  const { activePage, setActivePage } = usePagePagination();
 
   const handleMutateActivePage = (page: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    mutateActivePage(page);
+    setActivePage(page);
   };
 
   return (

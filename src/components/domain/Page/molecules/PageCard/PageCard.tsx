@@ -11,8 +11,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page } from '~/domains/Page';
 
-import { usePageListSWR } from '~/stores/page';
-
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { restClient } from '~/utils/rest-client';
@@ -27,8 +25,6 @@ type Props = {
 export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
   const { t } = useLocale();
 
-  const { data: pageList, mutate: mutatePageList } = usePageListSWR();
-
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
   const { _id, url, siteName, image, favicon, title, description, createdAt } = page;
@@ -37,15 +33,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     const bool = true;
     try {
       await switchArchive(_id, bool);
-      if (pageList) {
-        mutatePageList(
-          {
-            ...pageList,
-            docs: pageList.docs.filter((v) => v._id !== _id),
-          },
-          false,
-        );
-      }
+
       if (bool) {
         toastSuccess(t.toastr_success_read);
       } else {
@@ -60,7 +48,6 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
     try {
       await restClient.apiPut(`/pages/${page._id}/ogp`);
       toastSuccess(t.toastr_success_fetch_page);
-      mutatePageList();
     } catch (error) {
       if (error instanceof Error) toastError(error);
     }
