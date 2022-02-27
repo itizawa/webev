@@ -2,6 +2,7 @@ import React, { VFC, useState, createContext, ReactNode, SetStateAction, Dispatc
 import useSWR, { KeyedMutator } from 'swr';
 import { Page } from '~/domains/Page';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
+import { joinUrl } from '~/utils/joinUrl';
 import { restClient } from '~/utils/rest-client';
 
 export const PagePaginationContext = createContext<{
@@ -10,6 +11,7 @@ export const PagePaginationContext = createContext<{
   setActivePage?: Dispatch<SetStateAction<number>>;
   isSortCreatedAt: boolean;
   setIsSortCreatedAt?: Dispatch<SetStateAction<boolean>>;
+  setIsArchived?: Dispatch<SetStateAction<boolean>>;
   pagePagination?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
 }>({
@@ -18,6 +20,7 @@ export const PagePaginationContext = createContext<{
   setActivePage: undefined,
   isSortCreatedAt: false,
   setIsSortCreatedAt: undefined,
+  setIsArchived: undefined,
   pagePagination: undefined,
   mutatePagePagination: undefined,
 });
@@ -29,10 +32,14 @@ export const PagePaginationProvider: VFC<{
   const [activePage, setActivePage] = useState(1);
   const [limit] = useState(9);
   const [isSortCreatedAt, setIsSortCreatedAt] = useState(false);
+  const [isArchived, setIsArchived] = useState(false);
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
 
-  const endpoint = `/pages/list?page=${activePage}&limit=${limit}&sort=${sort}${searchKeyword ? `&q=${searchKeyword}` : ``}`;
+  const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`, `isArchived=${isArchived}`];
+  if (searchKeyword) params.push(`&q=${searchKeyword}`);
+
+  const endpoint = joinUrl('/pages/list', params);
 
   const { data: pagePagination, mutate: mutatePagePagination } = useSWR<PaginationResult<Page>>(endpoint, (endpoint: string) =>
     restClient.apiGet(endpoint).then((result) => result.data),
@@ -40,7 +47,16 @@ export const PagePaginationProvider: VFC<{
 
   return (
     <PagePaginationContext.Provider
-      value={{ setSearchKeyword, activePage, setActivePage, isSortCreatedAt, setIsSortCreatedAt, pagePagination, mutatePagePagination }}
+      value={{
+        setSearchKeyword,
+        activePage,
+        setActivePage,
+        isSortCreatedAt,
+        setIsSortCreatedAt,
+        setIsArchived,
+        pagePagination,
+        mutatePagePagination,
+      }}
     >
       {children}
     </PagePaginationContext.Provider>
