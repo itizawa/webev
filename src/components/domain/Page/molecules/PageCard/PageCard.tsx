@@ -19,10 +19,9 @@ const MAX_WORD_COUNT_OF_BODY = 96;
 
 type Props = {
   page: Page;
-  isHideArchiveButton?: boolean;
 };
 
-export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageCard: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
@@ -106,7 +105,7 @@ export const PageCard: VFC<Props> = ({ page, isHideArchiveButton }) => {
             {siteName != null && <br />}
             {format(new Date(createdAt), 'yyyy/MM/dd')}
           </small>
-          {!isHideArchiveButton && (
+          {!page.archivedAt && (
             <button className="btn btn-sm btn-primary d-flex" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
               <Icon height={20} width={20} icon="CHECK" color="WHITE" />
               <span className="ms-2 text-nowrap">{t.read_button}</span>

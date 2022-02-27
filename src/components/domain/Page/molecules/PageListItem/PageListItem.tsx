@@ -22,10 +22,9 @@ const MAX_WORD_COUNT_OF_SITE_NAME = 10;
 
 type Props = {
   page: Page;
-  isHideArchiveButton?: boolean;
 };
 
-export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
+export const PageListItem: VFC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
@@ -123,7 +122,7 @@ export const PageListItem: VFC<Props> = ({ page, isHideArchiveButton }) => {
             </a>
           </Tooltip>
         </small>
-        {!isHideArchiveButton && (
+        {!page.archivedAt && (
           <button className="btn btn-sm btn-primary d-flex ms-auto" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
             <Icon height={20} width={20} icon="CHECK" color="WHITE" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>

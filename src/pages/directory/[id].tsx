@@ -261,12 +261,7 @@ const Page: WebevNextPage = () => {
           </div>
         )}
         {pagePagination != null && (
-          <PageList
-            pages={pagePagination.docs}
-            pagingLimit={pagePagination.limit}
-            totalItemsCount={pagePagination.totalDocs}
-            isHideArchiveButton
-          />
+          <PageList pages={pagePagination.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
         )}
       </LoginRequiredWrapper>
     </>
