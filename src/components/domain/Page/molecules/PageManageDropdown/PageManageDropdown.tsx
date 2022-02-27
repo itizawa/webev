@@ -1,4 +1,4 @@
-import { VFC, useMemo } from 'react';
+import { VFC, useMemo, useCallback } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import styled from 'styled-components';
@@ -9,8 +9,9 @@ import { Page } from '~/domains/Page';
 import { useLocale } from '~/hooks/useLocale';
 import { useModal } from '~/hooks/useModal';
 
-import { toastSuccess } from '~/utils/toastr';
+import { toastError, toastSuccess } from '~/utils/toastr';
 import { zIndex } from '~/libs/constants/zIndex';
+import { usePagePagination, useSwitchArchive } from '~/hooks/Page';
 
 type Props = {
   page: Page;
@@ -20,27 +21,47 @@ type Props = {
 export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) => {
   const { t } = useLocale();
   const { handleModal } = useModal();
+  const { switchArchive } = useSwitchArchive();
+  const { pagePagination, mutatePagePagination } = usePagePagination();
+
+  const handleClickCancelArchiveButton = useCallback(async () => {
+    try {
+      await switchArchive(page._id, false);
+      if (pagePagination) {
+        mutatePagePagination(
+          {
+            ...pagePagination,
+            docs: pagePagination.docs.filter((v) => v._id !== page._id),
+          },
+          false,
+        );
+      }
+      toastSuccess(t.toastr_success_put_back);
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+  }, [mutatePagePagination, page._id, pagePagination, switchArchive, t.toastr_success_put_back]);
 
   /**
    * Twitter の共有
    */
-  const sharePage = async () => {
+  const sharePage = useCallback(async () => {
     if (window != null) {
       const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
       window.open(twitterUrl.toString(), '_blank');
     }
-  };
+  }, [page.siteName, page.url]);
 
   /**
    * Web share api を使った共有
    */
-  const sharePageByNavigator = () => {
+  const sharePageByNavigator = useCallback(() => {
     navigator.share({
       title: page.title,
       text: page.description,
       url: page.url,
     });
-  };
+  }, [page.description, page.title, page.url]);
 
   /**
    * Web share api が使えるかどうか(MobileかSafariだと使用可能)
@@ -68,6 +89,12 @@ export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) =>
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
         </DropdownItem>
+        {page.archivedAt && (
+          <DropdownItem tag="button" onClick={handleClickCancelArchiveButton}>
+            <Icon height={20} width={20} icon="REPLY" color="WHITE" />
+            <span className="ms-2 text-nowrap">{t.return_button}</span>
+          </DropdownItem>
+        )}
         {/* TODO: implement */}
         {/* <DropdownItem tag="button" onClick={onClickFetchButton}>
           <Icon icon="ARROW_CLOCKWISE" color="WHITE" />
