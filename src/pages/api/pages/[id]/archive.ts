@@ -15,12 +15,13 @@ const handler = nc()
   .use(connectDB)
   .use(injectUserToRequest)
   .use(loginRequired)
-  .put(async (req: WebevApiRequest<{ url: string }>, res: NextApiResponse) => {
+  .put(async (req: WebevApiRequest<{ isArchive: boolean }>, res: NextApiResponse) => {
     const { user } = req;
     const { id } = req.query;
+    const { isArchive } = req.body;
 
     try {
-      const result = await archivePageUseCase.execute({ id, userId: user._id });
+      const result = await archivePageUseCase.execute({ id, userId: user._id, isArchive: Boolean(isArchive) });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error });
