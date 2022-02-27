@@ -17,7 +17,6 @@ import {
 } from '~/stores/directory';
 import { useDirectoryId } from '~/stores/page';
 import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
-import { useUrlFromClipBoard } from '~/stores/contexts';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -55,7 +54,6 @@ const Page: WebevNextPage = () => {
   const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
-  const { data: urlFromClipBoard } = useUrlFromClipBoard();
   const { mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   mutateDirectoryId(id as string);
@@ -202,7 +200,7 @@ const Page: WebevNextPage = () => {
                     icon="SAVE"
                     color="SECONDARY"
                     activeColor="WARNING"
-                    isActive={urlFromClipBoard != null}
+                    isActive
                     onClickButton={() => mutateDirectoryForSavePage(directory)}
                   />
                 </div>

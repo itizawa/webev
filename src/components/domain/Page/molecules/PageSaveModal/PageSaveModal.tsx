@@ -1,4 +1,4 @@
-import { VFC, useState, useEffect } from 'react';
+import { VFC, useState } from 'react';
 
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -6,7 +6,7 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
-import { useSocketId, useUrlFromClipBoard } from '~/stores/contexts';
+import { useSocketId } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 import { isValidUrl } from '~/utils/isValidUrl';
@@ -21,15 +21,6 @@ export const PageSaveModal: VFC = () => {
   const { data: socketId } = useSocketId();
 
   const { mutatePagePagination } = usePagePagination();
-  const { data: urlFromClipBoard, mutate: mutateUrlFromClipBoard } = useUrlFromClipBoard();
-
-  useEffect(() => {
-    if (urlFromClipBoard != null) {
-      setUrl(urlFromClipBoard);
-    } else {
-      setUrl('');
-    }
-  }, [urlFromClipBoard]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -45,7 +36,6 @@ export const PageSaveModal: VFC = () => {
   };
 
   const closeModal = async () => {
-    mutateUrlFromClipBoard(null);
     setUrl('');
     mutateDirectoryForSavePage(null);
   };
