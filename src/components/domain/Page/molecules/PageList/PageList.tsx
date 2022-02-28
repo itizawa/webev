@@ -9,23 +9,21 @@ import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
-import { useActivePage } from '~/stores/page';
+import { usePagePagination } from '~/hooks/Page';
 
 type Props = {
   pages: Page[];
   pagingLimit: number;
   totalItemsCount: number;
-  isHideArchiveButton?: boolean;
 };
 
-export const PageList: VFC<Props> = (props) => {
-  const { pages, pagingLimit, totalItemsCount, isHideArchiveButton } = props;
+export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount }) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
-  const { data: activePage = 1, mutate: mutateActivePage } = useActivePage();
+  const { activePage, setActivePage } = usePagePagination();
 
   const handleMutateActivePage = (page: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    mutateActivePage(page);
+    setActivePage(page);
   };
 
   return (
@@ -34,13 +32,13 @@ export const PageList: VFC<Props> = (props) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
             <div className="col-12" key={page._id}>
-              <PageListItem page={page} isHideArchiveButton={isHideArchiveButton} />
+              <PageListItem page={page} />
             </div>
           );
         }
         return (
           <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
-            <PageCard page={page} isHideArchiveButton={isHideArchiveButton} />
+            <PageCard page={page} />
           </div>
         );
       })}
@@ -50,7 +48,12 @@ export const PageList: VFC<Props> = (props) => {
         </div>
       ) : (
         <div className="text-center">
-          <PaginationWrapper pagingLimit={pagingLimit} totalItemsCount={totalItemsCount} activePage={activePage} mutateActivePage={handleMutateActivePage} />
+          <PaginationWrapper
+            pagingLimit={pagingLimit}
+            totalItemsCount={totalItemsCount}
+            activePage={activePage}
+            mutateActivePage={handleMutateActivePage}
+          />
         </div>
       )}
     </div>

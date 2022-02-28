@@ -2,15 +2,13 @@ import { Emoji } from 'emoji-mart';
 import { VFC, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { EditableInput } from '../EditableInput';
+import { usePagePagination } from '~/hooks/Page';
 
-type Props = {
-  onChange: (input: string) => void;
-};
+export const SearchTextBox: VFC = () => {
+  const { setSearchKeyword } = usePagePagination();
 
-export const SearchTextBox: VFC<Props> = (props) => {
-  const { onChange } = props;
   const [value, setValue] = useState('');
-  const debounceChangeSearchText = useDebouncedCallback(onChange, 300);
+  const debounceChangeSearchText = useDebouncedCallback(setSearchKeyword, 300);
 
   const changeSearchText = (input: string) => {
     setValue(input);

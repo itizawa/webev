@@ -3,10 +3,10 @@ import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
-import Skeleton from 'react-loading-skeleton';
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
-import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -18,18 +18,28 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
-  draggableProvidedDragHandleProps?: DraggableProvidedDragHandleProps;
+  index: number;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvidedDragHandleProps }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
+  const { attributes, listeners, setNodeRef, transform, transition, isOver } = useSortable({
+    id: index.toString(),
+  });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [isFetchDirectory, setIsFetchDirectory] = useState(false);
 
-  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(isFetchDirectory ? directory._id : undefined);
+  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(
+    isFetchDirectory ? directory._id : undefined,
+  );
 
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
@@ -73,12 +83,15 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
     <>
       <StyledDiv
         className="text-white text-left rounded d-flex"
-        role="button"
         onClick={() => router.push(`/directory/${directory._id}`)}
         isActive={isActive}
+        isOver={isOver}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
-        {...draggableProvidedDragHandleProps}
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
@@ -135,19 +148,24 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, draggableProvi
         <div className="ps-3 pt-1">
           {isCreatingNewDirectory && (
             <form className="input-group my-2 ps-3" onSubmit={handleSubmitCreateDirectory}>
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="form-control bg-white" placeholder="...name" autoFocus />
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-control bg-white"
+                placeholder="...name"
+                autoFocus
+              />
             </form>
           )}
-          {childrenDirectoryTrees ? (
+          {childrenDirectoryTrees && (
             <>
-              {childrenDirectoryTrees.map((childrenDirectoryTree) => {
+              {childrenDirectoryTrees.map((childrenDirectoryTree, index) => {
                 const childDirectory = childrenDirectoryTree.descendant as Directory;
-                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
+                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} index={index} />;
               })}
               {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
             </>
-          ) : (
-            <Skeleton />
           )}
         </div>
       </Collapse>
@@ -161,7 +179,7 @@ const StyledEmojiWrapper = styled.span`
   }
 `;
 
-const StyledDiv = styled.div<{ isActive?: boolean }>`
+const StyledDiv = styled.div<{ isActive?: boolean; isOver: boolean }>`
   align-items: center;
   /* ズレをなくすための調整 */
   height: 24px;
@@ -187,4 +205,9 @@ const StyledDiv = styled.div<{ isActive?: boolean }>`
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
   }`}
+  ${({ isOver }) =>
+    isOver &&
+    `
+  background-color: rgba(111, 66, 193, 0.2);
+    transition: all 300ms linear;`}
 `;

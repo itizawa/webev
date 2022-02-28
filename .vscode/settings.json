@@ -27,9 +27,7 @@
       "source.fixAll.markdownlint": true
     },
     "cSpell.words": [
-      "NEXTAUTH",
-      "Subnav",
-      "Webev",
+      "automerge",
       "browserconfig",
       "commentout",
       "countup",
@@ -40,16 +38,20 @@
       "ipagp",
       "itizawa",
       "kzmat",
+      "middlewares",
       "mixins",
       "msapplication",
+      "NEXTAUTH",
       "noopener",
       "noreferrer",
       "pageview",
       "piyo",
       "randomstring",
       "stylelint",
+      "Subnav",
       "toastr",
-      "unstyled"
+      "unstyled",
+      "Webev"
     ]
   }
   

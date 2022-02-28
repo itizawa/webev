@@ -3,10 +3,6 @@ import { Directory } from '~/domains/Directory';
 import { Page } from '~/domains/Page';
 import { useStaticSWR } from '~/stores/use-static-swr';
 
-export const usePageForDelete = (initialData?: Page): SWRResponse<Page | null, Error> => {
-  return useStaticSWR<Page | null, Error>('pageForDeletePageModal', initialData);
-};
-
 export const usePageForAddToDirectory = (initialData?: Page): SWRResponse<Page | null, Error> => {
   return useStaticSWR<Page | null, Error>('pageForAddToDirectory', initialData);
 };
