@@ -27,7 +27,7 @@ From here onward for those who start up by themselves.
 
 ## Installation
 
-1. Clone the same versions of [webev-front](https://github.com/itizawa/webev-front) and [webev-back](https://github.com/itizawa/webev-back).
+1. Clone the same versions of [webev-front](https://github.com/itizaworld/webev).
 
 1. Prepare environment variables.  
 See the [environment variable section](https://github.com/itizawa/webev-front/#--environmental-variables) below
@@ -41,12 +41,11 @@ If you can use the make command, run `make up-front`.
   - Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
   - Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
 
-|Key | e.g. | Required | What is this? | memo |
-|---|---|---|---|---|
-|GOOGLE_CLIENT_ID |  | ✅ | client id for authentication of google ||
-|GOOGLE_CLIENT_SECRET |  | ✅ | client secret for authentication of google ||
-|MONGO_URI | mongodb://mongo:27017/webev | ✅  | For storing credentials for using by next-auth  | |
-|PORT | 8000 |  | port for server  | Anything other than 3000 is fine |
+|Key | e.g. | Required | What is this?
+|---|---|---|---|
+|GOOGLE_CLIENT_ID |  | ✅ | client id for authentication of google |
+|GOOGLE_CLIENT_SECRET |  | ✅ | client secret for authentication of google |
+|MONGO_URI | mongodb://mongo:27017/webev | ✅  | For storing credentials for using by next-auth  | 
 
 ## License
 
