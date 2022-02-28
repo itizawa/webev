@@ -43,5 +43,6 @@ export const WEBEV_GITHUB_URL = 'https://github.com/webev-dev';
 // NOTE: itizawa の twitter
 export const ITIZAWA_TWITTER_URL = 'https://twitter.com/itizawa_pen';
 
-// NOTE: 使い方のページ
-export const HOW_TO_USE_URL = 'https://www.webev.cloud/ja/news/xmaua8n1qes6';
+export const URLS = {
+  HOW_TO_USE: 'https://creative-rice-df2.notion.site/Webev-37a3c514bcbf45ba9ce938331721d254',
+};

@@ -6,7 +6,7 @@ import { User } from '~/domains/User';
 import { useCurrentUser } from '~/stores/user';
 
 import { restClient } from '~/utils/rest-client';
-import { HOW_TO_USE_URL } from '~/libs/constants/urls';
+import { URLS } from '~/libs/constants/urls';
 
 export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExecutedTutorial: () => Promise<void> } => {
   const { mutatePagePagination } = usePagePagination();
@@ -19,7 +19,7 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
 
     const { data } = await restClient.apiPut<User>('/users/me/isExecutedTutorial');
 
-    await restClient.apiPost('/pages', { url: HOW_TO_USE_URL });
+    await restClient.apiPost('/pages', { url: URLS.HOW_TO_USE });
     mutatePagePagination();
 
     setTimeout(() => {
