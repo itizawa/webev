@@ -22,7 +22,7 @@ export const ShareLinkReceiverModal: VFC = () => {
   const [title, setTitle] = useState<string | null>();
   const [url, setUrl] = useState<string | null>();
 
-  const { data: ogp, isValidating } = useOgp({ url: url || '' });
+  const { data: ogp, isValidating } = useOgp(url);
 
   useEffect(() => {
     if (typeof router.query.title === 'string') {
