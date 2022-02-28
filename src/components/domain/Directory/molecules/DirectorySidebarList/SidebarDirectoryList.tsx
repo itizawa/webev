@@ -1,7 +1,5 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import styled from 'styled-components';
-
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -23,14 +21,6 @@ export const SidebarDirectoryList: VFC = () => {
 
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  const [items, setItems] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (directoryPaginationResult) {
-      setItems(directoryPaginationResult.docs.map((_, i) => i.toString()));
-    }
-  }, [directoryPaginationResult]);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -72,15 +62,13 @@ export const SidebarDirectoryList: VFC = () => {
   return (
     <>
       <div className="px-3">
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          {directoryPaginationResult.docs.map((directory, index) => {
-            return (
-              <div key={directory._id} className="my-1">
-                <DirectorySidebarListItem directory={directory} index={index} />
-              </div>
-            );
-          })}
-        </SortableContext>
+        {directoryPaginationResult.docs.map((directory) => {
+          return (
+            <div key={directory._id} className="my-1">
+              <DirectorySidebarListItem directory={directory} />
+            </div>
+          );
+        })}
       </div>
       {directoryPaginationResult.docs.length < 10 && (
         <StyledDiv className="text-center mx-3 mt-2">
