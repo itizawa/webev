@@ -2,7 +2,7 @@
 
 ![White and Black Memphis Style General Twitch Banner](https://user-images.githubusercontent.com/48426654/112742744-362dbe80-8fcc-11eb-914f-6b07b48862ac.png)
 
-[![build-dev](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml/badge.svg?branch=master)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
+[![build-dev](https://github.com/itizaworld/webev/actions/workflows/ci-dev.yml/badge.svg?branch=master)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
 
 Webev is OSS of bookmark manager that improves the organization of information.
 
@@ -27,13 +27,12 @@ From here onward for those who start up by themselves.
 
 ## Installation
 
-1. Clone the same versions of [webev-front](https://github.com/itizaworld/webev).
+1. Clone the same versions of [webev](https://github.com/itizaworld/webev).
 
 1. Prepare environment variables.  
 See the [environment variable section](https://github.com/itizawa/webev-front/#--environmental-variables) below
 
 1. Run `docker-compose up`.  
-If you can use the make command, run `make up-front`.
 
 ## Environmental variables
 
