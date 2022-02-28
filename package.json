@@ -1,6 +1,6 @@
 {
   "name": "webev-front",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/webev-dev/webev.git"
   },
-  "keywords": [],
+  "keywords": ["OSS"],
   "author": "itizawa",
   "license": "MIT",
   "bugs": {
