@@ -29,17 +29,11 @@ From here onward for those who start up by themselves.
 
 1. Clone the same versions of [webev-front](https://github.com/itizawa/webev-front) and [webev-back](https://github.com/itizawa/webev-back).
 
-1. Prepare with the following folder structure.  
-
-- Webev
-  - webev-front
-  - webev-back
-
 1. Prepare environment variables.  
 See the [environment variable section](https://github.com/itizawa/webev-front/#--environmental-variables) below
 
-1. Run `docker-compose up` on each folder.  
-If you can use the make command, run `make up-front` and `make up-back` in either folder
+1. Run `docker-compose up`.  
+If you can use the make command, run `make up-front`.
 
 ## Environmental variables
 
@@ -47,12 +41,12 @@ If you can use the make command, run `make up-front` and `make up-back` in eithe
   - Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
   - Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
 
-|Key | e.g. | Required | Which set? | What is this? | memo |
-|---|---|---|---|---|---|
-|GOOGLE_CLIENT_ID |  | ✅ | front | client id for authentication of google ||
-|GOOGLE_CLIENT_SECRET |  | ✅ | front | client secret for authentication of google ||
-|MONGO_URI | mongodb://mongo:27017/webev | ✅ | front and back | For storing credentials for using by next-auth  | |
-|PORT | 8000 |  | back | port for server  | Anything other than 3000 is fine |
+|Key | e.g. | Required | What is this? | memo |
+|---|---|---|---|---|
+|GOOGLE_CLIENT_ID |  | ✅ | client id for authentication of google ||
+|GOOGLE_CLIENT_SECRET |  | ✅ | client secret for authentication of google ||
+|MONGO_URI | mongodb://mongo:27017/webev | ✅  | For storing credentials for using by next-auth  | |
+|PORT | 8000 |  | port for server  | Anything other than 3000 is fine |
 
 ## License
 
