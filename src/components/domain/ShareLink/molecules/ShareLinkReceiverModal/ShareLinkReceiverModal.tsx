@@ -8,8 +8,8 @@ import { useSocketId } from '~/stores/contexts';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { Ogp } from '~/domains/Ogp';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
+import { useOgp } from '~/stores/ogp';
 
 export const ShareLinkReceiverModal: VFC = () => {
   const router = useRouter();
@@ -20,16 +20,8 @@ export const ShareLinkReceiverModal: VFC = () => {
 
   const [title, setTitle] = useState<string | null>();
   const [url, setUrl] = useState<string | null>();
-  const [ogpImage, setOgpImage] = useState<string>();
 
-  const fetchOgpImage = async (url: string) => {
-    try {
-      const { data } = await restClient.apiGet(`ogp?url=${url}`);
-      setOgpImage((data as Ogp).image);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
+  const { data: ogp } = useOgp({ url: url || '' });
 
   useEffect(() => {
     if (typeof router.query.title === 'string') {
@@ -37,7 +29,6 @@ export const ShareLinkReceiverModal: VFC = () => {
     }
     if (typeof router.query.url === 'string') {
       setUrl(router.query.url);
-      fetchOgpImage(router.query.url);
     }
   }, [router]);
 
@@ -62,7 +53,7 @@ export const ShareLinkReceiverModal: VFC = () => {
 
   return (
     <Modal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
-      <FixedImage imageUrl={ogpImage} />
+      <FixedImage imageUrl={ogp?.image} />
       <h5 className="text-center my-3">{title || 'No title'}</h5>
       <div className="d-flex justify-content-evenly mt-5">
         <button className="btn btn-secondary" onClick={handleClickCloseButton}>
