@@ -38,7 +38,6 @@ See the [environment variable section](https://github.com/itizawa/webev-front/#-
 
 - The following environment variables are required for normal operation.
   - Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev-front.
-  - Set to [config/dev.env](https://github.com/itizawa/webev-back/blob/master/config/dev.env) in webev-back.
 
 |Key | e.g. | Required | What is this?
 |---|---|---|---|
