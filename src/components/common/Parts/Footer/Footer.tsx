@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { INQUIRY_URL, ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
+import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
 
 import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { IconButton } from '~/components/base/molecules/IconButton';
@@ -22,11 +22,6 @@ export const Footer: FC = () => {
             <li className="list-unstyled my-1" role="button">
               <Link href={TERM_URL}>
                 <a className="fw-bold text-muted webev-anchor">{t.term}</a>
-              </Link>
-            </li>
-            <li className="list-unstyled my-1" role="button">
-              <Link href={INQUIRY_URL}>
-                <a className="fw-bold text-muted webev-anchor">{t.inquiry}</a>
               </Link>
             </li>
           </ul>

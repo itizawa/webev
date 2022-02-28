@@ -7,9 +7,6 @@ export const DIRECTORY_ID_URL = '/directory/[id]';
 // NOTE: ダッシュボードのホームページ
 export const HOME_URL = '/home';
 
-// NOTE: お問い合わせページ
-export const INQUIRY_URL = '/inquiry';
-
 // NOTE: ログインページ
 export const LOGIN_URL = '/login';
 
