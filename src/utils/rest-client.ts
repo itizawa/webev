@@ -6,6 +6,7 @@ class RestClient {
 
   constructor() {
     this.axios = axiosBase.create({
+      baseURL: process.env.NEXT_PUBLIC_URL,
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',

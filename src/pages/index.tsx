@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import axios from 'axios';
-
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { imagePath } from '~/libs/constants/imagePath';
@@ -13,6 +11,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { PageCountupCard } from '~/components/domain/Page/atoms/PageCountupCard';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { restClient } from '~/utils/rest-client';
 
 type Props = {
   count: number;
@@ -42,7 +41,7 @@ const Page: WebevNextPage<Props> = ({ count }) => {
 
 export async function getStaticProps() {
   try {
-    const { data: count } = await axios.get<number>(`${process.env.FRONTEND_URL_FROM_NEXT_SERVER || 'http://localhost:3000'}/api/pages/all`);
+    const { data: count } = await restClient.apiGet('pages/all');
 
     return {
       props: {
@@ -51,6 +50,8 @@ export async function getStaticProps() {
       revalidate: 300,
     };
   } catch (error) {
+    console.log(error);
+
     return {
       props: {
         count: 0,

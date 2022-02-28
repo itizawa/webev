@@ -5,8 +5,6 @@ import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -18,21 +16,12 @@ import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
-  index: number;
 };
 
-export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
+export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
-
-  const { attributes, listeners, setNodeRef, transform, transition, isOver } = useSortable({
-    id: index.toString(),
-  });
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
 
   const [isOpen, setIsOpen] = useState(false);
   const [isFetchDirectory, setIsFetchDirectory] = useState(false);
@@ -85,13 +74,8 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
         className="text-white text-left rounded d-flex"
         onClick={() => router.push(`/directory/${directory._id}`)}
         isActive={isActive}
-        isOver={isOver}
         onMouseEnter={() => setIsHoverDirectoryItem(true)}
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
-        ref={setNodeRef}
-        style={style}
-        {...attributes}
-        {...listeners}
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && (
@@ -160,9 +144,9 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory, index }) => {
           )}
           {childrenDirectoryTrees && (
             <>
-              {childrenDirectoryTrees.map((childrenDirectoryTree, index) => {
+              {childrenDirectoryTrees.map((childrenDirectoryTree) => {
                 const childDirectory = childrenDirectoryTree.descendant as Directory;
-                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} index={index} />;
+                return <DirectorySidebarListItem key={childrenDirectoryTree._id} directory={childDirectory} />;
               })}
               {childrenDirectoryTrees.length === 0 && <div className="ps-3 my-1">No Directory</div>}
             </>
@@ -179,7 +163,7 @@ const StyledEmojiWrapper = styled.span`
   }
 `;
 
-const StyledDiv = styled.div<{ isActive?: boolean; isOver: boolean }>`
+const StyledDiv = styled.div<{ isActive?: boolean }>`
   align-items: center;
   /* ズレをなくすための調整 */
   height: 24px;
@@ -205,9 +189,4 @@ const StyledDiv = styled.div<{ isActive?: boolean; isOver: boolean }>`
     background-color: rgba(200, 200, 200, 0.2);
     transition: all 300ms linear;
   }`}
-  ${({ isOver }) =>
-    isOver &&
-    `
-  background-color: rgba(111, 66, 193, 0.2);
-    transition: all 300ms linear;`}
 `;
