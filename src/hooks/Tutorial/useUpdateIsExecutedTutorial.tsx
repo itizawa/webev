@@ -17,9 +17,11 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
   const updateIsExecutedTutorial = useCallback(async () => {
     setIsLoading(true);
 
-    const { data } = await restClient.apiPut<User>('/users/me/isExecutedTutorial');
+    const [{ data }] = await Promise.all([
+      restClient.apiPut<User>('/users/me/isExecutedTutorial'),
 
-    await restClient.apiPost('/pages', { url: URLS.HOW_TO_USE });
+      await restClient.apiPost('/pages', { url: URLS.HOW_TO_USE }),
+    ]);
     mutatePagePagination();
 
     setTimeout(() => {
