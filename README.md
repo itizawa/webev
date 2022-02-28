@@ -27,7 +27,7 @@ From here onward for those who start up by themselves.
 
 ## Installation
 
-1. Clone the same versions of [Webev](https://github.com/itizaworld/webev).
+1. Clone the same versions of [webev](https://github.com/itizaworld/webev).
 
 1. Prepare environment variables.  
 See the [environment variable section](https://github.com/itizawa/webev-front/#--environmental-variables) below
