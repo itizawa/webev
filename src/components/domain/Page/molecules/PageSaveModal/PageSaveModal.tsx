@@ -6,7 +6,6 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 import { Modal } from '~/components/base/molecules/Modal';
 
 import { useDirectoryForSavePage } from '~/stores/modal';
-import { useSocketId } from '~/stores/contexts';
 
 import { useLocale } from '~/hooks/useLocale';
 import { isValidUrl } from '~/utils/isValidUrl';
@@ -18,7 +17,6 @@ export const PageSaveModal: VFC = () => {
   const [url, setUrl] = useState('');
 
   const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
-  const { data: socketId } = useSocketId();
 
   const { mutatePagePagination } = usePagePagination();
 
@@ -26,7 +24,7 @@ export const PageSaveModal: VFC = () => {
     e.preventDefault();
 
     try {
-      await restClient.apiPost('/pages', { url, socketId, directoryId: directoryForSavePage?._id });
+      await restClient.apiPost('/pages', { url, directoryId: directoryForSavePage?._id });
       toastSuccess(t.toastr_save_url);
       mutatePagePagination();
       closeModal();

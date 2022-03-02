@@ -1,0 +1,1 @@
+export { useOgp } from './useOgp';
