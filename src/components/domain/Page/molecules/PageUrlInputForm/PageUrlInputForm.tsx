@@ -1,50 +1,27 @@
-import { VFC, useState } from 'react';
+import { VFC, useState, useCallback } from 'react';
 
-import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastSuccess } from '~/utils/toastr';
 
 import { useLocale } from '~/hooks/useLocale';
 import { isValidUrl } from '~/utils/isValidUrl';
-import { usePagePagination } from '~/hooks/Page';
-import { generateMockPage } from '~/mock/generateMockPage';
-import { Page } from '~/domains/Page';
+import { usePostPage } from '~/hooks/Page/usePostPage';
 
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
-
-  const { activePage, pagePagination, mutatePagePagination } = usePagePagination();
-
   const [url, setUrl] = useState('');
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
-    if (!pagePagination) return;
+  const { postPage } = usePostPage();
 
-    try {
+  const onSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      e.preventDefault();
+
+      postPage(url);
       toastSuccess(t.toastr_save_url);
-      // TODO: hooks
-      mutatePagePagination(restClient.apiPost('/pages', { url }).then(), {
-        optimisticData: {
-          ...pagePagination,
-          docs:
-            activePage === 1
-              ? [generateMockPage({ title: '...Loading', updatedAt: new Date() }), ...pagePagination.docs]
-              : pagePagination.docs,
-        },
-        populateCache: ({ data: page }: { data: Page }, pagePagination) => {
-          return {
-            ...pagePagination,
-            docs: activePage === 1 ? [page, ...pagePagination.docs] : pagePagination.docs,
-          };
-        },
-        rollbackOnError: true,
-        revalidate: false,
-      });
       setUrl('');
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
+    },
+    [postPage, t.toastr_save_url, url],
+  );
 
   return (
     <form className="input-group" onSubmit={onSubmit}>
