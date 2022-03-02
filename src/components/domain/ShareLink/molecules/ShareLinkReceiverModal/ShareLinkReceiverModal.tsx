@@ -16,23 +16,17 @@ export const ShareLinkReceiverModal: VFC = () => {
   const { t } = useLocale();
 
   const { mutatePagePagination } = usePagePagination();
-
-  const [title, setTitle] = useState<string>();
   const [url, setUrl] = useState<string>();
 
   const { data: ogp, isValidating } = useOgp(url);
 
   useEffect(() => {
-    if (typeof router.query.title === 'string') {
-      setTitle(router.query.title);
-    }
     if (typeof router.query.url === 'string') {
       setUrl(router.query.url);
     }
   }, [router]);
 
   const handleClickCloseButton = () => {
-    setTitle(undefined);
     setUrl(undefined);
     router.push(router.pathname);
   };
@@ -41,7 +35,6 @@ export const ShareLinkReceiverModal: VFC = () => {
     try {
       await restClient.apiPost('/pages', { url });
       toastSuccess(t.toastr_save_url);
-      setTitle(undefined);
       setUrl(undefined);
       mutatePagePagination();
       router.push(router.pathname);
@@ -63,7 +56,7 @@ export const ShareLinkReceiverModal: VFC = () => {
       ) : (
         <FixedImage imageUrl={ogp?.image} />
       )}
-      <h5 className="text-center my-3">{title || 'No title'}</h5>
+      <h5 className="text-center my-3">{ogp?.title || 'No title'}</h5>
       <div className="d-flex justify-content-evenly mt-5">
         <button className="btn btn-secondary" onClick={handleClickCloseButton}>
           {t.cancel}
