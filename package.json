@@ -28,7 +28,7 @@
     "date-fns": "2.28.0",
     "emoji-mart": "3.0.1",
     "mongodb": "4.4.0",
-    "mongoose": "6.2.3",
+    "mongoose": "6.2.4",
     "mongoose-paginate-v2": "1.6.3",
     "next": "12.1.0",
     "next-auth": "4.2.1",
