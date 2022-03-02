@@ -19,7 +19,7 @@ export const usePostPage = (): { postPage: (url: string) => void } => {
           ...pagePagination,
           docs:
             activePage === 1
-              ? [generateMockPage({ title: '...Loading', updatedAt: new Date() }), ...pagePagination.docs]
+              ? [generateMockPage({ title: '...Loading', siteName: '...Loading', updatedAt: new Date() }), ...pagePagination.docs]
               : pagePagination.docs,
         },
         populateCache: ({ data: page }: { data: Page }, pagePagination) => {
