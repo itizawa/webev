@@ -10,7 +10,7 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { FixedImage } from '~/components/base/atoms/FixedImage';
-import { useOgp } from '~/stores/ogp';
+import { useOgp } from '~/hooks/Ogp/useOgp';
 
 export const ShareLinkReceiverModal: VFC = () => {
   const router = useRouter();
