@@ -44,7 +44,7 @@ export const ShareLinkReceiverModal: VFC = () => {
   };
 
   return (
-    <Modal title={t.save_page} isOpen={url != null} toggle={handleClickCloseButton}>
+    <Modal title={t.save_page} isOpen={!!url} toggle={handleClickCloseButton}>
       {isValidating ? (
         <StyledDiv className="position-relative w-100">
           <div className="position-absolute top-0 left-0 w-100 h-100 d-flex align-items-center justify-content-center">
