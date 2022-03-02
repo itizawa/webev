@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { Modal } from '~/components/base/molecules/Modal';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
-import { useSocketId } from '~/stores/contexts';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
@@ -16,11 +15,10 @@ export const ShareLinkReceiverModal: VFC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
-  const { data: socketId } = useSocketId();
   const { mutatePagePagination } = usePagePagination();
 
-  const [title, setTitle] = useState<string | null>();
-  const [url, setUrl] = useState<string | null>();
+  const [title, setTitle] = useState<string>();
+  const [url, setUrl] = useState<string>();
 
   const { data: ogp, isValidating } = useOgp(url);
 
@@ -34,17 +32,17 @@ export const ShareLinkReceiverModal: VFC = () => {
   }, [router]);
 
   const handleClickCloseButton = () => {
-    setTitle(null);
-    setUrl(null);
+    setTitle(undefined);
+    setUrl(undefined);
     router.push(router.pathname);
   };
 
   const handleClickSubmitButton = async () => {
     try {
-      await restClient.apiPost('/pages', { url, socketId });
+      await restClient.apiPost('/pages', { url });
       toastSuccess(t.toastr_save_url);
-      setTitle(null);
-      setUrl(null);
+      setTitle(undefined);
+      setUrl(undefined);
       mutatePagePagination();
       router.push(router.pathname);
     } catch (err) {

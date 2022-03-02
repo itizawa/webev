@@ -4,7 +4,6 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useSocketId } from '~/stores/contexts';
 import { isValidUrl } from '~/utils/isValidUrl';
 import { usePagePagination } from '~/hooks/Page';
 import { generateMockPage } from '~/mock/generateMockPage';
@@ -14,7 +13,6 @@ export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();
 
   const { activePage, pagePagination, mutatePagePagination } = usePagePagination();
-  const { data: socketId } = useSocketId();
 
   const [url, setUrl] = useState('');
 
@@ -25,7 +23,7 @@ export const PageUrlInputForm: VFC = () => {
     try {
       toastSuccess(t.toastr_save_url);
       // TODO: hooks
-      mutatePagePagination(restClient.apiPost('/pages', { url, socketId }).then(), {
+      mutatePagePagination(restClient.apiPost('/pages', { url }).then(), {
         optimisticData: {
           ...pagePagination,
           docs:
