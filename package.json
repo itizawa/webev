@@ -57,7 +57,7 @@
     "@types/react": "17.0.39",
     "@types/react-copy-to-clipboard": "5.0.2",
     "@types/react-test-renderer": "17.0.1",
-    "@types/styled-components": "5.1.23",
+    "@types/styled-components": "5.1.24",
     "@types/throttle-debounce": "2.1.0",
     "@types/toastr": "2.1.39",
     "@typescript-eslint/eslint-plugin": "5.12.1",
