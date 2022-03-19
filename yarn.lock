@@ -1399,10 +1399,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@next-auth/mongodb-adapter@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@next-auth/mongodb-adapter/-/mongodb-adapter-1.0.1.tgz#604225bea6e7a1071e16be9e969da6f2a8e9fa8a"
-  integrity sha512-lelT++VsktPQ3wdwRVTZuCR5M6upJge0nhiI/I/xYd45ekFaFp1reumZ0JywlxkR59dTRXDQLYEzU/JlMIcR5A==
+"@next-auth/mongodb-adapter@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@next-auth/mongodb-adapter/-/mongodb-adapter-1.0.3.tgz#9ba4daaf9d789bc1eda29bad2ec6aef3330d1bd9"
+  integrity sha512-oO8OYjMhYx8s5qsdWWD+yNCqszCO7ewg6UkDhvfY0KhJRbcoOAwOgYYH5Bo4ZGJDqmIw8g6JeGipP7+xLa2Ynw==
 
 "@next/env@12.1.0":
   version "12.1.0"
