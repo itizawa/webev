@@ -31,7 +31,7 @@
     "mongoose": "6.2.7",
     "mongoose-paginate-v2": "1.6.3",
     "next": "12.1.0",
-    "next-auth": "4.2.1",
+    "next-auth": "4.3.1",
     "next-connect": "0.12.2",
     "next-pwa": "5.4.6",
     "react": "17.0.2",
