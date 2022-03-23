@@ -21,7 +21,7 @@ Webev is OSS of bookmark manager that improves the organization of information.
   <img src="https://user-images.githubusercontent.com/48426654/118361581-175ca900-b5c7-11eb-8c61-c5fc69053776.jpg"></img>
 </a>
 
-## :rocket: Want to try it right away? Here is SaaS => <https://webev.cloud/> :rocket
+## :rocket: Want to try it right away? Here is SaaS => <https://webev.cloud/> :rocket:
 
 From here onward for those who start up by themselves.
 
