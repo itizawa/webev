@@ -42,7 +42,7 @@
     "reactstrap": "9.0.1",
     "sass": "1.49.9",
     "sass-loader": "12.6.0",
-    "styled-components": "5.3.3",
+    "styled-components": "5.3.5",
     "swr": "1.2.2",
     "throttle-debounce": "3.0.1",
     "toastr": "2.1.4",
