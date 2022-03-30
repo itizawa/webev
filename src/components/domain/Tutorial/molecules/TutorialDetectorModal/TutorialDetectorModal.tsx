@@ -1,6 +1,6 @@
-import { useCallback, useRef, VFC } from 'react';
+import { useCallback, VFC } from 'react';
 
-import Reward, { RewardElement } from 'react-rewards';
+import { useReward } from 'react-rewards';
 import { Modal } from '~/components/base/molecules/Modal';
 import { useUpdateIsExecutedTutorial } from '~/hooks/Tutorial/useUpdateIsExecutedTutorial';
 
@@ -14,20 +14,17 @@ export const TutorialDetectorModal: VFC = () => {
 
   const { data: currentUser } = useCurrentUser();
   const { isLoading, updateIsExecutedTutorial } = useUpdateIsExecutedTutorial();
-
-  const okButtonRef = useRef<RewardElement>(null);
+  const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
 
   const handleOkButton = useCallback(async () => {
-    if (!okButtonRef.current) return;
-
     try {
-      okButtonRef.current.rewardMe();
+      confettiReward();
       await updateIsExecutedTutorial();
       toastSuccess(t.toastr_start_webev);
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  }, [t.toastr_start_webev, updateIsExecutedTutorial]);
+  }, [confettiReward, t.toastr_start_webev, updateIsExecutedTutorial]);
 
   return (
     <Modal isOpen={!currentUser?.isExecutedTutorial} title={t.welcome_webev}>
@@ -39,13 +36,11 @@ export const TutorialDetectorModal: VFC = () => {
           {t.tutorial_desc2}
         </p>
         <p dangerouslySetInnerHTML={{ __html: t.tutorial_desc3 }} />
-        <Reward ref={okButtonRef} type="confetti" config={{ zIndex: 1000, springAnimation: false, lifetime: 100 }}>
-          <div className="d-flex justify-content-center mt-5">
-            <button className="btn btn-indigo" onClick={handleOkButton} disabled={isLoading}>
-              {t.start_immediately}
-            </button>
-          </div>
-        </Reward>
+        <div className="d-flex justify-content-center mt-5" id="confettiReward">
+          <button className="btn btn-indigo" onClick={handleOkButton} disabled={isLoading}>
+            {t.start_immediately}
+          </button>
+        </div>
       </div>
     </Modal>
   );
