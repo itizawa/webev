@@ -1,6 +1,7 @@
-name: build-dev
+name: client：CI
 
 on:
+  # TODO: 特定のファイルを編集したときのみ走るようにする
   push:
     branches-ignore:
       - release/**
@@ -54,9 +55,9 @@ jobs:
         if: steps.cache-dependencies.outputs.cache-hit != 'true'
         run: yarn
       
-      - name: yarn build
+      - name: yarn client:build
         run: |
-          yarn build
+          yarn client:build
 
   # run-tests:
   #   name: Run test
