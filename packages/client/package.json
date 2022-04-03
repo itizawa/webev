@@ -1,20 +1,13 @@
 {
-  "name": "webev",
-  "version": "1.0.6",
+  "name": "@monorepo/client",
   "main": "index.js",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "dev": "lerna run dev --parallel --scope=@monorepo/client",
-    "client:dev": "lerna run dev --parallel --scope=@monorepo/client",
-    "client:build": "lerna run build --parallel --scope=@monorepo/client",
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
-    "test:coverage": "jest --collect-coverage",
-    "release": "lerna publish"
+    "test:coverage": "jest --collect-coverage"
   },
   "repository": {
     "type": "git",
@@ -75,29 +68,25 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.2",
-    "eslint": "8.12.0",
-    "eslint-config-next": "12.1.4",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-import-resolver-typescript": "2.7.0",
-    "eslint-plugin-import": "2.25.4",
-    "eslint-plugin-jsx-a11y": "6.5.1",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.29.4",
-    "eslint-plugin-react-hooks": "4.4.0",
-    "jest": "27.5.1",
-    "jest-styled-components": "7.0.8",
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
-    "lerna": "^4.0.0",
     "npm-run-all": "4.1.5",
-    "prettier": "2.6.1",
     "react-test-renderer": "17.0.2",
-    "stylelint": "14.6.1",
-    "stylelint-config-recess-order": "3.0.0",
-    "ts-jest": "27.1.4",
     "typescript": "4.6.3"
   },
   "volta": {
     "node": "16.14.2"
+  },
+  "description": "> TODO: description",
+  "version": "1.0.0",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
   }
 }
