@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { PostPageByUrlUseCase } from '@monorepo/webev-client/src/application/useCases/page/PostPageByUrlUseCase';
-import { PageRepository } from '@monorepo/webev-client/src/infrastructure/repositories/pageRepository';
-import dbConnect from '@monorepo/webev-client/src/middlewares/dbConnect';
+import { PostPageByUrlUseCase } from '@monorepo/client/src/application/useCases/page/PostPageByUrlUseCase';
+import { PageRepository } from '@monorepo/client/src/infrastructure/repositories/pageRepository';
+import dbConnect from '@monorepo/client/src/middlewares/dbConnect';
 
 const postPageByUrlUseCase = new PostPageByUrlUseCase(new PageRepository());
 

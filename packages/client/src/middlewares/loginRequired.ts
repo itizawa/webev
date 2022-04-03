@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next';
 import { NextHandler } from 'next-connect';
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
+import { User } from '@monorepo/client/src/domains/User';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
 
 /**
  * ログインしているかどうかチェックするミドルウェア

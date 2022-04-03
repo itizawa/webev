@@ -1,8 +1,8 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { useAuthenticationSWR } from '@monorepo/webev-client/src/stores/use-authentication-swr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { User } from '@monorepo/client/src/domains/User';
+import { useAuthenticationSWR } from '@monorepo/client/src/stores/use-authentication-swr';
 
 export const useCurrentUser = (): SWRResponse<User, Error> => {
   return useAuthenticationSWR('/users/me', (endpoint: string) => restClient.apiGet(endpoint).then((result) => result.data), {

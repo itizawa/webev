@@ -1,5 +1,5 @@
-import { IPageRepository } from '@monorepo/webev-client/src/application/repositories/IPageRepository';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { IPageRepository } from '@monorepo/client/src/application/repositories/IPageRepository';
+import { Page } from '@monorepo/client/src/domains/Page';
 
 /**
  * pageを削除する

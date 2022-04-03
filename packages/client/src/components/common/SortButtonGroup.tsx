@@ -1,7 +1,7 @@
 import { VFC } from 'react';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
 export const SortButtonGroup: VFC = () => {
   const { t } = useLocale();

@@ -1,6 +1,6 @@
-import { IPageRepository } from '@monorepo/webev-client/src/application/repositories/IPageRepository';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { OgpAdapter } from '@monorepo/webev-client/src/infrastructure/adapters/ogpAdapter';
+import { IPageRepository } from '@monorepo/client/src/application/repositories/IPageRepository';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { OgpAdapter } from '@monorepo/client/src/infrastructure/adapters/ogpAdapter';
 
 const ogpAdapter = new OgpAdapter();
 /**

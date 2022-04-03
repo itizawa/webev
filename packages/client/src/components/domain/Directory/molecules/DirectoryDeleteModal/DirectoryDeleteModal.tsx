@@ -1,15 +1,15 @@
 import { VFC } from 'react';
 
 import { useRouter } from 'next/router';
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { DIRECTORY_INDEX_URL } from '@monorepo/webev-client/src/libs/constants/urls';
+import { DIRECTORY_INDEX_URL } from '@monorepo/client/src/libs/constants/urls';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useDirectoryForDelete } from '@monorepo/webev-client/src/stores/modal';
-import { useDirectoryChildren, useDirectoryPaginationResult } from '@monorepo/webev-client/src/stores/directory';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useDirectoryForDelete } from '@monorepo/client/src/stores/modal';
+import { useDirectoryChildren, useDirectoryPaginationResult } from '@monorepo/client/src/stores/directory';
 
 export const DirectoryDeleteModal: VFC = () => {
   const { t } = useLocale();

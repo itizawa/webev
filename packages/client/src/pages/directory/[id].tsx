@@ -13,37 +13,37 @@ import {
   useDirectoryChildren,
   useDirectoryInformation,
   useDirectoryPaginationResult,
-} from '@monorepo/webev-client/src/stores/directory';
-import { useDirectoryId } from '@monorepo/webev-client/src/stores/page';
+} from '@monorepo/client/src/stores/directory';
+import { useDirectoryId } from '@monorepo/client/src/stores/page';
 import {
   useDirectoryForDelete,
   useParentDirectoryForCreateDirectory,
   useDirectoryForRename,
   useDirectoryForSavePage,
-} from '@monorepo/webev-client/src/stores/modal';
+} from '@monorepo/client/src/stores/modal';
 
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { Tooltip } from '@monorepo/webev-client/src/components/base/atoms/Tooltip';
-import { SearchTextBox } from '@monorepo/webev-client/src/components/case/molecules/SearchTextBox';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LoginRequiredWrapper';
-// import { SortButtonGroup } from '@monorepo/webev-client/src/components/common/SortButtonGroup';
-import { PageList } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageList';
-import { EditableInput } from '@monorepo/webev-client/src/components/case/molecules/EditableInput';
-import { DirectoryListItem } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectoryListItem';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { Tooltip } from '@monorepo/client/src/components/base/atoms/Tooltip';
+import { SearchTextBox } from '@monorepo/client/src/components/case/molecules/SearchTextBox';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LoginRequiredWrapper';
+// import { SortButtonGroup } from '@monorepo/client/src/components/common/SortButtonGroup';
+import { PageList } from '@monorepo/client/src/components/domain/Page/molecules/PageList';
+import { EditableInput } from '@monorepo/client/src/components/case/molecules/EditableInput';
+import { DirectoryListItem } from '@monorepo/client/src/components/domain/Directory/molecules/DirectoryListItem';
 
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
+import { Directory } from '@monorepo/client/src/domains/Directory';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { openFileFolderEmoji } from '@monorepo/webev-client/src/libs/constants/emoji';
-import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { openFileFolderEmoji } from '@monorepo/client/src/libs/constants/emoji';
+import { zIndex } from '@monorepo/client/src/libs/constants/zIndex';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 const emojiSize = 40;
 

@@ -2,16 +2,16 @@ import { VFC, useMemo, useCallback } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import styled from 'styled-components';
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { Page } from '@monorepo/client/src/domains/Page';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useModal } from '@monorepo/webev-client/src/hooks/useModal';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useModal } from '@monorepo/client/src/hooks/useModal';
 
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
-import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
-import { usePagePagination, useSwitchArchive } from '@monorepo/webev-client/src/hooks/Page';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
+import { zIndex } from '@monorepo/client/src/libs/constants/zIndex';
+import { usePagePagination, useSwitchArchive } from '@monorepo/client/src/hooks/Page';
 
 type Props = {
   page: Page;

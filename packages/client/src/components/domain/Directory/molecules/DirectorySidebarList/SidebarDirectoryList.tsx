@@ -1,14 +1,14 @@
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
 
-import { DirectorySidebarListItem } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectorySidebarListItem';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { DirectorySidebarListItem } from '@monorepo/client/src/components/domain/Directory/molecules/DirectorySidebarListItem';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
 
-import { useDirectoryPaginationResult } from '@monorepo/webev-client/src/stores/directory';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useCreateDirectory } from '@monorepo/webev-client/src/hooks/Directory/useCreateDirectory';
+import { useDirectoryPaginationResult } from '@monorepo/client/src/stores/directory';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useCreateDirectory } from '@monorepo/client/src/hooks/Directory/useCreateDirectory';
 
 export const SidebarDirectoryList: VFC = () => {
   const { t } = useLocale();

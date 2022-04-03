@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
 import { usePagePagination } from '.';
 
 /**

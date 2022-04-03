@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
 
 type Props = {
   imageUrl?: string;

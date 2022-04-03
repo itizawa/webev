@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState, VFC } from 'react';
 
 import styled from 'styled-components';
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { FixedImage } from '@monorepo/webev-client/src/components/base/atoms/FixedImage';
-import { useOgp } from '@monorepo/webev-client/src/hooks/Ogp/useOgp';
-import { usePostPage } from '@monorepo/webev-client/src/hooks/Page/usePostPage';
+import { FixedImage } from '@monorepo/client/src/components/base/atoms/FixedImage';
+import { useOgp } from '@monorepo/client/src/hooks/Ogp/useOgp';
+import { usePostPage } from '@monorepo/client/src/hooks/Page/usePostPage';
 
 export const ShareLinkReceiverModal: VFC = () => {
   const router = useRouter();

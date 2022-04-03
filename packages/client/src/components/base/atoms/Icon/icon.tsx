@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { BootstrapIcon, BootstrapColor } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { BootstrapIcon, BootstrapColor } from '@monorepo/client/src/libs/interfaces/variables';
 
 type Props = {
   width?: number;

@@ -2,10 +2,10 @@ import { VFC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { BootstrapIcon } from '@monorepo/webev-client/src/libs/interfaces/variables';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { BootstrapIcon } from '@monorepo/client/src/libs/interfaces/variables';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
 
 export const FooterSubnavBar: VFC = () => {
   const router = useRouter();

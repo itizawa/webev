@@ -5,14 +5,14 @@ import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap
 import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
-import { BootstrapBreakpoints } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { Directory } from '@monorepo/client/src/domains/Directory';
+import { BootstrapBreakpoints } from '@monorepo/client/src/libs/interfaces/variables';
 
-import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '@monorepo/webev-client/src/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '@monorepo/client/src/stores/modal';
 
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
 type Props = {
   directory: Directory;

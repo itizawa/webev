@@ -1,5 +1,5 @@
 import { VFC, ComponentProps, MouseEvent } from 'react';
-import { BootstrapColor } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { BootstrapColor } from '@monorepo/client/src/libs/interfaces/variables';
 import { Icon } from '../../atoms/Icon';
 
 type Props = {

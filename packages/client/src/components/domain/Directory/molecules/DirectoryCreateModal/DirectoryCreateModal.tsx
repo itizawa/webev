@@ -1,13 +1,13 @@
 import { VFC, useState } from 'react';
 
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { useParentDirectoryForCreateDirectory } from '@monorepo/webev-client/src/stores/modal';
+import { useParentDirectoryForCreateDirectory } from '@monorepo/client/src/stores/modal';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useDirectoryChildren } from '@monorepo/webev-client/src/stores/directory';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useDirectoryChildren } from '@monorepo/client/src/stores/directory';
 
 export const DirectoryCreateModal: VFC = () => {
   const { t } = useLocale();

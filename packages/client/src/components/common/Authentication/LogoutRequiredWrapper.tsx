@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 
-import { HOME_URL } from '@monorepo/webev-client/src/libs/constants/urls';
+import { HOME_URL } from '@monorepo/client/src/libs/constants/urls';
 
 export const LoginRequiredWrapper: FC = ({ children }) => {
   const { status } = useSession();

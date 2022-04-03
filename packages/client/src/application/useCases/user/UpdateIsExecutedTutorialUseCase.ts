@@ -1,5 +1,5 @@
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { IUserRepository } from '@monorepo/webev-client/src/application/repositories';
+import { User } from '@monorepo/client/src/domains/User';
+import { IUserRepository } from '@monorepo/client/src/application/repositories';
 
 /**
  * isExecutedTutorialを更新する

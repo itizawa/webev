@@ -1,6 +1,6 @@
 import useSWR, { SWRResponse } from 'swr';
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { User } from '@monorepo/client/src/domains/User';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
 
 /**
  * 現在ログインしているユーザーを返すswr

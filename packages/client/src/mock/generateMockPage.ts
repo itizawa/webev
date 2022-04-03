@@ -1,4 +1,4 @@
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { Page } from '@monorepo/client/src/domains/Page';
 
 export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({

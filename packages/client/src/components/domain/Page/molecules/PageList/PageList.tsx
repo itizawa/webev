@@ -1,15 +1,15 @@
 import { VFC } from 'react';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { useOgpCardLayout } from '@monorepo/webev-client/src/stores/contexts';
-import { OgpLayoutType } from '@monorepo/webev-client/src/libs/interfaces/contexts';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { useOgpCardLayout } from '@monorepo/client/src/stores/contexts';
+import { OgpLayoutType } from '@monorepo/client/src/libs/interfaces/contexts';
 
-import { NoPageAlert } from '@monorepo/webev-client/src/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '@monorepo/webev-client/src/components/common/Parts/PaginationWrapper';
-import { PageListItem } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageListItem';
-import { PageCard } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageCard';
+import { NoPageAlert } from '@monorepo/client/src/components/domain/Page/molecules/NoPageAlert';
+import { PaginationWrapper } from '@monorepo/client/src/components/common/Parts/PaginationWrapper';
+import { PageListItem } from '@monorepo/client/src/components/domain/Page/molecules/PageListItem';
+import { PageCard } from '@monorepo/client/src/components/domain/Page/molecules/PageCard';
 
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 type Props = {
   pages: Page[];

@@ -1,18 +1,18 @@
 import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { useDirectoryForRename } from '@monorepo/webev-client/src/stores/modal';
+import { useDirectoryForRename } from '@monorepo/client/src/stores/modal';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 import {
   useAllDirectories,
   useDirectoryChildren,
   useDirectoryInformation,
   useDirectoryPaginationResult,
-} from '@monorepo/webev-client/src/stores/directory';
+} from '@monorepo/client/src/stores/directory';
 import { Modal } from '../../../../base/molecules/Modal';
 
 export const DirectoryRenameModal: VFC = () => {

@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
 
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { PageCountupCard } from '@monorepo/webev-client/src/components/domain/Page/atoms/PageCountupCard';
-import { DefaultLayout } from '@monorepo/webev-client/src/components/common/Layout/DefaultLayout';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { PageCountupCard } from '@monorepo/client/src/components/domain/Page/atoms/PageCountupCard';
+import { DefaultLayout } from '@monorepo/client/src/components/common/Layout/DefaultLayout';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
 
 type Props = {
   count: number;

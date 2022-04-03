@@ -1,13 +1,13 @@
 import { useCallback, VFC } from 'react';
 
 import { useReward } from 'react-rewards';
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
-import { useUpdateIsExecutedTutorial } from '@monorepo/webev-client/src/hooks/Tutorial/useUpdateIsExecutedTutorial';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
+import { useUpdateIsExecutedTutorial } from '@monorepo/client/src/hooks/Tutorial/useUpdateIsExecutedTutorial';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useCurrentUser } from '@monorepo/webev-client/src/stores/user';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useCurrentUser } from '@monorepo/client/src/stores/user';
 
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
 export const TutorialDetectorModal: VFC = () => {
   const { t } = useLocale();

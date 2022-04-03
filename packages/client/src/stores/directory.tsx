@@ -1,10 +1,10 @@
 import { SWRResponse } from 'swr';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { PaginationResult } from '@monorepo/webev-client/src/libs/interfaces/paginationResult';
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
-import { DirectoryTree } from '@monorepo/webev-client/src/domains/DirectoryTree';
-import { useAuthenticationSWR } from '@monorepo/webev-client/src/stores/use-authentication-swr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { PaginationResult } from '@monorepo/client/src/libs/interfaces/paginationResult';
+import { Directory } from '@monorepo/client/src/domains/Directory';
+import { DirectoryTree } from '@monorepo/client/src/domains/DirectoryTree';
+import { useAuthenticationSWR } from '@monorepo/client/src/stores/use-authentication-swr';
 
 export const useDirectoryPaginationResult = ({
   searchKeyWord,

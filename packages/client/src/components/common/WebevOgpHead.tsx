@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { VFC } from 'react';
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
 
 type Props = {
   siteName?: string;

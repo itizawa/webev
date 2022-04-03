@@ -2,22 +2,22 @@ import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { usePageByPageId } from '@monorepo/webev-client/src/stores/page';
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { toastError } from '@monorepo/webev-client/src/utils/toastr';
+import { usePageByPageId } from '@monorepo/client/src/stores/page';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { toastError } from '@monorepo/client/src/utils/toastr';
 
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
 
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LoginRequiredWrapper';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
-import { TopSubnavBar } from '@monorepo/webev-client/src/components/common/Parts/TopSubnavBar';
-import { PageManageDropdown } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageManageDropdown';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LoginRequiredWrapper';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
+import { TopSubnavBar } from '@monorepo/client/src/components/common/Parts/TopSubnavBar';
+import { PageManageDropdown } from '@monorepo/client/src/components/domain/Page/molecules/PageManageDropdown';
 
-import { useSwitchArchive } from '@monorepo/webev-client/src/hooks/Page/useSwitchArchive';
-import { speech } from '@monorepo/webev-client/src/utils/services';
+import { useSwitchArchive } from '@monorepo/client/src/hooks/Page/useSwitchArchive';
+import { speech } from '@monorepo/client/src/utils/services';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();

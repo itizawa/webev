@@ -1,8 +1,8 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
 
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
-import { OgpAdapter } from '@monorepo/webev-client/src/infrastructure/adapters/ogpAdapter';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
+import { OgpAdapter } from '@monorepo/client/src/infrastructure/adapters/ogpAdapter';
 
 const ogpAdapter = new OgpAdapter();
 

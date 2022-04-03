@@ -2,10 +2,10 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
-import { BootstrapBreakpoints } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
+import { BootstrapBreakpoints } from '@monorepo/client/src/libs/interfaces/variables';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { Page } from '@monorepo/client/src/domains/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 40;
 

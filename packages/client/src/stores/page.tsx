@@ -1,10 +1,10 @@
 import { SWRResponse } from 'swr';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { PaginationResult } from '@monorepo/webev-client/src/libs/interfaces/paginationResult';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { useStaticSWR } from '@monorepo/webev-client/src/stores/use-static-swr';
-import { useAuthenticationSWR } from '@monorepo/webev-client/src/stores/use-authentication-swr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { PaginationResult } from '@monorepo/client/src/libs/interfaces/paginationResult';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { useStaticSWR } from '@monorepo/client/src/stores/use-static-swr';
+import { useAuthenticationSWR } from '@monorepo/client/src/stores/use-authentication-swr';
 
 export const useDirectoryId = (initialData?: string | null): SWRResponse<string | null, Error> => {
   return useStaticSWR('directoryId', initialData);

@@ -6,15 +6,15 @@ import styled from 'styled-components';
 
 import { signIn } from 'next-auth/react';
 
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
 
-import { toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { toastSuccess } from '@monorepo/client/src/utils/toastr';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LogoutRequiredWrapper';
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { DefaultLayout } from '@monorepo/webev-client/src/components/common/Layout/DefaultLayout';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LogoutRequiredWrapper';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { DefaultLayout } from '@monorepo/client/src/components/common/Layout/DefaultLayout';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();

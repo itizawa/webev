@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
 
 type Props = {
   totalItemsCount: number;

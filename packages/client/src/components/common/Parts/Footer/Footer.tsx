@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '@monorepo/webev-client/src/libs/constants/urls';
+import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '@monorepo/client/src/libs/constants/urls';
 
-import { Tooltip } from '@monorepo/webev-client/src/components/base/atoms/Tooltip';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { Tooltip } from '@monorepo/client/src/components/base/atoms/Tooltip';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
 export const Footer: FC = () => {
   const { t } = useLocale();

@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { VFC } from 'react';
-import { imagePath } from '@monorepo/webev-client/src/libs/constants/imagePath';
+import { imagePath } from '@monorepo/client/src/libs/constants/imagePath';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
 export const NoPageAlert: VFC = () => {
   const { t } = useLocale();

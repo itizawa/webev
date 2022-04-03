@@ -1,7 +1,7 @@
 import { SWRResponse } from 'swr';
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { useStaticSWR } from '@monorepo/webev-client/src/stores/use-static-swr';
+import { Directory } from '@monorepo/client/src/domains/Directory';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { useStaticSWR } from '@monorepo/client/src/stores/use-static-swr';
 
 export const usePageForAddToDirectory = (initialData?: Page): SWRResponse<Page | null, Error> => {
   return useStaticSWR<Page | null, Error>('pageForAddToDirectory', initialData);

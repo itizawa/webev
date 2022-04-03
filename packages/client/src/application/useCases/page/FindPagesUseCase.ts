@@ -1,9 +1,9 @@
 import { FilterQuery } from 'mongoose';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { IPageRepository } from '@monorepo/webev-client/src/application/repositories';
-import { PaginationOptions } from '@monorepo/webev-client/src/libs/interfaces/pagination';
-import { PaginationResult } from '@monorepo/webev-client/src/libs/interfaces/paginationResult';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { IPageRepository } from '@monorepo/client/src/application/repositories';
+import { PaginationOptions } from '@monorepo/client/src/libs/interfaces/pagination';
+import { PaginationResult } from '@monorepo/client/src/libs/interfaces/paginationResult';
 
 /**
  * ページリストを取得する

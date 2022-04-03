@@ -1,10 +1,10 @@
 import { VFC, useState, useCallback } from 'react';
 
-import { toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { isValidUrl } from '@monorepo/webev-client/src/utils/isValidUrl';
-import { usePostPage } from '@monorepo/webev-client/src/hooks/Page/usePostPage';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { isValidUrl } from '@monorepo/client/src/utils/isValidUrl';
+import { usePostPage } from '@monorepo/client/src/hooks/Page/usePostPage';
 
 export const PageUrlInputForm: VFC = () => {
   const { t } = useLocale();

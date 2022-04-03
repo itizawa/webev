@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { TOP_URL } from '@monorepo/webev-client/src/libs/constants/urls';
+import { TOP_URL } from '@monorepo/client/src/libs/constants/urls';
 
-import { Navbar } from '@monorepo/webev-client/src/components/common/Navbar';
-import { Footer } from '@monorepo/webev-client/src/components/common/Parts/Footer/Footer';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { Navbar } from '@monorepo/client/src/components/common/Navbar';
+import { Footer } from '@monorepo/client/src/components/common/Parts/Footer/Footer';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
 export const MaintenanceLayout: VFC = () => {
   const { t } = useLocale();

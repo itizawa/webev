@@ -2,13 +2,13 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 
 import { useRouter } from 'next/router';
-import { useUserById } from '@monorepo/webev-client/src/stores/user';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useUserById } from '@monorepo/client/src/stores/user';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { UserIcon } from '@monorepo/webev-client/src/components/domain/User/atoms/UserIcon';
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
+import { UserIcon } from '@monorepo/client/src/components/domain/User/atoms/UserIcon';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

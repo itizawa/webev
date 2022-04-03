@@ -4,13 +4,13 @@ import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from
 import { signOut } from 'next-auth/react';
 import style from 'styled-components';
 
-import { UserIcon } from '@monorepo/webev-client/src/components/domain/User/atoms/UserIcon';
+import { UserIcon } from '@monorepo/client/src/components/domain/User/atoms/UserIcon';
 
-import { useCurrentUser } from '@monorepo/webev-client/src/stores/users';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useCurrentUser } from '@monorepo/client/src/stores/users';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
-import { HOME_URL } from '@monorepo/webev-client/src/libs/constants/urls';
+import { zIndex } from '@monorepo/client/src/libs/constants/zIndex';
+import { HOME_URL } from '@monorepo/client/src/libs/constants/urls';
 
 export const PersonalDropdown: VFC = () => {
   const { t } = useLocale();

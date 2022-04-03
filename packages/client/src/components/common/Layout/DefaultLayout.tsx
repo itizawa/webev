@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { Navbar } from '@monorepo/webev-client/src/components/common/Navbar';
-import { Footer } from '@monorepo/webev-client/src/components/common/Parts/Footer/Footer';
+import { Navbar } from '@monorepo/client/src/components/common/Navbar';
+import { Footer } from '@monorepo/client/src/components/common/Parts/Footer/Footer';
 
-import { BootstrapBreakpoints } from '@monorepo/webev-client/src/libs/interfaces/variables';
-import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
+import { BootstrapBreakpoints } from '@monorepo/client/src/libs/interfaces/variables';
+import { zIndex } from '@monorepo/client/src/libs/constants/zIndex';
 
 export const DefaultLayout: FC = ({ children }) => {
   return (

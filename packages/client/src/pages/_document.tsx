@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
-import { GA_ID } from '@monorepo/webev-client/src/utils/gtag';
+import { GA_ID } from '@monorepo/client/src/utils/gtag';
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (

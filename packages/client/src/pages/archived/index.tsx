@@ -1,16 +1,16 @@
 import { ReactNode, useEffect } from 'react';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { SearchTextBox } from '@monorepo/webev-client/src/components/case/molecules/SearchTextBox';
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '@monorepo/webev-client/src/components/common/SortButtonGroup';
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { PageList } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageList';
+import { SearchTextBox } from '@monorepo/client/src/components/case/molecules/SearchTextBox';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LoginRequiredWrapper';
+import { SortButtonGroup } from '@monorepo/client/src/components/common/SortButtonGroup';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { PageList } from '@monorepo/client/src/components/domain/Page/molecules/PageList';
 
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

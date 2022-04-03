@@ -2,15 +2,15 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { Page } from '@monorepo/client/src/domains/Page';
 
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { PageManageDropdown } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageManageDropdown';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { PageManageDropdown } from '@monorepo/client/src/components/domain/Page/molecules/PageManageDropdown';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { speech } from '@monorepo/webev-client/src/utils/services';
+import { zIndex } from '@monorepo/client/src/libs/constants/zIndex';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { speech } from '@monorepo/client/src/utils/services';
 import { useHooks } from './hooks';
 
 type Props = {

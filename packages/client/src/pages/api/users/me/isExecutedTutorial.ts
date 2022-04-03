@@ -1,10 +1,10 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
-import { UpdateIsExecutedTutorialUseCase } from '@monorepo/webev-client/src/application/useCases/user';
-import { UserRepository } from '@monorepo/webev-client/src/infrastructure/repositories/userRepository';
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
-import { connectDB } from '@monorepo/webev-client/src/middlewares/dbConnect';
-import { injectUserToRequest } from '@monorepo/webev-client/src/middlewares/injectUserToRequest';
+import { UpdateIsExecutedTutorialUseCase } from '@monorepo/client/src/application/useCases/user';
+import { UserRepository } from '@monorepo/client/src/infrastructure/repositories/userRepository';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
+import { connectDB } from '@monorepo/client/src/middlewares/dbConnect';
+import { injectUserToRequest } from '@monorepo/client/src/middlewares/injectUserToRequest';
 
 const updateIsExecutedTutorialUseCase = new UpdateIsExecutedTutorialUseCase(new UserRepository());
 

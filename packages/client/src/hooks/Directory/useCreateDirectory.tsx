@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { Directory } from '@monorepo/client/src/domains/Directory';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
 
 export const useCreateDirectory = (): { isLoading: boolean; createDirectory: (name: string) => Promise<Directory> } => {
   const [isLoading, setIsLoading] = useState(false);

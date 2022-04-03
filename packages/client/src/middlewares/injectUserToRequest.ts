@@ -2,10 +2,10 @@ import { NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 import { NextHandler } from 'next-connect';
 
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { FindByEmailUseCase } from '@monorepo/webev-client/src/application/useCases/user';
-import { UserRepository } from '@monorepo/webev-client/src/infrastructure/repositories/userRepository';
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
+import { User } from '@monorepo/client/src/domains/User';
+import { FindByEmailUseCase } from '@monorepo/client/src/application/useCases/user';
+import { UserRepository } from '@monorepo/client/src/infrastructure/repositories/userRepository';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
 
 const findByEmailUseCase = new FindByEmailUseCase(new UserRepository());
 /**

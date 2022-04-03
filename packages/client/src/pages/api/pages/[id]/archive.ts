@@ -1,13 +1,13 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
 
-import { connectDB } from '@monorepo/webev-client/src/middlewares/dbConnect';
+import { connectDB } from '@monorepo/client/src/middlewares/dbConnect';
 
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
-import { injectUserToRequest } from '@monorepo/webev-client/src/middlewares/injectUserToRequest';
-import { loginRequired } from '@monorepo/webev-client/src/middlewares/loginRequired';
-import { PageRepository } from '@monorepo/webev-client/src/infrastructure/repositories';
-import { ArchivePageUseCase } from '@monorepo/webev-client/src/application/useCases/page';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
+import { injectUserToRequest } from '@monorepo/client/src/middlewares/injectUserToRequest';
+import { loginRequired } from '@monorepo/client/src/middlewares/loginRequired';
+import { PageRepository } from '@monorepo/client/src/infrastructure/repositories';
+import { ArchivePageUseCase } from '@monorepo/client/src/application/useCases/page';
 
 const archivePageUseCase = new ArchivePageUseCase(new PageRepository());
 

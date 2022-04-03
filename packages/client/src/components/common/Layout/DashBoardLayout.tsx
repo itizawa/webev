@@ -3,23 +3,23 @@ import { useRouter } from 'next/router';
 import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { useCurrentUser } from '@monorepo/webev-client/src/stores/user';
+import { useCurrentUser } from '@monorepo/client/src/stores/user';
 
-import { Navbar } from '@monorepo/webev-client/src/components/common/Navbar';
-import { Sidebar } from '@monorepo/webev-client/src/components/common/Sidebar';
-import { FooterSubnavBar } from '@monorepo/webev-client/src/components/common/FooterSubnavBar';
-import { Footer } from '@monorepo/webev-client/src/components/common/Parts/Footer';
+import { Navbar } from '@monorepo/client/src/components/common/Navbar';
+import { Sidebar } from '@monorepo/client/src/components/common/Sidebar';
+import { FooterSubnavBar } from '@monorepo/client/src/components/common/FooterSubnavBar';
+import { Footer } from '@monorepo/client/src/components/common/Parts/Footer';
 
-// import { DirectoryCreateModal } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectoryCreateModal';
-// import { DirectoryDeleteModal } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectoryDeleteModal';
-// import { DirectoryRenameModal } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectoryRenameModal';
-import { PageSaveModal } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageSaveModal';
+// import { DirectoryCreateModal } from '@monorepo/client/src/components/domain/Directory/molecules/DirectoryCreateModal';
+// import { DirectoryDeleteModal } from '@monorepo/client/src/components/domain/Directory/molecules/DirectoryDeleteModal';
+// import { DirectoryRenameModal } from '@monorepo/client/src/components/domain/Directory/molecules/DirectoryRenameModal';
+import { PageSaveModal } from '@monorepo/client/src/components/domain/Page/molecules/PageSaveModal';
 
-import { ShareLinkReceiverModal } from '@monorepo/webev-client/src/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-import { TutorialDetectorModal } from '@monorepo/webev-client/src/components/domain/Tutorial/molecules/TutorialDetectorModal';
-import { ScrollTopButton } from '@monorepo/webev-client/src/components/case/atoms/ScrollTopButton';
+import { ShareLinkReceiverModal } from '@monorepo/client/src/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
+import { TutorialDetectorModal } from '@monorepo/client/src/components/domain/Tutorial/molecules/TutorialDetectorModal';
+import { ScrollTopButton } from '@monorepo/client/src/components/case/atoms/ScrollTopButton';
 
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 export const DashBoardLayout: FC = ({ children }) => {
   const { data: session } = useSession();

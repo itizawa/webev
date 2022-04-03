@@ -1,8 +1,8 @@
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
-import { connectDB } from '@monorepo/webev-client/src/middlewares/dbConnect';
-import { injectUserToRequest } from '@monorepo/webev-client/src/middlewares/injectUserToRequest';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
+import { connectDB } from '@monorepo/client/src/middlewares/dbConnect';
+import { injectUserToRequest } from '@monorepo/client/src/middlewares/injectUserToRequest';
 
 const handler = nc()
   .use(connectDB)

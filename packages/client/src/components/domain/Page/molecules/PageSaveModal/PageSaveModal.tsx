@@ -1,15 +1,15 @@
 import { VFC, useState } from 'react';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
 
-import { useDirectoryForSavePage } from '@monorepo/webev-client/src/stores/modal';
+import { useDirectoryForSavePage } from '@monorepo/client/src/stores/modal';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { isValidUrl } from '@monorepo/webev-client/src/utils/isValidUrl';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { isValidUrl } from '@monorepo/client/src/utils/isValidUrl';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 export const PageSaveModal: VFC = () => {
   const { t } = useLocale();

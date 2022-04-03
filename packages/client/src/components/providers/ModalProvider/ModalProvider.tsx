@@ -1,7 +1,7 @@
 import React, { VFC, useState, createContext, ReactNode, useContext, useCallback } from 'react';
 
-import { DeletePageModal } from '@monorepo/webev-client/src/components/domain/Page';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { DeletePageModal } from '@monorepo/client/src/components/domain/Page';
+import { Page } from '@monorepo/client/src/domains/Page';
 
 type DeletePageModalType = {
   name?: 'deletePageModal' | null;

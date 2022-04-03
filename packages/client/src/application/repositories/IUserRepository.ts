@@ -1,4 +1,4 @@
-import { User } from '@monorepo/webev-client/src/domains/User';
+import { User } from '@monorepo/client/src/domains/User';
 
 export interface IUserRepository {
   findOne(pages: Partial<User>): Promise<User | null>;

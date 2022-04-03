@@ -2,20 +2,20 @@ import { ReactNode } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { useApiToken, useCurrentUser } from '@monorepo/webev-client/src/stores/user';
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LoginRequiredWrapper';
-import { toastSuccess, toastError } from '@monorepo/webev-client/src/utils/toastr';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useApiToken, useCurrentUser } from '@monorepo/client/src/stores/user';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LoginRequiredWrapper';
+import { toastSuccess, toastError } from '@monorepo/client/src/utils/toastr';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { User } from '@monorepo/webev-client/src/domains/User';
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
+import { User } from '@monorepo/client/src/domains/User';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
 
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
-import { EditableInput } from '@monorepo/webev-client/src/components/case/molecules/EditableInput';
-import { EditableTextarea } from '@monorepo/webev-client/src/components/case/molecules/EditableTextarea';
-import { UserIcon } from '@monorepo/webev-client/src/components/domain/User/atoms/UserIcon';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
+import { EditableInput } from '@monorepo/client/src/components/case/molecules/EditableInput';
+import { EditableTextarea } from '@monorepo/client/src/components/case/molecules/EditableTextarea';
+import { UserIcon } from '@monorepo/client/src/components/domain/User/atoms/UserIcon';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

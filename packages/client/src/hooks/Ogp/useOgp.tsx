@@ -1,8 +1,8 @@
 import { SWRResponse } from 'swr';
 
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { useAuthenticationSWR } from '@monorepo/webev-client/src/stores/use-authentication-swr';
-import { Ogp } from '@monorepo/webev-client/src/domains/Ogp';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { useAuthenticationSWR } from '@monorepo/client/src/stores/use-authentication-swr';
+import { Ogp } from '@monorepo/client/src/domains/Ogp';
 
 /**
  * urlをもとにOGPを取得するSWR

@@ -1,9 +1,9 @@
 import React, { VFC, useState, createContext, ReactNode, SetStateAction, Dispatch } from 'react';
 import useSWR, { KeyedMutator } from 'swr';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { PaginationResult } from '@monorepo/webev-client/src/libs/interfaces/paginationResult';
-import { joinUrl } from '@monorepo/webev-client/src/utils/joinUrl';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { PaginationResult } from '@monorepo/client/src/libs/interfaces/paginationResult';
+import { joinUrl } from '@monorepo/client/src/utils/joinUrl';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
 
 export const PagePaginationContext = createContext<{
   setSearchKeyword?: Dispatch<SetStateAction<string>>;

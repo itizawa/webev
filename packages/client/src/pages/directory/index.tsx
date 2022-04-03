@@ -2,19 +2,19 @@ import { useState, ReactNode } from 'react';
 
 import styled from 'styled-components';
 
-import { WebevNextPage } from '@monorepo/webev-client/src/libs/interfaces/webevNextPage';
+import { WebevNextPage } from '@monorepo/client/src/libs/interfaces/webevNextPage';
 
-import { WebevOgpHead } from '@monorepo/webev-client/src/components/common/WebevOgpHead';
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { LoginRequiredWrapper } from '@monorepo/webev-client/src/components/common/Authentication/LoginRequiredWrapper';
-import { DirectoryListItem } from '@monorepo/webev-client/src/components/domain/Directory/molecules/DirectoryListItem';
+import { WebevOgpHead } from '@monorepo/client/src/components/common/WebevOgpHead';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { LoginRequiredWrapper } from '@monorepo/client/src/components/common/Authentication/LoginRequiredWrapper';
+import { DirectoryListItem } from '@monorepo/client/src/components/domain/Directory/molecules/DirectoryListItem';
 
-import { useDirectoryPaginationResult } from '@monorepo/webev-client/src/stores/directory';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
+import { useDirectoryPaginationResult } from '@monorepo/client/src/stores/directory';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
 
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
-import { DashBoardLayout } from '@monorepo/webev-client/src/components/common/Layout/DashBoardLayout';
-import { useCreateDirectory } from '@monorepo/webev-client/src/hooks/Directory/useCreateDirectory';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
+import { DashBoardLayout } from '@monorepo/client/src/components/common/Layout/DashBoardLayout';
+import { useCreateDirectory } from '@monorepo/client/src/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

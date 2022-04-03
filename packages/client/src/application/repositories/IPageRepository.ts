@@ -1,8 +1,8 @@
 import { FilterQuery } from 'mongoose';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { PaginationOptions } from '@monorepo/webev-client/src/libs/interfaces/pagination';
-import { PaginationResult } from '@monorepo/webev-client/src/libs/interfaces/paginationResult';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { PaginationOptions } from '@monorepo/client/src/libs/interfaces/pagination';
+import { PaginationResult } from '@monorepo/client/src/libs/interfaces/paginationResult';
 
 export interface IPageRepository {
   create(pages: Partial<Page>): Promise<Page>;

@@ -5,14 +5,14 @@ import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
-import { BootstrapBreakpoints } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
+import { BootstrapBreakpoints } from '@monorepo/client/src/libs/interfaces/variables';
 
-import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { Directory } from '@monorepo/webev-client/src/domains/Directory';
-import { useDirectoryChildren } from '@monorepo/webev-client/src/stores/directory';
+import { IconButton } from '@monorepo/client/src/components/base/molecules/IconButton';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { Directory } from '@monorepo/client/src/domains/Directory';
+import { useDirectoryChildren } from '@monorepo/client/src/stores/directory';
 
 type Props = {
   directory: Directory;

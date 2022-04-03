@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { IOgpAdapter } from '@monorepo/webev-client/src/application/adapters/IOgpAdapter';
+import { IOgpAdapter } from '@monorepo/client/src/application/adapters/IOgpAdapter';
 
 export class OgpAdapter implements IOgpAdapter {
   async fetch(url: string): Promise<{

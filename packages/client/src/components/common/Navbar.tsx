@@ -4,8 +4,8 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import styled from 'styled-components';
 
-import { PersonalDropdown } from '@monorepo/webev-client/src/components/domain/User/molecules/PersonalDropdown';
-import { PageUrlInputForm } from '@monorepo/webev-client/src/components/domain/Page/molecules/PageUrlInputForm';
+import { PersonalDropdown } from '@monorepo/client/src/components/domain/User/molecules/PersonalDropdown';
+import { PageUrlInputForm } from '@monorepo/client/src/components/domain/Page/molecules/PageUrlInputForm';
 
 export const Navbar: VFC = () => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';

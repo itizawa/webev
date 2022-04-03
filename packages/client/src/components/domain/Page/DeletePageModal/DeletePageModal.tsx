@@ -1,13 +1,13 @@
 import { VFC } from 'react';
 
-import { Modal } from '@monorepo/webev-client/src/components/base/molecules/Modal';
-import { FixedImage } from '@monorepo/webev-client/src/components/base/atoms/FixedImage';
-import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { Modal } from '@monorepo/client/src/components/base/molecules/Modal';
+import { FixedImage } from '@monorepo/client/src/components/base/atoms/FixedImage';
+import { restClient } from '@monorepo/client/src/utils/rest-client';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { Page } from '@monorepo/client/src/domains/Page';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 
 type Props = {
   open: boolean;

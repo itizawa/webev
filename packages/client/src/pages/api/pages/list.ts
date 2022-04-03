@@ -1,15 +1,15 @@
 import { FilterQuery } from 'mongoose';
 import { NextApiResponse } from 'next';
 import nc from 'next-connect';
-import { PageRepository } from '@monorepo/webev-client/src/infrastructure/repositories/pageRepository';
-import { connectDB } from '@monorepo/webev-client/src/middlewares/dbConnect';
+import { PageRepository } from '@monorepo/client/src/infrastructure/repositories/pageRepository';
+import { connectDB } from '@monorepo/client/src/middlewares/dbConnect';
 
-import { WebevApiRequest } from '@monorepo/webev-client/src/libs/interfaces/webevApiRequest';
-import { injectUserToRequest } from '@monorepo/webev-client/src/middlewares/injectUserToRequest';
-import { loginRequired } from '@monorepo/webev-client/src/middlewares/loginRequired';
-import { FindPagesUseCase } from '@monorepo/webev-client/src/application/useCases/page';
-import { PaginationOptions } from '@monorepo/webev-client/src/libs/interfaces/pagination';
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { WebevApiRequest } from '@monorepo/client/src/libs/interfaces/webevApiRequest';
+import { injectUserToRequest } from '@monorepo/client/src/middlewares/injectUserToRequest';
+import { loginRequired } from '@monorepo/client/src/middlewares/loginRequired';
+import { FindPagesUseCase } from '@monorepo/client/src/application/useCases/page';
+import { PaginationOptions } from '@monorepo/client/src/libs/interfaces/pagination';
+import { Page } from '@monorepo/client/src/domains/Page';
 
 const findPagesUseCase = new FindPagesUseCase(new PageRepository());
 

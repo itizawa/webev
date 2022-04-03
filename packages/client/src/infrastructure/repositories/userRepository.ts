@@ -1,8 +1,8 @@
 import { model, models, Model, Schema, Document } from 'mongoose';
 import * as mongoosePaginate from 'mongoose-paginate-v2';
-import { IUserRepository } from '@monorepo/webev-client/src/application/repositories';
+import { IUserRepository } from '@monorepo/client/src/application/repositories';
 
-import { User } from '@monorepo/webev-client/src/domains/User';
+import { User } from '@monorepo/client/src/domains/User';
 
 const UserSchema: Schema = new Schema(
   {

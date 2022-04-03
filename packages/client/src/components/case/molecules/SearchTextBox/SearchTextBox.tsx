@@ -1,7 +1,7 @@
 import { Emoji } from 'emoji-mart';
 import { VFC, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { usePagePagination } from '@monorepo/webev-client/src/hooks/Page';
+import { usePagePagination } from '@monorepo/client/src/hooks/Page';
 import { EditableInput } from '../EditableInput';
 
 export const SearchTextBox: VFC = () => {

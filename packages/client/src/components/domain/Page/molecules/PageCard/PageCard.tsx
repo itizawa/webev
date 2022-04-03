@@ -4,14 +4,14 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
-import { FixedImage } from '@monorepo/webev-client/src/components/base/atoms/FixedImage';
-import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
-import { toastError, toastSuccess } from '@monorepo/webev-client/src/utils/toastr';
+import { FixedImage } from '@monorepo/client/src/components/base/atoms/FixedImage';
+import { Icon } from '@monorepo/client/src/components/base/atoms/Icon';
+import { toastError, toastSuccess } from '@monorepo/client/src/utils/toastr';
 
-import { Page } from '@monorepo/webev-client/src/domains/Page';
+import { Page } from '@monorepo/client/src/domains/Page';
 
-import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
-import { useSwitchArchive } from '@monorepo/webev-client/src/hooks/Page/useSwitchArchive';
+import { useLocale } from '@monorepo/client/src/hooks/useLocale';
+import { useSwitchArchive } from '@monorepo/client/src/hooks/Page/useSwitchArchive';
 import { PageManageDropdown } from '../PageManageDropdown';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
