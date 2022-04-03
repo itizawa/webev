@@ -1,5 +1,5 @@
 {
-  "name": "webev-front",
+  "name": "webev",
   "version": "1.0.6",
   "main": "index.js",
   "private": true,
@@ -8,9 +8,7 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
+    "dev": "lerna run dev --parallel --scope=@monorepo/client",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
