@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
-    "test:coverage": "jest --collect-coverage"
+    "test:coverage": "jest --collect-coverage",
+    "release": "lerna publish"
   },
   "repository": {
     "type": "git",
