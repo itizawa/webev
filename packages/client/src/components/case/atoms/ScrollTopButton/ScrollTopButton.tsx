@@ -1,9 +1,9 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { useHooks } from './hooks';
 import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
 import { BootstrapBreakpoints } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { useHooks } from './hooks';
 
 export const ScrollTopButton: VFC = () => {
   const { scrollTop, isShowScroll } = useHooks();

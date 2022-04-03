@@ -1,6 +1,6 @@
 import { VFC, ComponentProps, MouseEvent } from 'react';
-import { Icon } from '../../atoms/Icon';
 import { BootstrapColor } from '@monorepo/webev-client/src/libs/interfaces/variables';
+import { Icon } from '../../atoms/Icon';
 
 type Props = {
   isActive?: boolean;

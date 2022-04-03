@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 
-import { usePagePagination } from '../Page';
 import { User } from '@monorepo/webev-client/src/domains/User';
 
 import { useCurrentUser } from '@monorepo/webev-client/src/stores/user';
 
 import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
 import { URLS } from '@monorepo/webev-client/src/libs/constants/urls';
+import { usePagePagination } from '../Page';
 
 export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExecutedTutorial: () => Promise<void> } => {
   const { mutatePagePagination } = usePagePagination();

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import { usePagePagination } from '.';
 import { Page } from '@monorepo/webev-client/src/domains/Page';
 import { restClient } from '@monorepo/webev-client/src/utils/rest-client';
+import { usePagePagination } from '.';
 
 export const useAddPageToDirectory = (): { isLoading: boolean; addPageToDirectory: (pageId: string, directoryId: string) => void } => {
   const { pagePagination, mutatePagePagination } = usePagePagination();

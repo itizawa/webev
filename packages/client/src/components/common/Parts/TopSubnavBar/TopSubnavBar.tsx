@@ -2,8 +2,6 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { useHooks } from './hooks';
-
 import { Page } from '@monorepo/webev-client/src/domains/Page';
 
 import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
@@ -13,6 +11,7 @@ import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
 import { zIndex } from '@monorepo/webev-client/src/libs/constants/zIndex';
 import { IconButton } from '@monorepo/webev-client/src/components/base/molecules/IconButton';
 import { speech } from '@monorepo/webev-client/src/utils/services';
+import { useHooks } from './hooks';
 
 type Props = {
   page: Page;

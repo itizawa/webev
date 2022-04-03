@@ -4,7 +4,6 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
-import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '@monorepo/webev-client/src/components/base/atoms/FixedImage';
 import { Icon } from '@monorepo/webev-client/src/components/base/atoms/Icon';
 import { Tooltip } from '@monorepo/webev-client/src/components/base/atoms/Tooltip';
@@ -14,6 +13,7 @@ import { Page } from '@monorepo/webev-client/src/domains/Page';
 
 import { useLocale } from '@monorepo/webev-client/src/hooks/useLocale';
 import { useSwitchArchive } from '@monorepo/webev-client/src/hooks/Page/useSwitchArchive';
+import { PageManageDropdown } from '../PageManageDropdown';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;
