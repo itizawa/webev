@@ -1,5 +1,5 @@
 {
-  "name": "@monorepo/webev-client",
+  "name": "@monorepo/client",
   "main": "index.js",
   "scripts": {
     "dev": "next",
