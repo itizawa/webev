@@ -5,11 +5,5 @@
       "./*.ts",
       "./*.tsx"
     ],
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "~/*": ["./*"],
-      }
-    }
   }
   
