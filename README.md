@@ -2,7 +2,7 @@
 
 ![White and Black Memphis Style General Twitch Banner](https://user-images.githubusercontent.com/48426654/112742744-362dbe80-8fcc-11eb-914f-6b07b48862ac.png)
 
-[![build-dev](https://github.com/itizaworld/webev/actions/workflows/ci-dev.yml/badge.svg?branch=master)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
+[![build-dev](https://github.com/itizaworld/webev/actions/workflows/ci-dev.yml/badge.svg?branch=main)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
 
 Webev is OSS of bookmark manager that improves the organization of information.
 
@@ -37,7 +37,7 @@ See the [environment variable section](https://github.com/itizawa/webev-front/#-
 ## Environmental variables
 
 - The following environment variables are required for normal operation.
-  - Set to [.env.development](https://github.com/itizawa/webev-front/blob/master/.env.development) or .env(at root) in webev.
+  - Set to [.env.development](https://github.com/itizawa/webev-front/blob/main/.env.development) or .env(at root) in webev.
 
 |Key | e.g. | Required | What is this?
 |---|---|---|---|
