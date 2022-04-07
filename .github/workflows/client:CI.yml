@@ -58,10 +58,6 @@ jobs:
       - name: yarn client:build
         run: |
           yarn client:build
-      
-      - name: yarn lint
-        run: |
-          yarn lint
 
   # run-tests:
   #   name: Run test
