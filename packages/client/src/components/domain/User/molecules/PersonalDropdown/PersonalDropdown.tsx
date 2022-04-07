@@ -31,7 +31,7 @@ export const PersonalDropdown: VFC = () => {
       <DropdownToggle className="nav-link p-0" tag="a" role="button">
         <UserIcon image={currentUser.image} />
       </DropdownToggle>
-      <StyledDropdownMenu right className="dropdown-menu-dark">
+      <StyledDropdownMenu end className="dropdown-menu-dark">
         <DropdownItem header>
           <div className="text-center">
             <UserIcon image={currentUser.image} size={48} isCircle />
