@@ -69,7 +69,7 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
               isRemovePadding
             />
           </DropdownToggle>
-          <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+          <DropdownMenu className="dropdown-menu-dark" positionFixed end>
             <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
               <Icon icon="TRASH" color="WHITE" />
               <span className="ms-2">{t.delete}</span>

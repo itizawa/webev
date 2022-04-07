@@ -213,7 +213,7 @@ const Page: WebevNextPage = () => {
                 <DropdownToggle tag="div">
                   <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />
                 </DropdownToggle>
-                <DropdownMenu className="dropdown-menu-dark" positionFixed right>
+                <DropdownMenu className="dropdown-menu-dark" positionFixed end>
                   <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
                     <Icon icon="TRASH" color="WHITE" />
                     <span className="ms-2">{t.delete}</span>
