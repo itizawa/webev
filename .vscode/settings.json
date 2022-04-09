@@ -41,6 +41,7 @@
       "middlewares",
       "mixins",
       "msapplication",
+      "nestjs",
       "NEXTAUTH",
       "noopener",
       "noreferrer",
