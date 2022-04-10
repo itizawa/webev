@@ -78,7 +78,7 @@
     "node": "16.14.2"
   },
   "description": "> TODO: description",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
