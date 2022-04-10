@@ -9,7 +9,7 @@
     "dev": "lerna run dev --parallel --scope=@monorepo/{client,server}",
     "client:dev": "lerna run dev --parallel --scope=@monorepo/client",
     "client:build": "lerna run build --parallel --scope=@monorepo/client",
-    "server:dev": "lerna run start:dev --parallel --scope=@monorepo/server",
+    "server:dev": "lerna run dev --parallel --scope=@monorepo/server",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
