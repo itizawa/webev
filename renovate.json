@@ -12,6 +12,5 @@
   "patch": {
     "stabilityDays": 2
   },
-  "separateMinorPatch": true,
-  "automerge": true
+  "separateMinorPatch": true
 }
