@@ -11,6 +11,8 @@
     "client:build": "lerna run build --parallel --scope=@monorepo/client",
     "server:dev": "lerna run dev --parallel --scope=@monorepo/server",
     "server:build": "lerna run build --parallel --scope=@monorepo/server",
+    "server:deploy": "gcloud run deploy --source packages/server",
+    "server:start": "gcloud run start:prod --source packages/server",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
