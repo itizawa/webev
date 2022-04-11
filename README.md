@@ -2,7 +2,6 @@
 
 ![White and Black Memphis Style General Twitch Banner](https://user-images.githubusercontent.com/48426654/112742744-362dbe80-8fcc-11eb-914f-6b07b48862ac.png)
 
-[![build-dev](https://github.com/itizaworld/webev/actions/workflows/ci-dev.yml/badge.svg?branch=main)](https://github.com/itizawa/webev-front/actions/workflows/ci-dev.yml)
 
 Webev is OSS of bookmark manager that improves the organization of information.
 
