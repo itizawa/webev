@@ -1,7 +1,5 @@
 {
-  "name": "webev",
-  "version": "1.1.1",
-  "main": "index.js",
+  "name": "root",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -11,7 +9,10 @@
     "dev": "lerna run dev --parallel --scope=@monorepo/{client,server}",
     "client:dev": "lerna run dev --parallel --scope=@monorepo/client",
     "client:build": "lerna run build --parallel --scope=@monorepo/client",
-    "server:dev": "lerna run start:dev --parallel --scope=@monorepo/server",
+    "server:dev": "lerna run dev --parallel --scope=@monorepo/server",
+    "server:build": "lerna run build --parallel --scope=@monorepo/server",
+    "server:deploy": "gcloud run deploy --source packages/server",
+    "server:start": "gcloud run start:prod --source packages/server",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
@@ -49,7 +50,7 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.6.2",
-    "eslint": "8.12.0",
+    "eslint": "8.13.0",
     "eslint-config-next": "12.1.4",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-typescript": "2.7.1",
