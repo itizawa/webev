@@ -2765,10 +2765,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@17.0.44":
-  version "17.0.44"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.44.tgz#c3714bd34dd551ab20b8015d9d0dbec812a51ec7"
-  integrity sha512-Ye0nlw09GeMp2Suh8qoOv0odfgCoowfM/9MG6WeRD60Gq9wS90bdkdRtYbRkNhXOpG4H+YXGvj4wOWhAC0LJ1g==
+"@types/react@18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.1.tgz#1b2e02fb7613212518733946e49fb963dfc66e19"
+  integrity sha512-VnWlrVgG0dYt+NqlfMI0yUYb8Rdl4XUROyH+c6gq/iFCiZ805Vi//26UW38DHnxQkbDhnrIWTBiy6oKZqL11cw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2828,10 +2828,10 @@
   dependencies:
     "@types/superagent" "*"
 
-"@types/throttle-debounce@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-2.1.0.tgz#1c3df624bfc4b62f992d3012b84c56d41eab3776"
-  integrity sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==
+"@types/throttle-debounce@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/throttle-debounce/-/throttle-debounce-4.0.0.tgz#ae62a652c914f46276c78730f53fab85b4825f09"
+  integrity sha512-BZ1Y2nf1U3qj9MNWrlTG3+FWfFS8xfG2DA0ypiZ1pBUiO8WEvEjNTmQuecnYDtQvegRojeKh+iwNK2NjJ8a3YQ==
 
 "@types/toastr@2.1.39":
   version "2.1.39"
