@@ -1,6 +1,6 @@
 {
   "name": "@monorepo/server",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "> TODO: description",
   "author": "itizawa <itizawa.pen@gmail.com>",
   "private": true,
@@ -30,7 +30,6 @@
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
-    "cheerio": "^1.0.0-rc.10",
     "@nestjs/cli": "^8.0.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
@@ -40,6 +39,7 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "cheerio": "^1.0.0-rc.10",
     "eslint-plugin-prettier": "^4.0.0",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
