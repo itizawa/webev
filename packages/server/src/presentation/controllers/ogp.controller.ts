@@ -1,13 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common';
 // import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-import { OgpUseCase } from 'src/application/useCases/ogp.useCase';
+import { FetchOgpUseCase } from 'src/application/useCases/ogp/fetchOgp.useCase';
 import { FetchOgpDto } from 'src/presentation/dto/ogp/fetchOgp.dto';
 
 // @ApiTags('Legacy')
 @Controller('/ogp')
 export class OgpController {
-  constructor(private readonly ogpUseCase: OgpUseCase) {}
+  constructor(private readonly fetchOgpUseCase: FetchOgpUseCase) {}
 
   @Get('/')
   //   @ApiResponse({
@@ -22,6 +22,6 @@ export class OgpController {
   async fetchOgp(
     @Query() query: FetchOgpDto,
   ): Promise<{ [key: string]: string }> {
-    return await this.ogpUseCase.fetchOgp(query.url);
+    return await this.fetchOgpUseCase.fetchOgp(query.url);
   }
 }

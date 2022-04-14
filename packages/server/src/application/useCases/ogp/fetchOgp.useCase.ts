@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { IOgpAdapter } from 'src/application/adapters/IOgpAdapter';
 
 @Injectable()
-export class OgpUseCase {
+export class FetchOgpUseCase {
   constructor(private readonly ogpAdapter: IOgpAdapter) {}
   /**
    * Ogp を取得する
