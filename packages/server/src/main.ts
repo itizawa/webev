@@ -1,6 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+/*****************************
+ * Main Process              *
+ *****************************/
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const port = Number(process.env.PORT) || 8000; // Cloud Run の要件。環境変数PORTで起動するように。
