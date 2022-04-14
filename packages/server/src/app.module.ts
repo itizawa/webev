@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { OgpModule } from './infrastructure/ioc/ogp.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [OgpModule],
 })
 export class AppModule {}
