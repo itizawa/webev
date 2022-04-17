@@ -2,6 +2,7 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
+import { useHooks } from './hooks';
 import { Page } from '~/domains/Page';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -11,7 +12,6 @@ import { useLocale } from '~/hooks/useLocale';
 import { zIndex } from '~/libs/constants/zIndex';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { speech } from '~/utils/services';
-import { useHooks } from './hooks';
 
 type Props = {
   page: Page;

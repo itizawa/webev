@@ -1,8 +1,8 @@
 import { Emoji } from 'emoji-mart';
 import { VFC, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { usePagePagination } from '~/hooks/Page';
 import { EditableInput } from '../EditableInput';
+import { usePagePagination } from '~/hooks/Page';
 
 export const SearchTextBox: VFC = () => {
   const { setSearchKeyword } = usePagePagination();

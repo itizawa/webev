@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 
+import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
@@ -13,7 +14,6 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
-import { PageManageDropdown } from '../PageManageDropdown';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 const MAX_WORD_COUNT_OF_SITE_NAME = 10;

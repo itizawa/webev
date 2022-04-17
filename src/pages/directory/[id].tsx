@@ -15,12 +15,7 @@ import {
   useDirectoryPaginationResult,
 } from '~/stores/directory';
 import { useDirectoryId } from '~/stores/page';
-import {
-  useDirectoryForDelete,
-  useParentDirectoryForCreateDirectory,
-  useDirectoryForRename,
-  useDirectoryForSavePage,
-} from '~/stores/modal';
+import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename, useDirectoryForSavePage } from '~/stores/modal';
 
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';

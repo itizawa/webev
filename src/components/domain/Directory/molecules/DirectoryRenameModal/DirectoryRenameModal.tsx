@@ -1,19 +1,14 @@
 import { useEffect, useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
+import { Modal } from '../../../../base/molecules/Modal';
 import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryForRename } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import {
-  useAllDirectories,
-  useDirectoryChildren,
-  useDirectoryInformation,
-  useDirectoryPaginationResult,
-} from '~/stores/directory';
-import { Modal } from '../../../../base/molecules/Modal';
+import { useAllDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DirectoryRenameModal: VFC = () => {
   const { t } = useLocale();

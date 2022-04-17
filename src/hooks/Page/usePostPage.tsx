@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
-import { restClient } from '~/utils/rest-client';
 import { usePagePagination } from '.';
+import { restClient } from '~/utils/rest-client';
 
 /**
  * Pageを保存するhooks

@@ -1,9 +1,9 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 
+import { useHooks } from './hooks';
 import { Icon } from '~/components/base/atoms/Icon';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
-import { useHooks } from './hooks';
 
 export const ScrollTopButton: VFC = () => {
   const { scrollTop, isShowScroll } = useHooks();

@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { VFC, useRef, ReactNode } from 'react';
 import { UncontrolledTooltip } from 'reactstrap';
 
 type Props = {
@@ -6,9 +6,10 @@ type Props = {
   disabled?: boolean;
   fade?: boolean;
   placement?: 'top' | 'left' | 'right' | 'bottom';
+  children: ReactNode;
 };
 
-export const Tooltip: FC<Props> = ({ children, disabled, text, fade, placement = 'top' }) => {
+export const Tooltip: VFC<Props> = ({ children, disabled, text, fade, placement = 'top' }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
