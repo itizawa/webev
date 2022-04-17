@@ -1,7 +1,5 @@
 import { VFC, useMemo, useCallback } from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import styled from 'styled-components';
 import { Icon } from '~/components/base/atoms/Icon';
 import { IconButton } from '~/components/base/molecules/IconButton';
 import { Page } from '~/domains/Page';
@@ -10,7 +8,6 @@ import { useLocale } from '~/hooks/useLocale';
 import { useModal } from '~/hooks/useModal';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
-import { zIndex } from '~/libs/constants/zIndex';
 import { usePagePagination, useSwitchArchive } from '~/hooks/Page';
 
 type Props = {
@@ -78,13 +75,13 @@ export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) =>
           <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
         </div>
       </DropdownToggle>
-      <StyledDropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
-        <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
+      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
+        {/* <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
           <DropdownItem>
             <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
             <span className="ms-2">{t.copy_url}</span>
           </DropdownItem>
-        </CopyToClipboard>
+        </CopyToClipboard> */}
         <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>
           <Icon icon="TRASH" color="WHITE" />
           <span className="ms-2">{t.delete}</span>
@@ -104,11 +101,7 @@ export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) =>
           <Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} color="WHITE" />
           <span className="ms-2">{t.share}</span>
         </DropdownItem>
-      </StyledDropdownMenu>
+      </DropdownMenu>
     </UncontrolledDropdown>
   );
 };
-
-const StyledDropdownMenu = styled(DropdownMenu)`
-  z-index: ${zIndex.DROPDOWN_MENU};
-`;

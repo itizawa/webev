@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
 import styled from 'styled-components';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import { Emoji, Picker, EmojiData, emojiIndex } from 'emoji-mart';
+import { Emoji, EmojiData, emojiIndex } from 'emoji-mart';
 import { useDebouncedCallback } from 'use-debounce';
 
 import {
@@ -32,7 +32,7 @@ import { DirectoryListItem } from '~/components/domain/Directory/molecules/Direc
 import { Directory } from '~/domains/Directory';
 
 import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastError } from '~/utils/toastr';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
@@ -137,20 +137,20 @@ const Page: WebevNextPage = () => {
     mutateParentDirectoryForCreateDirectory(directory);
   };
 
-  const handleSelectEmoji = async (emoji: EmojiData) => {
-    const emojiId = emoji.id;
+  // const handleSelectEmoji = async (emoji: EmojiData) => {
+  //   const emojiId = emoji.id;
 
-    try {
-      await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
-      mutateDirectory();
-      toastSuccess(t.toastr_update_emoji);
-      setEmoji(emoji);
-      setIsEmojiSettingMode(false);
-      mutateDirectoryPaginationResult();
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  };
+  //   try {
+  //     await restClient.apiPut(`/directories/${directory?._id}/emoji`, { emojiId });
+  //     mutateDirectory();
+  //     toastSuccess(t.toastr_update_emoji);
+  //     setEmoji(emoji);
+  //     setIsEmojiSettingMode(false);
+  //     mutateDirectoryPaginationResult();
+  //   } catch (error) {
+  //     if (error instanceof Error) toastError(error);
+  //   }
+  // };
 
   const handleClickEmoji = () => {
     setIsEmojiSettingMode(true);
@@ -228,7 +228,7 @@ const Page: WebevNextPage = () => {
               <>
                 <div className="position-fixed top-0 start-0 end-0 bottom-0" onClick={() => setIsEmojiSettingMode(false)} />
                 <StyledEmojiPickerWrapper top={pickerTop} left={pickerLeft}>
-                  <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" />
+                  {/* <Picker theme="dark" onSelect={(emoji) => handleSelectEmoji(emoji)} title="Webev" emoji="" /> */}
                 </StyledEmojiPickerWrapper>
               </>
             )}

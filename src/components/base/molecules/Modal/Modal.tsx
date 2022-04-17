@@ -1,31 +1,23 @@
-import { FC } from 'react';
+import { ReactNode, VFC } from 'react';
 import { Modal as ReactStrapModal, ModalHeader, ModalBody } from 'reactstrap';
 
-import styled from 'styled-components';
 import { IconButton } from '../IconButton';
 
 type Props = {
   isOpen: boolean;
   toggle?: () => void;
   title: string;
+  children: ReactNode;
 };
 
-export const Modal: FC<Props> = (props) => {
-  const { isOpen, toggle, title, children } = props;
-
+export const Modal: VFC<Props> = ({ isOpen, toggle, title, children }) => {
   return (
     <ReactStrapModal size="lg" isOpen={isOpen} toggle={toggle}>
-      <StyledModalHeader className="bg-dark">
+      <ModalHeader className="bg-dark">
         {title}
         {toggle != null && <IconButton color="LIGHT" buttonColor="SECONDARY" activeColor="LIGHT" icon="CLOSE" onClickButton={toggle} />}
-      </StyledModalHeader>
+      </ModalHeader>
       <ModalBody className="bg-dark text-break">{children}</ModalBody>
     </ReactStrapModal>
   );
 };
-
-const StyledModalHeader = styled(ModalHeader)`
-  .modal-title {
-    display: contents;
-  }
-`;

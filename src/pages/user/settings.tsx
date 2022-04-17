@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import { useApiToken, useCurrentUser } from '~/stores/user';
+import { useCurrentUser } from '~/stores/user';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { toastSuccess, toastError } from '~/utils/toastr';
+import { toastError } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -21,7 +20,7 @@ const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   const { data: currentUser, mutate: mutateCurrentUser } = useCurrentUser();
-  const { data: apiToken, mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
+  // const { mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
 
   const updateProfile = (newObject: Partial<User>): void => {
     try {
@@ -32,7 +31,7 @@ const Page: WebevNextPage = () => {
   };
   const debounceUpdateProfile = useDebouncedCallback(updateProfile, 300);
 
-  if (currentUser == null || isValidatingApiToken) {
+  if (currentUser == null) {
     return (
       <div className="pt-5 d-flex align-items-center justify-content-center">
         <div className="spinner-border text-info" role="status">
@@ -42,15 +41,15 @@ const Page: WebevNextPage = () => {
     );
   }
 
-  const handleUpdateApiToken = async () => {
-    try {
-      const { data: user } = await restClient.apiPut<User>('/users/api-token');
-      toastSuccess(t.toastr_update_api_token);
-      mutateApiToken(user.apiTokenForExtension, false);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
+  // const handleUpdateApiToken = async () => {
+  //   try {
+  //     const { data: user } = await restClient.apiPut<User>('/users/api-token');
+  //     toastSuccess(t.toastr_update_api_token);
+  //     mutateApiToken(user.apiTokenForExtension, false);
+  //   } catch (err) {
+  //     if (err instanceof Error) toastError(err);
+  //   }
+  // };
 
   const changeProfile = (newObject: Partial<User>): void => {
     mutateCurrentUser({ ...currentUser, ...newObject }, false);
@@ -74,7 +73,7 @@ const Page: WebevNextPage = () => {
             />
           </div>
         </div>
-        <div className="row my-3">
+        {/* <div className="row my-3">
           <label className="col-md-2 mb-2">Api Token</label>
           <div className="input-group col-md-10 col-12">
             <CopyToClipboard text={apiToken || ''} onCopy={() => toastSuccess('Api Token をコピーしました')}>
@@ -84,7 +83,7 @@ const Page: WebevNextPage = () => {
               更新
             </button>
           </div>
-        </div>
+        </div> */}
       </LoginRequiredWrapper>
     </>
   );

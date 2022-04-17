@@ -30,7 +30,8 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   return (
     <SessionProvider session={pageProps.session}>
       <PagePaginationProvider>
-        <ModalProvider>{getLayout(<Component {...pageProps} />)}</ModalProvider>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <ModalProvider>{getLayout(<Component {...(pageProps as any)} />)}</ModalProvider>
       </PagePaginationProvider>
     </SessionProvider>
   );

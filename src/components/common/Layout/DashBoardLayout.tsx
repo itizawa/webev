@@ -1,6 +1,6 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { FC, useEffect } from 'react';
+import { VFC, ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { useCurrentUser } from '~/stores/user';
@@ -21,7 +21,11 @@ import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 
-export const DashBoardLayout: FC = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+export const DashBoardLayout: VFC<Props> = ({ children }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const { setActivePage } = usePagePagination();

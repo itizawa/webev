@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { ReactNode, VFC } from 'react';
 import styled from 'styled-components';
 
 import { Navbar } from '~/components/common/Navbar';
@@ -7,7 +7,11 @@ import { Footer } from '~/components/common/Parts/Footer/Footer';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { zIndex } from '~/libs/constants/zIndex';
 
-export const DefaultLayout: FC = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+export const DefaultLayout: VFC<Props> = ({ children }) => {
   return (
     <div>
       <div className="bg-dark">
