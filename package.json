@@ -55,7 +55,7 @@
     "@babel/core": "7.17.9",
     "@types/emoji-mart": "3.0.9",
     "@types/enzyme-adapter-react-16": "1.0.6",
-    "@types/jest": "27.4.1",
+    "@types/jest": "27.5.1",
     "@types/node": "16.11.35",
     "@types/react": "18.0.9",
     "@types/react-copy-to-clipboard": "5.0.2",
