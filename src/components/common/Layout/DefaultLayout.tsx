@@ -1,4 +1,4 @@
-import { ReactNode, VFC } from 'react';
+import { FC, ReactNode } from 'react';
 import styled from 'styled-components';
 
 import { Container } from '@nextui-org/react';
@@ -12,9 +12,9 @@ type Props = {
   children: ReactNode;
 };
 
-export const DefaultLayout: VFC<Props> = ({ children }) => {
+export const DefaultLayout: FC<Props> = ({ children }) => {
   return (
-    <Container fluid css={{ padding: '$0', minHeight: '100vh', bgColor: '$background' }}>
+    <Container css={{ padding: '$0', minHeight: '100vh', bgColor: '$background' }} fluid responsive={false}>
       <Navbar />
       <StyledBorder />
       <div className="webev-container container pt-3">{children}</div>
