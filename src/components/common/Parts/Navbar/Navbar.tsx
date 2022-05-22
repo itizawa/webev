@@ -1,23 +1,19 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 
+import { Container } from '@nextui-org/react';
 import { useSession } from 'next-auth/react';
-import styled from 'styled-components';
 
 import { PersonalDropdown } from '~/components/domain/User/molecules/PersonalDropdown';
 import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInputForm';
 
-export const Navbar: VFC = () => {
+export const Navbar: FC = () => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
 
   const { status } = useSession();
 
-  if (typeof window === 'undefined') {
-    return null;
-  }
-
   return (
-    <StyledDiv className="navbar mx-auto row">
+    <Container fluid css={{ height: '56px' }} display="flex" alignItems="center">
       <div className="col-3">
         <Link href="/">
           <span className="navbar-brand mb-0 text-white fw-bold" role="button">
@@ -44,11 +40,6 @@ export const Navbar: VFC = () => {
           </div>
         )}
       </div>
-    </StyledDiv>
+    </Container>
   );
 };
-
-const StyledDiv = styled.div`
-  max-width: 1440px;
-  min-height: 56px;
-`;
