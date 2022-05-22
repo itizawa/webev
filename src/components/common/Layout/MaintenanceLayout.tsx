@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { TOP_URL } from '~/libs/constants/urls';
 
-import { Navbar } from '~/components/common/Navbar';
+import { Navbar } from '~/components/common/Parts/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';
 import { useLocale } from '~/hooks/useLocale';
 

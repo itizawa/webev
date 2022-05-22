@@ -1,7 +1,8 @@
 import { ReactNode, VFC } from 'react';
 import styled from 'styled-components';
 
-import { Navbar } from '~/components/common/Navbar';
+import { Container } from '@nextui-org/react';
+import { Navbar } from '~/components/common/Parts/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';
 
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
@@ -13,14 +14,12 @@ type Props = {
 
 export const DefaultLayout: VFC<Props> = ({ children }) => {
   return (
-    <div>
-      <div className="bg-dark">
-        <Navbar />
-      </div>
+    <Container fluid css={{ padding: '$0', minHeight: '100vh', bgColor: '$background' }}>
+      <Navbar />
       <StyledBorder />
       <div className="webev-container container pt-3">{children}</div>
       <Footer />
-    </div>
+    </Container>
   );
 };
 
