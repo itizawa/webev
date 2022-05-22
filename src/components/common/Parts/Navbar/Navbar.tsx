@@ -1,45 +1,27 @@
 import { FC } from 'react';
-import Link from 'next/link';
+import { Container, Grid } from '@nextui-org/react';
 
-import { Container } from '@nextui-org/react';
-import { useSession } from 'next-auth/react';
-
-import { PersonalDropdown } from '~/components/domain/User/molecules/PersonalDropdown';
-import { PageUrlInputForm } from '~/components/domain/Page/molecules/PageUrlInputForm';
+import { Link } from '~/components/uiParts';
 
 export const Navbar: FC = () => {
-  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
-
-  const { status } = useSession();
-
   return (
-    <Container fluid css={{ height: '56px' }} display="flex" alignItems="center">
-      <div className="col-3">
-        <Link href="/">
-          <span className="navbar-brand mb-0 text-white fw-bold" role="button">
-            Webev
-          </span>
+    <Container fluid responsive={false} css={{ height: '56px' }} display="flex" alignItems="center">
+      <Grid xs={3}>
+        <Link href="/" style={{ fontWeight: 'bold', color: 'white' }}>
+          Webev
         </Link>
-      </div>
-      <div className="col-9">
-        {status === 'authenticated' && !isMaintenanceMode && (
-          <div className="d-flex justify-content-between align-items-center">
+      </Grid>
+      <Grid xs={9} justify="flex-end">
+        {/* <div className="d-flex justify-content-between align-items-center">
             <div className="col col-md-9 my-md-0 my-0 me-2">
               <PageUrlInputForm />
             </div>
             <PersonalDropdown />
-          </div>
-        )}
-        {status === 'unauthenticated' && (
-          <div className="d-flex align-items-center justify-content-end">
-            <Link href="/login">
-              <span className="mb-0 text-white" role="button">
-                Login
-              </span>
-            </Link>
-          </div>
-        )}
-      </div>
+          </div> */}
+        <Link href="/login" block style={{ color: 'white' }}>
+          Login
+        </Link>
+      </Grid>
     </Container>
   );
 };
