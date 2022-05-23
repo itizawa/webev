@@ -2949,7 +2949,7 @@ bser@2.1.1:
   dependencies:
     node-int64 "^0.4.0"
 
-bson@^4.2.2, bson@^4.6.1, bson@^4.6.2:
+bson@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/bson/-/bson-4.6.2.tgz#3241c79d23d225b86ab6d2bc268b803d8a5fd444"
   integrity sha512-VeJKHShcu1b/ugl0QiujlVuBepab714X9nNyBdA1kfekuDGecxgpTA2Z6nYbagrWFeiIyzSWIOzju3lhj+RNyQ==
@@ -5599,25 +5599,13 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
-mongodb-connection-string-url@^2.4.1, mongodb-connection-string-url@^2.5.2:
+mongodb-connection-string-url@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/mongodb-connection-string-url/-/mongodb-connection-string-url-2.5.2.tgz#f075c8d529e8d3916386018b8a396aed4f16e5ed"
   integrity sha512-tWDyIG8cQlI5k3skB6ywaEA5F9f5OntrKKsT/Lteub2zgwSUlhqEN2inGgBTm8bpYJf8QYBdA/5naz65XDpczA==
   dependencies:
     "@types/whatwg-url" "^8.2.1"
     whatwg-url "^11.0.0"
-
-mongodb@4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-4.3.1.tgz#e346f76e421ec6f47ddea5c8f5140e6181aaeb94"
-  integrity sha512-sNa8APSIk+r4x31ZwctKjuPSaeKuvUeNb/fu/3B6dRM02HpEgig7hTHM8A/PJQTlxuC/KFWlDlQjhsk/S43tBg==
-  dependencies:
-    bson "^4.6.1"
-    denque "^2.0.1"
-    mongodb-connection-string-url "^2.4.1"
-    socks "^2.6.1"
-  optionalDependencies:
-    saslprep "^1.0.3"
 
 mongodb@4.5.0:
   version "4.5.0"
@@ -5636,16 +5624,16 @@ mongoose-paginate-v2@1.6.3:
   resolved "https://registry.yarnpkg.com/mongoose-paginate-v2/-/mongoose-paginate-v2-1.6.3.tgz#50a96752b84a9456fef850b4207cc8b3867e98ac"
   integrity sha512-wxIOcZL7V3+yHIkdTcDk+MtPxjDacEmrZ/4NpwgvOmmEm9SWWsBKRyPd/EmHlRUzk3ylr7fy4QEje1VMg0qpZA==
 
-mongoose@6.2.11:
-  version "6.2.11"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.2.11.tgz#2d1f5987948469ff742463cca28b20c7942676bc"
-  integrity sha512-YqYAFTOqKthsFduM1IZCArIAwScFJKWoE3pEwmnR7UMw9mynEnOc6c4gBvAon+NtPdB0RAP6ppd3aOvLrVth2g==
+mongoose@6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-6.3.4.tgz#622f41c7380fba637f87006ebc46223753b3aac7"
+  integrity sha512-UP0azyGMdY+2YNbJUHeHhnVw5vPzCqs4GQDUwHkilif/rwmSZktUQhQWMp1pUgRNeF2JC30vWGLrInZxD7K/Qw==
   dependencies:
-    bson "^4.2.2"
+    bson "^4.6.2"
     kareem "2.3.5"
-    mongodb "4.3.1"
-    mpath "0.8.4"
-    mquery "4.0.2"
+    mongodb "4.5.0"
+    mpath "0.9.0"
+    mquery "4.0.3"
     ms "2.1.3"
     sift "16.0.0"
 
@@ -5654,15 +5642,15 @@ moo@^0.5.0:
   resolved "https://registry.yarnpkg.com/moo/-/moo-0.5.1.tgz#7aae7f384b9b09f620b6abf6f74ebbcd1b65dbc4"
   integrity sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w==
 
-mpath@0.8.4:
-  version "0.8.4"
-  resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.8.4.tgz#6b566d9581621d9e931dd3b142ed3618e7599313"
-  integrity sha512-DTxNZomBcTWlrMW76jy1wvV37X/cNNxPW1y2Jzd4DZkAaC5ZGsm8bfGfNOthcDuRJujXLqiuS6o3Tpy0JEoh7g==
+mpath@0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.9.0.tgz#0c122fe107846e31fc58c75b09c35514b3871904"
+  integrity sha512-ikJRQTk8hw5DEoFVxHG1Gn9T/xcjtdnOKIU1JTmGjZZlg9LST2mBLmcX3/ICIbgJydT2GOc15RnNy5mHmzfSew==
 
-mquery@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/mquery/-/mquery-4.0.2.tgz#a13add5ecd7c2e5a67e0f814b3c7acdfb6772804"
-  integrity sha512-oAVF0Nil1mT3rxty6Zln4YiD6x6QsUWYz927jZzjMxOK2aqmhEz5JQ7xmrKK7xRFA2dwV+YaOpKU/S+vfNqKxA==
+mquery@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/mquery/-/mquery-4.0.3.tgz#4d15f938e6247d773a942c912d9748bd1965f89d"
+  integrity sha512-J5heI+P08I6VJ2Ky3+33IpCdAvlYGTSUjwTPxkAr8i8EoduPMBX2OY/wa3IKZIQl7MU4SbFk8ndgSKyB/cl1zA==
   dependencies:
     debug "4.x"
 
@@ -6808,7 +6796,7 @@ smart-buffer@^4.2.0:
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.2.0.tgz#6e1d71fa4f18c05f7d0ff216dd16a481d0e8d9ae"
   integrity sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==
 
-socks@^2.6.1, socks@^2.6.2:
+socks@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/socks/-/socks-2.6.2.tgz#ec042d7960073d40d94268ff3bb727dc685f111a"
   integrity sha512-zDZhHhZRY9PxRruRMR7kMhnf3I8hDs4S3f9RecfnGxvcBHQcKcIH/oUcEWffsfl1XxdYlA7nnlGbbTvPz9D8gA==
