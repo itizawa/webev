@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useCurrentUser } from '~/stores/user';
 
-import { Navbar } from '~/components/common/Navbar';
+import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Sidebar';
 import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Parts/Footer';

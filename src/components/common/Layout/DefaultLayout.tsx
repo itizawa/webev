@@ -1,35 +1,33 @@
-import { ReactNode, VFC } from 'react';
-import styled from 'styled-components';
+import { FC, ReactNode } from 'react';
 
-import { Navbar } from '~/components/common/Navbar';
+import { Container, Grid } from '@nextui-org/react';
+import { Navbar } from '~/components/common/Parts/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';
 
-import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 import { zIndex } from '~/libs/constants/zIndex';
 
 type Props = {
   children: ReactNode;
 };
 
-export const DefaultLayout: VFC<Props> = ({ children }) => {
+export const DefaultLayout: FC<Props> = ({ children }) => {
   return (
-    <div>
-      <div className="bg-dark">
-        <Navbar />
-      </div>
-      <StyledBorder />
-      <div className="webev-container container pt-3">{children}</div>
+    <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
+      <Navbar />
+      <Grid
+        css={{
+          height: '4px',
+          width: '100%',
+          background: 'linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);',
+          position: 'sticky',
+          top: 0,
+          zIndex: zIndex.TOP_BORDER,
+          ml: '$0',
+        }}
+      />
+      {/* 画面全体からNavbarとFooterの高さを引く */}
+      <Container css={{ minHeight: 'calc(100vh - 100px - 100px)', pt: '$8' }}>{children}</Container>
       <Footer />
-    </div>
+    </Container>
   );
 };
-
-const StyledBorder = styled.div`
-  height: 4px;
-  background: linear-gradient(90deg, #f6d02e 0, #f87c00 47%, #f6d02e);
-  @media (min-width: ${BootstrapBreakpoints.md}px) {
-    position: sticky;
-    top: 0;
-    z-index: ${zIndex.TOP_BORDER};
-  }
-`;

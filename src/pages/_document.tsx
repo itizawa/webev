@@ -2,7 +2,9 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
+import { CssBaseline } from '@nextui-org/react';
 import { GA_ID } from '~/utils/gtag';
+
 export default class MyDocument extends Document {
   render(): JSX.Element {
     return (
@@ -35,6 +37,7 @@ export default class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#6f42c1" />
           <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
           <meta name="theme-color" content="#6f42c1" />
+          {CssBaseline.flush()}
         </Head>
         <body>
           <Main />
@@ -51,7 +54,6 @@ export default class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           enhanceApp: (App: any) => (props: any) => sheet.collectStyles(<App {...props} />),
         });
 

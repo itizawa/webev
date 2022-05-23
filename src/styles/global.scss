@@ -31,12 +31,6 @@ $theme-colors: (
 body {
   font-weight: 300;
   color: #ccc;
-  background-color: #0e1e25;
-}
-
-.webev-container {
-  /* 画面全体からNavbarとFooterの高さを引く */
-  min-height: calc(100vh - 100px - 100px);
 }
 
 #toast-container {

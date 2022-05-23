@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
+import { NextUIProvider } from '@nextui-org/react';
 
+import { theme } from '~/styles/theme';
 import '~/styles/global.scss';
 
 import { MaintenanceLayout } from '~/components/common/Layout/MaintenanceLayout';
@@ -28,12 +30,14 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <SessionProvider session={pageProps.session}>
-      <PagePaginationProvider>
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        <ModalProvider>{getLayout(<Component {...(pageProps as any)} />)}</ModalProvider>
-      </PagePaginationProvider>
-    </SessionProvider>
+    <NextUIProvider theme={theme}>
+      <SessionProvider session={pageProps.session}>
+        <PagePaginationProvider>
+          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+          <ModalProvider>{getLayout(<Component {...(pageProps as any)} />)}</ModalProvider>
+        </PagePaginationProvider>
+      </SessionProvider>
+    </NextUIProvider>
   );
 };
 
