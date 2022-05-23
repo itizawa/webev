@@ -57,7 +57,7 @@
     "@types/emoji-mart": "3.0.9",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/jest": "27.5.1",
-    "@types/node": "16.11.35",
+    "@types/node": "16.11.36",
     "@types/react": "18.0.9",
     "@types/react-copy-to-clipboard": "5.0.2",
     "@types/react-test-renderer": "18.0.0",
