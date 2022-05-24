@@ -1,70 +1,57 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import { FC } from 'react';
-import styled from 'styled-components';
 
+import { Container, Grid, Text } from '@nextui-org/react';
 import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
 
-import { Tooltip } from '~/components/base/atoms/Tooltip';
-import { IconButton } from '~/components/base/molecules/IconButton';
+import { Tooltip } from '~/components/uiParts/Tooltip';
 import { useLocale } from '~/hooks/useLocale';
+import { Link } from '~/components/uiParts';
+import { Icon } from '~/components/base/atoms/Icon';
 
 export const Footer: FC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
   return (
-    <StyledFooter className="footer mt-5 pt-3 bg-dark border-top border-secondary">
-      <StyledDiv className="row mx-auto">
-        <div className="col-9">
-          <h5 className="text-muted mb-0 text-white">Webev</h5>
-          <ul className="ps-0">
-            <li className="list-unstyled my-1" role="button">
-              <Link href={TERM_URL}>
-                <a className="fw-bold text-muted webev-anchor">{t.term}</a>
-              </Link>
-            </li>
-          </ul>
-          <span className="me-2">🇺🇸</span>
-          <Link href={router.asPath} locale="en">
-            <a className="text-muted webev-anchor">English</a>
+    <Grid css={{ pt: '$10', pb: '$20', bgColor: '$gray100', border: 0, borderTop: 1, borderStyle: 'solid', borderColor: '$gray400' }}>
+      <Container display="flex" css={{ mx: 'auto' }}>
+        <Grid xs={9} css={{ display: 'flex', flexDirection: 'column' }}>
+          <Text h5>Webev</Text>
+          <Link href={TERM_URL} css={{ mt: '$2', color: 'White' }}>
+            {t.term}
           </Link>
-          <span className="ms-3 me-2">🇯🇵</span>
-          <Link href={router.asPath} locale="ja">
-            <a className="text-muted webev-anchor">Japanese</a>
-          </Link>
-        </div>
-        <div className="col-3 d-flex justify-content-end">
-          <Tooltip text="Webev is OSS" fade>
-            <IconButton
-              width={24}
-              height={24}
-              icon="GITHUB"
-              color="SECONDARY"
-              activeColor="SECONDARY"
-              onClickButton={() => window.open(WEBEV_GITHUB_URL, '_blank')}
-            />
-          </Tooltip>
-          <Tooltip text="Please feel free to contact me!" fade>
-            <IconButton
-              width={24}
-              height={24}
-              icon="TWITTER"
-              color="SECONDARY"
-              activeColor="SECONDARY"
-              onClickButton={() => window.open(ITIZAWA_TWITTER_URL, '_blank')}
-            />
-          </Tooltip>
-        </div>
-      </StyledDiv>
-    </StyledFooter>
+          <Grid css={{ mt: '$8', display: 'flex', gridColumnGap: '$4' }}>
+            <Link href={router.asPath} locale="en" css={{ color: 'White' }}>
+              🇺🇸 English
+            </Link>
+            <Link href={router.asPath} locale="ja" css={{ color: 'White' }}>
+              🇯🇵 Japanese
+            </Link>
+          </Grid>
+        </Grid>
+        <Grid xs={3} css={{ display: 'flex', justifyContent: 'end', gap: '$4' }}>
+          <Grid>
+            <Tooltip content="Webev is OSS">
+              <NextLink href={WEBEV_GITHUB_URL}>
+                <a target="_blank">
+                  <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
+                </a>
+              </NextLink>
+            </Tooltip>
+          </Grid>
+          <Grid>
+            <Tooltip content="Please feel free to contact me!">
+              <NextLink href={ITIZAWA_TWITTER_URL}>
+                <a target="_blank">
+                  <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
+                </a>
+              </NextLink>
+            </Tooltip>
+          </Grid>
+        </Grid>
+      </Container>
+    </Grid>
   );
 };
-
-const StyledFooter = styled.footer`
-  padding-bottom: 70px;
-`;
-
-const StyledDiv = styled.div`
-  max-width: 1440px;
-`;

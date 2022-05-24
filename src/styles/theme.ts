@@ -5,6 +5,8 @@ export const theme = createTheme({
   theme: {
     colors: {
       background: '#0e1e25',
+      secondary: '#6f42c1',
+      link: '#f5f5f5',
     },
     space: {},
     fonts: {},

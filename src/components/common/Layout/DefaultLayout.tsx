@@ -26,7 +26,7 @@ export const DefaultLayout: FC<Props> = ({ children }) => {
         }}
       />
       {/* 画面全体からNavbarとFooterの高さを引く */}
-      <Container css={{ minHeight: 'calc(100vh - 100px - 100px)', pt: '$8' }}>{children}</Container>
+      <Container css={{ minHeight: 'calc(100vh - 100px - 100px)', pt: '$8', pb: '$48' }}>{children}</Container>
       <Footer />
     </Container>
   );
