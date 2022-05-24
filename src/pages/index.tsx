@@ -7,7 +7,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';
 
-import { PageCountupCard } from '~/components/domain/Page/atoms/PageCountupCard';
+import { PageCountupCard } from '~/components/domain/Page/PageCountupCard';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { restClient } from '~/utils/rest-client';
