@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
 
-import { Button, Grid } from '@nextui-org/react';
+import { Grid } from '@nextui-org/react';
 import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
@@ -28,8 +28,8 @@ const Page: WebevNextPage<Props> = ({ count }) => {
         <PageCountupCard count={count} text={t.total_pages} />
       </Grid>
       <Grid css={{ textAlign: 'center' }}>
-        <Link href="/home">
-          <Button color="secondary">{t.start_immediately}</Button>
+        <Link href="/home" block color="default">
+          {t.start_immediately}
         </Link>
       </Grid>
     </>
