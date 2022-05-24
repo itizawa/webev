@@ -5,11 +5,12 @@ import { Link as NextuiLink } from '@nextui-org/react';
 
 type Props = {
   href: string;
+  locale?: 'ja' | 'en';
 } & ComponentProps<typeof NextuiLink>;
 
-export const Link: FC<Props> = ({ href, children, ...rest }) => {
+export const Link: FC<Props> = ({ href, locale, children, ...rest }) => {
   return (
-    <NextLink href={href}>
+    <NextLink href={href} locale={locale}>
       <NextuiLink {...rest}>{children}</NextuiLink>
     </NextLink>
   );
