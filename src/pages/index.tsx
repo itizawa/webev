@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-
+import { Button, Grid } from '@nextui-org/react';
 import { imagePath } from '~/libs/constants/imagePath';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
@@ -11,7 +9,9 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { PageCountupCard } from '~/components/domain/Page/atoms/PageCountupCard';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { restClient } from '~/utils/rest-client';
+import { Link } from '~/components/uiParts';
 
 type Props = {
   count: number;
@@ -24,16 +24,14 @@ const Page: WebevNextPage<Props> = ({ count }) => {
     <>
       <WebevOgpHead />
       <Image src={imagePath.EYE_CATCH_DARK} alt={imagePath.EYE_CATCH_DARK} height={1260} width={2240} />
-      <div className="row my-3">
-        <div className="col-12 col-md-6 offset-md-3">
-          <PageCountupCard count={count} text={t.total_pages} />
-        </div>
-      </div>
-      <div className="text-center">
+      <Grid css={{ textAlign: 'center', my: '$10' }}>
+        <PageCountupCard count={count} text={t.total_pages} />
+      </Grid>
+      <Grid css={{ textAlign: 'center' }}>
         <Link href="/home">
-          <button className="btn btn-purple mt-3">{t.start_immediately}</button>
+          <Button color="secondary">{t.start_immediately}</Button>
         </Link>
-      </div>
+      </Grid>
     </>
   );
 };
