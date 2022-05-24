@@ -5,6 +5,7 @@ export const theme = createTheme({
   theme: {
     colors: {
       background: '#0e1e25',
+      secondary: '#6f42c1',
     },
     space: {},
     fonts: {},
