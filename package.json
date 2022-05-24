@@ -50,7 +50,7 @@
     "swr": "1.3.0",
     "throttle-debounce": "3.0.1",
     "toastr": "2.1.4",
-    "use-debounce": "7.0.1"
+    "use-debounce": "8.0.1"
   },
   "devDependencies": {
     "@babel/core": "7.18.0",
