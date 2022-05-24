@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import { FC } from 'react';
 
 import { Container, Grid, Text } from '@nextui-org/react';
@@ -33,16 +34,20 @@ export const Footer: FC = () => {
         <Grid xs={3} css={{ display: 'flex', justifyContent: 'end', gap: '$4' }}>
           <Grid>
             <Tooltip content="Webev is OSS">
-              <Link href={WEBEV_GITHUB_URL} target="_blank">
-                <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
-              </Link>
+              <NextLink href={WEBEV_GITHUB_URL}>
+                <a target="_blank">
+                  <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
+                </a>
+              </NextLink>
             </Tooltip>
           </Grid>
           <Grid>
             <Tooltip content="Please feel free to contact me!">
-              <Link href={ITIZAWA_TWITTER_URL} target="_blank">
-                <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
-              </Link>
+              <NextLink href={ITIZAWA_TWITTER_URL}>
+                <a target="_blank">
+                  <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
+                </a>
+              </NextLink>
             </Tooltip>
           </Grid>
         </Grid>
