@@ -4,10 +4,10 @@ import { FC } from 'react';
 import { Container, Grid, Text } from '@nextui-org/react';
 import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
 
-import { Tooltip } from '~/components/base/atoms/Tooltip';
-import { IconButton } from '~/components/base/molecules/IconButton';
+import { Tooltip } from '~/components/uiParts/Tooltip';
 import { useLocale } from '~/hooks/useLocale';
 import { Link } from '~/components/uiParts';
+import { Icon } from '~/components/base/atoms/Icon';
 
 export const Footer: FC = () => {
   const { t } = useLocale();
@@ -30,27 +30,21 @@ export const Footer: FC = () => {
             </Link>
           </Grid>
         </Grid>
-        <Grid xs={3} css={{ display: 'flex', justifyContent: 'end' }}>
-          <Tooltip text="Webev is OSS" fade>
-            <IconButton
-              width={24}
-              height={24}
-              icon="GITHUB"
-              color="SECONDARY"
-              activeColor="SECONDARY"
-              onClickButton={() => window.open(WEBEV_GITHUB_URL, '_blank')}
-            />
-          </Tooltip>
-          <Tooltip text="Please feel free to contact me!" fade>
-            <IconButton
-              width={24}
-              height={24}
-              icon="TWITTER"
-              color="SECONDARY"
-              activeColor="SECONDARY"
-              onClickButton={() => window.open(ITIZAWA_TWITTER_URL, '_blank')}
-            />
-          </Tooltip>
+        <Grid xs={3} css={{ display: 'flex', justifyContent: 'end', gap: '$4' }}>
+          <Grid>
+            <Tooltip content="Webev is OSS">
+              <Link href={WEBEV_GITHUB_URL} target="_blank">
+                <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
+              </Link>
+            </Tooltip>
+          </Grid>
+          <Grid>
+            <Tooltip content="Please feel free to contact me!">
+              <Link href={ITIZAWA_TWITTER_URL} target="_blank">
+                <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
+              </Link>
+            </Tooltip>
+          </Grid>
         </Grid>
       </Container>
     </Grid>
