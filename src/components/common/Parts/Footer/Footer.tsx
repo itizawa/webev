@@ -15,7 +15,7 @@ export const Footer: FC = () => {
   const router = useRouter();
 
   return (
-    <Grid css={{ pt: '$4', pb: '$20', bgColor: '$gray100', border: 0, borderTop: 1, borderStyle: 'solid', borderColor: '$gray400' }}>
+    <Grid css={{ pt: '$10', pb: '$20', bgColor: '$gray100', border: 0, borderTop: 1, borderStyle: 'solid', borderColor: '$gray400' }}>
       <Container display="flex" css={{ mx: 'auto' }}>
         <Grid xs={9} css={{ display: 'flex', flexDirection: 'column' }}>
           <Text h5>Webev</Text>
