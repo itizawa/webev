@@ -5,7 +5,7 @@ import { Link } from '~/components/uiParts';
 
 export const Navbar: FC = () => {
   return (
-    <Container fluid responsive={false} css={{ height: '56px' }} display="flex" alignItems="center">
+    <Container fluid responsive={false} css={{ height: '56px', bgColor: '$gray100' }} display="flex" alignItems="center">
       <Grid xs={3}>
         <Link href="/" style={{ fontWeight: 'bold', color: 'white' }}>
           Webev
