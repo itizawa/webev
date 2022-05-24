@@ -10,7 +10,9 @@ class RestClient {
       headers: {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
+        'Access-Control-Allow-Credentials': true,
       },
+      withCredentials: true,
       responseType: 'json',
     });
   }
