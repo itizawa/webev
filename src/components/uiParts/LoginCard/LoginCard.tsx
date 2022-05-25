@@ -1,14 +1,13 @@
-import { Card, Grid } from '@nextui-org/react';
+import NextLink from 'next/link';
 import { FC } from 'react';
+import { Card, Grid } from '@nextui-org/react';
 
-import { signIn } from 'next-auth/react';
 import { useLocale } from '~/hooks/useLocale';
 import { imagePath } from '~/libs/constants/imagePath';
 import { Text, Image } from '~/components/uiParts';
+import { URLS } from '~/libs/constants/urls';
 
-type Props = {};
-
-export const LoginCard: FC<Props> = () => {
+export const LoginCard: FC = () => {
   const { t } = useLocale();
 
   return (
@@ -22,18 +21,21 @@ export const LoginCard: FC<Props> = () => {
           mt: '$8',
         }}
       >
-        <Image
-          src={imagePath.SIGN_IN_GOOGLE}
-          height={46}
-          width={191}
-          onClick={() => signIn('google')}
-          css={{
-            cursor: 'pointer',
-            '&:hover': {
-              opacity: '.8',
-            },
-          }}
-        />
+        <NextLink href={URLS.LOGIN_URL_TO_BACKEND}>
+          <a>
+            <Image
+              src={imagePath.SIGN_IN_GOOGLE}
+              height={46}
+              width={191}
+              css={{
+                cursor: 'pointer',
+                '&:hover': {
+                  opacity: '.8',
+                },
+              }}
+            />
+          </a>
+        </NextLink>
       </Grid>
     </Card>
   );
