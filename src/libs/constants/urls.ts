@@ -37,15 +37,11 @@ export const NOT_FOUND_URL = '/404';
 // NOTE: ルート
 export const TOP_URL = '/';
 
-// NOTE: webev の github
-export const WEBEV_GITHUB_URL = 'https://github.com/itizaworld/webev';
-
-// NOTE: itizawa の twitter
-export const ITIZAWA_TWITTER_URL = 'https://twitter.com/itizawa_pen';
-
 const serverUrl = process.env.NEXT_PUBLIC_WEBEV_SERVER_URL;
 
 export const URLS = {
   HOW_TO_USE: 'https://creative-rice-df2.notion.site/Webev-37a3c514bcbf45ba9ce938331721d254',
+  ITIZAWA_TWITTER_URL: 'https://twitter.com/itizawa_pen',
   LOGIN_URL_TO_BACKEND: `${serverUrl}/auth/google`,
+  WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',
 };
