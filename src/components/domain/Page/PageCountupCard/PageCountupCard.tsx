@@ -1,6 +1,8 @@
-import { Card, Text } from '@nextui-org/react';
+import { Text } from '@nextui-org/react';
 import { FC } from 'react';
 import CountUp from 'react-countup';
+
+import { Card } from '~/components/uiParts';
 
 type Props = {
   count: number;
