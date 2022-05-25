@@ -14,5 +14,6 @@ module.exports = withPWA({
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     MONGO_URI: process.env.MONGO_URI,
+    NEXT_PUBLIC_WEBEV_SERVER_URL: process.env.NEXT_PUBLIC_WEBEV_SERVER_URL
   },
 });
