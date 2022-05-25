@@ -7,7 +7,7 @@ import { restClient } from '~/utils/rest-client';
  * @returns {User} currentUser
  */
 export const useCurrentUser = (): SWRResponse<User, Error> => {
-  return useSWR('/users/me', (endpoint) => restClient.apiGet(endpoint).then((result) => result.data), {
+  return useSWR('/users/me', (endpoint) => restClient.apiGet<{ currentUser: User }>(endpoint).then((result) => result.data.currentUser), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
