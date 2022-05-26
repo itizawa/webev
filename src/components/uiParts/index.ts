@@ -1,3 +1,4 @@
+export { Avatar } from './Avatar';
 export { Card } from './Card';
 export { Image } from './Image';
 export { Link } from './Link';
