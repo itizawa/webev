@@ -1,4 +1,4 @@
-import { Loading as NextuiAvatar } from '@nextui-org/react';
+import { Avatar as NextuiAvatar } from '@nextui-org/react';
 import { ComponentProps, FC } from 'react';
 
 type Props = ComponentProps<typeof NextuiAvatar>;
