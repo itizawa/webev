@@ -1,24 +1,24 @@
 export class User {
-  _id: string;
-  name: string;
-  description: string;
+  id: string;
+  username: string;
   email: string;
-  image: string;
-  admin: boolean;
-  isExecutedTutorial: boolean;
-  apiTokenForExtension?: string;
+  profileUrl: string;
   createdAt: Date;
   updatedAt: Date;
-  constructor({ _id, name, description, email, image, admin, isExecutedTutorial, apiTokenForExtension, createdAt, updatedAt }: User) {
-    this._id = _id;
-    this.name = name;
-    this.description = description;
-    this.email = email;
-    this.image = image;
-    this.admin = admin;
-    this.isExecutedTutorial = isExecutedTutorial;
-    this.apiTokenForExtension = apiTokenForExtension;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+  constructor(init: User) {
+    this.id = init.id;
+    this.username = init.username;
+    this.email = init.email;
+    this.profileUrl = init.profileUrl;
+    this.createdAt = init.createdAt;
+    this.updatedAt = init.updatedAt;
+  }
+
+  static convertUserFormObject(data: User): User {
+    return new User({
+      ...data,
+      createdAt: new Date(data.createdAt),
+      updatedAt: new Date(data.updatedAt),
+    });
   }
 }
