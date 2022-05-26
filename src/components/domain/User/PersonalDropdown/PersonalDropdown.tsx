@@ -8,9 +8,9 @@ import { Avatar } from '~/components/uiParts';
 import { URLS } from '~/libs/constants/urls';
 
 export const PersonalDropdown: FC = () => {
-  const { data: currentUser, isValidating: isValidatingCurrentUser } = useCurrentUser();
+  const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
 
-  if (isValidatingCurrentUser) {
+  if (isLoadingCurrentUser) {
     return <Loading color="secondary" />;
   }
 
