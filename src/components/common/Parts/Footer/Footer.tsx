@@ -36,16 +36,16 @@ export const Footer: FC = () => {
             <Tooltip content="Webev is OSS">
               <NextLink href={URLS.WEBEV_GITHUB_URL}>
                 <a target="_blank">
-                  <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
+                  <Icon width={24} height={24} icon="GITHUB" />
                 </a>
               </NextLink>
             </Tooltip>
           </Grid>
           <Grid>
-            <Tooltip content="Please feel free to contact me!">
+            <Tooltip content="Contact Me">
               <NextLink href={URLS.ITIZAWA_TWITTER_URL}>
                 <a target="_blank">
-                  <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
+                  <Icon width={24} height={24} icon="TWITTER" />
                 </a>
               </NextLink>
             </Tooltip>
