@@ -9,7 +9,6 @@ import { Input } from '~/components/uiParts';
 export const PageUrlInputForm: FC = () => {
   const { t } = useLocale();
   const [url, setUrl] = useState('');
-  console.log(url);
 
   const { postPage } = usePostPage();
 
