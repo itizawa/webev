@@ -1,12 +1,12 @@
-import { VFC, useState, useCallback } from 'react';
+import { useState, useCallback, FC } from 'react';
 
 import { toastSuccess } from '~/utils/toastr';
 
 import { useLocale } from '~/hooks/useLocale';
-import { isValidUrl } from '~/utils/isValidUrl';
 import { usePostPage } from '~/hooks/Page/usePostPage';
+import { Input } from '~/components/uiParts';
 
-export const PageUrlInputForm: VFC = () => {
+export const PageUrlInputForm: FC = () => {
   const { t } = useLocale();
   const [url, setUrl] = useState('');
 
@@ -25,10 +25,7 @@ export const PageUrlInputForm: VFC = () => {
 
   return (
     <form className="input-group" onSubmit={onSubmit}>
-      <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} className="form-control ps-3 bg-white" placeholder="...URL" />
-      <button className="btn btn-secondary" type="submit" id="input-group" disabled={!isValidUrl(url)}>
-        {t.save}
-      </button>
+      <Input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="...https://" fullWidth animated={false} />
     </form>
   );
 };

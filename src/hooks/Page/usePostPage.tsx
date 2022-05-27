@@ -6,18 +6,18 @@ import { restClient } from '~/utils/rest-client';
  * Pageを保存するhooks
  */
 export const usePostPage = () => {
-  const { pagePagination, mutatePagePagination } = usePagePagination();
+  const { mutatePagePagination } = usePagePagination();
 
   /**
    * @param {string} url
    */
   const postPage = useCallback(
     async (url: string) => {
-      if (!pagePagination) return;
+      // if (!pagePagination) return;
       await restClient.apiPost('/pages', { url });
       mutatePagePagination();
     },
-    [mutatePagePagination, pagePagination],
+    [mutatePagePagination],
   );
 
   return { postPage };

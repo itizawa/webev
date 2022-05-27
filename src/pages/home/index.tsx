@@ -4,10 +4,7 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { PageList } from '~/components/domain/Page/molecules/PageList';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
@@ -15,6 +12,7 @@ import { useLocale } from '~/hooks/useLocale';
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
   const { pagePagination, setIsArchived } = usePagePagination();
+
   useEffect(() => {
     setIsArchived(false);
   }, [setIsArchived]);
@@ -29,7 +27,7 @@ const Index: WebevNextPage = () => {
             <span className="badge rounded-pill bg-secondary text-white">{pagePagination?.totalDocs} Pages</span>
           </div>
         </div>
-        <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
+        {/* <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
           <SearchTextBox />
           <SortButtonGroup />
         </div>
@@ -42,7 +40,7 @@ const Index: WebevNextPage = () => {
         )}
         {pagePagination && (
           <PageList pages={pagePagination?.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
-        )}
+        )} */}
       </LoginRequiredWrapper>
     </>
   );
