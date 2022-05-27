@@ -8,7 +8,5 @@ export const theme = createTheme({
       secondary: '#6f42c1',
       link: '#f5f5f5',
     },
-    space: {},
-    fonts: {},
   },
 });

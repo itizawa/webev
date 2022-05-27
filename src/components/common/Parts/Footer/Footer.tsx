@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 
 import { Container, Grid, Text } from '@nextui-org/react';
-import { ITIZAWA_TWITTER_URL, TERM_URL, WEBEV_GITHUB_URL } from '~/libs/constants/urls';
+import { URLS, TERM_URL } from '~/libs/constants/urls';
 
 import { Tooltip } from '~/components/uiParts/Tooltip';
 import { useLocale } from '~/hooks/useLocale';
@@ -34,18 +34,18 @@ export const Footer: FC = () => {
         <Grid xs={3} css={{ display: 'flex', justifyContent: 'end', gap: '$4' }}>
           <Grid>
             <Tooltip content="Webev is OSS">
-              <NextLink href={WEBEV_GITHUB_URL}>
+              <NextLink href={URLS.WEBEV_GITHUB_URL}>
                 <a target="_blank">
-                  <Icon width={24} height={24} icon="GITHUB" color="WHITE" />
+                  <Icon width={24} height={24} icon="GITHUB" />
                 </a>
               </NextLink>
             </Tooltip>
           </Grid>
           <Grid>
-            <Tooltip content="Please feel free to contact me!">
-              <NextLink href={ITIZAWA_TWITTER_URL}>
+            <Tooltip content="Contact Me">
+              <NextLink href={URLS.ITIZAWA_TWITTER_URL}>
                 <a target="_blank">
-                  <Icon width={24} height={24} icon="TWITTER" color="WHITE" />
+                  <Icon width={24} height={24} icon="TWITTER" />
                 </a>
               </NextLink>
             </Tooltip>

@@ -1,39 +1,27 @@
-import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, VFC } from 'react';
+import { FC, ReactNode, useEffect } from 'react';
+
+import { Loading } from '~/components/uiParts';
+import { URLS } from '~/libs/constants/urls';
+import { useCurrentUser } from '~/stores/users';
 
 type Props = {
   children: ReactNode;
 };
 
-export const LoginRequiredWrapper: VFC<Props> = ({ children }) => {
-  const { status } = useSession();
+export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
+  const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/login?isRedirect=true');
+    if (!isLoadingCurrentUser && !currentUser) {
+      router.push(`${URLS.LOGIN}?isRedirect=true`);
     }
-  }, [router, status]);
+  }, [currentUser, isLoadingCurrentUser, router]);
 
-  if (typeof window !== 'undefined' && status === 'loading')
-    return (
-      <div className="pt-5 d-flex align-items-center justify-content-center">
-        <div className="spinner-border text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
+  if (isLoadingCurrentUser) return <Loading size="xl" />;
 
-  if (status === 'authenticated') {
-    return <>{children}</>;
-  }
+  if (!currentUser) return null;
 
-  return (
-    <div className="pt-5 d-flex align-items-center justify-content-center">
-      <div className="spinner-border text-info" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
-  );
+  return <>{children}</>;
 };
