@@ -22,7 +22,7 @@ const handler = nc()
     const { sort, page = '1', limit = '10', q = '', isArchived } = req.query;
 
     const query: FilterQuery<Page> = {
-      createdUser: user._id,
+      createdUser: user.id,
       isDeleted: false,
     };
 
