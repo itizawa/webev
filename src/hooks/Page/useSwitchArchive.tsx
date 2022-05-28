@@ -11,7 +11,7 @@ export const useSwitchArchive = (): {
   switchArchive: (pageId: string, bool: boolean) => Promise<void>;
 } => {
   const [isLoading, setIsLoading] = useState(false);
-  const { pagePagination, mutatePagePagination } = usePagePagination();
+  const { paginationPage, mutatePagePagination } = usePagePagination();
 
   const switchArchive = useCallback(
     async (pageId: string, bool: boolean): Promise<void> => {
@@ -19,21 +19,21 @@ export const useSwitchArchive = (): {
 
       mutatePagePagination(
         await restClient.apiPut<Page>(`/pages/${pageId}/archive`, { isArchive: bool }).then(() =>
-          pagePagination
+          paginationPage
             ? {
-                ...pagePagination,
-                docs: pagePagination.docs.filter((page) => {
-                  return page._id !== pageId;
+                ...paginationPage,
+                docs: paginationPage.docs.filter((page) => {
+                  return page.id !== pageId;
                 }),
               }
             : undefined,
         ),
         {
-          optimisticData: pagePagination
+          optimisticData: paginationPage
             ? {
-                ...pagePagination,
-                docs: pagePagination.docs.filter((page) => {
-                  return page._id !== pageId;
+                ...paginationPage,
+                docs: paginationPage.docs.filter((page) => {
+                  return page.id !== pageId;
                 }),
               }
             : undefined,
@@ -45,7 +45,7 @@ export const useSwitchArchive = (): {
       setIsLoading(false);
       return;
     },
-    [mutatePagePagination, pagePagination],
+    [mutatePagePagination, paginationPage],
   );
 
   return { isLoading, switchArchive };
