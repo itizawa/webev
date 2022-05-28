@@ -14,6 +14,7 @@ export const PagePaginationContext = createContext<{
   setIsArchived?: Dispatch<SetStateAction<boolean>>;
   paginationPage?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
+  isLoadingPaginationPage: boolean;
 }>({
   setSearchKeyword: undefined,
   activePage: 1,
@@ -23,6 +24,7 @@ export const PagePaginationContext = createContext<{
   setIsArchived: undefined,
   paginationPage: undefined,
   mutatePagePagination: undefined,
+  isLoadingPaginationPage: true,
 });
 
 export const PagePaginationProvider: FC<{
@@ -41,7 +43,11 @@ export const PagePaginationProvider: FC<{
 
   const endpoint = joinUrl('/pages/list', params);
 
-  const { data: paginationPage, mutate: mutatePagePagination } = useSWR<PaginationResult<Page>>(endpoint, (endpoint: string) =>
+  const {
+    data: paginationPage,
+    mutate: mutatePagePagination,
+    isLoading: isLoadingPaginationPage,
+  } = useSWR<PaginationResult<Page>>(endpoint, (endpoint: string) =>
     restClient.apiGet<{ paginationPage: PaginationResult<Page> }>(endpoint).then((result) => result.data.paginationPage),
   );
 
@@ -56,6 +62,7 @@ export const PagePaginationProvider: FC<{
         setIsArchived,
         paginationPage,
         mutatePagePagination,
+        isLoadingPaginationPage,
       }}
     >
       {children}
