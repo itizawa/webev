@@ -11,6 +11,7 @@ export const usePagePagination = () => {
     setIsArchived,
     paginationPage,
     mutatePagePagination,
+    isLoadingPaginationPage,
   } = useContext(PagePaginationContext);
 
   if (!setSearchKeyword || !setActivePage || !setIsSortUpdatedAt || !setIsArchived || !mutatePagePagination) {
@@ -26,5 +27,6 @@ export const usePagePagination = () => {
     setIsArchived,
     paginationPage,
     mutatePagePagination,
+    isLoadingPaginationPage,
   };
 };
