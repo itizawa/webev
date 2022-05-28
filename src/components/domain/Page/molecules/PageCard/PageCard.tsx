@@ -1,10 +1,9 @@
-import { VFC } from 'react';
+import { FC, useCallback } from 'react';
 import Link from 'next/link';
 
-import styled from 'styled-components';
 import { format } from 'date-fns';
 
-import { PageManageDropdown } from '../PageManageDropdown';
+import { Button, Card, Grid } from '@nextui-org/react';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -13,6 +12,7 @@ import { Page } from '~/domains/Page';
 
 import { useLocale } from '~/hooks/useLocale';
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
+import { Text } from '~/components/uiParts';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -20,87 +20,115 @@ type Props = {
   page: Page;
 };
 
-export const PageCard: VFC<Props> = ({ page }) => {
+export const PageCard: FC<Props> = ({ page }) => {
   const { t } = useLocale();
 
   const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
 
-  const { _id, url, siteName, image, favicon, title, description, updatedAt } = page;
-
-  const handleSwitchArchive = async () => {
-    try {
-      await switchArchive(_id, true);
-      toastSuccess(t.toastr_success_read);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
+  const handleSwitchArchive = useCallback(
+    async (id: string) => {
+      try {
+        await switchArchive(id, true);
+        toastSuccess(t.toastr_success_read);
+      } catch (err) {
+        if (err instanceof Error) toastError(err);
+      }
+    },
+    [switchArchive, t.toastr_success_read],
+  );
 
   return (
-    <StyledCard className="card border-0 shadow h-100 overflow-hidden">
-      {page.body ? (
-        <Link href={`/page/${page._id}`}>
-          <a>
-            <FixedImage imageUrl={image} />
-          </a>
-        </Link>
-      ) : (
-        <a href={url} target="blank" rel="noopener noreferrer">
-          <FixedImage imageUrl={image} />
-        </a>
-      )}
-      <div className="card-body p-2 d-flex flex-column">
-        <div className="d-flex align-items-center">
-          <p className="fw-bold text-break mb-0 me-auto">
-            {page.body ? (
-              <Link href={`/page/${page._id}`}>
-                <a className="text-white webev-anchor webev-limit-2lines">{title || url}</a>
-              </Link>
-            ) : (
-              <a className="text-white webev-anchor webev-limit-2lines" href={url} target="blank" rel="noopener noreferrer">
-                {title || url}
-              </a>
-            )}
-          </p>
-          <PageManageDropdown page={page} />
-        </div>
-        <p className="small mt-2 p-1">
-          {description?.length > MAX_WORD_COUNT_OF_BODY ? description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : description}
-        </p>
-        <div className="d-flex align-items-center mt-auto justify-content-between">
-          <small className="text-truncate me-auto">
-            {favicon != null && (
-              <img
-                className="me-1"
-                width={14}
-                height={14}
-                src={favicon || ''}
-                alt={favicon || ''}
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                onError={(e: any) => (e.target.style.display = 'none')}
-                loading="lazy"
-                referrerPolicy="no-referrer"
-                decoding="sync"
-              />
-            )}
-            <a className="text-white webev-anchor" href={new URL(url).origin} target="blank" rel="noopener noreferrer">
-              {siteName}
+    <Card>
+      <Card.Body css={{ p: 0, flex: 'none' }}>
+        {page.body ? (
+          <Link href={`/page/${page.id}`}>
+            <a>
+              <FixedImage imageUrl={page.image} />
             </a>
-            {siteName != null && <br />}
-            {format(new Date(updatedAt), 'yyyy/MM/dd')}
-          </small>
+          </Link>
+        ) : (
+          <a href={page.url} target="blank" rel="noopener noreferrer">
+            <FixedImage imageUrl={page.image} />
+          </a>
+        )}
+      </Card.Body>
+      <Card.Footer css={{ bgColor: '#2f363d', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
+        {page.body ? (
+          <Link href={`/page/${page.id}`}>
+            <a>
+              <Text
+                b
+                css={{
+                  color: '$white',
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  overflowWrap: 'anywhere',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 2,
+                }}
+              >
+                {page.title || page.url}
+              </Text>
+            </a>
+          </Link>
+        ) : (
+          <a href={page.url} target="blank" rel="noopener noreferrer">
+            <Text
+              b
+              css={{
+                color: '$white',
+                display: '-webkit-box',
+                overflow: 'hidden',
+                overflowWrap: 'anywhere',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+              }}
+            >
+              {page.title || page.url}
+            </Text>
+          </a>
+        )}
+        <Text css={{ mt: '$10', mb: '$4', color: '$white', fontSize: '$xs', overflowWrap: 'anywhere' }}>
+          {page.description?.length > MAX_WORD_COUNT_OF_BODY ? page.description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : page.description}
+        </Text>
+        {/* <PageManageDropdown page={page} /> */}
+        <Grid css={{ width: '100%', mt: 'auto', p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
+          <Grid>
+            <Grid css={{ p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
+              {page.favicon != null && (
+                <img
+                  width={14}
+                  height={14}
+                  src={page.favicon || ''}
+                  alt={page.favicon || ''}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  onError={(e: any) => (e.target.style.display = 'none')}
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                  decoding="sync"
+                />
+              )}
+              <a href={new URL(page.url).origin} target="blank" rel="noopener noreferrer">
+                <Text css={{ color: '$accents5', fontSize: '$xs' }}>{page.siteName}</Text>
+              </a>
+            </Grid>
+            <Text css={{ color: '$accents5', fontSize: '$xs' }}>{format(new Date(page.updatedAt), 'yyyy/MM/dd')}</Text>
+          </Grid>
           {!page.archivedAt && (
-            <button className="btn btn-sm btn-primary d-flex" onClick={handleSwitchArchive} disabled={isLoadingSwitchArchive}>
-              <Icon height={20} width={20} icon="CHECK" color="WHITE" />
-              <span className="ms-2 text-nowrap">{t.read_button}</span>
-            </button>
+            <Button
+              css={{ ml: 'auto', display: 'flex', gap: '$2', fontWeight: '$semibold' }}
+              onClick={() => handleSwitchArchive(page.id)}
+              disabled={isLoadingSwitchArchive}
+              size="sm"
+              color="secondary"
+              auto
+              icon={<Icon height={16} width={16} icon="CHECK" />}
+            >
+              {t.read_button}
+            </Button>
           )}
-        </div>
-      </div>
-    </StyledCard>
+        </Grid>
+      </Card.Footer>
+    </Card>
   );
 };
-
-const StyledCard = styled.div`
-  background-color: #2f363d;
-`;

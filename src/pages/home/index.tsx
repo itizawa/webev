@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 
+import { Grid } from '@nextui-org/react';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
@@ -8,10 +9,13 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
+import { SortButtonGroup } from '~/components/domain/Page';
+import { Loading, Text } from '~/components/uiParts';
+import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
-  const { pagePagination, setIsArchived } = usePagePagination();
+  const { paginationPage, setIsArchived, isLoadingPaginationPage } = usePagePagination();
 
   useEffect(() => {
     setIsArchived(false);
@@ -21,26 +25,27 @@ const Index: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.home}`} />
       <LoginRequiredWrapper>
-        <div className="d-flex align-items-center">
-          <h1 className="mb-0">{t.home}</h1>
-          <div className="ms-auto">
-            <span className="badge rounded-pill bg-secondary text-white">{pagePagination?.totalDocs} Pages</span>
-          </div>
-        </div>
-        {/* <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
-          <SearchTextBox />
-          <SortButtonGroup />
-        </div>
-        {!pagePagination && (
-          <div className="pt-5 d-flex align-items-center justify-content-center">
-            <div className="spinner-border text-info" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        )}
-        {pagePagination && (
-          <PageList pages={pagePagination?.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
-        )} */}
+        <Grid css={{ width: '100%', px: '$8' }}>
+          <Grid css={{ display: 'flex', alignItems: 'center' }}>
+            <Text h2>{t.home}</Text>
+            <Grid css={{ ml: 'auto', fontWeight: '$bold', color: '$white' }}>{paginationPage?.totalDocs} Pages</Grid>
+          </Grid>
+          <Grid css={{ display: 'flex', justifyContent: 'end' }}>
+            {/* <SearchTextBox /> */}
+            <SortButtonGroup />
+          </Grid>
+          {isLoadingPaginationPage ? (
+            <Grid css={{ display: 'flex', justifyContent: 'center' }}>
+              <Loading size="lg" color="secondary" />
+            </Grid>
+          ) : (
+            <>
+              {paginationPage && (
+                <PageList pages={paginationPage?.docs} pagingLimit={paginationPage.limit} totalItemsCount={paginationPage.totalDocs} />
+              )}
+            </>
+          )}
+        </Grid>
       </LoginRequiredWrapper>
     </>
   );

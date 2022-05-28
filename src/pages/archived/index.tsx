@@ -4,7 +4,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { SortButtonGroup } from '~/components/common/SortButtonGroup';
+import { SortButtonGroup } from '~/components/domain/Page/SortButtonGroup/SortButtonGroup';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { PageList } from '~/components/domain/Page/molecules/PageList';
 
@@ -15,7 +15,7 @@ import { usePagePagination } from '~/hooks/Page';
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
-  const { pagePagination, setIsArchived } = usePagePagination();
+  const { paginationPage, setIsArchived } = usePagePagination();
   useEffect(() => {
     setIsArchived(true);
   }, [setIsArchived]);
@@ -27,22 +27,22 @@ const Page: WebevNextPage = () => {
         <div className="d-flex align-items-center">
           <h1 className="mb-0">{t.read}</h1>
           <div className="ms-auto">
-            <span className="badge rounded-pill bg-secondary text-white">{pagePagination?.totalDocs} Pages</span>
+            <span className="badge rounded-pill bg-secondary text-white">{paginationPage?.totalDocs} Pages</span>
           </div>
         </div>
         <div className="my-3 d-flex flex-column flex-sm-row justify-content-between gap-3">
           <SearchTextBox />
           <SortButtonGroup />
         </div>
-        {pagePagination == null && (
+        {paginationPage == null && (
           <div className="pt-5 d-flex align-items-center justify-content-center">
             <div className="spinner-border text-info" role="status">
               <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         )}
-        {pagePagination != null && (
-          <PageList pages={pagePagination.docs} pagingLimit={pagePagination.limit} totalItemsCount={pagePagination.totalDocs} />
+        {paginationPage != null && (
+          <PageList pages={paginationPage.docs} pagingLimit={paginationPage.limit} totalItemsCount={paginationPage.totalDocs} />
         )}
       </LoginRequiredWrapper>
     </>

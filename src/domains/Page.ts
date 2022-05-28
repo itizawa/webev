@@ -1,5 +1,5 @@
 export class Page {
-  _id: string;
+  id: string;
   url: string;
   image: string;
   favicon: string;
@@ -13,7 +13,7 @@ export class Page {
   updatedAt: Date;
   archivedAt?: Date | null;
   constructor(init: Page) {
-    this._id = init._id;
+    this.id = init.id;
     this.url = init.url;
     this.image = init.image;
     this.favicon = init.favicon;

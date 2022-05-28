@@ -1,4 +1,4 @@
-import React, { VFC, useState, createContext, ReactNode, SetStateAction, Dispatch } from 'react';
+import React, { useState, createContext, ReactNode, SetStateAction, Dispatch, FC } from 'react';
 import useSWR, { KeyedMutator } from 'swr';
 import { Page } from '~/domains/Page';
 import { PaginationResult } from '~/libs/interfaces/paginationResult';
@@ -12,8 +12,9 @@ export const PagePaginationContext = createContext<{
   isSortUpdatedAt: boolean;
   setIsSortUpdatedAt?: Dispatch<SetStateAction<boolean>>;
   setIsArchived?: Dispatch<SetStateAction<boolean>>;
-  pagePagination?: PaginationResult<Page>;
+  paginationPage?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
+  isLoadingPaginationPage: boolean;
 }>({
   setSearchKeyword: undefined,
   activePage: 1,
@@ -21,11 +22,12 @@ export const PagePaginationContext = createContext<{
   isSortUpdatedAt: false,
   setIsSortUpdatedAt: undefined,
   setIsArchived: undefined,
-  pagePagination: undefined,
+  paginationPage: undefined,
   mutatePagePagination: undefined,
+  isLoadingPaginationPage: true,
 });
 
-export const PagePaginationProvider: VFC<{
+export const PagePaginationProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -41,8 +43,12 @@ export const PagePaginationProvider: VFC<{
 
   const endpoint = joinUrl('/pages/list', params);
 
-  const { data: pagePagination, mutate: mutatePagePagination } = useSWR<PaginationResult<Page>>(endpoint, (endpoint: string) =>
-    restClient.apiGet(endpoint).then((result) => result.data),
+  const {
+    data: paginationPage,
+    mutate: mutatePagePagination,
+    isLoading: isLoadingPaginationPage,
+  } = useSWR<PaginationResult<Page>>(endpoint, (endpoint: string) =>
+    restClient.apiGet<{ paginationPage: PaginationResult<Page> }>(endpoint).then((result) => result.data.paginationPage),
   );
 
   return (
@@ -54,8 +60,9 @@ export const PagePaginationProvider: VFC<{
         isSortUpdatedAt,
         setIsSortUpdatedAt,
         setIsArchived,
-        pagePagination,
+        paginationPage,
         mutatePagePagination,
+        isLoadingPaginationPage,
       }}
     >
       {children}

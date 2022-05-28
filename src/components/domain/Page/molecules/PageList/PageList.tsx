@@ -1,5 +1,6 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 
+import { Grid } from '@nextui-org/react';
 import { Page } from '~/domains/Page';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
@@ -17,7 +18,7 @@ type Props = {
   totalItemsCount: number;
 };
 
-export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount }) => {
+export const PageList: FC<Props> = ({ pages, pagingLimit, totalItemsCount }) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
   const { activePage, setActivePage } = usePagePagination();
 
@@ -27,35 +28,35 @@ export const PageList: VFC<Props> = ({ pages, pagingLimit, totalItemsCount }) =>
   };
 
   return (
-    <div className="row">
+    <Grid.Container gap={1}>
       {pages.map((page) => {
         if (ogpCardLayout === OgpLayoutType.LIST) {
           return (
-            <div className="col-12" key={page._id}>
+            <div className="col-12" key={page.id}>
               <PageListItem page={page} />
             </div>
           );
         }
         return (
-          <div className="col-xl-4 col-md-6 mb-3" key={page._id}>
+          <Grid key={page.id} xs={12} sm={6} md={4} xl={3}>
             <PageCard page={page} />
-          </div>
+          </Grid>
         );
       })}
       {pages.length === 0 ? (
-        <div className="col-12">
+        <Grid xs={12}>
           <NoPageAlert />
-        </div>
+        </Grid>
       ) : (
-        <div className="text-center">
+        <Grid xs={12}>
           <PaginationWrapper
             pagingLimit={pagingLimit}
             totalItemsCount={totalItemsCount}
             activePage={activePage}
             mutateActivePage={handleMutateActivePage}
           />
-        </div>
+        </Grid>
       )}
-    </div>
+    </Grid.Container>
   );
 };
