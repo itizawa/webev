@@ -28,9 +28,7 @@ const Index: WebevNextPage = () => {
         <Grid css={{ width: '100%', px: '$8' }}>
           <Grid css={{ display: 'flex', alignItems: 'center' }}>
             <Text h2>{t.home}</Text>
-            <Grid css={{ ml: 'auto' }}>
-              <span className="badge rounded-pill bg-secondary text-white">{paginationPage?.totalDocs} Pages</span>
-            </Grid>
+            <Grid css={{ ml: 'auto' }}>{paginationPage?.totalDocs} Pages</Grid>
           </Grid>
           <Grid css={{ display: 'flex', justifyContent: 'end' }}>
             {/* <SearchTextBox /> */}
