@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 
 import { imagePath } from '~/libs/constants/imagePath';
@@ -6,7 +6,8 @@ import { imagePath } from '~/libs/constants/imagePath';
 type Props = {
   imageUrl?: string;
 };
-export const FixedImage: VFC<Props> = ({ imageUrl }) => {
+
+export const FixedImage: FC<Props> = ({ imageUrl }) => {
   return (
     <StyledImageWrapper>
       <img
