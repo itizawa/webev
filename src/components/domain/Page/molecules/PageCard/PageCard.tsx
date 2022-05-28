@@ -56,12 +56,34 @@ export const PageCard: FC<Props> = ({ page }) => {
         {page.body ? (
           <Link href={`/page/${page.id}`}>
             <a>
-              <Text b>{page.title || page.url}</Text>
+              <Text
+                b
+                css={{
+                  color: '$white',
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  overflowWrap: 'anywhere',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 2,
+                }}
+              >
+                {page.title || page.url}
+              </Text>
             </a>
           </Link>
         ) : (
           <a href={page.url} target="blank" rel="noopener noreferrer">
-            <Text b css={{ color: '$white', display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}>
+            <Text
+              b
+              css={{
+                color: '$white',
+                display: '-webkit-box',
+                overflow: 'hidden',
+                overflowWrap: 'anywhere',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+              }}
+            >
               {page.title || page.url}
             </Text>
           </a>
