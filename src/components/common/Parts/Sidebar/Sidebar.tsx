@@ -24,11 +24,13 @@ export const Sidebar: FC = () => {
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>
-            <Button color="secondary" css={{ gap: '$2' }} ghost={!router.pathname.startsWith(v.url)}>
-              <Text css={{ alignItems: 'center', display: 'flex', gap: '$4' }}>
-                {v.icon != null && <Icon icon={v.icon} />}
-                {v.text}
-              </Text>
+            <Button
+              color="secondary"
+              css={{ gap: '$2', fontWeight: '$bold' }}
+              icon={v.icon != null ? <Icon icon={v.icon} /> : undefined}
+              ghost={!router.pathname.startsWith(v.url)}
+            >
+              {v.text}
             </Button>
           </Link>
         );
