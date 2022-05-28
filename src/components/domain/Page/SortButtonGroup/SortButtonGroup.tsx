@@ -10,10 +10,10 @@ export const SortButtonGroup: FC = () => {
 
   return (
     <Button.Group color="secondary" size="sm">
-      <Button bordered={isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(false)}>
+      <Button bordered={isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(false)} css={{ fontWeight: '$bold' }}>
         {t.latest_order}
       </Button>
-      <Button bordered={!isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(true)}>
+      <Button bordered={!isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(true)} css={{ fontWeight: '$bold' }}>
         {t.oldest_order}
       </Button>
     </Button.Group>
