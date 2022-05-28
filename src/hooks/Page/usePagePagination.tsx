@@ -9,7 +9,7 @@ export const usePagePagination = () => {
     isSortUpdatedAt,
     setIsSortUpdatedAt,
     setIsArchived,
-    pagePagination,
+    paginationPage,
     mutatePagePagination,
   } = useContext(PagePaginationContext);
 
@@ -24,7 +24,7 @@ export const usePagePagination = () => {
     isSortUpdatedAt,
     setIsSortUpdatedAt,
     setIsArchived,
-    pagePagination,
+    paginationPage,
     mutatePagePagination,
   };
 };
