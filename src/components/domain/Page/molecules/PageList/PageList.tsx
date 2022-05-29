@@ -1,12 +1,11 @@
 import { FC } from 'react';
 
-import { Grid } from '@nextui-org/react';
+import { Grid, Pagination } from '@nextui-org/react';
 import { Page } from '~/domains/Page';
 import { useOgpCardLayout } from '~/stores/contexts';
 import { OgpLayoutType } from '~/libs/interfaces/contexts';
 
 import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
-import { PaginationWrapper } from '~/components/common/Parts/PaginationWrapper';
 import { PageListItem } from '~/components/domain/Page/molecules/PageListItem';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
@@ -14,13 +13,12 @@ import { usePagePagination } from '~/hooks/Page';
 
 type Props = {
   pages: Page[];
-  pagingLimit: number;
-  totalItemsCount: number;
+  totalPages: number;
 };
 
-export const PageList: FC<Props> = ({ pages, pagingLimit, totalItemsCount }) => {
+export const PageList: FC<Props> = ({ pages, totalPages }) => {
   const { data: ogpCardLayout } = useOgpCardLayout();
-  const { activePage, setActivePage } = usePagePagination();
+  const { setActivePage } = usePagePagination();
 
   const handleMutateActivePage = (page: number) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -48,13 +46,8 @@ export const PageList: FC<Props> = ({ pages, pagingLimit, totalItemsCount }) => 
           <NoPageAlert />
         </Grid>
       ) : (
-        <Grid xs={12}>
-          <PaginationWrapper
-            pagingLimit={pagingLimit}
-            totalItemsCount={totalItemsCount}
-            activePage={activePage}
-            mutateActivePage={handleMutateActivePage}
-          />
+        <Grid xs={12} css={{ display: 'flex', justifyContent: 'center', mt: '$10' }}>
+          <Pagination shadow color="secondary" total={totalPages} onChange={handleMutateActivePage} />
         </Grid>
       )}
     </Grid.Container>
