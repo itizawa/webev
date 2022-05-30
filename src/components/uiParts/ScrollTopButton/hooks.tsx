@@ -6,10 +6,10 @@ export const useHooks = (): { isShowScroll: boolean; scrollTop: () => void } => 
 
   const throttleCheckScrollTop = throttle(300, () => {
     const currentYOffset = window.pageYOffset;
-    if (currentYOffset > 1000) {
+    if (currentYOffset > 500) {
       setIsShowScroll(true);
     }
-    if (currentYOffset <= 1000) {
+    if (currentYOffset <= 500) {
       setIsShowScroll(false);
     }
   });

@@ -15,7 +15,7 @@ import { Footer } from '~/components/common/Parts/Footer';
 
 // import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 // import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
-import { ScrollTopButton } from '~/components/case/atoms/ScrollTopButton';
+import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
