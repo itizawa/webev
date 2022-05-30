@@ -25,6 +25,7 @@ export const ScrollTopButton: FC = () => {
         backgroundColor: '$cyan100',
         display: isShowScroll ? 'block' : 'none',
       }}
+      auto
     >
       <Icon icon="ARROW" />
     </Button>
