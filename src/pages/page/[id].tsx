@@ -8,7 +8,6 @@ import { useLocale } from '~/hooks/useLocale';
 import { toastError } from '~/utils/toastr';
 
 import { Icon } from '~/components/base/atoms/Icon';
-import { IconButton } from '~/components/base/molecules/IconButton';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -49,7 +48,7 @@ const Page: WebevNextPage = () => {
 
   const handleClickSwitchArchiveButton = async () => {
     try {
-      await switchArchive(page._id, !false);
+      await switchArchive(page.id, !false);
       mutatePage();
     } catch (err) {
       if (err instanceof Error) toastError(err);
@@ -96,44 +95,9 @@ const Page: WebevNextPage = () => {
           isReading={isReading}
         />
         <div className="ms-2 d-flex align-items-center">
-          <div className="ms-auto me-2">
-            {speech.isEnabled && page.body && (
-              <>
-                {isReading ? (
-                  <IconButton
-                    icon="PAUSE_CIRCLE"
-                    color="WHITE"
-                    activeColor="SUCCESS"
-                    width={24}
-                    height={24}
-                    isRemovePadding
-                    onClickButton={handleClickPauseButton}
-                  />
-                ) : (
-                  <IconButton
-                    icon="PLAY_CIRCLE"
-                    color="WHITE"
-                    activeColor="SUCCESS"
-                    width={24}
-                    height={24}
-                    isRemovePadding
-                    onClickButton={handleClickPlayButton}
-                  />
-                )}
-                <IconButton
-                  icon="STOP_CIRCLE"
-                  color="WHITE"
-                  activeColor="SUCCESS"
-                  width={24}
-                  height={24}
-                  isRemovePadding
-                  onClickButton={handleClickStopButton}
-                />
-              </>
-            )}
-          </div>
+          <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
           <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+            <Icon height={20} width={20} icon="CHECK" />
             <span className="ms-2 text-nowrap">{t.read_button}</span>
           </button>
           <div className="ms-2">

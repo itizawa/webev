@@ -21,7 +21,7 @@ const handler = nc()
     const { isArchive } = req.body;
 
     try {
-      const result = await archivePageUseCase.execute({ id, userId: user._id, isArchive: Boolean(isArchive) });
+      const result = await archivePageUseCase.execute({ id, userId: user.id, isArchive: Boolean(isArchive) });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error });

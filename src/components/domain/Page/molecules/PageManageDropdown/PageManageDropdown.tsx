@@ -1,107 +1,101 @@
-import { VFC, useMemo, useCallback } from 'react';
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import { Icon } from '~/components/base/atoms/Icon';
-import { IconButton } from '~/components/base/molecules/IconButton';
+import { VFC } from 'react';
+
 import { Page } from '~/domains/Page';
-
-import { useLocale } from '~/hooks/useLocale';
-import { useModal } from '~/hooks/useModal';
-
-import { toastError, toastSuccess } from '~/utils/toastr';
-import { usePagePagination, useSwitchArchive } from '~/hooks/Page';
 
 type Props = {
   page: Page;
   direction?: 'up' | 'down' | 'start' | 'end';
 };
 
-export const PageManageDropdown: VFC<Props> = ({ page, direction = 'start' }) => {
-  const { t } = useLocale();
-  const { handleModal } = useModal();
-  const { switchArchive } = useSwitchArchive();
-  const { pagePagination, mutatePagePagination } = usePagePagination();
+export const PageManageDropdown: VFC<Props> = () => {
+  // const { t } = useLocale();
+  // const { handleModal } = useModal();
+  // const { switchArchive } = useSwitchArchive();
 
-  const handleClickCancelArchiveButton = useCallback(async () => {
-    try {
-      await switchArchive(page._id, false);
-      if (pagePagination) {
-        mutatePagePagination(
-          {
-            ...pagePagination,
-            docs: pagePagination.docs.filter((v) => v._id !== page._id),
-          },
-          false,
-        );
-      }
-      toastSuccess(t.toastr_success_put_back);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  }, [mutatePagePagination, page._id, pagePagination, switchArchive, t.toastr_success_put_back]);
+  return null;
+  // const { pagePagination, mutatePagePagination } = usePagePagination();
 
-  /**
-   * Twitter の共有
-   */
-  const sharePage = useCallback(async () => {
-    if (window != null) {
-      const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
-      window.open(twitterUrl.toString(), '_blank');
-    }
-  }, [page.siteName, page.url]);
+  // const handleClickCancelArchiveButton = useCallback(async () => {
+  //   try {
+  //     await switchArchive(page.id, false);
+  //     if (pagePagination) {
+  //       mutatePagePagination(
+  //         {
+  //           ...pagePagination,
+  //           docs: pagePagination.docs.filter((v) => v._id !== page.id),
+  //         },
+  //         false,
+  //       );
+  //     }
+  //     toastSuccess(t.toastr_success_put_back);
+  //   } catch (err) {
+  //     if (err instanceof Error) toastError(err);
+  //   }
+  // }, [mutatePagePagination, page.id, pagePagination, switchArchive, t.toastr_success_put_back]);
 
-  /**
-   * Web share api を使った共有
-   */
-  const sharePageByNavigator = useCallback(() => {
-    navigator.share({
-      title: page.title,
-      text: page.description,
-      url: page.url,
-    });
-  }, [page.description, page.title, page.url]);
+  // /**
+  //  * Twitter の共有
+  //  */
+  // const sharePage = useCallback(async () => {
+  //   if (window != null) {
+  //     const twitterUrl = new URL(`https://twitter.com/intent/tweet?url=${encodeURIComponent(page.url)}&hashtags=${page.siteName}`);
+  //     window.open(twitterUrl.toString(), '_blank');
+  //   }
+  // }, [page.siteName, page.url]);
 
-  /**
-   * Web share api が使えるかどうか(MobileかSafariだと使用可能)
-   * @returns {boolean}
-   */
-  const canShareByNavigator = useMemo(() => {
-    return !!navigator?.share;
-  }, []);
+  // /**
+  //  * Web share api を使った共有
+  //  */
+  // const sharePageByNavigator = useCallback(() => {
+  //   navigator.share({
+  //     title: page.title,
+  //     text: page.description,
+  //     url: page.url,
+  //   });
+  // }, [page.description, page.title, page.url]);
 
-  return (
-    <UncontrolledDropdown direction={direction}>
-      <DropdownToggle tag="span">
-        <div id={`manage-for-${page._id}`}>
-          <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
-        </div>
-      </DropdownToggle>
-      <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
-        {/* <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
-          <DropdownItem>
-            <Icon icon="CLIP_BOARD_PLUS" color="WHITE" />
-            <span className="ms-2">{t.copy_url}</span>
-          </DropdownItem>
-        </CopyToClipboard> */}
-        <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>
-          <Icon icon="TRASH" color="WHITE" />
-          <span className="ms-2">{t.delete}</span>
-        </DropdownItem>
-        {page.archivedAt && (
-          <DropdownItem tag="button" onClick={handleClickCancelArchiveButton}>
-            <Icon height={20} width={20} icon="REPLY" color="WHITE" />
-            <span className="ms-2 text-nowrap">{t.return_button}</span>
-          </DropdownItem>
-        )}
-        {/* TODO: implement */}
-        {/* <DropdownItem tag="button" onClick={onClickFetchButton}>
-          <Icon icon="ARROW_CLOCKWISE" color="WHITE" />
-          <span className="ms-2">{t.fetch}</span>
-        </DropdownItem> */}
-        <DropdownItem tag="button" onClick={canShareByNavigator ? sharePageByNavigator : sharePage}>
-          <Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} color="WHITE" />
-          <span className="ms-2">{t.share}</span>
-        </DropdownItem>
-      </DropdownMenu>
-    </UncontrolledDropdown>
-  );
+  // /**
+  //  * Web share api が使えるかどうか(MobileかSafariだと使用可能)
+  //  * @returns {boolean}
+  //  */
+  // const canShareByNavigator = useMemo(() => {
+  //   return !!navigator?.share;
+  // }, []);
+
+  // return (
+  //   <UncontrolledDropdown direction={direction}>
+  //     <DropdownToggle tag="span">
+  //       <div id={`manage-for-${page.id}`}>
+  //         <IconButton width={18} height={18} icon="THREE_DOTS_VERTICAL" color="WHITE" activeColor="WHITE" />
+  //       </div>
+  //     </DropdownToggle>
+  //     <DropdownMenu className="dropdown-menu-dark border-secondary" positionFixed container="body">
+  //       {/* <CopyToClipboard text={page.url || ''} onCopy={() => toastSuccess(t.toastr_success_copy_url)}>
+  //         <DropdownItem>
+  //           <Icon icon="CLIP_BOARD_PLUS"  />
+  //           <span className="ms-2">{t.copy_url}</span>
+  //         </DropdownItem>
+  //       </CopyToClipboard> */}
+  //       <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>
+  //         <Icon icon="TRASH" />
+  //         <span className="ms-2">{t.delete}</span>
+  //       </DropdownItem>
+  //       {page.archivedAt && (
+  //         <DropdownItem tag="button" onClick={handleClickCancelArchiveButton}>
+  //           <Icon height={20} width={20} icon="REPLY" />
+  //           <span className="ms-2 text-nowrap">{t.return_button}</span>
+  //         </DropdownItem>
+  //       )}
+  //       {/* TODO: implement */}
+  //       {/* <DropdownItem tag="button" onClick={onClickFetchButton}>
+  //         <Icon icon="ARROW_CLOCKWISE"  />
+  //         <span className="ms-2">{t.fetch}</span>
+  //       </DropdownItem> */}
+  //       <DropdownItem tag="button" onClick={canShareByNavigator ? sharePageByNavigator : sharePage}>
+  //         <Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />
+  //         <span className="ms-2">{t.share}</span>
+  //       </DropdownItem>
+  //     </DropdownMenu>
+  //   </UncontrolledDropdown>
+  // );
 };

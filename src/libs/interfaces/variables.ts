@@ -1,16 +1,3 @@
-export const BootstrapColor = {
-  INFO: 'info',
-  SUCCESS: 'success',
-  PRIMARY: 'primary',
-  SECONDARY: 'secondary',
-  WHITE: 'white',
-  WARNING: 'warning',
-  DANGER: 'danger',
-  LIGHT: 'light',
-  TWITTER: 'twitter',
-} as const;
-export type BootstrapColor = keyof typeof BootstrapColor;
-
 export const BootstrapIcon = {
   HOME: 'home',
   SEARCH: 'search',

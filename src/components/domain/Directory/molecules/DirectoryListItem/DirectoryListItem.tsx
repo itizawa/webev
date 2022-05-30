@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { VFC, useState, MouseEvent } from 'react';
+import { VFC, useState } from 'react';
 
 import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import styled from 'styled-components';
@@ -7,8 +7,6 @@ import styled from 'styled-components';
 import { Emoji } from 'emoji-mart';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
-
-import { IconButton } from '~/components/base/molecules/IconButton';
 
 type Props = {
   directory: Directory;
@@ -35,11 +33,6 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
   //   // mutateParentDirectoryForCreateDirectory(directory);
   // };
 
-  const handleClickManageButton = (e: MouseEvent<HTMLButtonElement>, directoryId: string) => {
-    e.stopPropagation();
-    setDirectoryIdForDropdown((prevDirectoryId) => (prevDirectoryId === directoryId ? '' : directoryId));
-  };
-
   return (
     <Link href={`/directory/${directory._id}`}>
       <StyledList className="d-flex" role="button">
@@ -52,17 +45,7 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
           </span>
         </div>
         <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
-          <DropdownToggle tag="span" className="manage-directory-button">
-            <IconButton
-              width={18}
-              height={18}
-              icon="THREE_DOTS_VERTICAL"
-              color="WHITE"
-              activeColor="WHITE"
-              onClickButton={(e) => handleClickManageButton(e, directory._id)}
-              isRemovePadding
-            />
-          </DropdownToggle>
+          <DropdownToggle tag="span" className="manage-directory-button"></DropdownToggle>
           <DropdownMenu className="dropdown-menu-dark" positionFixed end>
             {/* <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
               <Icon icon="TRASH" color="WHITE" />

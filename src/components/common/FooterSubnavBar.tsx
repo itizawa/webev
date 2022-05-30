@@ -24,7 +24,7 @@ export const FooterSubnavBar: VFC = () => {
         return (
           <Link key={v.text} href={v.url}>
             <div className="text-center col d-flex flex-column bg-dark border-top py-2 border-secondary">
-              <small className="ms-1 text-nowrap">{v.icon != null && <Icon icon={v.icon} color={isActive ? 'WHITE' : 'SECONDARY'} />}</small>
+              <small className="ms-1 text-nowrap">{v.icon != null && <Icon icon={v.icon} />}</small>
               <span className={`ms-2 ${isActive ? 'text-white' : 'text-secondary'}`}>{v.text}</span>
             </div>
           </Link>

@@ -43,7 +43,7 @@ export class PageRepository implements IPageRepository {
 
   private convert(page: Page): Page {
     return new Page({
-      _id: page._id.toString(),
+      id: page.id.toString(),
       url: page.url,
       image: page.image,
       favicon: page.favicon,
@@ -79,7 +79,7 @@ export class PageRepository implements IPageRepository {
     };
   }
 
-  async findById(id: Page['_id']): Promise<Page | null> {
+  async findById(id: Page['id']): Promise<Page | null> {
     const page = await this.PageModel.findById(id);
 
     if (!page) {
@@ -89,7 +89,7 @@ export class PageRepository implements IPageRepository {
     return this.convert(page);
   }
 
-  async update(id: Page['_id'], newObject: Partial<Page>): Promise<Page | null> {
+  async update(id: Page['id'], newObject: Partial<Page>): Promise<Page | null> {
     const page = await this.PageModel.findByIdAndUpdate(id, newObject, { new: true });
 
     if (!page) {

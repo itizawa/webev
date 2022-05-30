@@ -14,7 +14,6 @@ import {
   useDirectoryPaginationResult,
 } from '~/stores/directory';
 
-import { IconButton } from '~/components/base/molecules/IconButton';
 import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
@@ -199,9 +198,7 @@ const Page: WebevNextPage = () => {
                 </div>
               </Tooltip>
               <UncontrolledDropdown direction="down">
-                <DropdownToggle tag="div">
-                  <IconButton width={18} height={18} icon="THREE_DOTS_HORIZONTAL" color="SECONDARY" activeColor="WARNING" />
-                </DropdownToggle>
+                <DropdownToggle tag="div"></DropdownToggle>
                 <DropdownMenu className="dropdown-menu-dark" positionFixed end>
                   {/* <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
                     <Icon icon="TRASH" />

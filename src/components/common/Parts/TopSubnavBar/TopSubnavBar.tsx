@@ -10,7 +10,6 @@ import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManag
 import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';
-import { IconButton } from '~/components/base/molecules/IconButton';
 import { speech } from '~/utils/services';
 
 type Props = {
@@ -21,14 +20,7 @@ type Props = {
   onClickStopButton: () => void;
   isReading: boolean;
 };
-export const TopSubnavBar: VFC<Props> = ({
-  page,
-  onClickSwitchArchiveButton,
-  onClickPlayButton,
-  onClickPauseButton,
-  onClickStopButton,
-  isReading,
-}) => {
+export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) => {
   const { t } = useLocale();
   const { isShowScroll } = useHooks();
 
@@ -40,44 +32,9 @@ export const TopSubnavBar: VFC<Props> = ({
             {page.title}
           </StyledAnchor>
         </div>
-        <div className="ms-auto me-2">
-          {speech.isEnabled && page.body && (
-            <>
-              {isReading ? (
-                <IconButton
-                  icon="PAUSE_CIRCLE"
-                  color="WHITE"
-                  activeColor="SUCCESS"
-                  width={24}
-                  height={24}
-                  isRemovePadding
-                  onClickButton={onClickPauseButton}
-                />
-              ) : (
-                <IconButton
-                  icon="PLAY_CIRCLE"
-                  color="WHITE"
-                  activeColor="SUCCESS"
-                  width={24}
-                  height={24}
-                  isRemovePadding
-                  onClickButton={onClickPlayButton}
-                />
-              )}
-              <IconButton
-                icon="STOP_CIRCLE"
-                color="WHITE"
-                activeColor="SUCCESS"
-                width={24}
-                height={24}
-                isRemovePadding
-                onClickButton={onClickStopButton}
-              />
-            </>
-          )}
-        </div>
+        <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
         <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
-          <Icon height={20} width={20} icon="CHECK" color="WHITE" />
+          <Icon height={20} width={20} icon="CHECK" />
           <span className="ms-2 text-nowrap">{t.read_button}</span>
         </button>
         <div className="ms-2">

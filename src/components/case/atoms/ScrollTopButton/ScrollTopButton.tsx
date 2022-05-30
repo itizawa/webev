@@ -10,7 +10,7 @@ export const ScrollTopButton: VFC = () => {
 
   return (
     <StyledButton id="scroll-to-top" onClick={scrollTop} className={`btn btn-light btn-lg ${isShowScroll ? 'show' : ''}`}>
-      <Icon icon="ARROW" color="SECONDARY" />
+      <Icon icon="ARROW" />
     </StyledButton>
   );
 };

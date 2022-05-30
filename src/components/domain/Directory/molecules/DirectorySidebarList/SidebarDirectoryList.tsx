@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { IconButton } from '~/components/base/molecules/IconButton';
-
 import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
 import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
@@ -84,7 +82,7 @@ export const SidebarDirectoryList: VFC = () => {
               />
             </form>
           ) : (
-            <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />
+            <></>
           )}
         </StyledDiv>
       )}

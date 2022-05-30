@@ -2,7 +2,7 @@ import { Page } from '~/domains/Page';
 
 export const generateMockPage = (mock: Partial<Page> = {}): Page => {
   return new Page({
-    _id: mock._id || 'mockId',
+    id: mock.id || 'mockId',
     url: mock.url || 'https://example.com',
     image: mock.image || 'https://www.webev.cloud/images/no-image-ogp.png',
     favicon: mock.favicon || 'https://www.webev.cloud/favicons/favicon-32x32.png',

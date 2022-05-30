@@ -6,7 +6,6 @@ import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { SortButtonGroup } from '~/components/domain/Page/SortButtonGroup/SortButtonGroup';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
@@ -41,9 +40,9 @@ const Page: WebevNextPage = () => {
             </div>
           </div>
         )}
-        {paginationPage != null && (
+        {/* {paginationPage != null && (
           <PageList pages={paginationPage.docs} pagingLimit={paginationPage.limit} totalItemsCount={paginationPage.totalDocs} />
-        )}
+        )} */}
       </LoginRequiredWrapper>
     </>
   );

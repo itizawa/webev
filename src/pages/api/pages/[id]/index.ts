@@ -20,7 +20,7 @@ const handler = nc()
     const { id } = req.query;
 
     try {
-      const result = await deletePageUseCase.execute({ id, userId: user._id });
+      const result = await deletePageUseCase.execute({ id, userId: user.id });
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error });

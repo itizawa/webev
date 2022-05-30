@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { IconButton } from '~/components/base/molecules/IconButton';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
@@ -26,7 +25,7 @@ const Page: WebevNextPage = () => {
   });
   const { createDirectory } = useCreateDirectory();
 
-  const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
+  const [, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -81,20 +80,16 @@ const Page: WebevNextPage = () => {
             </div>
             {directoryPaginationResult.docs.length < 10 && (
               <StyledDiv className="text-center mx-3 mt-2 d-md-none">
-                {isCreatingNewDirectory ? (
-                  <form className="input-group ps-3" onSubmit={onSubmit}>
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="form-control bg-white"
-                      placeholder="...name"
-                      autoFocus
-                    />
-                  </form>
-                ) : (
-                  <IconButton icon="PLUS_DOTTED" color="LIGHT" activeColor="LIGHT" onClickButton={() => setIsCreatingNewDirectory(true)} />
-                )}
+                <form className="input-group ps-3" onSubmit={onSubmit}>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="form-control bg-white"
+                    placeholder="...name"
+                    autoFocus
+                  />
+                </form>
               </StyledDiv>
             )}
           </>
