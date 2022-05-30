@@ -5,14 +5,14 @@ import { Modal } from '~/components/base/molecules/Modal';
 import { useUpdateIsExecutedTutorial } from '~/hooks/Tutorial/useUpdateIsExecutedTutorial';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useCurrentUser } from '~/stores/user';
+// import { useCurrentUser } from '~/stores/user';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 export const TutorialDetectorModal: VFC = () => {
   const { t } = useLocale();
 
-  const { data: currentUser } = useCurrentUser();
+  // const { data: currentUser } = useCurrentUser();
   const { isLoading, updateIsExecutedTutorial } = useUpdateIsExecutedTutorial();
   const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
 
@@ -27,7 +27,7 @@ export const TutorialDetectorModal: VFC = () => {
   }, [confettiReward, t.toastr_start_webev, updateIsExecutedTutorial]);
 
   return (
-    <Modal isOpen={!currentUser?.isExecutedTutorial} title={t.welcome_webev}>
+    <Modal isOpen title={t.welcome_webev}>
       <div className="text-center">
         <h3>🎉 {t.welcome_webev} 🎉</h3>
         <p>

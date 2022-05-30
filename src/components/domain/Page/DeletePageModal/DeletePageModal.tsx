@@ -22,7 +22,7 @@ export const DeletePageModal: VFC<Props> = ({ open, onClose, page }) => {
 
   const deletePage = async () => {
     try {
-      await restClient.apiDelete(`/pages/${page._id}`);
+      await restClient.apiDelete(`/pages/${page.id}`);
       toastSuccess(t.toastr_delete_url);
       mutatePagePagination();
       onClose();

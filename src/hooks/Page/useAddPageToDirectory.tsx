@@ -1,34 +1,26 @@
-import { useCallback, useState } from 'react';
-import { usePagePagination } from '.';
-import { Page } from '~/domains/Page';
-import { restClient } from '~/utils/rest-client';
+import { useState } from 'react';
 
-export const useAddPageToDirectory = (): { isLoading: boolean; addPageToDirectory: (pageId: string, directoryId: string) => void } => {
-  const { pagePagination, mutatePagePagination } = usePagePagination();
-  const [isLoading, setIsLoading] = useState(false);
+export const useAddPageToDirectory = (): { isLoading: boolean } => {
+  const [isLoading] = useState(false);
 
-  const addPageToDirectory = useCallback(
-    async (pageId: string, directoryId: string) => {
-      setIsLoading(true);
+  // const addPageToDirectory = useCallback(
+  //   async (pageId: string, directoryId: string) => {
+  //     // setIsLoading(true);
+  //     // const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/directories`, { directoryId });
+  //     // if (!pagePagination) {
+  //     //   return;
+  //     // }
+  //     // mutatePagePagination(
+  //     //   {
+  //     //     ...pagePagination,
+  //     //     docs: [...pagePagination.docs.filter((v) => v._id !== pageId), data],
+  //     //   },
+  //     //   false,
+  //     // );
+  //     // setIsLoading(false);
+  //   },
+  //   [mutatePagePagination, pagePagination],
+  // );
 
-      const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/directories`, { directoryId });
-
-      if (!pagePagination) {
-        return;
-      }
-
-      mutatePagePagination(
-        {
-          ...pagePagination,
-          docs: [...pagePagination.docs.filter((v) => v._id !== pageId), data],
-        },
-        false,
-      );
-
-      setIsLoading(false);
-    },
-    [mutatePagePagination, pagePagination],
-  );
-
-  return { isLoading, addPageToDirectory };
+  return { isLoading };
 };

@@ -39,11 +39,7 @@ const Index: WebevNextPage = () => {
               <Loading size="lg" color="secondary" />
             </Grid>
           ) : (
-            <>
-              {paginationPage && (
-                <PageList pages={paginationPage?.docs} pagingLimit={paginationPage.limit} totalItemsCount={paginationPage.totalDocs} />
-              )}
-            </>
+            <>{paginationPage && <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} />}</>
           )}
         </Grid>
       </LoginRequiredWrapper>

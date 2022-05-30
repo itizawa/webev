@@ -9,7 +9,6 @@ import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
-import { IconButton } from '~/components/base/molecules/IconButton';
 import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
 import { useDirectoryChildren } from '~/stores/directory';
@@ -23,8 +22,8 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isFetchDirectory, setIsFetchDirectory] = useState(false);
+  const [isOpen] = useState(false);
+  const [isFetchDirectory] = useState(false);
 
   const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(
     isFetchDirectory ? directory._id : undefined,
@@ -33,22 +32,6 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
   const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
-
-  const handleToggleCollapse = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    if (!isOpen) {
-      setIsCreatingNewDirectory(false);
-    }
-    setIsFetchDirectory(true);
-    setIsOpen((prevState) => !prevState);
-  };
-
-  const handleClickPencilIcon = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsOpen(true);
-    setIsFetchDirectory(true);
-    setIsCreatingNewDirectory(true);
-  };
 
   const handleSubmitCreateDirectory = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
@@ -78,33 +61,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
         onMouseLeave={() => setIsHoverDirectoryItem(false)}
       >
         <div className="text-truncate">
-          {isHoverDirectoryItem && (
-            <>
-              {isOpen ? (
-                <IconButton
-                  width={18}
-                  height={18}
-                  isActive={isActive}
-                  icon="CARET_DOWN"
-                  color="SECONDARY"
-                  activeColor="WHITE"
-                  onClickButton={handleToggleCollapse}
-                  isRemovePadding
-                />
-              ) : (
-                <IconButton
-                  width={18}
-                  height={18}
-                  isActive={isActive}
-                  icon="CARET_RIGHT"
-                  color="SECONDARY"
-                  activeColor="WHITE"
-                  onClickButton={handleToggleCollapse}
-                  isRemovePadding
-                />
-              )}
-            </>
-          )}
+          {isHoverDirectoryItem && <></>}
           {!isHoverDirectoryItem && (
             <StyledEmojiWrapper className="px-2">
               <Emoji emoji={directory?.emojiId || ''} size={18} />
@@ -112,18 +69,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
           )}
           <span className="ms-2">{directory?.name}</span>
         </div>
-        <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}>
-          <IconButton
-            width={18}
-            height={18}
-            isActive={isActive}
-            icon="ADD_TO_DIRECTORY"
-            color="WHITE"
-            activeColor="WHITE"
-            onClickButton={handleClickPencilIcon}
-            isRemovePadding
-          />
-        </div>
+        <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}></div>
         <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
           {t.create_directory}
         </UncontrolledTooltip>

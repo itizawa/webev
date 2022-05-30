@@ -2,14 +2,10 @@ import { User } from '~/domains/User';
 
 export const generateMockUser = (mock: Partial<User> = {}): User => {
   return new User({
-    _id: mock._id || 'mockId',
-    name: mock.name || 'mockName',
-    description: mock.description || 'mockDescription',
+    id: mock.id || 'mockId',
+    username: mock.username || 'mockName',
     email: mock.email || 'mockEmail',
-    image: mock.image || 'mockImage',
-    admin: mock.admin || false,
-    isExecutedTutorial: mock.isExecutedTutorial || true,
-    apiTokenForExtension: mock.apiTokenForExtension || 'mockApiTokenForExtension',
+    profileUrl: mock.profileUrl || 'profileUrl',
     createdAt: mock.createdAt || new Date('2020-01-01T00:00:00'),
     updatedAt: mock.updatedAt || new Date('2020-01-01T00:00:00'),
   });

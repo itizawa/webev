@@ -1,50 +1,37 @@
 import Link from 'next/link';
-import { VFC, useState, MouseEvent } from 'react';
+import { VFC, useState } from 'react';
 
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { Directory } from '~/domains/Directory';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
-import { useDirectoryForDelete, useParentDirectoryForCreateDirectory, useDirectoryForRename } from '~/stores/modal';
-
-import { IconButton } from '~/components/base/molecules/IconButton';
-import { Icon } from '~/components/base/atoms/Icon';
-import { useLocale } from '~/hooks/useLocale';
-
 type Props = {
   directory: Directory;
 };
 export const DirectoryListItem: VFC<Props> = ({ directory }) => {
-  const { t } = useLocale();
-
   const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState('');
 
-  const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
-  const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
-  const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
+  // const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
+  // const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
+  // const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
 
-  const openDeleteModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
-    e.stopPropagation();
-    mutateDirectoryForDelete(directory);
-  };
+  // const openDeleteModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
+  //   e.stopPropagation();
+  //   // mutateDirectoryForDelete(directory);
+  // };
 
-  const openRenameModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
-    e.stopPropagation();
-    mutateDirectoryForRename(directory);
-  };
+  // const openRenameModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
+  //   e.stopPropagation();
+  //   // mutateDirectoryForRename(directory);
+  // };
 
-  const openAddDirectoryModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>, directory: Directory) => {
-    e.stopPropagation();
-    mutateParentDirectoryForCreateDirectory(directory);
-  };
-
-  const handleClickManageButton = (e: MouseEvent<HTMLButtonElement>, directoryId: string) => {
-    e.stopPropagation();
-    setDirectoryIdForDropdown((prevDirectoryId) => (prevDirectoryId === directoryId ? '' : directoryId));
-  };
+  // const openAddDirectoryModal = (e: MouseEvent<HTMLElement, globalThis.MouseEvent>) => {
+  //   e.stopPropagation();
+  //   // mutateParentDirectoryForCreateDirectory(directory);
+  // };
 
   return (
     <Link href={`/directory/${directory._id}`}>
@@ -58,19 +45,9 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
           </span>
         </div>
         <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
-          <DropdownToggle tag="span" className="manage-directory-button">
-            <IconButton
-              width={18}
-              height={18}
-              icon="THREE_DOTS_VERTICAL"
-              color="WHITE"
-              activeColor="WHITE"
-              onClickButton={(e) => handleClickManageButton(e, directory._id)}
-              isRemovePadding
-            />
-          </DropdownToggle>
+          <DropdownToggle tag="span" className="manage-directory-button"></DropdownToggle>
           <DropdownMenu className="dropdown-menu-dark" positionFixed end>
-            <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
+            {/* <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
               <Icon icon="TRASH" color="WHITE" />
               <span className="ms-2">{t.delete}</span>
             </DropdownItem>
@@ -81,7 +58,7 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
             <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
               <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
               <span className="ms-2">{t.create_directory}</span>
-            </DropdownItem>
+            </DropdownItem> */}
           </DropdownMenu>
         </Dropdown>
       </StyledList>
