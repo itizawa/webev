@@ -93,7 +93,7 @@ export const PageCard: FC<Props> = ({ page }) => {
         </Text>
         {/* <PageManageDropdown page={page} /> */}
         <Grid css={{ width: '100%', mt: 'auto', p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
-          <Grid>
+          <Grid css={{ py: 0 }}>
             <Grid css={{ p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
               {page.favicon != null && (
                 <img
