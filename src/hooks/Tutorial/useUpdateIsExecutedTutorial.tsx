@@ -3,10 +3,9 @@ import { useCallback, useState } from 'react';
 import { usePagePagination } from '../Page';
 import { User } from '~/domains/User';
 
-import { useCurrentUser } from '~/stores/user';
-
 import { restClient } from '~/utils/rest-client';
 import { URLS } from '~/libs/constants/urls';
+import { useCurrentUser } from '~/stores/users';
 
 export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExecutedTutorial: () => Promise<void> } => {
   const { mutatePagePagination } = usePagePagination();

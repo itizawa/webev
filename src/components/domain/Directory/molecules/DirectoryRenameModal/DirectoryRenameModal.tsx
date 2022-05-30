@@ -1,54 +1,53 @@
-import { useEffect, useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import { useRouter } from 'next/router';
 
 import { Modal } from '../../../../base/molecules/Modal';
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
-import { useDirectoryForRename } from '~/stores/modal';
+// import { useDirectoryForRename } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
-import { useAllDirectories, useDirectoryChildren, useDirectoryInformation, useDirectoryPaginationResult } from '~/stores/directory';
+import { useAllDirectories, useDirectoryChildren, useDirectoryPaginationResult } from '~/stores/directory';
 
 export const DirectoryRenameModal: VFC = () => {
   const { t } = useLocale();
   const router = useRouter();
 
   const [name, setName] = useState<string>('');
-  const { data: directoryForRename, mutate: mutateDirectoryForRename } = useDirectoryForRename();
-  const { mutate: mutateDirectory } = useDirectoryInformation(directoryForRename?._id as string);
+  // const { data: directoryForRename, mutate: mutateDirectoryForRename } = useDirectoryForRename();
+  // const { mutate: mutateDirectory } = useDirectoryInformation(directoryForRename?._id as string);
   const { mutate: mutateDirectoryChildren } = useDirectoryChildren(router.query?.id as string);
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
   const { mutate: mutateAllDirectories } = useAllDirectories();
 
-  useEffect(() => {
-    if (directoryForRename != null) {
-      setName(directoryForRename.name);
-    }
-  }, [directoryForRename]);
+  // useEffect(() => {
+  //   if (directoryForRename != null) {
+  //     setName(directoryForRename.name);
+  //   }
+  // }, [directoryForRename]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
     try {
-      await restClient.apiPut(`/directories/${directoryForRename?._id}/rename`, { name });
+      // await restClient.apiPut(`/directories/${directoryForRename?._id}/rename`, { name });
       toastSuccess(t.toastr_update_directory_name);
-      mutateDirectory();
+      // mutateDirectory();
       mutateDirectoryPaginationResult();
       mutateDirectoryChildren();
       mutateAllDirectories();
-      mutateDirectoryForRename(null);
+      // mutateDirectoryForRename(null);
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
   };
 
   const closeDeleteModal = async () => {
-    mutateDirectoryForRename(null);
+    // mutateDirectoryForRename(null);
   };
 
   return (
-    <Modal isOpen={directoryForRename != null} toggle={closeDeleteModal} title={t.rename_directory}>
+    <Modal isOpen={'directoryForRename' != null} toggle={closeDeleteModal} title={t.rename_directory}>
       <form className="input-group my-2" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -58,9 +57,9 @@ export const DirectoryRenameModal: VFC = () => {
           placeholder="...name"
           autoFocus
         />
-        <button className="btn btn-success" type="submit" disabled={name.trim() === '' || name === directoryForRename?.name}>
+        {/* <button className="btn btn-success" type="submit" disabled={name.trim() === '' || name === directoryForRename?.name}>
           {t.save}
-        </button>
+        </button> */}
       </form>
     </Modal>
   );

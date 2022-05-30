@@ -1,11 +1,8 @@
 import { VFC, useState } from 'react';
 
-import { restClient } from '~/utils/rest-client';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Modal } from '~/components/base/molecules/Modal';
-
-import { useDirectoryForSavePage } from '~/stores/modal';
 
 import { useLocale } from '~/hooks/useLocale';
 import { isValidUrl } from '~/utils/isValidUrl';
@@ -16,7 +13,7 @@ export const PageSaveModal: VFC = () => {
 
   const [url, setUrl] = useState('');
 
-  const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
+  // const { data: directoryForSavePage, mutate: mutateDirectoryForSavePage } = useDirectoryForSavePage();
 
   const { mutatePagePagination } = usePagePagination();
 
@@ -24,7 +21,7 @@ export const PageSaveModal: VFC = () => {
     e.preventDefault();
 
     try {
-      await restClient.apiPost('/pages', { url, directoryId: directoryForSavePage?._id });
+      // await restClient.apiPost('/pages', { url, directoryId: directoryForSavePage?._id });
       toastSuccess(t.toastr_save_url);
       mutatePagePagination();
       closeModal();
@@ -35,11 +32,11 @@ export const PageSaveModal: VFC = () => {
 
   const closeModal = async () => {
     setUrl('');
-    mutateDirectoryForSavePage(null);
+    // mutateDirectoryForSavePage(null);
   };
 
   return (
-    <Modal isOpen={directoryForSavePage != null} toggle={closeModal} title={t.save_page_to_directory}>
+    <Modal isOpen={'directoryForSavePage' != null} toggle={closeModal} title={t.save_page_to_directory}>
       <div className="row align-items-center">
         <div className="col-12 col-md-3 text-md-end">
           <span>{t.input_url}</span>
