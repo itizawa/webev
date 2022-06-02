@@ -32,7 +32,7 @@
     "date-fns": "2.28.0",
     "emoji-mart": "3.0.1",
     "mongodb": "4.6.0",
-    "mongoose": "6.3.4",
+    "mongoose": "6.3.5",
     "mongoose-paginate-v2": "1.6.3",
     "next": "12.1.6",
     "next-auth": "4.3.4",
