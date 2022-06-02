@@ -19,7 +19,7 @@ export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
     }
   }, [currentUser, isLoadingCurrentUser, router]);
 
-  if (isLoadingCurrentUser) return <Loading size="xl" />;
+  if (isLoadingCurrentUser) return <Loading size="xl" color="secondary" />;
 
   if (!currentUser) return null;
 
