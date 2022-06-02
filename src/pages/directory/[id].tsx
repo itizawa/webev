@@ -15,12 +15,11 @@ import {
 } from '~/stores/directory';
 
 import { Tooltip } from '~/components/base/atoms/Tooltip';
-import { SearchTextBox } from '~/components/case/molecules/SearchTextBox';
+import { SearchTextBox } from '~/components/uiParts';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 // import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { EditableInput } from '~/components/case/molecules/EditableInput';
 import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
 
 import { Directory } from '~/domains/Directory';
@@ -183,7 +182,6 @@ const Page: WebevNextPage = () => {
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
-              <EditableInput value={newDirectoryName} onChange={setNewDirectoryName} isHeader />
               <Tooltip text={t.save_to_directory(directory.name)}>
                 <div id="save-page-to-directory">
                   {/* <IconButton
@@ -223,7 +221,6 @@ const Page: WebevNextPage = () => {
                 </StyledEmojiPickerWrapper>
               </>
             )}
-            <EditableInput value={newDirectoryDescription} onChange={setNewDirectoryDescription} placeholder={t.no_description} />
           </>
         )}
         {childrenDirectoryTrees != null && childrenDirectoryTrees.length > 0 && (
