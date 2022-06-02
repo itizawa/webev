@@ -9,9 +9,8 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
-import { SortButtonGroup } from '~/components/domain/Page';
+import { SortButtonGroup, PageList } from '~/components/domain/Page';
 import { Loading, Text } from '~/components/uiParts';
-import { PageList } from '~/components/domain/Page/molecules/PageList';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
