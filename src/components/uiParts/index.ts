@@ -6,5 +6,6 @@ export { Link } from './Link';
 export { Loading } from './Loading';
 export { LoginCard } from './LoginCard';
 export { ScrollTopButton } from './ScrollTopButton';
+export { SearchTextBox } from './SearchTextBox';
 export { Text } from './Text';
 export { Tooltip } from './Tooltip';

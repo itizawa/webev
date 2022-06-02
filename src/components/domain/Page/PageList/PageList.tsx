@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Grid, Pagination } from '@nextui-org/react';
 import { Page } from '~/domains/Page';
 
-import { NoPageAlert } from '~/components/domain/Page/molecules/NoPageAlert';
+import { NoPageAlert } from '~/components/domain/Page';
 import { PageCard } from '~/components/domain/Page/molecules/PageCard';
 
 import { usePagePagination } from '~/hooks/Page';

@@ -9,9 +9,8 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
-import { SortButtonGroup } from '~/components/domain/Page';
-import { Loading, Text } from '~/components/uiParts';
-import { PageList } from '~/components/domain/Page/molecules/PageList';
+import { SortButtonGroup, PageList } from '~/components/domain/Page';
+import { Loading, Text, SearchTextBox } from '~/components/uiParts';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
@@ -30,8 +29,8 @@ const Index: WebevNextPage = () => {
             <Text h2>{t.home}</Text>
             <Grid css={{ ml: 'auto', fontWeight: '$bold', color: '$white' }}>{paginationPage?.totalDocs} Pages</Grid>
           </Grid>
-          <Grid css={{ display: 'flex', justifyContent: 'end' }}>
-            {/* <SearchTextBox /> */}
+          <Grid css={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <SearchTextBox />
             <SortButtonGroup />
           </Grid>
           {isLoadingPaginationPage ? (
@@ -39,7 +38,9 @@ const Index: WebevNextPage = () => {
               <Loading size="lg" color="secondary" />
             </Grid>
           ) : (
-            <>{paginationPage && <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} />}</>
+            <Grid css={{ py: '$8' }}>
+              {paginationPage && <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} />}
+            </Grid>
           )}
         </Grid>
       </LoginRequiredWrapper>

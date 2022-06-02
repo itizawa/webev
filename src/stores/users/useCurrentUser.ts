@@ -13,6 +13,7 @@ export const useCurrentUser = (): SWRResponse<User, Error> => {
     {
       revalidateOnFocus: false,
       revalidateOnReconnect: true,
+      revalidateIfStale: false,
     },
   );
 };

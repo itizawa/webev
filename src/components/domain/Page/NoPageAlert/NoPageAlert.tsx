@@ -1,18 +1,20 @@
 import Image from 'next/image';
 import { VFC } from 'react';
+import { Grid } from '@nextui-org/react';
 import { imagePath } from '~/libs/constants/imagePath';
 
 import { useLocale } from '~/hooks/useLocale';
+import { Text } from '~/components/uiParts';
 
 export const NoPageAlert: VFC = () => {
   const { t } = useLocale();
 
   return (
-    <div className="text-center">
-      <div className="w-25 mx-auto my-2">
+    <Grid css={{ textAlign: 'center' }}>
+      <Grid css={{ my: '$10', width: '40%', mx: 'auto' }}>
         <Image src={imagePath.NO_PAGE} height={958} width={1000} />
-      </div>
-      <h2 className="mb-0">{t['your_pages_don’t_exist']}</h2>
-    </div>
+      </Grid>
+      <Text h3>{t['your_pages_don’t_exist']}</Text>
+    </Grid>
   );
 };
