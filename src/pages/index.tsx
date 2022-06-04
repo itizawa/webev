@@ -38,11 +38,11 @@ const Page: WebevNextPage<Props> = ({ count }) => {
 
 export async function getStaticProps() {
   try {
-    const { data: count } = await restClient.apiGet('pages/all');
+    const { data } = await restClient.apiGet<{ count: number }>('/pages/all-count');
 
     return {
       props: {
-        count,
+        count: data.count,
       },
       revalidate: 300,
     };
