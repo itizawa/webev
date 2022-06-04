@@ -3,6 +3,7 @@ import { FC, ReactNode, useEffect } from 'react';
 
 import { Container, Grid } from '@nextui-org/react';
 
+import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Parts/Sidebar';
 // import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
@@ -46,7 +47,7 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           ml: '$0',
         }}
       />
-      {/* <FooterSubnavBar /> */}
+      <FooterSubnavBar />
       {/* 画面全体からNavbarとFooterの高さを引く */}
       <Grid
         css={{

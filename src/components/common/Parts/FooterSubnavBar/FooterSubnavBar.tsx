@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -7,7 +7,7 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';
 
-export const FooterSubnavBar: VFC = () => {
+export const FooterSubnavBar: FC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
