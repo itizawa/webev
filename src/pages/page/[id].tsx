@@ -13,7 +13,7 @@ import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
 
 import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { speech } from '~/utils/services';
