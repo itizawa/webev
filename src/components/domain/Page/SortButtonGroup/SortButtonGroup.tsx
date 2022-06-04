@@ -9,7 +9,7 @@ export const SortButtonGroup: FC = () => {
   const { isSortUpdatedAt, setIsSortUpdatedAt } = usePagePagination();
 
   return (
-    <Button.Group color="secondary" size="sm" css={{ '@xsMax': { width: '100%' } }}>
+    <Button.Group color="secondary" size="sm">
       <Button bordered={isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(false)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
         {t.latest_order}
       </Button>
