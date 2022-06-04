@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 
 import { Button, Card, Grid } from '@nextui-org/react';
+import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 import { Icon } from '~/components/base/atoms/Icon';
 import { toastError, toastSuccess } from '~/utils/toastr';
@@ -91,7 +92,7 @@ export const PageCard: FC<Props> = ({ page }) => {
         <Text css={{ mt: '$10', mb: '$4', color: '$white', fontSize: '$xs', overflowWrap: 'anywhere' }}>
           {page.description?.length > MAX_WORD_COUNT_OF_BODY ? page.description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : page.description}
         </Text>
-        {/* <PageManageDropdown page={page} /> */}
+        <PageManageDropdown page={page} />
         <Grid css={{ width: '100%', mt: 'auto', p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
           <Grid css={{ py: 0 }}>
             <Grid css={{ p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>

@@ -19,7 +19,15 @@ export const Sidebar: FC = () => {
   ];
 
   return (
-    <Grid className="sticky-top" css={{ display: 'flex', flexDirection: 'column', gap: '$8' }}>
+    <Grid
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '$8',
+        position: 'sticky',
+        top: '$8',
+      }}
+    >
       {navbarItemMappings.map((v) => {
         return (
           <Link key={v.text} href={v.url}>

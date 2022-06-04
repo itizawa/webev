@@ -6,7 +6,7 @@ import { useHooks } from './hooks';
 import { Page } from '~/domains/Page';
 
 import { Icon } from '~/components/base/atoms/Icon';
-import { PageManageDropdown } from '~/components/domain/Page/molecules/PageManageDropdown';
+import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
 import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';

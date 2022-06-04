@@ -27,12 +27,19 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.read}`} />
       <LoginRequiredWrapper>
-        <Grid css={{ width: '100%', px: '$8' }}>
+        <Grid css={{ width: '100%' }}>
           <Grid css={{ display: 'flex', alignItems: 'center' }}>
             <Text h2>{t.read}</Text>
             <Grid css={{ ml: 'auto', fontWeight: '$bold', color: '$white' }}>{paginationPage?.totalDocs} Pages</Grid>
           </Grid>
-          <Grid css={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Grid
+            css={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              '@xsMax': { flexDirection: 'column', alignItems: 'start', rowGap: '$4' },
+            }}
+          >
             <SearchTextBox />
             <SortButtonGroup />
           </Grid>

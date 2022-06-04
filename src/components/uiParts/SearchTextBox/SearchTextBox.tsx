@@ -16,7 +16,7 @@ export const SearchTextBox: FC = () => {
   return (
     <Input
       onChange={(e) => changeSearchText(e.target.value)}
-      contentLeft={<Emoji emoji="mag" size={24} />}
+      contentLeft={<Emoji emoji="mag" size={20} />}
       placeholder="Search..."
       underlined
       clearable
