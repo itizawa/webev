@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import { Grid } from '@nextui-org/react';
 import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -18,18 +19,45 @@ export const FooterSubnavBar: FC = () => {
   ];
 
   return (
-    <div className="fixed-bottom bg-dark d-flex justify-content-evenly d-md-none">
+    <Grid
+      css={{
+        display: 'flex',
+        position: 'fixed',
+        bottom: 0,
+        width: '100%',
+        justifyContent: 'space-evenly',
+        bgColor: '$gray100',
+        border: 0,
+        borderTop: 3,
+        borderStyle: 'solid',
+        borderColor: '$gray400',
+        zIndex: '$10',
+      }}
+    >
       {navbarItemMappings.map((v) => {
         const isActive = router.pathname.startsWith(v.url);
         return (
           <Link key={v.text} href={v.url}>
-            <div className="text-center col d-flex flex-column bg-dark border-top py-2 border-secondary">
-              <small className="ms-1 text-nowrap">{v.icon != null && <Icon icon={v.icon} />}</small>
-              <span className={`ms-2 ${isActive ? 'text-white' : 'text-secondary'}`}>{v.text}</span>
-            </div>
+            <a>
+              <Grid
+                css={{
+                  textAlign: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  py: '$8',
+                  gap: '$2',
+                  alignItems: 'center',
+                  color: isActive ? 'white' : '$accents4',
+                }}
+                className="text-center col d-flex flex-column bg-dark border-top border-secondary"
+              >
+                <Icon icon={v.icon} />
+                {v.text}
+              </Grid>
+            </a>
           </Link>
         );
       })}
-    </div>
+    </Grid>
   );
 };

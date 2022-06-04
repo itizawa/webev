@@ -47,7 +47,9 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           ml: '$0',
         }}
       />
-      <FooterSubnavBar />
+      <Grid css={{ '@sm': { display: 'none' } }}>
+        <FooterSubnavBar />
+      </Grid>
       {/* 画面全体からNavbarとFooterの高さを引く */}
       <Grid
         css={{
