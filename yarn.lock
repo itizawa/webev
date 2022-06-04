@@ -6369,10 +6369,10 @@ react-popper@^2.2.4:
     react-fast-compare "^3.0.1"
     warning "^4.0.2"
 
-react-rewards@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-rewards/-/react-rewards-2.0.3.tgz#685aee98654ab4f060e297849f39cf0a16cec042"
-  integrity sha512-qww5Jtk2HmCjR9wc7+0c2iP8oCQzENZn8pnoJGi0S6o+6dAD25+ZoagLSWdoBLGVwxfP5kFBjv3VZ6L8fPk6lg==
+react-rewards@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-rewards/-/react-rewards-2.0.4.tgz#617f6c1bb591f74bb0e0455cc6ff355ee6d36665"
+  integrity sha512-Lw7gIhD8yPDzC6boaVmcXwuTHRLSLAdqB3kZc+29YWvdHWsuc3fdAZlxI8Cm8fvD8fhP+3JkZBtzX224czw15w==
 
 react-shallow-renderer@^16.15.0:
   version "16.15.0"
