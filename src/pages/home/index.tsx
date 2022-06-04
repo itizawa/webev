@@ -24,7 +24,7 @@ const Index: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.home}`} />
       <LoginRequiredWrapper>
-        <Grid css={{ width: '100%', px: '$8' }}>
+        <Grid css={{ width: '100%' }}>
           <Grid css={{ display: 'flex', alignItems: 'center' }}>
             <Text h2>{t.home}</Text>
             <Grid css={{ ml: 'auto', fontWeight: '$bold', color: '$white' }}>{paginationPage?.totalDocs} Pages</Grid>

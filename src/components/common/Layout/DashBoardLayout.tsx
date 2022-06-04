@@ -48,14 +48,23 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
       />
       {/* <FooterSubnavBar /> */}
       {/* 画面全体からNavbarとFooterの高さを引く */}
-      <Grid.Container css={{ minHeight: 'calc(100vh - 100px - 100px)', pt: '$8', pb: '$48', mx: 'auto' }}>
-        <Grid sm={3} css={{ display: 'none', justifyContent: 'center' }}>
+      <Grid
+        css={{
+          maxWidth: '1280px',
+          minHeight: 'calc(100vh - 100px - 100px)',
+          pt: '$8',
+          px: '$8',
+          pb: '$48',
+          mx: 'auto',
+          display: 'flex',
+          gap: '$8',
+        }}
+      >
+        <Grid css={{ '@smMax': { display: 'none' } }}>
           <Sidebar />
         </Grid>
-        <Grid xs={12} sm={9}>
-          {children}
-        </Grid>
-      </Grid.Container>
+        {children}
+      </Grid>
 
       {/* {session && (
         <>
