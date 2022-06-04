@@ -32,7 +32,14 @@ const Page: WebevNextPage = () => {
             <Text h2>{t.read}</Text>
             <Grid css={{ ml: 'auto', fontWeight: '$bold', color: '$white' }}>{paginationPage?.totalDocs} Pages</Grid>
           </Grid>
-          <Grid css={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Grid
+            css={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              '@xsMax': { flexDirection: 'column', alignItems: 'start', rowGap: '$4' },
+            }}
+          >
             <SearchTextBox />
             <SortButtonGroup />
           </Grid>
