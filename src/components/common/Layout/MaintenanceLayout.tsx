@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { TOP_URL } from '~/libs/constants/urls';
+import { URLS } from '~/libs/constants/urls';
 
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Footer } from '~/components/common/Parts/Footer/Footer';
@@ -19,7 +19,7 @@ export const MaintenanceLayout: VFC = () => {
       </div>
       <StyledDiv className="container text-center pt-5">
         <h1>{t.maintenance}</h1>
-        <button className="mt-4 btn btn-indigo btn-bg" onClick={() => router.push(TOP_URL)}>
+        <button className="mt-4 btn btn-indigo btn-bg" onClick={() => router.push(URLS.TOP_URL)}>
           {t.go_to_top}
         </button>
       </StyledDiv>
