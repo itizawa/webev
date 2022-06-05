@@ -11,41 +11,19 @@ export const useSwitchArchive = (): {
   switchArchive: (pageId: string, bool: boolean) => Promise<void>;
 } => {
   const [isLoading, setIsLoading] = useState(false);
-  const { paginationPage, mutatePagePagination } = usePagePagination();
+  const { mutatePagePagination } = usePagePagination();
 
   const switchArchive = useCallback(
     async (pageId: string, bool: boolean): Promise<void> => {
       setIsLoading(true);
 
-      mutatePagePagination(
-        await restClient.apiPut<Page>(`/pages/${pageId}/archive`, { isArchive: bool }).then(() =>
-          paginationPage
-            ? {
-                ...paginationPage,
-                docs: paginationPage.docs.filter((page) => {
-                  return page.id !== pageId;
-                }),
-              }
-            : undefined,
-        ),
-        {
-          optimisticData: paginationPage
-            ? {
-                ...paginationPage,
-                docs: paginationPage.docs.filter((page) => {
-                  return page.id !== pageId;
-                }),
-              }
-            : undefined,
-          rollbackOnError: true,
-          revalidate: false,
-        },
-      );
+      await restClient.apiPut<Page>(bool ? `/pages/${pageId}/archive` : `/pages/${pageId}/unarchive`);
+      mutatePagePagination();
 
       setIsLoading(false);
       return;
     },
-    [mutatePagePagination, paginationPage],
+    [mutatePagePagination],
   );
 
   return { isLoading, switchArchive };

@@ -6,7 +6,6 @@ import { useHooks } from './hooks';
 import { Page } from '~/domains/Page';
 
 import { Icon } from '~/components/base/atoms/Icon';
-import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
 import { useLocale } from '~/hooks/useLocale';
 
 import { zIndex } from '~/libs/constants/zIndex';
@@ -37,9 +36,9 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) =
           <Icon height={20} width={20} icon="CHECK" />
           <span className="ms-2 text-nowrap">{t.read_button}</span>
         </button>
-        <div className="ms-2">
+        {/* <div className="ms-2">
           <PageManageDropdown page={page} direction="down" />
-        </div>
+        </div> */}
       </div>
       <StyledBorder />
     </StyledDiv>

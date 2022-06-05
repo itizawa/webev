@@ -4,7 +4,7 @@ export const ja = {
   start_immediately: 'さっそく 始める',
   term: '利用規約',
 
-  copy_url: 'URL をコピーする',
+  copy_url: 'URLをコピー',
   logout: 'ログアウト',
   delete: '削除',
   fetch: 'ページを再取得する',

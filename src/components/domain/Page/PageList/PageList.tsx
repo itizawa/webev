@@ -36,7 +36,7 @@ export const PageList: FC<Props> = ({ pages, totalPages }) => {
         </Grid>
       ) : (
         <Grid xs={12} css={{ display: 'flex', justifyContent: 'center', mt: '$10' }}>
-          <Pagination shadow color="secondary" total={totalPages} onChange={handleMutateActivePage} />
+          <Pagination shadow initialPage={1} color="secondary" total={totalPages} onChange={handleMutateActivePage} />
         </Grid>
       )}
     </Grid.Container>

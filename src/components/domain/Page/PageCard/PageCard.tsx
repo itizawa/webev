@@ -54,9 +54,27 @@ export const PageCard: FC<Props> = ({ page }) => {
         )}
       </Card.Body>
       <Card.Footer css={{ bgColor: '#2f363d', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
-        {page.body ? (
-          <Link href={`/page/${page.id}`}>
-            <a>
+        <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
+          {page.body ? (
+            <Link href={`/page/${page.id}`}>
+              <a>
+                <Text
+                  b
+                  css={{
+                    color: '$white',
+                    display: '-webkit-box',
+                    overflow: 'hidden',
+                    overflowWrap: 'anywhere',
+                    WebkitBoxOrient: 'vertical',
+                    WebkitLineClamp: 2,
+                  }}
+                >
+                  {page.title || page.url}
+                </Text>
+              </a>
+            </Link>
+          ) : (
+            <a href={page.url} target="blank" rel="noopener noreferrer">
               <Text
                 b
                 css={{
@@ -71,28 +89,12 @@ export const PageCard: FC<Props> = ({ page }) => {
                 {page.title || page.url}
               </Text>
             </a>
-          </Link>
-        ) : (
-          <a href={page.url} target="blank" rel="noopener noreferrer">
-            <Text
-              b
-              css={{
-                color: '$white',
-                display: '-webkit-box',
-                overflow: 'hidden',
-                overflowWrap: 'anywhere',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
-              }}
-            >
-              {page.title || page.url}
-            </Text>
-          </a>
-        )}
+          )}
+          <PageManageDropdown page={page} />
+        </Grid>
         <Text css={{ mt: '$10', mb: '$4', color: '$white', fontSize: '$xs', overflowWrap: 'anywhere' }}>
           {page.description?.length > MAX_WORD_COUNT_OF_BODY ? page.description?.slice(0, MAX_WORD_COUNT_OF_BODY) + '...' : page.description}
         </Text>
-        <PageManageDropdown page={page} />
         <Grid css={{ width: '100%', mt: 'auto', p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
           <Grid css={{ py: 0 }}>
             <Grid css={{ p: 0, display: 'flex', gap: '$2', alignItems: 'center' }}>
