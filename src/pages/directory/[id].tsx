@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
 import styled from 'styled-components';
-import { DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
 import { Emoji, EmojiData, emojiIndex } from 'emoji-mart';
 
 import {
@@ -14,7 +13,6 @@ import {
   useDirectoryPaginationResult,
 } from '~/stores/directory';
 
-import { Tooltip } from '~/components/base/atoms/Tooltip';
 import { SearchTextBox } from '~/components/uiParts';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
@@ -182,9 +180,9 @@ const Page: WebevNextPage = () => {
               <div ref={emojiRef}>
                 <Emoji emoji={emoji} size={emojiSize} onClick={() => handleClickEmoji()} />
               </div>
-              <Tooltip text={t.save_to_directory(directory.name)}>
+              {/* <Tooltip text={t.save_to_directory(directory.name)}>
                 <div id="save-page-to-directory">
-                  {/* <IconButton
+                  <IconButton
                     width={18}
                     height={18}
                     icon="SAVE"
@@ -192,26 +190,9 @@ const Page: WebevNextPage = () => {
                     activeColor="WARNING"
                     isActive
                     onClickButton={() => mutateDirectoryForSavePage(directory)}
-                  /> */}
+                  />
                 </div>
-              </Tooltip>
-              <UncontrolledDropdown direction="down">
-                <DropdownToggle tag="div"></DropdownToggle>
-                <DropdownMenu className="dropdown-menu-dark" positionFixed end>
-                  {/* <DropdownItem tag="button" onClick={() => openDeleteModal(directory)}>
-                    <Icon icon="TRASH" />
-                    <span className="ms-2">{t.delete}</span>
-                  </DropdownItem>
-                  <DropdownItem tag="button" onClick={() => openRenameModal(directory)}>
-                    <Icon icon="PENCIL" />
-                    <span className="ms-2">{t.rename_directory}</span>
-                  </DropdownItem>
-                  <DropdownItem tag="button" onClick={() => openAddDirectoryModal(directory)}>
-                    <Icon icon="ADD_TO_DIRECTORY" />
-                    <span className="ms-2">{t.create_directory}</span>
-                  </DropdownItem> */}
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              </Tooltip> */}
             </div>
             {isEmojiSettingMode && (
               <>

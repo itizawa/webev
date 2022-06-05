@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { VFC, useState } from 'react';
+import { VFC } from 'react';
 
-import { Dropdown, DropdownMenu, DropdownToggle } from 'reactstrap';
 import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
@@ -12,8 +11,6 @@ type Props = {
   directory: Directory;
 };
 export const DirectoryListItem: VFC<Props> = ({ directory }) => {
-  const [directoryIdForDropdown, setDirectoryIdForDropdown] = useState('');
-
   // const { mutate: mutateDirectoryForDelete } = useDirectoryForDelete();
   // const { mutate: mutateDirectoryForRename } = useDirectoryForRename();
   // const { mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();
@@ -44,10 +41,10 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
             {directory.name}
           </span>
         </div>
-        <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
+        {/* <Dropdown isOpen={directoryIdForDropdown === directory._id} toggle={() => setDirectoryIdForDropdown('')}>
           <DropdownToggle tag="span" className="manage-directory-button"></DropdownToggle>
           <DropdownMenu className="dropdown-menu-dark" positionFixed end>
-            {/* <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
+            <DropdownItem tag="button" onClick={(e) => openDeleteModal(e, directory)}>
               <Icon icon="TRASH" color="WHITE" />
               <span className="ms-2">{t.delete}</span>
             </DropdownItem>
@@ -58,9 +55,9 @@ export const DirectoryListItem: VFC<Props> = ({ directory }) => {
             <DropdownItem tag="button" onClick={(e) => openAddDirectoryModal(e, directory)}>
               <Icon icon="ADD_TO_DIRECTORY" color="WHITE" />
               <span className="ms-2">{t.create_directory}</span>
-            </DropdownItem> */}
+            </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
       </StyledList>
     </Link>
   );

@@ -1,55 +1,40 @@
 import { useState, VFC } from 'react';
-import { Collapse, UncontrolledTooltip } from 'reactstrap';
 
 import styled from 'styled-components';
 
 import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
-import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
-import { useLocale } from '~/hooks/useLocale';
 import { Directory } from '~/domains/Directory';
-import { useDirectoryChildren } from '~/stores/directory';
 
 type Props = {
   directory: Directory;
 };
 
 export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
-  const { t } = useLocale();
   const router = useRouter();
   const isActive = directory._id === router.query.id;
 
-  const [isOpen] = useState(false);
-  const [isFetchDirectory] = useState(false);
-
-  const { data: childrenDirectoryTrees, mutate: mutateChildrenDirectoriesForDisplay } = useDirectoryChildren(
-    isFetchDirectory ? directory._id : undefined,
-  );
-
   const [isHoverDirectoryItem, setIsHoverDirectoryItem] = useState(false);
-  const [isCreatingNewDirectory, setIsCreatingNewDirectory] = useState(false);
-  const [name, setName] = useState('');
 
-  const handleSubmitCreateDirectory = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+  // const handleSubmitCreateDirectory = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  //   e.preventDefault();
 
-    if (name.trim() === '') {
-      return setIsCreatingNewDirectory(false);
-    }
+  //   if (name.trim() === '') {
+  //     return setIsCreatingNewDirectory(false);
+  //   }
 
-    try {
-      await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
-      toastSuccess(t.toastr_save_directory);
-      setName('');
-      setIsCreatingNewDirectory(false);
-      mutateChildrenDirectoriesForDisplay();
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
+  //   try {
+  //     await restClient.apiPost<Directory>('/directories', { name, parentDirectoryId: directory?._id });
+  //     toastSuccess(t.toastr_save_directory);
+  //     setName('');
+  //     setIsCreatingNewDirectory(false);
+  //     mutateChildrenDirectoriesForDisplay();
+  //   } catch (err) {
+  //     if (err instanceof Error) toastError(err);
+  //   }
+  // };
 
   return (
     <>
@@ -70,11 +55,11 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
           <span className="ms-2">{directory?.name}</span>
         </div>
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}></div>
-        <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
+        {/* <UncontrolledTooltip fade={false} placement="top" target={`create-directory-icon-on-${directory?._id}`}>
           {t.create_directory}
-        </UncontrolledTooltip>
+        </UncontrolledTooltip> */}
       </StyledDiv>
-      <Collapse isOpen={isOpen}>
+      {/* <Collapse isOpen={isOpen}>
         <div className="ps-3 pt-1">
           {isCreatingNewDirectory && (
             <form className="input-group my-2 ps-3" onSubmit={handleSubmitCreateDirectory}>
@@ -98,7 +83,7 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
             </>
           )}
         </div>
-      </Collapse>
+      </Collapse> */}
     </>
   );
 };
