@@ -26,12 +26,14 @@ From here onward for those who start up by themselves.
 
 ## Installation
 
-1. Clone the latest version of [webev](https://github.com/itizaworld/webev).
+1. Clone the latest version of [webev](https://github.com/itizaworld/webev) and [webev-server](https://github.com/itizaworld/webev-server).
 
 1. Prepare environment variables.  
 See the [environment variable section](https://github.com/itizawa/webev-front/#--environmental-variables) below
 
-1. Run `docker-compose up`.  
+1. Run `docker-compose up` and `yarn dev` at webev-server.
+
+1. Run `yarn dev` at webev.
 
 ## Environmental variables
 
