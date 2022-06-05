@@ -1,45 +1,45 @@
-@import "../../node_modules/bootstrap/scss/bootstrap";
-@import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-@import "emoji-mart/css/emoji-mart.css";
+// @import "../../node_modules/bootstrap/scss/bootstrap";
+// @import "../../node_modules/bootstrap/scss/functions";
+// @import "../../node_modules/bootstrap/scss/variables";
+// @import "emoji-mart/css/emoji-mart.css";
 
-$theme-colors: (
-  "primary": $purple,
-  "secondary": $secondary,
-  "success": $success,
-  "info": $info,
-  "warning": $warning,
-  "danger": $danger,
-  "light": $light,
-  "dark": $dark,
-  "indigo": $indigo,
-  "purple": $purple,
-  "pink": $pink,
-  "orange": $orange,
-  "teal": $teal,
-);
+// $theme-colors: (
+//   "primary": $purple,
+//   "secondary": $secondary,
+//   "success": $success,
+//   "info": $info,
+//   "warning": $warning,
+//   "danger": $danger,
+//   "light": $light,
+//   "dark": $dark,
+//   "indigo": $indigo,
+//   "purple": $purple,
+//   "pink": $pink,
+//   "orange": $orange,
+//   "teal": $teal,
+// );
 
-@import "../../node_modules/bootstrap/scss/_buttons";
-@import "../../node_modules/bootstrap/scss/mixins";
+// @import "../../node_modules/bootstrap/scss/_buttons";
+// @import "../../node_modules/bootstrap/scss/mixins";
 
 @import "~toastr/toastr.scss";
 
-@import "./override.scss";
+// @import "./override.scss";
 
-@import "./customUtility.scss";
+// @import "./customUtility.scss";
 
-body {
-  font-weight: 300;
-  color: #ccc;
-}
+// body {
+//   font-weight: 300;
+//   color: #ccc;
+// }
 
-#toast-container {
-  @include media-breakpoint-down(md) {
-    left: 0;
-    width: 100%;
-    padding: 0 5%;
-    .toast {
-      width: 100%;
-    }
-  }
-}
+// #toast-container {
+//   @include media-breakpoint-down(md) {
+//     left: 0;
+//     width: 100%;
+//     padding: 0 5%;
+//     .toast {
+//       width: 100%;
+//     }
+//   }
+// }

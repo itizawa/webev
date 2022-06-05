@@ -4,7 +4,7 @@ import { SessionProvider } from 'next-auth/react';
 import { NextUIProvider } from '@nextui-org/react';
 
 import { theme } from '~/styles/theme';
-// import '~/styles/global.scss';
+import '~/styles/global.scss';
 
 import { MaintenanceLayout } from '~/components/common/Layout/MaintenanceLayout';
 
