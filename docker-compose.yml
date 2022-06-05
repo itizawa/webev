@@ -1,7 +1,0 @@
-version: '3.8'
-services:
-  mongo:
-    image: mongo:5.0
-    container_name: webev_mongo_db
-    ports:
-      - 27017:27017

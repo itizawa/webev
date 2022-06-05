@@ -1,9 +1,0 @@
-# compiled output
-/node_modules
-
-# Logs
-logs
-*.log
-
-# OS
-.DS_Store
