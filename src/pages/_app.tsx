@@ -1,6 +1,4 @@
 import { ReactNode } from 'react';
-import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react';
 import { NextUIProvider } from '@nextui-org/react';
 
 import { theme } from '~/styles/theme';
@@ -18,7 +16,7 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
   pageProps,
 }: {
   Component: WebevNextPage;
-  pageProps: { children?: ReactNode; session?: Session };
+  pageProps: { children?: ReactNode };
 }) => {
   const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
   usePageView();
@@ -31,12 +29,10 @@ const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { c
 
   return (
     <NextUIProvider theme={theme}>
-      <SessionProvider session={pageProps.session}>
-        <PagePaginationProvider>
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          <ModalProvider>{getLayout(<Component {...(pageProps as any)} />)}</ModalProvider>
-        </PagePaginationProvider>
-      </SessionProvider>
+      <PagePaginationProvider>
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        <ModalProvider>{getLayout(<Component {...(pageProps as any)} />)}</ModalProvider>
+      </PagePaginationProvider>
     </NextUIProvider>
   );
 };

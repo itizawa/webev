@@ -42,7 +42,6 @@ See the [environment variable section](https://github.com/itizawa/webev-front/#-
 |---|---|---|---|
 |GOOGLE_CLIENT_ID |  | ✅ | client id for authentication of google |
 |GOOGLE_CLIENT_SECRET |  | ✅ | client secret for authentication of google |
-|MONGO_URI | mongodb://mongo:27017/webev | ✅  | For storing credentials for using by next-auth  | 
 
 ## License
 
