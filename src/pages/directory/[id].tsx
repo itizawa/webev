@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState, useRef, ReactNode } from 'react';
 
 import styled from 'styled-components';
-import { Emoji, EmojiData, emojiIndex } from 'emoji-mart';
+import { Emoji, EmojiData } from 'emoji-mart';
 
 import {
   useAllDirectories,
@@ -54,7 +54,7 @@ const Page: WebevNextPage = () => {
   const { mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({ searchKeyWord: '', isRoot: true });
 
   const [isEmojiSettingMode, setIsEmojiSettingMode] = useState<boolean>();
-  const [emoji, setEmoji] = useState<EmojiData>(openFileFolderEmoji);
+  const [emoji] = useState<EmojiData>(openFileFolderEmoji);
   const [pickerTop, setPickerTop] = useState<number>(0);
   const [pickerLeft, setPickerLeft] = useState<number>(0);
   const emojiRef = useRef<HTMLDivElement>(null);
@@ -108,10 +108,10 @@ const Page: WebevNextPage = () => {
 
   useEffect(() => {
     if (directory != null) {
-      const result = emojiIndex.search(directory.emojiId);
-      if (result != null) {
-        setEmoji(result[0]);
-      }
+      // const result = emojiIndex.search(directory.emojiId);
+      // if (result != null) {
+      //   setEmoji(result[0]);
+      // }
     }
   }, [directory]);
 
