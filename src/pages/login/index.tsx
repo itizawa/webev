@@ -7,10 +7,10 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { toastSuccess } from '~/utils/toastr';
 
-import { LoginRequiredWrapper } from '~/components/common/Authentication/LogoutRequiredWrapper';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
 import { LoginCard } from '~/components/uiParts';
+import { LogoutRequiredWrapper } from '~/components/common/Authentication/LogoutRequiredWrapper';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();
@@ -24,13 +24,13 @@ const Page: WebevNextPage = () => {
   return (
     <>
       <WebevOgpHead title="Webev | Login" />
-      <LoginRequiredWrapper>
+      <LogoutRequiredWrapper>
         <Grid>
           <Grid css={{ mw: '400px', mx: 'auto' }}>
             <LoginCard />
           </Grid>
         </Grid>
-      </LoginRequiredWrapper>
+      </LogoutRequiredWrapper>
     </>
   );
 };

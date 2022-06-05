@@ -9,20 +9,20 @@ type Props = {
   children: ReactNode;
 };
 
-export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
+export const LogoutRequiredWrapper: FC<Props> = ({ children }) => {
   const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (isLoadingCurrentUser || currentUser) {
+    if (isLoadingCurrentUser || !currentUser) {
       return;
     }
-    router.push(URLS.HOME_URL);
+    router.push(URLS.TOP_URL);
   }, [currentUser, isLoadingCurrentUser, router]);
 
   if (isLoadingCurrentUser) return <Loading color="secondary" />;
 
-  if (!currentUser) {
+  if (currentUser) {
     return null;
   }
 
