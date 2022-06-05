@@ -4,9 +4,6 @@ export const DIRECTORY_INDEX_URL = '/directory';
 // NOTE: directory 詳細
 export const DIRECTORY_ID_URL = '/directory/[id]';
 
-// NOTE: ダッシュボードのホームページ
-export const HOME_URL = '/home';
-
 // NOTE: ニュースページ
 export const NEWS_INDEX_URL = '/news';
 
@@ -34,6 +31,7 @@ export const TOP_URL = '/';
 const serverUrl = process.env.NEXT_PUBLIC_WEBEV_SERVER_URL;
 
 export const URLS = {
+  HOME_URL: '/home',
   HOW_TO_USE: 'https://creative-rice-df2.notion.site/Webev-37a3c514bcbf45ba9ce938331721d254',
   ITIZAWA_TWITTER_URL: 'https://twitter.com/itizawa_pen',
   LOGIN: '/login',
