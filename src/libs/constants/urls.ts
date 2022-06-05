@@ -22,9 +22,6 @@ export const TERM_URL = '/term';
 // NOTE: ユーザー詳細ページ
 export const USER_ID_URL = '/user/[id]';
 
-// NOTE: 404 ページ
-export const NOT_FOUND_URL = '/404';
-
 const serverUrl = process.env.NEXT_PUBLIC_WEBEV_SERVER_URL;
 
 export const URLS = {
@@ -36,4 +33,5 @@ export const URLS = {
   USER_SETTINGS_URL: '/user/settings',
   TOP_URL: '/',
   WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',
+  NOT_FOUND_URL: '/404',
 };
