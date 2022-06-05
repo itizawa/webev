@@ -40,8 +40,7 @@ See the [environment variable section](https://github.com/itizawa/webev-front/#-
 
 |Key | e.g. | Required | What is this?
 |---|---|---|---|
-|GOOGLE_CLIENT_ID |  | ✅ | client id for authentication of google |
-|GOOGLE_CLIENT_SECRET |  | ✅ | client secret for authentication of google |
+|NEXT_PUBLIC_WEBEV_SERVER_URL |  | ✅ | backend url |
 
 ## License
 
