@@ -25,9 +25,6 @@ export const USER_ID_URL = '/user/[id]';
 // NOTE: 404 ページ
 export const NOT_FOUND_URL = '/404';
 
-// NOTE: ルート
-export const TOP_URL = '/';
-
 const serverUrl = process.env.NEXT_PUBLIC_WEBEV_SERVER_URL;
 
 export const URLS = {
@@ -37,5 +34,6 @@ export const URLS = {
   LOGIN: '/login',
   LOGIN_URL_TO_BACKEND: `${serverUrl}/auth/google`,
   USER_SETTINGS_URL: '/user/settings',
+  TOP_URL: '/',
   WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',
 };

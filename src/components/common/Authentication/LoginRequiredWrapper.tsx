@@ -14,9 +14,10 @@ export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoadingCurrentUser && !currentUser) {
-      router.push(`${URLS.LOGIN}?isRedirect=true`);
+    if (isLoadingCurrentUser || currentUser) {
+      return;
     }
+    router.push(`${URLS.LOGIN}?isRedirect=true`);
   }, [currentUser, isLoadingCurrentUser, router]);
 
   if (isLoadingCurrentUser) return <Loading size="xl" color="secondary" />;
