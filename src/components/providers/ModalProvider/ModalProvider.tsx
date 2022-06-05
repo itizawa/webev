@@ -1,4 +1,4 @@
-import React, { VFC, useState, createContext, ReactNode, useContext, useCallback } from 'react';
+import React, { useState, createContext, ReactNode, useContext, useCallback, FC } from 'react';
 
 import { DeletePageModal } from '~/components/domain/Page';
 import { Page } from '~/domains/Page';
@@ -17,7 +17,7 @@ export const ModalContext = createContext<{
   handleModal: (props: ModalProps) => void;
 }>({ modal: undefined, handleModal: () => void 0 });
 
-export const ModalProvider: VFC<{
+export const ModalProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   const [modal, setModal] = useState<ModalProps>();
