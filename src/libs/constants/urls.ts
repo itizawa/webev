@@ -19,9 +19,6 @@ export const ARCHIVED_URL = '/archived';
 // NOTE: 利用規約ページ
 export const TERM_URL = '/term';
 
-// NOTE: ユーザー詳細ページ
-export const USER_ID_URL = '/user/[id]';
-
 const serverUrl = process.env.NEXT_PUBLIC_WEBEV_SERVER_URL;
 
 export const URLS = {
