@@ -17,7 +17,7 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
     setIsLoading(true);
 
     const [{ data }] = await Promise.all([
-      restClient.apiPut<User>('/users/me/isExecutedTutorial'),
+      restClient.apiPut<User>('/users/me/isCompletedTutorial'),
       restClient.apiPost('/pages', { url: URLS.HOW_TO_USE }),
     ]);
     mutatePagePagination();
