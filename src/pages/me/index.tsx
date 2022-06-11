@@ -50,7 +50,7 @@ const Page: WebevNextPage = () => {
                   zIndex: 1000,
                 }}
               >
-                <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="gradient" pointer as="div" size="xl" />
+                <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="gradient" as="div" size="xl" />
               </Grid>
               <Text h3 css={{ mt: '$10', textAlign: 'center' }}>
                 {currentUser.username}
