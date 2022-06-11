@@ -49,6 +49,7 @@ export const en = {
   user_page: 'User Page',
   view_original: 'View Original',
   back: 'Return',
+  my_page: 'My Page',
 
   return_news_list: 'Return News List',
 

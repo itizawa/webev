@@ -35,6 +35,7 @@ export const BootstrapIcon = {
   GITHUB: 'github',
   QUESTION: 'question',
   GEAR: 'gear',
+  PERSON: 'person',
   PAUSE_CIRCLE: 'pause-circle',
   PLAY_CIRCLE: 'play-circle',
   STOP_CIRCLE: 'stop-circle',

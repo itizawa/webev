@@ -7,13 +7,15 @@ import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';
+import { URLS } from '~/libs/constants/urls';
 
 export const FooterSubnavBar: FC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
   const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
-    { text: t.home, url: '/home', icon: 'HOME' },
+    { text: t.home, url: URLS.HOME_URL, icon: 'HOME' },
+    { text: t.my_page, url: URLS.ME, icon: 'PERSON' },
     // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
   ];
 

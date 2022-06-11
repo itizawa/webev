@@ -1,0 +1,1 @@
+export { usePagesCountByUserId } from './usePagesCountByUserId';
