@@ -8,7 +8,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { useCurrentUser } from '~/stores/users';
+import { useCurrentUser } from '~/stores/User';
 import { Avatar, Loading, Text } from '~/components/uiParts';
 
 const Page: WebevNextPage = () => {
