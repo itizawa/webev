@@ -15,11 +15,11 @@ import { Footer } from '~/components/common/Parts/Footer';
 // import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 // import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-// import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
+import { useModal } from '~/hooks/useModal';
 
 type Props = {
   children: ReactNode;
@@ -27,11 +27,19 @@ type Props = {
 
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
-  const { setActivePage } = usePagePagination();
+  const { setActivePage, paginationPage, isLoadingPaginationPage } = usePagePagination();
+  const { handleModal } = useModal();
 
   useEffect(() => {
     setActivePage(1);
   }, [setActivePage, router]);
+
+  // TODO: all count pages
+  useEffect(() => {
+    if (!isLoadingPaginationPage && paginationPage?.totalDocs === 0) {
+      handleModal({ name: 'tutorialDetectorModal', args: {} });
+    }
+  }, [handleModal, isLoadingPaginationPage, paginationPage?.totalDocs]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
@@ -68,7 +76,6 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
         </Grid>
         {children}
       </Grid>
-
       {/* {session && (
         <>
           <DirectoryCreateModal />
@@ -77,8 +84,7 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           <PageSaveModal />
         </>
       )}
-      {session && <ShareLinkReceiverModal />}
-      {currentUser && <TutorialDetectorModal />} */}
+      {session && <ShareLinkReceiverModal />} */}
       {/* 横幅調整のためにdivでwrapしている */}
       <div>
         <ScrollTopButton />
