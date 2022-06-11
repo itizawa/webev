@@ -8,8 +8,8 @@ import { Ogp } from '~/domains/Ogp';
  * @param url
  */
 export const useOgp = (url?: string): SWRResponse<Ogp, Error> => {
-  const key = url ? `ogp?url=${url}` : null;
-  return useSWR(key, (endpoint: string) => restClient.apiGet<Ogp>(endpoint).then((result) => result.data), {
+  const key = url ? `/ogps?url=${url}` : null;
+  return useSWR(key, (endpoint: string) => restClient.apiGet<{ ogp: Ogp }>(endpoint).then((result) => result.data.ogp), {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
   });
