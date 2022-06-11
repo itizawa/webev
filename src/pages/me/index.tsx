@@ -71,15 +71,17 @@ const Page: WebevNextPage = () => {
                 <Text css={{ fontSize: '14px' }}>メールアドレス</Text>
                 <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{currentUser.email}</Text>
               </Grid>
+              <Grid css={{ mt: 'auto', display: 'flex', justifyContent: 'center' }}>
+                <Link href={URLS.LOGOUT_URL_TO_BACKEND}>
+                  <a>
+                    <Button color="secondary" css={{ fontWeight: '$bold' }}>
+                      {t.logout}
+                    </Button>
+                  </a>
+                </Link>
+              </Grid>
             </Card.Body>
           </Card>
-          <Grid>
-            <Link href={URLS.LOGOUT_URL_TO_BACKEND}>
-              <a>
-                <Button color="secondary">{t.logout}</Button>
-              </a>
-            </Link>
-          </Grid>
         </Grid>
       </LoginRequiredWrapper>
     </>
