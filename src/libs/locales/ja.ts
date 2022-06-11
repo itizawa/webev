@@ -13,6 +13,7 @@ export const ja = {
   settings: '設定',
   search: '検索',
   save: '保存',
+  email: 'メールアドレス',
   return_list: 'リストに戻る',
   save_page: 'ページを保存する',
   save_to_directory: (directoryName: string): string => `${directoryName} に直接保存します`,
@@ -100,4 +101,7 @@ export const ja = {
 
   login_description:
     '<a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">利用規約</a> に同意して Webev を始める！',
+
+  total_page_count: '保存したページ件数',
+  registered_day: '登録日',
 };
