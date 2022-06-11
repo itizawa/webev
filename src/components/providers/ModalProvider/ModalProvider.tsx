@@ -1,40 +1,48 @@
 import React, { useState, createContext, ReactNode, useContext, useCallback, FC } from 'react';
 
 import { DeletePageModal } from '~/components/domain/Page';
-import { Page } from '~/domains/Page';
+import { TutorialDetectorModal } from '~/components/domain/Tutorial/TutorialDetectorModal';
 
 type DeletePageModalType = {
-  name?: 'deletePageModal' | null;
-  args?: { targetPage: Page };
+  name: 'deletePageModal';
+  args: { targetPageId: string };
 };
 
-type ModalProps = DeletePageModalType | undefined | null;
+type TutorialDetectorModalType = {
+  name: 'tutorialDetectorModal';
+  args: {};
+};
+
+type ModalProps = DeletePageModalType | TutorialDetectorModalType | undefined | null;
 
 const DURATION = 195; // モーダルの開閉のアニメーション時間
 
 export const ModalContext = createContext<{
   modal: ModalProps;
+  open: boolean;
   handleModal: (props: ModalProps) => void;
-}>({ modal: undefined, handleModal: () => void 0 });
+}>({ modal: undefined, open: false, handleModal: () => void 0 });
 
 export const ModalProvider: FC<{
   children: ReactNode;
 }> = ({ children }) => {
   const [modal, setModal] = useState<ModalProps>();
+  const [open, setOpen] = useState(false);
 
   const handleModal = useCallback((args: ModalProps) => {
     if (!args) {
-      // モーダルを閉じるときは先にnameをfalsyにして閉じるアニメーションを実行する
-      setModal((prev) => ({ ...prev, name: null }));
-      // アニメーションが終了したらオブジェクトをnullにしてコンポーネントを破棄する
+      // モーダルを閉じるときは先にopenをfalsyにして閉じるアニメーションを実行する
+      setOpen(false);
+      // アニメーションが終了したらmodalをnullにしてコンポーネントを破棄する
       setTimeout(() => setModal(null), DURATION);
     } else {
       setModal(args);
+      setOpen(true);
     }
   }, []);
 
   return (
-    <ModalContext.Provider value={{ modal, handleModal }}>
+    <ModalContext.Provider value={{ modal, open, handleModal }}>
       <Modal />
       {children}
     </ModalContext.Provider>
@@ -42,10 +50,17 @@ export const ModalProvider: FC<{
 };
 
 const Modal = () => {
-  const { modal, handleModal } = useContext(ModalContext);
+  const { modal, open, handleModal } = useContext(ModalContext);
   const handleCancel = useCallback(() => handleModal(null), [handleModal]);
 
   if (!modal) return null;
 
-  return <>{modal.args && <DeletePageModal open={modal.name === 'deletePageModal'} onClose={handleCancel} page={modal.args.targetPage} />}</>;
+  switch (modal.name) {
+    case 'deletePageModal': {
+      return <DeletePageModal open={open} onClose={handleCancel} pageId={modal.args.targetPageId} />;
+    }
+    case 'tutorialDetectorModal': {
+      return <TutorialDetectorModal open={open} onClose={handleCancel} />;
+    }
+  }
 };
