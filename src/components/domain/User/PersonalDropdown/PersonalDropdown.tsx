@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import { FC } from 'react';
 
-import { useCurrentUser } from '~/stores/users';
+import { useCurrentUser } from '~/stores/User';
 
 import { Loading } from '~/components/uiParts/Loading/Loading';
 import { Avatar } from '~/components/uiParts';
@@ -23,7 +23,7 @@ export const PersonalDropdown: FC = () => {
   }
 
   return (
-    <NextLink href={URLS.USER_SETTINGS_URL}>
+    <NextLink href={URLS.ME}>
       <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="secondary" pointer as="div" />
     </NextLink>
   );

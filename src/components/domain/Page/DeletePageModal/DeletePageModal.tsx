@@ -1,11 +1,9 @@
 import { FC } from 'react';
 
-import { Page } from '~/domains/Page';
-
 type Props = {
   open: boolean;
   onClose: () => void;
-  page: Page;
+  pageId: string;
 };
 
 export const DeletePageModal: FC<Props> = () => {

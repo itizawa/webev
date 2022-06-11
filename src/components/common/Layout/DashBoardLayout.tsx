@@ -6,7 +6,6 @@ import { Container, Grid } from '@nextui-org/react';
 import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Parts/Sidebar';
-// import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Parts/Footer';
 
 // import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
@@ -14,12 +13,13 @@ import { Footer } from '~/components/common/Parts/Footer';
 // import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 // import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
-// import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-// import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
+import { useModal } from '~/hooks/useModal';
+import { usePagesCountByUserId } from '~/stores/Page';
+import { useCurrentUser } from '~/stores/User';
 
 type Props = {
   children: ReactNode;
@@ -27,11 +27,26 @@ type Props = {
 
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
+  const { data: currentUser } = useCurrentUser();
   const { setActivePage } = usePagePagination();
+  const { data: pagesCountByUserId, isLoading: isLoadingPagesCountByUserId } = usePagesCountByUserId(currentUser?.id);
+  const { handleModal } = useModal();
 
   useEffect(() => {
     setActivePage(1);
   }, [setActivePage, router]);
+
+  useEffect(() => {
+    if (!isLoadingPagesCountByUserId && pagesCountByUserId === 0) {
+      handleModal({ name: 'tutorialDetectorModal', args: {} });
+    }
+  }, [handleModal, isLoadingPagesCountByUserId, pagesCountByUserId]);
+
+  useEffect(() => {
+    if (typeof router.query.url === 'string') {
+      handleModal({ name: 'shareLinkReceiverModal', args: { url: router.query.url } });
+    }
+  }, [handleModal, router]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
@@ -68,7 +83,6 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
         </Grid>
         {children}
       </Grid>
-
       {/* {session && (
         <>
           <DirectoryCreateModal />
@@ -77,8 +91,7 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           <PageSaveModal />
         </>
       )}
-      {session && <ShareLinkReceiverModal />}
-      {currentUser && <TutorialDetectorModal />} */}
+      {session && <ShareLinkReceiverModal />} */}
       {/* 横幅調整のためにdivでwrapしている */}
       <div>
         <ScrollTopButton />

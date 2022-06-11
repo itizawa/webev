@@ -1,12 +1,11 @@
-import { Button, Grid, Popover } from '@nextui-org/react';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { Button, Dropdown } from '@nextui-org/react';
+import { FC, Key, useCallback, useMemo } from 'react';
 import { Icon } from '~/components/base/atoms/Icon';
 
 import { Page } from '~/domains/Page';
-import { useSwitchArchive } from '~/hooks/Page';
 import { useClipboard } from '~/hooks/shared';
 import { useLocale } from '~/hooks/useLocale';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastSuccess } from '~/utils/toastr';
 
 type Props = {
   page: Page;
@@ -15,23 +14,8 @@ type Props = {
 export const PageManageDropdown: FC<Props> = ({ page }) => {
   const { t } = useLocale();
   const { handleCopy } = useClipboard();
-  const [isLoading, setIsLoading] = useState(false);
 
   // const { handleModal } = useModal();
-  const { switchArchive } = useSwitchArchive();
-
-  const handleClickCancelArchiveButton = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setTimeout(async () => {
-        await switchArchive(page.id, false);
-        setIsLoading(false);
-      }, 500);
-      toastSuccess(t.toastr_success_put_back);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  }, [page.id, switchArchive, t.toastr_success_put_back]);
 
   /**
    * Twitter の共有
@@ -62,48 +46,43 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
     return !!navigator?.share;
   }, []);
 
+  const handleAction = useCallback(
+    (key: Key) => {
+      switch (key) {
+        case 'copy': {
+          handleCopy(page.url);
+          toastSuccess(t.toastr_success_copy_url);
+          break;
+        }
+        case 'share': {
+          if (canShareByNavigator) {
+            sharePageByNavigator();
+          } else {
+            sharePage();
+          }
+          break;
+        }
+      }
+    },
+    [canShareByNavigator, handleCopy, page.url, sharePage, sharePageByNavigator, t.toastr_success_copy_url],
+  );
+
   return (
-    <Popover placement="bottom-right">
-      <Popover.Trigger>
+    <Dropdown placement="bottom-right">
+      <Dropdown.Trigger>
         <Button auto css={{ padding: '0px 11px' }} light>
           <Icon width={18} height={18} icon="THREE_DOTS_VERTICAL" />
         </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Grid css={{ p: '$8', display: 'flex', flexDirection: 'column', gridRowGap: '16px' }}>
-          <Button
-            icon={<Icon icon="CLIP_BOARD_PLUS" />}
-            light
-            css={{ fontWeight: '$bold' }}
-            onClick={() => {
-              handleCopy(page.url);
-              toastSuccess(t.toastr_success_copy_url);
-            }}
-          >
-            {t.copy_url}
-          </Button>
-          {page.archivedAt && (
-            <Button
-              icon={<Icon icon="REPLY" />}
-              light
-              css={{ fontWeight: '$bold' }}
-              onClick={handleClickCancelArchiveButton}
-              disabled={isLoading}
-            >
-              {t.return_button}
-            </Button>
-          )}
-          <Button
-            icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}
-            light
-            css={{ fontWeight: '$bold' }}
-            onClick={canShareByNavigator ? sharePageByNavigator : sharePage}
-          >
-            {t.share}
-          </Button>
-        </Grid>
-      </Popover.Content>
-    </Popover>
+      </Dropdown.Trigger>
+      <Dropdown.Menu aria-label="Static Actions" onAction={handleAction}>
+        <Dropdown.Item key="copy" icon={<Icon icon="CLIP_BOARD_PLUS" />}>
+          {t.copy_url}
+        </Dropdown.Item>
+        <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
+          {t.share}
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 
   //       <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>

@@ -1,18 +1,14 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import Link from 'next/link';
 
 import { format } from 'date-fns';
 
-import { Button, Card, Grid } from '@nextui-org/react';
+import { Card, Grid } from '@nextui-org/react';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
-import { Icon } from '~/components/base/atoms/Icon';
-import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { Page } from '~/domains/Page';
 
-import { useLocale } from '~/hooks/useLocale';
-import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { Text } from '~/components/uiParts';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
@@ -22,22 +18,6 @@ type Props = {
 };
 
 export const PageCard: FC<Props> = ({ page }) => {
-  const { t } = useLocale();
-
-  const { isLoading: isLoadingSwitchArchive, switchArchive } = useSwitchArchive();
-
-  const handleSwitchArchive = useCallback(
-    async (id: string) => {
-      try {
-        await switchArchive(id, true);
-        toastSuccess(t.toastr_success_read);
-      } catch (err) {
-        if (err instanceof Error) toastError(err);
-      }
-    },
-    [switchArchive, t.toastr_success_read],
-  );
-
   return (
     <Card>
       <Card.Body css={{ p: 0, flex: 'none' }}>
@@ -53,7 +33,7 @@ export const PageCard: FC<Props> = ({ page }) => {
           </a>
         )}
       </Card.Body>
-      <Card.Footer css={{ bgColor: '#2f363d', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
+      <Card.Footer css={{ bgColor: '#202020', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
         <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
           {page.body ? (
             <Link href={`/page/${page.id}`}>
@@ -112,24 +92,11 @@ export const PageCard: FC<Props> = ({ page }) => {
                 />
               )}
               <a href={new URL(page.url).origin} target="blank" rel="noopener noreferrer">
-                <Text css={{ color: '$accents5', fontSize: '$xs' }}>{page.siteName}</Text>
+                <Text css={{ color: '$accents8', fontWeight: '$bold', fontSize: '$xs' }}>{page.siteName}</Text>
               </a>
             </Grid>
-            <Text css={{ color: '$accents5', fontSize: '$xs' }}>{format(new Date(page.updatedAt), 'yyyy/MM/dd')}</Text>
+            <Text css={{ color: '$accents7', fontSize: '$xs' }}>{format(new Date(page.updatedAt), 'yyyy/MM/dd')}</Text>
           </Grid>
-          {!page.archivedAt && (
-            <Button
-              css={{ ml: 'auto', display: 'flex', gap: '$2', fontWeight: '$semibold' }}
-              onClick={() => handleSwitchArchive(page.id)}
-              disabled={isLoadingSwitchArchive}
-              size="sm"
-              color="secondary"
-              auto
-              icon={<Icon height={16} width={16} icon="CHECK" />}
-            >
-              {t.read_button}
-            </Button>
-          )}
         </Grid>
       </Card.Footer>
     </Card>

@@ -1,8 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-import { imagePath } from '~/libs/constants/imagePath';
+import { Button, Grid, Text } from '@nextui-org/react';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { useLocale } from '~/hooks/useLocale';
@@ -15,15 +14,16 @@ const Page: WebevNextPage = () => {
   return (
     <>
       <WebevOgpHead title="Webev | 404" />
-      <h1 className="m-3 text-center">{t.this_is_the_404_page}</h1>
-      <div className="w-50 mx-auto">
-        <Image src={imagePath.NOT_FOUND_PAGE} height={958} width={1000} />
-      </div>
-      <h2 className="text-center">
+      <Grid css={{ width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', pt: '$10' }}>
+        <Text h2>{t.this_is_the_404_page}</Text>
         <Link href="/">
-          <a className="text-white webev-anchor">{t.go_to_top}</a>
+          <a>
+            <Button color="secondary" css={{ mt: '$10', mx: 'auto' }}>
+              {t.go_to_top}
+            </Button>
+          </a>
         </Link>
-      </h2>
+      </Grid>
     </>
   );
 };

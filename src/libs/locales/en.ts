@@ -14,6 +14,7 @@ export const en = {
   search: 'Search',
   save: 'Save',
   return_list: 'Return List',
+  email: 'Mail address',
   save_page: 'Save Page',
   save_to_directory: (directoryName: string): string => `Save a page to ${directoryName} directly`,
   create: 'Create',
@@ -43,13 +44,13 @@ export const en = {
   toastr_success_add_directory: 'Add Directory',
 
   home: 'Home',
-  read: 'Archived',
   directory: 'Directory',
   share: 'Share',
   user: 'User',
   user_page: 'User Page',
   view_original: 'View Original',
   back: 'Return',
+  my_page: 'My Page',
 
   return_news_list: 'Return News List',
 
@@ -98,4 +99,7 @@ export const en = {
 
   login_description:
     'Agree to the <a class="webev-anchor text-info" href="https://webev.cloud/term" target="blank" rel="noopener noreferrer">Term</a> and sign in or sign up Webev！',
+
+  total_page_count: 'Total page count',
+  registered_day: 'Registered day',
 };

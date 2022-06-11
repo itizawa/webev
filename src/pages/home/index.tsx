@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 import { Grid } from '@nextui-org/react';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
@@ -14,11 +14,7 @@ import { Loading, Text, SearchTextBox } from '~/components/uiParts';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
-  const { paginationPage, setIsArchived, isLoadingPaginationPage } = usePagePagination();
-
-  useEffect(() => {
-    setIsArchived(false);
-  }, [setIsArchived]);
+  const { paginationPage, isLoadingPaginationPage } = usePagePagination();
 
   return (
     <>
@@ -46,7 +42,9 @@ const Index: WebevNextPage = () => {
             </Grid>
           ) : (
             <Grid css={{ py: '$8' }}>
-              {paginationPage && <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} />}
+              {paginationPage && (
+                <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} activePage={paginationPage.page} />
+              )}
             </Grid>
           )}
         </Grid>

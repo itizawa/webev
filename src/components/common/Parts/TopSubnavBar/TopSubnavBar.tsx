@@ -5,22 +5,18 @@ import styled from 'styled-components';
 import { useHooks } from './hooks';
 import { Page } from '~/domains/Page';
 
-import { Icon } from '~/components/base/atoms/Icon';
-import { useLocale } from '~/hooks/useLocale';
-
 import { zIndex } from '~/libs/constants/zIndex';
 import { speech } from '~/utils/services';
 
 type Props = {
   page: Page;
-  onClickSwitchArchiveButton: () => void;
   onClickPlayButton: () => void;
   onClickPauseButton: () => void;
   onClickStopButton: () => void;
   isReading: boolean;
 };
-export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) => {
-  const { t } = useLocale();
+
+export const TopSubnavBar: VFC<Props> = ({ page }) => {
   const { isShowScroll } = useHooks();
 
   return (
@@ -32,10 +28,6 @@ export const TopSubnavBar: VFC<Props> = ({ page, onClickSwitchArchiveButton }) =
           </StyledAnchor>
         </div>
         <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
-        <button className="btn btn-sm btn-primary d-flex" onClick={onClickSwitchArchiveButton}>
-          <Icon height={20} width={20} icon="CHECK" />
-          <span className="ms-2 text-nowrap">{t.read_button}</span>
-        </button>
         {/* <div className="ms-2">
           <PageManageDropdown page={page} direction="down" />
         </div> */}

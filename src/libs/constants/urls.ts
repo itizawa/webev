@@ -13,9 +13,6 @@ export const NEWS_ID_URL = '/news/[id]';
 // NOTE: ページ詳細ページ
 export const PAGES_ID_URL = '/pages/[id]';
 
-// NOTE: 既読ページ
-export const ARCHIVED_URL = '/archived';
-
 // NOTE: 利用規約ページ
 export const TERM_URL = '/term';
 
@@ -27,7 +24,8 @@ export const URLS = {
   ITIZAWA_TWITTER_URL: 'https://twitter.com/itizawa_pen',
   LOGIN: '/login',
   LOGIN_URL_TO_BACKEND: `${serverUrl}/auth/google`,
-  USER_SETTINGS_URL: '/user/settings',
+  LOGOUT_URL_TO_BACKEND: `${serverUrl}/logout`,
+  ME: '/me',
   TOP_URL: '/',
   WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',
   NOT_FOUND_URL: '/404',

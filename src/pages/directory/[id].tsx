@@ -18,7 +18,7 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 // import { SortButtonGroup } from '~/components/common/SortButtonGroup';
-import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
+import { DirectoryListItem } from '~/components/domain/Directory';
 
 import { Directory } from '~/domains/Directory';
 
