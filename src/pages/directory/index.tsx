@@ -6,7 +6,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { DirectoryListItem } from '~/components/domain/Directory/molecules/DirectoryListItem';
+import { DirectoryListItem } from '~/components/domain/Directory';
 
 import { useDirectoryPaginationResult } from '~/stores/directory';
 import { useLocale } from '~/hooks/useLocale';
