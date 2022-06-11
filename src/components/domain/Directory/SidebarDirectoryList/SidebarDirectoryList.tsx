@@ -1,7 +1,7 @@
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
 
-import { DirectorySidebarListItem } from '~/components/domain/Directory/molecules/DirectorySidebarListItem';
+import { DirectorySidebarListItem } from '~/components/domain/Directory';
 import { toastError, toastSuccess } from '~/utils/toastr';
 
 import { useDirectoryPaginationResult } from '~/stores/directory';

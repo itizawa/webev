@@ -11,7 +11,7 @@ type Props = {
 
 export const PageCountupCard: FC<Props> = ({ count, text }) => {
   return (
-    <Card bordered css={{ borderColor: '$warning', padding: '$4' }}>
+    <Card css={{ borderColor: '$warning', padding: '$4' }} variant="bordered">
       <Text h2 css={{ textAlign: 'center' }}>
         <CountUp start={0} end={count} duration={3} delay={1} /> Pages
       </Text>

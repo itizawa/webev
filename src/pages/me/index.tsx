@@ -40,13 +40,13 @@ const Page: WebevNextPage = () => {
       <WebevOgpHead title={`Webev | ${t.user}${t.settings}`} />
       <LoginRequiredWrapper>
         <Grid css={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center', pt: '$10' }}>
-          <Card css={{ overflow: 'unset', maxWidth: '500px' }}>
+          <Card css={{ overflow: 'unset', maxWidth: '500px' }} variant="bordered">
             <Card.Body css={{ overflow: 'unset' }}>
               <Grid
                 css={{
                   position: 'absolute',
                   left: '50%',
-                  transform: 'translate(-50%, -40px)',
+                  transform: 'translate(-50%, -50px)',
                   display: 'flex',
                   justifyContent: 'center',
                   zIndex: 1000,
