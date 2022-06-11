@@ -5,9 +5,6 @@ import styled from 'styled-components';
 import { usePageByPageId } from '~/stores/page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
-import { toastError } from '~/utils/toastr';
-
-import { Icon } from '~/components/base/atoms/Icon';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -15,7 +12,6 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
 
-import { useSwitchArchive } from '~/hooks/Page/useSwitchArchive';
 import { speech } from '~/utils/services';
 
 const Page: WebevNextPage = () => {
@@ -24,8 +20,7 @@ const Page: WebevNextPage = () => {
   const { id } = router.query;
 
   const { t, locale } = useLocale();
-  const { data: page, mutate: mutatePage } = usePageByPageId({ pageId: id as string });
-  const { isLoading, switchArchive } = useSwitchArchive();
+  const { data: page } = usePageByPageId({ pageId: id as string });
 
   const [isReading, setIsReading] = useState(false);
   const [isMidway, setIsMidway] = useState(false);
@@ -45,15 +40,6 @@ const Page: WebevNextPage = () => {
       </div>
     );
   }
-
-  const handleClickSwitchArchiveButton = async () => {
-    try {
-      await switchArchive(page.id, !false);
-      mutatePage();
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  };
 
   const handleClickPlayButton = () => {
     if (!page.body) return;
@@ -88,7 +74,6 @@ const Page: WebevNextPage = () => {
       <LoginRequiredWrapper>
         <TopSubnavBar
           page={page}
-          onClickSwitchArchiveButton={handleClickSwitchArchiveButton}
           onClickPlayButton={handleClickPlayButton}
           onClickPauseButton={handleClickPauseButton}
           onClickStopButton={handleClickStopButton}
@@ -96,10 +81,6 @@ const Page: WebevNextPage = () => {
         />
         <div className="ms-2 d-flex align-items-center">
           <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
-          <button className="btn btn-sm btn-primary d-flex" disabled={isLoading} onClick={handleClickSwitchArchiveButton}>
-            <Icon height={20} width={20} icon="CHECK" />
-            <span className="ms-2 text-nowrap">{t.read_button}</span>
-          </button>
           <div className="ms-2">
             <PageManageDropdown page={page} />
           </div>

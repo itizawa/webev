@@ -1,12 +1,11 @@
 import { Button, Grid, Popover } from '@nextui-org/react';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Icon } from '~/components/base/atoms/Icon';
 
 import { Page } from '~/domains/Page';
-import { useSwitchArchive } from '~/hooks/Page';
 import { useClipboard } from '~/hooks/shared';
 import { useLocale } from '~/hooks/useLocale';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { toastSuccess } from '~/utils/toastr';
 
 type Props = {
   page: Page;
@@ -15,23 +14,8 @@ type Props = {
 export const PageManageDropdown: FC<Props> = ({ page }) => {
   const { t } = useLocale();
   const { handleCopy } = useClipboard();
-  const [isLoading, setIsLoading] = useState(false);
 
   // const { handleModal } = useModal();
-  const { switchArchive } = useSwitchArchive();
-
-  const handleClickCancelArchiveButton = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      setTimeout(async () => {
-        await switchArchive(page.id, false);
-        setIsLoading(false);
-      }, 500);
-      toastSuccess(t.toastr_success_put_back);
-    } catch (err) {
-      if (err instanceof Error) toastError(err);
-    }
-  }, [page.id, switchArchive, t.toastr_success_put_back]);
 
   /**
    * Twitter の共有
@@ -82,17 +66,6 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           >
             {t.copy_url}
           </Button>
-          {page.archivedAt && (
-            <Button
-              icon={<Icon icon="REPLY" />}
-              light
-              css={{ fontWeight: '$bold' }}
-              onClick={handleClickCancelArchiveButton}
-              disabled={isLoading}
-            >
-              {t.return_button}
-            </Button>
-          )}
           <Button
             icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}
             light

@@ -43,7 +43,6 @@ export const en = {
   toastr_success_add_directory: 'Add Directory',
 
   home: 'Home',
-  read: 'Archived',
   directory: 'Directory',
   share: 'Share',
   user: 'User',

@@ -13,9 +13,6 @@ export const NEWS_ID_URL = '/news/[id]';
 // NOTE: ページ詳細ページ
 export const PAGES_ID_URL = '/pages/[id]';
 
-// NOTE: 既読ページ
-export const ARCHIVED_URL = '/archived';
-
 // NOTE: 利用規約ページ
 export const TERM_URL = '/term';
 
