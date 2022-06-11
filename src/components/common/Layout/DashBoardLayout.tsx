@@ -20,6 +20,8 @@ import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
+import { useCurrentUser } from '~/stores/users';
+import { useModal } from '~/hooks/useModal';
 
 type Props = {
   children: ReactNode;
@@ -28,10 +30,18 @@ type Props = {
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const { setActivePage } = usePagePagination();
+  const { data: currentUser } = useCurrentUser();
+  const { handleModal } = useModal();
 
   useEffect(() => {
     setActivePage(1);
   }, [setActivePage, router]);
+
+  useEffect(() => {
+    if (currentUser) {
+      handleModal({ name: 'tutorialDetectorModal', args: {} });
+    }
+  }, [currentUser, handleModal]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
@@ -68,7 +78,6 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
         </Grid>
         {children}
       </Grid>
-
       {/* {session && (
         <>
           <DirectoryCreateModal />
@@ -77,8 +86,7 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           <PageSaveModal />
         </>
       )}
-      {session && <ShareLinkReceiverModal />}
-      {currentUser && <TutorialDetectorModal />} */}
+      {session && <ShareLinkReceiverModal />} */}
       {/* 横幅調整のためにdivでwrapしている */}
       <div>
         <ScrollTopButton />

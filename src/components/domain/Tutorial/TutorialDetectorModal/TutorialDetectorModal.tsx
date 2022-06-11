@@ -1,38 +1,45 @@
-import { VFC } from 'react';
+import { Button, Modal, Text } from '@nextui-org/react';
+import { useCallback, FC } from 'react';
+import { useReward } from 'react-rewards';
+import { useUpdateIsExecutedTutorial } from '~/hooks/Tutorial/useUpdateIsExecutedTutorial';
+import { useLocale } from '~/hooks/useLocale';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
-// import { useCurrentUser } from '~/stores/user';
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
 
-export const TutorialDetectorModal: VFC = () => {
-  // const { t } = useLocale();
+export const TutorialDetectorModal: FC<Props> = ({ open, onClose }) => {
+  const { t } = useLocale();
 
-  // const { data: currentUser } = useCurrentUser();
-  // const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
+  const { updateIsExecutedTutorial } = useUpdateIsExecutedTutorial();
+  const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
 
-  // const handleOkButton = useCallback(async () => {
-  //   try {
-  //     confettiReward();
-  //     await updateIsExecutedTutorial();
-  //     toastSuccess(t.toastr_start_webev);
-  //   } catch (err) {
-  //     if (err instanceof Error) toastError(err);
-  //   }
-  // }, [confettiReward, t.toastr_start_webev, updateIsExecutedTutorial]);
+  const handleOkButton = useCallback(async () => {
+    try {
+      confettiReward();
+      await updateIsExecutedTutorial();
+      toastSuccess(t.toastr_start_webev);
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+  }, [confettiReward, t.toastr_start_webev, updateIsExecutedTutorial]);
 
-  return null;
-  // <Modal isOpen title={t.welcome_webev}>
-  //   <div className="text-center">
-  //     <h3>🎉 {t.welcome_webev} 🎉</h3>
-  //     <p>
-  //       {t.tutorial_desc1}
-  //       <br />
-  //       {t.tutorial_desc2}
-  //     </p>
-  //     <p dangerouslySetInnerHTML={{ __html: t.tutorial_desc3 }} />
-  //     <div className="d-flex justify-content-center mt-5" id="confettiReward">
-  //       <button className="btn btn-indigo" onClick={handleOkButton} disabled={isLoading}>
-  //         {t.start_immediately}
-  //       </button>
-  //     </div>
-  //   </div>
-  // </Modal>
+  return (
+    <Modal open={open} onClose={onClose} title={t.welcome_webev} preventClose>
+      <Modal.Header>
+        <Text h3 css={{ mb: '$20' }}>
+          🎉 {t.welcome_webev} 🎉
+        </Text>
+      </Modal.Header>
+      <Modal.Body css={{ textAlign: 'center' }}>
+        <Text css={{ mb: '$4' }}>{t.tutorial_desc1}</Text>
+        <Text>{t.tutorial_desc2}</Text>
+        <Button color="secondary" onClick={handleOkButton} css={{ mt: '$12', fontWeight: '$bold' }} id="confettiReward">
+          {t.start_immediately}！
+        </Button>
+      </Modal.Body>
+    </Modal>
+  );
 };
