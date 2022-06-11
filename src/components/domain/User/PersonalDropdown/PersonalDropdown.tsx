@@ -23,7 +23,7 @@ export const PersonalDropdown: FC = () => {
   }
 
   return (
-    <NextLink href={URLS.USER_SETTINGS_URL}>
+    <NextLink href={URLS.ME}>
       <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="secondary" pointer as="div" />
     </NextLink>
   );
