@@ -29,7 +29,7 @@ export const TutorialDetectorModal: FC<Props> = ({ open, onClose }) => {
   }, [confettiReward, onClose, t.toastr_start_webev, updateIsExecutedTutorial]);
 
   return (
-    <Modal open={open} onClose={onClose} title={t.welcome_webev} preventClose>
+    <Modal open={open} onClose={onClose} title={t.welcome_webev} preventClose blur>
       <Modal.Header>
         <Text h3 css={{ mb: '$20' }}>
           🎉 {t.welcome_webev} 🎉

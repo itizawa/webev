@@ -86,7 +86,7 @@ export const ja = {
   maintenance: '管理画面はメンテナンス中です',
 
   tutorial_desc1: 'Webev はブックマーク管理アプリです。',
-  tutorial_desc2: 'Webev の使い方を保存します！',
+  tutorial_desc2: 'さっそくWebev の使い方を保存します！',
   tutorial_desc3: '読み終わったら <span class="fw-bold">読了ボタン</span> を押して記録をつけましょう',
 
   input_url: 'Url を入力する',
