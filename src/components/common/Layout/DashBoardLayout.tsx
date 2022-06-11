@@ -3,6 +3,7 @@ import { FC, ReactNode, useEffect } from 'react';
 
 import { Container, Grid } from '@nextui-org/react';
 
+import { isEmpty } from 'lodash';
 import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Parts/Sidebar';
@@ -15,7 +16,6 @@ import { Footer } from '~/components/common/Parts/Footer';
 // import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
 // import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-// import { TutorialDetectorModal } from '~/components/domain/Tutorial/molecules/TutorialDetectorModal';
 import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
@@ -29,8 +29,8 @@ type Props = {
 
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
-  const { setActivePage } = usePagePagination();
-  const { data: currentUser } = useCurrentUser();
+  const { setActivePage, paginationPage, isLoadingPaginationPage } = usePagePagination();
+  const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const { handleModal } = useModal();
 
   useEffect(() => {
@@ -38,10 +38,10 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
   }, [setActivePage, router]);
 
   useEffect(() => {
-    if (currentUser) {
+    if (!isLoadingPaginationPage && isEmpty(paginationPage?.totalDocs)) {
       handleModal({ name: 'tutorialDetectorModal', args: {} });
     }
-  }, [currentUser, handleModal]);
+  }, [currentUser, handleModal, isLoadingCurrentUser, isLoadingPaginationPage, paginationPage?.totalDocs]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
