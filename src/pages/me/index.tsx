@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
-import { Grid } from '@nextui-org/react';
+import { Card, Grid } from '@nextui-org/react';
+import { format } from 'date-fns';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -19,7 +20,6 @@ const Page: WebevNextPage = () => {
 
   const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const { data: count } = usePagesCountByUserId(currentUser?.id);
-  console.log(count);
 
   // const { mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
 
@@ -53,12 +53,42 @@ const Page: WebevNextPage = () => {
     <>
       <WebevOgpHead title={`Webev | ${t.user}${t.settings}`} />
       <LoginRequiredWrapper>
-        <Grid>
-          <Grid css={{ display: 'flex', justifyContent: 'center', gap: '$8' }}>
-            <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="secondary" pointer as="div" />
-            <Text h3>{currentUser.username}</Text>
-          </Grid>
+        <Grid css={{ width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center', pt: '$10' }}>
+          <Card css={{ overflow: 'unset', maxWidth: '500px' }}>
+            <Card.Body css={{ overflow: 'unset' }}>
+              <Grid
+                css={{
+                  position: 'absolute',
+                  left: '50%',
+                  transform: 'translate(-50%, -40px)',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  zIndex: 1000,
+                }}
+              >
+                <Avatar text={currentUser.username} src={currentUser.profileUrl} bordered color="gradient" pointer as="div" size="xl" />
+              </Grid>
+              <Text h3 css={{ mt: '$10', textAlign: 'center' }}>
+                {currentUser.username}
+              </Text>
+              <Grid css={{ mt: '$10', display: 'flex', justifyContent: 'space-between' }}>
+                <Text css={{ fontSize: '14px' }}>保存したページ件数</Text>
+                <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{count}ページ</Text>
+              </Grid>
+              <Grid css={{ mt: '$4', display: 'flex', justifyContent: 'space-between' }}>
+                <Text css={{ fontSize: '14px' }}>登録日</Text>
+                <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>
+                  {format(new Date(currentUser.createdAt), 'yyyy/MM/dd HH:hh:ss')}
+                </Text>
+              </Grid>
+              <Grid css={{ mt: '$4', display: 'flex', justifyContent: 'space-between' }}>
+                <Text css={{ fontSize: '14px' }}>メールアドレス</Text>
+                <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{currentUser.email}</Text>
+              </Grid>
+            </Card.Body>
+          </Card>
         </Grid>
+
         {/* <div className="row mt-3">
           <div className="col-md-3 col-12 text-center mb-3"></div>
           <div className="col-md-9 col-12 d-flex flex-column gap-2">
