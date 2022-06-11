@@ -42,7 +42,9 @@ const Index: WebevNextPage = () => {
             </Grid>
           ) : (
             <Grid css={{ py: '$8' }}>
-              {paginationPage && <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} />}
+              {paginationPage && (
+                <PageList pages={paginationPage?.docs} totalPages={paginationPage.totalPages} activePage={paginationPage.page} />
+              )}
             </Grid>
           )}
         </Grid>
