@@ -14,7 +14,6 @@ export const FooterSubnavBar: FC = () => {
 
   const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
     { text: t.home, url: '/home', icon: 'HOME' },
-    { text: t.read, url: '/archived', icon: 'CHECK' },
     // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
   ];
 

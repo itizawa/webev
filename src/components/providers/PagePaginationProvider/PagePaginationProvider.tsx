@@ -11,7 +11,6 @@ export const PagePaginationContext = createContext<{
   setActivePage?: Dispatch<SetStateAction<number>>;
   isSortUpdatedAt: boolean;
   setIsSortUpdatedAt?: Dispatch<SetStateAction<boolean>>;
-  setIsArchived?: Dispatch<SetStateAction<boolean>>;
   paginationPage?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
   isLoadingPaginationPage: boolean;
@@ -21,7 +20,6 @@ export const PagePaginationContext = createContext<{
   setActivePage: undefined,
   isSortUpdatedAt: false,
   setIsSortUpdatedAt: undefined,
-  setIsArchived: undefined,
   paginationPage: undefined,
   mutatePagePagination: undefined,
   isLoadingPaginationPage: true,
@@ -34,11 +32,10 @@ export const PagePaginationProvider: FC<{
   const [activePage, setActivePage] = useState(1);
   const [limit] = useState(9);
   const [isSortUpdatedAt, setIsSortUpdatedAt] = useState(false);
-  const [isArchived, setIsArchived] = useState(false);
 
   const sort = isSortUpdatedAt ? 'updatedAt' : '-updatedAt';
 
-  const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`, `isArchived=${isArchived}`];
+  const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`];
   if (searchKeyword) params.push(`&q=${searchKeyword}`);
 
   const endpoint = joinUrl('/pages/list', params);
@@ -59,7 +56,6 @@ export const PagePaginationProvider: FC<{
         setActivePage,
         isSortUpdatedAt,
         setIsSortUpdatedAt,
-        setIsArchived,
         paginationPage,
         mutatePagePagination,
         isLoadingPaginationPage,
