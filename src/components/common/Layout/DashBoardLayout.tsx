@@ -20,6 +20,8 @@ import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
 import { useModal } from '~/hooks/useModal';
+import { usePagesCountByUserId } from '~/stores/Page';
+import { useCurrentUser } from '~/stores/User';
 
 type Props = {
   children: ReactNode;
@@ -27,7 +29,9 @@ type Props = {
 
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
-  const { setActivePage, paginationPage, isLoadingPaginationPage } = usePagePagination();
+  const { data: currentUser } = useCurrentUser();
+  const { setActivePage } = usePagePagination();
+  const { data: pagesCountByUserId, isLoading: isLoadingPagesCountByUserId } = usePagesCountByUserId(currentUser?.id);
   const { handleModal } = useModal();
 
   useEffect(() => {
@@ -36,10 +40,10 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
 
   // TODO: all count pages
   useEffect(() => {
-    if (!isLoadingPaginationPage && paginationPage?.totalDocs === 0) {
+    if (!isLoadingPagesCountByUserId && pagesCountByUserId === 0) {
       handleModal({ name: 'tutorialDetectorModal', args: {} });
     }
-  }, [handleModal, isLoadingPaginationPage, paginationPage?.totalDocs]);
+  }, [handleModal, isLoadingPagesCountByUserId, pagesCountByUserId]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
