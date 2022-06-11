@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import { FC } from 'react';
 
-import { useCurrentUser } from '~/stores/users';
+import { useCurrentUser } from '~/stores/User';
 
 import { Loading } from '~/components/uiParts/Loading/Loading';
 import { Avatar } from '~/components/uiParts';

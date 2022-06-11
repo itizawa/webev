@@ -3,7 +3,7 @@ import { FC, ReactNode, useEffect } from 'react';
 
 import { Loading } from '~/components/uiParts';
 import { URLS } from '~/libs/constants/urls';
-import { useCurrentUser } from '~/stores/users';
+import { useCurrentUser } from '~/stores/User';
 
 type Props = {
   children: ReactNode;
