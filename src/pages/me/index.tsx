@@ -21,17 +21,6 @@ const Page: WebevNextPage = () => {
   const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const { data: count } = usePagesCountByUserId(currentUser?.id);
 
-  // const { mutate: mutateApiToken, isValidating: isValidatingApiToken } = useApiToken();
-
-  // const updateProfile = (newObject: Partial<User>): void => {
-  //   try {
-  //     restClient.apiPut<User>('/users/me', { property: newObject });
-  //   } catch (err) {
-  //     if (err instanceof Error) toastError(err);
-  //   }
-  // };
-  // const debounceUpdateProfile = useDebouncedCallback(updateProfile, 300);
-
   if (isLoadingCurrentUser) {
     return (
       <Grid css={{ display: 'flex', justifyContent: 'center' }}>
@@ -43,11 +32,6 @@ const Page: WebevNextPage = () => {
   if (!currentUser) {
     return null;
   }
-
-  // const changeProfile = (newObject: Partial<User>): void => {
-  //   mutateCurrentUser({ ...currentUser, ...newObject }, false);
-  //   debounceUpdateProfile(newObject);
-  // };
 
   return (
     <>
@@ -88,18 +72,6 @@ const Page: WebevNextPage = () => {
             </Card.Body>
           </Card>
         </Grid>
-
-        {/* <div className="row mt-3">
-          <div className="col-md-3 col-12 text-center mb-3"></div>
-          <div className="col-md-9 col-12 d-flex flex-column gap-2">
-            <EditableInput onChange={(inputValue) => changeProfile({ name: inputValue })} value={currentUser.name} isHeader />
-            <EditableTextarea
-              value={currentUser.description}
-              onChange={(inputValue) => changeProfile({ description: inputValue })}
-              placeholder={t.no_description}
-            />
-          </div>
-        </div> */}
       </LoginRequiredWrapper>
     </>
   );
