@@ -50,6 +50,7 @@ export const ja = {
   user_page: 'ユーザーページ',
   view_original: '元の記事を見る',
   back: '戻る',
+  my_page: 'マイページ',
 
   return_news_list: 'ニュースリストに戻る',
 
