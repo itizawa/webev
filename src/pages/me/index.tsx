@@ -58,17 +58,17 @@ const Page: WebevNextPage = () => {
                 {currentUser.username}
               </Text>
               <Grid css={{ mt: '$10', display: 'flex', justifyContent: 'space-between' }}>
-                <Text css={{ fontSize: '14px' }}>保存したページ件数</Text>
-                <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{count}ページ</Text>
+                <Text css={{ fontSize: '14px' }}>{t.total_page_count}</Text>
+                <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{count} Page</Text>
               </Grid>
               <Grid css={{ mt: '$4', display: 'flex', justifyContent: 'space-between' }}>
-                <Text css={{ fontSize: '14px' }}>登録日</Text>
+                <Text css={{ fontSize: '14px' }}>{t.registered_day}</Text>
                 <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>
                   {format(new Date(currentUser.createdAt), 'yyyy/MM/dd HH:hh:ss')}
                 </Text>
               </Grid>
               <Grid css={{ mt: '$4', display: 'flex', justifyContent: 'space-between' }}>
-                <Text css={{ fontSize: '14px' }}>メールアドレス</Text>
+                <Text css={{ fontSize: '14px' }}>{t.email}</Text>
                 <Text css={{ color: '$gray600', fontWeight: '$bold', fontSize: '14px' }}>{currentUser.email}</Text>
               </Grid>
               <Grid css={{ mt: 'auto', display: 'flex', justifyContent: 'center' }}>

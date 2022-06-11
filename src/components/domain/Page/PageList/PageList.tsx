@@ -11,9 +11,10 @@ import { usePagePagination } from '~/hooks/Page';
 type Props = {
   pages: Page[];
   totalPages: number;
+  activePage: number;
 };
 
-export const PageList: FC<Props> = ({ pages, totalPages }) => {
+export const PageList: FC<Props> = ({ pages, totalPages, activePage }) => {
   const { setActivePage } = usePagePagination();
 
   const handleMutateActivePage = (page: number) => {
@@ -30,15 +31,14 @@ export const PageList: FC<Props> = ({ pages, totalPages }) => {
           </Grid>
         );
       })}
-      {pages.length === 0 ? (
+      {pages.length === 0 && (
         <Grid xs={12}>
           <NoPageAlert />
         </Grid>
-      ) : (
-        <Grid xs={12} css={{ display: 'flex', justifyContent: 'center', mt: '$10' }}>
-          <Pagination shadow initialPage={1} color="secondary" total={totalPages} onChange={handleMutateActivePage} />
-        </Grid>
       )}
+      <Grid xs={12} css={{ display: 'flex', justifyContent: 'center', mt: '$10' }}>
+        <Pagination shadow page={activePage} initialPage={1} color="secondary" total={totalPages} onChange={handleMutateActivePage} />
+      </Grid>
     </Grid.Container>
   );
 };
