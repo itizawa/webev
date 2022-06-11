@@ -13,18 +13,20 @@ type Props = {
 export const TutorialDetectorModal: FC<Props> = ({ open, onClose }) => {
   const { t } = useLocale();
 
-  const { updateIsExecutedTutorial } = useUpdateIsExecutedTutorial();
+  const { updateIsExecutedTutorial, isLoading } = useUpdateIsExecutedTutorial();
   const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
 
   const handleOkButton = useCallback(async () => {
+    confettiReward();
     try {
-      confettiReward();
-      await updateIsExecutedTutorial();
-      toastSuccess(t.toastr_start_webev);
+      await updateIsExecutedTutorial().then(() => {
+        toastSuccess(t.toastr_start_webev);
+        onClose();
+      });
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  }, [confettiReward, t.toastr_start_webev, updateIsExecutedTutorial]);
+  }, [confettiReward, onClose, t.toastr_start_webev, updateIsExecutedTutorial]);
 
   return (
     <Modal open={open} onClose={onClose} title={t.welcome_webev} preventClose>
@@ -36,7 +38,7 @@ export const TutorialDetectorModal: FC<Props> = ({ open, onClose }) => {
       <Modal.Body css={{ textAlign: 'center' }}>
         <Text css={{ mb: '$4' }}>{t.tutorial_desc1}</Text>
         <Text>{t.tutorial_desc2}</Text>
-        <Button color="secondary" onClick={handleOkButton} css={{ mt: '$12', fontWeight: '$bold' }} id="confettiReward">
+        <Button color="secondary" onClick={handleOkButton} css={{ mt: '$12', fontWeight: '$bold' }} id="confettiReward" disabled={isLoading}>
           {t.start_immediately}！
         </Button>
       </Modal.Body>

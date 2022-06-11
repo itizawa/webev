@@ -18,15 +18,17 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
 
     const [{ data }] = await Promise.all([
       restClient.apiPut<User>('/users/me/isExecutedTutorial'),
-
-      await restClient.apiPost('/pages', { url: URLS.HOW_TO_USE }),
+      restClient.apiPost('/pages', { url: URLS.HOW_TO_USE }),
     ]);
     mutatePagePagination();
 
-    setTimeout(() => {
-      mutateCurrentUser(data, false);
-      setIsLoading(false);
-    }, 2000);
+    await new Promise<void>((resolve) =>
+      setTimeout(() => {
+        mutateCurrentUser(data, false);
+        setIsLoading(false);
+        resolve();
+      }, 2000),
+    );
   }, [mutateCurrentUser, mutatePagePagination]);
 
   return { isLoading, updateIsExecutedTutorial };
