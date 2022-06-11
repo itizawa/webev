@@ -3,7 +3,6 @@ import { FC, ReactNode, useEffect } from 'react';
 
 import { Container, Grid } from '@nextui-org/react';
 
-import { isEmpty } from 'lodash';
 import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Parts/Sidebar';
@@ -20,7 +19,6 @@ import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
 import { zIndex } from '~/libs/constants/zIndex';
-import { useCurrentUser } from '~/stores/users';
 import { useModal } from '~/hooks/useModal';
 
 type Props = {
@@ -30,18 +28,18 @@ type Props = {
 export const DashBoardLayout: FC<Props> = ({ children }) => {
   const router = useRouter();
   const { setActivePage, paginationPage, isLoadingPaginationPage } = usePagePagination();
-  const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();
   const { handleModal } = useModal();
 
   useEffect(() => {
     setActivePage(1);
   }, [setActivePage, router]);
 
+  // TODO: all count pages
   useEffect(() => {
-    if (!isLoadingPaginationPage && isEmpty(paginationPage?.totalDocs)) {
+    if (!isLoadingPaginationPage && paginationPage?.totalDocs === 0) {
       handleModal({ name: 'tutorialDetectorModal', args: {} });
     }
-  }, [currentUser, handleModal, isLoadingCurrentUser, isLoadingPaginationPage, paginationPage?.totalDocs]);
+  }, [handleModal, isLoadingPaginationPage, paginationPage?.totalDocs]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>
