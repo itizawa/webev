@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 
-import { Card, Grid } from '@nextui-org/react';
+import { Button, Card, Grid } from '@nextui-org/react';
 import { format } from 'date-fns';
+import Link from 'next/link';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
 import { useLocale } from '~/hooks/useLocale';
 
@@ -10,6 +11,7 @@ import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 
+import { URLS } from '~/libs/constants/urls';
 import { useCurrentUser } from '~/stores/User';
 
 import { Avatar, Loading, Text } from '~/components/uiParts';
@@ -71,6 +73,13 @@ const Page: WebevNextPage = () => {
               </Grid>
             </Card.Body>
           </Card>
+          <Grid>
+            <Link href={URLS.LOGOUT_URL_TO_BACKEND}>
+              <a>
+                <Button color="secondary">{t.logout}</Button>
+              </a>
+            </Link>
+          </Grid>
         </Grid>
       </LoginRequiredWrapper>
     </>
