@@ -33,7 +33,7 @@ export const PageCard: FC<Props> = ({ page }) => {
           </a>
         )}
       </Card.Body>
-      <Card.Footer css={{ bgColor: '#2f363d', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
+      <Card.Footer css={{ bgColor: '#202020', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
         <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
           {page.body ? (
             <Link href={`/page/${page.id}`}>
@@ -92,10 +92,10 @@ export const PageCard: FC<Props> = ({ page }) => {
                 />
               )}
               <a href={new URL(page.url).origin} target="blank" rel="noopener noreferrer">
-                <Text css={{ color: '$accents5', fontSize: '$xs' }}>{page.siteName}</Text>
+                <Text css={{ color: '$accents8', fontWeight: '$bold', fontSize: '$xs' }}>{page.siteName}</Text>
               </a>
             </Grid>
-            <Text css={{ color: '$accents5', fontSize: '$xs' }}>{format(new Date(page.updatedAt), 'yyyy/MM/dd')}</Text>
+            <Text css={{ color: '$accents7', fontSize: '$xs' }}>{format(new Date(page.updatedAt), 'yyyy/MM/dd')}</Text>
           </Grid>
         </Grid>
       </Card.Footer>
