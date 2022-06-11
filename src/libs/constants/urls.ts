@@ -24,6 +24,7 @@ export const URLS = {
   ITIZAWA_TWITTER_URL: 'https://twitter.com/itizawa_pen',
   LOGIN: '/login',
   LOGIN_URL_TO_BACKEND: `${serverUrl}/auth/google`,
+  LOGOUT_URL_TO_BACKEND: `${serverUrl}/logout`,
   ME: '/me',
   TOP_URL: '/',
   WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',

@@ -11,7 +11,7 @@ export const LoginCard: FC = () => {
   const { t } = useLocale();
 
   return (
-    <Card css={{ bgColor: '$gray100', p: '$10' }}>
+    <Card css={{ bgColor: '$gray100', p: '$10', textAlign: 'center' }}>
       <Text h3>🎉 {t.welcome_webev} 🎉</Text>
       <Text css={{ mt: '$4' }}>{t.tutorial_desc1}</Text>
       <Text dangerouslySetInnerHTML={{ __html: t.login_description }} />
