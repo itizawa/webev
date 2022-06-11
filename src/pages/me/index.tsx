@@ -12,7 +12,7 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { useCurrentUser } from '~/stores/User';
 
 import { Avatar, Loading, Text } from '~/components/uiParts';
-import { usePagesCountByUserId } from '~/stores/NewPage';
+import { usePagesCountByUserId } from '~/stores/Page';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

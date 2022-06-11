@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { usePageByPageId } from '~/stores/page';
+import { usePageByPageId } from '~/stores/Page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
 
