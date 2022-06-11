@@ -27,7 +27,7 @@ export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExe
         mutateCurrentUser(data, false);
         setIsLoading(false);
         resolve();
-      }, 2000),
+      }, 1000),
     );
   }, [mutateCurrentUser, mutatePagePagination]);
 
