@@ -6,7 +6,6 @@ import { Container, Grid } from '@nextui-org/react';
 import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
 import { Navbar } from '~/components/common/Parts/Navbar';
 import { Sidebar } from '~/components/common/Parts/Sidebar';
-// import { FooterSubnavBar } from '~/components/common/FooterSubnavBar';
 import { Footer } from '~/components/common/Parts/Footer';
 
 // import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
@@ -14,7 +13,6 @@ import { Footer } from '~/components/common/Parts/Footer';
 // import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
 // import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
 
-// import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
 
 import { usePagePagination } from '~/hooks/Page';
@@ -38,12 +36,17 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
     setActivePage(1);
   }, [setActivePage, router]);
 
-  // TODO: all count pages
   useEffect(() => {
     if (!isLoadingPagesCountByUserId && pagesCountByUserId === 0) {
       handleModal({ name: 'tutorialDetectorModal', args: {} });
     }
   }, [handleModal, isLoadingPagesCountByUserId, pagesCountByUserId]);
+
+  useEffect(() => {
+    if (typeof router.query.url === 'string') {
+      handleModal({ name: 'shareLinkReceiverModal', args: { url: router.query.url } });
+    }
+  }, [handleModal, router]);
 
   return (
     <Container css={{ padding: '$0', bgColor: '$background' }} fluid responsive={false}>

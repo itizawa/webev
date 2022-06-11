@@ -1,19 +1,25 @@
 import React, { useState, createContext, ReactNode, useContext, useCallback, FC } from 'react';
 
 import { DeletePageModal } from '~/components/domain/Page';
+import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/TutorialDetectorModal';
 
-type DeletePageModalType = {
+type DeletePageModal = {
   name: 'deletePageModal';
   args: { targetPageId: string };
 };
 
-type TutorialDetectorModalType = {
+type ShareLinkReceiverModal = {
+  name: 'shareLinkReceiverModal';
+  args: { url: string };
+};
+
+type TutorialDetectorModal = {
   name: 'tutorialDetectorModal';
   args: {};
 };
 
-type ModalProps = DeletePageModalType | TutorialDetectorModalType | undefined | null;
+type ModalProps = DeletePageModal | ShareLinkReceiverModal | TutorialDetectorModal | undefined | null;
 
 const DURATION = 195; // モーダルの開閉のアニメーション時間
 
@@ -58,6 +64,9 @@ const Modal = () => {
   switch (modal.name) {
     case 'deletePageModal': {
       return <DeletePageModal open={open} onClose={handleCancel} pageId={modal.args.targetPageId} />;
+    }
+    case 'shareLinkReceiverModal': {
+      return <ShareLinkReceiverModal open={open} onClose={handleCancel} url={modal.args.url} />;
     }
     case 'tutorialDetectorModal': {
       return <TutorialDetectorModal open={open} onClose={handleCancel} />;
