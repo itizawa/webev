@@ -85,15 +85,19 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
         </Button>
       </Dropdown.Trigger>
       <Dropdown.Menu aria-label="Static Actions" onAction={handleAction}>
-        <Dropdown.Item key="copy" icon={<Icon icon="CLIP_BOARD_PLUS" />}>
-          {t.copy_url}
-        </Dropdown.Item>
-        <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
-          {t.share}
-        </Dropdown.Item>
-        <Dropdown.Item key="delete" icon={<Icon icon="TRASH" />}>
-          {t.delete}
-        </Dropdown.Item>
+        <Dropdown.Section title="Page action">
+          <Dropdown.Item key="copy" icon={<Icon icon="CLIP_BOARD_PLUS" />}>
+            {t.copy_url}
+          </Dropdown.Item>
+          <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
+            {t.share}
+          </Dropdown.Item>
+        </Dropdown.Section>
+        <Dropdown.Section title="Danger zone">
+          <Dropdown.Item key="delete" color="error" icon={<Icon icon="TRASH" />}>
+            {t.delete}
+          </Dropdown.Item>
+        </Dropdown.Section>
       </Dropdown.Menu>
     </Dropdown>
   );
