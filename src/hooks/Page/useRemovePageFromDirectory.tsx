@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { Page } from '~/domains/Page';
-import { restClient } from '~/utils/rest-client';
 
-export const useRemovePageFromDirectory = (): { isLoading: boolean; removePageFromDirectory: (pageId: string) => Promise<Page> } => {
+export const useRemovePageFromDirectory = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const removePageFromDirectory = async (pageId: string) => {
+  const removePageFromDirectory = async () => {
     setIsLoading(true);
-    const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/directories`, {
-      directoryId: null,
-    });
+    // const { data } = await restClient.apiPut<Page>(`/pages/${pageId}/directories`, {
+    //   directoryId: null,
+    // });
     setIsLoading(false);
-    return data;
+    // return data;
   };
 
   return { isLoading, removePageFromDirectory };
