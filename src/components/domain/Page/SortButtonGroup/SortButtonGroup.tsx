@@ -9,22 +9,22 @@ type SelectedKey = 'latest_order' | 'oldest_order';
 
 export const SortButtonGroup: FC = () => {
   const { t } = useLocale();
-  const { isSortUpdatedAt, setIsSortUpdatedAt } = usePagePagination();
-  const [selected, setSelected] = useState<SelectedKey>(isSortUpdatedAt ? 'latest_order' : 'oldest_order');
+  const { isSortCreatedAt, setIsSortCreatedAt } = usePagePagination();
+  const [selected, setSelected] = useState<SelectedKey>(isSortCreatedAt ? 'latest_order' : 'oldest_order');
 
   const handleAction = useCallback(
     (key: Key) => {
       setSelected(key as SelectedKey);
       switch (key) {
         case 'latest_order':
-          setIsSortUpdatedAt(false);
+          setIsSortCreatedAt(false);
           break;
         case 'oldest_order':
-          setIsSortUpdatedAt(true);
+          setIsSortCreatedAt(true);
           break;
       }
     },
-    [setIsSortUpdatedAt],
+    [setIsSortCreatedAt],
   );
 
   return (
