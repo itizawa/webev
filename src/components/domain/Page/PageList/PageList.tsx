@@ -26,7 +26,7 @@ export const PageList: FC<Props> = ({ pages, totalPages, activePage }) => {
     <Grid.Container gap={1}>
       {pages.map((page) => {
         return (
-          <Grid key={page.id} xs={12} sm={6} md={4} xl={3}>
+          <Grid key={page.id} xs={12} sm={6} md={4}>
             <PageCard page={page} />
           </Grid>
         );
