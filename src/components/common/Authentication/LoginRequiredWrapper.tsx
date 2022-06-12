@@ -21,7 +21,7 @@ export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
     router.push(`${URLS.LOGIN}?isRedirect=true`);
   }, [currentUser, isLoadingCurrentUser, router]);
 
-  if (!isLoadingCurrentUser)
+  if (isLoadingCurrentUser)
     return (
       <Grid css={{ width: '100%', py: '$8', display: 'flex', justifyContent: 'center' }}>
         <Loading size="xl" color="secondary" />
