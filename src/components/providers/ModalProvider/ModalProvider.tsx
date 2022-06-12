@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactNode, useContext, useCallback, FC } from 'react';
+import React, { useState, createContext, ReactNode, useContext, useCallback, FC, ComponentProps } from 'react';
 
 import { DeletePageModal } from '~/components/domain/Page';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
@@ -6,17 +6,17 @@ import { TutorialDetectorModal } from '~/components/domain/Tutorial/TutorialDete
 
 type DeletePageModal = {
   name: 'deletePageModal';
-  args: { targetPageId: string };
+  args: Omit<ComponentProps<typeof DeletePageModal>, 'open' | 'onClose'>;
 };
 
 type ShareLinkReceiverModal = {
   name: 'shareLinkReceiverModal';
-  args: { url: string };
+  args: Omit<ComponentProps<typeof ShareLinkReceiverModal>, 'open' | 'onClose'>;
 };
 
 type TutorialDetectorModal = {
   name: 'tutorialDetectorModal';
-  args: {};
+  args: Omit<ComponentProps<typeof TutorialDetectorModal>, 'open' | 'onClose'>;
 };
 
 type ModalProps = DeletePageModal | ShareLinkReceiverModal | TutorialDetectorModal | undefined | null;
@@ -63,10 +63,10 @@ const Modal = () => {
 
   switch (modal.name) {
     case 'deletePageModal': {
-      return <DeletePageModal open={open} onClose={handleCancel} pageId={modal.args.targetPageId} />;
+      return <DeletePageModal open={open} onClose={handleCancel} {...modal.args} />;
     }
     case 'shareLinkReceiverModal': {
-      return <ShareLinkReceiverModal open={open} onClose={handleCancel} url={modal.args.url} />;
+      return <ShareLinkReceiverModal open={open} onClose={handleCancel} {...modal.args} />;
     }
     case 'tutorialDetectorModal': {
       return <TutorialDetectorModal open={open} onClose={handleCancel} />;
