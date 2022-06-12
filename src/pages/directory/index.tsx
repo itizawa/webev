@@ -13,17 +13,16 @@ import { useLocale } from '~/hooks/useLocale';
 
 import { toastError, toastSuccess } from '~/utils/toastr';
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { useCreateDirectory } from '~/hooks/Directory/useCreateDirectory';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();
 
   // const [searchKeyWord, setSearchKeyWord] = useState('');
-  const { data: directoryPaginationResult, mutate: mutateDirectoryPaginationResult } = useDirectoryPaginationResult({
+  const { data: directoryPaginationResult } = useDirectoryPaginationResult({
     searchKeyWord: '',
     isRoot: true,
   });
-  const { createDirectory } = useCreateDirectory();
+  // const { createDirectory } = useCreateDirectory();
 
   const [, setIsCreatingNewDirectory] = useState(false);
   const [name, setName] = useState('');
@@ -38,16 +37,16 @@ const Page: WebevNextPage = () => {
     try {
       toastSuccess(t.toastr_save_directory);
       setName('');
-      const result = await createDirectory(name);
-      if (directoryPaginationResult) {
-        mutateDirectoryPaginationResult(
-          {
-            ...directoryPaginationResult,
-            docs: [...directoryPaginationResult.docs, result],
-          },
-          false,
-        );
-      }
+      // const result = await createDirectory(name);
+      // if (directoryPaginationResult) {
+      //   mutateDirectoryPaginationResult(
+      //     {
+      //       ...directoryPaginationResult,
+      //       docs: [...directoryPaginationResult.docs, result],
+      //     },
+      //     false,
+      //   );
+      // }
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }

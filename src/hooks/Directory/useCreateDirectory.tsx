@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { Directory } from '~/domains/Directory';
-import { restClient } from '~/utils/rest-client';
+// import { restClient } from '~/utils/rest-client';
 
-export const useCreateDirectory = (): { isLoading: boolean; createDirectory: (name: string) => Promise<Directory> } => {
+export const useCreateDirectory = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const createDirectory = async (name: string): Promise<Directory> => {
+  const createDirectory = async (): Promise<void> => {
     setIsLoading(true);
-    const { data } = await restClient.apiPost<Directory>('/directories', { name });
-    setIsLoading(false);
-    return data;
+    // const { data } = await restClient.apiPost<Directory>('/directories', { name });
+    // setIsLoading(false);
+    // return data;
   };
 
   return { isLoading, createDirectory };
