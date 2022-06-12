@@ -1,4 +1,4 @@
-import axiosBase, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import axiosBase, { AxiosInstance, AxiosResponse } from 'axios';
 
 class RestClient {
   axios: AxiosInstance;
@@ -16,44 +16,20 @@ class RestClient {
     });
   }
 
-  async apiGet<T>(url: string, query = {}): Promise<AxiosResponse<T> | void> {
-    try {
-      return await this.axios.get<T>(`/api/v1${url}`, { ...query });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        throw new Error(error.response?.data.message);
-      }
-    }
+  async apiGet<T>(url: string, query = {}): Promise<AxiosResponse<T>> {
+    return await this.axios.get<T>(`/api/v1${url}`, { ...query });
   }
 
-  async apiPost<T>(url: string, body = {}): Promise<AxiosResponse<T> | void> {
-    try {
-      return await this.axios.post<T>(`/api/v1${url}`, body);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        throw new Error(error.response?.data.message);
-      }
-    }
+  async apiPost<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
+    return await this.axios.post<T>(`/api/v1${url}`, body);
   }
 
-  async apiPut<T>(url: string, body = {}): Promise<AxiosResponse<T> | void> {
-    try {
-      return await this.axios.put<T>(`/api/v1${url}`, body);
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        throw new Error(error.response?.data.message);
-      }
-    }
+  async apiPut<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
+    return await this.axios.put<T>(`/api/v1${url}`, body);
   }
 
-  async apiDelete<T>(url: string, body = {}): Promise<AxiosResponse<T> | void> {
-    try {
-      return await this.axios.delete<T>(`/api/v1${url}`, { data: body });
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        throw new Error(error.response?.data.message);
-      }
-    }
+  async apiDelete<T>(url: string, body = {}): Promise<AxiosResponse<T>> {
+    return await this.axios.delete<T>(`/api/v1${url}`, { data: body });
   }
 }
 
