@@ -29,6 +29,7 @@ export const BootstrapIcon = {
   CHEVRON_LEFT: 'chevron-left',
   CHEVRON_DOUBLE_RIGHT: 'chevron-double-right',
   CHEVRON_RIGHT: 'chevron-right',
+  FILTER: 'filter',
   GOOGLE: 'google',
   REMOVE_FROM_DIRECTORY: 'remove-from-directory',
   TWITTER: 'twitter',

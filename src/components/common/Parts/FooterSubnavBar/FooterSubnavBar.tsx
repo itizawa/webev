@@ -45,10 +45,9 @@ export const FooterSubnavBar: FC = () => {
                   textAlign: 'center',
                   display: 'flex',
                   flexDirection: 'column',
-                  py: '$8',
-                  gap: '$2',
+                  py: '$4',
                   alignItems: 'center',
-                  color: isActive ? 'white' : '$accents4',
+                  color: isActive ? 'white' : '$accents7',
                 }}
                 className="text-center col d-flex flex-column bg-dark border-top border-secondary"
               >
