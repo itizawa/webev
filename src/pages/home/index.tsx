@@ -30,7 +30,6 @@ const Index: WebevNextPage = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              '@xsMax': { flexDirection: 'column', alignItems: 'start', rowGap: '$4' },
             }}
           >
             <SearchTextBox />

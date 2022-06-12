@@ -87,10 +87,8 @@ const Page: WebevNextPage = () => {
     }
     try {
       const res = await restClient.apiPut<Directory>(`/directories/${directory?._id}/description`, { description });
-      if (res) {
-        mutateDirectory(res.data, false);
-        mutateAllDirectories();
-      }
+      mutateDirectory(res.data, false);
+      mutateAllDirectories();
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
