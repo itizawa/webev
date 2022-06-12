@@ -41,13 +41,5 @@ export const SortButtonGroup: FC = () => {
         </Dropdown.Section>
       </Dropdown.Menu>
     </Dropdown>
-    // <Button.Group color="secondary" size="sm">
-    //   <Button bordered={isSortUpdatedAt} onClick={() => } css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
-    //     {t.latest_order}
-    //   </Button>
-    //   <Button bordered={!isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(true)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
-    //     {t.oldest_order}
-    //   </Button>
-    // </Button.Group>
   );
 };
