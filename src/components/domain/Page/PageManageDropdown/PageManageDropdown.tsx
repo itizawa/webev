@@ -5,6 +5,7 @@ import { Icon } from '~/components/base/atoms/Icon';
 import { Page } from '~/domains/Page';
 import { useClipboard } from '~/hooks/shared';
 import { useLocale } from '~/hooks/useLocale';
+import { useModal } from '~/hooks/useModal';
 import { toastSuccess } from '~/utils/toastr';
 
 type Props = {
@@ -15,7 +16,7 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
   const { t } = useLocale();
   const { handleCopy } = useClipboard();
 
-  // const { handleModal } = useModal();
+  const { handleModal } = useModal();
 
   /**
    * Twitter の共有
@@ -62,9 +63,18 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           }
           break;
         }
+        case 'delete': {
+          handleModal({
+            name: 'deletePageModal',
+            args: {
+              page: page,
+            },
+          });
+          break;
+        }
       }
     },
-    [canShareByNavigator, handleCopy, page.url, sharePage, sharePageByNavigator, t.toastr_success_copy_url],
+    [canShareByNavigator, handleCopy, handleModal, page, sharePage, sharePageByNavigator, t.toastr_success_copy_url],
   );
 
   return (
@@ -81,14 +91,12 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
         <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
           {t.share}
         </Dropdown.Item>
+        <Dropdown.Item key="delete" icon={<Icon icon="TRASH" />}>
+          {t.delete}
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );
-
-  //       <DropdownItem tag="button" onClick={() => handleModal({ name: 'deletePageModal', args: { targetPage: page } })}>
-  //         <Icon icon="TRASH" />
-  //         <span className="ms-2">{t.delete}</span>
-  //       </DropdownItem>
 
   //       {/* TODO: implement */}
   //       {/* <DropdownItem tag="button" onClick={onClickFetchButton}>
