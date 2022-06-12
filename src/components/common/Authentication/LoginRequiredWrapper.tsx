@@ -1,3 +1,4 @@
+import { Grid } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, ReactNode, useEffect } from 'react';
 
@@ -20,7 +21,12 @@ export const LoginRequiredWrapper: FC<Props> = ({ children }) => {
     router.push(`${URLS.LOGIN}?isRedirect=true`);
   }, [currentUser, isLoadingCurrentUser, router]);
 
-  if (isLoadingCurrentUser) return <Loading size="xl" color="secondary" />;
+  if (!isLoadingCurrentUser)
+    return (
+      <Grid css={{ width: '100%', py: '$8', display: 'flex', justifyContent: 'center' }}>
+        <Loading size="xl" color="secondary" />
+      </Grid>
+    );
 
   if (!currentUser) return null;
 
