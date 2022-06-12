@@ -6,14 +6,14 @@ export const usePagePagination = () => {
     setSearchKeyword,
     activePage,
     setActivePage,
-    isSortUpdatedAt,
-    setIsSortUpdatedAt,
+    isSortCreatedAt,
+    setIsSortCreatedAt,
     paginationPage,
     mutatePagePagination,
     isLoadingPaginationPage,
   } = useContext(PagePaginationContext);
 
-  if (!setSearchKeyword || !setActivePage || !setIsSortUpdatedAt || !mutatePagePagination) {
+  if (!setSearchKeyword || !setActivePage || !setIsSortCreatedAt || !mutatePagePagination) {
     throw new Error('Provider is not wrap');
   }
 
@@ -21,8 +21,8 @@ export const usePagePagination = () => {
     setSearchKeyword,
     activePage,
     setActivePage,
-    isSortUpdatedAt,
-    setIsSortUpdatedAt,
+    isSortCreatedAt,
+    setIsSortCreatedAt,
     paginationPage,
     mutatePagePagination,
     isLoadingPaginationPage,

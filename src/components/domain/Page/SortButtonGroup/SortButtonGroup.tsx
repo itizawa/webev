@@ -6,14 +6,14 @@ import { useLocale } from '~/hooks/useLocale';
 
 export const SortButtonGroup: FC = () => {
   const { t } = useLocale();
-  const { isSortUpdatedAt, setIsSortUpdatedAt } = usePagePagination();
+  const { isSortCreatedAt, setIsSortCreatedAt } = usePagePagination();
 
   return (
     <Button.Group color="secondary" size="sm">
-      <Button bordered={isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(false)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
+      <Button bordered={isSortCreatedAt} onClick={() => setIsSortCreatedAt(false)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
         {t.latest_order}
       </Button>
-      <Button bordered={!isSortUpdatedAt} onClick={() => setIsSortUpdatedAt(true)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
+      <Button bordered={!isSortCreatedAt} onClick={() => setIsSortCreatedAt(true)} css={{ fontWeight: '$bold', '@xsMax': { width: '100%' } }}>
         {t.oldest_order}
       </Button>
     </Button.Group>
