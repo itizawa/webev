@@ -33,7 +33,7 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
   }, [confettiReward, newMagazine.description, newMagazine.name, onClose]);
 
   return (
-    <Modal open={open} onClose={onClose} title="TODO" width="600px">
+    <Modal open={open} onClose={onClose} width="600px">
       <Modal.Header>
         <Text h4>{magazine ? 'Edit' : 'Create'} Magazine</Text>
       </Modal.Header>
