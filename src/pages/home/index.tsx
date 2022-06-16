@@ -29,6 +29,12 @@ const Index: WebevNextPage = () => {
             css={{
               display: 'flex',
               justifyContent: 'space-between',
+              '@smMax': {
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'left',
+              },
+              gap: '$4',
               alignItems: 'center',
             }}
           >
@@ -36,9 +42,10 @@ const Index: WebevNextPage = () => {
             <Grid
               css={{
                 ml: 'auto',
+                '@smMax': { ml: '0' },
                 display: 'flex',
                 gap: '$4',
-                justifyContent: 'space-between',
+                justifyContent: 'flex-start',
                 alignItems: 'center',
               }}
             >
