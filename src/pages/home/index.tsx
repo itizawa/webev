@@ -54,7 +54,7 @@ const Index: WebevNextPage = () => {
             </Grid>
           </Grid>
           {isLoadingPaginationPage ? (
-            <Grid css={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid css={{ display: 'flex', justifyContent: 'center', pt: '16px' }}>
               <Loading size="lg" color="secondary" />
             </Grid>
           ) : (
