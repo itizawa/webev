@@ -1,0 +1,1 @@
+export { EditMagazineModal } from './EditMagazineModal';
