@@ -10,7 +10,7 @@ type SelectedKey = 'latest_order' | 'oldest_order';
 export const SortButtonGroup: FC = () => {
   const { t } = useLocale();
   const { isSortCreatedAt, setIsSortCreatedAt } = usePagePagination();
-  const [selected, setSelected] = useState<SelectedKey>(isSortCreatedAt ? 'latest_order' : 'oldest_order');
+  const [selected, setSelected] = useState<SelectedKey>(isSortCreatedAt ? 'oldest_order' : 'latest_order');
 
   const handleAction = useCallback(
     (key: Key) => {
