@@ -30,7 +30,7 @@ export const SortButtonGroup: FC = () => {
   return (
     <Dropdown placement="bottom-right">
       <Dropdown.Trigger>
-        <Button auto css={{ padding: '0px 11px' }} light icon={<Icon width={18} height={18} icon="FILTER" />}>
+        <Button auto css={{ padding: '0px 11px' }} light icon={<Icon width={18} height={18} icon="SORT" />}>
           <Text>{t[selected]}</Text>
         </Button>
       </Dropdown.Trigger>
