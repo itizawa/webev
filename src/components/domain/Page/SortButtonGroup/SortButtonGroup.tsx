@@ -10,7 +10,7 @@ type SelectedKey = 'latest_order' | 'oldest_order';
 export const SortButtonGroup: FC = () => {
   const { t } = useLocale();
   const { isSortCreatedAt, setIsSortCreatedAt } = usePagePagination();
-  const [selected, setSelected] = useState<SelectedKey>(isSortCreatedAt ? 'latest_order' : 'oldest_order');
+  const [selected, setSelected] = useState<SelectedKey>(isSortCreatedAt ? 'oldest_order' : 'latest_order');
 
   const handleAction = useCallback(
     (key: Key) => {
@@ -30,7 +30,7 @@ export const SortButtonGroup: FC = () => {
   return (
     <Dropdown placement="bottom-right">
       <Dropdown.Trigger>
-        <Button auto css={{ padding: '0px 11px' }} light icon={<Icon width={18} height={18} icon="FILTER" />}>
+        <Button auto css={{ padding: '0px 11px' }} light icon={<Icon width={18} height={18} icon="SORT" />}>
           <Text>{t[selected]}</Text>
         </Button>
       </Dropdown.Trigger>

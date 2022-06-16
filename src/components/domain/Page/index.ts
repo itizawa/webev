@@ -1,4 +1,5 @@
 export { DeletePageModal } from './DeletePageModal';
+export { FilterIsReadDropdown } from './FilterIsReadDropdown';
 export { NoPageAlert } from './NoPageAlert';
 export { PageCountupCard } from './PageCountupCard';
 export { PageList } from './PageList';

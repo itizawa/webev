@@ -21,7 +21,7 @@ type Props = {
 export const PageCard: FC<Props> = ({ page }) => {
   const handleClickPageLink = useCallback(async (pageId: string) => {
     try {
-      await restClient.apiPut(`/pages/${pageId}/read`);
+      await restClient.apiPut<Page>(`/pages/${pageId}`, { isRead: true });
     } catch (error) {
       if (error instanceof Error) toastError(error);
     }

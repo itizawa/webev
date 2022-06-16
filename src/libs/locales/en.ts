@@ -21,6 +21,10 @@ export const en = {
   new_create: 'New Create',
   create_child_directory: (directoryName: string): string => `Create directory under ${directoryName}`,
 
+  filter: 'Filter',
+  is_read: 'Already Read',
+  is_not_read: 'Not Read Yet',
+
   latest_order: 'Latest Order',
   oldest_order: 'Oldest Order',
 

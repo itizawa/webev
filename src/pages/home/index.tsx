@@ -9,7 +9,7 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
-import { SortButtonGroup, PageList } from '~/components/domain/Page';
+import { SortButtonGroup, PageList, FilterIsReadDropdown } from '~/components/domain/Page';
 import { Loading, Text, SearchTextBox } from '~/components/uiParts';
 
 const Index: WebevNextPage = () => {
@@ -33,7 +33,18 @@ const Index: WebevNextPage = () => {
             }}
           >
             <SearchTextBox />
-            <SortButtonGroup />
+            <Grid
+              css={{
+                ml: 'auto',
+                display: 'flex',
+                gap: '$4',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <FilterIsReadDropdown />
+              <SortButtonGroup />
+            </Grid>
           </Grid>
           {isLoadingPaginationPage ? (
             <Grid css={{ display: 'flex', justifyContent: 'center' }}>
