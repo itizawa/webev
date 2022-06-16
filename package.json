@@ -44,7 +44,7 @@
     "toastr": "2.1.4"
   },
   "devDependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@types/emoji-mart": "3.0.9",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/jest": "28.1.1",
