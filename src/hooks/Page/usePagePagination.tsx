@@ -11,6 +11,7 @@ export const usePagePagination = () => {
     paginationPage,
     mutatePagePagination,
     isLoadingPaginationPage,
+    isRead,
     setIsRead,
   } = useContext(PagePaginationContext);
 
@@ -27,6 +28,7 @@ export const usePagePagination = () => {
     paginationPage,
     mutatePagePagination,
     isLoadingPaginationPage,
+    isRead,
     setIsRead,
   };
 };

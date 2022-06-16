@@ -14,6 +14,7 @@ export const PagePaginationContext = createContext<{
   paginationPage?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
   isLoadingPaginationPage: boolean;
+  isRead?: boolean;
   setIsRead?: Dispatch<SetStateAction<boolean | undefined>>;
 }>({
   setSearchKeyword: undefined,
@@ -24,6 +25,7 @@ export const PagePaginationContext = createContext<{
   paginationPage: undefined,
   mutatePagePagination: undefined,
   isLoadingPaginationPage: true,
+  isRead: undefined,
   setIsRead: undefined,
 });
 
@@ -63,6 +65,7 @@ export const PagePaginationProvider: FC<{
         paginationPage,
         mutatePagePagination,
         isLoadingPaginationPage,
+        isRead,
         setIsRead,
       }}
     >
