@@ -42,7 +42,7 @@ export const PagePaginationProvider: FC<{
 
   const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`];
   if (searchKeyword) params.push(`&q=${searchKeyword}`);
-  if (isRead) params.push(`&isRead=${isRead}`);
+  if (isRead !== undefined) params.push(`&isRead=${isRead}`);
 
   const endpoint = joinUrl('/pages/list', params);
 

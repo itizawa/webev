@@ -21,6 +21,10 @@ export const ja = {
   new_create: '新規作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
+  filter: 'フィルター',
+  is_read: '読んだ記事',
+  is_not_read: '読んでいない記事',
+
   latest_order: '新しい順',
   oldest_order: '古い順',
 
