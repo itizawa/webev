@@ -34,7 +34,7 @@ const Index: WebevNextPage = () => {
               icon={<Icon icon="PENCIL" />}
               onClick={handleClickAddMagazineButton}
             >
-              追加
+              Add
             </Button>
           </Grid>
         </Grid>
