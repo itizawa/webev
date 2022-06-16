@@ -1,8 +1,14 @@
 import React, { useState, createContext, ReactNode, useContext, useCallback, FC, ComponentProps } from 'react';
+import { EditMagazineModal } from '~/components/domain/Magazine';
 
 import { DeletePageModal } from '~/components/domain/Page';
 import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
 import { TutorialDetectorModal } from '~/components/domain/Tutorial/TutorialDetectorModal';
+
+type EditMagazineModal = {
+  name: 'EditMagazineModal';
+  args: Omit<ComponentProps<typeof EditMagazineModal>, 'open' | 'onClose'>;
+};
 
 type DeletePageModal = {
   name: 'deletePageModal';
@@ -19,7 +25,7 @@ type TutorialDetectorModal = {
   args: Omit<ComponentProps<typeof TutorialDetectorModal>, 'open' | 'onClose'>;
 };
 
-type ModalProps = DeletePageModal | ShareLinkReceiverModal | TutorialDetectorModal | undefined | null;
+type ModalProps = EditMagazineModal | DeletePageModal | ShareLinkReceiverModal | TutorialDetectorModal | undefined | null;
 
 const DURATION = 195; // モーダルの開閉のアニメーション時間
 
@@ -62,6 +68,9 @@ const Modal = () => {
   if (!modal) return null;
 
   switch (modal.name) {
+    case 'EditMagazineModal': {
+      return <EditMagazineModal open={open} onClose={handleCancel} {...modal.args} />;
+    }
     case 'deletePageModal': {
       return <DeletePageModal open={open} onClose={handleCancel} {...modal.args} />;
     }

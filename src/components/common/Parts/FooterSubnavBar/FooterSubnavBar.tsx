@@ -14,8 +14,8 @@ export const FooterSubnavBar: FC = () => {
 
   const navbarItemMappings: Array<{ text: string; url: string; icon: ComponentProps<typeof Icon>['icon'] }> = [
     { text: t.home, url: URLS.HOME_URL, icon: 'HOME' },
+    { text: t.magazine, url: URLS.MAGAZINES, icon: 'BOOK' },
     { text: t.my_page, url: URLS.ME, icon: 'PERSON' },
-    // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
   ];
 
   return (
