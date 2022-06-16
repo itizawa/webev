@@ -1,7 +1,10 @@
 import { Button, Grid, Input, Modal, Text, Textarea } from '@nextui-org/react';
 import { FC, useCallback, useState } from 'react';
+import { useReward } from 'react-rewards';
 import { Icon } from '~/components/base/atoms/Icon';
 import { Magazine } from '~/domains/Magazine';
+import { restClient } from '~/utils/rest-client';
+import { toastError, toastSuccess } from '~/utils/toastr';
 
 type Props = {
   open: boolean;
@@ -10,10 +13,24 @@ type Props = {
 };
 
 export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [newMagazine, setNewMagazine] = useState<Magazine>(magazine || Magazine.create({ name: '', description: '', createdUserId: '' }));
-  const handleSubmit = useCallback(() => {
-    console.log('Submit');
-  }, []);
+  const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
+
+  const handleSubmit = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      await restClient.apiPost(`/magazines`, { name: newMagazine.name, description: newMagazine.description });
+      confettiReward();
+      setTimeout(() => {
+        setIsLoading(false);
+        toastSuccess('Create Magazine');
+        onClose();
+      }, 1500);
+    } catch (err) {
+      if (err instanceof Error) toastError(err);
+    }
+  }, [confettiReward, newMagazine.description, newMagazine.name, onClose]);
 
   return (
     <Modal open={open} onClose={onClose} title="TODO" width="600px">
@@ -46,8 +63,9 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
             onClick={handleSubmit}
             icon={<Icon icon="PENCIL" />}
             color="secondary"
+            id="confettiReward"
             css={{ fontWeight: '$bold' }}
-            disabled={!newMagazine.name.trim()}
+            disabled={!newMagazine.name.trim() || isLoading}
           >
             {magazine ? 'Update' : 'Create'}
           </Button>
