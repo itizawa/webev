@@ -82,6 +82,7 @@ export const ja = {
   remove_page_from_directory: 'ディレクトリからページを除外する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
+  no_page_alert: '🎉 全て読み切りました 🎉',
 
   this_is_the_404_page: '404 page です',
   data_not_found: 'データが見つかりませんでした',

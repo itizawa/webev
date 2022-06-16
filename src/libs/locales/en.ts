@@ -81,6 +81,7 @@ export const en = {
   remove_page_from_directory: 'Remove Page from Directory',
 
   'your_pages_don’t_exist': 'Your pages don’t exist.',
+  no_page_alert: '🎉 Read Pages All 🎉',
 
   this_is_the_404_page: 'This is the 404 page',
   data_not_found: 'Data Not Found',
