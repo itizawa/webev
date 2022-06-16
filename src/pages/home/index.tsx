@@ -9,7 +9,7 @@ import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRe
 import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { usePagePagination } from '~/hooks/Page';
 import { useLocale } from '~/hooks/useLocale';
-import { SortButtonGroup, PageList } from '~/components/domain/Page';
+import { SortButtonGroup, PageList, FilterIsReadDropdown } from '~/components/domain/Page';
 import { Loading, Text, SearchTextBox } from '~/components/uiParts';
 
 const Index: WebevNextPage = () => {
@@ -29,14 +29,32 @@ const Index: WebevNextPage = () => {
             css={{
               display: 'flex',
               justifyContent: 'space-between',
+              '@smMax': {
+                flexDirection: 'column',
+                alignItems: 'flex-start',
+                justifyContent: 'left',
+              },
+              gap: '$4',
               alignItems: 'center',
             }}
           >
             <SearchTextBox />
-            <SortButtonGroup />
+            <Grid
+              css={{
+                ml: 'auto',
+                '@smMax': { ml: '0' },
+                display: 'flex',
+                gap: '$4',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }}
+            >
+              <FilterIsReadDropdown />
+              <SortButtonGroup />
+            </Grid>
           </Grid>
           {isLoadingPaginationPage ? (
-            <Grid css={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid css={{ display: 'flex', justifyContent: 'center', pt: '16px' }}>
               <Loading size="lg" color="secondary" />
             </Grid>
           ) : (

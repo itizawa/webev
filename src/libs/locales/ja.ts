@@ -21,6 +21,10 @@ export const ja = {
   new_create: '新規作成',
   create_child_directory: (directoryName: string): string => `${directoryName} の下に作ります`,
 
+  filter: 'フィルター',
+  is_read: '読んだ記事',
+  is_not_read: '読んでいない記事',
+
   latest_order: '新しい順',
   oldest_order: '古い順',
 
@@ -78,6 +82,7 @@ export const ja = {
   remove_page_from_directory: 'ディレクトリからページを除外する',
 
   'your_pages_don’t_exist': 'ページが存在しません',
+  no_page_alert: '🎉 全て読み切りました 🎉',
 
   this_is_the_404_page: '404 page です',
   data_not_found: 'データが見つかりませんでした',

@@ -1,11 +1,10 @@
-import { FC } from 'react';
+import { FC, ComponentProps } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Button, Grid } from '@nextui-org/react';
 import { useLocale } from '~/hooks/useLocale';
 
-import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { Icon } from '~/components/base/atoms/Icon';
 import { URLS } from '~/libs/constants/urls';
 
@@ -13,7 +12,7 @@ export const Sidebar: FC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
-  const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
+  const navbarItemMappings: Array<{ text: string; url: string; icon: ComponentProps<typeof Icon>['icon'] }> = [
     { text: t.home, url: URLS.HOME_URL, icon: 'HOME' },
     { text: t.my_page, url: URLS.ME, icon: 'PERSON' },
     // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },

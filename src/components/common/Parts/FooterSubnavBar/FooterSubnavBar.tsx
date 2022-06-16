@@ -1,9 +1,8 @@
-import { FC } from 'react';
+import { ComponentProps, FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Grid } from '@nextui-org/react';
-import { BootstrapIcon } from '~/libs/interfaces/variables';
 import { useLocale } from '~/hooks/useLocale';
 
 import { Icon } from '~/components/base/atoms/Icon';
@@ -13,7 +12,7 @@ export const FooterSubnavBar: FC = () => {
   const router = useRouter();
   const { t } = useLocale();
 
-  const navbarItemMappings: Array<{ text: string; url: string; icon: BootstrapIcon }> = [
+  const navbarItemMappings: Array<{ text: string; url: string; icon: ComponentProps<typeof Icon>['icon'] }> = [
     { text: t.home, url: URLS.HOME_URL, icon: 'HOME' },
     { text: t.my_page, url: URLS.ME, icon: 'PERSON' },
     // { text: t.directory, url: '/directory', icon: 'DIRECTORY' },
