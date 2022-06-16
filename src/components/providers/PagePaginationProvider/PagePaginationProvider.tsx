@@ -14,6 +14,7 @@ export const PagePaginationContext = createContext<{
   paginationPage?: PaginationResult<Page>;
   mutatePagePagination?: KeyedMutator<PaginationResult<Page>>;
   isLoadingPaginationPage: boolean;
+  setIsRead?: Dispatch<SetStateAction<boolean | undefined>>;
 }>({
   setSearchKeyword: undefined,
   activePage: 1,
@@ -23,6 +24,7 @@ export const PagePaginationContext = createContext<{
   paginationPage: undefined,
   mutatePagePagination: undefined,
   isLoadingPaginationPage: true,
+  setIsRead: undefined,
 });
 
 export const PagePaginationProvider: FC<{
@@ -32,11 +34,13 @@ export const PagePaginationProvider: FC<{
   const [activePage, setActivePage] = useState(1);
   const [limit] = useState(9);
   const [isSortCreatedAt, setIsSortCreatedAt] = useState(false);
+  const [isRead, setIsRead] = useState<boolean | undefined>(undefined);
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
 
   const params = [`page=${activePage}`, `limit=${limit}`, `sort=${sort}`];
   if (searchKeyword) params.push(`&q=${searchKeyword}`);
+  if (isRead) params.push(`&isRead=${isRead}`);
 
   const endpoint = joinUrl('/pages/list', params);
 
@@ -59,6 +63,7 @@ export const PagePaginationProvider: FC<{
         paginationPage,
         mutatePagePagination,
         isLoadingPaginationPage,
+        setIsRead,
       }}
     >
       {children}
