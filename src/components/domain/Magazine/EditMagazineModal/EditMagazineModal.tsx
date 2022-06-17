@@ -9,10 +9,11 @@ import { toastError, toastSuccess } from '~/utils/toastr';
 type Props = {
   open: boolean;
   onClose: () => void;
+  onSubmit: () => void;
   magazine?: Magazine;
 };
 
-export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
+export const EditMagazineModal: FC<Props> = ({ open, onClose, onSubmit, magazine }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [newMagazine, setNewMagazine] = useState<Magazine>(magazine || Magazine.create({ name: '', description: '', createdUserId: '' }));
   const { reward: confettiReward } = useReward('confettiReward', 'confetti', { zIndex: 1000, lifetime: 100 });
@@ -22,6 +23,7 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
       setIsLoading(true);
       await restClient.apiPost(`/magazines`, { name: newMagazine.name, description: newMagazine.description });
       confettiReward();
+      onSubmit();
       setTimeout(() => {
         setIsLoading(false);
         toastSuccess('Create Magazine');
@@ -30,7 +32,7 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, magazine }) => {
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  }, [confettiReward, newMagazine.description, newMagazine.name, onClose]);
+  }, [confettiReward, newMagazine.description, newMagazine.name, onClose, onSubmit]);
 
   return (
     <Modal open={open} onClose={onClose} width="600px">
