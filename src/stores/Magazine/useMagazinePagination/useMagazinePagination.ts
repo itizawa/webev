@@ -28,6 +28,8 @@ export const useMagazinePagination = ({
   const endpoint = joinUrl('/magazines/list', params);
 
   return useSWR(endpoint, (endpoint) =>
-    restClient.apiGet<{ magazinePagination: PaginationResult<Magazine> }>(endpoint).then((result) => result.data.magazinePagination),
+    restClient.apiGet<{ magazinePagination: PaginationResult<Magazine> }>(endpoint).then((result) => {
+      return { ...result.data.magazinePagination, docs: result.data.magazinePagination.docs.map((v) => Magazine.convertUserFormObject(v)) };
+    }),
   );
 };
