@@ -1,6 +1,7 @@
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 
-import { Button, Grid } from '@nextui-org/react';
+import { Button, Grid, Pagination, Table } from '@nextui-org/react';
+import { format } from 'date-fns';
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
@@ -15,27 +16,34 @@ import { useMagazinePagination } from '~/stores/Magazine';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
-  const { data: magazinePagination } = useMagazinePagination({
-    activePage: 1,
+  const [activePage, setActivePage] = useState(1);
+  const {
+    data: magazinePagination,
+    mutate: mutateMagazinePagination,
+    isLoading,
+  } = useMagazinePagination({
+    activePage: activePage,
     limit: 10,
     sort: 'updatedAt',
     searchKeyword: '',
   });
 
-  console.log(magazinePagination);
-
   const { handleModal } = useModal();
 
   const handleClickAddMagazineButton = useCallback(() => {
-    handleModal({ name: 'EditMagazineModal', args: {} });
-  }, [handleModal]);
+    handleModal({ name: 'EditMagazineModal', args: { onSubmit: () => mutateMagazinePagination() } });
+  }, [handleModal, mutateMagazinePagination]);
+
+  const handleMutateActivePage = (page: number) => {
+    setActivePage(page);
+  };
 
   return (
     <>
-      <WebevOgpHead title={`Webev | ${t.home}`} />
+      <WebevOgpHead title={`Webev | ${t.magazine}`} />
       <LoginRequiredWrapper>
         <Grid css={{ width: '100%' }}>
-          <Grid css={{ display: 'flex', alignItems: 'center' }}>
+          <Grid css={{ display: 'flex', alignItems: 'center', mb: '16px' }}>
             <Text h2>{t.magazine}</Text>
             <Button
               size="sm"
@@ -46,6 +54,73 @@ const Index: WebevNextPage = () => {
             >
               Add
             </Button>
+          </Grid>
+          <Table
+            fixed
+            color="secondary"
+            css={{
+              bgColor: '#202020',
+              minHeight: 'auto',
+              minWidth: '100%',
+            }}
+          >
+            <Table.Header>
+              <Table.Column css={{ width: '30%' }}>TITLE</Table.Column>
+              <Table.Column css={{ width: '30%' }}>DESCRIPTION</Table.Column>
+              <Table.Column>STATUS</Table.Column>
+              <Table.Column>UPDATE</Table.Column>
+              <Table.Column>MANAGE</Table.Column>
+            </Table.Header>
+            <Table.Body items={magazinePagination?.docs || []} loadingState={isLoading ? 'loading' : 'idle'}>
+              {(magazine) => (
+                <Table.Row key={magazine.id}>
+                  <Table.Cell>
+                    <Text
+                      b
+                      css={{
+                        whiteSpace: 'pre-wrap',
+                        color: '$white',
+                        display: '-webkit-box',
+                        overflow: 'hidden',
+                        overflowWrap: 'anywhere',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 1,
+                      }}
+                    >
+                      {magazine.name}
+                    </Text>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Text
+                      css={{
+                        whiteSpace: 'pre-wrap',
+                        color: '$white',
+                        display: '-webkit-box',
+                        overflow: 'hidden',
+                        overflowWrap: 'anywhere',
+                        WebkitBoxOrient: 'vertical',
+                        WebkitLineClamp: 2,
+                      }}
+                    >
+                      {magazine.description}
+                    </Text>
+                  </Table.Cell>
+                  <Table.Cell>Active</Table.Cell>
+                  <Table.Cell>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
+                  <Table.Cell>Active</Table.Cell>
+                </Table.Row>
+              )}
+            </Table.Body>
+          </Table>
+          <Grid css={{ display: 'flex', justifyContent: 'center', mt: '$10' }}>
+            <Pagination
+              shadow
+              page={activePage}
+              initialPage={1}
+              color="secondary"
+              total={magazinePagination?.totalPages}
+              onChange={handleMutateActivePage}
+            />
           </Grid>
         </Grid>
       </LoginRequiredWrapper>
