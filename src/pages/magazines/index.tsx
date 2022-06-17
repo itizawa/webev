@@ -11,9 +11,19 @@ import { useLocale } from '~/hooks/useLocale';
 import { Text } from '~/components/uiParts';
 import { Icon } from '~/components/base/atoms/Icon';
 import { useModal } from '~/hooks/useModal';
+import { useMagazinePagination } from '~/stores/Magazine';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
+  const { data: magazinePagination } = useMagazinePagination({
+    activePage: 1,
+    limit: 10,
+    sort: 'updatedAt',
+    searchKeyword: '',
+  });
+
+  console.log(magazinePagination);
+
   const { handleModal } = useModal();
 
   const handleClickAddMagazineButton = useCallback(() => {
