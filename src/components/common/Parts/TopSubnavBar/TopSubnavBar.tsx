@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC } from 'react';
 
 import styled from 'styled-components';
 
@@ -10,13 +10,9 @@ import { speech } from '~/utils/services';
 
 type Props = {
   page: Page;
-  onClickPlayButton: () => void;
-  onClickPauseButton: () => void;
-  onClickStopButton: () => void;
-  isReading: boolean;
 };
 
-export const TopSubnavBar: VFC<Props> = ({ page }) => {
+export const TopSubnavBar: FC<Props> = ({ page }) => {
   const { isShowScroll } = useHooks();
 
   return (

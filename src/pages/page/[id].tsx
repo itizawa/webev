@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { Grid, Loading } from '@nextui-org/react';
 import { usePageByPageId } from '~/stores/Page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
@@ -19,66 +20,22 @@ const Page: WebevNextPage = () => {
 
   const { id } = router.query;
 
-  const { t, locale } = useLocale();
+  const { t } = useLocale();
   const { data: page } = usePageByPageId({ pageId: id as string });
-
-  const [isReading, setIsReading] = useState(false);
-  const [isMidway, setIsMidway] = useState(false);
-
-  useEffect(() => {
-    speech.cancel();
-    setIsReading(false);
-    setIsMidway(false);
-  }, [locale]);
 
   if (!page) {
     return (
-      <div className="pt-5 d-flex align-items-center justify-content-center">
-        <div className="spinner-border text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+      <Grid css={{ width: '100%', py: '$8', display: 'flex', justifyContent: 'center' }}>
+        <Loading size="xl" color="secondary" />
+      </Grid>
     );
   }
-
-  const handleClickPlayButton = () => {
-    if (!page.body) return;
-
-    if (isMidway) {
-      speech.resume();
-      setIsReading(true);
-      return;
-    }
-
-    const div = document.createElement('div');
-    div.innerHTML = page.body;
-    speech.play(div.innerText, locale === 'ja' ? 'ja-JP' : 'en-US');
-    setIsReading(true);
-    setIsMidway(true);
-  };
-
-  const handleClickPauseButton = () => {
-    speech.pause();
-    setIsReading(false);
-  };
-
-  const handleClickStopButton = () => {
-    speech.cancel();
-    setIsReading(false);
-    setIsMidway(false);
-  };
 
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar
-          page={page}
-          onClickPlayButton={handleClickPlayButton}
-          onClickPauseButton={handleClickPauseButton}
-          onClickStopButton={handleClickStopButton}
-          isReading={isReading}
-        />
+        <TopSubnavBar page={page} />
         <div className="ms-2 d-flex align-items-center">
           <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
           <div className="ms-2">
