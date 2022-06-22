@@ -75,7 +75,7 @@ export const DashBoardLayout: FC<Props> = ({ children }) => {
           pb: '$48',
           mx: 'auto',
           display: 'flex',
-          gap: '$8',
+          gap: '32px',
         }}
       >
         <Grid css={{ '@smMax': { display: 'none' } }}>

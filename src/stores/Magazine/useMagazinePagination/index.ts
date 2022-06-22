@@ -1,0 +1,1 @@
+export { useMagazinePagination } from './useMagazinePagination';

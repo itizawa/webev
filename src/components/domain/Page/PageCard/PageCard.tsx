@@ -3,6 +3,7 @@ import { FC, useCallback } from 'react';
 import { format } from 'date-fns';
 
 import { Card, Grid } from '@nextui-org/react';
+import Link from 'next/link';
 import { PageManageDropdown } from '../PageManageDropdown';
 import { FixedImage } from '~/components/base/atoms/FixedImage';
 
@@ -30,21 +31,21 @@ export const PageCard: FC<Props> = ({ page }) => {
   return (
     <Card>
       <Card.Body css={{ p: 0, flex: 'none' }}>
-        {/* {page.body ? (
+        {page.body ? (
           <Link href={`/page/${page.id}`}>
             <a>
               <FixedImage imageUrl={page.image} />
             </a>
           </Link>
-        ) : ( */}
-        <a href={page.url} target="blank" rel="noopener noreferrer" onClick={() => handleClickPageLink(page.id)}>
-          <FixedImage imageUrl={page.image} />
-        </a>
-        {/* )} */}
+        ) : (
+          <a href={page.url} target="blank" rel="noopener noreferrer" onClick={() => handleClickPageLink(page.id)}>
+            <FixedImage imageUrl={page.image} />
+          </a>
+        )}
       </Card.Body>
       <Card.Footer css={{ bgColor: '#202020', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
         <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* {page.body ? (
+          {page.body ? (
             <Link href={`/page/${page.id}`}>
               <a>
                 <Text
@@ -62,23 +63,23 @@ export const PageCard: FC<Props> = ({ page }) => {
                 </Text>
               </a>
             </Link>
-          ) : ( */}
-          <a href={page.url} target="blank" rel="noopener noreferrer" onClick={() => handleClickPageLink(page.id)}>
-            <Text
-              b
-              css={{
-                color: '$white',
-                display: '-webkit-box',
-                overflow: 'hidden',
-                overflowWrap: 'anywhere',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
-              }}
-            >
-              {page.title || page.url}
-            </Text>
-          </a>
-          {/* )} */}
+          ) : (
+            <a href={page.url} target="blank" rel="noopener noreferrer" onClick={() => handleClickPageLink(page.id)}>
+              <Text
+                b
+                css={{
+                  color: '$white',
+                  display: '-webkit-box',
+                  overflow: 'hidden',
+                  overflowWrap: 'anywhere',
+                  WebkitBoxOrient: 'vertical',
+                  WebkitLineClamp: 2,
+                }}
+              >
+                {page.title || page.url}
+              </Text>
+            </a>
+          )}
           <PageManageDropdown page={page} />
         </Grid>
         <Text css={{ mt: '$10', mb: '$4', color: '$white', fontSize: '$xs', overflowWrap: 'anywhere' }}>

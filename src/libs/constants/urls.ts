@@ -25,6 +25,8 @@ export const URLS = {
   LOGIN: '/login',
   LOGIN_URL_TO_BACKEND: `${serverUrl}/auth/google`,
   LOGOUT_URL_TO_BACKEND: `${serverUrl}/logout`,
+  MAGAZINE: (id: string) => `/magazines/${id}`,
+  MAGAZINES: '/magazines',
   ME: '/me',
   TOP_URL: '/',
   WEBEV_GITHUB_URL: 'https://github.com/itizaworld/webev',

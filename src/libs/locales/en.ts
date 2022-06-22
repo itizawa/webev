@@ -55,6 +55,7 @@ export const en = {
   view_original: 'View Original',
   back: 'Return',
   my_page: 'My Page',
+  magazine: 'Magazine',
 
   return_news_list: 'Return News List',
 
