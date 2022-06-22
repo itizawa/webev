@@ -13,6 +13,7 @@ import { Text } from '~/components/uiParts';
 import { Icon } from '~/components/base/atoms/Icon';
 import { useModal } from '~/hooks/useModal';
 import { useMagazinePagination } from '~/stores/Magazine';
+import { StatusLabel } from '~/components/domain/Magazine';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
@@ -105,7 +106,9 @@ const Index: WebevNextPage = () => {
                       {magazine.description}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell>Active</Table.Cell>
+                  <Table.Cell>
+                    <StatusLabel isPublic={magazine.isPublic} />
+                  </Table.Cell>
                   <Table.Cell>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
                   <Table.Cell>Active</Table.Cell>
                 </Table.Row>
