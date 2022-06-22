@@ -1,1 +1,0 @@
-export { speech } from './speech';

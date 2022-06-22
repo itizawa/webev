@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { Button, Grid, Loading, Text } from '@nextui-org/react';
+import Link from 'next/link';
 import { usePageByPageId } from '~/stores/Page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
+import { URLS } from '~/libs/constants/urls';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -12,99 +15,70 @@ import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
 import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
 import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
 
-import { speech } from '~/utils/services';
-
 const Page: WebevNextPage = () => {
   const router = useRouter();
 
   const { id } = router.query;
 
-  const { t, locale } = useLocale();
-  const { data: page } = usePageByPageId({ pageId: id as string });
+  const { t } = useLocale();
+  const { data: page, isLoading: isLoadingPage } = usePageByPageId({ pageId: id as string });
 
-  const [isReading, setIsReading] = useState(false);
-  const [isMidway, setIsMidway] = useState(false);
-
-  useEffect(() => {
-    speech.cancel();
-    setIsReading(false);
-    setIsMidway(false);
-  }, [locale]);
-
-  if (!page) {
+  if (isLoadingPage) {
     return (
-      <div className="pt-5 d-flex align-items-center justify-content-center">
-        <div className="spinner-border text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+      <Grid css={{ width: '100%', py: '$8', display: 'flex', justifyContent: 'center' }}>
+        <Loading size="xl" color="secondary" />
+      </Grid>
     );
   }
 
-  const handleClickPlayButton = () => {
-    if (!page.body) return;
-
-    if (isMidway) {
-      speech.resume();
-      setIsReading(true);
-      return;
-    }
-
-    const div = document.createElement('div');
-    div.innerHTML = page.body;
-    speech.play(div.innerText, locale === 'ja' ? 'ja-JP' : 'en-US');
-    setIsReading(true);
-    setIsMidway(true);
-  };
-
-  const handleClickPauseButton = () => {
-    speech.pause();
-    setIsReading(false);
-  };
-
-  const handleClickStopButton = () => {
-    speech.cancel();
-    setIsReading(false);
-    setIsMidway(false);
-  };
+  if (!page) {
+    return (
+      <Grid css={{ textAlign: 'center', width: '100%' }}>
+        <Text h3>{t.data_not_found}</Text>
+        <Link href={URLS.HOME_URL}>
+          <a>
+            <Button color="secondary" css={{ mx: 'auto', mt: '24px' }}>
+              {t.return_button}
+            </Button>
+          </a>
+        </Link>
+      </Grid>
+    );
+  }
 
   return (
     <>
       <WebevOgpHead title={`Webev | ${page.title}`} />
       <LoginRequiredWrapper>
-        <TopSubnavBar
-          page={page}
-          onClickPlayButton={handleClickPlayButton}
-          onClickPauseButton={handleClickPauseButton}
-          onClickStopButton={handleClickStopButton}
-          isReading={isReading}
-        />
-        <div className="ms-2 d-flex align-items-center">
-          <div className="ms-auto me-2">{speech.isEnabled && page.body && <></>}</div>
-          <div className="ms-2">
+        <Grid css={{ maxWidth: '800px', width: '100%' }}>
+          <TopSubnavBar page={page} />
+          <Grid css={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: '16px', gap: '8px' }}>
+            <Text h2 css={{ textAlign: 'center', mb: '$0', mx: 'auto', '@smMax': { fontSize: '$lg', textAlign: 'left' } }}>
+              {page.title}
+            </Text>
             <PageManageDropdown page={page} />
-          </div>
-        </div>
-        <h1 className="text-center my-3">{page.title}</h1>
-        <div className="text-center">
-          <a className="text-white webev-anchor" href={page.url} target="blank" rel="noopener noreferrer">
-            {t.view_original}
-          </a>
-        </div>
-        <StyledDiv
-          className="mx-auto mt-5"
-          dangerouslySetInnerHTML={{
-            __html: `${page?.body}`,
-          }}
-        />
+          </Grid>
+          <Text css={{ textAlign: 'center', mb: '24px' }}>
+            <Link href={page.url}>
+              <a target="_blank" rel="noopener noreferrer">
+                {t.view_original}
+              </a>
+            </Link>
+          </Text>
+          <StyledDiv
+            dangerouslySetInnerHTML={{
+              __html: `${page?.body}`,
+            }}
+          />
+        </Grid>
       </LoginRequiredWrapper>
     </>
   );
 };
 
-const StyledDiv = styled.div`
-  max-width: 800px;
+const StyledDiv = styled(Grid)`
   word-break: break-all;
+  width: 100%;
 
   img {
     width: 100%;
@@ -120,7 +94,9 @@ const StyledDiv = styled.div`
     background: black;
   }
 
-  h1 {
+  h1,
+  h2 {
+    font-size: 20px;
     padding-bottom: 5px;
     border-bottom: 2px solid #6f42c1;
   }
@@ -134,6 +110,7 @@ const StyledDiv = styled.div`
   }
 
   code {
+    background: none;
     margin: 0 5px;
   }
 `;
