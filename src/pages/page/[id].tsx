@@ -2,11 +2,12 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { Grid, Loading, Text } from '@nextui-org/react';
+import { Button, Grid, Loading, Text } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePageByPageId } from '~/stores/Page';
 import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
 import { useLocale } from '~/hooks/useLocale';
+import { URLS } from '~/libs/constants/urls';
 
 import { WebevOgpHead } from '~/components/common/WebevOgpHead';
 import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
@@ -31,7 +32,18 @@ const Page: WebevNextPage = () => {
   }
 
   if (!page) {
-    return <></>;
+    return (
+      <Grid css={{ textAlign: 'center', width: '100%' }}>
+        <Text h3>{t.data_not_found}</Text>
+        <Link href={URLS.HOME_URL}>
+          <a>
+            <Button color="secondary" css={{ mx: 'auto', mt: '24px' }}>
+              {t.return_button}
+            </Button>
+          </a>
+        </Link>
+      </Grid>
+    );
   }
 
   return (
