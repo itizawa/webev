@@ -14,6 +14,7 @@ import { Icon } from '~/components/base/atoms/Icon';
 import { useModal } from '~/hooks/useModal';
 import { useMagazinePagination } from '~/stores/Magazine';
 import { StatusLabel } from '~/components/domain/Magazine';
+import { Magazine } from '~/domains/Magazine';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
@@ -38,6 +39,13 @@ const Index: WebevNextPage = () => {
   const handleMutateActivePage = (page: number) => {
     setActivePage(page);
   };
+
+  const handleClickEditMagazineButton = useCallback(
+    (magazine: Magazine) => {
+      handleModal({ name: 'EditMagazineModal', args: { magazine: magazine, onSubmit: () => mutateMagazinePagination() } });
+    },
+    [handleModal, mutateMagazinePagination],
+  );
 
   return (
     <>
@@ -111,7 +119,7 @@ const Index: WebevNextPage = () => {
                   <Table.Cell css={{ minWidth: '100px' }}>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
                   <Table.Cell css={{ minWidth: '100px' }}>
                     <Grid css={{ display: 'flex', gridGap: '16px', alignItems: 'center' }}>
-                      <Text css={{ cursor: 'pointer' }}>
+                      <Text css={{ cursor: 'pointer' }} onClick={() => handleClickEditMagazineButton(magazine)}>
                         <Icon icon="PENCIL" width={16} height={16} />
                       </Text>
                       {/* TODO: implement */}

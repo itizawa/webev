@@ -21,18 +21,22 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, onSubmit, magazine
   const handleSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
-      await restClient.apiPost(`/magazines`, { name: newMagazine.name, description: newMagazine.description });
-      confettiReward();
+      if (magazine) {
+        await restClient.apiPut(`/magazines/${magazine.id}`, { name: newMagazine.name, description: newMagazine.description });
+      } else {
+        await restClient.apiPost(`/magazines`, { name: newMagazine.name, description: newMagazine.description });
+        confettiReward();
+      }
       onSubmit();
       setTimeout(() => {
         setIsLoading(false);
         toastSuccess('Create Magazine');
         onClose();
-      }, 1500);
+      }, 1200);
     } catch (err) {
       if (err instanceof Error) toastError(err);
     }
-  }, [confettiReward, newMagazine.description, newMagazine.name, onClose, onSubmit]);
+  }, [confettiReward, magazine, newMagazine.description, newMagazine.name, onClose, onSubmit]);
 
   return (
     <Modal open={open} onClose={onClose} width="600px">
@@ -63,7 +67,7 @@ export const EditMagazineModal: FC<Props> = ({ open, onClose, onSubmit, magazine
         <Grid css={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             onClick={handleSubmit}
-            icon={<Icon icon="PENCIL" />}
+            icon={<Icon icon={magazine ? 'UPDATE' : 'PLUS_LARGE'} />}
             color="secondary"
             id="confettiReward"
             css={{ fontWeight: '$bold' }}
