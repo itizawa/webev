@@ -26,7 +26,7 @@ const Index: WebevNextPage = () => {
   } = useMagazinePagination({
     activePage: activePage,
     limit: 10,
-    sort: 'updatedAt',
+    sort: '-updatedAt',
     searchKeyword: '',
   });
 
