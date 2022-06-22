@@ -50,14 +50,13 @@ const Index: WebevNextPage = () => {
               size="sm"
               css={{ fontWeight: 'bold', ml: 'auto' }}
               color="secondary"
-              icon={<Icon icon="PENCIL" />}
+              icon={<Icon icon="PLUS_LARGE" />}
               onClick={handleClickAddMagazineButton}
             >
               Add
             </Button>
           </Grid>
           <Table
-            fixed
             color="secondary"
             css={{
               bgColor: '#202020',
@@ -75,7 +74,7 @@ const Index: WebevNextPage = () => {
             <Table.Body items={magazinePagination?.docs || []} loadingState={isLoading ? 'loading' : 'idle'}>
               {(magazine) => (
                 <Table.Row key={magazine.id}>
-                  <Table.Cell>
+                  <Table.Cell css={{ minWidth: '200px' }}>
                     <Text
                       b
                       css={{
@@ -91,7 +90,7 @@ const Index: WebevNextPage = () => {
                       {magazine.name}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell css={{ minWidth: '200px' }}>
                     <Text
                       css={{
                         whiteSpace: 'pre-wrap',
@@ -106,11 +105,11 @@ const Index: WebevNextPage = () => {
                       {magazine.description}
                     </Text>
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell css={{ minWidth: '100px' }}>
                     <StatusLabel isPublic={magazine.isPublic} />
                   </Table.Cell>
-                  <Table.Cell>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell css={{ minWidth: '100px' }}>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
+                  <Table.Cell css={{ minWidth: '100px' }}>
                     <Grid css={{ display: 'flex', gridGap: '16px', alignItems: 'center' }}>
                       <Text css={{ cursor: 'pointer' }}>
                         <Icon icon="PENCIL" width={16} height={16} />
