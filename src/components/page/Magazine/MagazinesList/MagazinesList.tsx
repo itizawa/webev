@@ -52,7 +52,7 @@ export const MagazinesList: FC<Props> = () => {
       <LoginRequiredWrapper>
         <Grid css={{ width: '100%' }}>
           <Grid css={{ display: 'flex', alignItems: 'center', mb: '16px' }}>
-            <Text h2 css={{ textTransform: 'capitalize' }}>
+            <Text h2 css={{ textTransform: 'capitalize', mb: '$0' }}>
               {t.magazine}
             </Text>
             <Button
