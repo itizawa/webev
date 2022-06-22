@@ -248,6 +248,12 @@ const PlayCircle: FC = () => (
   </>
 );
 
+const Plus: FC = () => <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />;
+
+const PlusLarge: FC = () => (
+  <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+);
+
 const PauseCircle: FC = () => (
   <>
     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -265,6 +271,16 @@ const StopCircle: FC = () => (
   <>
     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
     <path d="M5 6.5A1.5 1.5 0 0 1 6.5 5h3A1.5 1.5 0 0 1 11 6.5v3A1.5 1.5 0 0 1 9.5 11h-3A1.5 1.5 0 0 1 5 9.5v-3z" />
+  </>
+);
+
+const Update = (
+  <>
+    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z" />
+    <path
+      fillRule="evenodd"
+      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+    />
   </>
 );
 
@@ -297,6 +313,8 @@ export const IconComponentMapping = {
   PENCIL: <PencilIcon />,
   PERSON: <Person />,
   PLAY_CIRCLE: <PlayCircle />,
+  PLUS: <Plus />,
+  PLUS_LARGE: <PlusLarge />,
   PLUS_BOARD: <PlusBoardIcon />,
   PLUS_DOTTED: <PlusDottedIcon />,
   QUESTION: <Question />,
@@ -312,6 +330,7 @@ export const IconComponentMapping = {
   THREE_DOTS_VERTICAL: <ThreeDotsVerticalIcon />,
   TRASH: <TrashIcon />,
   TWITTER: <Twitter />,
+  UPDATE: Update,
 };
 
 export const Icon: FC<Props> = ({ width = 18, height = 18, icon }) => {

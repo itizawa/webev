@@ -30,4 +30,12 @@ export class Magazine {
       updatedAt: new Date(),
     });
   }
+
+  static convertUserFormObject(data: Magazine): Magazine {
+    return new Magazine({
+      ...data,
+      createdAt: new Date(data.createdAt),
+      updatedAt: new Date(data.updatedAt),
+    });
+  }
 }
