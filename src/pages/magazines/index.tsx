@@ -110,7 +110,17 @@ const Index: WebevNextPage = () => {
                     <StatusLabel isPublic={magazine.isPublic} />
                   </Table.Cell>
                   <Table.Cell>{format(new Date(magazine.createdAt), 'yyyy/MM/dd')}</Table.Cell>
-                  <Table.Cell>Active</Table.Cell>
+                  <Table.Cell>
+                    <Grid css={{ display: 'flex', gridGap: '16px', alignItems: 'center' }}>
+                      <Text css={{ cursor: 'pointer' }}>
+                        <Icon icon="PENCIL" width={16} height={16} />
+                      </Text>
+                      {/* TODO: implement */}
+                      {/* <Text css={{ cursor: 'pointer', color: '$error' }}>
+                        <Icon icon="TRASH" />
+                      </Text> */}
+                    </Grid>
+                  </Table.Cell>
                 </Table.Row>
               )}
             </Table.Body>
