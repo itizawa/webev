@@ -8,6 +8,7 @@ export const usePageByPageId = ({ pageId }: { pageId: string }): SWRResponse<Pag
     pageId ? `/pages/${pageId}` : null,
     (endpoint: string) => restClient.apiGet<{ page: Page }>(endpoint).then((result) => result.data.page),
     {
+      revalidateOnMount: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
     },
