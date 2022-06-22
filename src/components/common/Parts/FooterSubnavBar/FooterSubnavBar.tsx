@@ -19,7 +19,7 @@ export const FooterSubnavBar: FC = () => {
   ];
 
   return (
-    <Grid
+    <Grid.Container
       css={{
         display: 'flex',
         position: 'fixed',
@@ -37,26 +37,28 @@ export const FooterSubnavBar: FC = () => {
       {navbarItemMappings.map((v) => {
         const isActive = router.pathname.startsWith(v.url);
         return (
-          <Link key={v.text} href={v.url}>
-            <a>
-              <Grid
-                css={{
-                  textAlign: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  py: '$4',
-                  alignItems: 'center',
-                  color: isActive ? 'white' : '$accents7',
-                }}
-                className="text-center col d-flex flex-column bg-dark border-top border-secondary"
-              >
-                <Icon icon={v.icon} />
-                {v.text}
-              </Grid>
-            </a>
-          </Link>
+          <Grid key={v.text} xs={4} css={{ justifyContent: 'center' }}>
+            <Link href={v.url}>
+              <a>
+                <Grid
+                  css={{
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    py: '$4',
+                    alignItems: 'center',
+                    color: isActive ? 'white' : '$accents7',
+                  }}
+                  className="text-center col d-flex flex-column bg-dark border-top border-secondary"
+                >
+                  <Icon icon={v.icon} />
+                  {v.text}
+                </Grid>
+              </a>
+            </Link>
+          </Grid>
         );
       })}
-    </Grid>
+    </Grid.Container>
   );
 };
