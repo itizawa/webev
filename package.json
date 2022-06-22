@@ -39,7 +39,7 @@
     "sass": "1.52.3",
     "sass-loader": "13.0.0",
     "styled-components": "5.3.5",
-    "swr": "2.0.0-beta.3",
+    "swr": "2.0.0-beta.4",
     "throttle-debounce": "5.0.0",
     "toastr": "2.1.4"
   },
