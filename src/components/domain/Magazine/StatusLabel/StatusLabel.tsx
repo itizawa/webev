@@ -1,12 +1,14 @@
 import { styled } from '@nextui-org/react';
 import { FC } from 'react';
+import { useLocale } from './useLocale';
 
 type Props = {
   isPublic: boolean;
 };
 
 export const StatusLabel: FC<Props> = ({ isPublic }) => {
-  return <StyledLabel type={isPublic ? 'public' : 'draft'}>{isPublic ? 'Public' : 'draft'}</StyledLabel>;
+  const { t } = useLocale();
+  return <StyledLabel type={isPublic ? 'public' : 'draft'}>{isPublic ? t.public : t.draft}</StyledLabel>;
 };
 
 const StyledLabel = styled('span', {
@@ -14,7 +16,7 @@ const StyledLabel = styled('span', {
   textTransform: 'uppercase',
   padding: '$2 $3',
   margin: '0 2px',
-  fontSize: '10px',
+  fontSize: '12px',
   fontWeight: '$bold',
   borderRadius: '14px',
   letterSpacing: '0.6px',
