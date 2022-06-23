@@ -32,7 +32,7 @@ export const PageCard: FC<Props> = ({ page }) => {
     <Card>
       <Card.Body css={{ p: 0, flex: 'none' }}>
         {page.body ? (
-          <Link href={`/page/${page.id}`}>
+          <Link href={`/page/${page.id}`} onClick={() => handleClickPageLink(page.id)}>
             <a>
               <FixedImage imageUrl={page.image} />
             </a>
@@ -46,7 +46,7 @@ export const PageCard: FC<Props> = ({ page }) => {
       <Card.Footer css={{ bgColor: '#202020', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
         <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
           {page.body ? (
-            <Link href={`/page/${page.id}`}>
+            <Link href={`/page/${page.id}`} onClick={() => handleClickPageLink(page.id)}>
               <a>
                 <Text
                   b
