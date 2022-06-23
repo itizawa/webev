@@ -12,6 +12,7 @@ import { Page } from '~/domains/Page';
 import { Text } from '~/components/uiParts';
 import { restClient } from '~/utils/rest-client';
 import { toastError } from '~/utils/toastr';
+import { usePagePagination } from '~/hooks/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 
@@ -20,20 +21,26 @@ type Props = {
 };
 
 export const PageCard: FC<Props> = ({ page }) => {
-  const handleClickPageLink = useCallback(async (pageId: string) => {
-    try {
-      await restClient.apiPut<Page>(`/pages/${pageId}`, { isRead: true });
-    } catch (error) {
-      if (error instanceof Error) toastError(error);
-    }
-  }, []);
+  const { mutatePagePagination } = usePagePagination();
+
+  const handleClickPageLink = useCallback(
+    async (pageId: string) => {
+      try {
+        await restClient.apiPut<Page>(`/pages/${pageId}`, { isRead: true });
+        mutatePagePagination();
+      } catch (error) {
+        if (error instanceof Error) toastError(error);
+      }
+    },
+    [mutatePagePagination],
+  );
 
   return (
     <Card>
       <Card.Body css={{ p: 0, flex: 'none' }}>
         {page.body ? (
-          <Link href={`/page/${page.id}`} onClick={() => handleClickPageLink(page.id)}>
-            <a>
+          <Link href={`/page/${page.id}`}>
+            <a onClick={() => handleClickPageLink(page.id)}>
               <FixedImage imageUrl={page.image} />
             </a>
           </Link>
@@ -46,8 +53,8 @@ export const PageCard: FC<Props> = ({ page }) => {
       <Card.Footer css={{ bgColor: '#202020', p: '$4', display: 'flex', flexDirection: 'column', alignItems: 'start', height: '100%' }}>
         <Grid css={{ width: '100%', display: 'flex', p: '$0', alignItems: 'center', justifyContent: 'space-between' }}>
           {page.body ? (
-            <Link href={`/page/${page.id}`} onClick={() => handleClickPageLink(page.id)}>
-              <a>
+            <Link href={`/page/${page.id}`}>
+              <a onClick={() => handleClickPageLink(page.id)}>
                 <Text
                   b
                   css={{
