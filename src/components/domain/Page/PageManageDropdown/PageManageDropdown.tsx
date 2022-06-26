@@ -1,10 +1,10 @@
 import { Button, Dropdown } from '@nextui-org/react';
 import { FC, Key, useCallback, useMemo } from 'react';
+import { useLocale } from './useLocale';
 import { Icon } from '~/components/base/atoms/Icon';
 
 import { Page } from '~/domains/Page';
 import { useClipboard } from '~/hooks/shared';
-import { useLocale } from '~/hooks/useLocale';
 import { useModal } from '~/hooks/useModal';
 import { toastSuccess } from '~/utils/toastr';
 
