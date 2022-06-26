@@ -5,6 +5,7 @@ import { useLocale } from './useLocale';
 import { useMagazinePagination } from '~/stores/Magazine';
 import { Input, Loading } from '~/components/uiParts';
 import { Magazine } from '~/domains/Magazine';
+import { Icon } from '~/components/base/atoms/Icon';
 
 type Props = {
   open: boolean;
@@ -69,7 +70,12 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
           </Checkbox.Group>
         )}
         <Grid css={{ mt: 'auto' }}>
-          <Button color="secondary" css={{ fontWeight: '$bold', mx: 'auto' }} disabled={isLoadingMagazinePagination}>
+          <Button
+            color="secondary"
+            icon={<Icon icon="JOURNAL_PLUS" />}
+            css={{ fontWeight: '$bold', mx: 'auto' }}
+            disabled={isLoadingMagazinePagination}
+          >
             {t.update}
           </Button>
         </Grid>
