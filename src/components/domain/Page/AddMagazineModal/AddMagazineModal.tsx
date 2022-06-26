@@ -53,7 +53,12 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
             <Loading color="secondary" />
           </Grid>
         ) : (
-          <Checkbox.Group color="secondary" value={selected} onChange={setSelected} css={{ maxHeight: '400px', overflow: 'scroll' }}>
+          <Checkbox.Group
+            color="secondary"
+            value={selected}
+            onChange={setSelected}
+            css={{ maxHeight: '400px', overflow: 'scroll', whiteSpace: 'nowrap' }}
+          >
             {filteredMagazines.map((doc) => {
               return (
                 <Checkbox key={doc.id} value={doc.id}>
