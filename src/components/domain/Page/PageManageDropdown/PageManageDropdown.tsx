@@ -63,6 +63,13 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           }
           break;
         }
+        case 'addMagazine': {
+          handleModal({
+            name: 'AddMagazineModal',
+            args: {},
+          });
+          break;
+        }
         case 'delete': {
           handleModal({
             name: 'deletePageModal',
@@ -91,6 +98,9 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           </Dropdown.Item>
           <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
             {t.share}
+          </Dropdown.Item>
+          <Dropdown.Item key="addMagazine" icon={<Icon icon="JOURNAL_PLUS" />}>
+            {t.add_magazine}
           </Dropdown.Item>
         </Dropdown.Section>
         <Dropdown.Section title="Danger zone">

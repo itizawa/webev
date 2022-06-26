@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 const ja = {
+  add_magazine: 'マガジンへ追加',
   copy_url: 'URLをコピー',
   delete: '削除',
   share: '共有',
@@ -8,6 +9,7 @@ const ja = {
 };
 
 const en = {
+  add_magazine: 'Add Magazine',
   copy_url: 'Copy URL',
   delete: 'Delete',
   share: 'Share',
