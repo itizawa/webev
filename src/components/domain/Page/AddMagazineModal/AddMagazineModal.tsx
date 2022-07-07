@@ -39,13 +39,14 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose, pageId }) => {
 
   const filteredMagazines = magazinePagination ? getFilteredMagazines(magazinePagination.docs, searchKeyword, magazineIds) : [];
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = useCallback(async () => {
     try {
-      restClient.apiPost('/page-magazine-relations', { pageId, magazineIds });
+      await restClient.apiPost('/page-magazine-relations', { pageId, magazineIds });
+      onClose();
     } catch (error) {
       if (error instanceof Error) toastError(error);
     }
-  }, [magazineIds, pageId]);
+  }, [magazineIds, onClose, pageId]);
 
   return (
     <Modal open={open} onClose={onClose} title={t.add_magazine} width="600px" css={{ height: '500px' }}>
