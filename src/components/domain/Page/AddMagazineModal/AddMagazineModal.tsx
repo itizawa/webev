@@ -1,21 +1,23 @@
 import { Button, Checkbox, Grid, Modal, Text } from '@nextui-org/react';
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { Emoji } from 'emoji-mart';
 import { useLocale } from './useLocale';
 import { useMagazinePagination } from '~/stores/Magazine';
 import { Input, Loading } from '~/components/uiParts';
 import { Magazine } from '~/domains/Magazine';
 import { Icon } from '~/components/base/atoms/Icon';
+import { toastError } from '~/utils/toastr';
+import { restClient } from '~/utils/rest-client';
 
 type Props = {
   open: boolean;
   onClose: () => void;
+  pageId: string;
 };
 
 const getFilteredMagazines = (magazines: Magazine[], searchKeyword: string, selected: string[]) => {
   return magazines.filter((magazine) => {
     if (searchKeyword === '') return true;
-    console.log(magazine);
     if (magazine.id && selected.includes(magazine.id)) {
       return true;
     }
@@ -23,10 +25,10 @@ const getFilteredMagazines = (magazines: Magazine[], searchKeyword: string, sele
   });
 };
 
-export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
+export const AddMagazineModal: FC<Props> = ({ open, onClose, pageId }) => {
   const { t } = useLocale();
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [selected, setSelected] = useState<string[]>([]);
+  const [magazineIds, setMagazineIds] = useState<string[]>([]);
 
   const { data: magazinePagination, isLoading: isLoadingMagazinePagination } = useMagazinePagination({
     activePage: 1,
@@ -34,7 +36,16 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
     sort: '-updatedAt',
     searchKeyword: '',
   });
-  const filteredMagazines = magazinePagination ? getFilteredMagazines(magazinePagination.docs, searchKeyword, selected) : [];
+
+  const filteredMagazines = magazinePagination ? getFilteredMagazines(magazinePagination.docs, searchKeyword, magazineIds) : [];
+
+  const handleSubmit = useCallback(() => {
+    try {
+      restClient.apiPost('/page-magazine-relations', { pageId, magazineIds });
+    } catch (error) {
+      if (error instanceof Error) toastError(error);
+    }
+  }, [magazineIds, pageId]);
 
   return (
     <Modal open={open} onClose={onClose} title={t.add_magazine} width="600px" css={{ height: '500px' }}>
@@ -56,8 +67,8 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
         ) : (
           <Checkbox.Group
             color="secondary"
-            value={selected}
-            onChange={setSelected}
+            value={magazineIds}
+            onChange={setMagazineIds}
             css={{ maxHeight: '400px', overflow: 'scroll', whiteSpace: 'nowrap' }}
           >
             {filteredMagazines.map((doc) => {
@@ -71,6 +82,7 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose }) => {
         )}
         <Grid css={{ mt: 'auto' }}>
           <Button
+            onClick={handleSubmit}
             color="secondary"
             icon={<Icon icon="JOURNAL_PLUS" />}
             css={{ fontWeight: '$bold', mx: 'auto' }}

@@ -66,7 +66,9 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
         case 'addMagazine': {
           handleModal({
             name: 'AddMagazineModal',
-            args: {},
+            args: {
+              pageId: page.id,
+            },
           });
           break;
         }
