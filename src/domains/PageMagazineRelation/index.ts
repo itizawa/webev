@@ -1,0 +1,1 @@
+export { PageMagazineRelation } from './PageMagazineRelation';
