@@ -1,5 +1,5 @@
 import { Button, Checkbox, Grid, Modal, Text } from '@nextui-org/react';
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { Emoji } from 'emoji-mart';
 import { useLocale } from './useLocale';
 import { useMagazinePagination } from '~/stores/Magazine';
@@ -8,6 +8,7 @@ import { Magazine } from '~/domains/Magazine';
 import { Icon } from '~/components/base/atoms/Icon';
 import { toastError } from '~/utils/toastr';
 import { restClient } from '~/utils/rest-client';
+import { usePageMagazineRelationPagination } from '~/stores/PageMagazineRelation';
 
 type Props = {
   open: boolean;
@@ -36,6 +37,15 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose, pageId }) => {
     sort: '-updatedAt',
     searchKeyword: '',
   });
+  const { data: pageMagazineRelation } = usePageMagazineRelationPagination({
+    pageId,
+  });
+
+  useEffect(() => {
+    if (pageMagazineRelation) {
+      setMagazineIds(pageMagazineRelation.docs.map((doc) => doc.magazineId));
+    }
+  }, [pageMagazineRelation]);
 
   const filteredMagazines = magazinePagination ? getFilteredMagazines(magazinePagination.docs, searchKeyword, magazineIds) : [];
 
