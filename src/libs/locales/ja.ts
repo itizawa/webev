@@ -4,7 +4,6 @@ export const ja = {
   start_immediately: 'さっそく 始める',
   term: '利用規約',
 
-  copy_url: 'URLをコピー',
   logout: 'ログアウト',
   delete: '削除',
   fetch: 'ページを再取得する',
@@ -40,7 +39,6 @@ export const ja = {
   toastr_save_url: 'Url を保存しました',
   toastr_save_directory: 'ディレクトリを保存しました',
   toastr_delete_directory: 'ディレクトリを削除しました',
-  toastr_success_copy_url: 'Url をコピーしました!',
   toastr_start_webev: 'Start Webev!!',
   toastr_success_fetch_page: 'ページを再取得しました!',
   toastr_success_read: '読みました！',

@@ -1,3 +1,4 @@
+export { AddMagazineModal } from './AddMagazineModal';
 export { DeletePageModal } from './DeletePageModal';
 export { FilterIsReadDropdown } from './FilterIsReadDropdown';
 export { NoPageAlert } from './NoPageAlert';

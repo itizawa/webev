@@ -1,10 +1,10 @@
 import { Button, Dropdown } from '@nextui-org/react';
 import { FC, Key, useCallback, useMemo } from 'react';
+import { useLocale } from './useLocale';
 import { Icon } from '~/components/base/atoms/Icon';
 
 import { Page } from '~/domains/Page';
 import { useClipboard } from '~/hooks/shared';
-import { useLocale } from '~/hooks/useLocale';
 import { useModal } from '~/hooks/useModal';
 import { toastSuccess } from '~/utils/toastr';
 
@@ -63,6 +63,15 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           }
           break;
         }
+        case 'addMagazine': {
+          handleModal({
+            name: 'AddMagazineModal',
+            args: {
+              pageId: page.id,
+            },
+          });
+          break;
+        }
         case 'delete': {
           handleModal({
             name: 'deletePageModal',
@@ -91,6 +100,9 @@ export const PageManageDropdown: FC<Props> = ({ page }) => {
           </Dropdown.Item>
           <Dropdown.Item key="share" icon={<Icon icon={canShareByNavigator ? 'SHARE' : 'TWITTER'} />}>
             {t.share}
+          </Dropdown.Item>
+          <Dropdown.Item key="addMagazine" icon={<Icon icon="JOURNAL_PLUS" />}>
+            {t.add_magazine}
           </Dropdown.Item>
         </Dropdown.Section>
         <Dropdown.Section title="Danger zone">

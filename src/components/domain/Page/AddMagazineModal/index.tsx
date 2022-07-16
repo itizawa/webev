@@ -1,0 +1,1 @@
+export { AddMagazineModal } from './AddMagazineModal';
