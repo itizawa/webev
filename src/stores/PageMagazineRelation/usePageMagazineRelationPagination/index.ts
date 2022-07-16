@@ -1,0 +1,1 @@
+export { usePageMagazineRelationPagination } from './usePageMagazineRelationPagination';
