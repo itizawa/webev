@@ -1,4 +1,3 @@
-import { Emoji } from 'emoji-mart';
 import { FC } from 'react';
 import { Input } from '@nextui-org/react';
 import { usePagePagination } from '~/hooks/Page';
@@ -13,13 +12,5 @@ export const SearchTextBox: FC = () => {
     debounceChangeSearchText(input);
   };
 
-  return (
-    <Input
-      onChange={(e) => changeSearchText(e.target.value)}
-      contentLeft={<Emoji emoji="mag" size={20} />}
-      placeholder="Search..."
-      underlined
-      clearable
-    />
-  );
+  return <Input onChange={(e) => changeSearchText(e.target.value)} contentLeft="🔍" placeholder="Search..." underlined clearable />;
 };

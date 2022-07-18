@@ -36,7 +36,7 @@ export const PagePaginationProvider: FC<{
   const [activePage, setActivePage] = useState(1);
   const [limit] = useState(9);
   const [isSortCreatedAt, setIsSortCreatedAt] = useState(false);
-  const [isRead, setIsRead] = useState<boolean | undefined>(undefined);
+  const [isRead, setIsRead] = useState<boolean | undefined>(false);
 
   const sort = isSortCreatedAt ? 'createdAt' : '-createdAt';
 
