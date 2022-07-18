@@ -2,7 +2,6 @@ import { useState, VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { Emoji } from 'emoji-mart';
 import { useRouter } from 'next/router';
 import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
 
@@ -47,11 +46,6 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
       >
         <div className="text-truncate">
           {isHoverDirectoryItem && <></>}
-          {!isHoverDirectoryItem && (
-            <StyledEmojiWrapper className="px-2">
-              <Emoji emoji={directory?.emojiId || ''} size={18} />
-            </StyledEmojiWrapper>
-          )}
           <span className="ms-2">{directory?.name}</span>
         </div>
         <div className="ms-auto create-directory-button" id={`create-directory-icon-on-${directory?._id}`}></div>
@@ -87,12 +81,6 @@ export const DirectorySidebarListItem: VFC<Props> = ({ directory }) => {
     </>
   );
 };
-
-const StyledEmojiWrapper = styled.span`
-  .emoji-mart-emoji {
-    vertical-align: middle;
-  }
-`;
 
 const StyledDiv = styled.div<{ isActive?: boolean }>`
   align-items: center;
