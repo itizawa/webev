@@ -1,6 +1,5 @@
 import { Button, Checkbox, Grid, Modal, Text } from '@nextui-org/react';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { Emoji } from 'emoji-mart';
 import { useLocale } from './useLocale';
 import { useMagazinePagination } from '~/stores/Magazine';
 import { Input, Loading } from '~/components/uiParts';
@@ -64,13 +63,7 @@ export const AddMagazineModal: FC<Props> = ({ open, onClose, pageId }) => {
         <Text h4>{t.add_magazine}</Text>
       </Modal.Header>
       <Modal.Body>
-        <Input
-          onChange={(e) => setSearchKeyword(e.target.value)}
-          contentLeft={<Emoji emoji="mag" size={20} />}
-          placeholder="Search..."
-          underlined
-          clearable
-        />
+        <Input onChange={(e) => setSearchKeyword(e.target.value)} contentLeft="🔍" placeholder="Search..." underlined clearable />
         {isLoadingMagazinePagination ? (
           <Grid css={{ mb: '40px', display: 'flex', justifyContent: 'center' }}>
             <Loading color="secondary" />
