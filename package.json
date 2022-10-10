@@ -11,7 +11,7 @@
     "web": "yarn workspace @webev/web",
     "dev:web": "yarn workspace @webev/web dev",
     "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
-    "build": "yarn workspace @webev/build"
+    "build": "yarn workspace @webev/web build"
   },
   "repository": {
     "type": "git",
