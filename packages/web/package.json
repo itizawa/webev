@@ -40,7 +40,7 @@
     "toastr": "2.1.4"
   },
   "devDependencies": {
-    "@babel/core": "7.18.10",
+    "@babel/core": "7.18.13",
     "@types/enzyme-adapter-react-16": "1.0.6",
     "@types/jest": "28.1.6",
     "@types/lodash": "4.14.182",
