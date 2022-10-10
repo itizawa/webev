@@ -1,11 +1,11 @@
 import NextLink from 'next/link';
 import { FC } from 'react';
 
-import { useCurrentUser } from '~/stores/User';
+import { useCurrentUser } from '@webev/web/stores/User';
 
-import { Loading } from '~/components/uiParts/Loading/Loading';
-import { Avatar } from '~/components/uiParts';
-import { URLS } from '~/libs/constants/urls';
+import { Loading } from '@webev/web/components/uiParts/Loading/Loading';
+import { Avatar } from '@webev/web/components/uiParts';
+import { URLS } from '@webev/web/libs/constants/urls';
 
 export const PersonalDropdown: FC = () => {
   const { data: currentUser, isLoading: isLoadingCurrentUser } = useCurrentUser();

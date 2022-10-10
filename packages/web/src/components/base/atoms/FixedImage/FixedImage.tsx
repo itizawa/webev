@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 
-import { imagePath } from '~/libs/constants/imagePath';
+import { imagePath } from '@webev/web/libs/constants/imagePath';
 
 type Props = {
   imageUrl?: string;

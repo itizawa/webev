@@ -1,10 +1,10 @@
 import { FC, ReactNode } from 'react';
 
 import { Container, Grid } from '@nextui-org/react';
-import { Navbar } from '~/components/common/Parts/Navbar';
-import { Footer } from '~/components/common/Parts/Footer/Footer';
+import { Navbar } from '@webev/web/components/common/Parts/Navbar';
+import { Footer } from '@webev/web/components/common/Parts/Footer/Footer';
 
-import { zIndex } from '~/libs/constants/zIndex';
+import { zIndex } from '@webev/web/libs/constants/zIndex';
 
 type Props = {
   children: ReactNode;

@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Grid } from '@nextui-org/react';
-import { useLocale } from '~/hooks/useLocale';
+import { useLocale } from '@webev/web/hooks/useLocale';
 
-import { Icon } from '~/components/base/atoms/Icon';
-import { URLS } from '~/libs/constants/urls';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { URLS } from '@webev/web/libs/constants/urls';
 
 export const FooterSubnavBar: FC = () => {
   const router = useRouter();

@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 import { NextUIProvider } from '@nextui-org/react';
 
-import { theme } from '~/styles/theme';
-import '~/styles/global.scss';
+import { theme } from '@webev/web/styles/theme';
+import '@webev/web/styles/global.scss';
 
-import { MaintenanceLayout } from '~/components/common/Layout/MaintenanceLayout';
+import { MaintenanceLayout } from '@webev/web/components/common/Layout/MaintenanceLayout';
 
-import { usePageView } from '~/hooks/usePageView';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { ModalProvider } from '~/components/providers/ModalProvider';
-import { PagePaginationProvider } from '~/components/providers/PagePaginationProvider';
+import { usePageView } from '@webev/web/hooks/usePageView';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
+import { ModalProvider } from '@webev/web/components/providers/ModalProvider';
+import { PagePaginationProvider } from '@webev/web/components/providers/PagePaginationProvider';
 
 const App: ({ Component, pageProps }: { Component: WebevNextPage; pageProps: { children?: ReactNode } }) => JSX.Element = ({
   Component,

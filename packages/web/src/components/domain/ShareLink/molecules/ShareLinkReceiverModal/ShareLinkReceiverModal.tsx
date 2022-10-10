@@ -1,11 +1,11 @@
 import { Button, Grid, Loading, Modal, Text } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
-import { FixedImage } from '~/components/base/atoms/FixedImage';
-import { useOgp } from '~/hooks/Ogp';
-import { usePostPage } from '~/hooks/Page/usePostPage';
-import { useLocale } from '~/hooks/useLocale';
-import { toastSuccess } from '~/utils/toastr';
+import { FixedImage } from '@webev/web/components/base/atoms/FixedImage';
+import { useOgp } from '@webev/web/hooks/Ogp';
+import { usePostPage } from '@webev/web/hooks/Page/usePostPage';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { toastSuccess } from '@webev/web/utils/toastr';
 
 type Props = {
   open: boolean;

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
-import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { MagazinesList } from '~/components/page/Magazine/MagazinesList';
+import { DashBoardLayout } from '@webev/web/components/common/Layout/DashBoardLayout';
+import { MagazinesList } from '@webev/web/components/page/Magazine/MagazinesList';
 
 const Index: WebevNextPage = () => {
   return <MagazinesList />;

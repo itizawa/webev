@@ -1,9 +1,9 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { restClient } from '~/utils/rest-client';
-import { PaginationResult } from '~/libs/interfaces/paginationResult';
-import { Directory } from '~/domains/Directory';
-import { DirectoryTree } from '~/domains/DirectoryTree';
+import { restClient } from '@webev/web/utils/rest-client';
+import { PaginationResult } from '@webev/web/libs/interfaces/paginationResult';
+import { Directory } from '@webev/web/domains/Directory';
+import { DirectoryTree } from '@webev/web/domains/DirectoryTree';
 
 export const useDirectoryPaginationResult = ({
   searchKeyWord,

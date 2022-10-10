@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { PagePaginationContext } from '~/components/providers/PagePaginationProvider/PagePaginationProvider';
+import { PagePaginationContext } from '@webev/web/components/providers/PagePaginationProvider/PagePaginationProvider';
 
 export const usePagePagination = () => {
   const {

@@ -1,9 +1,9 @@
 import { Button, Dropdown, Text } from '@nextui-org/react';
 import { useState, FC, Key, useCallback } from 'react';
-import { Icon } from '~/components/base/atoms/Icon';
-import { usePagePagination } from '~/hooks/Page';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { usePagePagination } from '@webev/web/hooks/Page';
 
-import { useLocale } from '~/hooks/useLocale';
+import { useLocale } from '@webev/web/hooks/useLocale';
 
 type SelectedKey = 'latest_order' | 'oldest_order';
 

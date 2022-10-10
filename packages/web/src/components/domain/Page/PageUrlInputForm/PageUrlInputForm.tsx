@@ -1,10 +1,10 @@
 import { useState, useCallback, FC } from 'react';
 
-import { toastSuccess } from '~/utils/toastr';
+import { toastSuccess } from '@webev/web/utils/toastr';
 
-import { useLocale } from '~/hooks/useLocale';
-import { usePostPage } from '~/hooks/Page/usePostPage';
-import { Input } from '~/components/uiParts';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { usePostPage } from '@webev/web/hooks/Page/usePostPage';
+import { Input } from '@webev/web/components/uiParts';
 
 export const PageUrlInputForm: FC = () => {
   const { t } = useLocale();

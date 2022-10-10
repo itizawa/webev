@@ -5,14 +5,14 @@ import { format } from 'date-fns';
 import { Card, Grid } from '@nextui-org/react';
 import Link from 'next/link';
 import { PageManageDropdown } from '../PageManageDropdown';
-import { FixedImage } from '~/components/base/atoms/FixedImage';
+import { FixedImage } from '@webev/web/components/base/atoms/FixedImage';
 
-import { Page } from '~/domains/Page';
+import { Page } from '@webev/web/domains/Page';
 
-import { Text } from '~/components/uiParts';
-import { restClient } from '~/utils/rest-client';
-import { toastError } from '~/utils/toastr';
-import { usePagePagination } from '~/hooks/Page';
+import { Text } from '@webev/web/components/uiParts';
+import { restClient } from '@webev/web/utils/rest-client';
+import { toastError } from '@webev/web/utils/toastr';
+import { usePagePagination } from '@webev/web/hooks/Page';
 
 const MAX_WORD_COUNT_OF_BODY = 96;
 

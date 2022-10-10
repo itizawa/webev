@@ -4,22 +4,22 @@ import { FC, ReactNode, useEffect } from 'react';
 import { Container, Grid } from '@nextui-org/react';
 
 import { FooterSubnavBar } from '../Parts/FooterSubnavBar/FooterSubnavBar';
-import { Navbar } from '~/components/common/Parts/Navbar';
-import { Sidebar } from '~/components/common/Parts/Sidebar';
-import { Footer } from '~/components/common/Parts/Footer';
+import { Navbar } from '@webev/web/components/common/Parts/Navbar';
+import { Sidebar } from '@webev/web/components/common/Parts/Sidebar';
+import { Footer } from '@webev/web/components/common/Parts/Footer';
 
-// import { DirectoryCreateModal } from '~/components/domain/Directory/molecules/DirectoryCreateModal';
-// import { DirectoryDeleteModal } from '~/components/domain/Directory/molecules/DirectoryDeleteModal';
-// import { DirectoryRenameModal } from '~/components/domain/Directory/molecules/DirectoryRenameModal';
-// import { PageSaveModal } from '~/components/domain/Page/molecules/PageSaveModal';
+// import { DirectoryCreateModal } from '@webev/web/components/domain/Directory/molecules/DirectoryCreateModal';
+// import { DirectoryDeleteModal } from '@webev/web/components/domain/Directory/molecules/DirectoryDeleteModal';
+// import { DirectoryRenameModal } from '@webev/web/components/domain/Directory/molecules/DirectoryRenameModal';
+// import { PageSaveModal } from '@webev/web/components/domain/Page/molecules/PageSaveModal';
 
-import { ScrollTopButton } from '~/components/uiParts/ScrollTopButton';
+import { ScrollTopButton } from '@webev/web/components/uiParts/ScrollTopButton';
 
-import { usePagePagination } from '~/hooks/Page';
-import { zIndex } from '~/libs/constants/zIndex';
-import { useModal } from '~/hooks/useModal';
-import { usePagesCountByUserId } from '~/stores/Page';
-import { useCurrentUser } from '~/stores/User';
+import { usePagePagination } from '@webev/web/hooks/Page';
+import { zIndex } from '@webev/web/libs/constants/zIndex';
+import { useModal } from '@webev/web/hooks/useModal';
+import { usePagesCountByUserId } from '@webev/web/stores/Page';
+import { useCurrentUser } from '@webev/web/stores/User';
 
 type Props = {
   children: ReactNode;

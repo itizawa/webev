@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { Button } from '@nextui-org/react';
 import { useHooks } from './hooks';
-import { Icon } from '~/components/base/atoms/Icon';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
 
 export const ScrollTopButton: FC = () => {
   const { scrollTop, isShowScroll } = useHooks();

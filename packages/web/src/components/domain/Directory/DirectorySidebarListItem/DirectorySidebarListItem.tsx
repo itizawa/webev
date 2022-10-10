@@ -3,9 +3,9 @@ import { useState, VFC } from 'react';
 import styled from 'styled-components';
 
 import { useRouter } from 'next/router';
-import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { BootstrapBreakpoints } from '@webev/web/libs/interfaces/variables';
 
-import { Directory } from '~/domains/Directory';
+import { Directory } from '@webev/web/domains/Directory';
 
 type Props = {
   directory: Directory;

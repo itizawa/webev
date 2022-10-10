@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 
-// import { useParentDirectoryForCreateDirectory } from '~/stores/modal';
+// import { useParentDirectoryForCreateDirectory } from '@webev/web/stores/modal';
 
 export const DirectoryCreateModal: VFC = () => {
   // const { data: parentDirectoryForCreateDirectory, mutate: mutateParentDirectoryForCreateDirectory } = useParentDirectoryForCreateDirectory();

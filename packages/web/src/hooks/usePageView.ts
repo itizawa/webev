@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import { GA_ID, pageview } from '~/utils/gtag';
+import { GA_ID, pageview } from '@webev/web/utils/gtag';
 
 export const usePageView = (): void => {
   const router = useRouter();

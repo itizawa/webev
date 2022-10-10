@@ -2,9 +2,9 @@ import { Grid } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, ReactNode, useEffect } from 'react';
 
-import { Loading } from '~/components/uiParts';
-import { URLS } from '~/libs/constants/urls';
-import { useCurrentUser } from '~/stores/User';
+import { Loading } from '@webev/web/components/uiParts';
+import { URLS } from '@webev/web/libs/constants/urls';
+import { useCurrentUser } from '@webev/web/stores/User';
 
 type Props = {
   children: ReactNode;

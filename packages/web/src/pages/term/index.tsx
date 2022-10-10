@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { DefaultLayout } from '@webev/web/components/common/Layout/DefaultLayout';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
 
-import { Term } from '~/components/domain/Term/molecules/Term';
-import { useLocale } from '~/hooks/useLocale';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { Term } from '@webev/web/components/domain/Term/molecules/Term';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

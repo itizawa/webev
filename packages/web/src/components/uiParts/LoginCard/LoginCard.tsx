@@ -2,10 +2,10 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 import { Card, Grid } from '@nextui-org/react';
 
-import { useLocale } from '~/hooks/useLocale';
-import { imagePath } from '~/libs/constants/imagePath';
-import { Text, Image } from '~/components/uiParts';
-import { URLS } from '~/libs/constants/urls';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { imagePath } from '@webev/web/libs/constants/imagePath';
+import { Text, Image } from '@webev/web/components/uiParts';
+import { URLS } from '@webev/web/libs/constants/urls';
 
 export const LoginCard: FC = () => {
   const { t } = useLocale();

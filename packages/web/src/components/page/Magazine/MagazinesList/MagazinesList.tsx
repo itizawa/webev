@@ -3,15 +3,15 @@ import { FC, useCallback, useState } from 'react';
 import { Button, Grid, Pagination, Table } from '@nextui-org/react';
 import { format } from 'date-fns';
 import { useLocale } from './useLocale';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
 
-import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { Text } from '~/components/uiParts';
-import { Icon } from '~/components/base/atoms/Icon';
-import { useModal } from '~/hooks/useModal';
-import { useMagazinePagination } from '~/stores/Magazine';
-import { StatusLabel } from '~/components/domain/Magazine';
-import { Magazine } from '~/domains/Magazine';
+import { LoginRequiredWrapper } from '@webev/web/components/common/Authentication/LoginRequiredWrapper';
+import { Text } from '@webev/web/components/uiParts';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { useModal } from '@webev/web/hooks/useModal';
+import { useMagazinePagination } from '@webev/web/stores/Magazine';
+import { StatusLabel } from '@webev/web/components/domain/Magazine';
+import { Magazine } from '@webev/web/domains/Magazine';
 
 type Props = {};
 

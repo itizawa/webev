@@ -1,9 +1,9 @@
 import { Button, Modal, Text } from '@nextui-org/react';
 import { useCallback, FC } from 'react';
 import { useReward } from 'react-rewards';
-import { useUpdateIsExecutedTutorial } from '~/hooks/Tutorial/useUpdateIsExecutedTutorial';
-import { useLocale } from '~/hooks/useLocale';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { useUpdateIsExecutedTutorial } from '@webev/web/hooks/Tutorial/useUpdateIsExecutedTutorial';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { toastError, toastSuccess } from '@webev/web/utils/toastr';
 
 type Props = {
   open: boolean;

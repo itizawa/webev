@@ -1,8 +1,8 @@
 import useSWR, { SWRResponse } from 'swr';
-import { Magazine } from '~/domains/Magazine';
-import { PaginationResult } from '~/libs/interfaces/paginationResult';
-import { joinUrl } from '~/utils/joinUrl';
-import { restClient } from '~/utils/rest-client';
+import { Magazine } from '@webev/web/domains/Magazine';
+import { PaginationResult } from '@webev/web/libs/interfaces/paginationResult';
+import { joinUrl } from '@webev/web/utils/joinUrl';
+import { restClient } from '@webev/web/utils/rest-client';
 
 /**
  * Magazineのページネーションを返すSWR

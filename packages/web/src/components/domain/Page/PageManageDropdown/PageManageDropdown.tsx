@@ -1,12 +1,12 @@
 import { Button, Dropdown } from '@nextui-org/react';
 import { FC, Key, useCallback, useMemo } from 'react';
 import { useLocale } from './useLocale';
-import { Icon } from '~/components/base/atoms/Icon';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
 
-import { Page } from '~/domains/Page';
-import { useClipboard } from '~/hooks/shared';
-import { useModal } from '~/hooks/useModal';
-import { toastSuccess } from '~/utils/toastr';
+import { Page } from '@webev/web/domains/Page';
+import { useClipboard } from '@webev/web/hooks/shared';
+import { useModal } from '@webev/web/hooks/useModal';
+import { toastSuccess } from '@webev/web/utils/toastr';
 
 type Props = {
   page: Page;

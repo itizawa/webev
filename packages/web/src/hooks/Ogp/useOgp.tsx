@@ -1,7 +1,7 @@
 import useSWR, { SWRResponse } from 'swr';
 
-import { restClient } from '~/utils/rest-client';
-import { Ogp } from '~/domains/Ogp';
+import { restClient } from '@webev/web/utils/rest-client';
+import { Ogp } from '@webev/web/domains/Ogp';
 
 /**
  * urlをもとにOGPを取得するSWR

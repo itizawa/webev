@@ -2,8 +2,8 @@ import { useCallback, useState } from 'react';
 
 import { usePagePagination } from '../Page';
 
-import { restClient } from '~/utils/rest-client';
-import { URLS } from '~/libs/constants/urls';
+import { restClient } from '@webev/web/utils/rest-client';
+import { URLS } from '@webev/web/libs/constants/urls';
 
 export const useUpdateIsExecutedTutorial = (): { isLoading: boolean; updateIsExecutedTutorial: () => Promise<void> } => {
   const { mutatePagePagination } = usePagePagination();

@@ -3,13 +3,13 @@ import { useEffect, ReactNode } from 'react';
 
 import { Grid } from '@nextui-org/react';
 
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
-import { toastSuccess } from '~/utils/toastr';
+import { toastSuccess } from '@webev/web/utils/toastr';
 
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
-import { LoginCard } from '~/components/uiParts';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
+import { DefaultLayout } from '@webev/web/components/common/Layout/DefaultLayout';
+import { LoginCard } from '@webev/web/components/uiParts';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();

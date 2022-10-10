@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { restClient } from '~/utils/rest-client';
+// import { restClient } from '@webev/web/utils/rest-client';
 
 export const useCreateDirectory = () => {
   const [isLoading, setIsLoading] = useState(false);

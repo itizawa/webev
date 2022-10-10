@@ -1,5 +1,5 @@
 import useSWR, { SWRResponse } from 'swr';
-import { restClient } from '~/utils/rest-client';
+import { restClient } from '@webev/web/utils/rest-client';
 
 /**
  * ユーザーに紐づいたページの件数を返すSWR

@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 import Image from 'next/image';
 
 import { Grid } from '@nextui-org/react';
-import { imagePath } from '~/libs/constants/imagePath';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { imagePath } from '@webev/web/libs/constants/imagePath';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
-import { useLocale } from '~/hooks/useLocale';
+import { useLocale } from '@webev/web/hooks/useLocale';
 
-import { PageCountupCard } from '~/components/domain/Page/PageCountupCard';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { restClient } from '~/utils/rest-client';
-import { Link } from '~/components/uiParts';
+import { PageCountupCard } from '@webev/web/components/domain/Page/PageCountupCard';
+import { DefaultLayout } from '@webev/web/components/common/Layout/DefaultLayout';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
+import { restClient } from '@webev/web/utils/rest-client';
+import { Link } from '@webev/web/components/uiParts';
 
 type Props = {
   count: number;

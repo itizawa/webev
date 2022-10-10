@@ -1,14 +1,14 @@
 import { Button, Grid, Modal, Text } from '@nextui-org/react';
 import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
-import { FixedImage } from '~/components/base/atoms/FixedImage';
-import { Icon } from '~/components/base/atoms/Icon';
-import { Page } from '~/domains/Page';
-import { usePagePagination } from '~/hooks/Page';
-import { useLocale } from '~/hooks/useLocale';
-import { URLS } from '~/libs/constants/urls';
-import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { FixedImage } from '@webev/web/components/base/atoms/FixedImage';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { Page } from '@webev/web/domains/Page';
+import { usePagePagination } from '@webev/web/hooks/Page';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { URLS } from '@webev/web/libs/constants/urls';
+import { restClient } from '@webev/web/utils/rest-client';
+import { toastError, toastSuccess } from '@webev/web/utils/toastr';
 
 type Props = {
   open: boolean;

@@ -3,8 +3,8 @@ import { VFC } from 'react';
 
 import styled from 'styled-components';
 
-import { Directory } from '~/domains/Directory';
-import { BootstrapBreakpoints } from '~/libs/interfaces/variables';
+import { Directory } from '@webev/web/domains/Directory';
+import { BootstrapBreakpoints } from '@webev/web/libs/interfaces/variables';
 
 type Props = {
   directory: Directory;

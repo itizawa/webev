@@ -2,8 +2,8 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 import { Col, Container, Row } from '@nextui-org/react';
 
-import { PersonalDropdown } from '~/components/domain/User/PersonalDropdown';
-import { PageUrlInputForm } from '~/components/domain/Page/PageUrlInputForm';
+import { PersonalDropdown } from '@webev/web/components/domain/User/PersonalDropdown';
+import { PageUrlInputForm } from '@webev/web/components/domain/Page/PageUrlInputForm';
 
 export const Navbar: FC = () => {
   return (

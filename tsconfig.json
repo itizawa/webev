@@ -19,7 +19,7 @@
     "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "~/*": [
+      "@webev/web/*": [
         "packages/web/src/*"
       ]
     },

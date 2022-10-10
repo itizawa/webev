@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
 import { CssBaseline } from '@nextui-org/react';
-import { GA_ID } from '~/utils/gtag';
+import { GA_ID } from '@webev/web/utils/gtag';
 
 class MyDocument extends Document {
   render() {

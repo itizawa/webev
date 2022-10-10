@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
 import { Grid, Pagination } from '@nextui-org/react';
-import { Page } from '~/domains/Page';
+import { Page } from '@webev/web/domains/Page';
 
-import { NoPageAlert } from '~/components/domain/Page';
-import { PageCard } from '~/components/domain/Page/PageCard';
+import { NoPageAlert } from '@webev/web/components/domain/Page';
+import { PageCard } from '@webev/web/components/domain/Page/PageCard';
 
-import { usePagePagination } from '~/hooks/Page';
+import { usePagePagination } from '@webev/web/hooks/Page';
 
 type Props = {
   pages: Page[];

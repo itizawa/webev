@@ -1,9 +1,9 @@
 import React, { useState, createContext, ReactNode, SetStateAction, Dispatch, FC } from 'react';
 import useSWR, { KeyedMutator } from 'swr';
-import { Page } from '~/domains/Page';
-import { PaginationResult } from '~/libs/interfaces/paginationResult';
-import { joinUrl } from '~/utils/joinUrl';
-import { restClient } from '~/utils/rest-client';
+import { Page } from '@webev/web/domains/Page';
+import { PaginationResult } from '@webev/web/libs/interfaces/paginationResult';
+import { joinUrl } from '@webev/web/utils/joinUrl';
+import { restClient } from '@webev/web/utils/rest-client';
 
 export const PagePaginationContext = createContext<{
   setSearchKeyword?: Dispatch<SetStateAction<string>>;

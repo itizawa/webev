@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-import { useLocale } from '~/hooks/useLocale';
+import { useLocale } from '@webev/web/hooks/useLocale';
 
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
+import { DashBoardLayout } from '@webev/web/components/common/Layout/DashBoardLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

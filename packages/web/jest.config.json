@@ -31,6 +31,6 @@
     }
   },
   "moduleNameMapper": {
-    "^~/(.*)$": "<rootDir>/src/$1"
+    "^@webev/web/(.*)$": "<rootDir>/src/$1"
   }
 }

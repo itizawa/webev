@@ -2,10 +2,10 @@ import { Button, Grid, Input, Modal, Text, Textarea } from '@nextui-org/react';
 import { FC, useCallback, useState } from 'react';
 import { useReward } from 'react-rewards';
 import { useLocale } from './useLocale';
-import { Icon } from '~/components/base/atoms/Icon';
-import { Magazine } from '~/domains/Magazine';
-import { restClient } from '~/utils/rest-client';
-import { toastError, toastSuccess } from '~/utils/toastr';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { Magazine } from '@webev/web/domains/Magazine';
+import { restClient } from '@webev/web/utils/rest-client';
+import { toastError, toastSuccess } from '@webev/web/utils/toastr';
 
 type Props = {
   open: boolean;

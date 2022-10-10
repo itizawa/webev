@@ -4,16 +4,16 @@ import styled from 'styled-components';
 
 import { Button, Grid, Loading, Text } from '@nextui-org/react';
 import Link from 'next/link';
-import { usePageByPageId } from '~/stores/Page';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
-import { useLocale } from '~/hooks/useLocale';
-import { URLS } from '~/libs/constants/urls';
+import { usePageByPageId } from '@webev/web/stores/Page';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { URLS } from '@webev/web/libs/constants/urls';
 
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { TopSubnavBar } from '~/components/common/Parts/TopSubnavBar';
-import { PageManageDropdown } from '~/components/domain/Page/PageManageDropdown';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
+import { LoginRequiredWrapper } from '@webev/web/components/common/Authentication/LoginRequiredWrapper';
+import { DashBoardLayout } from '@webev/web/components/common/Layout/DashBoardLayout';
+import { TopSubnavBar } from '@webev/web/components/common/Parts/TopSubnavBar';
+import { PageManageDropdown } from '@webev/web/components/domain/Page/PageManageDropdown';
 
 const Page: WebevNextPage = () => {
   const router = useRouter();

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 
 import { Button, Grid, Text } from '@nextui-org/react';
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
-import { useLocale } from '~/hooks/useLocale';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
-import { DefaultLayout } from '~/components/common/Layout/DefaultLayout';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
+import { DefaultLayout } from '@webev/web/components/common/Layout/DefaultLayout';
 
 const Page: WebevNextPage = () => {
   const { t } = useLocale();

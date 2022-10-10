@@ -2,11 +2,11 @@ import { useRouter } from 'next/router';
 import { VFC } from 'react';
 import styled from 'styled-components';
 
-import { URLS } from '~/libs/constants/urls';
+import { URLS } from '@webev/web/libs/constants/urls';
 
-import { Navbar } from '~/components/common/Parts/Navbar';
-import { Footer } from '~/components/common/Parts/Footer/Footer';
-import { useLocale } from '~/hooks/useLocale';
+import { Navbar } from '@webev/web/components/common/Parts/Navbar';
+import { Footer } from '@webev/web/components/common/Parts/Footer/Footer';
+import { useLocale } from '@webev/web/hooks/useLocale';
 
 export const MaintenanceLayout: VFC = () => {
   const { t } = useLocale();

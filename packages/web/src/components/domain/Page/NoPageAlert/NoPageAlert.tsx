@@ -1,8 +1,8 @@
 import { VFC } from 'react';
 import { Grid } from '@nextui-org/react';
 
-import { useLocale } from '~/hooks/useLocale';
-import { Text } from '~/components/uiParts';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { Text } from '@webev/web/components/uiParts';
 
 export const NoPageAlert: VFC = () => {
   const { t } = useLocale();

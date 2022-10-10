@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { Grid, Text } from '@nextui-org/react';
 import { useHooks } from './hooks';
-import { Page } from '~/domains/Page';
+import { Page } from '@webev/web/domains/Page';
 
-import { zIndex } from '~/libs/constants/zIndex';
-import { PageManageDropdown } from '~/components/domain/Page';
+import { zIndex } from '@webev/web/libs/constants/zIndex';
+import { PageManageDropdown } from '@webev/web/components/domain/Page';
 
 type Props = {
   page: Page;

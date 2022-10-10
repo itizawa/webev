@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 
-import { Page } from '~/domains/Page';
+import { Page } from '@webev/web/domains/Page';
 
 // const MAX_WORD_COUNT_OF_BODY = 96;
 // const MAX_WORD_COUNT_OF_SITE_NAME = 10;

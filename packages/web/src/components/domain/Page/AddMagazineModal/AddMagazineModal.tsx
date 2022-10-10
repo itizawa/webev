@@ -1,13 +1,13 @@
 import { Button, Checkbox, Grid, Modal, Text } from '@nextui-org/react';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useLocale } from './useLocale';
-import { useMagazinePagination } from '~/stores/Magazine';
-import { Input, Loading } from '~/components/uiParts';
-import { Magazine } from '~/domains/Magazine';
-import { Icon } from '~/components/base/atoms/Icon';
-import { toastError } from '~/utils/toastr';
-import { restClient } from '~/utils/rest-client';
-import { usePageMagazineRelationPagination } from '~/stores/PageMagazineRelation';
+import { useMagazinePagination } from '@webev/web/stores/Magazine';
+import { Input, Loading } from '@webev/web/components/uiParts';
+import { Magazine } from '@webev/web/domains/Magazine';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
+import { toastError } from '@webev/web/utils/toastr';
+import { restClient } from '@webev/web/utils/rest-client';
+import { usePageMagazineRelationPagination } from '@webev/web/stores/PageMagazineRelation';
 
 type Props = {
   open: boolean;

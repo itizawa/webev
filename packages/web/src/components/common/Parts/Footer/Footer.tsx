@@ -3,12 +3,12 @@ import NextLink from 'next/link';
 import { FC } from 'react';
 
 import { Container, Grid, Text } from '@nextui-org/react';
-import { URLS, TERM_URL } from '~/libs/constants/urls';
+import { URLS, TERM_URL } from '@webev/web/libs/constants/urls';
 
-import { Tooltip } from '~/components/uiParts/Tooltip';
-import { useLocale } from '~/hooks/useLocale';
-import { Link } from '~/components/uiParts';
-import { Icon } from '~/components/base/atoms/Icon';
+import { Tooltip } from '@webev/web/components/uiParts/Tooltip';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { Link } from '@webev/web/components/uiParts';
+import { Icon } from '@webev/web/components/base/atoms/Icon';
 
 export const Footer: FC = () => {
   const { t } = useLocale();

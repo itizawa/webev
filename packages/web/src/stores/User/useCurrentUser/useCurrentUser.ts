@@ -1,6 +1,6 @@
 import useSWR, { SWRResponse } from 'swr';
-import { User } from '~/domains/User';
-import { restClient } from '~/utils/rest-client';
+import { User } from '@webev/web/domains/User';
+import { restClient } from '@webev/web/utils/rest-client';
 
 /**
  * 現在ログインしているユーザーを返すswr

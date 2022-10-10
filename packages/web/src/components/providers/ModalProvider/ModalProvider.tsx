@@ -1,9 +1,9 @@
 import React, { useState, createContext, ReactNode, useContext, useCallback, FC, ComponentProps } from 'react';
-import { EditMagazineModal } from '~/components/domain/Magazine';
+import { EditMagazineModal } from '@webev/web/components/domain/Magazine';
 
-import { AddMagazineModal, DeletePageModal } from '~/components/domain/Page';
-import { ShareLinkReceiverModal } from '~/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
-import { TutorialDetectorModal } from '~/components/domain/Tutorial/TutorialDetectorModal';
+import { AddMagazineModal, DeletePageModal } from '@webev/web/components/domain/Page';
+import { ShareLinkReceiverModal } from '@webev/web/components/domain/ShareLink/molecules/ShareLinkReceiverModal';
+import { TutorialDetectorModal } from '@webev/web/components/domain/Tutorial/TutorialDetectorModal';
 
 type AddMagazineModal = {
   name: 'AddMagazineModal';

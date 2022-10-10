@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 
-// import { useDirectoryForDelete } from '~/stores/modal';
+// import { useDirectoryForDelete } from '@webev/web/stores/modal';
 
 export const DirectoryDeleteModal: VFC = () => {
   // const router = useRouter();

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Input } from '@nextui-org/react';
-import { usePagePagination } from '~/hooks/Page';
-import { useDebouncedCallback } from '~/hooks/shared';
+import { usePagePagination } from '@webev/web/hooks/Page';
+import { useDebouncedCallback } from '@webev/web/hooks/shared';
 
 export const SearchTextBox: FC = () => {
   const { setSearchKeyword } = usePagePagination();

@@ -1,16 +1,16 @@
 import { ReactNode } from 'react';
 
 import { Grid } from '@nextui-org/react';
-import { WebevOgpHead } from '~/components/common/WebevOgpHead';
+import { WebevOgpHead } from '@webev/web/components/common/WebevOgpHead';
 
-import { WebevNextPage } from '~/libs/interfaces/webevNextPage';
+import { WebevNextPage } from '@webev/web/libs/interfaces/webevNextPage';
 
-import { LoginRequiredWrapper } from '~/components/common/Authentication/LoginRequiredWrapper';
-import { DashBoardLayout } from '~/components/common/Layout/DashBoardLayout';
-import { usePagePagination } from '~/hooks/Page';
-import { useLocale } from '~/hooks/useLocale';
-import { SortButtonGroup, PageList, FilterIsReadDropdown } from '~/components/domain/Page';
-import { Loading, Text, SearchTextBox } from '~/components/uiParts';
+import { LoginRequiredWrapper } from '@webev/web/components/common/Authentication/LoginRequiredWrapper';
+import { DashBoardLayout } from '@webev/web/components/common/Layout/DashBoardLayout';
+import { usePagePagination } from '@webev/web/hooks/Page';
+import { useLocale } from '@webev/web/hooks/useLocale';
+import { SortButtonGroup, PageList, FilterIsReadDropdown } from '@webev/web/components/domain/Page';
+import { Loading, Text, SearchTextBox } from '@webev/web/components/uiParts';
 
 const Index: WebevNextPage = () => {
   const { t } = useLocale();
