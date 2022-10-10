@@ -1,6 +1,4 @@
-const withPWA = require('next-pwa')
-
-module.exports = withPWA({
+module.exports = {
   pwa: {
     dest: "public", // output dir
     disable: process.env.NODE_ENV === 'development',
@@ -12,4 +10,4 @@ module.exports = withPWA({
   env: {
     NEXT_PUBLIC_WEBEV_SERVER_URL: process.env.NEXT_PUBLIC_WEBEV_SERVER_URL
   },
-});
+};
