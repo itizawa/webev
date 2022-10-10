@@ -1,0 +1,74 @@
+{
+  "name": "@webev/web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true, 
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webev-dev/webev.git"
+  },
+  "keywords": [
+    "OSS"
+  ],
+  "author": "itizawa",
+  "license": "MIT",
+  "dependencies": {
+    "@nextui-org/react": "1.0.0-beta.9",
+    "axios": "0.27.2",
+    "cheerio": "^1.0.0-rc.10",
+    "date-fns": "2.29.2",
+    "lodash": "^4.17.21",
+    "next": "12.2.5",
+    "next-pwa": "5.5.5",
+    "react": "18.2.0",
+    "react-countup": "6.3.0",
+    "react-dom": "18.2.0",
+    "react-rewards": "2.0.4",
+    "sass": "1.54.5",
+    "sass-loader": "13.0.2",
+    "styled-components": "5.3.5",
+    "swr": "2.0.0-beta.6",
+    "throttle-debounce": "5.0.0",
+    "toastr": "2.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "7.18.10",
+    "@types/enzyme-adapter-react-16": "1.0.6",
+    "@types/jest": "28.1.6",
+    "@types/lodash": "4.14.182",
+    "@types/node": "16.11.45",
+    "@types/react": "18.0.15",
+    "@types/react-test-renderer": "18.0.0",
+    "@types/styled-components": "5.1.25",
+    "@types/throttle-debounce": "5.0.0",
+    "@types/toastr": "2.1.39",
+    "@typescript-eslint/eslint-plugin": "5.33.1",
+    "@typescript-eslint/parser": "5.33.1",
+    "babel-loader": "8.2.5",
+    "babel-preset-react-app": "10.0.1",
+    "enzyme": "3.11.0",
+    "enzyme-adapter-react-16": "1.15.6",
+    "enzyme-to-json": "3.6.2",
+    "jest": "28.1.3",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.7.1",
+    "react-test-renderer": "18.2.0",
+    "source-map-support": "0.5.21",
+    "supertest": "6.2.4",
+    "ts-jest": "28.0.8",
+    "ts-node": "10.9.1",
+    "tsconfig-paths": "4.1.0",
+    "typescript": "4.8.4"
+  },
+  "volta": {
+    "node": "16.17.0"
+  }
+}
