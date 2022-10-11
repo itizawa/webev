@@ -27,7 +27,7 @@ const Page: WebevNextPage<Props> = ({ count }) => {
       <Grid css={{ textAlign: 'center', my: '$10' }}>
         <PageCountupCard count={count} text={t.total_pages} />
       </Grid>
-      <Grid css={{ textAlign: 'center' }}>
+      <Grid css={{ justifyContent: 'center', display: 'flex' }}>
         <Link href="/home" block color="default">
           {t.start_immediately}
         </Link>
