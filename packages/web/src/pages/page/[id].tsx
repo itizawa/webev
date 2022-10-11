@@ -81,6 +81,7 @@ const StyledDiv = styled(Grid)`
   width: 100%;
 
   img {
+    object-fit: contain;
     width: 100%;
     border: 3px #aaa solid;
   }
