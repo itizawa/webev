@@ -1,5 +1,4 @@
 import { FC, ComponentProps } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { Button, Grid } from '@nextui-org/react';
@@ -30,16 +29,16 @@ export const Sidebar: FC = () => {
     >
       {navbarItemMappings.map((v) => {
         return (
-          <Link key={v.text} href={v.url}>
-            <Button
-              color="secondary"
-              css={{ gap: '$2', fontWeight: '$bold' }}
-              icon={v.icon != null ? <Icon icon={v.icon} /> : undefined}
-              ghost={!router.pathname.startsWith(v.url)}
-            >
-              {v.text}
-            </Button>
-          </Link>
+          <Button
+            key={v.text}
+            color="secondary"
+            css={{ gap: '$2', fontWeight: '$bold' }}
+            icon={v.icon != null ? <Icon icon={v.icon} /> : undefined}
+            ghost={!router.pathname.startsWith(v.url)}
+            onClick={() => router.push(v.url)}
+          >
+            {v.text}
+          </Button>
         );
       })}
       {/* <SidebarDirectoryList /> */}
