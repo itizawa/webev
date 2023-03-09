@@ -40,6 +40,6 @@
   },
   "homepage": "https://github.com/webev-dev/webev#readme",
   "volta": {
-    "node": "16.17.1"
+    "node": "16.19.0"
   }
 }
