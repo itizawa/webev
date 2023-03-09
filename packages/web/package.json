@@ -24,7 +24,7 @@
     "@nextui-org/react": "1.0.0-beta.10",
     "axios": "0.27.2",
     "cheerio": "1.0.0-rc.12",
-    "date-fns": "2.29.2",
+    "date-fns": "2.29.3",
     "lodash": "4.17.21",
     "next": "12.2.6",
     "next-pwa": "5.6.0",
